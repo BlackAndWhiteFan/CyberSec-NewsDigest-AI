@@ -8,6 +8,7 @@ RSS_FEEDS = [
     "https://cyberdefence24.pl/rss",
     "https://www.bleepingcomputer.com/feed/",
     "https://thehackernews.com/feeds/posts/default",
+    "https://example.invalid/nie-istnieje",
 ]
 
 

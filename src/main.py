@@ -34,7 +34,12 @@ print("CyberSec NewsDigest AI")
 
 for feed_url in RSS_FEEDS:
     print("Pobieram RSS:", feed_url)
-    items = fetch_feed(feed_url)
+
+    try:
+        items = fetch_feed(feed_url)
+    except Exception as error:
+        print(f"BŁĄD FEEDU: {error}")
+        continue
 
     print(f"Znaleziono artykułów: {len(items)}")
 

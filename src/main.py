@@ -49,9 +49,11 @@ for feed_url in RSS_FEEDS:
         ) or "(brak tytułu)"
 
         link_element = item.find("{http://www.w3.org/2005/Atom}link")
-        link = link_element.get("href", "(brak linku)") if link_element is not None else "(brak linku)"
-        print("LINK ELEMENT:", ET.tostring(link_element, encoding="unicode") if link_element is not None else "(brak elementu)")
-        print("ELEMENTY:", [(child.tag, child.text, child.attrib) for child in item])
+
+        if link_element is not None:
+            link = link_element.get("href", "(brak linku)")
+        else:
+            link = item.findtext("link") or "(brak linku)"
         
         print()
         print("TYTUŁ:", title)

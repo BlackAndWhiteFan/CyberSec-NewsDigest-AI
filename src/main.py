@@ -63,4 +63,5 @@ for feed_url in RSS_FEEDS:
             
         print()
         print("TYTUŁ:", title)
+        print("ŹRÓDŁO:", feed_url)
         print("LINK:", link)

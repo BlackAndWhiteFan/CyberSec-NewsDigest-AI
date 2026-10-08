@@ -56,6 +56,7 @@ for feed_url in RSS_FEEDS:
             link = item.findtext("link") or "(brak linku)"
 
         articles.append({
+            "source": feed_url,
             "title": title,
             "link": link,
         })

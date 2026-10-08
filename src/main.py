@@ -9,8 +9,6 @@ print("Pobieram RSS:", RSS_URL)
 with urllib.request.urlopen(RSS_URL, timeout=20) as response:
     xml_data = response.read()
 
-print(xml_data[:500])
-
 root = ET.fromstring(xml_data.lstrip())
 
 items = root.findall(".//item")

@@ -28,7 +28,7 @@ def fetch_feed(url):
 
     return items
 
-
+articles = []
 print("CyberSec NewsDigest AI")
 
 
@@ -43,7 +43,7 @@ for feed_url in RSS_FEEDS:
 
     print(f"Znaleziono artykułów: {len(items)}")
 
-    for item in items[:5]:
+    for item in items:
         title = item.findtext("title") or item.findtext(
             "{http://www.w3.org/2005/Atom}title"
         ) or "(brak tytułu)"
@@ -54,7 +54,12 @@ for feed_url in RSS_FEEDS:
             link = link_element.get("href", "(brak linku)")
         else:
             link = item.findtext("link") or "(brak linku)"
-        
+
+        articles.append({
+            "title": title,
+            "link": link,
+        })
+            
         print()
         print("TYTUŁ:", title)
         print("LINK:", link)

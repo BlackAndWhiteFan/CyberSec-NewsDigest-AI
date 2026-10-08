@@ -12,7 +12,12 @@ RSS_FEEDS = [
 
 
 def fetch_feed(url):
-    with urllib.request.urlopen(url, timeout=20) as response:
+    request = urllib.request.Request(
+        url,
+        headers={"User-Agent": "CyberSec-NewsDigest-AI/1.0"}
+    )
+
+    with urllib.request.urlopen(request, timeout=20) as response:
         xml_data = response.read()
 
     root = ET.fromstring(xml_data.lstrip())

@@ -11,7 +11,7 @@ with urllib.request.urlopen(RSS_URL, timeout=20) as response:
 
 print(xml_data[:500])
 
-root = ET.fromstring(xml_data)
+root = ET.fromstring(xml_data.lstrip())
 
 items = root.findall(".//item")
 

@@ -17,7 +17,7 @@ print(f"Znaleziono artykułów: {len(items)}")
 
 for item in items[:5]:
     title = item.findtext("title") or item.findtext("{http://www.w3.org/2005/Atom}title") or "(brak tytułu)"
-    link_element = item.find("link")
+    link_element = item.find("{http://www.w3.org/2005/Atom}link")
     link = link_element.get("href", "(brak linku)") if link_element is not None else "(brak linku)"
 
     print()

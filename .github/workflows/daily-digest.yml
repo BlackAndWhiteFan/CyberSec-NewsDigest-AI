@@ -1,0 +1,10 @@
+name: Daily CyberSec Digest
+
+on:
+  workflow_dispatch:
+  jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test workflow
+        run: echo "CyberSec Digest is alive!"

@@ -1,7 +1,14 @@
 import urllib.request
 import xml.etree.ElementTree as ET
 
-RSS_URL = "https://niebezpiecznik.pl/feed/"
+RSS_FEEDS = [
+    "https://niebezpiecznik.pl/feed/",
+    "https://sekurak.pl/feed/",
+    "https://zaufanatrzeciastrona.pl/feed/",
+    "https://cyberdefence24.pl/rss",
+    "https://www.bleepingcomputer.com/feed/",
+    "https://thehackernews.com/feeds/posts/default",
+]
 
 
 def fetch_feed(url):
@@ -15,22 +22,25 @@ def fetch_feed(url):
     )
 
     return items
+
+
 print("CyberSec NewsDigest AI")
-print("Pobieram RSS:", RSS_URL)
 
 
-items = fetch_feed(RSS_URL)
+for feed_url in RSS_FEEDS:
+    print("Pobieram RSS:", feed_url)
+    items = fetch_feed(feed_url)
 
-print(f"Znaleziono artykułów: {len(items)}")
+    print(f"Znaleziono artykułów: {len(items)}")
 
-for item in items[:5]:
-    title = item.findtext("title") or item.findtext(
-        "{http://www.w3.org/2005/Atom}title"
-    ) or "(brak tytułu)"
+    for item in items[:5]:
+        title = item.findtext("title") or item.findtext(
+            "{http://www.w3.org/2005/Atom}title"
+        ) or "(brak tytułu)"
 
-    link_element = item.find("{http://www.w3.org/2005/Atom}link")
-    link = link_element.get("href", "(brak linku)") if link_element is not None else "(brak linku)"
+        link_element = item.find("{http://www.w3.org/2005/Atom}link")
+        link = link_element.get("href", "(brak linku)") if link_element is not None else "(brak linku)"
 
-    print()
-    print("TYTUŁ:", title)
-    print("LINK:", link)
+        print()
+        print("TYTUŁ:", title)
+        print("LINK:", link)

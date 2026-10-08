@@ -51,8 +51,8 @@ for feed_url in RSS_FEEDS:
         link_element = item.find("{http://www.w3.org/2005/Atom}link")
         link = link_element.get("href", "(brak linku)") if link_element is not None else "(brak linku)"
         print("LINK ELEMENT:", ET.tostring(link_element, encoding="unicode") if link_element is not None else "(brak elementu)")
-        print("CAŁY ITEM:", ET.tostring(item, encoding="unicode"))
-
+        print("ELEMENTY:", [(child.tag, child.text, child.attrib) for child in item])
+        
         print()
         print("TYTUŁ:", title)
         print("LINK:", link)

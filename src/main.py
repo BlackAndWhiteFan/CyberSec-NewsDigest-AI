@@ -1,6 +1,8 @@
 import urllib.request
 import xml.etree.ElementTree as ET
 
+from deduplication import add_article
+
 RSS_FEEDS = [
     "https://niebezpiecznik.pl/feed/",
     "https://sekurak.pl/feed/",

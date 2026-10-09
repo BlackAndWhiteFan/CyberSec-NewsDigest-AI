@@ -29,6 +29,7 @@ def fetch_feed(url):
     return items
 
 articles = []
+seen_links = {}
 print("CyberSec NewsDigest AI")
 
 
@@ -55,13 +56,21 @@ for feed_url in RSS_FEEDS:
         else:
             link = item.findtext("link") or "(brak linku)"
 
-        articles.append({
-            "source": feed_url,
-            "title": title,
-            "link": link,
-        })
-            
+             if link not in seen_links:
+            seen_links[link] = []
+
+            articles.append({
+                "source": feed_url,
+                "sources": seen_links[link],
+                "title": title,
+                "link": link,
+            })
+
+        if feed_url not in seen_links[link]:
+            seen_links[link].append(feed_url)
+
         print()
         print("TYTUŁ:", title)
         print("ŹRÓDŁO:", feed_url)
         print("LINK:", link)
+    

@@ -10,7 +10,6 @@ RSS_FEEDS = [
     "https://thehackernews.com/feeds/posts/default",
 ]
 
-
 def fetch_feed(url):
     request = urllib.request.Request(
         url,

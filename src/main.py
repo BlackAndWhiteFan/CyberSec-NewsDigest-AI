@@ -65,7 +65,6 @@ for feed_url in RSS_FEEDS:
                 "title": title,
                 "link": link,
             })
-
         if feed_url not in seen_links[link]:
             seen_links[link].append(feed_url)
 

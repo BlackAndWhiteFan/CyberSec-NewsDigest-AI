@@ -1,3 +1,4 @@
+[English](README.md) | [Polski](README.pl.md)
 _**CyberSec NewsDigest AI**_
 
 An automated daily cybersecurity news digest built with Python, GitHub Actions, RSS feeds, and AI-powered content processing.

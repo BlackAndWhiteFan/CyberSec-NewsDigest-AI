@@ -8,6 +8,37 @@ from article_selection import (
 )
 
 class TestArticleSelection(unittest.TestCase):
+    
+    def test_selects_articles_by_priority(self):
+        articles = [
+            {"title": "Technology company announces results", "description": ""},
+            {"title": "New CVE-2026-12345 vulnerability disclosed", "description": ""},
+            {"title": "Ransomware attack actively exploited in the wild", "description": ""},
+        ]
+
+        selected = select_top_articles(articles)
+
+        self.assertEqual(selected[0]["title"], "Ransomware attack actively exploited in the wild")
+        self.assertEqual(selected[1]["title"], "New CVE-2026-12345 vulnerability disclosed")
+
+    def test_respects_article_limit(self):
+        articles = [
+            {"title": "First article", "description": ""},
+            {"title": "Second article", "description": ""},
+            {"title": "Third article", "description": ""},
+        ]
+
+        selected = select_top_articles(articles, limit=2)
+
+        self.assertEqual(len(selected), 2)
+
+    def test_zero_limit_returns_no_articles(self):
+        articles = [
+            {"title": "Ransomware attack reported", "description": ""},
+        ]
+
+        self.assertEqual(select_top_articles(articles, limit=0), [])
+
     def test_detects_critical_article(self):
         article = {
             "title": "Ransomware attack hits a major company",

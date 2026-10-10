@@ -90,7 +90,7 @@ for feed_url in RSS_FEEDS:
             skipped_invalid_items += 1
             continue
         
-        if link in seen_links:
+        if is_duplicate_link(link, seen_links):
             duplicate_items += 1
 
         add_article(

@@ -7,7 +7,7 @@ from article_history import load_history, save_history
 
 
 class TestArticleHistory(unittest.TestCase):
-     def test_loads_existing_history(self):
+    def test_loads_existing_history(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             path = Path(temp_dir) / "history.json"
             path.write_text(
@@ -34,7 +34,7 @@ class TestArticleHistory(unittest.TestCase):
 
             history = load_history(path)
 
-              self.assertEqual(
+            self.assertEqual(
                 history,
                 {
                     "seen_links": [],
@@ -70,14 +70,15 @@ class TestArticleHistory(unittest.TestCase):
             }
 
             save_history(history, path)
-
+           
             self.assertEqual(
                 load_history(path),
                 {
                     "seen_links": [
                         "https://example.com/1",
                         "https://example.com/2",
-                    ]
+                    ],
+                    "published_links": [],
                 },
             )
 

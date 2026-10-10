@@ -66,4 +66,10 @@ for feed_url in RSS_FEEDS:
         print("TYTUŁ:", title)
         print("ŹRÓDŁO:", feed_url)
         print("LINK:", link)
+
+        print()
+        print("PODSUMOWANIE RSS")
+        print("Wpisy znalezione w feedach:", total_feed_items)
+        print("Unikalne artykuły:", len(articles))
+        print("Duplikaty:", total_feed_items - len(articles))
     

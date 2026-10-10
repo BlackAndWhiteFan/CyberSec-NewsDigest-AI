@@ -60,6 +60,15 @@ for feed_url in RSS_FEEDS:
         else:
             link = item.findtext("link") or "(brak linku)"
 
+        if (
+            not title.strip()
+            or title == "(brak tytułu)"
+            or link == "(brak linku)"
+            or not link.startswith(("https://", "http://"))
+        ):
+            print("POMINIĘTO: brak prawidłowego tytułu lub linku")
+            continue
+        
         add_article(articles, seen_links, feed_url, title, link)
 
         print()

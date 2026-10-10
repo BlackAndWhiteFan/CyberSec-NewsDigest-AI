@@ -116,11 +116,11 @@ for feed_url in RSS_FEEDS:
         print("ŹRÓDŁO:", feed_url)
         print("LINK:", link)
 
-print()
 print("PODSUMOWANIE RSS")
 print("Wpisy znalezione w feedach:", total_feed_items)
 print("Unikalne artykuły:", len(articles))
-print("Duplikaty:", duplicate_items)
+print("Duplikaty w bieżącym uruchomieniu:", duplicate_items)
+print("Artykuły widziane wcześniej:", previously_seen_items)
 print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
 print("Nieudane feedy:", failed_feeds)
     

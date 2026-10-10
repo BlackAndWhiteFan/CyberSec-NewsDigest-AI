@@ -112,6 +112,17 @@ for feed_url in RSS_FEEDS:
             link,
             description
         )
+article = {
+    "title": title,
+    "description": description,
+    "link": link,
+}
+
+categories = categorize_article(article)
+priority = prioritize_article(article)
+
+print("KATEGORIE:", categories)
+print("PRIORYTET:", priority)
 
         print()
         print("TYTUŁ:", title)

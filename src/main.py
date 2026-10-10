@@ -41,8 +41,8 @@ def fetch_feed(url):
 articles = []
 seen_links = {}
 history = load_history()
-previously_seen_links = set(history["seen_links"])
-print("Linki wczytane z historii:", len(previously_seen_links))
+previously_published_links = set(history["published_links"])
+print("Linki opublikowane wcześniej:", len(previously_published_links))
 
 total_feed_items = 0
 skipped_invalid_items = 0
@@ -100,9 +100,9 @@ for feed_url in RSS_FEEDS:
             skipped_invalid_items += 1
             continue
 
-        if link in previously_seen_links:
+        if link in previously_published_links:
             previously_seen_items += 1
-            print("POMINIĘTO: artykuł był widziany wcześniej")
+            print("POMINIĘTO: artykuł był już opublikowany")
             continue
 
         if is_duplicate_link(link, seen_links):

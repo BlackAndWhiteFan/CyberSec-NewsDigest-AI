@@ -43,9 +43,14 @@ def load_history(path="data/seen_articles.json"):
     }
 
 
+
 def save_history(history, path="data/seen_articles.json"):
     """Save article history to a JSON file."""
-    seen_links = history.get("seen_links") if isinstance(history, dict) else None
+    if not isinstance(history, dict):
+        raise ValueError("Article history must be a JSON object.")
+
+    seen_links = history.get("seen_links")
+    published_links = history.get("published_links", [])
 
     if not isinstance(seen_links, list):
         raise ValueError("Article history must contain a seen_links list.")
@@ -53,12 +58,21 @@ def save_history(history, path="data/seen_articles.json"):
     if not all(isinstance(link, str) for link in seen_links):
         raise ValueError("All seen_links entries must be strings.")
 
+    if not isinstance(published_links, list):
+        raise ValueError("Article history must contain a published_links list.")
+
+    if not all(isinstance(link, str) for link in published_links):
+        raise ValueError("All published_links entries must be strings.")
+
     history_path = Path(path)
     history_path.parent.mkdir(parents=True, exist_ok=True)
 
     with history_path.open("w", encoding="utf-8") as file:
         json.dump(
-            {"seen_links": list(dict.fromkeys(seen_links))},
+            {
+                "seen_links": list(dict.fromkeys(seen_links)),
+                "published_links": list(dict.fromkeys(published_links)),
+            },
             file,
             ensure_ascii=False,
             indent=2,

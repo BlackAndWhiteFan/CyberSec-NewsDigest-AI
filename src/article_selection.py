@@ -75,3 +75,16 @@ def prioritize_article(article):
         score += 1
 
     return score
+
+def select_top_articles(articles, limit=20):
+    """Return the highest-priority articles, up to the requested limit."""
+    if limit < 0:
+        raise ValueError("limit must not be negative")
+
+    ranked_articles = sorted(
+        articles,
+        key=prioritize_article,
+        reverse=True,
+    )
+
+    return ranked_articles[:limit]

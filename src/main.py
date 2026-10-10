@@ -37,6 +37,7 @@ articles = []
 seen_links = {}
 history = load_history()
 previously_seen_links = set(history["seen_links"])
+print("Linki wczytane z historii:", len(previously_seen_links))
 
 total_feed_items = 0
 skipped_invalid_items = 0

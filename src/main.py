@@ -1,15 +1,10 @@
 import urllib.request
 import xml.etree.ElementTree as ET
 import urllib.parse
+from rss_helpers import is_valid_url, is_duplicate_link
 
 from deduplication import add_article
 
-def is_valid_url(url):
-    if not url or not url.startswith(("https://", "http://")):
-        return False
-
-    parsed_url = urllib.parse.urlparse(url)
-    return bool(parsed_url.netloc)
 
 RSS_FEEDS = [
     "https://niebezpiecznik.pl/feed/",

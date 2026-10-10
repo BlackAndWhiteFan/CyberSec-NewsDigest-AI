@@ -15,7 +15,8 @@ class TestAddArticle(unittest.TestCase):
             self.seen_links,
             "feed_a",
             "Test article",
-            "https://example.com/article"
+            "https://example.com/article",
+            "This is a test description."
         )
 
         self.assertEqual(len(self.articles), 1)
@@ -24,7 +25,12 @@ class TestAddArticle(unittest.TestCase):
             self.articles[0]["link"],
             "https://example.com/article"
         )
-        self.assertEqual(self.articles[0]["sources"], ["feed_a"])
+        self.assertEqual(
+            self.articles[0]["description"],
+            "This is a test description."
+        )
+        self.assertEqual(self.articles[0]["sources"], ["feed_a"]) 
+
 
     def test_does_not_add_duplicate_link(self):
         add_article(

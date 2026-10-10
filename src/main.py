@@ -54,7 +54,7 @@ for feed_url in RSS_FEEDS:
     total_feed_items += len(items)
 
     for item in items:
-          title = (
+        title = (
             item.findtext("title")
             or item.findtext(
                 "{http://www.w3.org/2005/Atom}title"

@@ -123,4 +123,18 @@ print("Duplikaty w bieżącym uruchomieniu:", duplicate_items)
 print("Artykuły widziane wcześniej:", previously_seen_items)
 print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
 print("Nieudane feedy:", failed_feeds)
+new_links = [
+    article["link"]
+    for article in articles
+]
+
+history["seen_links"] = list(
+    dict.fromkeys(
+        history["seen_links"] + new_links
+    )
+)
+
+save_history(history)
+
+print("Zapamiętane linki w historii:", len(history["seen_links"]))
     

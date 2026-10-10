@@ -1,4 +1,3 @@
-
 import unittest
 
 from main import is_valid_url

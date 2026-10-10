@@ -46,6 +46,7 @@ for feed_url in RSS_FEEDS:
         continue
 
     print(f"Znaleziono artykułów: {len(items)}")
+    total_feed_items += len(items)
 
     for item in items:
         title = item.findtext("title") or item.findtext(

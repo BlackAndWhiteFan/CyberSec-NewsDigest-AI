@@ -1,8 +1,11 @@
 
 import unittest
 
-from article_selection import categorize_article, prioritize_article
-
+from article_selection import (
+    categorize_article,
+    prioritize_article,
+    select_top_articles,
+)
 
 class TestArticleSelection(unittest.TestCase):
     def test_detects_critical_article(self):

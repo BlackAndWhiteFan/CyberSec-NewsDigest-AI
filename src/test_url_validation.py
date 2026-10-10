@@ -22,17 +22,14 @@ class TestIsValidUrl(unittest.TestCase):
 
     def test_rejects_unsupported_scheme(self):
         self.assertFalse(is_valid_url("ftp://example.com/file"))
-
+    
     def test_duplicate_link_is_detected(self):
         seen_links = {"https://example.com/article": []}
-        self.assertTrue(
-            is_duplicate_link("https://example.com/article", seen_links)
+        self.assertTrue(is_duplicate_link("https://example.com/article", seen_links))
 
     def test_new_link_is_not_a_duplicate(self):
         seen_links = {"https://example.com/article": []}
-        self.assertFalse(
-            is_duplicate_link("https://example.com/another-article", seen_links)
-        )
+        self.assertFalse(is_duplicate_link("https://example.com/another-article", seen_links))
 
 
 if __name__ == "__main__":

@@ -1,3 +1,5 @@
+[English](README.md) | [Polski](README_PL.md)
+
 _**CyberSec NewsDigest AI**_
 
 Zautomatyzowany, codzienny przegląd wiadomości z obszaru cyberbezpieczeństwa, tworzony z wykorzystaniem Pythona, GitHub Actions, kanałów RSS i przetwarzania treści przez AI.

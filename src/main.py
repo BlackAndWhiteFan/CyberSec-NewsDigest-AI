@@ -68,6 +68,7 @@ for feed_url in RSS_FEEDS:
             or not link.startswith(("https://", "http://"))
         ):
             print("POMINIĘTO: brak prawidłowego tytułu lub linku")
+            skipped_invalid_items += 1
             continue
         
         add_article(articles, seen_links, feed_url, title, link)

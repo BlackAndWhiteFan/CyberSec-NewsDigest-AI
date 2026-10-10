@@ -31,6 +31,8 @@ def fetch_feed(url):
 
 articles = []
 seen_links = {}
+total_feed_items = 0
+
 print("CyberSec NewsDigest AI")
 
 

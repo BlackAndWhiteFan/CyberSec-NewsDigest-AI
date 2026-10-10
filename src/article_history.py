@@ -29,7 +29,18 @@ def load_history(path="data/seen_articles.json"):
     if not all(isinstance(link, str) for link in seen_links):
         raise ValueError("All seen_links entries must be strings.")
 
-    return {"seen_links": list(dict.fromkeys(seen_links))}
+    published_links = history.get("published_links", [])
+
+    if not isinstance(published_links, list):
+        raise ValueError("Article history must contain a published_links list.")
+
+    if not all(isinstance(link, str) for link in published_links):
+        raise ValueError("All published_links entries must be strings.")
+
+    return {
+        "seen_links": list(dict.fromkeys(seen_links)),
+        "published_links": list(dict.fromkeys(published_links)),
+    }
 
 
 def save_history(history, path="data/seen_articles.json"):

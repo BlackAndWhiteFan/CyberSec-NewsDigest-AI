@@ -142,6 +142,19 @@ print("Artykuły widziane wcześniej:", previously_seen_items)
 print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
 print("Nieudane feedy:", failed_feeds)
 
+selected_articles = select_top_articles(articles, limit=20)
+
+print()
+print("SELEKCJA ARTYKUŁÓW")
+print("Artykuły dostępne do selekcji:", len(articles))
+print("Artykuły wybrane do digestu:", len(selected_articles))
+
+for article in selected_articles:
+    print("WYBRANO:", article["title"])
+    print("PRIORYTET:", prioritize_article(article))
+    print("LINK:", article["link"])
+    print()
+    
 new_links = [
     article["link"]
     for article in articles

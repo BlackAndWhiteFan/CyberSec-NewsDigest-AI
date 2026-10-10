@@ -17,4 +17,16 @@ jobs:
 
       - name: Test workflow
         run: python src/main.py
+
+      - name: Persist article history
+        run: |
+          if git diff --quiet -- data/seen_articles.json; then
+            echo "Article history has not changed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add data/seen_articles.json
+            git commit -m "Update persistent article history"
+            git push
+          fi
         

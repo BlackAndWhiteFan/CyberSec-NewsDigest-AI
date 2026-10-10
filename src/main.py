@@ -5,7 +5,11 @@ from rss_helpers import is_valid_url, is_duplicate_link
 from article_history import load_history, save_history
 
 from deduplication import add_article
-from article_selection import categorize_article, prioritize_article
+from article_selection import (
+    categorize_article,
+    prioritize_article,
+    select_top_articles,
+)
 
 
 RSS_FEEDS = [

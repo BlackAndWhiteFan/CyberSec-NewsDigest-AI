@@ -9,6 +9,7 @@ CATEGORIES = {
 
 CRITICAL_KEYWORDS = (
     "actively exploited",
+    "critical vulnerability",
     "exploited in the wild",
     "zero-day",
     "zero day",

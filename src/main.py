@@ -75,7 +75,14 @@ for feed_url in RSS_FEEDS:
             skipped_invalid_items += 1
             continue
         
-        add_article(articles, seen_links, feed_url, title, link)
+        add_article(
+            articles,
+            seen_links,
+            feed_url,
+            title,
+            link,
+            description
+        )
 
         print()
         print("TYTUŁ:", title)

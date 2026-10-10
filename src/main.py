@@ -1,5 +1,6 @@
 import urllib.request
 import xml.etree.ElementTree as ET
+import urllib.parse
 
 from deduplication import add_article
 
@@ -33,6 +34,8 @@ articles = []
 seen_links = {}
 total_feed_items = 0
 skipped_invalid_items = 0
+duplicate_items = 0
+failed_feeds = 0
 
 print("CyberSec NewsDigest AI")
 
@@ -40,9 +43,10 @@ print("CyberSec NewsDigest AI")
 for feed_url in RSS_FEEDS:
     print("Pobieram RSS:", feed_url)
 
-    try:
+     try:
         items = fetch_feed(feed_url)
     except Exception as error:
+        failed_feeds += 1
         print(f"BŁĄD FEEDU: {error}")
         continue
 
@@ -50,31 +54,48 @@ for feed_url in RSS_FEEDS:
     total_feed_items += len(items)
 
     for item in items:
-        title = item.findtext("title") or item.findtext(
-            "{http://www.w3.org/2005/Atom}title"
-        ) or "(brak tytułu)"
+          title = (
+            item.findtext("title")
+            or item.findtext(
+                "{http://www.w3.org/2005/Atom}title"
+            )
+            or ""
+        ).strip()
         
-        description = item.findtext("description") or item.findtext(
-            "{http://www.w3.org/2005/Atom}summary"
-        ) or ""
+        description = (
+            item.findtext("description")
+            or item.findtext(
+                "{http://www.w3.org/2005/Atom}summary"
+            )
+            or item.findtext(
+                "{http://www.w3.org/2005/Atom}content"
+            )
+            or ""
+        ).strip()
 
         link_element = item.find("{http://www.w3.org/2005/Atom}link")
 
         if link_element is not None:
-            link = link_element.get("href", "(brak linku)")
+            link = link_element.get("href", "")
         else:
-            link = item.findtext("link") or "(brak linku)"
+            link = item.findtext("link") or ""
+
+        link = link.strip()
 
         if (
-            not title.strip()
-            or title == "(brak tytułu)"
-            or link == "(brak linku)"
+            not title
+            or not link
             or not link.startswith(("https://", "http://"))
+            or not urllib.parse.urlparse(link).netloc
         ):
+            
             print("POMINIĘTO: brak prawidłowego tytułu lub linku")
             skipped_invalid_items += 1
             continue
         
+        if link in seen_links:
+            duplicate_items += 1
+
         add_article(
             articles,
             seen_links,
@@ -93,9 +114,7 @@ print()
 print("PODSUMOWANIE RSS")
 print("Wpisy znalezione w feedach:", total_feed_items)
 print("Unikalne artykuły:", len(articles))
-print(
-    "Duplikaty:",
-    total_feed_items - len(articles) - skipped_invalid_items
-)
+print("Duplikaty:", duplicate_items)
 print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
+print("Nieudane feedy:", failed_feeds)
     

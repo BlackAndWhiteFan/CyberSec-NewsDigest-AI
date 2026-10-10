@@ -7,11 +7,14 @@ from article_history import load_history, save_history
 
 
 class TestArticleHistory(unittest.TestCase):
-    def test_loads_existing_history(self):
+     def test_loads_existing_history(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             path = Path(temp_dir) / "history.json"
             path.write_text(
-                json.dumps({"seen_links": ["https://example.com/1"]}),
+                json.dumps({
+                    "seen_links": ["https://example.com/1"],
+                    "published_links": [],
+                }),
                 encoding="utf-8",
             )
 
@@ -19,7 +22,10 @@ class TestArticleHistory(unittest.TestCase):
 
             self.assertEqual(
                 history,
-                {"seen_links": ["https://example.com/1"]},
+                {
+                    "seen_links": ["https://example.com/1"],
+                    "published_links": [],
+                },
             )
 
     def test_returns_empty_history_when_file_is_missing(self):
@@ -28,7 +34,13 @@ class TestArticleHistory(unittest.TestCase):
 
             history = load_history(path)
 
-            self.assertEqual(history, {"seen_links": []})
+              self.assertEqual(
+                history,
+                {
+                    "seen_links": [],
+                    "published_links": [],
+                },
+            )
 
     def test_saves_and_reloads_history(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -37,7 +49,8 @@ class TestArticleHistory(unittest.TestCase):
                 "seen_links": [
                     "https://example.com/1",
                     "https://example.com/2",
-                ]
+                ],
+                "published_links": [],
             }
 
             save_history(history, path)
@@ -52,7 +65,8 @@ class TestArticleHistory(unittest.TestCase):
                     "https://example.com/1",
                     "https://example.com/1",
                     "https://example.com/2",
-                ]
+                ],
+                "published_links": []
             }
 
             save_history(history, path)

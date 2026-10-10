@@ -112,23 +112,24 @@ for feed_url in RSS_FEEDS:
             link,
             description
         )
-article = {
-    "title": title,
-    "description": description,
-    "link": link,
-}
+        article = {
+            "title": title,
+            "description": description,
+            "link": link,
+        }
 
-categories = categorize_article(article)
-priority = prioritize_article(article)
+        categories = categorize_article(article)
+        priority = prioritize_article(article)
 
-print("KATEGORIE:", categories)
-print("PRIORYTET:", priority)
+        print("KATEGORIE:", categories)
+        print("PRIORYTET:", priority)
 
         print()
         print("TYTUŁ:", title)
         print("ŹRÓDŁO:", feed_url)
         print("LINK:", link)
 
+print()
 print("PODSUMOWANIE RSS")
 print("Wpisy znalezione w feedach:", total_feed_items)
 print("Unikalne artykuły:", len(articles))
@@ -136,6 +137,7 @@ print("Duplikaty w bieżącym uruchomieniu:", duplicate_items)
 print("Artykuły widziane wcześniej:", previously_seen_items)
 print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
 print("Nieudane feedy:", failed_feeds)
+
 new_links = [
     article["link"]
     for article in articles

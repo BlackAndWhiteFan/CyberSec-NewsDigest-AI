@@ -35,9 +35,13 @@ def fetch_feed(url):
 
 articles = []
 seen_links = {}
+history = load_history()
+previously_seen_links = set(history["seen_links"])
+
 total_feed_items = 0
 skipped_invalid_items = 0
 duplicate_items = 0
+previously_seen_items = 0
 failed_feeds = 0
 
 print("CyberSec NewsDigest AI")

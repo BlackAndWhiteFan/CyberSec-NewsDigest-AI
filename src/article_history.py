@@ -2,7 +2,10 @@ import json
 from pathlib import Path
 
 
-DEFAULT_HISTORY = {"seen_links": []}
+DEFAULT_HISTORY = {
+    "seen_links": [],
+    "published_links": [],
+}
 
 
 def load_history(path="data/seen_articles.json"):

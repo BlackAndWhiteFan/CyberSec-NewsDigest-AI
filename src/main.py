@@ -86,4 +86,5 @@ print(
     "Duplikaty:",
     total_feed_items - len(articles) - skipped_invalid_items
 )
+print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
     

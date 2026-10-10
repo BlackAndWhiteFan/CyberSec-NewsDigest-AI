@@ -4,6 +4,13 @@ import urllib.parse
 
 from deduplication import add_article
 
+def is_valid_url(url):
+    if not url or not url.startswith(("https://", "http://")):
+        return False
+
+    parsed_url = urllib.parse.urlparse(url)
+    return bool(parsed_url.netloc)
+
 RSS_FEEDS = [
     "https://niebezpiecznik.pl/feed/",
     "https://sekurak.pl/feed/",
@@ -82,12 +89,7 @@ for feed_url in RSS_FEEDS:
 
         link = link.strip()
 
-        if (
-            not title
-            or not link
-            or not link.startswith(("https://", "http://"))
-            or not urllib.parse.urlparse(link).netloc
-        ):
+        if not title or not is_valid_url(link):
             
             print("POMINIĘTO: brak prawidłowego tytułu lub linku")
             skipped_invalid_items += 1

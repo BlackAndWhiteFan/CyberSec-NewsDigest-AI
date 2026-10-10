@@ -1,6 +1,6 @@
 import unittest
 
-from main import is_valid_url
+from rss_helpers import is_valid_url, is_duplicate_link
 
 
 class TestIsValidUrl(unittest.TestCase):

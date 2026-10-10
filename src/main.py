@@ -53,6 +53,10 @@ for feed_url in RSS_FEEDS:
         title = item.findtext("title") or item.findtext(
             "{http://www.w3.org/2005/Atom}title"
         ) or "(brak tytułu)"
+        
+        description = item.findtext("description") or item.findtext(
+            "{http://www.w3.org/2005/Atom}summary"
+        ) or ""
 
         link_element = item.find("{http://www.w3.org/2005/Atom}link")
 

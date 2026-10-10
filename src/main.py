@@ -43,7 +43,7 @@ print("CyberSec NewsDigest AI")
 for feed_url in RSS_FEEDS:
     print("Pobieram RSS:", feed_url)
 
-     try:
+    try:
         items = fetch_feed(feed_url)
     except Exception as error:
         failed_feeds += 1

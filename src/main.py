@@ -82,5 +82,8 @@ print()
 print("PODSUMOWANIE RSS")
 print("Wpisy znalezione w feedach:", total_feed_items)
 print("Unikalne artykuły:", len(articles))
-print("Duplikaty:", total_feed_items - len(articles))
+print(
+    "Duplikaty:",
+    total_feed_items - len(articles) - skipped_invalid_items
+)
     

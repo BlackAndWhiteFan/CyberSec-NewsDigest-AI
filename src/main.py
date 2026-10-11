@@ -2,7 +2,11 @@ import urllib.request
 import xml.etree.ElementTree as ET
 import urllib.parse
 from rss_helpers import is_valid_url, is_duplicate_link
-from article_history import load_history, save_history
+from article_history import (
+    filter_unpublished_articles,
+    load_history,
+    save_history,
+)
 
 from deduplication import add_article
 from article_selection import (

@@ -132,6 +132,23 @@ class TestArticleHistory(unittest.TestCase):
                 "https://example.com/published",
                 loaded_history["published_links"],
             )
+    
+    def test_filters_only_published_articles(self):
+        articles = [
+            {"title": "Seen only", "link": "https://example.com/seen-only"},
+            {"title": "Already published", "link": "https://example.com/published"},
+            {"title": "New article", "link": "https://example.com/new"},
+        ]
+        published_links = ["https://example.com/published"]
 
+        result = filter_unpublished_articles(articles, published_links)
+
+        self.assertEqual(
+            [article["link"] for article in result],
+            [
+                "https://example.com/seen-only",
+                "https://example.com/new",
+            ],
+        )
 if __name__ == "__main__":
     unittest.main()

@@ -3,8 +3,11 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from article_history import load_history, save_history
-
+from article_history import (
+    filter_unpublished_articles,
+    load_history,
+    save_history,
+)
 
 class TestArticleHistory(unittest.TestCase):
     def test_loads_existing_history(self):

@@ -168,5 +168,6 @@ history["seen_links"] = list(
 
 save_history(history)
 
-print("Zapamiętane linki w historii:", len(history["seen_links"]))
+print("Linki zapamiętane w historii:", len(history["seen_links"]))
+print("Linki opublikowane wcześniej:", len(history["published_links"]))
     

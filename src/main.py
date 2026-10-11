@@ -133,6 +133,13 @@ for feed_url in RSS_FEEDS:
         print("TYTUŁ:", title)
         print("ŹRÓDŁO:", feed_url)
         print("LINK:", link)
+        
+eligible_articles = filter_unpublished_articles(
+    articles,
+    history["published_links"],
+)
+
+previously_seen_items = len(articles) - len(eligible_articles)
 
 print()
 print("PODSUMOWANIE RSS")
@@ -143,11 +150,11 @@ print("Artykuły widziane wcześniej:", previously_seen_items)
 print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
 print("Nieudane feedy:", failed_feeds)
 
-selected_articles = select_top_articles(articles, limit=20)
+selected_articles = select_top_articles(eligible_articles, limit=20)
 
 print()
 print("SELEKCJA ARTYKUŁÓW")
-print("Artykuły dostępne do selekcji:", len(articles))
+print("Artykuły dostępne do selekcji:", len(eligible_articles))
 print("Artykuły wybrane do digestu:", len(selected_articles))
 
 for article in selected_articles:

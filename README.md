@@ -1,31 +1,38 @@
 [English](README.md) | [Polski](README_PL.md)
 
-# CyberSec NewsDigest AI
+_# CyberSec NewsDigest AI_
 
-An automated daily cybersecurity news digest built with Python, GitHub Actions, RSS feeds, and AI-powered content processing.
+An automated cybersecurity news digest built with Python, GitHub Actions, RSS feeds, and planned AI-powered content processing.
 
 ## Project Goal
 
 CyberSec NewsDigest AI is designed to collect cybersecurity news from selected RSS feeds, identify relevant articles, generate concise summaries, and deliver a daily digest to Discord.
 
-The project aims to operate with a budget of 0 PLN, using free service tiers wherever possible.
+The project aims to operate with a budget of 0 PLN by using free service tiers wherever possible.
 
 ## Project Status
 
-**Phase 1 — RSS ingestion and quality checks: completed.**
+**Phase 1 — RSS ingestion, URL validation, and quality checks: completed.**
 
-**Phase 2 — Persistent article history and cross-run deduplication: implemented and verified.**
+**Phase 2 — Persistent article history and publication-aware filtering: implemented; automated workflow and unit tests verified.**
+
+**Phase 3 — Rule-based article categorization and prioritization: implemented; end-to-end selection output still requires verification.**
+
+AI-powered summaries, Discord delivery, and automatic daily scheduling have not yet been implemented.
 
 ### Current Implementation
 
 - Retrieves RSS or Atom entries from six configured cybersecurity news sources.
 - Extracts article titles, links, and descriptions.
 - Skips entries with missing titles or invalid URLs.
-- Detects duplicate links within a single run.
-- Skips article links recorded in the persistent history.
-- Records newly processed article links in `data/seen_articles.json`.
+- Detects duplicate links within a single run and tracks the feeds in which an article appears.
+- Maintains persistent article history in `data/seen_articles.json`, separating previously seen links from published links.
+- Filters out articles whose links are already recorded in `published_links`, rather than excluding every previously seen article.
+- Categorizes articles using keyword-based rules into critical news, vulnerabilities, and Poland-related news.
+- Assigns preliminary priority scores based on matching categories.
+- Selects up to 20 highest-priority eligible articles for the planned digest.
 - Continues processing when an individual RSS feed fails.
-- Displays statistics about retrieved, skipped, and processed entries.
+- Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
 - Runs unit tests before executing the RSS ingestion script.
 - Uses GitHub Actions to commit and push changes to the persistent article history when that file changes.
 
@@ -33,24 +40,36 @@ The current workflow can be triggered manually through GitHub Actions. Daily sch
 
 ### Latest Verified Results
 
-The RSS ingestion test retrieved 150 entries across the configured feeds, with no invalid entries or failed feeds. A subsequent run confirmed that all 150 recorded links were loaded from persistent history and recognized as previously seen.
+The latest reported unit-test run completed successfully:
 
-- Initial collection: 150 entries, 150 unique article links.
-- Initial duplicate count: 0.
-- Invalid entries skipped: 0.
-- Failed RSS feeds: 0.
-- Subsequent run: 150 previously seen articles recognized.
-- Unit tests: 18 passed.
+- Unit tests: **30 passed**.
+- Persistent history contains 150 recorded article links.
+- `published_links` is currently empty because Discord publishing has not yet been implemented.
 
-These figures describe verified runs and may change over time. Link-based deduplication does not guarantee that different URLs cannot refer to the same underlying story.
+The current code includes publication-aware filtering and rule-based article selection. However, the latest execution logs provided so far did not include the expected RSS summary and selection statistics, so the complete runtime behavior of this updated selection flow still needs confirmation.
+
+Historical RSS runs retrieved 150 entries across the configured feeds. These figures describe specific runs and may change over time.
+
+Link-based deduplication does not guarantee that different URLs cannot refer to the same underlying story.
+
+### Important History and Selection Limitations
+
+`seen_links` records links encountered during RSS ingestion. It does not mean that an article has been published.
+
+`published_links` is intended to record links successfully delivered to the digest. Articles already recorded there are excluded from subsequent selections.
+
+The current implementation does not persist complete article content as a backlog. Therefore, an eligible article that disappears from the RSS feeds before being selected may no longer be available for a later digest.
+
+Priority scores are preliminary, keyword-based indicators. They do not represent an AI assessment or a guarantee of editorial relevance.
 
 ## Planned Features
 
-- Filtering and prioritization of relevant cybersecurity news.
-- Generation of concise article summaries using an AI service.
-- Delivery of the daily news digest to Discord.
+- AI-powered summaries of selected cybersecurity articles.
+- Formatting and delivery of the daily digest to Discord.
+- Recording successfully published article links in `published_links`.
 - Automatic execution at a scheduled time every day.
 - Operational documentation and troubleshooting instructions.
+- End-to-end verification of the complete workflow.
 
 Planned features are not considered implemented until they have been developed and verified.
 
@@ -59,26 +78,30 @@ Planned features are not considered implemented until they have been developed a
 The target processing workflow is:
 
 1. Retrieve articles from configured RSS feeds.
-2. Validate article data and detect duplicates.
-3. Compare article links against persistent processing history.
-4. Select and prioritize relevant news.
-5. Generate concise summaries using an AI service.
-6. Format and deliver the news digest to Discord.
-7. Record processing results and maintain article history.
+2. Validate article data and detect duplicate links.
+3. Update persistent history with newly encountered links.
+4. Exclude articles already recorded as published.
+5. Categorize eligible articles and calculate preliminary priority scores.
+6. Select up to 20 articles for the digest.
+7. Generate concise summaries using an AI service.
+8. Format and deliver the digest to Discord.
+9. Record successfully published links and maintain article history.
 
-GitHub Actions executes the workflow, while Python implements the processing logic. The current implementation covers RSS ingestion, validation, deduplication, and persistent link history.
+GitHub Actions executes the workflow, while Python implements the processing logic. The current implementation covers RSS ingestion, validation, deduplication, persistent link history, rule-based categorization, prioritization, and article selection.
 
 ## Repository Structure
 
-- `.github/workflows/daily-digest.yml` — GitHub Actions workflow.
-- `data/seen_articles.json` — persistent history of previously seen article links.
+- `.github/workflows/daily-digest.yml` — GitHub Actions workflow and automated test execution.
+- `data/seen_articles.json` — persistent history of seen and published article links.
 - `src/main.py` — main RSS ingestion and processing script.
-- `src/deduplication.py` — article deduplication logic.
-- `src/rss_helpers.py` — helper functions for URL validation and duplicate-link detection.
-- `src/article_history.py` — loading and saving persistent article history.
+- `src/deduplication.py` — article deduplication and source tracking.
+- `src/rss_helpers.py` — URL validation and duplicate-link detection helpers.
+- `src/article_history.py` — loading, validating, saving, and filtering persistent article history.
+- `src/article_selection.py` — keyword-based categorization, preliminary prioritization, and top-article selection.
 - `src/test_deduplication.py` — deduplication unit tests.
 - `src/test_url_validation.py` — URL validation and duplicate-detection tests.
-- `src/test_article_history.py` — persistent article history unit tests.
+- `src/test_article_history.py` — persistent article history and publication-filtering tests.
+- `src/test_article_selection.py` — article categorization, prioritization, and selection tests.
 
 ## Configuration and Secrets
 
@@ -88,7 +111,7 @@ Never commit API keys, Discord webhook URLs, passwords, or other credentials to 
 
 ## Development and Testing
 
-Unit tests can be run locally from the repository root using:
+Run unit tests locally from the repository root using:
 
 ```bash
 python -m unittest discover -s src -p "test_*.py"

@@ -101,6 +101,34 @@ class TestArticleHistory(unittest.TestCase):
             with self.assertRaises(ValueError):
                 load_history(path)
 
+    def test_keeps_seen_and_published_links_separate(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            path = Path(temp_dir) / "history.json"
+            history = {
+                "seen_links": [
+                    "https://example.com/seen-only",
+                    "https://example.com/published",
+                ],
+                "published_links": [
+                    "https://example.com/published",
+                ],
+            }
+
+            save_history(history, path)
+            loaded_history = load_history(path)
+
+            self.assertIn(
+                "https://example.com/seen-only",
+                loaded_history["seen_links"],
+            )
+            self.assertNotIn(
+                "https://example.com/seen-only",
+                loaded_history["published_links"],
+            )
+            self.assertIn(
+                "https://example.com/published",
+                loaded_history["published_links"],
+            )
 
 if __name__ == "__main__":
     unittest.main()

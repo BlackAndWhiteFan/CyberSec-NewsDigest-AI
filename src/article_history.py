@@ -78,3 +78,14 @@ def save_history(history, path="data/seen_articles.json"):
             indent=2,
         )
         file.write("\n")
+
+
+def filter_unpublished_articles(articles, published_links):
+    """Return articles that have not been published yet."""
+    published_links = set(published_links)
+
+    return [
+        article
+        for article in articles
+        if article["link"] not in published_links
+    ]

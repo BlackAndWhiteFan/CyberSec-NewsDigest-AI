@@ -99,16 +99,13 @@ for feed_url in RSS_FEEDS:
 
         link = link.strip()
 
+        
         if not title or not is_valid_url(link):
             print("POMINIĘTO: brak prawidłowego tytułu lub linku")
             skipped_invalid_items += 1
             continue
 
-        if link in previously_published_links:
-            previously_seen_items += 1
-            print("POMINIĘTO: artykuł był już opublikowany")
-            continue
-
+        
         if is_duplicate_link(link, seen_links):
             duplicate_items += 1
 

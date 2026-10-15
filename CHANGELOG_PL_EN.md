@@ -48,8 +48,10 @@ najprawdopodobniej wynikał z tego, że wyszukiwarka logów GitHub Actions
 przeszukuje tylko rozwinięte kroki, a nie z błędu programu.
 
 W README (PL i EN) usunięto zastrzeżenie, że działanie selekcji wymaga
-potwierdzenia. W nagłówku changelogu zaznaczono, że od v11 wpisy są
-dodawane na bieżąco, razem ze zmianą, a nie odtwarzane z historii Git.
+potwierdzenia, a sekcję ostatnich zweryfikowanych wyników zastąpiono
+wynikami tego uruchomienia, z odesłaniem do changelogu. W nagłówku
+changelogu zaznaczono, że od v11 wpisy są dodawane na bieżąco, razem ze
+zmianą, a nie odtwarzane z historii Git.
 
 **Ograniczenie:** licznik „Artykuły widziane wcześniej” liczy w
 rzeczywistości artykuły wcześniej opublikowane (`published_links`), a
@@ -291,9 +293,10 @@ earlier absence most likely resulted from the GitHub Actions log search
 covering only expanded steps, not from a program error.
 
 The README (PL and EN) no longer states that selection still requires
-confirmation. The changelog header now notes that, from v11 onwards,
-entries are added together with each change rather than reconstructed
-from Git history.
+confirmation, and its latest verified results section now shows the
+results of this run, with a reference to the changelog. The changelog
+header now notes that, from v11 onwards, entries are added together with
+each change rather than reconstructed from Git history.
 
 **Limitation:** the "Artykuły widziane wcześniej" (previously seen
 articles) counter actually counts previously published articles

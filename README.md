@@ -16,7 +16,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 2 — Persistent article history and publication-aware filtering: implemented; automated workflow and unit tests verified.**
 
-**Phase 3 — Rule-based article categorization and prioritization: implemented; end-to-end selection output still requires verification.**
+**Phase 3 — Rule-based article categorization and prioritization: implemented and verified in a full workflow run.**
 
 AI-powered summaries, Discord delivery, and automatic daily scheduling have not yet been implemented.
 
@@ -40,15 +40,13 @@ The current workflow can be triggered manually through GitHub Actions. Daily sch
 
 ### Latest Verified Results
 
-The latest reported unit-test run completed successfully:
+The latest verified run (v11, 2026-10-15) completed successfully:
 
 - Unit tests: **30 passed**.
-- Persistent history contains 150 recorded article links.
+- All 6 feeds retrieved without errors; 150 entries processed and 20 articles selected for the digest.
 - `published_links` is currently empty because Discord publishing has not yet been implemented.
 
-The current code includes publication-aware filtering and rule-based article selection. However, the latest execution logs provided so far did not include the expected RSS summary and selection statistics, so the complete runtime behavior of this updated selection flow still needs confirmation.
-
-Historical RSS runs retrieved 150 entries across the configured feeds. These figures describe specific runs and may change over time.
+These figures describe a specific run and may change over time. Verification results for each change are recorded in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 Link-based deduplication does not guarantee that different URLs cannot refer to the same underlying story.
 

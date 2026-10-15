@@ -16,7 +16,7 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 2 — trwała historia artykułów i filtrowanie uwzględniające publikację: zaimplementowane; workflow i testy jednostkowe zweryfikowane.**
 
-**Etap 3 — kategoryzacja artykułów i ustalanie priorytetów na podstawie reguł: zaimplementowane; pełne działanie selekcji podczas uruchomienia wymaga jeszcze potwierdzenia.**
+**Etap 3 — kategoryzacja artykułów i ustalanie priorytetów na podstawie reguł: zaimplementowane i zweryfikowane w pełnym uruchomieniu workflow.**
 
 Generowanie podsumowań przez AI, dostarczanie wiadomości na Discorda i automatyczny harmonogram dzienny nie zostały jeszcze wdrożone.
 
@@ -40,15 +40,13 @@ Obecny workflow można uruchomić ręcznie w GitHub Actions. Codzienny harmonogr
 
 ### Ostatnie zweryfikowane wyniki
 
-Ostatnie zgłoszone uruchomienie testów jednostkowych zakończyło się powodzeniem:
+Ostatnie zweryfikowane uruchomienie (v11, 15.10.2026) zakończyło się powodzeniem:
 
 - Testy jednostkowe: **30 zaliczonych**.
-- Trwała historia zawiera 150 zapisanych linków do artykułów.
+- Wszystkie 6 kanałów pobrano bez błędów; przetworzono 150 wpisów, a do digestu wybrano 20 artykułów.
 - Lista `published_links` jest obecnie pusta, ponieważ publikowanie na Discordzie nie zostało jeszcze wdrożone.
 
-Aktualny kod zawiera filtrowanie uwzględniające status publikacji oraz regułową selekcję artykułów. Jednak w dotychczas udostępnionych logach z ostatniego uruchomienia nie było oczekiwanego podsumowania RSS ani statystyk selekcji. Pełne działanie zaktualizowanego przepływu podczas uruchomienia wymaga więc jeszcze potwierdzenia.
-
-We wcześniejszych testach pobierania RSS uzyskano 150 wpisów ze skonfigurowanych kanałów. Są to wyniki konkretnych uruchomień i mogą się zmieniać.
+Są to wyniki konkretnego uruchomienia i mogą się zmieniać. Wyniki weryfikacji każdej zmiany są zapisywane w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 Deduplikacja oparta na linkach nie gwarantuje, że różne adresy URL nie prowadzą do informacji o tym samym wydarzeniu.
 

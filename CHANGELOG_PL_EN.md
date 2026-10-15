@@ -1,26 +1,62 @@
 # Changelog
 
-```{=html}
-<!-- POLSKA WERSJA -->
-```
-# Changelog
-
 Historia rozwoju produktu **CyberSec-NewsDigest-AI** -- automatycznego
 pobierania i przetwarzania wiadomości cyberbezpieczeństwa z kanałów
 RSS/Atom.
 
 Najnowsze wersje na górze. Numery v1--v10 porządkują istotne etapy
 funkcjonalne odtworzone z historii Git; nie są oficjalnymi tagami wydań.
-Daty wskazują datę autora odpowiednich commitów w historii Git, a nie
-czas utworzenia lokalnego pliku ani osobno potwierdzony moment wydania.
-Powiązane commity scalono w jeden wpis. Pominięto zmiany czysto
+Ich daty wskazują datę autora odpowiednich commitów w historii Git, a
+nie czas utworzenia lokalnego pliku ani osobno potwierdzony moment
+wydania. Powiązane commity scalono w jeden wpis. Pominięto zmiany czysto
 kosmetyczne, tymczasowe diagnostyki i eksperymenty usunięte później.
 
+Od v11 wpisy są dodawane na bieżąco, razem z każdą zmianą, przed jej
+scaleniem do gałęzi `main`. Jedna wersja odpowiada jednej logicznej
+zmianie; automatyczne aktualizacje historii artykułów przez workflow nie
+otrzymują osobnych wersji.
+
 Format inspirowany [Keep a Changelog](https://keepachangelog.com/).
-Źródło: historia Git (113 commitów), opisy commitów i przeanalizowane
-diffy.
+Źródło wpisów v1--v10: historia Git (113 commitów), opisy commitów i
+przeanalizowane diffy.
 
 ------------------------------------------------------------------------
+
+## v11 --- 15.10.2026
+
+**Wydzielenie głównego przepływu do funkcji `run()` i potwierdzenie
+pełnego przebiegu etapu 3.**
+
+W pliku `src/main.py` kod wykonywany dotąd na poziomie modułu
+(pobieranie RSS, kategoryzacja, selekcja TOP 20, aktualizacja historii)
+przeniesiono do funkcji `run()`, wywoływanej wyłącznie w bloku
+`if __name__ == "__main__":`. Logika przetwarzania nie uległa zmianie:
+poza zmianą wcięć diff obejmuje trzy dodane linie. Import `main.py`
+przez inny moduł nie pobiera już feedów ani nie nadpisuje
+`data/seen_articles.json`, co pozwala dołączać kolejne moduły (np.
+dostarczanie na Discorda lub integrację z glosariuszem) bez efektów
+ubocznych.
+
+Zmianę zweryfikowano: testy jednostkowe (30) zakończone powodzeniem;
+ręczne uruchomienie workflow na gałęzi `refactor-main` zakończone
+sukcesem: 6 feedów bez błędów, 150 wpisów, 150 unikalnych artykułów,
+0 nieprawidłowych wpisów, 150 artykułów dostępnych do selekcji, 20
+wybranych do digestu. Historia wzrosła do 250 linków w `seen_links`;
+`published_links` pozostaje puste. Potwierdzono, że podsumowanie RSS i
+statystyki selekcji są wypisywane w logu. Ich wcześniejszy brak
+najprawdopodobniej wynikał z tego, że wyszukiwarka logów GitHub Actions
+przeszukuje tylko rozwinięte kroki, a nie z błędu programu.
+
+W README (PL i EN) usunięto zastrzeżenie, że działanie selekcji wymaga
+potwierdzenia, a sekcję ostatnich zweryfikowanych wyników zastąpiono
+wynikami tego uruchomienia, z odesłaniem do changelogu. W nagłówku
+changelogu zaznaczono, że od v11 wpisy są dodawane na bieżąco, razem ze
+zmianą, a nie odtwarzane z historii Git.
+
+**Ograniczenie:** licznik „Artykuły widziane wcześniej” liczy w
+rzeczywistości artykuły wcześniej opublikowane (`published_links`), a
+nie wcześniej wykryte (`seen_links`); przy pustej liście publikacji
+pokazuje 0. Do poprawy przy wdrażaniu publikowania.
 
 ## v10 --- 11.10.2026
 
@@ -210,9 +246,6 @@ deduplikację, historię artykułów i selekcję według priorytetu.
 
 ------------------------------------------------------------------------
 
-```{=html}
-<!-- ENGLISH VERSION -->
-```
 # Changelog (English)
 
 History of **CyberSec-NewsDigest-AI** --- an automated cybersecurity
@@ -220,16 +253,56 @@ news digest that retrieves and processes articles from RSS/Atom feeds.
 
 Newest versions appear first. Versions v1--v10 are documentation labels
 for major development stages reconstructed from Git history; they are
-not official release tags. Dates reflect commit author dates in Git, not
-local file download times or independently confirmed release dates.
-Related commits are grouped into one entry. Purely cosmetic changes,
-temporary diagnostics, and experiments later removed have been omitted.
+not official release tags. Their dates reflect commit author dates in
+Git, not local file download times or independently confirmed release
+dates. Related commits are grouped into one entry. Purely cosmetic
+changes, temporary diagnostics, and experiments later removed have been
+omitted.
+
+From v11 onwards, entries are added together with each change, before
+it is merged into the `main` branch. One version corresponds to one
+logical change; automatic article-history updates made by the workflow
+do not receive separate versions.
 
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
-Sources: Git history (113 commits), commit descriptions, and reviewed
-diffs.
+Sources for v1--v10: Git history (113 commits), commit descriptions,
+and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v11 --- 2026-10-15
+
+**Main flow moved into a `run()` function; full stage 3 run confirmed.**
+
+In `src/main.py`, code previously executed at module level (RSS
+retrieval, categorization, TOP 20 selection, history update) was moved
+into a `run()` function, called only under
+`if __name__ == "__main__":`. Processing logic is unchanged: apart from
+indentation, the diff consists of three added lines. Importing
+`main.py` from another module no longer downloads feeds or overwrites
+`data/seen_articles.json`, which allows further modules (e.g. Discord
+delivery or glossary integration) to be added without side effects.
+
+The change was verified: unit tests (30) passed; a manual workflow run
+on the `refactor-main` branch succeeded: 6 feeds without errors, 150
+entries, 150 unique articles, 0 invalid entries, 150 articles eligible
+for selection, 20 selected for the digest. History grew to 250 links in
+`seen_links`; `published_links` remains empty. The RSS summary and
+selection statistics were confirmed to be printed in the log. Their
+earlier absence most likely resulted from the GitHub Actions log search
+covering only expanded steps, not from a program error.
+
+The README (PL and EN) no longer states that selection still requires
+confirmation, and its latest verified results section now shows the
+results of this run, with a reference to the changelog. The changelog
+header now notes that, from v11 onwards, entries are added together with
+each change rather than reconstructed from Git history.
+
+**Limitation:** the "Artykuły widziane wcześniej" (previously seen
+articles) counter actually counts previously published articles
+(`published_links`), not previously detected ones (`seen_links`); with
+an empty publication list it shows 0. To be fixed when publishing is
+implemented.
 
 ## v10 --- 2026-10-11
 
@@ -414,4 +487,3 @@ selection.
     presence of a published-link filter does not prove that external
     publishing is implemented or that `published_links` is updated after
     a successful publication.
-

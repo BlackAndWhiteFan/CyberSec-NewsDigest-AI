@@ -1,7 +1,8 @@
+import os
 import urllib.request
 import xml.etree.ElementTree as ET
 import urllib.parse
-from rss_helpers import is_valid_url, is_duplicate_link
+from rss_helpers import clean_title, is_valid_url, is_duplicate_link
 from article_history import (
     filter_unpublished_articles,
     load_history,
@@ -14,6 +15,7 @@ from article_selection import (
     prioritize_article,
     select_top_articles,
 )
+from discord_output import build_digest_messages, send_messages
 
 
 RSS_FEEDS = [
@@ -52,7 +54,7 @@ def run():
     total_feed_items = 0
     skipped_invalid_items = 0
     duplicate_items = 0
-    previously_seen_items = 0
+    previously_published_items = 0
     failed_feeds = 0
     
     print("CyberSec NewsDigest AI")
@@ -72,13 +74,12 @@ def run():
         total_feed_items += len(items)
     
         for item in items:
-            title = (
+            title = clean_title(
                 item.findtext("title")
                 or item.findtext(
                     "{http://www.w3.org/2005/Atom}title"
                 )
-                or ""
-            ).strip()
+            )
             
             description = (
                 item.findtext("description")
@@ -140,14 +141,14 @@ def run():
         history["published_links"],
     )
     
-    previously_seen_items = len(articles) - len(eligible_articles)
+    previously_published_items = len(articles) - len(eligible_articles)
     
     print()
     print("PODSUMOWANIE RSS")
     print("Wpisy znalezione w feedach:", total_feed_items)
     print("Unikalne artykuły:", len(articles))
     print("Duplikaty w bieżącym uruchomieniu:", duplicate_items)
-    print("Artykuły widziane wcześniej:", previously_seen_items)
+    print("Artykuły opublikowane wcześniej (pominięte):", previously_published_items)
     print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
     print("Nieudane feedy:", failed_feeds)
     
@@ -175,10 +176,43 @@ def run():
         )
     )
     
+    print()
+    print("DISCORD")
+
+    messages = build_digest_messages(
+        selected_articles,
+        len(eligible_articles),
+        len(RSS_FEEDS) - failed_feeds,
+    )
+    webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
+    delivery_failed = False
+
+    if not messages:
+        print("Brak artykułów do wysłania.")
+    elif not webhook_url:
+        print("Pominięto wysyłkę: brak zmiennej DISCORD_WEBHOOK_URL.")
+    else:
+        try:
+            send_messages(webhook_url, messages)
+        except Exception as error:
+            delivery_failed = True
+            print(f"BŁĄD WYSYŁKI NA DISCORD: {error}")
+        else:
+            print("Wysłane wiadomości:", len(messages))
+            history["published_links"] = list(
+                dict.fromkeys(
+                    history["published_links"]
+                    + [article["link"] for article in selected_articles]
+                )
+            )
+
     save_history(history)
 
     print("Linki zapamiętane w historii:", len(history["seen_links"]))
-    print("Linki opublikowane wcześniej:", len(history["published_links"]))
+    print("Linki opublikowane łącznie:", len(history["published_links"]))
+
+    if delivery_failed:
+        raise SystemExit("Wysyłka prasówki na Discord nie powiodła się.")
 
 if __name__ == "__main__":
     run()

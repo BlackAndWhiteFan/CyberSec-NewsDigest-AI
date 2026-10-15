@@ -18,12 +18,14 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 3 — kategoryzacja artykułów i ustalanie priorytetów na podstawie reguł: zaimplementowane i zweryfikowane w pełnym uruchomieniu workflow.**
 
-Generowanie podsumowań przez AI, dostarczanie wiadomości na Discorda i automatyczny harmonogram dzienny nie zostały jeszcze wdrożone.
+**Etap 4 — dostarczanie prasówki na Discorda (bez AI): zaimplementowane i zweryfikowane w uruchomieniach workflow.**
+
+Generowanie podsumowań przez AI i automatyczny harmonogram dzienny nie zostały jeszcze wdrożone.
 
 ### Obecna implementacja
 
 - Pobiera wpisy RSS lub Atom z sześciu skonfigurowanych źródeł wiadomości o cyberbezpieczeństwie.
-- Odczytuje tytuły artykułów, linki i opisy.
+- Odczytuje tytuły artykułów, linki i opisy, dekodując encje HTML pozostawione w tytułach przez niektóre kanały.
 - Pomija wpisy bez tytułów lub z nieprawidłowymi adresami URL.
 - Wykrywa powtarzające się linki w obrębie jednego uruchomienia i śledzi źródła, w których pojawia się dany artykuł.
 - Prowadzi trwałą historię artykułów w pliku `data/seen_articles.json`, rozdzielając linki wcześniej zauważone od linków opublikowanych.
@@ -31,6 +33,9 @@ Generowanie podsumowań przez AI, dostarczanie wiadomości na Discorda i automat
 - Kategoryzuje artykuły na podstawie słów kluczowych, przypisując je do kategorii najważniejszych wiadomości, podatności i wiadomości związanych z Polską.
 - Przydziela wstępne punkty priorytetu na podstawie dopasowanych kategorii.
 - Wybiera maksymalnie 20 artykułów o najwyższym priorytecie spośród artykułów kwalifikujących się do selekcji.
+- Wysyła prasówkę na kanał Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami i domeną źródła, podzielone na wiadomości mieszczące się w limicie długości Discorda.
+- Dopisuje linki do `published_links` dopiero po udanej wysyłce; błąd wysyłki kończy uruchomienie błędem, więc workflow zostaje oznaczony jako nieudany.
+- Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu.
 - Kontynuuje pracę, gdy pobranie pojedynczego kanału RSS się nie powiedzie.
 - Wyświetla informacje diagnostyczne o pobranych, pominiętych i przetwarzanych wpisach oraz wynikach selekcji artykułów.
 - Uruchamia testy jednostkowe przed wykonaniem skryptu pobierającego wiadomości RSS.
@@ -40,13 +45,13 @@ Obecny workflow można uruchomić ręcznie w GitHub Actions. Codzienny harmonogr
 
 ### Ostatnie zweryfikowane wyniki
 
-Ostatnie zweryfikowane uruchomienie (v11, 15.10.2026) zakończyło się powodzeniem:
+Ostatnie zweryfikowane uruchomienia (v12, 15.10.2026) zakończyły się powodzeniem:
 
-- Testy jednostkowe: **30 zaliczonych**.
-- Wszystkie 6 kanałów pobrano bez błędów; przetworzono 150 wpisów, a do digestu wybrano 20 artykułów.
-- Lista `published_links` jest obecnie pusta, ponieważ publikowanie na Discordzie nie zostało jeszcze wdrożone.
+- Testy jednostkowe: **45 zaliczonych**.
+- Trzy kolejne uruchomienia dostarczyły na Discord prasówkę z 20 artykułów; w każdym następnym pominięto artykuły opublikowane wcześniej (do selekcji dostępnych było kolejno 150, 130 i 110 artykułów).
+- Lista `published_links` zawiera po tych uruchomieniach 60 linków.
 
-Są to wyniki konkretnego uruchomienia i mogą się zmieniać. Wyniki weryfikacji każdej zmiany są zapisywane w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+Są to wyniki konkretnych uruchomień i mogą się zmieniać. Wyniki weryfikacji każdej zmiany są zapisywane w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 Deduplikacja oparta na linkach nie gwarantuje, że różne adresy URL nie prowadzą do informacji o tym samym wydarzeniu.
 
@@ -54,7 +59,7 @@ Deduplikacja oparta na linkach nie gwarantuje, że różne adresy URL nie prowad
 
 Lista `seen_links` rejestruje linki napotkane podczas pobierania RSS. Nie oznacza to, że artykuły zostały opublikowane.
 
-Lista `published_links` ma przechowywać linki do artykułów pomyślnie dostarczonych w ramach digestu. Artykuły, których linki znajdują się już na tej liście, są wykluczane z kolejnych selekcji.
+Lista `published_links` przechowuje linki do artykułów pomyślnie dostarczonych na Discord. Artykuły, których linki znajdują się już na tej liście, są wykluczane z kolejnych selekcji.
 
 Obecna implementacja nie przechowuje pełnej treści artykułów w osobnej kolejce oczekujących. W związku z tym artykuł kwalifikujący się do selekcji, który zniknie z kanałów RSS, zanim zostanie wybrany, może nie być już dostępny w kolejnym digescie.
 
@@ -63,5 +68,9 @@ Punkty priorytetu są wstępnymi wskaźnikami opartymi na słowach kluczowych. N
 ## Planowane funkcje
 
 - Generowanie krótkich podsumowań wybranych artykułów z wykorzystaniem AI.
-- Formatowanie i dostarczanie codziennego przeglądu wiadomości na Discorda.
-- Zapisywanie linków do pomyślnie opublikowanych artykułów
+- Automatyczne uruchamianie o ustalonej porze każdego dnia.
+- Dokumentacja operacyjna i instrukcje rozwiązywania problemów.
+- Weryfikacja pełnego przepływu od początku do końca.
+
+Planowane funkcje nie są uznawane za wdrożone, dopóki nie zostaną opracowane i zweryfikowane.
+

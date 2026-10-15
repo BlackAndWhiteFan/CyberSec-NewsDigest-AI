@@ -22,6 +22,59 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v12 --- 15.10.2026
+
+**Dostarczanie prasówki na Discorda (bez AI) i zapis opublikowanych
+linków.**
+
+Dodano moduł `src/discord_output.py`, który grupuje wybrane artykuły
+według najważniejszej kategorii (kolejność ważności wynika ze słownika
+`CATEGORIES` w `src/article_selection.py`, więc nowe kategorie są
+obsługiwane automatycznie), formatuje je jako numerowane, klikalne
+tytuły z domeną źródła i bez podglądów stron, dzieli prasówkę na
+wiadomości mieszczące się w limicie długości Discorda i wysyła je na
+webhook. Liczebniki są odmieniane zgodnie z polską gramatyką. Wzmianki
+typu `@everyone` z tytułów zewnętrznych artykułów są wyłączone. Gdy
+sekcja przechodzi do kolejnej wiadomości, jej nagłówek jest powtarzany z
+dopiskiem „(cd.)”; limit wiadomości ustawiono na 1900 znaków jako
+margines bezpieczeństwa.
+
+Funkcja `run()` w `src/main.py` buduje prasówkę z wybranych artykułów i
+wysyła ją na adres ze zmiennej środowiskowej `DISCORD_WEBHOOK_URL`.
+Linki trafiają do `published_links` dopiero po udanej wysyłce. Brak
+zmiennej pomija wysyłkę bez błędu, a błąd wysyłki kończy uruchomienie
+błędem, dzięki czemu workflow jest oznaczany jako nieudany. Workflow
+przekazuje sekret repozytorium `DISCORD_WEBHOOK_URL` wyłącznie do kroku
+uruchamiającego prasówkę. Usunięto ograniczenie opisane w v11: licznik
+„Artykuły widziane wcześniej” zastąpiono licznikiem „Artykuły
+opublikowane wcześniej (pominięte)”.
+
+Dodano funkcję `clean_title()` w `src/rss_helpers.py`, dekodującą encje
+HTML w tytułach (np. `&#8230;`, `&#x1f4cc;`), które niektóre kanały, w
+tym Niebezpiecznik, kodują podwójnie. Dodano 15 testów jednostkowych
+(`src/test_discord_output.py` oraz testy `clean_title()`); testy nie
+łączą się z Discordem. Zaktualizowano README (PL i EN), w tym
+uzupełniono w README_PL ucięte zakończenie listy planowanych funkcji.
+
+Zmianę zweryfikowano: testy jednostkowe (45) zakończone powodzeniem;
+trzy ręczne uruchomienia workflow na gałęzi `v12-discord-from-main`
+dostarczyły na prywatny kanał Discorda prasówki po 20 artykułów. Kolejne
+uruchomienia pomijały artykuły opublikowane wcześniej: do selekcji
+dostępnych było 150, 130 i 110 artykułów, a `published_links` zawiera 60
+linków. Potwierdzono powtarzanie nagłówka „(cd.)” w kolejnych
+wiadomościach.
+
+**Ograniczenia:** selekcja opiera się na angielskich słowach kluczowych,
+więc w pierwszym uruchomieniu 18 z 20 artykułów pochodziło ze źródeł
+anglojęzycznych, a polskie artykuły o incydentach (np. wycieki danych)
+trafiały do „Pozostałych”. Słowo „polski” bywa zbyt szerokim sygnałem, a
+treści promocyjne (webinary, podsumowania tygodnia) nie są filtrowane.
+Prasówka jest zawsze uzupełniana do 20 pozycji, także artykułami o
+niskiej trafności. Te same wydarzenia opisane przez różne serwisy
+pojawiają się wielokrotnie, ponieważ deduplikacja działa po linkach.
+Jeśli wysyłka nie powiedzie się po dostarczeniu części wiadomości, linki
+nie zostaną oznaczone jako opublikowane i mogą zostać wysłane ponownie.
+
 ## v11 --- 15.10.2026
 
 **Wydzielenie głównego przepływu do funkcji `run()` i potwierdzenie
@@ -269,6 +322,57 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v12 --- 2026-10-15
+
+**Digest delivery to Discord (without AI) and recording of published
+links.**
+
+Added the `src/discord_output.py` module, which groups selected articles
+by their most important category (importance follows the order of the
+`CATEGORIES` dictionary in `src/article_selection.py`, so new categories
+are handled automatically), formats them as numbered, clickable titles
+with source domains and without page previews, splits the digest into
+messages within Discord's length limit, and sends them to a webhook.
+Polish plural forms are applied correctly. Mentions such as `@everyone`
+from external article titles are disabled. When a section continues in
+the next message, its header is repeated with a "(cd.)" suffix; the
+message limit was set to 1900 characters as a safety margin.
+
+`run()` in `src/main.py` builds the digest from the selected articles
+and sends it to the address in the `DISCORD_WEBHOOK_URL` environment
+variable. Links are added to `published_links` only after a successful
+delivery. A missing variable skips delivery without an error, and a
+delivery failure ends the run with an error, so the workflow is marked
+as failed. The workflow passes the `DISCORD_WEBHOOK_URL` repository
+secret only to the step that runs the digest. The limitation described
+in v11 was resolved: the "Artykuły widziane wcześniej" counter was
+replaced with "Artykuły opublikowane wcześniej (pominięte)" (previously
+published, skipped).
+
+Added `clean_title()` to `src/rss_helpers.py`, which decodes HTML
+entities in titles (e.g. `&#8230;`, `&#x1f4cc;`) that some feeds,
+including Niebezpiecznik, encode twice. Added 15 unit tests
+(`src/test_discord_output.py` and tests for `clean_title()`); the tests
+do not contact Discord. Updated the README (PL and EN), including the
+truncated end of the planned features list in README_PL.
+
+The change was verified: unit tests (45) passed; three manual workflow
+runs on the `v12-discord-from-main` branch delivered 20-article digests
+to a private Discord channel. Each subsequent run skipped previously
+published articles: 150, 130 and 110 articles were eligible for
+selection, and `published_links` contains 60 links. Repetition of the
+"(cd.)" header in continued messages was confirmed.
+
+**Limitations:** selection relies on English keywords, so in the first
+run 18 of 20 articles came from English-language sources, and Polish
+articles about incidents (e.g. data leaks) were placed under "Pozostałe"
+(other). The word "polski" can be too broad a signal, and promotional
+content (webinars, weekly recaps) is not filtered. The digest is always
+filled up to 20 items, including articles of low relevance. The same
+event reported by different sites appears more than once, because
+deduplication works on links. If delivery fails after some messages have
+been sent, the links are not marked as published and may be sent again.
 
 ## v11 --- 2026-10-15
 

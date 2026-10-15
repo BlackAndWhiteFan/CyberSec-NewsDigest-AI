@@ -2,7 +2,7 @@ import os
 import urllib.request
 import xml.etree.ElementTree as ET
 import urllib.parse
-from rss_helpers import is_valid_url, is_duplicate_link
+from rss_helpers import clean_title, is_valid_url, is_duplicate_link
 from article_history import (
     filter_unpublished_articles,
     load_history,
@@ -74,13 +74,12 @@ def run():
         total_feed_items += len(items)
     
         for item in items:
-            title = (
+            title = clean_title(
                 item.findtext("title")
                 or item.findtext(
                     "{http://www.w3.org/2005/Atom}title"
                 )
-                or ""
-            ).strip()
+            )
             
             description = (
                 item.findtext("description")

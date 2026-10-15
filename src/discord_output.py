@@ -10,9 +10,12 @@ from zoneinfo import ZoneInfo
 from article_selection import CATEGORIES, categorize_article
 
 
-DISCORD_MESSAGE_LIMIT = 2000
+# Discord allows 2000 characters per message; the margin covers differences
+# in how emoji and other special characters are counted.
+DISCORD_MESSAGE_LIMIT = 1900
 OTHER_CATEGORY = "📰 POZOSTAŁE"
 MAX_TITLE_LENGTH = 250
+CONTINUATION_SUFFIX = " (cd.)"
 
 
 def polish_plural(number, one, few, many):
@@ -41,6 +44,16 @@ def primary_category(article):
     return OTHER_CATEGORY
 
 
+def section_labels():
+    """Return section labels in display order: categories first, then other."""
+    return list(CATEGORIES.values()) + [OTHER_CATEGORY]
+
+
+def section_header(label):
+    """Return the bold header line for a section label."""
+    return f"**{label}**"
+
+
 def format_article_line(number, article):
     """Return one digest line: number, clickable title and source domain."""
     title = article["title"].replace("[", "(").replace("]", ")")
@@ -62,8 +75,6 @@ def build_digest_lines(articles, eligible_count, source_count, date_text):
     for article in articles:
         groups.setdefault(primary_category(article), []).append(article)
 
-    section_order = list(CATEGORIES.values()) + [OTHER_CATEGORY]
-
     selected_phrase = polish_plural(
         len(articles),
         "artykuł wybrany",
@@ -78,12 +89,12 @@ def build_digest_lines(articles, eligible_count, source_count, date_text):
 
     number = 1
 
-    for section in section_order:
+    for section in section_labels():
         if section not in groups:
             continue
 
         lines.append("")
-        lines.append(f"**{section}**")
+        lines.append(section_header(section))
 
         for article in groups[section]:
             lines.append(format_article_line(number, article))
@@ -92,18 +103,32 @@ def build_digest_lines(articles, eligible_count, source_count, date_text):
     return lines
 
 
-def split_into_messages(lines, limit=DISCORD_MESSAGE_LIMIT):
-    """Join lines into messages no longer than the limit, never splitting a line."""
+def split_into_messages(lines, limit=DISCORD_MESSAGE_LIMIT, section_headers=()):
+    """Join lines into messages no longer than the limit, never splitting a line.
+
+    When a section continues in the next message, its header is repeated
+    there with a "(cd.)" suffix, so each message can be read on its own.
+    """
     messages = []
     current = ""
+    current_header = None
 
     for line in lines:
+        if line in section_headers:
+            current_header = line
+
         candidate = f"{current}\n{line}" if current else line
 
         if len(candidate) <= limit:
             current = candidate
+            continue
+
+        messages.append(current)
+
+        if current_header and line not in ("", current_header):
+            continued = current_header[:-2] + CONTINUATION_SUFFIX + "**"
+            current = f"{continued}\n{line}"
         else:
-            messages.append(current)
             current = line
 
     if current:
@@ -121,7 +146,8 @@ def build_digest_messages(articles, eligible_count, source_count, date_text=None
         date_text = datetime.now(ZoneInfo("Europe/Warsaw")).strftime("%d.%m.%Y")
 
     lines = build_digest_lines(articles, eligible_count, source_count, date_text)
-    return split_into_messages(lines)
+    headers = {section_header(label) for label in section_labels()}
+    return split_into_messages(lines, section_headers=headers)
 
 
 def send_messages(webhook_url, messages):

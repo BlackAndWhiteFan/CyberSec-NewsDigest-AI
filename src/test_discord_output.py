@@ -68,6 +68,25 @@ class TestSplitIntoMessages(unittest.TestCase):
         self.assertEqual(rejoined, lines)
 
 
+    def test_section_header_is_repeated_in_next_message(self):
+        lines = ["**Header**", "**🛡️ PODATNOŚCI**"] + [
+            f"{i}. " + "x" * 90 for i in range(1, 13)
+        ]
+        messages = split_into_messages(
+            lines,
+            limit=500,
+            section_headers={"**🛡️ PODATNOŚCI**"},
+        )
+
+        self.assertGreater(len(messages), 1)
+
+        for message in messages[1:]:
+            self.assertTrue(message.startswith("**🛡️ PODATNOŚCI (cd.)**\n"))
+
+        for message in messages:
+            self.assertLessEqual(len(message), 500)
+
+
 class TestBuildDigestMessages(unittest.TestCase):
     def test_empty_selection_produces_no_messages(self):
         self.assertEqual(build_digest_messages([], 0, 6, "16.10.2026"), [])

@@ -18,19 +18,23 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 3 — Rule-based article categorization and prioritization: implemented and verified in a full workflow run.**
 
-AI-powered summaries, Discord delivery, and automatic daily scheduling have not yet been implemented.
+**Phase 4 — Delivery of the digest to Discord (without AI): implemented and verified in workflow runs.**
+
+AI-powered summaries and automatic daily scheduling have not yet been implemented.
 
 ### Current Implementation
 
 - Retrieves RSS or Atom entries from six configured cybersecurity news sources.
-- Extracts article titles, links, and descriptions.
+- Extracts article titles, links, and descriptions, decoding HTML entities left in feed titles.
 - Skips entries with missing titles or invalid URLs.
 - Detects duplicate links within a single run and tracks the feeds in which an article appears.
 - Maintains persistent article history in `data/seen_articles.json`, separating previously seen links from published links.
 - Filters out articles whose links are already recorded in `published_links`, rather than excluding every previously seen article.
 - Categorizes articles using keyword-based rules into critical news, vulnerabilities, and Poland-related news.
 - Assigns preliminary priority scores based on matching categories.
-- Selects up to 20 highest-priority eligible articles for the planned digest.
+- Selects up to 20 highest-priority eligible articles for the digest.
+- Sends the digest to a Discord channel through a webhook, grouped by each article's most important category, with clickable titles and source domains, split into messages within Discord's length limit.
+- Records links in `published_links` only after a successful delivery; a delivery failure ends the run with an error, so the workflow is marked as failed.
 - Continues processing when an individual RSS feed fails.
 - Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
 - Runs unit tests before executing the RSS ingestion script.
@@ -40,11 +44,11 @@ The current workflow can be triggered manually through GitHub Actions. Daily sch
 
 ### Latest Verified Results
 
-The latest verified run (v11, 2026-10-15) completed successfully:
+The latest verified runs (v12, 2026-10-15) completed successfully:
 
-- Unit tests: **30 passed**.
-- All 6 feeds retrieved without errors; 150 entries processed and 20 articles selected for the digest.
-- `published_links` is currently empty because Discord publishing has not yet been implemented.
+- Unit tests: **45 passed**.
+- Three consecutive runs each delivered a 20-article digest to Discord; previously published articles were skipped in each subsequent run (150, then 130, then 110 articles eligible for selection).
+- `published_links` contains 60 links after these runs.
 
 These figures describe a specific run and may change over time. Verification results for each change are recorded in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
@@ -54,7 +58,7 @@ Link-based deduplication does not guarantee that different URLs cannot refer to 
 
 `seen_links` records links encountered during RSS ingestion. It does not mean that an article has been published.
 
-`published_links` is intended to record links successfully delivered to the digest. Articles already recorded there are excluded from subsequent selections.
+`published_links` records links successfully delivered to Discord. Articles already recorded there are excluded from subsequent selections.
 
 The current implementation does not persist complete article content as a backlog. Therefore, an eligible article that disappears from the RSS feeds before being selected may no longer be available for a later digest.
 
@@ -63,8 +67,6 @@ Priority scores are preliminary, keyword-based indicators. They do not represent
 ## Planned Features
 
 - AI-powered summaries of selected cybersecurity articles.
-- Formatting and delivery of the daily digest to Discord.
-- Recording successfully published article links in `published_links`.
 - Automatic execution at a scheduled time every day.
 - Operational documentation and troubleshooting instructions.
 - End-to-end verification of the complete workflow.
@@ -85,7 +87,7 @@ The target processing workflow is:
 8. Format and deliver the digest to Discord.
 9. Record successfully published links and maintain article history.
 
-GitHub Actions executes the workflow, while Python implements the processing logic. The current implementation covers RSS ingestion, validation, deduplication, persistent link history, rule-based categorization, prioritization, and article selection.
+GitHub Actions executes the workflow, while Python implements the processing logic. The current implementation covers all steps except AI-generated summaries (step 7).
 
 ## Repository Structure
 
@@ -93,17 +95,21 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `data/seen_articles.json` — persistent history of seen and published article links.
 - `src/main.py` — main RSS ingestion and processing script.
 - `src/deduplication.py` — article deduplication and source tracking.
-- `src/rss_helpers.py` — URL validation and duplicate-link detection helpers.
+- `src/rss_helpers.py` — URL validation, duplicate-link detection, and title cleanup helpers.
+- `src/discord_output.py` — digest formatting, message splitting, and delivery to a Discord webhook.
 - `src/article_history.py` — loading, validating, saving, and filtering persistent article history.
 - `src/article_selection.py` — keyword-based categorization, preliminary prioritization, and top-article selection.
 - `src/test_deduplication.py` — deduplication unit tests.
-- `src/test_url_validation.py` — URL validation and duplicate-detection tests.
+- `src/test_url_validation.py` — URL validation, duplicate-detection, and title cleanup tests.
+- `src/test_discord_output.py` — digest formatting and message-splitting tests (no network access).
 - `src/test_article_history.py` — persistent article history and publication-filtering tests.
 - `src/test_article_selection.py` — article categorization, prioritization, and selection tests.
 
 ## Configuration and Secrets
 
-Runtime configuration and credentials will be stored in GitHub Actions secrets or other appropriate secure configuration mechanisms when required.
+Required repository secret (Settings → Secrets and variables → Actions):
+
+- `DISCORD_WEBHOOK_URL` — webhook URL of the Discord channel that receives the digest. It is passed only to the workflow step that runs the digest. Without it, delivery is skipped without an error.
 
 Never commit API keys, Discord webhook URLs, passwords, or other credentials to the repository.
 

@@ -20,6 +20,8 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 4 — dostarczanie prasówki na Discorda (bez AI): zaimplementowane i zweryfikowane w uruchomieniach workflow.**
 
+**Etap 5 — jakość selekcji (polskie słowa kluczowe, próg trafności, limity źródeł, filtr promocji): zaimplementowane i zweryfikowane w uruchomieniach workflow.**
+
 Generowanie podsumowań przez AI i automatyczny harmonogram dzienny nie zostały jeszcze wdrożone.
 
 ### Obecna implementacja
@@ -30,9 +32,11 @@ Generowanie podsumowań przez AI i automatyczny harmonogram dzienny nie zostały
 - Wykrywa powtarzające się linki w obrębie jednego uruchomienia i śledzi źródła, w których pojawia się dany artykuł.
 - Prowadzi trwałą historię artykułów w pliku `data/seen_articles.json`, rozdzielając linki wcześniej zauważone od linków opublikowanych.
 - Odrzuca artykuły, których linki znajdują się już na liście `published_links`, zamiast wykluczać wszystkie wcześniej zauważone artykuły.
-- Kategoryzuje artykuły na podstawie słów kluczowych, przypisując je do kategorii najważniejszych wiadomości, podatności i wiadomości związanych z Polską.
-- Przydziela wstępne punkty priorytetu na podstawie dopasowanych kategorii.
-- Wybiera maksymalnie 20 artykułów o najwyższym priorytecie spośród artykułów kwalifikujących się do selekcji.
+- Kategoryzuje artykuły jako najważniejsze wiadomości, podatności i wiadomości związane z Polską na podstawie angielskich i polskich słów kluczowych zapisanych jako rdzenie wyrazów; polskie rdzenie sprawdzono z formami fleksyjnymi wygenerowanymi przez analizator morfologiczny Morfeusz 2.
+- Przydziela punkty priorytetu (najważniejsze +3, podatności +2, Polska +1) i odejmuje 2 punkty tytułom w kontekście wydarzeń, raportów lub poradników (np. konferencje, eksperci, poradniki, odporność, kary regulacyjne).
+- Wyklucza tytuły promocyjne (webinary, bezpłatne szkolenia, e-booki, rabaty, treści sponsorowane, wykłady, zapisy).
+- Wybiera maksymalnie 20 artykułów z wynikiem co najmniej 2, więc artykuły związane z Polską bez sygnału bezpieczeństwa nie są wybierane, a prasówka może liczyć mniej niż 20 pozycji.
+- Ogranicza każde źródło do 4 artykułów (Niebezpiecznik: 2); limity są ustawiane w `src/article_selection.py`.
 - Wysyła prasówkę na kanał Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami i domeną źródła, podzielone na wiadomości mieszczące się w limicie długości Discorda.
 - Dopisuje linki do `published_links` dopiero po udanej wysyłce; błąd wysyłki kończy uruchomienie błędem, więc workflow zostaje oznaczony jako nieudany.
 - Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu.
@@ -45,11 +49,12 @@ Obecny workflow można uruchomić ręcznie w GitHub Actions. Codzienny harmonogr
 
 ### Ostatnie zweryfikowane wyniki
 
-Ostatnie zweryfikowane uruchomienia (v12, 15.10.2026) zakończyły się powodzeniem:
+Ostatnie zweryfikowane uruchomienia (v13, 17.10.2026) zakończyły się powodzeniem:
 
-- Testy jednostkowe: **45 zaliczonych**.
-- Trzy kolejne uruchomienia dostarczyły na Discord prasówkę z 20 artykułów; w każdym następnym pominięto artykuły opublikowane wcześniej (do selekcji dostępnych było kolejno 150, 130 i 110 artykułów).
-- Lista `published_links` zawiera po tych uruchomieniach 60 linków.
+- Testy jednostkowe: **69 zaliczonych**.
+- Pierwsze uruchomienie: 20 artykułów wybranych spośród 105, w tym 13 ze źródeł polskich; żadne źródło nie przekroczyło limitu.
+- Drugie uruchomienie: 8 artykułów wybranych spośród 85; 1 artykuł odrzucono jako promocję, a 76 znalazło się poniżej progu trafności, więc prasówka nie została uzupełniona do 20 pozycji.
+- Lista `published_links` zawiera po tych uruchomieniach 88 linków.
 
 Są to wyniki konkretnych uruchomień i mogą się zmieniać. Wyniki weryfikacji każdej zmiany są zapisywane w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
@@ -63,7 +68,7 @@ Lista `published_links` przechowuje linki do artykułów pomyślnie dostarczonyc
 
 Obecna implementacja nie przechowuje pełnej treści artykułów w osobnej kolejce oczekujących. W związku z tym artykuł kwalifikujący się do selekcji, który zniknie z kanałów RSS, zanim zostanie wybrany, może nie być już dostępny w kolejnym digescie.
 
-Punkty priorytetu są wstępnymi wskaźnikami opartymi na słowach kluczowych. Nie stanowią oceny AI ani gwarancji, że artykuł jest istotny z redakcyjnego punktu widzenia.
+Punkty priorytetu są wskaźnikami opartymi na słowach kluczowych. Nie stanowią oceny AI ani gwarancji, że artykuł jest istotny z redakcyjnego punktu widzenia.
 
 ## Planowane funkcje
 

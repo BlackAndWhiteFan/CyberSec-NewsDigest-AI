@@ -11,7 +11,9 @@ from article_history import (
 
 from deduplication import add_article
 from article_selection import (
+    MIN_PRIORITY_SCORE,
     categorize_article,
+    is_excluded,
     prioritize_article,
     select_top_articles,
 )
@@ -158,6 +160,19 @@ def run():
     print("SELEKCJA ARTYKUŁÓW")
     print("Artykuły dostępne do selekcji:", len(eligible_articles))
     print("Artykuły wybrane do digestu:", len(selected_articles))
+    print(
+        "Odrzucone jako promocja:",
+        sum(1 for article in eligible_articles if is_excluded(article)),
+    )
+    print(
+        "Poniżej progu trafności:",
+        sum(
+            1
+            for article in eligible_articles
+            if not is_excluded(article)
+            and prioritize_article(article) < MIN_PRIORITY_SCORE
+        ),
+    )
     
     for article in selected_articles:
         print("WYBRANO:", article["title"])

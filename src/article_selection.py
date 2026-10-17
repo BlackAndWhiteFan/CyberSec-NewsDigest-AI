@@ -140,6 +140,7 @@ CONTEXT_TITLE_KEYWORDS = (
     "wydarzeni",
     "edycj",
     "wzrost",
+    "odporn",
     "poradnik",
     "jak chroni",
     "jak zabezpiecz",
@@ -152,6 +153,7 @@ CONTEXT_TITLE_KEYWORDS = (
     "experts",
     "survey",
     "how to",
+    "fined",
 )
 
 CONTEXT_PENALTY = 2

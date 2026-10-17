@@ -252,6 +252,20 @@ class TestContextAndTitleOnlyKeywords(unittest.TestCase):
         )
         self.assertEqual(select_top_articles([article]), [])
 
+    def test_resilience_opinion_piece_is_not_selected(self):
+        article = make_article(
+            "Cyberataki, zagrożenia i permanentny kryzys. Jak wygląda "
+            "odporność państwa i biznesu?"
+        )
+        self.assertEqual(select_top_articles([article]), [])
+
+    def test_regulatory_fine_is_not_selected(self):
+        article = make_article(
+            "Xandr Fined a Record €8.6 Million for Relaying Grindr Data",
+            description="The company faced a data breach investigation.",
+        )
+        self.assertEqual(select_top_articles([article]), [])
+
     def test_concrete_cyberattack_is_selected(self):
         article = make_article("Duży cyberatak na lodówki i zamrażarki sklepowe")
         self.assertEqual(len(select_top_articles([article])), 1)

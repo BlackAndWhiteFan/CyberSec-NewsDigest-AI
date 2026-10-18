@@ -2,9 +2,21 @@ name: Daily CyberSec Digest
 
 on:
   workflow_dispatch:
+  schedule:
+    # 06:17 Polish time, Monday to Saturday (no digest on Sundays).
+    # The timezone field keeps the hour fixed across daylight saving changes.
+    - cron: "17 6 * * 1-6"
+      timezone: "Europe/Warsaw"
 
 permissions:
   contents: write
+
+# Never run two digests at the same time (e.g. a manual run during the
+# scheduled one), so the same articles are not sent twice.
+concurrency:
+  group: daily-digest
+  cancel-in-progress: false
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -31,4 +43,3 @@ jobs:
             git commit -m "Update persistent article history"
             git push
           fi
-        

@@ -22,6 +22,37 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v14 --- 18.10.2026
+
+**Automatyczny harmonogram prasówki: 6:17 czasu polskiego, od
+poniedziałku do soboty.**
+
+W pliku `.github/workflows/daily-digest.yml` dodano wyzwalacz `schedule`
+z wyrażeniem cron `17 6 * * 1-6` i strefą czasową `Europe/Warsaw`.
+Prasówka uruchamia się automatycznie od poniedziałku do soboty (bez
+niedziel), a dzięki polu `timezone` godzina pozostaje stała także po
+zmianie czasu. Start o 6:17, a nie o pełnej godzinie, ogranicza ryzyko
+opóźnień w okresach największego obciążenia GitHub Actions. Zachowano
+możliwość ręcznego uruchamiania (`workflow_dispatch`). Dodano grupę
+współbieżności `daily-digest` (`cancel-in-progress: false`):
+uruchomienie ręczne i zaplanowane nie mogą działać równocześnie, więc te
+same artykuły nie zostaną wysłane dwukrotnie przed zapisaniem ich w
+`published_links`. Kod Pythona nie uległ zmianie. Zaktualizowano README
+(PL i EN).
+
+Zmianę zweryfikowano: GitHub zaakceptował nowy plik workflow, a ręczne
+uruchomienie na gałęzi `v14-harmonogram` zakończyło się powodzeniem:
+wszystkie 6 kanałów pobrano bez błędów (150 wpisów), 71 artykułów
+opublikowanych wcześniej pominięto, a spośród 79 dostępnych do selekcji
+wybrano 3, odrzucając 1 jako promocję i 75 jako poniżej progu trafności.
+Prasówka dotarła na Discord.
+
+**Ograniczenia:** harmonogram działa wyłącznie z gałęzi `main`, więc
+pierwsze automatyczne uruchomienie (planowane na 19.10.2026) zostanie
+potwierdzone po scaleniu i opisane w tym wpisie. GitHub nie gwarantuje
+dokładnej godziny startu zaplanowanych uruchomień; w okresach dużego
+obciążenia mogą one zostać opóźnione lub pominięte.
+
 ## v13 --- 17.10.2026
 
 **Poprawa jakości selekcji: polskie słowa kluczowe, próg trafności,
@@ -380,6 +411,34 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v14 --- 2026-10-18
+
+**Automatic digest schedule: 06:17 Polish time, Monday to Saturday.**
+
+A `schedule` trigger with the cron expression `17 6 * * 1-6` and the
+`Europe/Warsaw` timezone was added to
+`.github/workflows/daily-digest.yml`. The digest runs automatically
+Monday to Saturday (not on Sundays), and the `timezone` field keeps the
+hour fixed across daylight saving changes. Starting at 06:17 rather than
+on the hour reduces the risk of delays during peak GitHub Actions load.
+Manual runs (`workflow_dispatch`) remain available. A `daily-digest`
+concurrency group (`cancel-in-progress: false`) was added so manual and
+scheduled runs never overlap and the same articles are not sent twice
+before being recorded in `published_links`. No Python code was changed.
+The README (PL and EN) was updated.
+
+The change was verified: GitHub accepted the new workflow file, and a
+manual run on the `v14-harmonogram` branch succeeded: all 6 feeds were
+retrieved without errors (150 entries), 71 previously published articles
+were skipped, and of 79 eligible articles 3 were selected, with 1
+excluded as promotional and 75 below the relevance threshold. The digest
+was delivered to Discord.
+
+**Limitations:** schedules run only from the `main` branch, so the first
+scheduled run (planned for 2026-10-19) will be confirmed after merging
+and recorded in this entry. GitHub does not guarantee exact start times
+for scheduled runs; under heavy load they may be delayed or skipped.
 
 ## v13 --- 2026-10-17
 

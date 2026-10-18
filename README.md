@@ -24,6 +24,8 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 6 — Automatic schedule (06:17 Polish time, Monday to Saturday): configured; the first scheduled run is awaiting confirmation.**
 
+**Phase 7 — Monthly archive of delivered articles: implemented; verification during a run that delivers articles is pending.**
+
 AI-powered summaries have not yet been implemented.
 
 ### Current Implementation
@@ -41,6 +43,8 @@ AI-powered summaries have not yet been implemented.
 - Limits each source to 4 articles (Niebezpiecznik: 2); limits are configured in `src/article_selection.py`.
 - Sends the digest to a Discord channel through a webhook, grouped by each article's most important category, with clickable titles and source domains, split into messages within Discord's length limit.
 - Records links in `published_links` only after a successful delivery; a delivery failure ends the run with an error, so the workflow is marked as failed.
+- Archives each delivered article (date, title, link, source, categories, score) in a monthly file `data/archive/YYYY-MM.json`. An archive error is logged and ends the run with an error, but the article history is still saved, so delivered links are not sent again.
+- Saves the article history and archive even if the digest step fails, unless the run is cancelled.
 - Continues processing when an individual RSS feed fails.
 - Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
 - Runs unit tests before executing the RSS ingestion script.
@@ -73,6 +77,8 @@ Priority scores are keyword-based indicators. They do not represent an AI assess
 
 ## Planned Features
 
+- Detection of the same event reported by different sites.
+- A monthly top 10 articles digest delivered to a separate Discord channel.
 - AI-powered summaries of selected cybersecurity articles.
 - Operational documentation and troubleshooting instructions.
 - End-to-end verification of the complete workflow.
@@ -99,15 +105,18 @@ GitHub Actions executes the workflow, while Python implements the processing log
 
 - `.github/workflows/daily-digest.yml` — GitHub Actions workflow: schedule, manual trigger, test execution, digest run, and history persistence.
 - `data/seen_articles.json` — persistent history of seen and published article links.
+- `data/archive/YYYY-MM.json` — monthly archive of delivered articles.
 - `src/main.py` — main RSS ingestion and processing script.
 - `src/deduplication.py` — article deduplication and source tracking.
 - `src/rss_helpers.py` — URL validation, duplicate-link detection, and title cleanup helpers.
 - `src/discord_output.py` — digest formatting, message splitting, and delivery to a Discord webhook.
+- `src/article_archive.py` — monthly archive of delivered articles.
 - `src/article_history.py` — loading, validating, saving, and filtering persistent article history.
 - `src/article_selection.py` — keyword lists, categorization, priority scoring, promotional filter, source limits, and article selection.
 - `src/test_deduplication.py` — deduplication unit tests.
 - `src/test_url_validation.py` — URL validation, duplicate-detection, and title cleanup tests.
 - `src/test_discord_output.py` — digest formatting and message-splitting tests (no network access).
+- `src/test_article_archive.py` — monthly archive tests.
 - `src/test_article_history.py` — persistent article history and publication-filtering tests.
 - `src/test_article_selection.py` — categorization, Polish keyword, filtering, and selection tests based on real article titles.
 

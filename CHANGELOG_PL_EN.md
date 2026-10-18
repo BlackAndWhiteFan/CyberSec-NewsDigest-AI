@@ -22,6 +22,48 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v15 --- 18.10.2026
+
+**Miesięczne archiwum dostarczonych artykułów i odporniejszy zapis
+danych.**
+
+Dodano moduł `src/article_archive.py`, który zapisuje każdy artykuł
+dostarczony na Discord w miesięcznym pliku `data/archive/RRRR-MM.json`:
+datę prasówki (czas polski), tytuł, link, źródło, kategorie i punkty.
+Ten sam link nie jest zapisywany dwukrotnie, a polskie znaki są
+zapisywane czytelnie. Archiwum jest podstawą planowanego miesięcznego
+zestawienia 10 najważniejszych artykułów i późniejszej integracji z
+Mozaiką. Funkcja `run()` w `src/main.py` archiwizuje wybrane artykuły
+zaraz po udanej wysyłce. Błąd archiwum jest zapisywany w logu, historia
+artykułów zostaje mimo to zapisana, a uruchomienie kończy się błędem,
+więc dostarczone linki nie są wysyłane ponownie.
+
+W workflow krok zapisu danych dodaje teraz cały folder `data` przed
+sprawdzeniem zmian, dzięki czemu nowe pliki archiwum są zapisywane w
+repozytorium (wcześniej sprawdzano tylko `data/seen_articles.json`, a
+nowe pliki zostałyby utracone). Krok ten wykonuje się także wtedy, gdy
+krok prasówki zakończy się błędem (`if: ${{ !cancelled() }}`), więc
+linki dostarczone przed awarią są zawsze zapisywane. Dodano 9 testów
+archiwum. Zaktualizowano README (PL i EN), w tym listę planowanych
+funkcji o wykrywanie powtórzonych wydarzeń i miesięczne zestawienie top
+10.
+
+Zmianę zweryfikowano: testy jednostkowe (78) zakończone powodzeniem;
+symulacja pełnego uruchomienia utworzyła plik archiwum z 20
+dostarczonymi artykułami, a symulacja z celowo uszkodzonym plikiem
+archiwum potwierdziła zapis historii i zakończenie uruchomienia błędem.
+Ręczne uruchomienie na gałęzi `v15-archiwum` zakończyło się powodzeniem,
+ale nie wybrało żadnego artykułu (76 dostępnych, 1 promocja, 75 poniżej
+progu), więc potwierdziło jedynie poprawne działanie kroku zapisu przy
+braku zmian.
+
+**Ograniczenia:** zapis archiwum nie został jeszcze potwierdzony w
+uruchomieniu, które dostarcza artykuły; nastąpi to przy pierwszym takim
+uruchomieniu (planowo 19.10.2026) i zostanie opisane w tym wpisie.
+Archiwum obejmuje artykuły od dnia wdrożenia; za październik 2026 będzie
+niepełne. Data w archiwum to data prasówki, a nie data publikacji
+artykułu.
+
 ## v14 --- 18.10.2026
 
 **Automatyczny harmonogram prasówki: 6:17 czasu polskiego, od
@@ -411,6 +453,45 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v15 --- 2026-10-18
+
+**Monthly archive of delivered articles and more robust data
+persistence.**
+
+Added the `src/article_archive.py` module, which stores each article
+delivered to Discord in a monthly file `data/archive/YYYY-MM.json`:
+digest date (Polish time), title, link, source, categories and score.
+The same link is never stored twice, and Polish characters are written
+readably. The archive is the basis for the planned monthly top 10 digest
+and later integration with Mozaika. `run()` in `src/main.py` archives
+the selected articles right after a successful delivery. An archive
+error is logged, the article history is still saved, and the run ends
+with an error, so delivered links are not sent again.
+
+In the workflow, the persist step now stages the whole `data` folder
+before checking for changes, so new archive files are committed
+(previously only `data/seen_articles.json` was checked and new files
+would have been lost). The step also runs when the digest step fails
+(`if: ${{ !cancelled() }}`), so links delivered before a failure are
+always recorded. Added 9 archive tests. Updated the README (PL and EN),
+including planned features for repeated-event detection and the monthly
+top 10.
+
+The change was verified: unit tests (78) passed; a full-run simulation
+created an archive file with 20 delivered articles, and a simulation
+with a deliberately corrupted archive file confirmed that the history is
+saved and the run ends with an error. A manual run on the `v15-archiwum`
+branch succeeded but selected no articles (76 eligible, 1 promotional,
+75 below threshold), so it only confirmed that the persist step behaves
+correctly when nothing changes.
+
+**Limitations:** archive writing has not yet been confirmed in a run
+that delivers articles; this will happen in the first such run (planned
+for 2026-10-19) and will be recorded in this entry. The archive covers
+articles from the deployment date onwards; October 2026 will be
+incomplete. The archived date is the digest date, not the article's
+publication date.
 
 ## v14 --- 2026-10-18
 

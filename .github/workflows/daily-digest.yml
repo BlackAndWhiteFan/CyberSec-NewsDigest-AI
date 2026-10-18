@@ -33,6 +33,9 @@ jobs:
         run: python src/main.py
 
       - name: Persist article history and archive
+        # Runs even if the digest step failed, so links already delivered to
+        # Discord are still recorded and not sent again the next day.
+        if: ${{ !cancelled() }}
         run: |
           git add data
           if git diff --cached --quiet; then

@@ -18,6 +18,7 @@ from article_selection import (
     select_top_articles,
 )
 from discord_output import build_digest_messages, send_messages
+from article_archive import append_to_archive
 
 
 RSS_FEEDS = [
@@ -219,6 +220,10 @@ def run():
                     history["published_links"]
                     + [article["link"] for article in selected_articles]
                 )
+            )
+            print(
+                "Zarchiwizowane artykuły:",
+                append_to_archive(selected_articles),
             )
 
     save_history(history)

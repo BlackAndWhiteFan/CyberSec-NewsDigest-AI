@@ -22,7 +22,9 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 5 — jakość selekcji (polskie słowa kluczowe, próg trafności, limity źródeł, filtr promocji): zaimplementowane i zweryfikowane w uruchomieniach workflow.**
 
-Generowanie podsumowań przez AI i automatyczny harmonogram dzienny nie zostały jeszcze wdrożone.
+**Etap 6 — automatyczny harmonogram (6:17 czasu polskiego, od poniedziałku do soboty): skonfigurowany; pierwsze automatyczne uruchomienie oczekuje na potwierdzenie.**
+
+Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
 
 ### Obecna implementacja
 
@@ -45,7 +47,7 @@ Generowanie podsumowań przez AI i automatyczny harmonogram dzienny nie zostały
 - Uruchamia testy jednostkowe przed wykonaniem skryptu pobierającego wiadomości RSS.
 - Wykorzystuje GitHub Actions do zatwierdzania i wysyłania zmian w historii artykułów, gdy zawartość tego pliku ulegnie zmianie.
 
-Obecny workflow można uruchomić ręcznie w GitHub Actions. Codzienny harmonogram nie został jeszcze skonfigurowany.
+Workflow uruchamia się automatycznie o 6:17 czasu polskiego (`Europe/Warsaw`) od poniedziałku do soboty; można go też uruchomić ręcznie w GitHub Actions. GitHub nie gwarantuje dokładnej godziny startu zaplanowanych uruchomień, więc prasówka może przyjść z opóźnieniem. Grupa współbieżności zapobiega nakładaniu się dwóch uruchomień.
 
 ### Ostatnie zweryfikowane wyniki
 
@@ -73,7 +75,6 @@ Punkty priorytetu są wskaźnikami opartymi na słowach kluczowych. Nie stanowi�
 ## Planowane funkcje
 
 - Generowanie krótkich podsumowań wybranych artykułów z wykorzystaniem AI.
-- Automatyczne uruchamianie o ustalonej porze każdego dnia.
 - Dokumentacja operacyjna i instrukcje rozwiązywania problemów.
 - Weryfikacja pełnego przepływu od początku do końca.
 

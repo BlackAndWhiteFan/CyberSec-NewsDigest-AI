@@ -22,7 +22,9 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 5 — Selection quality (Polish keywords, relevance threshold, source limits, promotional filter): implemented and verified in workflow runs.**
 
-AI-powered summaries and automatic daily scheduling have not yet been implemented.
+**Phase 6 — Automatic schedule (06:17 Polish time, Monday to Saturday): configured; the first scheduled run is awaiting confirmation.**
+
+AI-powered summaries have not yet been implemented.
 
 ### Current Implementation
 
@@ -44,7 +46,7 @@ AI-powered summaries and automatic daily scheduling have not yet been implemente
 - Runs unit tests before executing the RSS ingestion script.
 - Uses GitHub Actions to commit and push changes to the persistent article history when that file changes.
 
-The current workflow can be triggered manually through GitHub Actions. Daily scheduling has not yet been configured.
+The workflow runs automatically at 06:17 Polish time (`Europe/Warsaw`), Monday to Saturday, and can also be triggered manually through GitHub Actions. GitHub does not guarantee exact start times for scheduled runs, so the digest may arrive with a delay. A concurrency group prevents two runs from overlapping.
 
 ### Latest Verified Results
 
@@ -72,7 +74,6 @@ Priority scores are keyword-based indicators. They do not represent an AI assess
 ## Planned Features
 
 - AI-powered summaries of selected cybersecurity articles.
-- Automatic execution at a scheduled time every day.
 - Operational documentation and troubleshooting instructions.
 - End-to-end verification of the complete workflow.
 
@@ -96,7 +97,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 
 ## Repository Structure
 
-- `.github/workflows/daily-digest.yml` — GitHub Actions workflow and automated test execution.
+- `.github/workflows/daily-digest.yml` — GitHub Actions workflow: schedule, manual trigger, test execution, digest run, and history persistence.
 - `data/seen_articles.json` — persistent history of seen and published article links.
 - `src/main.py` — main RSS ingestion and processing script.
 - `src/deduplication.py` — article deduplication and source tracking.

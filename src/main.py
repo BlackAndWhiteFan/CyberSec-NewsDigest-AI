@@ -18,6 +18,7 @@ from article_selection import (
     select_top_articles,
 )
 from discord_output import build_digest_messages, send_messages
+from article_archive import append_to_archive
 
 
 RSS_FEEDS = [
@@ -201,6 +202,7 @@ def run():
     )
     webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
     delivery_failed = False
+    archive_failed = False
 
     if not messages:
         print("Brak artykułów do wysłania.")
@@ -220,6 +222,13 @@ def run():
                     + [article["link"] for article in selected_articles]
                 )
             )
+            try:
+                archived = append_to_archive(selected_articles)
+            except Exception as error:
+                archive_failed = True
+                print(f"BŁĄD ARCHIWUM: {error}")
+            else:
+                print("Zarchiwizowane artykuły:", archived)
 
     save_history(history)
 
@@ -228,6 +237,9 @@ def run():
 
     if delivery_failed:
         raise SystemExit("Wysyłka prasówki na Discord nie powiodła się.")
+
+    if archive_failed:
+        raise SystemExit("Zapis do archiwum nie powiódł się.")
 
 if __name__ == "__main__":
     run()

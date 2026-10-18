@@ -24,6 +24,8 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 6 — automatyczny harmonogram (6:17 czasu polskiego, od poniedziałku do soboty): skonfigurowany; pierwsze automatyczne uruchomienie oczekuje na potwierdzenie.**
 
+**Etap 7 — miesięczne archiwum dostarczonych artykułów: zaimplementowane; weryfikacja w uruchomieniu, które dostarczy artykuły, oczekuje na potwierdzenie.**
+
 Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
 
 ### Obecna implementacja
@@ -41,6 +43,8 @@ Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
 - Ogranicza każde źródło do 4 artykułów (Niebezpiecznik: 2); limity są ustawiane w `src/article_selection.py`.
 - Wysyła prasówkę na kanał Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami i domeną źródła, podzielone na wiadomości mieszczące się w limicie długości Discorda.
 - Dopisuje linki do `published_links` dopiero po udanej wysyłce; błąd wysyłki kończy uruchomienie błędem, więc workflow zostaje oznaczony jako nieudany.
+- Archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty) w miesięcznym pliku `data/archive/RRRR-MM.json`. Błąd archiwum jest zapisywany w logu i kończy uruchomienie błędem, ale historia artykułów zostaje zapisana, więc dostarczone linki nie są wysyłane ponownie.
+- Zapisuje historię artykułów i archiwum także wtedy, gdy krok prasówki zakończy się błędem, chyba że uruchomienie zostanie anulowane.
 - Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu.
 - Kontynuuje pracę, gdy pobranie pojedynczego kanału RSS się nie powiedzie.
 - Wyświetla informacje diagnostyczne o pobranych, pominiętych i przetwarzanych wpisach oraz wynikach selekcji artykułów.
@@ -74,6 +78,8 @@ Punkty priorytetu są wskaźnikami opartymi na słowach kluczowych. Nie stanowi�
 
 ## Planowane funkcje
 
+- Wykrywanie tego samego wydarzenia opisanego przez różne serwisy.
+- Miesięczne zestawienie 10 najważniejszych artykułów na osobnym kanale Discorda.
 - Generowanie krótkich podsumowań wybranych artykułów z wykorzystaniem AI.
 - Dokumentacja operacyjna i instrukcje rozwiązywania problemów.
 - Weryfikacja pełnego przepływu od początku do końca.

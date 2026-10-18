@@ -32,14 +32,17 @@ jobs:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: python src/main.py
 
-      - name: Persist article history
+      - name: Persist article history and archive
+        # Runs even if the digest step failed, so links already delivered to
+        # Discord are still recorded and not sent again the next day.
+        if: ${{ !cancelled() }}
         run: |
-          if git diff --quiet -- data/seen_articles.json; then
-            echo "Article history has not changed."
+          git add data
+          if git diff --cached --quiet; then
+            echo "Article history and archive have not changed."
           else
             git config user.name "github-actions[bot]"
             git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-            git add data/seen_articles.json
-            git commit -m "Update persistent article history"
+            git commit -m "Update persistent article history and archive"
             git push
           fi

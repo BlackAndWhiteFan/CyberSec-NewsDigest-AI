@@ -30,7 +30,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 9 — Monthly top 10 events on a separate Discord channel: implemented and verified in a manual run that delivered the summary to the channel; the first scheduled run is planned for 2026-11-01.**
 
-AI-powered summaries have not yet been implemented.
+**Phase 10 — AI summaries in Polish with a mandatory glossary consistent with the CyberSec Mozaika glossary: implemented and verified in a run that delivered a digest with summaries.**
 
 ### Current Implementation
 
@@ -51,6 +51,7 @@ AI-powered summaries have not yet been implemented.
 - Saves the article history and archive even if the digest step fails, unless the run is cancelled.
 - Merges articles from different sources about the same event into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
 - On the first day of each month, sends the top 10 events of the previous month (ranked by number of articles, then sources and score) to a separate Discord channel.
+- Adds an AI summary in Polish (up to 2 sentences) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description. Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped; explanations in parentheses are added by code at the first occurrence of a term in the digest. Without the `GROQ_API_KEY` secret the digest is sent without summaries.
 - Continues processing when an individual RSS feed fails.
 - Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
 - Runs unit tests before executing the RSS ingestion script.
@@ -83,7 +84,6 @@ Priority scores are keyword-based indicators. They do not represent an AI assess
 
 ## Planned Features
 
-- AI-powered summaries of selected cybersecurity articles.
 - Operational documentation and troubleshooting instructions.
 - End-to-end verification of the complete workflow.
 
@@ -103,7 +103,7 @@ The target processing workflow is:
 8. Format and deliver the digest to Discord.
 9. Record successfully published links and maintain article history.
 
-GitHub Actions executes the workflow, while Python implements the processing logic. The current implementation covers all steps except AI-generated summaries (step 7).
+GitHub Actions executes the workflow, while Python implements the processing logic. The current implementation covers all steps.
 
 ## Repository Structure
 
@@ -117,6 +117,10 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/article_archive.py` — monthly archive of delivered articles.
 - `src/event_grouping.py` — detection of the same event reported by different sources and of follow-ups.
 - `src/monthly_top.py` — monthly top 10 events from the archive.
+- `src/ai_summaries.py` — AI summaries (Groq), glossary enforcement and correction.
+- `src/glossary.py` — glossary conventions from the mirror: prompt entries, forbidden forms, explanations at first use.
+- `data/glosariusz_mirror.csv` — standalone mirror of the CyberSec Mozaika glossary used by the digest.
+- `tools/eksport_mirrora.py` — manual export of the mirror from the Mozaika mother workbook (`python tools/eksport_mirrora.py <workbook.xlsx>`, requires openpyxl).
 - `.github/workflows/monthly-top.yml` — monthly top 10 workflow (1st day of the month, 08:17 Polish time, or on demand).
 - `src/article_history.py` — loading, validating, saving, and filtering persistent article history.
 - `src/article_selection.py` — keyword lists, categorization, priority scoring, promotional filter, source limits, and article selection.
@@ -126,6 +130,8 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/test_article_archive.py` — monthly archive tests.
 - `src/test_event_grouping.py` — event grouping tests based on real title pairs.
 - `src/test_monthly_top.py` — monthly top 10 tests.
+- `src/test_ai_summaries.py` — AI summary tests (no network access).
+- `src/test_glossary.py` — glossary mirror, explanations and forbidden-form tests.
 - `src/test_article_history.py` — persistent article history and publication-filtering tests.
 - `src/test_article_selection.py` — categorization, Polish keyword, filtering, and selection tests based on real article titles.
 
@@ -135,6 +141,7 @@ Required repository secret (Settings → Secrets and variables → Actions):
 
 - `DISCORD_WEBHOOK_URL` — webhook URL of the Discord channel that receives the digest. It is passed only to the workflow step that runs the digest. Without it, delivery is skipped without an error.
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook URL of the Discord channel that receives the monthly top 10. It is passed only to the monthly workflow step.
+- `GROQ_API_KEY` — Groq API key for AI summaries. It is passed only to the digest step. Without it, the digest is sent without summaries.
 
 Never commit API keys, Discord webhook URLs, passwords, or other credentials to the repository.
 

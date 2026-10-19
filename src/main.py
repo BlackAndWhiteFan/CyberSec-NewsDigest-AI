@@ -19,9 +19,13 @@ from article_selection import (
     select_top_articles,
 )
 from discord_output import build_digest_messages, send_messages
+from ai_summaries import summarize_articles
 from article_archive import append_to_archive, load_recent
 from event_grouping import group_events, mark_continuations
 
+
+CONTENT_ENCODED = "{http://purl.org/rss/1.0/modules/content/}encoded"
+ATOM = "{http://www.w3.org/2005/Atom}"
 
 RSS_FEEDS = [
     "https://niebezpiecznik.pl/feed/",
@@ -96,6 +100,14 @@ def run():
                 )
                 or ""
             ).strip()
+
+            # Full article text, when the feed provides it (RSS content:encoded
+            # or Atom content). Used only as material for AI summaries.
+            content = (
+                item.findtext(CONTENT_ENCODED)
+                or item.findtext(f"{ATOM}content")
+                or ""
+            ).strip()
     
             link_element = item.find("{http://www.w3.org/2005/Atom}link")
     
@@ -122,7 +134,8 @@ def run():
                 feed_url,
                 title,
                 link,
-                description
+                description,
+                content,
             )
             article = {
                 "title": title,
@@ -218,6 +231,10 @@ def run():
         )
     )
     
+    print()
+    print("STRESZCZENIA AI")
+    summarize_articles(selected_articles)
+
     print()
     print("DISCORD")
 

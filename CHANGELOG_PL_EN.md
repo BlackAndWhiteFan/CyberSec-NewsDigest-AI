@@ -22,6 +22,69 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v18 --- 19.10.2026
+
+**Streszczenia AI po polsku z obowiązkowym słowniczkiem zgodnym z
+glosariuszem CyberSec Mozaika.**
+
+Nowy moduł `src/ai_summaries.py`: każdy artykuł w prasówce dostaje
+streszczenie po polsku (do 2 zdań), także artykuły z polskich serwisów.
+Model: `openai/gpt-oss-120b` w Groq (darmowy plan), a gdy zawiedzie –
+`qwen/qwen3.8-27b` w Groq (ten sam klucz, osobny limit); gdy oba
+zawiodą, prasówka idzie bez streszczeń. Artykuły trafiają do AI paczkami
+po 5; przy przekroczeniu limitu (429) kod czeka i ponawia. Materiałem
+jest pełny tekst z kanału, jeśli kanał go podaje (Niebezpiecznik, Z3S),
+a w pozostałych przypadkach opis z RSS (do 1500 znaków); stron
+artykułów nie pobieramy. Pełny tekst służy tylko do streszczeń, nie
+wpływa na selekcję. Treść z kanałów jest dla AI danymi, nie poleceniami;
+streszczenia są czyszczone (jedna linia, bez linków, formatowania i „@”).
+Klucz `GROQ_API_KEY` trafia tylko do kroku uruchamiającego prasówkę; bez
+niego prasówka działa jak dotąd. Limit czasu zadania: 20 minut.
+
+Słowniczek: nowy plik `data/glosariusz_mirror.csv` – samodzielny mirror
+glosariusza CyberSec Mozaika (matka v83, 726 haseł); prasówka nie
+korzysta z samej matki. Mirror generuje ręcznie uruchamiany skrypt
+`tools/eksport_mirrora.py`, który przechowuje też decyzje prasówki
+(forma w tekście, objaśnienie w nawiasie, uwaga dla AI, formy zakazane).
+Zasada (decyzja z 19.10.2026): termin angielski pierwszy, gdy tak mówi
+branża, a polski odpowiednik w nawiasie – jak w matce od v32; wyjątek:
+„podwyższenie (eskalacja) uprawnień”. Moduł `src/glossary.py` wymusza
+słowniczek w trzech miejscach: (1) polecenie dla AI („SŁOWNICZEK JEST
+OBOWIĄZKOWY”) z 21 stałymi konwencjami i maks. 40 hasłami występującymi
+w streszczanych artykułach; (2) kontrola form zakazanych (np.
+„eskalacja uprawnień”, „eksploit”, „łatka”, „aktor zagrożeń”) –
+streszczenie z błędem wraca raz do AI z uwagą, a jeśli nadal jest
+błędne, zostaje odrzucone; (3) objaśnienia w nawiasach dopisuje kod, nie
+AI, tylko przy pierwszym wystąpieniu terminu w całej prasówce, w zgodzie
+z przypadkiem (formy z Morfeusza 2, np. „poprawce (łatce)”,
+„podwyższenie (eskalację) uprawnień”).
+
+W `src/discord_output.py` streszczenie stoi pod tytułem jako cytat
+(nigdy nie oddziela się od tytułu przy dzieleniu wiadomości), a na końcu
+prasówki jest dopisek, że streszczenia przygotowało AI. Nagłówek sekcji
+nie zostaje już sam na końcu wiadomości. `src/deduplication.py` i
+`src/main.py` przekazują pełną treść z kanału.
+
+Zmianę zweryfikowano: testy jednostkowe (151) zakończone powodzeniem.
+Pierwsze uruchomienie na gałęzi `v18-streszczenia-ai` nie wybrało
+żadnego artykułu (brak nowych powyżej progu), więc AI nie zostało
+wywołane. Drugie uruchomienie (19.10.2026, 23:09): 6 artykułów spośród
+85, streszczenia 6 z 6 przygotował `gpt-oss-120b` za pierwszym
+podejściem (bez naruszeń słowniczka); prasówka dotarła na Discord (2
+wiadomości). Na tej podstawie poprawiono trzy rzeczy przed scaleniem:
+w poleceniu dla AI terminy angielskie bez nawiasów (model przepisał
+dosłownie „exploit (kit)”) i prośba o odmianę terminów; brak
+zagnieżdżonych objaśnień („(RCE (zdalne wykonanie kodu))”); nagłówek
+sekcji przenoszony do kolejnej wiadomości.
+
+**Ograniczenia:** streszczenia z krótkich zajawek (BleepingComputer)
+mają często 1 zdanie; przeglądy tygodniowe dają ogólnikowe streszczenia.
+Kod objaśnia przy pierwszym użyciu każdy angielski termin z mirrora
+(np. „API (interfejs programowania aplikacji)”), co może zagęścić
+nawiasy. Jakość i poprawki po teście ocenimy w kolejnych prasówkach.
+Mirror trzeba odświeżyć po każdej zmianie nazw w matce. Awaria całego
+Groq oznacza prasówkę bez streszczeń (zapasowy dostawca odłożony).
+
 ## v17 --- 19.10.2026
 
 **Miesięczne zestawienie 10 najważniejszych wydarzeń na osobnym kanale
@@ -542,6 +605,70 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v18 --- 2026-10-19
+
+**AI summaries in Polish with a mandatory glossary consistent with the
+CyberSec Mozaika glossary.**
+
+New module `src/ai_summaries.py`: every article in the digest gets a
+summary in Polish (up to 2 sentences), including articles from Polish
+sites. Model: `openai/gpt-oss-120b` on Groq (free tier), falling back to
+`qwen/qwen3.8-27b` on Groq (same key, separate rate limit); if both fail,
+the digest is sent without summaries. Articles are sent to the AI in
+batches of 5; when rate limited (429) the code waits and retries. The
+material is the full text from the feed when the feed provides it
+(Niebezpiecznik, Z3S), otherwise the RSS description (up to 1,500
+characters); article pages are not fetched. Full text is used only for
+summaries and does not affect selection. Feed text is treated as data,
+not instructions; summaries are cleaned (one line, no links, formatting
+or "@"). The `GROQ_API_KEY` secret is passed only to the digest step;
+without it the digest works as before. Job time limit: 20 minutes.
+
+Glossary: new file `data/glosariusz_mirror.csv` – a standalone mirror of
+the CyberSec Mozaika glossary (mother workbook v83, 726 entries); the
+digest never reads the mother workbook. The mirror is generated by the
+manually run script `tools/eksport_mirrora.py`, which also holds the
+digest's own decisions (text form, explanation in parentheses, AI rule,
+forbidden forms). Rule (decision of 2026-10-19): the English term first
+where the industry uses it, with the Polish equivalent in parentheses –
+as in the mother workbook since v32; exception: "podwyższenie
+(eskalacja) uprawnień". The module `src/glossary.py` enforces the
+glossary in three places: (1) the prompt ("SŁOWNICZEK JEST
+OBOWIĄZKOWY") with 21 fixed conventions and up to 40 entries found in the
+summarized articles; (2) a check for forbidden forms (e.g. "eskalacja
+uprawnień", "eksploit", "łatka", "aktor zagrożeń") – a summary that
+breaks the glossary is sent back once with a note and dropped if still
+wrong; (3) explanations in parentheses are added by code, not the AI,
+only at the first occurrence of a term in the whole digest and in the
+grammatical case of the explained word (forms from Morfeusz 2, e.g.
+"poprawce (łatce)", "podwyższenie (eskalację) uprawnień").
+
+In `src/discord_output.py` the summary is quoted under its title (never
+separated from it when the digest is split into messages), and a note at
+the end of the digest says the summaries were prepared by AI. A section
+header is no longer left alone at the end of a message.
+`src/deduplication.py` and `src/main.py` pass on the full feed text.
+
+The change was verified: unit tests (151) passed. The first run on the
+`v18-streszczenia-ai` branch selected no articles (nothing new above the
+threshold), so the AI was not called. The second run (2026-10-19, 23:09):
+6 of 85 articles, 6 of 6 summaries written by `gpt-oss-120b` on the first
+attempt (no glossary violations); the digest reached Discord
+(2 messages). Based on it, three fixes were made before merging: English
+terms without parentheses in the prompt (the model copied "exploit (kit)"
+literally) and a request to inflect terms; no nested explanations
+("(RCE (zdalne wykonanie kodu))"); a section header is moved to the next
+message.
+
+**Limitations:** summaries of short teasers (BleepingComputer) often
+have 1 sentence; weekly recaps give generic summaries. Code explains
+every English mirror term at first use (e.g. "API (interfejs
+programowania aplikacji)"), which may add many parentheses. Quality and
+the post-test fixes will be assessed in the next digests. The mirror must
+be refreshed after every rename in the mother workbook. An outage of the
+whole Groq service means a digest without summaries (backup provider
+postponed).
 
 ## v17 --- 2026-10-19
 

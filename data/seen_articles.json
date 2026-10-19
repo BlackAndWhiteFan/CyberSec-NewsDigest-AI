@@ -314,7 +314,23 @@
     "https://thehackernews.com/2026/10/unpatched-broadcom-wi-fi-flaw-lets.html",
     "https://thehackernews.com/2026/10/opencode-console-breach-may-have.html",
     "https://cyberdefence24.pl/cyberbezpieczenstwo/dezinformacja/historia-jako-narzedzie-wplywu-polska-kreowana-na-agresora",
-    "https://www.bleepingcomputer.com/news/microsoft/microsoft-october-windows-server-updates-cause-exchange-issues/"
+    "https://www.bleepingcomputer.com/news/microsoft/microsoft-october-windows-server-updates-cause-exchange-issues/",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-irlandzka-policje-przejete-konta-promowaly-kryptowaluty",
+    "https://cyberdefence24.pl/armia-i-sluzby/zmiany-w-panstwowym-systemie-lacznosci-govnet-w-nowej-roli",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/od-cyberataku-do-fizycznego-zagrozenia-w-kilkanascie-minut-ai-pokazala-swoje-mozliwosci",
+    "https://www.bleepingcomputer.com/news/security/hackers-hijack-aomei-update-servers-to-secretly-spread-malware/",
+    "https://www.bleepingcomputer.com/news/security/bullhorn-takes-staffing-platform-offline-to-contain-cyberattack/",
+    "https://www.bleepingcomputer.com/news/security/opencode-hack-exposes-api-keys-amid-ai-distillation-attacks/",
+    "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-game-app-crashes-caused-by-windows-kb5124010-preview-update/",
+    "https://www.bleepingcomputer.com/news/security/inside-the-underground-market-for-know-your-client-services/",
+    "https://www.bleepingcomputer.com/news/security/f5-releases-out-of-band-patches-for-critical-nginx-vulnerabilities/",
+    "https://www.bleepingcomputer.com/news/microsoft/microsoft-fixes-bug-that-hid-copilot-buttons-in-classic-outlook/",
+    "https://thehackernews.com/2026/10/hackers-exploit-plex2shell-flaws-to.html",
+    "https://thehackernews.com/2026/10/popular-wordpress-seo-plugin-rank-math.html",
+    "https://thehackernews.com/2026/10/weekly-recap-98-zero-days-rogue-ai.html",
+    "https://thehackernews.com/2026/10/ghostaction-attackers-plant-credential.html",
+    "https://thehackernews.com/2026/10/from-email-to-case-to-boardroom-how.html",
+    "https://thehackernews.com/2026/10/fake-web3-accelerator-uses-npm-packages.html"
   ],
   "published_links": [
     "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/",
@@ -409,6 +425,12 @@
     "https://www.bleepingcomputer.com/news/security/hackers-breach-microsoft-365-tenants-via-connectwise-supply-chain-attack/",
     "https://www.bleepingcomputer.com/news/security/hackers-exploit-siteguard-waf-flaw-to-run-commands-as-system-root/",
     "https://thehackernews.com/2026/10/opencode-console-breach-may-have.html",
-    "https://www.bleepingcomputer.com/news/microsoft/microsoft-october-windows-server-updates-cause-exchange-issues/"
+    "https://www.bleepingcomputer.com/news/microsoft/microsoft-october-windows-server-updates-cause-exchange-issues/",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-irlandzka-policje-przejete-konta-promowaly-kryptowaluty",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/od-cyberataku-do-fizycznego-zagrozenia-w-kilkanascie-minut-ai-pokazala-swoje-mozliwosci",
+    "https://www.bleepingcomputer.com/news/security/opencode-hack-exposes-api-keys-amid-ai-distillation-attacks/",
+    "https://thehackernews.com/2026/10/weekly-recap-98-zero-days-rogue-ai.html",
+    "https://www.bleepingcomputer.com/news/security/f5-releases-out-of-band-patches-for-critical-nginx-vulnerabilities/",
+    "https://thehackernews.com/2026/10/hackers-exploit-plex2shell-flaws-to.html"
   ]
 }

@@ -20,6 +20,8 @@ concurrency:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # Upper limit for one run; AI requests may wait when rate limited.
+    timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,6 +32,9 @@ jobs:
       - name: Test workflow
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          # AI summaries (Groq: two models, one key). Without the key the
+          # digest is sent without summaries.
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
         run: python src/main.py
 
       - name: Persist article history and archive

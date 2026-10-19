@@ -27,6 +27,7 @@ STEM_LENGTH = 5
 MIN_WORD_LENGTH = 3
 SIMILARITY_THRESHOLD = 2.0
 NAME_MIN_LENGTH = 6
+NAME_ENDING_LENGTH = 3
 
 CVE_PATTERN = re.compile(r"cve-\d{4}-\d{4,}")
 
@@ -119,19 +120,24 @@ def document_frequency(titles):
     return counts
 
 
-def stem_weight(count):
+def stem_weight(count, rare_limit=2):
     """Weight of a shared stem found in `count` titles of the pool."""
-    if count <= 2:
+    if count <= rare_limit:
         return 1.0
 
-    if count == 3:
+    if count == rare_limit + 1:
         return 0.25
 
     return 0.0
 
 
-def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD):
-    """Return True when two titles most likely describe the same event."""
+def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare_limit=2):
+    """Return True when two titles most likely describe the same event.
+
+    rare_limit is the largest number of titles in which a word still counts
+    as rare. Within one day it is 2 (only the compared pair); across a month
+    it grows with the event, whose name appears in all of its articles.
+    """
     if title_cves(title_a) & title_cves(title_b):
         return True
 
@@ -139,16 +145,19 @@ def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD):
     words_b = title_words(title_b)
     shared = words_a.keys() & words_b.keys()
 
-    score = sum(stem_weight(frequency.get(stem, 2)) for stem in shared)
+    score = sum(stem_weight(frequency.get(stem, 2), rare_limit) for stem in shared)
 
     if score >= threshold:
         return True
 
-    # One name found only in these two titles.
+    # One name found only in these titles. The two words may differ only by
+    # an inflectional ending (at most NAME_ENDING_LENGTH letters), so the name
+    # "Medyc" does not match the adjective "medycznej".
     return any(
-        frequency.get(stem, 2) <= 2
+        frequency.get(stem, 2) <= rare_limit
         and (words_a[stem][1] or words_b[stem][1])
         and max(len(words_a[stem][0]), len(words_b[stem][0])) >= NAME_MIN_LENGTH
+        and abs(len(words_a[stem][0]) - len(words_b[stem][0])) <= NAME_ENDING_LENGTH
         for stem in shared
     )
 

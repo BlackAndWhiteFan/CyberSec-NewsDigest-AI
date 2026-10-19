@@ -53,13 +53,15 @@ miesiąca.
 Zmianę zweryfikowano: testy jednostkowe (107) zakończone powodzeniem;
 symulacja na archiwum z prawdziwymi tytułami wykazała dwa błędne
 połączenia (dwa różne artykuły Sekuraka o wspólnych pospolitych słowach
-oraz „Medyc”/„medycznej”), które usunięto przed wdrożeniem.
+oraz „Medyc”/„medycznej”), które usunięto przed wdrożeniem. Po scaleniu
+ręczne uruchomienie workflow na gałęzi `main` (19.10.2026) zakończyło
+się powodzeniem: na kanał `#top-miesiąca` dotarło zestawienie „📅 Top 10
+· październik 2026” z oznaczeniem niepełnego miesiąca (archiwum od
+19.10) i jedną pozycją (OpenCode Console Breach…, 1 artykuł, 1 serwis).
 
 **Ograniczenia:** ręczne uruchomienie workflow jest możliwe dopiero po
 scaleniu do `main`, bo GitHub pokazuje przycisk uruchamiania tylko dla
-workflow istniejących na gałęzi domyślnej; pierwsza wysyłka na
-`#top-miesiąca` zostanie potwierdzona po scaleniu i opisana w tym
-wpisie. Harmonogram korzysta z pola `timezone`, którego działanie jest
+workflow istniejących na gałęzi domyślnej. Harmonogram korzysta z pola `timezone`, którego działanie jest
 wyjaśniane (zob. v14). Ranking opiera się na liczbie artykułów, więc
 wydarzenia opisywane przez wiele serwisów mają przewagę nad
 pojedynczymi, choć ważnymi analizami.
@@ -571,12 +573,15 @@ invalid months.
 The change was verified: unit tests (107) passed; a simulation on an
 archive of real titles revealed two false merges (two different Sekurak
 articles sharing common words, and "Medyc"/"medycznej"), which were
-fixed before deployment.
+fixed before deployment. After merging, a manual run of the workflow on
+the `main` branch (2026-10-19) succeeded: the "📅 Top 10 · październik
+2026" summary reached the `#top-miesiąca` channel, marked as an
+incomplete month (archive from 19.10) and containing one item (OpenCode
+Console Breach…, 1 article, 1 source).
 
 **Limitations:** the workflow can be run manually only after merging
 into `main`, because GitHub shows the run button only for workflows that
-exist on the default branch; the first delivery to `#top-miesiąca` will
-be confirmed after merging and recorded in this entry. The schedule uses
+exist on the default branch. The schedule uses
 the `timezone` field, whose behaviour is being investigated (see v14).
 Ranking by number of articles favours events covered by many sites over
 single but important analyses.

@@ -201,6 +201,30 @@ class TestSelectionRules(unittest.TestCase):
 
         self.assertEqual(len(select_top_articles(articles)), 2)
 
+    def test_group_survives_when_leader_source_is_full(self):
+        articles = [
+            make_article(f"Ransomware attack {i}", f"https://www.bleepingcomputer.com/{i}")
+            for i in range(4)
+        ]
+        leader = make_article(
+            "Palo Alto warns of PAN-OS RCE flaw", "https://www.bleepingcomputer.com/pan"
+        )
+        leader["related"] = [
+            make_article(
+                "Palo Alto Networks Patches PAN-OS RCE Flaw", "https://thehackernews.com/pan"
+            )
+        ]
+
+        selected = select_top_articles(articles + [leader])
+        chosen = selected[-1]
+
+        self.assertEqual(len(selected), 5)
+        self.assertEqual(chosen["link"], "https://thehackernews.com/pan")
+        self.assertEqual(
+            [related["link"] for related in chosen["related"]],
+            ["https://www.bleepingcomputer.com/pan"],
+        )
+
     def test_source_limit_leaves_room_for_other_sources(self):
         articles = [
             make_article(f"Ransomware attack {i}", f"https://thehackernews.com/{i}")

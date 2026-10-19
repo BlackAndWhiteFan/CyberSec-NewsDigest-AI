@@ -15,10 +15,12 @@ from article_selection import (
     categorize_article,
     is_excluded,
     prioritize_article,
+    relevant_articles,
     select_top_articles,
 )
 from discord_output import build_digest_messages, send_messages
-from article_archive import append_to_archive
+from article_archive import append_to_archive, load_recent
+from event_grouping import group_events, mark_continuations
 
 
 RSS_FEEDS = [
@@ -155,12 +157,36 @@ def run():
     print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
     print("Nieudane feedy:", failed_feeds)
     
-    selected_articles = select_top_articles(eligible_articles, limit=20)
+    grouped_articles = group_events(
+        relevant_articles(eligible_articles),
+        pool=eligible_articles,
+    )
+    selected_articles = select_top_articles(grouped_articles, limit=20)
+
+    try:
+        recent_records = load_recent(days=3)
+    except Exception as error:
+        recent_records = []
+        print(f"BŁĄD ODCZYTU ARCHIWUM (pominięto ciąg dalszy): {error}")
+
+    mark_continuations(
+        selected_articles,
+        recent_records,
+        pool_titles=[article["title"] for article in eligible_articles],
+    )
     
     print()
     print("SELEKCJA ARTYKUŁÓW")
     print("Artykuły dostępne do selekcji:", len(eligible_articles))
     print("Artykuły wybrane do digestu:", len(selected_articles))
+    print(
+        "Połączone powtórzenia (dodatkowe źródła):",
+        sum(len(article.get("related", [])) for article in selected_articles),
+    )
+    print(
+        "Ciąg dalszy wcześniejszych wydarzeń:",
+        sum(1 for article in selected_articles if article.get("continuation")),
+    )
     print(
         "Odrzucone jako promocja:",
         sum(1 for article in eligible_articles if is_excluded(article)),
@@ -220,6 +246,11 @@ def run():
                 dict.fromkeys(
                     history["published_links"]
                     + [article["link"] for article in selected_articles]
+                    + [
+                        related["link"]
+                        for article in selected_articles
+                        for related in article.get("related", [])
+                    ]
                 )
             )
             try:

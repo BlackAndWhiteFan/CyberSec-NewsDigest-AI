@@ -8,6 +8,7 @@ from article_archive import (
     archive_path,
     build_record,
     load_archive,
+    load_recent,
 )
 
 
@@ -93,6 +94,48 @@ class TestArticleArchive(unittest.TestCase):
 
         with self.assertRaises(ValueError):
             load_archive(path)
+
+    def test_related_sources_and_continuation_are_saved(self):
+        article = make_article("Fakturownia.pl zhackowana", "https://niebezpiecznik.pl/a")
+        article["related"] = [
+            make_article("Ofiarą firma Fakturownia.pl", "https://zaufanatrzeciastrona.pl/b")
+        ]
+        article["continuation"] = True
+
+        record = build_record(article, "2026-10-19")
+
+        self.assertEqual(
+            record["related"],
+            [
+                {
+                    "title": "Ofiarą firma Fakturownia.pl",
+                    "link": "https://zaufanatrzeciastrona.pl/b",
+                    "source": "zaufanatrzeciastrona.pl",
+                }
+            ],
+        )
+        self.assertTrue(record["continuation"])
+
+    def test_recent_records_span_months_and_skip_older_days(self):
+        append_to_archive(
+            [make_article("Old ransomware attack", "https://a.example/old")],
+            "2026-10-27",
+            self.archive_dir,
+        )
+        append_to_archive(
+            [make_article("Ransomware attack", "https://a.example/1")],
+            "2026-10-30",
+            self.archive_dir,
+        )
+        append_to_archive(
+            [make_article("Ransomware attack 2", "https://a.example/2")],
+            "2026-11-01",
+            self.archive_dir,
+        )
+
+        links = [r["link"] for r in load_recent(3, "2026-11-01", self.archive_dir)]
+
+        self.assertEqual(links, ["https://a.example/1", "https://a.example/2"])
 
     def test_polish_characters_are_saved_readably(self):
         append_to_archive(

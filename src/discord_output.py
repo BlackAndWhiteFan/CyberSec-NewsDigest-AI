@@ -14,6 +14,7 @@ from article_selection import CATEGORIES, categorize_article
 # in how emoji and other special characters are counted.
 DISCORD_MESSAGE_LIMIT = 1900
 OTHER_CATEGORY = "📰 POZOSTAŁE"
+CONTINUATION_CATEGORY = "🔁 CIĄG DALSZY"
 MAX_TITLE_LENGTH = 250
 CONTINUATION_SUFFIX = " (cd.)"
 
@@ -35,6 +36,9 @@ def primary_category(article):
     The order of CATEGORIES in article_selection.py defines importance,
     so new categories added there are handled here automatically.
     """
+    if article.get("continuation"):
+        return CONTINUATION_CATEGORY
+
     categories = categorize_article(article)
 
     for key, label in CATEGORIES.items():
@@ -45,8 +49,8 @@ def primary_category(article):
 
 
 def section_labels():
-    """Return section labels in display order: categories first, then other."""
-    return list(CATEGORIES.values()) + [OTHER_CATEGORY]
+    """Return section labels in display order: categories, other, continuations."""
+    return list(CATEGORIES.values()) + [OTHER_CATEGORY, CONTINUATION_CATEGORY]
 
 
 def section_header(label):
@@ -65,7 +69,21 @@ def format_article_line(number, article):
     domain = urllib.parse.urlparse(link).netloc.removeprefix("www.")
 
     # <...> around the link stops Discord from showing a large preview card.
-    return f"{number}. [{title}](<{link}>) · {domain}"
+    line = f"{number}. [{title}](<{link}>) · {domain}"
+
+    related = article.get("related", [])
+
+    if related:
+        others = ", ".join(
+            f"[{source_label(item)}](<{item['link']}>)" for item in related
+        )
+        line += f" · także: {others}"
+
+    return line
+
+
+def source_label(article):
+    return urllib.parse.urlparse(article["link"]).netloc.removeprefix("www.")
 
 
 def build_digest_lines(articles, eligible_count, source_count, date_text):

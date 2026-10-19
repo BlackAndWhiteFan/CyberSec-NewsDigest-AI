@@ -6,7 +6,7 @@ archive is the basis for monthly summaries and other later analyses.
 """
 
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -36,6 +36,15 @@ def build_record(article, date_text):
         "source": source_domain(article),
         "categories": categorize_article(article),
         "score": prioritize_article(article),
+        "related": [
+            {
+                "title": related.get("title", ""),
+                "link": related.get("link", ""),
+                "source": source_domain(related),
+            }
+            for related in article.get("related", [])
+        ],
+        "continuation": bool(article.get("continuation")),
     }
 
 
@@ -51,6 +60,25 @@ def load_archive(path):
 
     if not isinstance(records, list):
         raise ValueError("Article archive must be a JSON list.")
+
+    return records
+
+
+def load_recent(days=3, date_text=None, archive_dir=ARCHIVE_DIR):
+    """Return archive records from the last `days` days, including today."""
+    if date_text is None:
+        date_text = today_local()
+
+    today = datetime.strptime(date_text, "%Y-%m-%d").date()
+    first_day = today - timedelta(days=days)
+    months = {first_day.strftime("%Y-%m"), today.strftime("%Y-%m")}
+
+    records = []
+
+    for month in sorted(months):
+        for record in load_archive(Path(archive_dir) / f"{month}.json"):
+            if first_day.isoformat() <= record.get("date", "") <= today.isoformat():
+                records.append(record)
 
     return records
 

@@ -56,6 +56,33 @@ class TestFormatArticleLine(unittest.TestCase):
         self.assertLess(len(format_article_line(1, article)), 400)
 
 
+class TestRelatedAndContinuations(unittest.TestCase):
+    def test_related_sources_are_listed(self):
+        article = make_article("Fakturownia.pl zhackowana", "https://niebezpiecznik.pl/a")
+        article["related"] = [
+            make_article("Ofiarą firma Fakturownia.pl", "https://zaufanatrzeciastrona.pl/b")
+        ]
+
+        line = format_article_line(1, article)
+
+        self.assertIn(
+            " · także: [zaufanatrzeciastrona.pl](<https://zaufanatrzeciastrona.pl/b>)",
+            line,
+        )
+
+    def test_continuation_goes_to_its_own_last_section(self):
+        follow_up = make_article("Ransomware attack update", "https://example.com/1")
+        follow_up["continuation"] = True
+        articles = [follow_up, make_article("Ransomware attack", "https://example.com/2")]
+
+        text = "\n".join(build_digest_messages(articles, 10, 6, "19.10.2026"))
+
+        self.assertLess(text.index("🔴 NAJWAŻNIEJSZE"), text.index("🔁 CIĄG DALSZY"))
+        self.assertGreater(
+            text.index("https://example.com/1"), text.index("🔁 CIĄG DALSZY")
+        )
+
+
 class TestSplitIntoMessages(unittest.TestCase):
     def test_messages_respect_limit_and_keep_lines_whole(self):
         lines = [f"line {i} " + "x" * 90 for i in range(60)]

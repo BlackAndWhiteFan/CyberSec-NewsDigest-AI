@@ -261,21 +261,30 @@ def source_limit(domain):
     return SOURCE_LIMITS.get(domain, DEFAULT_SOURCE_LIMIT)
 
 
+def relevant_articles(articles, min_score=MIN_PRIORITY_SCORE):
+    """Return articles that are not promotional and reach min_score."""
+    return [
+        article
+        for article in articles
+        if not is_excluded(article) and prioritize_article(article) >= min_score
+    ]
+
+
 def select_top_articles(articles, limit=20, min_score=MIN_PRIORITY_SCORE):
     """Return the highest-priority relevant articles, up to the limit.
 
     Promotional articles and articles below min_score are skipped, and no
     source may exceed its limit from SOURCE_LIMITS (or DEFAULT_SOURCE_LIMIT).
     The digest may therefore contain fewer articles than the limit.
+
+    For a group of articles about the same event (see event_grouping), if
+    the leading article's source has reached its limit, another article of
+    the group from a source with room left represents the event instead.
     """
     if limit < 0:
         raise ValueError("limit must not be negative")
 
-    candidates = [
-        article
-        for article in articles
-        if not is_excluded(article) and prioritize_article(article) >= min_score
-    ]
+    candidates = relevant_articles(articles, min_score)
     ranked_articles = sorted(candidates, key=prioritize_article, reverse=True)
 
     selected = []
@@ -285,12 +294,30 @@ def select_top_articles(articles, limit=20, min_score=MIN_PRIORITY_SCORE):
         if len(selected) >= limit:
             break
 
-        domain = source_domain(article)
+        members = [article] + list(article.get("related", []))
+        chosen = next(
+            (
+                member
+                for member in members
+                if per_source.get(source_domain(member), 0)
+                < source_limit(source_domain(member))
+            ),
+            None,
+        )
 
-        if per_source.get(domain, 0) >= source_limit(domain):
+        if chosen is None:
             continue
 
+        if chosen is not article:
+            others = [member for member in members if member is not chosen]
+            chosen = dict(chosen)
+            chosen["related"] = [
+                {key: value for key, value in member.items() if key != "related"}
+                for member in others
+            ]
+
+        domain = source_domain(chosen)
         per_source[domain] = per_source.get(domain, 0) + 1
-        selected.append(article)
+        selected.append(chosen)
 
     return selected

@@ -28,7 +28,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 8 — Detection of the same event reported by different sources: implemented; verified with tests and simulations, live grouping not yet observed.**
 
-**Phase 9 — Monthly top 10 events on a separate Discord channel: implemented; first delivery pending after merging.**
+**Phase 9 — Monthly top 10 events on a separate Discord channel: implemented and verified in a manual run that delivered the summary to the channel; the first scheduled run is planned for 2026-11-01.**
 
 AI-powered summaries have not yet been implemented.
 

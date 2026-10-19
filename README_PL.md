@@ -28,7 +28,7 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 8 — wykrywanie tego samego wydarzenia opisanego przez różne serwisy: zaimplementowane; zweryfikowane testami i symulacjami, grupowanie na żywo jeszcze nie wystąpiło.**
 
-**Etap 9 — miesięczne top 10 wydarzeń na osobnym kanale Discorda: zaimplementowane; pierwsza wysyłka oczekuje na scalenie.**
+**Etap 9 — miesięczne top 10 wydarzeń na osobnym kanale Discorda: zaimplementowane i zweryfikowane w ręcznym uruchomieniu, które dostarczyło zestawienie na kanał; pierwsze automatyczne uruchomienie zaplanowano na 1.11.2026.**
 
 Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
 

@@ -24,7 +24,11 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 6 — automatyczny harmonogram (6:17 czasu polskiego, od poniedziałku do soboty): skonfigurowany; pierwsze automatyczne uruchomienie oczekuje na potwierdzenie.**
 
-**Etap 7 — miesięczne archiwum dostarczonych artykułów: zaimplementowane; weryfikacja w uruchomieniu, które dostarczy artykuły, oczekuje na potwierdzenie.**
+**Etap 7 — miesięczne archiwum dostarczonych artykułów: zaimplementowane i zweryfikowane w uruchomieniu, które dostarczyło artykuł.**
+
+**Etap 8 — wykrywanie tego samego wydarzenia opisanego przez różne serwisy: zaimplementowane; zweryfikowane testami i symulacjami, grupowanie na żywo jeszcze nie wystąpiło.**
+
+**Etap 9 — miesięczne top 10 wydarzeń na osobnym kanale Discorda: zaimplementowane; pierwsza wysyłka oczekuje na scalenie.**
 
 Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
 
@@ -45,7 +49,9 @@ Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
 - Dopisuje linki do `published_links` dopiero po udanej wysyłce; błąd wysyłki kończy uruchomienie błędem, więc workflow zostaje oznaczony jako nieudany.
 - Archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty) w miesięcznym pliku `data/archive/RRRR-MM.json`. Błąd archiwum jest zapisywany w logu i kończy uruchomienie błędem, ale historia artykułów zostaje zapisana, więc dostarczone linki nie są wysyłane ponownie.
 - Zapisuje historię artykułów i archiwum także wtedy, gdy krok prasówki zakończy się błędem, chyba że uruchomienie zostanie anulowane.
-- Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu.
+- Łączy artykuły z różnych serwisów o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł, a artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”.
+- Pierwszego dnia miesiąca wysyła na osobny kanał Discorda 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji).
+- Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu. Zestawienie miesięczne wymaga sekretu `DISCORD_MONTHLY_WEBHOOK_URL`.
 - Kontynuuje pracę, gdy pobranie pojedynczego kanału RSS się nie powiedzie.
 - Wyświetla informacje diagnostyczne o pobranych, pominiętych i przetwarzanych wpisach oraz wynikach selekcji artykułów.
 - Uruchamia testy jednostkowe przed wykonaniem skryptu pobierającego wiadomości RSS.
@@ -78,8 +84,6 @@ Punkty priorytetu są wskaźnikami opartymi na słowach kluczowych. Nie stanowi�
 
 ## Planowane funkcje
 
-- Wykrywanie tego samego wydarzenia opisanego przez różne serwisy.
-- Miesięczne zestawienie 10 najważniejszych artykułów na osobnym kanale Discorda.
 - Generowanie krótkich podsumowań wybranych artykułów z wykorzystaniem AI.
 - Dokumentacja operacyjna i instrukcje rozwiązywania problemów.
 - Weryfikacja pełnego przepływu od początku do końca.

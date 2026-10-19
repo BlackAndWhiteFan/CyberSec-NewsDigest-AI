@@ -10,5 +10,17 @@
     "score": 3,
     "related": [],
     "continuation": false
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Microsoft: October Windows Server updates break Exchange sign-in, mail flow",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-october-windows-server-updates-cause-exchange-issues/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false
   }
 ]

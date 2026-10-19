@@ -188,3 +188,14 @@ class TestSummaries(unittest.TestCase):
         messages = build_digest_messages(articles, 150, 6, "19.10.2026")
         self.assertTrue(all(len(message) <= DISCORD_MESSAGE_LIMIT for message in messages))
         self.assertEqual(sum(message.count("\n> ") for message in messages), 20)
+
+
+class TestHeaderNotOrphaned(unittest.TestCase):
+    def test_section_header_never_ends_a_message(self):
+        header = "**🛡️ PODATNOŚCI**"
+        lines = ["a" * 1800, "", header, "1. " + "b" * 300]
+        messages = split_into_messages(lines, section_headers={header})
+
+        self.assertFalse(any(message.endswith(header) for message in messages))
+        self.assertTrue(messages[1].startswith(header + "\n1. "))
+        self.assertNotIn("(cd.)", messages[1])

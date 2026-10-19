@@ -167,6 +167,17 @@ def split_into_messages(lines, limit=DISCORD_MESSAGE_LIMIT, section_headers=()):
             current = candidate
             continue
 
+        # Never leave a section header alone at the end of a message: start
+        # the next message with it instead (seen in test 19.10).
+        if current_header and line not in ("", current_header) and current.endswith("\n" + current_header):
+            head = current[: -len(current_header)].rstrip("\n")
+
+            if head:
+                messages.append(head)
+
+            current = f"{current_header}\n{line}"
+            continue
+
         messages.append(current)
 
         if current_header and line not in ("", current_header):

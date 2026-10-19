@@ -66,6 +66,7 @@ Dla każdego artykułu napisz po polsku streszczenie z dokładnie 2 zdań.
 SŁOWNICZEK JEST OBOWIĄZKOWY:
 - Każdy termin, który występuje w słowniczku poniżej, zapisuj wyłącznie w formie podanej po strzałce (odmieniając ją zgodnie z polską gramatyką). Nie używaj żadnych innych odpowiedników, synonimów ani kalk – także wtedy, gdy artykuł źródłowy (polski lub angielski) używa innego słowa.
 - Przestrzegaj uwag w nawiasach przy terminach.
+- Odmieniaj terminy ze słowniczka zgodnie z polską gramatyką (np. „kilku exploitów”, „instalację backdoora”).
 - Nie dodawaj objaśnień terminów w nawiasach (robi to automatycznie kod), chyba że wymaga tego uwaga przy terminie.
 - Streszczenia są automatycznie sprawdzane: streszczenie niezgodne ze słowniczkiem zostanie odrzucone.
 

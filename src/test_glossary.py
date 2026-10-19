@@ -99,6 +99,15 @@ class TestExplanations(unittest.TestCase):
         self.assertEqual(apply_glossary(text, used), text)
         self.assertIn("H028", used)
 
+    def test_term_inside_parentheses_gets_no_nested_explanation(self):
+        text = "Poprawki eliminują możliwość wykonania kodu (RCE) na serwerach."
+        self.assertNotIn("(RCE (", gloss(text))
+
+    def test_term_after_parentheses_is_still_explained(self):
+        used = set()
+        apply_glossary("Możliwe wykonanie kodu (RCE).", used)
+        self.assertIn("RCE (zdalne wykonanie kodu)", apply_glossary("Luka daje RCE.", used))
+
     def test_acronyms_are_case_sensitive(self):
         self.assertEqual(gloss("Klient zamówił poc."), "Klient zamówił poc.")
 
@@ -139,13 +148,19 @@ class TestPrompt(unittest.TestCase):
         text = prompt_glossary(["Zupełnie inny tekst."])
 
         for item in CORE_ENTRIES:
-            self.assertIn(f"- {item['termin_en']} → {item['forma']}", text)
+            english = item["termin_en"].split(" (")[0]
+            self.assertIn(f"- {english} → {item['forma']}", text)
 
     def test_entries_found_in_article_text_are_added(self):
         selected = relevant_entries(["Attackers used password spraying against VPN."])
         ids = {item["id"] for item in selected}
 
         self.assertIn("H134", ids)  # password spraying
+
+    def test_prompt_shows_english_terms_without_parentheses(self):
+        text = prompt_glossary([""])
+        self.assertIn("- exploit → exploit", text)
+        self.assertNotIn("exploit (kit)", text)
 
     def test_prompt_size_is_limited(self):
         long_text = " ".join(item["termin_en"] for item in ENTRIES)

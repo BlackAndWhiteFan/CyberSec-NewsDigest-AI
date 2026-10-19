@@ -123,7 +123,9 @@ def relevant_entries(texts, limit=PROMPT_EXTRA_LIMIT):
 
 
 def prompt_line(entry):
-    line = f"- {entry['termin_en']} → {entry['forma']}"
+    # Without parentheses: the AI copied "exploit (kit)" literally (test 19.10).
+    english = re.sub(r"\s*\([^)]*\)", "", entry["termin_en"]).strip()
+    line = f"- {english} → {entry['forma']}"
 
     if entry["regula"]:
         line += f" ({entry['regula']})"
@@ -197,6 +199,12 @@ def apply_glossary(text, used_terms):
             continue
 
         start, end = match.span("anchor")
+
+        # A term that is itself inside parentheses (e.g. "wykonanie kodu (RCE)")
+        # gets no nested explanation: "(RCE (zdalne ...))" seen in test 19.10.
+        before = text[:start]
+        if before.count("(") > before.count(")"):
+            continue
 
         # Overlapping terms get only the first explanation.
         if any(start < other_end and other_start < end for other_start, other_end in spans):

@@ -30,7 +30,7 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 9 — miesięczne top 10 wydarzeń na osobnym kanale Discorda: zaimplementowane i zweryfikowane w ręcznym uruchomieniu, które dostarczyło zestawienie na kanał; pierwsze automatyczne uruchomienie zaplanowano na 1.11.2026.**
 
-Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
+**Etap 10 — streszczenia AI po polsku z obowiązkowym słowniczkiem zgodnym z glosariuszem CyberSec Mozaika: zaimplementowane i zweryfikowane w uruchomieniu, które dostarczyło prasówkę ze streszczeniami.**
 
 ### Obecna implementacja
 
@@ -51,6 +51,7 @@ Generowanie podsumowań przez AI nie zostało jeszcze wdrożone.
 - Zapisuje historię artykułów i archiwum także wtedy, gdy krok prasówki zakończy się błędem, chyba że uruchomienie zostanie anulowane.
 - Łączy artykuły z różnych serwisów o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł, a artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”.
 - Pierwszego dnia miesiąca wysyła na osobny kanał Discorda 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji).
+- Dodaje do każdego artykułu streszczenie po polsku (do 2 zdań) przygotowane przez AI (Groq: `gpt-oss-120b`, zapasowo `qwen3.8-27b`) z pełnego tekstu z kanału albo opisu RSS. Terminy muszą być zgodne ze słowniczkiem `data/glosariusz_mirror.csv` (mirror glosariusza CyberSec Mozaika): streszczenie niezgodne wraca do AI do poprawki, a potem jest odrzucane; objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu terminu w prasówce. Bez sekretu `GROQ_API_KEY` prasówka idzie bez streszczeń.
 - Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu. Zestawienie miesięczne wymaga sekretu `DISCORD_MONTHLY_WEBHOOK_URL`.
 - Kontynuuje pracę, gdy pobranie pojedynczego kanału RSS się nie powiedzie.
 - Wyświetla informacje diagnostyczne o pobranych, pominiętych i przetwarzanych wpisach oraz wynikach selekcji artykułów.
@@ -84,7 +85,6 @@ Punkty priorytetu są wskaźnikami opartymi na słowach kluczowych. Nie stanowi�
 
 ## Planowane funkcje
 
-- Generowanie krótkich podsumowań wybranych artykułów z wykorzystaniem AI.
 - Dokumentacja operacyjna i instrukcje rozwiązywania problemów.
 - Weryfikacja pełnego przepływu od początku do końca.
 

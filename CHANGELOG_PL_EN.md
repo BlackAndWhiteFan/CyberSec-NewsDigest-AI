@@ -22,6 +22,92 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v17 --- 19.10.2026
+
+**Miesięczne zestawienie 10 najważniejszych wydarzeń na osobnym kanale
+Discorda.**
+
+Dodano moduł `src/monthly_top.py` i workflow
+`.github/workflows/monthly-top.yml`. Pierwszego dnia miesiąca o 8:17
+czasu polskiego (`Europe/Warsaw`) archiwum poprzedniego miesiąca jest
+grupowane w wydarzenia tym samym mechanizmem co w v16, ale w skali
+całego miesiąca; łączone są także kolejne artykuły z tego samego serwisu
+(np. aktualizacje), pod warunkiem wspólnej nazwy lub numeru CVE.
+Wydarzenia są szeregowane według liczby artykułów, następnie liczby
+serwisów i najwyższej punktacji, a 10 pierwszych trafia na kanał
+`#top-miesiąca` przez sekret `DISCORD_MONTHLY_WEBHOOK_URL`. Każda
+pozycja podaje liczbę artykułów i serwisów (z polską odmianą) oraz dzień
+pierwszego wystąpienia; niepełny miesiąc jest oznaczany w nagłówku.
+Miesiąc można podać ręcznie (`RRRR-MM`); wartość jest sprawdzana wzorcem
+przed odczytem plików. Workflow ma wyłącznie uprawnienie odczytu
+repozytorium.
+
+W `src/event_grouping.py` nazwy muszą różnić się co najwyżej końcówką do
+3 liter (nazwa „Medyc” nie łączy się już z przymiotnikiem „medycznej”),
+a próg rzadkości słowa może rosnąć wraz z wielkością wydarzenia
+(potrzebne w skali miesiąca, gdzie nazwa występuje we wszystkich
+artykułach o wydarzeniu). Dodano testy (107 łącznie), m.in. dla łączenia
+aktualizacji, rankingu, odmiany, niepełnego miesiąca i nieprawidłowego
+miesiąca.
+
+Zmianę zweryfikowano: testy jednostkowe (107) zakończone powodzeniem;
+symulacja na archiwum z prawdziwymi tytułami wykazała dwa błędne
+połączenia (dwa różne artykuły Sekuraka o wspólnych pospolitych słowach
+oraz „Medyc”/„medycznej”), które usunięto przed wdrożeniem.
+
+**Ograniczenia:** ręczne uruchomienie workflow jest możliwe dopiero po
+scaleniu do `main`, bo GitHub pokazuje przycisk uruchamiania tylko dla
+workflow istniejących na gałęzi domyślnej; pierwsza wysyłka na
+`#top-miesiąca` zostanie potwierdzona po scaleniu i opisana w tym
+wpisie. Harmonogram korzysta z pola `timezone`, którego działanie jest
+wyjaśniane (zob. v14). Ranking opiera się na liczbie artykułów, więc
+wydarzenia opisywane przez wiele serwisów mają przewagę nad
+pojedynczymi, choć ważnymi analizami.
+
+## v16 --- 19.10.2026
+
+**Wykrywanie tego samego wydarzenia opisanego przez różne serwisy i
+sekcja „Ciąg dalszy”.**
+
+Dodano moduł `src/event_grouping.py`. Artykuły z różnych serwisów o tym
+samym wydarzeniu są łączone w jedną pozycję prasówki z dopiskiem
+„także:” i linkami do pozostałych źródeł. O połączeniu decydują: wspólny
+numer CVE, co najmniej dwa wspólne rzadkie słowa tytułu albo jedna
+wspólna nazwa, która nie występuje w innych tytułach dnia (wyraz z
+wielką literą w środku, jak „BeyondTrust”, albo pisany wielką literą w
+środku tytułu zdaniowego, jak „Fakturownia.pl”). Słowa porównywane są po
+pięcioliterowych rdzeniach, a ogólne słownictwo newsów i bezpieczeństwa
+jest pomijane. Artykuły z tego samego serwisu nie są łączone. Grupę
+reprezentuje artykuł z najwyższą punktacją, przy remisie ze źródła
+polskiego; gdy jego serwis wyczerpał limit, grupę reprezentuje inny
+artykuł z grupy. Artykuły o wydarzeniach dostarczonych w ciągu ostatnich
+3 dni (według archiwum z v15) trafiają do osobnej sekcji „🔁 Ciąg
+dalszy”.
+
+Linki wszystkich artykułów z grupy są zapisywane w `published_links`, a
+archiwum przechowuje źródła powiązane i znacznik ciągu dalszego. W logu
+dodano liczbę połączonych powtórzeń i artykułów z ciągu dalszego. Zmiany
+objęły `src/main.py`, `src/article_selection.py`,
+`src/article_archive.py` i `src/discord_output.py`; dodano testy oparte
+na prawdziwych parach tytułów (94 łącznie). Zmiana trafiła na gałąź
+`main` bezpośrednio, bez pull requesta, wskutek wgrania plików na
+niewłaściwą gałąź.
+
+Zmianę zweryfikowano: testy jednostkowe (94) zakończone powodzeniem; na
+7 prawdziwych parach „to samo wydarzenie” wykryto 6, na 13 parach „różne
+wydarzenia” nie było błędnych połączeń; symulacja na 68 prawdziwych
+tytułach połączyła m.in. Cisco, BeyondTrust, Palo Alto, ataki na sklepy
+we Francji i Fakturownię oraz oznaczyła kontynuację z archiwum.
+Uruchomienia na żywo (na `main` i na gałęzi `v17-top-miesiaca`)
+zakończyły się powodzeniem; nie wystąpiły w nich jeszcze artykuły do
+połączenia.
+
+**Ograniczenia:** reguły przedkładają precyzję nad kompletność: część
+powtórzeń zostanie pominięta, np. gdy nazwa stoi na początku obu
+tytułów, a jeden z nich jest pisany wielkimi literami w każdym słowie
+(para o Drupalu). Porównywane są wyłącznie tytuły. Grupowanie nie
+działało jeszcze na prawdziwej porannej prasówce z wieloma artykułami.
+
 ## v15 --- 18.10.2026
 
 **Miesięczne archiwum dostarczonych artykułów i odporniejszy zapis
@@ -57,11 +143,12 @@ ale nie wybrało żadnego artykułu (76 dostępnych, 1 promocja, 75 poniżej
 progu), więc potwierdziło jedynie poprawne działanie kroku zapisu przy
 braku zmian.
 
-**Ograniczenia:** zapis archiwum nie został jeszcze potwierdzony w
-uruchomieniu, które dostarcza artykuły; nastąpi to przy pierwszym takim
-uruchomieniu (planowo 19.10.2026) i zostanie opisane w tym wpisie.
-Archiwum obejmuje artykuły od dnia wdrożenia; za październik 2026 będzie
-niepełne. Data w archiwum to data prasówki, a nie data publikacji
+**Potwierdzenie (19.10.2026):** pierwsze uruchomienie dostarczające
+artykuł (ręczne, na gałęzi `v17-top-miesiaca`) utworzyło plik
+`data/archive/2026-10.json` z poprawnym wpisem, a krok zapisu
+zatwierdził go w repozytorium razem z historią. **Ograniczenia:**
+archiwum obejmuje artykuły od dnia wdrożenia, więc za październik 2026
+jest niepełne. Data w archiwum to data prasówki, a nie data publikacji
 artykułu.
 
 ## v14 --- 18.10.2026
@@ -454,6 +541,87 @@ and reviewed diffs.
 
 ------------------------------------------------------------------------
 
+## v17 --- 2026-10-19
+
+**Monthly top 10 events delivered to a separate Discord channel.**
+
+Added `src/monthly_top.py` and the `.github/workflows/monthly-top.yml`
+workflow. On the first day of each month at 08:17 Polish time
+(`Europe/Warsaw`), the previous month's archive is grouped into events
+with the same mechanism as in v16, but across the whole month; follow-up
+articles from the same source (e.g. updates) are also merged when they
+share a name or a CVE identifier. Events are ranked by number of
+articles, then number of sources and highest score, and the top 10 are
+sent to the `#top-miesiąca` channel via the
+`DISCORD_MONTHLY_WEBHOOK_URL` secret. Each item shows the number of
+articles and sources (with Polish plural forms) and the first day the
+event appeared; an incomplete month is marked in the header. The month
+can be given manually (`YYYY-MM`) and is validated against a pattern
+before any file is read. The workflow has read-only repository
+permissions.
+
+In `src/event_grouping.py`, names may now differ only by an inflectional
+ending of up to 3 letters (the name "Medyc" no longer matches the
+adjective "medycznej"), and the rarity limit of a word can grow with the
+size of an event (needed at monthly scale, where the name appears in
+every article about the event). Tests were added (107 in total),
+covering follow-up merging, ranking, plural forms, incomplete months and
+invalid months.
+
+The change was verified: unit tests (107) passed; a simulation on an
+archive of real titles revealed two false merges (two different Sekurak
+articles sharing common words, and "Medyc"/"medycznej"), which were
+fixed before deployment.
+
+**Limitations:** the workflow can be run manually only after merging
+into `main`, because GitHub shows the run button only for workflows that
+exist on the default branch; the first delivery to `#top-miesiąca` will
+be confirmed after merging and recorded in this entry. The schedule uses
+the `timezone` field, whose behaviour is being investigated (see v14).
+Ranking by number of articles favours events covered by many sites over
+single but important analyses.
+
+## v16 --- 2026-10-19
+
+**Detection of the same event reported by different sources, and a "Ciąg
+dalszy" (follow-up) section.**
+
+Added `src/event_grouping.py`. Articles from different sources about the
+same event are merged into one digest item, with "także:" (also:) and
+links to the other sources. A merge requires a shared CVE identifier, at
+least two shared rare title words, or one shared name that appears in no
+other title of the day (a word with an inner capital letter, such as
+"BeyondTrust", or a capitalized word in the middle of a sentence-case
+title, such as "Fakturownia.pl"). Words are compared by five-letter
+stems, and generic news and security vocabulary is ignored. Articles
+from the same source are never merged. A group is represented by its
+highest-scoring article, preferring Polish sources on ties; if that
+article's source has reached its limit, another group member represents
+the event. Articles about events delivered within the last 3 days
+(according to the v15 archive) are shown in a separate "🔁 Ciąg dalszy"
+section.
+
+Links of all grouped articles are recorded in `published_links`, and the
+archive stores related sources and the follow-up flag. The log now
+reports merged duplicates and follow-up articles. Changes cover
+`src/main.py`, `src/article_selection.py`, `src/article_archive.py` and
+`src/discord_output.py`; tests based on real title pairs were added (94
+in total). The change was committed directly to `main`, without a pull
+request, after the files were uploaded to the wrong branch.
+
+The change was verified: unit tests (94) passed; 6 of 7 real "same
+event" pairs were detected, with no false merges among 13 "different
+events" pairs; a simulation on 68 real titles merged, among others,
+Cisco, BeyondTrust, Palo Alto, the French store attacks and Fakturownia,
+and marked a follow-up from the archive. Live runs (on `main` and on the
+`v17-top-miesiaca` branch) succeeded; they did not yet contain articles
+to merge.
+
+**Limitations:** the rules favour precision over completeness, so some
+duplicates are missed, e.g. when a name starts both titles and one of
+them is in Title Case (the Drupal pair). Only titles are compared.
+Grouping has not yet run on a real morning digest with many articles.
+
 ## v15 --- 2026-10-18
 
 **Monthly archive of delivered articles and more robust data
@@ -486,10 +654,11 @@ branch succeeded but selected no articles (76 eligible, 1 promotional,
 75 below threshold), so it only confirmed that the persist step behaves
 correctly when nothing changes.
 
-**Limitations:** archive writing has not yet been confirmed in a run
-that delivers articles; this will happen in the first such run (planned
-for 2026-10-19) and will be recorded in this entry. The archive covers
-articles from the deployment date onwards; October 2026 will be
+**Confirmation (2026-10-19):** the first run delivering an article
+(manual, on the `v17-top-miesiaca` branch) created
+`data/archive/2026-10.json` with a correct entry, and the persist step
+committed it together with the history. **Limitations:** the archive
+covers articles from the deployment date onwards, so October 2026 is
 incomplete. The archived date is the digest date, not the article's
 publication date.
 

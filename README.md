@@ -24,7 +24,11 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 6 — Automatic schedule (06:17 Polish time, Monday to Saturday): configured; the first scheduled run is awaiting confirmation.**
 
-**Phase 7 — Monthly archive of delivered articles: implemented; verification during a run that delivers articles is pending.**
+**Phase 7 — Monthly archive of delivered articles: implemented and verified in a run that delivered an article.**
+
+**Phase 8 — Detection of the same event reported by different sources: implemented; verified with tests and simulations, live grouping not yet observed.**
+
+**Phase 9 — Monthly top 10 events on a separate Discord channel: implemented; first delivery pending after merging.**
 
 AI-powered summaries have not yet been implemented.
 
@@ -45,6 +49,8 @@ AI-powered summaries have not yet been implemented.
 - Records links in `published_links` only after a successful delivery; a delivery failure ends the run with an error, so the workflow is marked as failed.
 - Archives each delivered article (date, title, link, source, categories, score) in a monthly file `data/archive/YYYY-MM.json`. An archive error is logged and ends the run with an error, but the article history is still saved, so delivered links are not sent again.
 - Saves the article history and archive even if the digest step fails, unless the run is cancelled.
+- Merges articles from different sources about the same event into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
+- On the first day of each month, sends the top 10 events of the previous month (ranked by number of articles, then sources and score) to a separate Discord channel.
 - Continues processing when an individual RSS feed fails.
 - Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
 - Runs unit tests before executing the RSS ingestion script.
@@ -77,8 +83,6 @@ Priority scores are keyword-based indicators. They do not represent an AI assess
 
 ## Planned Features
 
-- Detection of the same event reported by different sites.
-- A monthly top 10 articles digest delivered to a separate Discord channel.
 - AI-powered summaries of selected cybersecurity articles.
 - Operational documentation and troubleshooting instructions.
 - End-to-end verification of the complete workflow.
@@ -111,12 +115,17 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/rss_helpers.py` — URL validation, duplicate-link detection, and title cleanup helpers.
 - `src/discord_output.py` — digest formatting, message splitting, and delivery to a Discord webhook.
 - `src/article_archive.py` — monthly archive of delivered articles.
+- `src/event_grouping.py` — detection of the same event reported by different sources and of follow-ups.
+- `src/monthly_top.py` — monthly top 10 events from the archive.
+- `.github/workflows/monthly-top.yml` — monthly top 10 workflow (1st day of the month, 08:17 Polish time, or on demand).
 - `src/article_history.py` — loading, validating, saving, and filtering persistent article history.
 - `src/article_selection.py` — keyword lists, categorization, priority scoring, promotional filter, source limits, and article selection.
 - `src/test_deduplication.py` — deduplication unit tests.
 - `src/test_url_validation.py` — URL validation, duplicate-detection, and title cleanup tests.
 - `src/test_discord_output.py` — digest formatting and message-splitting tests (no network access).
 - `src/test_article_archive.py` — monthly archive tests.
+- `src/test_event_grouping.py` — event grouping tests based on real title pairs.
+- `src/test_monthly_top.py` — monthly top 10 tests.
 - `src/test_article_history.py` — persistent article history and publication-filtering tests.
 - `src/test_article_selection.py` — categorization, Polish keyword, filtering, and selection tests based on real article titles.
 
@@ -125,6 +134,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 Required repository secret (Settings → Secrets and variables → Actions):
 
 - `DISCORD_WEBHOOK_URL` — webhook URL of the Discord channel that receives the digest. It is passed only to the workflow step that runs the digest. Without it, delivery is skipped without an error.
+- `DISCORD_MONTHLY_WEBHOOK_URL` — webhook URL of the Discord channel that receives the monthly top 10. It is passed only to the monthly workflow step.
 
 Never commit API keys, Discord webhook URLs, passwords, or other credentials to the repository.
 

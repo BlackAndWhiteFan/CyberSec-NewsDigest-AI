@@ -1,0 +1,37 @@
+name: Monthly Top 10
+
+on:
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Month to summarize (YYYY-MM); empty = previous month"
+        required: false
+        default: ""
+  schedule:
+    # 08:17 Polish time on the first day of each month, for the previous month.
+    - cron: "17 8 1 * *"
+      timezone: "Europe/Warsaw"
+
+# Reads the archive only; nothing is committed.
+permissions:
+  contents: read
+
+concurrency:
+  group: monthly-top
+  cancel-in-progress: false
+
+jobs:
+  monthly-top:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run unit tests
+        run: python -m unittest discover -s src -p "test_*.py"
+
+      - name: Send monthly top 10
+        env:
+          DISCORD_MONTHLY_WEBHOOK_URL: ${{ secrets.DISCORD_MONTHLY_WEBHOOK_URL }}
+          MONTH: ${{ inputs.month }}
+        run: python src/monthly_top.py

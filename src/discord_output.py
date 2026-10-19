@@ -8,6 +8,7 @@ from datetime import datetime
 from zoneinfo import ZoneInfo
 
 from article_selection import CATEGORIES, categorize_article
+from glossary import apply_glossary
 
 
 # Discord allows 2000 characters per message; the margin covers differences
@@ -17,6 +18,11 @@ OTHER_CATEGORY = "📰 POZOSTAŁE"
 CONTINUATION_CATEGORY = "🔁 CIĄG DALSZY"
 MAX_TITLE_LENGTH = 250
 CONTINUATION_SUFFIX = " (cd.)"
+# "-#" is Discord's small grey text (subtext).
+AI_NOTE = (
+    "-# Streszczenia przygotowało AI na podstawie kanałów RSS;"
+    " w razie wątpliwości rozstrzyga artykuł źródłowy."
+)
 
 
 def polish_plural(number, one, few, many):
@@ -58,8 +64,13 @@ def section_header(label):
     return f"**{label}**"
 
 
-def format_article_line(number, article):
-    """Return one digest line: number, clickable title and source domain."""
+def format_article_line(number, article, summary=None):
+    """Return one digest entry: number, clickable title and source domain,
+    followed by the AI summary as a quote on the next line, if there is one.
+
+    The summary is part of the same entry, so splitting the digest into
+    messages never separates it from its title.
+    """
     title = article["title"].replace("[", "(").replace("]", ")")
 
     if len(title) > MAX_TITLE_LENGTH:
@@ -78,6 +89,9 @@ def format_article_line(number, article):
             f"[{source_label(item)}](<{item['link']}>)" for item in related
         )
         line += f" · także: {others}"
+
+    if summary:
+        line += f"\n> {summary}"
 
     return line
 
@@ -106,6 +120,9 @@ def build_digest_lines(articles, eligible_count, source_count, date_text):
     ]
 
     number = 1
+    # Shared by all summaries, so each glossary term is explained only at
+    # its first occurrence in the whole digest (in display order).
+    explained_terms = set()
 
     for section in section_labels():
         if section not in groups:
@@ -115,8 +132,17 @@ def build_digest_lines(articles, eligible_count, source_count, date_text):
         lines.append(section_header(section))
 
         for article in groups[section]:
-            lines.append(format_article_line(number, article))
+            summary = article.get("summary")
+
+            if summary:
+                summary = apply_glossary(summary, explained_terms)
+
+            lines.append(format_article_line(number, article, summary))
             number += 1
+
+    if any(article.get("summary") for article in articles):
+        lines.append("")
+        lines.append(AI_NOTE)
 
     return lines
 

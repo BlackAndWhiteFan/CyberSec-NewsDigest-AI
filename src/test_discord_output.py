@@ -1,6 +1,7 @@
 import unittest
 
 from discord_output import (
+    AI_NOTE,
     DISCORD_MESSAGE_LIMIT,
     OTHER_CATEGORY,
     build_digest_messages,
@@ -150,3 +151,40 @@ class TestBuildDigestMessages(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestSummaries(unittest.TestCase):
+    def test_summary_is_quoted_under_its_title(self):
+        line = format_article_line(1, make_article("Tytuł"), "Krótkie streszczenie.")
+        title_line, summary_line = line.split("\n")
+
+        self.assertIn("[Tytuł]", title_line)
+        self.assertEqual(summary_line, "> Krótkie streszczenie.")
+
+    def test_glossary_explains_term_once_per_digest_and_note_is_added(self):
+        first = make_article("Ransomware attack hits hospital", "https://example.com/1")
+        second = make_article("Ransomware gang leaks data", "https://example.com/2")
+        first["summary"] = "Atak ransomware sparaliżował szpital."
+        second["summary"] = "Grupa ransomware opublikowała dane."
+
+        text = "\n".join(build_digest_messages([first, second], 10, 6, "19.10.2026"))
+
+        self.assertEqual(text.count("(oprogramowanie wymuszające okup)"), 1)
+        self.assertIn("Atak ransomware (oprogramowanie wymuszające okup)", text)
+        self.assertTrue(text.endswith(AI_NOTE))
+
+    def test_no_note_without_summaries(self):
+        text = "\n".join(build_digest_messages([make_article("Tytuł")], 10, 6, "19.10.2026"))
+        self.assertNotIn(AI_NOTE, text)
+
+    def test_twenty_articles_with_long_summaries_fit_discord_limit(self):
+        articles = []
+
+        for number in range(20):
+            article = make_article("Zero-day " + "x" * 240, f"https://example.com/{number}")
+            article["summary"] = "s" * 450
+            articles.append(article)
+
+        messages = build_digest_messages(articles, 150, 6, "19.10.2026")
+        self.assertTrue(all(len(message) <= DISCORD_MESSAGE_LIMIT for message in messages))
+        self.assertEqual(sum(message.count("\n> ") for message in messages), 20)

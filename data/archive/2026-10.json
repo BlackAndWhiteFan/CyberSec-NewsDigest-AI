@@ -22,5 +22,77 @@
     "score": 2,
     "related": [],
     "continuation": false
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Cyberatak na irlandzką policję. Przejęte konta promowały kryptowaluty",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-irlandzka-policje-przejete-konta-promowaly-kryptowaluty",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Od cyberataku do fizycznego zagrożenia w kilkanaście minut. AI pokazała swoje możliwości",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/od-cyberataku-do-fizycznego-zagrozenia-w-kilkanascie-minut-ai-pokazala-swoje-mozliwosci",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false
+  },
+  {
+    "date": "2026-10-19",
+    "title": "OpenCode hack exposes API keys amid AI distillation attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/opencode-hack-exposes-api-keys-amid-ai-distillation-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true
+  },
+  {
+    "date": "2026-10-19",
+    "title": "⚡ Weekly Recap: 98 Zero-Days, Rogue AI Agents, $100M Crypto Theft, 700 Supermarkets Hit and More",
+    "link": "https://thehackernews.com/2026/10/weekly-recap-98-zero-days-rogue-ai.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false
+  },
+  {
+    "date": "2026-10-19",
+    "title": "F5 releases out-of-band patches for critical NGINX vulnerabilities",
+    "link": "https://www.bleepingcomputer.com/news/security/f5-releases-out-of-band-patches-for-critical-nginx-vulnerabilities/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false
+  },
+  {
+    "date": "2026-10-19",
+    "title": "Hackers Exploit Plex2Shell Flaws to Install Crypto Miners and Linux Proxy Backdoor",
+    "link": "https://thehackernews.com/2026/10/hackers-exploit-plex2shell-flaws-to.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false
   }
 ]

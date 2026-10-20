@@ -106,5 +106,29 @@
     "score": 3,
     "related": [],
     "continuation": false
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Masz firmę? Oszuści podszywają się pod państwowy urząd. Chcą wyłudzić dane",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/masz-firme-oszusci-podszywaja-sie-pod-panstwowy-urzad-chca-wyludzic-dane",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false
+  },
+  {
+    "date": "2026-10-20",
+    "title": "ClickFix Attackers Exploit Siemens Software Center Flaw to Deploy Remote Access Trojan",
+    "link": "https://thehackernews.com/2026/10/clickfix-attackers-exploit-siemens.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false
   }
 ]

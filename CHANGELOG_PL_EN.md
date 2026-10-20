@@ -66,8 +66,22 @@ Porządki: w PR v23 pliki `backfill_summaries.py` i
 `test_backfill_summaries.py` trafiły do głównego katalogu repozytorium
 zamiast do `src`; właściwe wersje dodano następnie bezpośrednio na
 `main` (dwa commity bez PR), a kopie z głównego katalogu usunięto w
-poprawce. Zapis uzupełnionych streszczeń zostanie opisany w tym
-wpisie.
+poprawce.
+
+Drugi podgląd (21.10.2026, 00:32): 11 z 11 streszczeń; 8 poprawnych,
+3 z błędem: przy artykule z samego tytułu (Microsoft/Exchange) AI
+dopisało niepoparte drugie zdanie („Microsoft zaleca zastosowanie
+poprawek…”), przy OpenCode „distillation attacks” oddano jako „ataki na
+procesy destylacji AI” (a chodzi o ataki polegające na destylacji, czyli
+kopiowaniu modelu), przy Plex2Shell PoC przypisano sprawcom zamiast
+badaczom; dwa streszczenia użyły „poprawki” zamiast ustalonej „łatki”.
+Druga poprawka: przy samym tytule zapisywane jest tylko pierwsze zdanie
+streszczenia (`src/backfill_summaries.py`), a „poprawka” trafiła na
+listę form zakazanych hasła H166 (`tools/eksport_mirrora.py`,
+`data/glosariusz_mirror.csv`), więc kontrola słowniczka wymusza
+„łatkę” – także w codziennej prasówce. Błędy interpretacji (OpenCode,
+Plex2Shell) poprawiane ręcznie w archiwum po zapisie. Testy: 198. Zapis
+uzupełnionych streszczeń zostanie opisany w tym wpisie.
 
 **Ograniczenia:** workflow można uruchomić dopiero po scaleniu (GitHub
 pokazuje przycisk tylko dla workflow z `main`), dlatego przed zapisem
@@ -886,8 +900,23 @@ applies to the daily digest. Tests: 196.
 Housekeeping: in the v23 PR the files `backfill_summaries.py` and
 `test_backfill_summaries.py` landed in the repository root instead of
 `src`; the correct versions were then added directly on `main` (two
-commits without a PR), and the root copies were removed in the fix. The
-saving of the backfilled summaries will be recorded in this entry.
+commits without a PR), and the root copies were removed in the fix.
+
+Second preview (2026-10-21, 00:32): 11 of 11 summaries; 8 correct, 3
+wrong: for a title-only article (Microsoft/Exchange) the AI added an
+unsupported second sentence ("Microsoft zaleca zastosowanie
+poprawek…"), for OpenCode "distillation attacks" became "attacks on AI
+distillation processes" (they are attacks that use distillation, i.e.
+copying a model), and for Plex2Shell the PoC was attributed to the
+attackers instead of researchers; two summaries used "poprawka" instead
+of the agreed "łatka". Second fix: for title-only articles only the
+first sentence of the summary is saved (`src/backfill_summaries.py`),
+and "poprawka" was added to the forbidden forms of entry H166
+(`tools/eksport_mirrora.py`, `data/glosariusz_mirror.csv`), so the
+glossary check enforces "łatka" – also in the daily digest.
+Interpretation errors (OpenCode, Plex2Shell) are corrected manually in
+the archive after saving. Tests: 198. The saving of the backfilled
+summaries will be recorded in this entry.
 
 **Limitations:** the workflow can be run only after merging (GitHub shows
 the run button only for workflows on `main`), hence the preview before

@@ -48,8 +48,26 @@ trafia na Discord. Workflow ma wspólną grupę współbieżności z prasówką
 
 Zmianę zweryfikowano: testy jednostkowe (194) zakończone powodzeniem,
 w tym uzupełnianie tylko brakujących streszczeń, podgląd bez zapisu,
-brak zapisu z gałęzi i materiał z RSS albo z tytułu. Uruchomienie na
-`main` (podgląd i zapis) zostanie opisane w tym wpisie.
+brak zapisu z gałęzi i materiał z RSS albo z tytułu.
+
+Podgląd na `main` (21.10.2026, 00:22): 11 artykułów bez streszczenia,
+9 odnalezionych w kanałach RSS, 2 już nie (BleepingComputer: F5/NGINX i
+Microsoft/Exchange); 10 streszczeń, ale jedno z nich to opis braku
+materiału („Brak dostępnych informacji w treści artykułu.”), a przy
+jednym AI nie zwróciło nic. Poprawka przed zapisem:
+`src/backfill_summaries.py` przy braku materiału podaje AI sam tytuł
+jako tekst (AI oddaje go jednym zdaniem po polsku), a
+`src/ai_summaries.py` odrzuca odpowiedzi opisujące brak materiału
+zamiast streszczenia (zaczynające się od „Brak informacji…” albo
+mówiące o „treści/tekście artykułu”) – dotyczy to też codziennej
+prasówki. Testy: 196.
+
+Porządki: w PR v23 pliki `backfill_summaries.py` i
+`test_backfill_summaries.py` trafiły do głównego katalogu repozytorium
+zamiast do `src`; właściwe wersje dodano następnie bezpośrednio na
+`main` (dwa commity bez PR), a kopie z głównego katalogu usunięto w
+poprawce. Zapis uzupełnionych streszczeń zostanie opisany w tym
+wpisie.
 
 **Ograniczenia:** workflow można uruchomić dopiero po scaleniu (GitHub
 pokazuje przycisk tylko dla workflow z `main`), dlatego przed zapisem
@@ -852,8 +870,24 @@ archive.
 
 The change was verified: unit tests (194) passed, including filling only
 missing summaries, preview without saving, no saving from a branch, and
-material from RSS or from the title. The run on `main` (preview and save)
-will be recorded in this entry.
+material from RSS or from the title.
+
+Preview on `main` (2026-10-21, 00:22): 11 articles without a summary, 9
+found in the RSS feeds, 2 no longer (BleepingComputer: F5/NGINX and
+Microsoft/Exchange); 10 summaries, but one of them described the missing
+material ("Brak dostępnych informacji w treści artykułu.") and for one
+the AI returned nothing. Fix before saving: `src/backfill_summaries.py`
+gives the AI the title itself as the text when there is no material (the
+AI renders it as one Polish sentence), and `src/ai_summaries.py` drops
+answers that describe missing material instead of summarizing (starting
+with "Brak informacji…" or mentioning the "article text") – this also
+applies to the daily digest. Tests: 196.
+
+Housekeeping: in the v23 PR the files `backfill_summaries.py` and
+`test_backfill_summaries.py` landed in the repository root instead of
+`src`; the correct versions were then added directly on `main` (two
+commits without a PR), and the root copies were removed in the fix. The
+saving of the backfilled summaries will be recorded in this entry.
 
 **Limitations:** the workflow can be run only after merging (GitHub shows
 the run button only for workflows on `main`), hence the preview before

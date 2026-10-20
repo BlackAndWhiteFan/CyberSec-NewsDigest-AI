@@ -1,6 +1,7 @@
 import json
 import tempfile
 import unittest
+import unittest.mock
 from datetime import date
 from pathlib import Path
 
@@ -148,23 +149,64 @@ class TestMessage(unittest.TestCase):
 
 
 class TestRun(unittest.TestCase):
+    """Every run gets a temporary marker, so tests never touch data/."""
 
-    def test_run_without_webhook_does_not_fail(self):
+    def test_run_without_webhook_does_not_fail_and_keeps_period_open(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / "2026-10.json"
             path.write_text(json.dumps([FAKTUROWNIA, SINGLE]), encoding="utf-8")
+            marker = Path(directory) / "last_top.json"
 
-            run("2026-10", archive_dir=directory)
+            with unittest.mock.patch.dict("os.environ", {"GITHUB_REF_NAME": "main"}):
+                run("2026-10", archive_dir=directory, marker_path=marker, today=date(2026, 11, 1))
+            self.assertFalse(marker.exists())
 
     def test_invalid_month_is_rejected(self):
-        for month in ("2026-13", "../etc", "2026-1"):
-            with self.subTest(month=month):
-                with self.assertRaises(SystemExit):
-                    run(month)
-
-    def test_run_with_missing_archive_does_not_fail(self):
         with tempfile.TemporaryDirectory() as directory:
-            run("2026-10", archive_dir=directory)
+            for month in ("2026-13", "../etc", "2026-1"):
+                with self.subTest(month=month):
+                    with self.assertRaises(SystemExit):
+                        run(month, archive_dir=directory, marker_path=Path(directory) / "m.json")
+
+    def test_empty_month_is_recorded(self):
+        with tempfile.TemporaryDirectory() as directory:
+            marker = Path(directory) / "last_top.json"
+            # Same result on every branch the unit tests run on in GitHub Actions.
+            with unittest.mock.patch.dict("os.environ", {"GITHUB_REF_NAME": "main"}):
+                run("2026-10", archive_dir=directory, marker_path=marker, today=date(2026, 11, 1))
+            self.assertEqual(json.loads(marker.read_text(encoding="utf-8")), {"month": "2026-10"})
+
+    def test_sent_month_is_recorded_and_scheduled_retry_skipped(self):
+        import monthly_top
+        import top_guard
+
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "2026-10.json"
+            path.write_text(json.dumps([FAKTUROWNIA, SINGLE]), encoding="utf-8")
+            marker = Path(directory) / "last_top.json"
+            sent = []
+            original = monthly_top.send_messages
+            monthly_top.send_messages = lambda url, messages: sent.append(messages)
+
+            try:
+                with unittest.mock.patch.dict("os.environ", {
+                    "DISCORD_MONTHLY_WEBHOOK_URL": "real", "GITHUB_REF_NAME": "main",
+                    "GITHUB_EVENT_NAME": "schedule",
+                }):
+                    run("2026-10", archive_dir=directory, marker_path=marker, today=date(2026, 11, 1))
+                    run("2026-10", archive_dir=directory, marker_path=marker, today=date(2026, 11, 1))
+            finally:
+                monthly_top.send_messages = original
+
+            self.assertEqual(len(sent), 1)
+            self.assertTrue(top_guard.should_skip("month", "2026-10", "schedule", marker))
+
+    def test_preview_of_current_month_is_not_recorded(self):
+        with tempfile.TemporaryDirectory() as directory:
+            marker = Path(directory) / "last_top.json"
+            with unittest.mock.patch.dict("os.environ", {"GITHUB_REF_NAME": "main"}):
+                run("2026-10", archive_dir=directory, marker_path=marker, today=date(2026, 10, 20))
+            self.assertFalse(marker.exists())
 
 
 if __name__ == "__main__":

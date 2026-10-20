@@ -169,8 +169,8 @@ class TestSummaries(unittest.TestCase):
 
         text = "\n".join(build_digest_messages([first, second], 10, 6, "19.10.2026"))
 
-        self.assertEqual(text.count("(oprogramowanie wymuszające okup)"), 1)
-        self.assertIn("Atak ransomware (oprogramowanie wymuszające okup)", text)
+        self.assertEqual(text.count("(program żądający okupu)"), 1)
+        self.assertIn("Atak ransomware (program żądający okupu)", text)
         self.assertTrue(text.endswith(AI_NOTE))
 
     def test_no_note_without_summaries(self):

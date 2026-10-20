@@ -16,7 +16,7 @@ Conventions are enforced in three places:
 
 Polish inflected forms in INFLECTED were generated with the Morfeusz 2
 morphological analyzer, so explanations agree with the case of the word they
-explain (e.g. "poprawce (łatce)", "poświadczeń (danych logowania)").
+explain (e.g. "poświadczeń (danych logowania)").
 """
 
 import csv
@@ -29,7 +29,6 @@ PROMPT_EXTRA_LIMIT = 40
 
 # Entries whose explanation must follow the case of the explained word.
 # id: (regex with an "anchor" group, function of the match -> explanation)
-SPONSORED_ENDINGS = "(?:y|ego|emu|ym|a|ej|ą|e|i|ych|ymi)"
 ESCALATION = {
     # Accusative for the ambiguous nominative/accusative form (JW, 19.10.2026).
     "podwyższenie": "eskalację",
@@ -49,14 +48,10 @@ CREDENTIALS = {
     "poświadczeniu": "danym logowania",
 }
 INFLECTED = {
-    "H166": (r"\b(?P<anchor>popraw(?:ka|ki|ce|kę|ką|ek|kom|kami|kach))\b",
-             lambda m: "łat" + m.group("anchor").lower()[6:]),
     "H182": (r"\b(?P<anchor>podwyższeni(?:e|a|u|em)|podwyższeń)\s+uprawnień\b",
              lambda m: ESCALATION.get(m.group("anchor").lower())),
     "H207": (r"\b(?P<anchor>poświadcze(?:nia|ń|niom|niami|niach|nie|niem|niu))\b",
              lambda m: CREDENTIALS.get(m.group("anchor").lower())),
-    "H371-sponsored": (rf"\b(?P<anchor>opłacan(?P<ending>{SPONSORED_ENDINGS})\s+przez\s+państwo)\b",
-                       lambda m: "sponsorowan" + m.group("ending").lower()),
 }
 
 
@@ -171,12 +166,26 @@ def gloss_rule(entry):
         return re.compile(pattern, re.IGNORECASE), explain
 
     forma = entry["forma"]
-    flags = 0 if is_acronym(forma) else re.IGNORECASE
-    pattern = re.compile(rf"(?<!\w)(?P<anchor>{re.escape(forma)}\w*)", flags)
+
+    if is_acronym(forma):
+        # Acronyms only as whole words, optionally inflected after a hyphen
+        # ("IAB-ów"): "NAT" must not match inside "NATO" (20.10.2026).
+        pattern = re.compile(rf"(?<!\w)(?P<anchor>{re.escape(forma)}(?:-\w+)?)(?!\w)")
+    else:
+        pattern = re.compile(rf"(?<!\w)(?P<anchor>{re.escape(forma)}\w*)", re.IGNORECASE)
+
     return pattern, lambda match, text=entry["nawias"]: text
 
 
-GLOSS_RULES = [(entry["id"], *gloss_rule(entry)) for entry in ENTRIES if entry["nawias"]]
+# Longer terms first: "DLL sideloading" must win over "sideloading", whose
+# explanation ("instalacja spoza sklepu") means something else (20.10.2026).
+GLOSS_RULES = [
+    (entry["id"], *gloss_rule(entry))
+    for entry in sorted(
+        (entry for entry in ENTRIES if entry["nawias"]),
+        key=lambda entry: -len(entry["forma"]),
+    )
+]
 
 
 def apply_glossary(text, used_terms):

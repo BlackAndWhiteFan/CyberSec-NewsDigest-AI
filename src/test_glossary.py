@@ -1,6 +1,7 @@
 import unittest
 
 from glossary import (
+    GLOSS_RULES,
     CORE_ENTRIES,
     ENTRIES,
     apply_glossary,
@@ -26,23 +27,29 @@ class TestMirror(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
         self.assertTrue(all(item["forma"] for item in ENTRIES))
 
-    def test_digest_decisions_are_in_the_mirror(self):
+    def test_only_chosen_entries_have_explanations(self):
+        """Option B (20.10.2026): parentheses only where JW decided."""
         expected = {
-            "H028": ("malware", "złośliwe oprogramowanie"),
-            "H090": ("RCE", "zdalne wykonanie kodu"),
-            "H152": ("PoC", "dowód słuszności koncepcji"),
             "H153": ("exploit", "kod wykorzystujący podatność"),
-            "H159": ("zero-day", "luka dnia zerowego"),
-            "H166": ("poprawka", "łatka"),
             "H182": ("podwyższenie uprawnień", "eskalacja"),
             "H207": ("poświadczenia", "dane logowania"),
-            "H365": ("IAB", "broker dostępu początkowego"),
-            "H023": ("backdoor", "tylna furtka"),
+            "H015": ("ransomware", "program żądający okupu"),
+            "H019": ("infostealer", "program kradnący dane"),
+            "H004": ("botnet", "sieć zainfekowanych urządzeń"),
+            "H232": ("MFA", "uwierzytelnianie wieloskładnikowe"),
         }
+        with_explanation = {item["id"] for item in ENTRIES if item["nawias"]}
 
+        self.assertEqual(with_explanation, set(expected))
         for entry_id, (forma, nawias) in expected.items():
             with self.subTest(entry_id=entry_id):
                 self.assertEqual((entry(entry_id)["forma"], entry(entry_id)["nawias"]), (forma, nawias))
+
+    def test_english_first_entries_keep_english_form_without_explanation(self):
+        for entry_id, forma in {"H028": "malware", "H090": "RCE", "H152": "PoC",
+                                "H023": "backdoor", "H365": "IAB", "H726": "DLL sideloading"}.items():
+            with self.subTest(entry_id=entry_id):
+                self.assertEqual((entry(entry_id)["forma"], entry(entry_id)["nawias"]), (forma, ""))
 
     def test_polish_entry_without_english_first_has_no_explanation(self):
         self.assertEqual(entry("H063")["forma"], "atak na łańcuch dostaw")
@@ -50,34 +57,32 @@ class TestMirror(unittest.TestCase):
 
 
 class TestExplanations(unittest.TestCase):
-    def test_english_first_entries_get_polish_explanation(self):
+    def test_chosen_entries_get_explanation(self):
         cases = {
-            "Rozsyłano malware.": "Rozsyłano malware (złośliwe oprogramowanie).",
-            "Luka pozwala na RCE.": "Luka pozwala na RCE (zdalne wykonanie kodu).",
-            "Badacze opublikowali PoC.": "Badacze opublikowali PoC (dowód słuszności koncepcji).",
-            "Napastnicy zostawili backdoor w routerze.":
-                "Napastnicy zostawili backdoor (tylna furtka) w routerze.",
             "Atak ransomware sparaliżował szpital.":
-                "Atak ransomware (oprogramowanie wymuszające okup) sparaliżował szpital.",
-            "Dostęp sprzedał IAB.": "Dostęp sprzedał IAB (broker dostępu początkowego).",
+                "Atak ransomware (program żądający okupu) sparaliżował szpital.",
             "Grupa użyła exploita.": "Grupa użyła exploita (kod wykorzystujący podatność).",
+            "Włączono MFA dla kont.": "Włączono MFA (uwierzytelnianie wieloskładnikowe) dla kont.",
         }
 
         for text, expected in cases.items():
             with self.subTest(text=text):
                 self.assertEqual(gloss(text), expected)
 
+    def test_other_terms_get_no_explanation(self):
+        text = (
+            "Rozsyłano malware, luka daje RCE, badacze opublikowali PoC i backdoor w NATO przez NAT; "
+            "producent wydał łatkę, a grupa opłacana przez państwo zaatakowała."
+        )
+        self.assertEqual(gloss(text), text)
+
     def test_explanation_agrees_with_case(self):
         cases = {
-            "Producent wydał poprawkę.": "Producent wydał poprawkę (łatkę).",
-            "W poprawce brakuje zmian.": "W poprawce (łatce) brakuje zmian.",
             "Luka umożliwia podwyższenie uprawnień.":
                 "Luka umożliwia podwyższenie (eskalację) uprawnień.",
             "Doszło do podwyższenia uprawnień.": "Doszło do podwyższenia (eskalacji) uprawnień.",
             "Wykradziono poświadczenia.": "Wykradziono poświadczenia (dane logowania).",
             "Użyto skradzionych poświadczeń.": "Użyto skradzionych poświadczeń (danych logowania).",
-            "Grupa opłacana przez państwo zaatakowała.":
-                "Grupa opłacana przez państwo (sponsorowana) zaatakowała.",
         }
 
         for text, expected in cases.items():
@@ -89,27 +94,37 @@ class TestExplanations(unittest.TestCase):
         first = apply_glossary("Atak ransomware na szpital.", used)
         second = apply_glossary("Kolejny atak ransomware na urząd.", used)
 
-        self.assertIn("(oprogramowanie wymuszające okup)", first)
+        self.assertIn("(program żądający okupu)", first)
         self.assertEqual(second, "Kolejny atak ransomware na urząd.")
 
     def test_existing_parenthesis_counts_as_explained(self):
         used = set()
-        text = "Malware (szkodnik) się rozprzestrzenia."
+        text = "Botnet (sieć urządzeń) się rozrasta."
 
         self.assertEqual(apply_glossary(text, used), text)
-        self.assertIn("H028", used)
+        self.assertIn("H004", used)
 
     def test_term_inside_parentheses_gets_no_nested_explanation(self):
-        text = "Poprawki eliminują możliwość wykonania kodu (RCE) na serwerach."
-        self.assertNotIn("(RCE (", gloss(text))
+        text = "Wdrożono drugi składnik (MFA) dla administratorów."
+        self.assertNotIn("(MFA (", gloss(text))
 
     def test_term_after_parentheses_is_still_explained(self):
         used = set()
-        apply_glossary("Możliwe wykonanie kodu (RCE).", used)
-        self.assertIn("RCE (zdalne wykonanie kodu)", apply_glossary("Luka daje RCE.", used))
+        apply_glossary("Wdrożono drugi składnik (MFA).", used)
+        self.assertIn("MFA (uwierzytelnianie", apply_glossary("Firma wymaga MFA.", used))
+
+    def test_longer_terms_are_checked_first(self):
+        lengths = [len(next(item for item in ENTRIES if item["id"] == key)["forma"]) for key, *_ in GLOSS_RULES]
+        self.assertEqual(lengths, sorted(lengths, reverse=True))
+
+    def test_acronym_is_not_matched_inside_a_longer_word(self):
+        self.assertEqual(gloss("Projekt MFAX ruszył."), "Projekt MFAX ruszył.")
+
+    def test_inflected_acronym_after_hyphen_is_explained(self):
+        self.assertIn("MFA-ą (uwierzytelnianie wieloskładnikowe)", gloss("Konta chronione MFA-ą."))
 
     def test_acronyms_are_case_sensitive(self):
-        self.assertEqual(gloss("Klient zamówił poc."), "Klient zamówił poc.")
+        self.assertEqual(gloss("Klient zamówił mfa."), "Klient zamówił mfa.")
 
 
 class TestConventionViolations(unittest.TestCase):
@@ -117,7 +132,6 @@ class TestConventionViolations(unittest.TestCase):
         cases = {
             "Luka pozwala na eskalację uprawnień.": "podwyższenie uprawnień",
             "Badacze opublikowali eksploit.": "exploit",
-            "Producent wydał łatkę.": "poprawka",
             "Za atakiem stoją aktorzy zagrożeń.": "sprawcy",
             "Rozsyłano złośliwe oprogramowanie.": "malware",
             "Możliwe jest zdalne wykonanie kodu.": "RCE",
@@ -134,7 +148,7 @@ class TestConventionViolations(unittest.TestCase):
     def test_correct_text_has_no_violations(self):
         text = (
             "Luka umożliwia RCE i podwyższenie uprawnień; badacze opublikowali PoC, "
-            "a producent wydał poprawkę."
+            "a producent wydał łatkę."
         )
         self.assertEqual(convention_violations(text), [])
 

@@ -88,7 +88,7 @@
     "score": 2,
     "related": [],
     "continuation": false,
-    "summary": "Firma F5 wydała out-of-band łatki na krytyczne podatności w NGINX."
+    "summary": "Firma F5 wydała pozacykliczne łatki na krytyczne podatności w NGINX."
   },
   {
     "date": "2026-10-19",
@@ -127,7 +127,7 @@
     "score": 3,
     "related": [],
     "continuation": false,
-    "summary": "Oszuści rozsyłają fałszywe pisma podszywając się pod państwowy urząd, aby wyłudzić wrażliwe dane dotyczące monitoringu wizyjnego od firm. Kampanię wykrył zespół prowadzony przez szefa ABW, co umożliwiło szybkie podjęcie działań obronnych."
+    "summary": "Oszuści rozsyłają fałszywe pisma, podszywając się pod państwowy urząd, aby wyłudzić od firm wrażliwe dane dotyczące monitoringu wizyjnego. Kampanię wykrył zespół prowadzony przez szefa ABW."
   },
   {
     "date": "2026-10-20",

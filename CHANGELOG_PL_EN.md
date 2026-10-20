@@ -80,8 +80,20 @@ streszczenia (`src/backfill_summaries.py`), a „poprawka” trafiła na
 listę form zakazanych hasła H166 (`tools/eksport_mirrora.py`,
 `data/glosariusz_mirror.csv`), więc kontrola słowniczka wymusza
 „łatkę” – także w codziennej prasówce. Błędy interpretacji (OpenCode,
-Plex2Shell) poprawiane ręcznie w archiwum po zapisie. Testy: 198. Zapis
-uzupełnionych streszczeń zostanie opisany w tym wpisie.
+Plex2Shell) poprawiane ręcznie w archiwum po zapisie. Testy: 198.
+
+Zapis na `main` (21.10.2026, 00:42, commit „Backfill AI summaries in
+archive”): 11 z 11 streszczeń w archiwum; artykuł Microsoft/Exchange z
+samego tytułu ma jedno zdanie, „łatki” zamiast „poprawek”, błędy
+OpenCode i Plex2Shell z drugiego podglądu się nie powtórzyły. Ręczna
+korekta 2 streszczeń w `data/archive/2026-10.json` (redakcja, bez zmiany
+faktów): F5 („out-of-band łatki” → „pozacykliczne łatki”) i oszustwo
+„na urząd” (usunięte niepoparte „co umożliwiło szybkie podjęcie działań
+obronnych”); dwie inne proponowane korekty (OpenCode Console, przegląd
+tygodniowy THN) odrzucono. Podgląd
+zestawienia tygodniowego 19–25.10 pokazuje streszczenia przy wszystkich
+pozycjach. Workflow uzupełniania zostaje w repozytorium jako narzędzie
+na przyszłość (np. po awarii AI).
 
 **Ograniczenia:** workflow można uruchomić dopiero po scaleniu (GitHub
 pokazuje przycisk tylko dla workflow z `main`), dlatego przed zapisem
@@ -915,8 +927,20 @@ and "poprawka" was added to the forbidden forms of entry H166
 (`tools/eksport_mirrora.py`, `data/glosariusz_mirror.csv`), so the
 glossary check enforces "łatka" – also in the daily digest.
 Interpretation errors (OpenCode, Plex2Shell) are corrected manually in
-the archive after saving. Tests: 198. The saving of the backfilled
-summaries will be recorded in this entry.
+the archive after saving. Tests: 198.
+
+Save on `main` (2026-10-21, 00:42, commit "Backfill AI summaries in
+archive"): 11 of 11 summaries in the archive; the title-only
+Microsoft/Exchange article has one sentence, "łatki" instead of
+"poprawki", and the OpenCode and Plex2Shell errors from the second
+preview did not recur. Manual correction of 2 summaries in
+`data/archive/2026-10.json` (editing, no change of facts): F5
+("out-of-band łatki" → "pozacykliczne łatki") and the "government office"
+scam (unsupported "co umożliwiło szybkie podjęcie działań obronnych"
+removed); two other proposed corrections (OpenCode Console, THN weekly
+recap) were rejected. The preview of the weekly top for
+2026-10-19/25 shows summaries for all items. The backfill workflow stays
+in the repository as a tool for the future (e.g. after an AI outage).
 
 **Limitations:** the workflow can be run only after merging (GitHub shows
 the run button only for workflows on `main`), hence the preview before

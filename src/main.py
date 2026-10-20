@@ -23,6 +23,7 @@ from ai_summaries import summarize_articles
 from article_archive import append_to_archive, load_recent
 from event_grouping import group_events, mark_continuations
 from run_guard import mark_done, should_skip
+import test_mode
 
 
 CONTENT_ENCODED = "{http://purl.org/rss/1.0/modules/content/}encoded"
@@ -248,7 +249,13 @@ def run():
         len(eligible_articles),
         len(RSS_FEEDS) - failed_feeds,
     )
-    webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
+    test_run = test_mode.is_test_run()
+    messages = test_mode.with_banner(messages)
+    webhook_url, webhook_variable = test_mode.webhook_url("DISCORD_WEBHOOK_URL")
+
+    if test_run:
+        print(f"TRYB TESTOWY (gałąź {test_mode.branch_name()}): kanał testowy, bez zapisu historii i archiwum.")
+
     delivery_failed = False
     archive_failed = False
     articles_sent = 0
@@ -256,13 +263,15 @@ def run():
     if not messages:
         print("Brak artykułów do wysłania.")
     elif not webhook_url:
-        print("Pominięto wysyłkę: brak zmiennej DISCORD_WEBHOOK_URL.")
+        print(f"Pominięto wysyłkę: brak zmiennej {webhook_variable}.")
     else:
         try:
             send_messages(webhook_url, messages)
         except Exception as error:
             delivery_failed = True
             print(f"BŁĄD WYSYŁKI NA DISCORD: {error}")
+        elif test_run:
+            print("Wysłane wiadomości (kanał testowy):", len(messages))
         else:
             print("Wysłane wiadomości:", len(messages))
             articles_sent = len(selected_articles)
@@ -285,12 +294,16 @@ def run():
             else:
                 print("Zarchiwizowane artykuły:", archived)
 
-    save_history(history)
+    # A test run saves nothing, so the branch keeps the data of main.
+    if test_run:
+        print("Tryb testowy: historia, archiwum i znacznik dnia bez zmian.")
+    else:
+        save_history(history)
 
-    # After a failed delivery the marker is not written, so a later
-    # scheduled attempt the same day can try again.
-    if not delivery_failed:
-        mark_done(articles_sent)
+        # After a failed delivery the marker is not written, so a later
+        # scheduled attempt the same day can try again.
+        if not delivery_failed:
+            mark_done(articles_sent)
 
     print("Linki zapamiętane w historii:", len(history["seen_links"]))
     print("Linki opublikowane łącznie:", len(history["published_links"]))

@@ -18,6 +18,7 @@ from datetime import datetime
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from discord_output import polish_plural, send_messages, split_into_messages
 from event_grouping import SIMILARITY_THRESHOLD, document_frequency, same_event
+import test_mode
 
 
 TOP_LIMIT = 10
@@ -189,13 +190,13 @@ def run(month=None, archive_dir=ARCHIVE_DIR):
     for line in lines:
         print(line)
 
-    webhook_url = os.environ.get("DISCORD_MONTHLY_WEBHOOK_URL", "").strip()
+    webhook_url, webhook_variable = test_mode.webhook_url("DISCORD_MONTHLY_WEBHOOK_URL")
 
     if not webhook_url:
-        print("Pominięto wysyłkę: brak zmiennej DISCORD_MONTHLY_WEBHOOK_URL.")
+        print(f"Pominięto wysyłkę: brak zmiennej {webhook_variable}.")
         return
 
-    messages = split_into_messages(lines)
+    messages = test_mode.with_banner(split_into_messages(lines))
     send_messages(webhook_url, messages)
     print("Wysłane wiadomości:", len(messages))
 

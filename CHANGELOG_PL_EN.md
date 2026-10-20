@@ -22,6 +22,50 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v20 --- 20.10.2026
+
+**Kanał testowy dla uruchomień z gałęzi: test nie trafia na kanał
+główny i niczego nie zapisuje.**
+
+Powód: 20.10.2026 test na gałęzi `v19-harmonogram` wysłał 2 artykuły na
+kanał główny i zapisał je jako opublikowane tylko na tej gałęzi; 10
+minut później spóźnione uruchomienie z harmonogramu na `main` wysłało te
+same 2 artykuły drugi raz, bo `main` o nich nie wiedział.
+
+Nowy moduł `src/test_mode.py`: uruchomienie na każdej gałęzi innej niż
+`main` (zmienna `GITHUB_REF_NAME`) jest testowe – prasówka idzie na
+osobny kanał Discorda `#prasówka-test` (sekret
+`DISCORD_TEST_WEBHOOK_URL`), pierwsza wiadomość ma nagłówek „🧪 TEST ·
+gałąź … · bez zapisu w historii i archiwum”, a `src/main.py` nie
+zapisuje opublikowanych linków, archiwum, historii ani znacznika dnia.
+Gałąź zachowuje więc dane `main`, a `main` nigdy nie wyśle ponownie
+artykułów sprawdzonych na gałęzi. Bez sekretu testowego uruchomienie z
+gałęzi niczego nie wysyła i nigdy nie trafia na kanał główny. To samo
+dotyczy miesięcznego top 10 (`src/monthly_top.py`). Oba workflow
+przekazują `DISCORD_TEST_WEBHOOK_URL` tylko do kroku wysyłki.
+Uruchomienia z `main` (ręczne i z harmonogramu) działają bez zmian.
+
+Przy okazji nowy test `src/test_scripts_compile.py` sprawdza składnię
+wszystkich plików w `src`, także tych, których nie ładują inne testy:
+pierwsza wersja zmiany w `main.py` miała błąd składni (`elif` po bloku
+`try/except`), który testy jednostkowe przepuściły, a uruchomienie
+zatrzymało się przed pobraniem czegokolwiek (nic nie wysłano ani nie
+zapisano).
+
+Zmianę zweryfikowano: testy jednostkowe (165) zakończone powodzeniem;
+symulacja `main.py` na sztucznych danych w obu trybach (gałąź: wysyłka
+tylko na kanał testowy, historia bez zmian; `main`: kanał główny,
+historia zapisana). Na gałęzi `v20-kanał-testowy`: uruchomienie o 12:14
+nie znalazło nowych artykułów (log potwierdził tryb testowy i brak
+zapisu); uruchomienie o 22:38 wysłało 7 artykułów spośród 92 wyłącznie
+na `#prasówka-test` z nagłówkiem testowym, a gałąź nie dostała commita
+z danymi.
+
+**Ograniczenia:** tryb testowy rozpoznaje tylko nazwę gałęzi; ręczne
+uruchomienie na `main` zawsze idzie na kanał główny. Test na gałęzi nie
+sprawdza zapisu historii i archiwum (z założenia) – te części potwierdza
+dopiero pierwsza prasówka po scaleniu.
+
 ## v19 --- 20.10.2026
 
 **Niezawodny poranny start: cztery próby z harmonogramu i strażnik
@@ -646,6 +690,47 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v20 --- 2026-10-20
+
+**Test channel for runs from branches: a test never reaches the main
+channel and saves nothing.**
+
+Reason: on 2026-10-20 a test on the `v19-harmonogram` branch sent 2
+articles to the main channel and recorded them as published only on that
+branch; 10 minutes later a late scheduled run on `main` sent the same 2
+articles again, because `main` did not know about them.
+
+New module `src/test_mode.py`: a run on any branch other than `main`
+(variable `GITHUB_REF_NAME`) is a test run – the digest goes to a separate
+Discord channel `#prasówka-test` (secret `DISCORD_TEST_WEBHOOK_URL`), the
+first message has the banner "🧪 TEST · gałąź … · bez zapisu w historii
+i archiwum", and `src/main.py` saves no published links, archive,
+history or daily marker. The branch therefore keeps the data of `main`,
+and `main` never resends articles tested on a branch. Without the test
+secret a branch run sends nothing and never reaches the main channel.
+The same applies to the monthly top 10 (`src/monthly_top.py`). Both
+workflows pass `DISCORD_TEST_WEBHOOK_URL` only to the sending step. Runs
+from `main` (manual and scheduled) work as before.
+
+A new test `src/test_scripts_compile.py` checks the syntax of every file
+in `src`, including those no other test imports: the first version of
+the change in `main.py` had a syntax error (`elif` after a `try/except`
+block) that the unit tests missed; that run stopped before fetching
+anything (nothing was sent or saved).
+
+The change was verified: unit tests (165) passed; a simulation of
+`main.py` on fake data in both modes (branch: sent only to the test
+channel, history unchanged; `main`: main channel, history saved). On the
+`v20-kanał-testowy` branch: the 12:14 run found no new articles (the log
+confirmed test mode and no saving); the 22:38 run sent 7 of 92 articles
+only to `#prasówka-test` with the test banner, and the branch got no data
+commit.
+
+**Limitations:** test mode depends only on the branch name; a manual run
+on `main` always goes to the main channel. A branch test does not check
+saving history and archive (by design) – those parts are confirmed by the
+first digest after merging.
 
 ## v19 --- 2026-10-20
 

@@ -33,5 +33,7 @@ jobs:
       - name: Send monthly top 10
         env:
           DISCORD_MONTHLY_WEBHOOK_URL: ${{ secrets.DISCORD_MONTHLY_WEBHOOK_URL }}
+          # Runs on branches other than main go to the test channel only.
+          DISCORD_TEST_WEBHOOK_URL: ${{ secrets.DISCORD_TEST_WEBHOOK_URL }}
           MONTH: ${{ inputs.month }}
         run: python src/monthly_top.py

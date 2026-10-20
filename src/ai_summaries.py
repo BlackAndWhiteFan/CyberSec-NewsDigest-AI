@@ -140,6 +140,22 @@ def clean_summary(text, limit=SUMMARY_LIMIT):
     return text
 
 
+# Answers about the material instead of the article (seen in the backfill
+# preview of 2026-10-21: "Brak dostępnych informacji w treści artykułu.").
+# Only answers that start with "brak informacji…" or talk about the article
+# text itself; "W raporcie brak informacji o sprawcach…" stays a summary.
+META_ANSWER = re.compile(
+    r"^\W*brak (dostępnych |wystarczających )?(informacji|danych|treści|szczegółów)"
+    r"|\b(w )?(treści|tekście|tekst) artykułu\b",
+    re.IGNORECASE,
+)
+
+
+def is_meta_answer(text):
+    """True when the model describes missing material instead of summarizing."""
+    return bool(META_ANSWER.search(text))
+
+
 def parse_summaries(content, expected_ids):
     """Return {id: summary} from the model answer; ignore unknown ids."""
     # Some models may still put their reasoning in <think> tags.
@@ -159,7 +175,7 @@ def parse_summaries(content, expected_ids):
         number = item.get("id")
         text = clean_summary(item.get("tekst", ""))
 
-        if number in expected_ids and text:
+        if number in expected_ids and text and not is_meta_answer(text):
             summaries[number] = text
 
     return summaries

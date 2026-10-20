@@ -6,7 +6,9 @@ archive, looks the articles up again in the RSS feeds (to get the same
 material the digest uses: full text or description), writes summaries with
 the same AI module and mandatory glossary as the digest, and saves them in
 the archive. Records that are no longer in any feed are summarized from the
-title only (the AI is told to write one sentence and add nothing).
+title only: the title is given as the material, so the AI renders it as one
+Polish sentence and adds nothing (an empty text made the model answer
+"Brak dostępnych informacji…" in the preview of 2026-10-21).
 
 Run (GitHub Actions, workflow "Backfill AI summaries"):
     MONTH=2026-10 SAVE=false python src/backfill_summaries.py   (preview)
@@ -76,10 +78,12 @@ def build_articles(records, material):
 
     for record in records:
         found = material.get(record.get("link", ""), {})
+        title = clean_title(record.get("title", ""))
         articles.append({
-            "title": clean_title(record.get("title", "")),
+            "title": title,
             "link": record.get("link", ""),
-            "description": found.get("description", ""),
+            # Without feed material the title itself is the material.
+            "description": found.get("description", "") or title,
             "content": found.get("content", ""),
         })
         used.append("RSS" if found else "tylko tytuł")

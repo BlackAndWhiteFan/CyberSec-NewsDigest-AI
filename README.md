@@ -34,6 +34,8 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 11 — Test channel for runs from branches (nothing saved to history or archive): implemented and verified in a run that delivered a digest to the test channel.**
 
+**Phase 12 — Weekly top 5 and one-time sending of tops (four attempts, marker `data/last_top.json`) with AI summaries: implemented; the monthly top verified on the test channel, the first weekly top awaiting confirmation after merging.**
+
 ### Current Implementation
 
 - Retrieves RSS or Atom entries from six configured cybersecurity news sources.
@@ -52,7 +54,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 - Archives each delivered article (date, title, link, source, categories, score) in a monthly file `data/archive/YYYY-MM.json`. An archive error is logged and ends the run with an error, but the article history is still saved, so delivered links are not sent again.
 - Saves the article history and archive even if the digest step fails, unless the run is cancelled.
 - Merges articles from different sources about the same event into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
-- On the first day of each month, sends the top 10 events of the previous month (ranked by number of articles, then sources and score) to a separate Discord channel.
+- On the first day of each month, sends the top 10 events of the previous month to a separate Discord channel, and on Mondays the top 5 events of the previous week to `#top-tygodnia` (ranked by number of articles, then sources and score), with AI summaries. Each top has four start attempts and is sent only once (marker `data/last_top.json`).
 - Adds an AI summary in Polish (up to 2 sentences) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description. Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped; explanations in parentheses are added by code at the first occurrence of a term in the digest, only for 7 chosen terms (e.g. ransomware, exploit, MFA, podwyższenie (eskalacja) uprawnień). Without the `GROQ_API_KEY` secret the digest is sent without summaries.
 - Continues processing when an individual RSS feed fails.
 - Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
@@ -118,7 +120,10 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/discord_output.py` — digest formatting, message splitting, and delivery to a Discord webhook.
 - `src/article_archive.py` — monthly archive of delivered articles.
 - `src/event_grouping.py` — detection of the same event reported by different sources and of follow-ups.
-- `src/monthly_top.py` — monthly top 10 events from the archive.
+- `src/monthly_top.py` — monthly top 10 events from the archive and the delivery shared with the weekly top.
+- `src/weekly_top.py` — weekly top 5 events of the previous week.
+- `src/top_guard.py` — one-time sending of tops: marker `data/last_top.json`.
+- `data/last_top.json` — last week and month for which a top was sent.
 - `src/test_mode.py` — test runs from branches: test channel webhook, TEST banner, nothing saved.
 - `src/run_guard.py` — one scheduled digest per day: marker `data/last_digest.json` and the skip check.
 - `data/last_digest.json` — date, trigger and number of articles of the last completed digest run.
@@ -126,7 +131,8 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/glossary.py` — glossary conventions from the mirror: prompt entries, forbidden forms, explanations at first use.
 - `data/glosariusz_mirror.csv` — standalone mirror of the CyberSec Mozaika glossary used by the digest (currently from mother workbook v84).
 - `tools/eksport_mirrora.py` — manual export of the mirror from the Mozaika mother workbook (`python tools/eksport_mirrora.py <workbook.xlsx>`, requires openpyxl).
-- `.github/workflows/monthly-top.yml` — monthly top 10 workflow (1st day of the month, 08:17 Polish time, or on demand).
+- `.github/workflows/monthly-top.yml` — monthly top 10 workflow (1st day of the month, attempts 08:17–11:17 Polish time, or on demand).
+- `.github/workflows/weekly-top.yml` — weekly top 5 workflow (Mondays, attempts 08:17–11:17 Polish time, or on demand).
 - `src/article_history.py` — loading, validating, saving, and filtering persistent article history.
 - `src/article_selection.py` — keyword lists, categorization, priority scoring, promotional filter, source limits, and article selection.
 - `src/test_deduplication.py` — deduplication unit tests.
@@ -135,6 +141,8 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/test_article_archive.py` — monthly archive tests.
 - `src/test_event_grouping.py` — event grouping tests based on real title pairs.
 - `src/test_monthly_top.py` — monthly top 10 tests.
+- `src/test_weekly_top.py` — weekly top 5 tests.
+- `src/test_top_guard.py` — top marker tests.
 - `src/test_run_guard.py` — run guard tests.
 - `src/test_test_mode.py` — test mode tests.
 - `src/test_scripts_compile.py` — syntax check of every file in `src`.
@@ -149,6 +157,7 @@ Required repository secret (Settings → Secrets and variables → Actions):
 
 - `DISCORD_WEBHOOK_URL` — webhook URL of the Discord channel that receives the digest. It is passed only to the workflow step that runs the digest. Without it, delivery is skipped without an error.
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook URL of the Discord channel that receives the monthly top 10. It is passed only to the monthly workflow step.
+- `DISCORD_WEEKLY_WEBHOOK_URL` — webhook URL of the Discord channel that receives the weekly top 5. It is passed only to the weekly workflow step.
 - `GROQ_API_KEY` — Groq API key for AI summaries. It is passed only to the digest step. Without it, the digest is sent without summaries.
 - `DISCORD_TEST_WEBHOOK_URL` — webhook URL of the Discord test channel. Runs on branches other than `main` send only there (with a TEST banner) and save nothing; without it they send nothing.
 

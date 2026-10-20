@@ -94,5 +94,17 @@
     "score": 2,
     "related": [],
     "continuation": false
+  },
+  {
+    "date": "2026-10-20",
+    "title": "Nikkei discloses third data breach in a month, 1.8M records exposed",
+    "link": "https://www.bleepingcomputer.com/news/security/nikkei-discloses-third-data-breach-in-a-month-18m-records-exposed/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false
   }
 ]

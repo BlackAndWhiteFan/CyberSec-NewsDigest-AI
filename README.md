@@ -32,6 +32,8 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 10 — AI summaries in Polish with a mandatory glossary consistent with the CyberSec Mozaika glossary: implemented and verified in a run that delivered a digest with summaries.**
 
+**Phase 11 — Test channel for runs from branches (nothing saved to history or archive): implemented and verified in a run that delivered a digest to the test channel.**
+
 ### Current Implementation
 
 - Retrieves RSS or Atom entries from six configured cybersecurity news sources.
@@ -117,6 +119,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/article_archive.py` — monthly archive of delivered articles.
 - `src/event_grouping.py` — detection of the same event reported by different sources and of follow-ups.
 - `src/monthly_top.py` — monthly top 10 events from the archive.
+- `src/test_mode.py` — test runs from branches: test channel webhook, TEST banner, nothing saved.
 - `src/run_guard.py` — one scheduled digest per day: marker `data/last_digest.json` and the skip check.
 - `data/last_digest.json` — date, trigger and number of articles of the last completed digest run.
 - `src/ai_summaries.py` — AI summaries (Groq), glossary enforcement and correction.
@@ -133,6 +136,8 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/test_event_grouping.py` — event grouping tests based on real title pairs.
 - `src/test_monthly_top.py` — monthly top 10 tests.
 - `src/test_run_guard.py` — run guard tests.
+- `src/test_test_mode.py` — test mode tests.
+- `src/test_scripts_compile.py` — syntax check of every file in `src`.
 - `src/test_ai_summaries.py` — AI summary tests (no network access).
 - `src/test_glossary.py` — glossary mirror, explanations and forbidden-form tests.
 - `src/test_article_history.py` — persistent article history and publication-filtering tests.
@@ -145,6 +150,7 @@ Required repository secret (Settings → Secrets and variables → Actions):
 - `DISCORD_WEBHOOK_URL` — webhook URL of the Discord channel that receives the digest. It is passed only to the workflow step that runs the digest. Without it, delivery is skipped without an error.
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook URL of the Discord channel that receives the monthly top 10. It is passed only to the monthly workflow step.
 - `GROQ_API_KEY` — Groq API key for AI summaries. It is passed only to the digest step. Without it, the digest is sent without summaries.
+- `DISCORD_TEST_WEBHOOK_URL` — webhook URL of the Discord test channel. Runs on branches other than `main` send only there (with a TEST banner) and save nothing; without it they send nothing.
 
 Never commit API keys, Discord webhook URLs, passwords, or other credentials to the repository.
 

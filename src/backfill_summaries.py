@@ -68,6 +68,12 @@ def feed_material(fetch=main.fetch_feed, feeds=main.RSS_FEEDS):
     return material
 
 
+def first_sentence(text):
+    """Return the first sentence of a summary."""
+    match = re.match(r"(.+?[.!?])(\s|$)", text.strip())
+    return match.group(1) if match else text.strip()
+
+
 def records_without_summary(records):
     return [record for record in records if not record.get("summary")]
 
@@ -110,6 +116,12 @@ def backfill(month, save, archive_dir=ARCHIVE_DIR, fetch=main.fetch_feed, summar
 
     for record, article, source in zip(missing, articles, used):
         summary = article.get("summary", "")
+
+        # From the title alone only the first sentence is reliable; the AI
+        # added an unsupported second sentence in the preview of 2026-10-21.
+        if source == "tylko tytuł":
+            summary = first_sentence(summary)
+
         print(f"- {record.get('date')} · {record.get('title', '')[:80]} [{source}]")
         print(f"  > {summary or '(brak streszczenia)'}")
 

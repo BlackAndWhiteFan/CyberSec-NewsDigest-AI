@@ -262,14 +262,14 @@ class TestGlossaryEnforcement(unittest.TestCase):
     def test_summary_still_wrong_after_correction_is_dropped(self):
         articles = [make_article("A"), make_article("B")]
         opener = ScriptedOpener([
-            {1: "Opublikowano eksploit.", 2: "Producent wydał poprawkę."},
+            {1: "Opublikowano eksploit.", 2: "Producent wydał łatkę."},
             {1: "Opublikowano eksploit ponownie."},
         ])
 
         summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
 
         self.assertNotIn("summary", articles[0])
-        self.assertEqual(articles[1]["summary"], "Producent wydał poprawkę.")
+        self.assertEqual(articles[1]["summary"], "Producent wydał łatkę.")
 
     def test_correct_summaries_need_no_second_request(self):
         articles = [make_article("A")]

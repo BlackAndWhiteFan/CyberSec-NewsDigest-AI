@@ -154,7 +154,13 @@ class TestConventionViolations(unittest.TestCase):
 
     def test_explanations_added_by_code_are_not_checked(self):
         # The check runs on the AI text before explanations are added.
-        self.assertEqual(convention_violations("Producent wydał poprawkę."), [])
+        self.assertEqual(convention_violations("Producent wydał łatkę."), [])
+
+    def test_poprawka_is_forbidden_in_favour_of_latka(self):
+        self.assertEqual(
+            [forma for _, forma in convention_violations("Firma wydała poprawki poza cyklem.")],
+            ["łatka"],
+        )
 
 
 class TestPrompt(unittest.TestCase):

@@ -70,6 +70,17 @@ class TestBackfill(unittest.TestCase):
         self.run_backfill(save=True)
         self.assertEqual(self.run_backfill(save=True), 0)
 
+    def test_title_only_summary_keeps_first_sentence(self):
+        def two_sentences(articles):
+            for article in articles:
+                article["summary"] = "Pierwsze zdanie. Drugie dopowiedziane."
+
+        with unittest.mock.patch.dict("os.environ", {"GITHUB_REF_NAME": "main"}):
+            backfill("2026-10", True, self.directory.name, fake_fetch, two_sentences)
+
+        self.assertEqual(self.saved()["https://example.com/gone"], "Pierwsze zdanie.")
+        self.assertEqual(self.saved()["https://example.com/old"], "Pierwsze zdanie. Drugie dopowiedziane.")
+
     def test_material_from_feed_or_title_only(self):
         articles, used = build_articles(
             [record("https://example.com/old"), record("https://example.com/gone")],

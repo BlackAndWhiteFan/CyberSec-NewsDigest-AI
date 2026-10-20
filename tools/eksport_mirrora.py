@@ -47,8 +47,9 @@ OVERRIDES = {
     "H153": {"forma": "exploit", "nawias": "kod wykorzystujący podatność",
              "regula": "nie spolszczaj", "unikaj": r"eksploit\w*"},
     "H159": {"unikaj": r"(?:podatnoś|luk)\w* dnia zerowego"},
-    # 20.10.2026: "łatka" without parentheses ("wiadomo, że to poprawka").
-    "H166": {"forma": "łatka", "nawias": ""},
+    # 20.10.2026: "łatka" without parentheses ("wiadomo, że to poprawka");
+    # 21.10.2026: "poprawka" forbidden, so the AI keeps to "łatka".
+    "H166": {"forma": "łatka", "nawias": "", "unikaj": r"poprawk\w*|poprawce|poprawek"},
     "H090": {"unikaj": r"zdaln\w+ wykonani\w+ kodu"},
     "H182": {"forma": "podwyższenie uprawnień", "nawias": "eskalacja",
              "unikaj": r"eskalacj\w* uprawnień | podniesieni\w* uprawnień"},

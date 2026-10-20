@@ -131,6 +131,8 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/glossary.py` — glossary conventions from the mirror: prompt entries, forbidden forms, explanations at first use.
 - `data/glosariusz_mirror.csv` — standalone mirror of the CyberSec Mozaika glossary used by the digest (currently from mother workbook v84).
 - `tools/eksport_mirrora.py` — manual export of the mirror from the Mozaika mother workbook (`python tools/eksport_mirrora.py <workbook.xlsx>`, requires openpyxl).
+- `src/backfill_summaries.py` — one-time backfill of AI summaries for archived articles that have none.
+- `.github/workflows/backfill-summaries.yml` — manual workflow for the backfill (preview, then save).
 - `.github/workflows/monthly-top.yml` — monthly top 10 workflow (1st day of the month, attempts 08:17–11:17 Polish time, or on demand).
 - `.github/workflows/weekly-top.yml` — weekly top 5 workflow (Mondays, attempts 08:17–11:17 Polish time, or on demand).
 - `src/article_history.py` — loading, validating, saving, and filtering persistent article history.
@@ -143,6 +145,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/test_monthly_top.py` — monthly top 10 tests.
 - `src/test_weekly_top.py` — weekly top 5 tests.
 - `src/test_top_guard.py` — top marker tests.
+- `src/test_backfill_summaries.py` — summary backfill tests.
 - `src/test_run_guard.py` — run guard tests.
 - `src/test_test_mode.py` — test mode tests.
 - `src/test_scripts_compile.py` — syntax check of every file in `src`.

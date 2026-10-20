@@ -1,0 +1,56 @@
+name: Backfill AI summaries
+
+# One-time tool (v23): adds AI summaries to archived articles that do not
+# have one (archived before v22). Run it manually: first with save = false
+# (preview in the log), then with save = true. Nothing goes to Discord.
+on:
+  workflow_dispatch:
+    inputs:
+      month:
+        description: "Archive month (YYYY-MM)"
+        required: true
+        default: "2026-10"
+      save:
+        description: "Save summaries to the archive (false = preview only)"
+        required: true
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+# Same group as the daily digest: both write the archive.
+concurrency:
+  group: daily-digest
+  cancel-in-progress: false
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run unit tests
+        run: python -m unittest discover -s src -p "test_*.py"
+
+      - name: Backfill summaries
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          MONTH: ${{ inputs.month }}
+          SAVE: ${{ inputs.save }}
+        run: python src/backfill_summaries.py
+
+      - name: Persist archive
+        run: |
+          git add data/archive
+          if git diff --cached --quiet; then
+            echo "Archive has not changed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Backfill AI summaries in archive"
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

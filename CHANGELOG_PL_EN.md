@@ -22,6 +22,40 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v23 --- 21.10.2026
+
+**Jednorazowe uzupełnienie streszczeń AI w archiwum dla artykułów
+zarchiwizowanych przed v22.**
+
+Powód: archiwum zaczęło zapisywać streszczenia dopiero w v22, więc 11
+artykułów z 19–20.10.2026 nie miało streszczeń i zestawienia tygodniowe
+i miesięczne pokazywały przy nich same tytuły. Przeoczenie z v17/v18
+(zestawienia budowane z archiwum bez streszczeń).
+
+Nowy moduł `src/backfill_summaries.py` i ręczny workflow
+`.github/workflows/backfill-summaries.yml` („Backfill AI summaries”):
+dla wskazanego miesiąca archiwum wyszukuje rekordy bez streszczenia,
+odnajduje te artykuły w aktualnych kanałach RSS (ten sam materiał co w
+prasówce: pełny tekst albo opis), przygotowuje streszczenia tym samym
+modułem AI z obowiązkowym słowniczkiem i zapisuje je w archiwum.
+Artykuły, których nie ma już w kanałach, są streszczane z samego
+tytułu (AI pisze wtedy 1 zdanie i niczego nie dodaje); log oznacza je
+„tylko tytuł”. Najpierw uruchamia się podgląd (`save = false`, wynik
+tylko w logu), potem zapis (`save = true`). Rekordy ze streszczeniem
+nie są zmieniane; uruchomienie z gałęzi niczego nie zapisuje; nic nie
+trafia na Discord. Workflow ma wspólną grupę współbieżności z prasówką
+(`daily-digest`), bo oba zapisują archiwum.
+
+Zmianę zweryfikowano: testy jednostkowe (194) zakończone powodzeniem,
+w tym uzupełnianie tylko brakujących streszczeń, podgląd bez zapisu,
+brak zapisu z gałęzi i materiał z RSS albo z tytułu. Uruchomienie na
+`main` (podgląd i zapis) zostanie opisane w tym wpisie.
+
+**Ograniczenia:** workflow można uruchomić dopiero po scaleniu (GitHub
+pokazuje przycisk tylko dla workflow z `main`), dlatego przed zapisem
+jest podgląd. Streszczenia z samego tytułu są uboższe. Narzędzie jest
+jednorazowe; po uzupełnieniu archiwum workflow można usunąć.
+
 ## v22 --- 20.10.2026
 
 **Tygodniowe top 5, jednorazowa wysyłka zestawień tygodniowych i
@@ -71,9 +105,10 @@ nagłówek „(cd.)”, gałąź bez commita ze znacznikiem. Przy wgrywaniu
 
 **Ograniczenia:** zestawienia tygodniowego nie da się uruchomić z gałęzi
 przed scaleniem (GitHub pokazuje przycisk tylko dla workflow z `main`) –
-pierwsze uruchomienie na żywo zostanie potwierdzone po scaleniu i
-opisane w tym wpisie. Artykuły zarchiwizowane przed tą zmianą nie mają
-streszczeń, więc pierwsze zestawienia pokażą je tylko częściowo. Tytuły
+pierwsze uruchomienie na żywo po scaleniu (21.10.2026, 00:03, podgląd
+tygodnia 19–25.10) dotarło na `#top-tygodnia` i nie zapisało znacznika.
+Artykuły zarchiwizowane przed tą zmianą nie miały streszczeń (11 z 11),
+więc podgląd pokazał same tytuły – uzupełnienie: v23. Tytuły
 angielskie nadal nie są tłumaczone (zaplanowane w kolejnej wersji).
 
 ## v21 --- 20.10.2026
@@ -791,6 +826,40 @@ and reviewed diffs.
 
 ------------------------------------------------------------------------
 
+## v23 --- 2026-10-21
+
+**One-time backfill of AI summaries in the archive for articles archived
+before v22.**
+
+Reason: the archive started saving summaries only in v22, so 11 articles
+from 2026-10-19/20 had no summaries and the weekly and monthly tops showed
+titles only for them. An oversight from v17/v18 (tops built from an
+archive without summaries).
+
+New module `src/backfill_summaries.py` and a manual workflow
+`.github/workflows/backfill-summaries.yml` ("Backfill AI summaries"): for
+a chosen archive month it finds records without a summary, looks the
+articles up in the current RSS feeds (the same material as the digest:
+full text or description), writes summaries with the same AI module and
+mandatory glossary, and saves them in the archive. Articles no longer in
+the feeds are summarized from the title only (the AI then writes 1
+sentence and adds nothing); the log marks them "tylko tytuł". A preview
+runs first (`save = false`, result only in the log), then the save
+(`save = true`). Records that have a summary are not changed; a run from
+a branch saves nothing; nothing goes to Discord. The workflow shares the
+concurrency group `daily-digest` with the digest, because both write the
+archive.
+
+The change was verified: unit tests (194) passed, including filling only
+missing summaries, preview without saving, no saving from a branch, and
+material from RSS or from the title. The run on `main` (preview and save)
+will be recorded in this entry.
+
+**Limitations:** the workflow can be run only after merging (GitHub shows
+the run button only for workflows on `main`), hence the preview before
+saving. Title-only summaries are poorer. The tool is one-time; after the
+backfill the workflow can be removed.
+
 ## v22 --- 2026-10-20
 
 **Weekly top 5, one-time sending of weekly and monthly tops, and AI
@@ -837,9 +906,10 @@ removed before merging.
 
 **Limitations:** the weekly top cannot be run from a branch before
 merging (GitHub shows the run button only for workflows on `main`) – its
-first live run will be confirmed after merging and recorded in this
-entry. Articles archived before this change have no summaries, so the
-first tops will show them only partly. English titles are still not
+first live run after merging (2026-10-21, 00:03, preview of the week
+2026-10-19/25) reached `#top-tygodnia` and wrote no marker. Articles
+archived before this change had no summaries (11 of 11), so the preview
+showed titles only – backfill: v23. English titles are still not
 translated (planned for the next version).
 
 ## v21 --- 2026-10-20

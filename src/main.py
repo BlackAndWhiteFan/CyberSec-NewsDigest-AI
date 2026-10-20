@@ -270,10 +270,11 @@ def run():
         except Exception as error:
             delivery_failed = True
             print(f"BŁĄD WYSYŁKI NA DISCORD: {error}")
-        elif test_run:
-            print("Wysłane wiadomości (kanał testowy):", len(messages))
         else:
             print("Wysłane wiadomości:", len(messages))
+
+        # A test run records nothing as published or archived.
+        if not test_run and not delivery_failed:
             articles_sent = len(selected_articles)
             history["published_links"] = list(
                 dict.fromkeys(

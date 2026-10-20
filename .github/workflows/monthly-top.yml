@@ -8,21 +8,25 @@ on:
         required: false
         default: ""
   schedule:
-    # 08:17 Polish time on the first day of each month, for the previous month.
-    - cron: "17 8 1 * *"
+    # First day of each month, attempts at 08:17, 09:17, 10:17 and 11:17
+    # Polish time, for the previous month. GitHub skips or delays many
+    # scheduled starts; src/top_guard.py sends each month only once.
+    - cron: "17 8-11 1 * *"
       timezone: "Europe/Warsaw"
 
-# Reads the archive only; nothing is committed.
+# Writes only the marker data/last_top.json (which periods were sent).
 permissions:
-  contents: read
+  contents: write
 
+# Shared with the weekly top: both write the same marker file.
 concurrency:
-  group: monthly-top
+  group: top-reports
   cancel-in-progress: false
 
 jobs:
   monthly-top:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -37,3 +41,17 @@ jobs:
           DISCORD_TEST_WEBHOOK_URL: ${{ secrets.DISCORD_TEST_WEBHOOK_URL }}
           MONTH: ${{ inputs.month }}
         run: python src/monthly_top.py
+
+      - name: Persist top marker
+        run: |
+          git add data/last_top.json 2>/dev/null || true
+          if git diff --cached --quiet; then
+            echo "Top marker has not changed."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Update top marker (monthly)"
+            # Another workflow (daily digest) may have pushed in the meantime.
+            git pull --rebase origin "$GITHUB_REF_NAME"
+            git push
+          fi

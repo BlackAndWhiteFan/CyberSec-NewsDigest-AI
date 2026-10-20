@@ -41,6 +41,12 @@ class TestArticleArchive(unittest.TestCase):
         self.assertEqual(record["source"], "niebezpiecznik.pl")
         self.assertEqual(record["categories"], ["critical"])
         self.assertEqual(record["score"], 3)
+        self.assertEqual(record["summary"], "")
+
+    def test_ai_summary_is_archived(self):
+        article = make_article("Wakacje.pl zhackowane", "https://www.niebezpiecznik.pl/post/x")
+        article["summary"] = "Wyciek danych klientów biura podróży."
+        self.assertEqual(build_record(article, "2026-10-19")["summary"], "Wyciek danych klientów biura podróży.")
 
     def test_articles_are_appended_and_saved(self):
         articles = [

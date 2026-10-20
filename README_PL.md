@@ -34,6 +34,8 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 11 — kanał testowy dla uruchomień z gałęzi (bez zapisu w historii i archiwum): zaimplementowane i zweryfikowane w uruchomieniu, które dostarczyło prasówkę na kanał testowy.**
 
+**Etap 12 — tygodniowe top 5 i jednorazowa wysyłka zestawień (cztery próby, znacznik `data/last_top.json`) ze streszczeniami AI: zaimplementowane; zestawienie miesięczne zweryfikowane na kanale testowym, pierwsze tygodniowe oczekuje na potwierdzenie po scaleniu.**
+
 ### Obecna implementacja
 
 - Pobiera wpisy RSS lub Atom z sześciu skonfigurowanych źródeł wiadomości o cyberbezpieczeństwie.
@@ -52,7 +54,7 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 - Archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty) w miesięcznym pliku `data/archive/RRRR-MM.json`. Błąd archiwum jest zapisywany w logu i kończy uruchomienie błędem, ale historia artykułów zostaje zapisana, więc dostarczone linki nie są wysyłane ponownie.
 - Zapisuje historię artykułów i archiwum także wtedy, gdy krok prasówki zakończy się błędem, chyba że uruchomienie zostanie anulowane.
 - Łączy artykuły z różnych serwisów o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł, a artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”.
-- Pierwszego dnia miesiąca wysyła na osobny kanał Discorda 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji).
+- Pierwszego dnia miesiąca wysyła na osobny kanał Discorda 10 najważniejszych wydarzeń poprzedniego miesiąca, a w poniedziałek na kanał `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami AI. Każde zestawienie ma cztery próby startu i idzie tylko raz (znacznik `data/last_top.json`); zestawienie tygodniowe wymaga sekretu `DISCORD_WEEKLY_WEBHOOK_URL`.
 - Dodaje do każdego artykułu streszczenie po polsku (do 2 zdań) przygotowane przez AI (Groq: `gpt-oss-120b`, zapasowo `qwen3.8-27b`) z pełnego tekstu z kanału albo opisu RSS. Terminy muszą być zgodne ze słowniczkiem `data/glosariusz_mirror.csv` (mirror glosariusza CyberSec Mozaika): streszczenie niezgodne wraca do AI do poprawki, a potem jest odrzucane; objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu terminu w prasówce, tylko dla 7 wybranych terminów (np. ransomware, exploit, MFA, podwyższenie (eskalacja) uprawnień). Bez sekretu `GROQ_API_KEY` prasówka idzie bez streszczeń.
 - Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu. Zestawienie miesięczne wymaga sekretu `DISCORD_MONTHLY_WEBHOOK_URL`. Uruchomienia z gałęzi innych niż `main` idą wyłącznie na kanał testowy (sekret `DISCORD_TEST_WEBHOOK_URL`) z nagłówkiem „🧪 TEST” i niczego nie zapisują; bez tego sekretu nic nie wysyłają.
 - Kontynuuje pracę, gdy pobranie pojedynczego kanału RSS się nie powiedzie.

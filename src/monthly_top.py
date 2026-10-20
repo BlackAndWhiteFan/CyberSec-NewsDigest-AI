@@ -7,6 +7,10 @@ as "(AKTUALIZACJA 2)" join their original story. Events are ranked by the
 number of articles about them, then by the number of sources, then by the
 highest score, and the top 10 are sent to a separate Discord channel.
 
+Since v22 the workflow has several scheduled attempts, and top_guard makes
+sure a month is sent only once (manual runs are never blocked). The same
+ranking is used by the weekly top (weekly_top.py).
+
 Run: python src/monthly_top.py            (previous month)
      MONTH=2026-10 python src/monthly_top.py  (a chosen month)
 """
@@ -19,6 +23,7 @@ from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from discord_output import polish_plural, send_messages, split_into_messages
 from event_grouping import SIMILARITY_THRESHOLD, document_frequency, same_event
 import test_mode
+import top_guard
 
 
 TOP_LIMIT = 10
@@ -103,6 +108,16 @@ def group_month(records):
     return events
 
 
+def event_summary(event):
+    """Return the AI summary of the leading article, or of the first article
+    in the event that has one (records archived before v22 have none)."""
+    for record in event:
+        if record.get("summary"):
+            return record["summary"]
+
+    return ""
+
+
 def summarize_event(event):
     """Return the figures used to rank and display one event."""
     leader = event[0]
@@ -115,6 +130,7 @@ def summarize_event(event):
         "sources": len(sources - {""}),
         "score": max(record.get("score", 0) for record in event),
         "first_date": min(record.get("date", "") for record in event),
+        "summary": event_summary(event),
     }
 
 
@@ -142,10 +158,17 @@ def format_event_line(number, event):
     sources = polish_plural(event["sources"], "serwis", "serwisy", "serwisów")
     day, month = event["first_date"][8:10], event["first_date"][5:7]
 
-    return (
+    line = (
         f"{number}. [{title}](<{event['link']}>) · "
         f"{event['articles']} {articles}, {event['sources']} {sources} · od {day}.{month}"
     )
+
+    # The summary stays in the same entry, so it is never separated from
+    # its title when the message is split.
+    if event.get("summary"):
+        line += f"\n> {event['summary']}"
+
+    return line
 
 
 def build_top_lines(month, records, limit=TOP_LIMIT):
@@ -170,35 +193,60 @@ def build_top_lines(month, records, limit=TOP_LIMIT):
     return lines
 
 
-def run(month=None, archive_dir=ARCHIVE_DIR):
-    month = month or os.environ.get("MONTH", "").strip() or previous_month()
+def deliver(kind, period, lines, real_variable, marker_path=top_guard.MARKER_PATH, complete=True):
+    """Send a top message and record the period as sent.
+
+    An empty period is also recorded, so later scheduled attempts stop.
+    Not recorded: test runs, a missing webhook (a later attempt can still
+    send) and a period that has not ended yet (a manual preview of the
+    current week or month must not block the full report later).
+    """
+    test_run = test_mode.is_test_run()
+
+    if not lines:
+        print("Brak artykułów w archiwum – nic nie wysłano.")
+    else:
+        for line in lines:
+            print(line)
+
+        webhook_url, webhook_variable = test_mode.webhook_url(real_variable)
+
+        if not webhook_url:
+            print(f"Pominięto wysyłkę: brak zmiennej {webhook_variable}.")
+            return
+
+        # The header is repeated with "(cd.)" in every following message, so
+        # no message starts in the middle of the numbered list.
+        messages = test_mode.with_banner(split_into_messages(lines, section_headers={lines[0]}))
+        send_messages(webhook_url, messages)
+        print("Wysłane wiadomości:", len(messages))
+
+    if test_run:
+        print("Tryb testowy: znacznik zestawień bez zmian.")
+    elif not complete:
+        print("Okres jeszcze trwa – podgląd bez zapisu w znaczniku.")
+    else:
+        top_guard.mark_sent(kind, period, marker_path)
+
+
+def run(month=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, today=None):
+    today = today or datetime.now(TIMEZONE).date()
+    month = month or os.environ.get("MONTH", "").strip() or previous_month(today)
 
     if not re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", month):
         raise SystemExit(f"Nieprawidłowy miesiąc: {month!r} (oczekiwano RRRR-MM).")
 
-    records = load_archive(f"{archive_dir}/{month}.json")
-
     print("TOP MIESIĄCA:", month)
+
+    if top_guard.should_skip("month", month, path=marker_path):
+        print("Zestawienie za ten miesiąc już poszło – ten zaplanowany start kończy się bez wysyłki.")
+        return
+
+    records = load_archive(f"{archive_dir}/{month}.json")
     print("Artykuły w archiwum:", len(records))
 
-    lines = build_top_lines(month, records)
-
-    if not lines:
-        print("Brak artykułów w archiwum – nic nie wysłano.")
-        return
-
-    for line in lines:
-        print(line)
-
-    webhook_url, webhook_variable = test_mode.webhook_url("DISCORD_MONTHLY_WEBHOOK_URL")
-
-    if not webhook_url:
-        print(f"Pominięto wysyłkę: brak zmiennej {webhook_variable}.")
-        return
-
-    messages = test_mode.with_banner(split_into_messages(lines))
-    send_messages(webhook_url, messages)
-    print("Wysłane wiadomości:", len(messages))
+    complete = month < today.strftime("%Y-%m")
+    deliver("month", month, build_top_lines(month, records), "DISCORD_MONTHLY_WEBHOOK_URL", marker_path, complete)
 
 
 if __name__ == "__main__":

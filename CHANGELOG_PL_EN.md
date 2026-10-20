@@ -22,6 +22,60 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v22 --- 20.10.2026
+
+**Tygodniowe top 5, jednorazowa wysyłka zestawień tygodniowych i
+miesięcznych oraz streszczenia AI w zestawieniach.**
+
+Nowy moduł `src/weekly_top.py`: w poniedziałek 5 najważniejszych
+wydarzeń poprzedniego tygodnia (poniedziałek–niedziela) trafia na nowy
+kanał Discorda `#top-tygodnia` (sekret `DISCORD_WEEKLY_WEBHOOK_URL`).
+Grupowanie i ranking są takie same jak w zestawieniu miesięcznym (liczba
+artykułów, serwisów, punkty); tydzień na przełomie miesięcy czyta oba
+pliki archiwum. Nowy workflow `.github/workflows/weekly-top.yml`: próby o
+8:17, 9:17, 10:17 i 11:17 czasu polskiego; ręcznie można podać dowolną
+datę z wybranego tygodnia.
+
+Zabezpieczenie przed zawodnym harmonogramem (jak w v19): Monthly Top 10
+ma teraz cztery próby 1. dnia miesiąca (8:17–11:17) zamiast jednej. Nowy
+moduł `src/top_guard.py` zapisuje w `data/last_top.json`, za jaki
+tydzień i miesiąc zestawienie już poszło; kolejne zaplanowane próby
+kończą się bez wysyłki. Uruchomienia ręczne nie są blokowane. Nie
+zapisują znacznika: uruchomienia testowe z gałęzi, brak webhooka (żeby
+późniejsza próba mogła wysłać) oraz podgląd okresu, który jeszcze trwa
+(żeby nie zablokował pełnego zestawienia). Oba workflow zestawień mają
+uprawnienie zapisu (tylko znacznik) i wspólną grupę współbieżności
+`top-reports`; wszystkie trzy workflow przed wysłaniem zmian pobierają
+cudze zmiany (`git pull --rebase`), bo w poniedziałki prasówka i
+zestawienie tygodniowe mogą zapisywać jednocześnie.
+
+Streszczenia w zestawieniach: archiwum (`src/article_archive.py`)
+zapisuje streszczenie AI każdego wysłanego artykułu, a zestawienia
+pokazują je pod tytułem jako cytat (streszczenie pierwszego artykułu
+wydarzenia, który je ma). Długie zestawienie powtarza nagłówek z
+dopiskiem „(cd.)” w każdej kolejnej wiadomości – wcześniej druga
+wiadomość zaczynała się od pozycji 9 w środku listy, co Discord źle
+numerował. Wspólna wysyłka obu zestawień: funkcja `deliver` w
+`src/monthly_top.py`. Testy używają tymczasowych znaczników i nie zależą
+od gałęzi ani sposobu uruchomienia.
+
+Zmianę zweryfikowano: testy jednostkowe (189) zakończone powodzeniem
+także w środowisku gałęzi i zaplanowanego uruchomienia; podgląd
+zestawienia tygodniowego 19–25.10.2026 na prawdziwym archiwum (OpenCode
+połączony z dwóch serwisów). Ręczne uruchomienia Monthly Top 10 na
+gałęzi `v22-top-tygodnia` (20.10.2026, 23:29 i 23:52, miesiąc 2026-10):
+zestawienie wyłącznie na `#prasówka-test`, w drugiej wiadomości
+nagłówek „(cd.)”, gałąź bez commita ze znacznikiem. Przy wgrywaniu
+4 pliki trafiły najpierw do głównego katalogu repozytorium zamiast do
+`src`; usunięto je przed scaleniem.
+
+**Ograniczenia:** zestawienia tygodniowego nie da się uruchomić z gałęzi
+przed scaleniem (GitHub pokazuje przycisk tylko dla workflow z `main`) –
+pierwsze uruchomienie na żywo zostanie potwierdzone po scaleniu i
+opisane w tym wpisie. Artykuły zarchiwizowane przed tą zmianą nie mają
+streszczeń, więc pierwsze zestawienia pokażą je tylko częściowo. Tytuły
+angielskie nadal nie są tłumaczone (zaplanowane w kolejnej wersji).
+
 ## v21 --- 20.10.2026
 
 **Mirror glosariusza z matki Mozaiki v84 i objaśnienia w nawiasach tylko
@@ -736,6 +790,57 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v22 --- 2026-10-20
+
+**Weekly top 5, one-time sending of weekly and monthly tops, and AI
+summaries in the tops.**
+
+New module `src/weekly_top.py`: on Mondays the top 5 events of the
+previous week (Monday–Sunday) go to a new Discord channel `#top-tygodnia`
+(secret `DISCORD_WEEKLY_WEBHOOK_URL`). Grouping and ranking are the same
+as in the monthly top (articles, sources, score); a week spanning two
+months reads both archive files. New workflow
+`.github/workflows/weekly-top.yml`: attempts at 08:17, 09:17, 10:17 and
+11:17 Polish time; a manual run accepts any date in the chosen week.
+
+Safeguard against the unreliable schedule (as in v19): the monthly top
+10 now has four attempts on the first day of the month (08:17–11:17)
+instead of one. The new module `src/top_guard.py` records in
+`data/last_top.json` which week and month have been sent; later
+scheduled attempts end without sending. Manual runs are never blocked.
+Not recorded: test runs from branches, a missing webhook (so a later
+attempt can still send) and a preview of a period that has not ended (so
+it does not block the full report). Both top workflows have write
+permission (marker only) and share the concurrency group `top-reports`;
+all three workflows fetch other changes before pushing (`git pull
+--rebase`), because on Mondays the digest and the weekly top may save at
+the same time.
+
+Summaries in the tops: the archive (`src/article_archive.py`) saves the
+AI summary of each delivered article, and the tops show it under the
+title as a quote (the summary of the first article in the event that has
+one). A long top repeats its header with "(cd.)" in every following
+message – before, the second message started at item 9 in the middle of
+the list, which Discord numbered wrongly. Shared delivery for both tops:
+the `deliver` function in `src/monthly_top.py`. Tests use temporary
+markers and do not depend on the branch or trigger.
+
+The change was verified: unit tests (189) passed, also in the branch and
+scheduled-run environments; a preview of the weekly top for 2026-10-19/25
+on the real archive (OpenCode merged from two sources). Manual monthly
+top 10 runs on the `v22-top-tygodnia` branch (2026-10-20, 23:29 and
+23:52, month 2026-10): delivered only to `#prasówka-test`, "(cd.)" header
+in the second message, no marker commit on the branch. During upload 4
+files first landed in the repository root instead of `src`; they were
+removed before merging.
+
+**Limitations:** the weekly top cannot be run from a branch before
+merging (GitHub shows the run button only for workflows on `main`) – its
+first live run will be confirmed after merging and recorded in this
+entry. Articles archived before this change have no summaries, so the
+first tops will show them only partly. English titles are still not
+translated (planned for the next version).
 
 ## v21 --- 2026-10-20
 

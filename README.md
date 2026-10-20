@@ -22,7 +22,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 5 — Selection quality (Polish keywords, relevance threshold, source limits, promotional filter): implemented and verified in workflow runs.**
 
-**Phase 6 — Automatic schedule (06:17 Polish time, Monday to Saturday): configured; the first scheduled run is awaiting confirmation.**
+**Phase 6 — Automatic schedule (attempts at 06:17, 07:17, 08:17 and 09:17 Polish time, Monday to Saturday, one digest per day): configured; GitHub runs schedules irregularly, hence four attempts and a guard; skipping later attempts is awaiting confirmation on `main`.**
 
 **Phase 7 — Monthly archive of delivered articles: implemented and verified in a run that delivered an article.**
 
@@ -57,7 +57,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 - Runs unit tests before executing the RSS ingestion script.
 - Uses GitHub Actions to commit and push changes to the persistent article history when that file changes.
 
-The workflow runs automatically at 06:17 Polish time (`Europe/Warsaw`), Monday to Saturday, and can also be triggered manually through GitHub Actions. GitHub does not guarantee exact start times for scheduled runs, so the digest may arrive with a delay. A concurrency group prevents two runs from overlapping.
+The workflow tries to start automatically at 06:17, 07:17, 08:17 and 09:17 Polish time (`Europe/Warsaw`), Monday to Saturday; the first completed attempt sends the digest and later attempts that day end without sending (marker `data/last_digest.json`). It can also be triggered manually through GitHub Actions – manual runs are never blocked and also count as today's digest. GitHub does not guarantee that scheduled runs start (it skips or delays many of them), so the digest may arrive later or need a manual run. A concurrency group prevents two runs from overlapping.
 
 ### Latest Verified Results
 
@@ -117,6 +117,8 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/article_archive.py` — monthly archive of delivered articles.
 - `src/event_grouping.py` — detection of the same event reported by different sources and of follow-ups.
 - `src/monthly_top.py` — monthly top 10 events from the archive.
+- `src/run_guard.py` — one scheduled digest per day: marker `data/last_digest.json` and the skip check.
+- `data/last_digest.json` — date, trigger and number of articles of the last completed digest run.
 - `src/ai_summaries.py` — AI summaries (Groq), glossary enforcement and correction.
 - `src/glossary.py` — glossary conventions from the mirror: prompt entries, forbidden forms, explanations at first use.
 - `data/glosariusz_mirror.csv` — standalone mirror of the CyberSec Mozaika glossary used by the digest.
@@ -130,6 +132,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/test_article_archive.py` — monthly archive tests.
 - `src/test_event_grouping.py` — event grouping tests based on real title pairs.
 - `src/test_monthly_top.py` — monthly top 10 tests.
+- `src/test_run_guard.py` — run guard tests.
 - `src/test_ai_summaries.py` — AI summary tests (no network access).
 - `src/test_glossary.py` — glossary mirror, explanations and forbidden-form tests.
 - `src/test_article_history.py` — persistent article history and publication-filtering tests.

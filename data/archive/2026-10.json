@@ -9,7 +9,8 @@
     ],
     "score": 3,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Intruz uzyskał dostęp do starszego systemu OpenCode w nocy 16 października i może mieć dostęp do kluczy API dostawców sztucznej inteligencji zapisanych w OpenCode Console. Firma poinformowała, że klucze OpenAI, Anthropic i Google mogły zostać ujawnione."
   },
   {
     "date": "2026-10-19",
@@ -21,7 +22,8 @@
     ],
     "score": 2,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Aktualizacje Windows Server z października spowodowały problemy z logowaniem do Exchange oraz przepływem poczty elektronicznej."
   },
   {
     "date": "2026-10-19",
@@ -33,7 +35,8 @@
     ],
     "score": 3,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Irlandzka policja An Garda Síochána padła ofiarą cyberataku, w wyniku którego nieuprawnione osoby przejęły dwa oficjalne konta na platformie X. Przejęte konta zostały wykorzystane do promowania kryptowalut."
   },
   {
     "date": "2026-10-19",
@@ -45,7 +48,8 @@
     ],
     "score": 3,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Raport Booz Allen Hamilton wskazuje, że zaawansowane modele AI mogą wykonywać zadania dotychczas wymagające specjalistycznej wiedzy, co zwiększa ryzyko cyberataków na infrastrukturę krytyczną. Autorzy ostrzegają, że rosnące możliwości sztucznej inteligencji mogą mieć konsekwencje nie tylko dla bezpieczeństwa systemów informatycznych, ale także dla funkcjonowania obiektów przemysłowych."
   },
   {
     "date": "2026-10-19",
@@ -57,7 +61,8 @@
     ],
     "score": 3,
     "related": [],
-    "continuation": true
+    "continuation": true,
+    "summary": "Projekt OpenCode powiadomił niewielką liczbę użytkowników, że ich klucze API używane z zewnętrznymi dostawcami zostały ujawnione w wyniku naruszenia bezpieczeństwa."
   },
   {
     "date": "2026-10-19",
@@ -69,7 +74,8 @@
     ],
     "score": 3,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "W minionym tygodniu odnotowano 98 zero-day, które wykorzystano w różnych scenariuszach, w tym w atakach na zaufane połączenia i sprzęt. Problemy te pokazały, że zarówno usługi, jak i urządzenia mogą stać się wektorem zagrożenia bez wcześniejszego ostrzeżenia."
   },
   {
     "date": "2026-10-19",
@@ -81,7 +87,8 @@
     ],
     "score": 2,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Firma F5 wydała out-of-band łatki na krytyczne podatności w NGINX."
   },
   {
     "date": "2026-10-19",
@@ -93,7 +100,8 @@
     ],
     "score": 2,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Sprawcy wykorzystali cztery exploity w Plex Media Server, tworząc łańcuch Plex2Shell, aby zainstalować kryptominery oraz backdoor w postaci proxy na systemach Linux. Działanie to zostało udokumentowane w publicznie dostępnym PoC."
   },
   {
     "date": "2026-10-20",
@@ -105,7 +113,8 @@
     ],
     "score": 3,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Nikkei Inc. poinformowało o wycieku danych, w wyniku którego ujawniono 1,83 miliona rekordów osobowych. To już trzeci incydent tego typu w ciągu około miesiąca."
   },
   {
     "date": "2026-10-20",
@@ -117,7 +126,8 @@
     ],
     "score": 3,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Oszuści rozsyłają fałszywe pisma podszywając się pod państwowy urząd, aby wyłudzić wrażliwe dane dotyczące monitoringu wizyjnego od firm. Kampanię wykrył zespół prowadzony przez szefa ABW, co umożliwiło szybkie podjęcie działań obronnych."
   },
   {
     "date": "2026-10-20",
@@ -129,6 +139,7 @@
     ],
     "score": 2,
     "related": [],
-    "continuation": false
+    "continuation": false,
+    "summary": "Siemens naprawił podatność typu DLL sideloading w Siemens Software Center, którą wykorzystano w atakach ClickFix. Atakujący mogli umieścić spreparowaną bibliotekę DLL, co umożliwiło uruchomienie złośliwego kodu z takimi samymi uprawnieniami jak aplikacja."
   }
 ]

@@ -45,6 +45,8 @@ def build_record(article, date_text):
             for related in article.get("related", [])
         ],
         "continuation": bool(article.get("continuation")),
+        # AI summary as delivered (v22), so weekly and monthly tops can show it.
+        "summary": article.get("summary", ""),
     }
 
 

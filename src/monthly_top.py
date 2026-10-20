@@ -108,6 +108,16 @@ def group_month(records):
     return events
 
 
+def event_summary(event):
+    """Return the AI summary of the leading article, or of the first article
+    in the event that has one (records archived before v22 have none)."""
+    for record in event:
+        if record.get("summary"):
+            return record["summary"]
+
+    return ""
+
+
 def summarize_event(event):
     """Return the figures used to rank and display one event."""
     leader = event[0]
@@ -120,6 +130,7 @@ def summarize_event(event):
         "sources": len(sources - {""}),
         "score": max(record.get("score", 0) for record in event),
         "first_date": min(record.get("date", "") for record in event),
+        "summary": event_summary(event),
     }
 
 
@@ -147,10 +158,17 @@ def format_event_line(number, event):
     sources = polish_plural(event["sources"], "serwis", "serwisy", "serwisów")
     day, month = event["first_date"][8:10], event["first_date"][5:7]
 
-    return (
+    line = (
         f"{number}. [{title}](<{event['link']}>) · "
         f"{event['articles']} {articles}, {event['sources']} {sources} · od {day}.{month}"
     )
+
+    # The summary stays in the same entry, so it is never separated from
+    # its title when the message is split.
+    if event.get("summary"):
+        line += f"\n> {event['summary']}"
+
+    return line
 
 
 def build_top_lines(month, records, limit=TOP_LIMIT):
@@ -197,7 +215,9 @@ def deliver(kind, period, lines, real_variable, marker_path=top_guard.MARKER_PAT
             print(f"Pominięto wysyłkę: brak zmiennej {webhook_variable}.")
             return
 
-        messages = test_mode.with_banner(split_into_messages(lines))
+        # The header is repeated with "(cd.)" in every following message, so
+        # no message starts in the middle of the numbered list.
+        messages = test_mode.with_banner(split_into_messages(lines, section_headers={lines[0]}))
         send_messages(webhook_url, messages)
         print("Wysłane wiadomości:", len(messages))
 

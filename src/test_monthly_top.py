@@ -148,6 +148,37 @@ class TestMessage(unittest.TestCase):
         self.assertEqual(build_top_lines("2026-10", []), [])
 
 
+class TestSummaries(unittest.TestCase):
+    def test_summary_is_shown_under_the_title(self):
+        item = dict(FAKTUROWNIA, summary="Wykradziono faktury klientów.")
+        line = format_event_line(1, rank_events([item])[0])
+
+        self.assertEqual(line.split("\n")[1], "> Wykradziono faktury klientów.")
+
+    def test_summary_taken_from_another_article_of_the_event(self):
+        from monthly_top import event_summary
+        event = [dict(FAKTUROWNIA), dict(SINGLE, summary="Drugi artykuł.")]
+        self.assertEqual(event_summary(event), "Drugi artykuł.")
+
+    def test_old_records_without_summary_have_no_quote(self):
+        line = format_event_line(1, rank_events([FAKTUROWNIA])[0])
+        self.assertNotIn("\n>", line)
+
+    def test_long_top_repeats_header_in_next_message(self):
+        from discord_output import split_into_messages
+        items = [
+            dict(SINGLE, title=f"Unique headline {n} about distinct subject{n}", link=f"https://x/{n}",
+                 source=f"s{n}.pl", summary="s" * 400)
+            for n in range(10)
+        ]
+        lines = build_top_lines("2026-10", items)
+        messages = split_into_messages(lines, section_headers={lines[0]})
+
+        self.assertGreater(len(messages), 1)
+        for message in messages[1:]:
+            self.assertTrue(message.startswith("**📅 Top 10 · październik 2026 (cd.)**"))
+
+
 class TestRun(unittest.TestCase):
     """Every run gets a temporary marker, so tests never touch data/."""
 

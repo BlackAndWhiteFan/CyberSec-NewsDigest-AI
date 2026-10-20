@@ -22,6 +22,46 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v19 --- 20.10.2026
+
+**Niezawodny poranny start: cztery próby z harmonogramu i strażnik
+„jedna prasówka dziennie”.**
+
+Diagnoza harmonogramu z v14 (19–20.10.2026): pierwsze zaplanowane
+uruchomienie 19.10 przyszło o 11:54 zamiast o 6:17, a 20.10 nie przyszło
+wcale. Dwie tymczasowe sondy (cron co 20 minut, jedna w UTC, druga z
+polem `timezone: Europe/Warsaw`) przez dobę uruchomiły się po około 4
+razy zamiast około 70, zawsze obie w odstępie 1–2 minut. Wniosek: pole
+`timezone` działa; GitHub uruchamia harmonogramy w tym repozytorium
+nieregularnie, pomijając lub opóźniając większość startów (dokumentacja
+GitHuba dopuszcza opóźnienia i pominięcia przy dużym obciążeniu).
+
+W `.github/workflows/daily-digest.yml` harmonogram ma teraz cztery
+próby: `17 6-9 * * 1-6` (6:17, 7:17, 8:17 i 9:17 czasu polskiego, od
+poniedziałku do soboty). Nowy moduł `src/run_guard.py` zapisuje po
+każdym zakończonym uruchomieniu znacznik `data/last_digest.json` (data,
+sposób uruchomienia, liczba wysłanych artykułów) – także wtedy, gdy nie
+było czego wysłać, ale nie po nieudanej wysyłce. Zaplanowane
+uruchomienie kończy się bez wysyłki, jeśli dzisiejsza prasówka już się
+odbyła; uruchomienie ręczne nigdy nie jest blokowane i również „zalicza
+dzień”. `src/main.py` sprawdza strażnika na początku i zapisuje znacznik
+na końcu. Usunięto obie sondy (`schedule-probe-utc.yml`,
+`schedule-probe-tz.yml`).
+
+Zmianę zweryfikowano: testy jednostkowe (158) zakończone powodzeniem.
+Ręczne uruchomienie na gałęzi `v19-harmonogram` (20.10.2026, 11:16):
+2 artykuły spośród 82, streszczenia 2 z 2 (`gpt-oss-120b`), prasówka
+dotarła na Discord, a workflow zapisał znacznik
+`{"date": "2026-10-20", "trigger": "workflow_dispatch", "articles": 2}`.
+
+**Ograniczenia:** blokadę zaplanowanego uruchomienia da się sprawdzić
+wyłącznie na `main` (harmonogram nie działa na innych gałęziach) –
+zostanie potwierdzona w kolejnych dniach i opisana w tym wpisie. Jeśli
+wszystkie cztery próby przepadną, prasówki trzeba uruchomić ręcznie.
+Jeśli pierwsza próba nie znajdzie artykułów, kolejne tego dnia też nic
+nie wyślą. Miesięczne top 10 (v17) ma ten sam problem z harmonogramem i
+wymaga analogicznego zabezpieczenia przed 1.11.2026.
+
 ## v18 --- 19.10.2026
 
 **Streszczenia AI po polsku z obowiązkowym słowniczkiem zgodnym z
@@ -242,8 +282,9 @@ wybrano 3, odrzucając 1 jako promocję i 75 jako poniżej progu trafności.
 Prasówka dotarła na Discord.
 
 **Ograniczenia:** harmonogram działa wyłącznie z gałęzi `main`, więc
-pierwsze automatyczne uruchomienie (planowane na 19.10.2026) zostanie
-potwierdzone po scaleniu i opisane w tym wpisie. GitHub nie gwarantuje
+pierwsze automatyczne uruchomienie (planowane na 19.10.2026) przyszło
+o 11:54 zamiast o 6:17, a 20.10 nie przyszło wcale – diagnoza i
+poprawka: v19. GitHub nie gwarantuje
 dokładnej godziny startu zaplanowanych uruchomień; w okresach dużego
 obciążenia mogą one zostać opóźnione lub pominięte.
 
@@ -606,6 +647,45 @@ and reviewed diffs.
 
 ------------------------------------------------------------------------
 
+## v19 --- 2026-10-20
+
+**Reliable morning start: four scheduled attempts and a "one digest per
+day" guard.**
+
+Schedule diagnosis from v14 (2026-10-19/20): the first scheduled run on
+2026-10-19 came at 11:54 instead of 06:17, and on 2026-10-20 it did not
+come at all. Two temporary probes (cron every 20 minutes, one in UTC, one
+with `timezone: Europe/Warsaw`) ran about 4 times each in 24 hours
+instead of about 70, always both within 1–2 minutes. Conclusion: the
+`timezone` field works; GitHub runs schedules in this repository
+irregularly, skipping or delaying most starts (GitHub's documentation
+allows delays and skipped runs under heavy load).
+
+In `.github/workflows/daily-digest.yml` the schedule now has four
+attempts: `17 6-9 * * 1-6` (06:17, 07:17, 08:17 and 09:17 Polish time,
+Monday to Saturday). The new module `src/run_guard.py` writes the marker
+`data/last_digest.json` (date, trigger, number of articles sent) after
+every completed run – also when there was nothing to send, but not after
+a failed delivery. A scheduled run ends without sending if today's digest
+has already run; manual runs are never blocked and also count as today's
+digest. `src/main.py` checks the guard at the start and writes the
+marker at the end. Both probes (`schedule-probe-utc.yml`,
+`schedule-probe-tz.yml`) were removed.
+
+The change was verified: unit tests (158) passed. A manual run on the
+`v19-harmonogram` branch (2026-10-20, 11:16): 2 of 82 articles, 2 of 2
+summaries (`gpt-oss-120b`), the digest reached Discord, and the workflow
+wrote the marker
+`{"date": "2026-10-20", "trigger": "workflow_dispatch", "articles": 2}`.
+
+**Limitations:** skipping a scheduled run can only be checked on `main`
+(schedules do not run on other branches) – it will be confirmed in the
+coming days and recorded in this entry. If all four attempts are lost,
+the digest has to be run manually. If the first attempt finds no
+articles, later attempts that day send nothing either. The monthly top 10
+(v17) has the same schedule problem and needs a similar safeguard before
+2026-11-01.
+
 ## v18 --- 2026-10-19
 
 **AI summaries in Polish with a mandatory glossary consistent with the
@@ -818,8 +898,8 @@ excluded as promotional and 75 below the relevance threshold. The digest
 was delivered to Discord.
 
 **Limitations:** schedules run only from the `main` branch, so the first
-scheduled run (planned for 2026-10-19) will be confirmed after merging
-and recorded in this entry. GitHub does not guarantee exact start times
+scheduled run (planned for 2026-10-19) came at 11:54 instead of 06:17,
+and on 2026-10-20 it did not come at all – diagnosis and fix: v19. GitHub does not guarantee exact start times
 for scheduled runs; under heavy load they may be delayed or skipped.
 
 ## v13 --- 2026-10-17

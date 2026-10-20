@@ -22,7 +22,7 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 
 **Etap 5 — jakość selekcji (polskie słowa kluczowe, próg trafności, limity źródeł, filtr promocji): zaimplementowane i zweryfikowane w uruchomieniach workflow.**
 
-**Etap 6 — automatyczny harmonogram (6:17 czasu polskiego, od poniedziałku do soboty): skonfigurowany; pierwsze automatyczne uruchomienie oczekuje na potwierdzenie.**
+**Etap 6 — automatyczny harmonogram (próby o 6:17, 7:17, 8:17 i 9:17 czasu polskiego, od poniedziałku do soboty, jedna prasówka dziennie): skonfigurowany; GitHub uruchamia harmonogramy nieregularnie, dlatego są cztery próby i strażnik; blokada kolejnych prób oczekuje na potwierdzenie na `main`.**
 
 **Etap 7 — miesięczne archiwum dostarczonych artykułów: zaimplementowane i zweryfikowane w uruchomieniu, które dostarczyło artykuł.**
 
@@ -58,7 +58,7 @@ Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości kor
 - Uruchamia testy jednostkowe przed wykonaniem skryptu pobierającego wiadomości RSS.
 - Wykorzystuje GitHub Actions do zatwierdzania i wysyłania zmian w historii artykułów, gdy zawartość tego pliku ulegnie zmianie.
 
-Workflow uruchamia się automatycznie o 6:17 czasu polskiego (`Europe/Warsaw`) od poniedziałku do soboty; można go też uruchomić ręcznie w GitHub Actions. GitHub nie gwarantuje dokładnej godziny startu zaplanowanych uruchomień, więc prasówka może przyjść z opóźnieniem. Grupa współbieżności zapobiega nakładaniu się dwóch uruchomień.
+Workflow próbuje uruchomić się automatycznie o 6:17, 7:17, 8:17 i 9:17 czasu polskiego (`Europe/Warsaw`) od poniedziałku do soboty; pierwsza zakończona próba wysyła prasówkę, a kolejne tego dnia kończą się bez wysyłki (znacznik `data/last_digest.json`). Można go też uruchomić ręcznie w GitHub Actions – uruchomienie ręczne nigdy nie jest blokowane i również „zalicza dzień”. GitHub nie gwarantuje startu zaplanowanych uruchomień (wiele z nich pomija lub opóźnia), więc prasówka może przyjść później albo trzeba ją uruchomić ręcznie. Grupa współbieżności zapobiega nakładaniu się dwóch uruchomień.
 
 ### Ostatnie zweryfikowane wyniki
 

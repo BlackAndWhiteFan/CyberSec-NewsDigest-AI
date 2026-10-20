@@ -22,6 +22,7 @@ from discord_output import build_digest_messages, send_messages
 from ai_summaries import summarize_articles
 from article_archive import append_to_archive, load_recent
 from event_grouping import group_events, mark_continuations
+from run_guard import mark_done, should_skip
 
 
 CONTENT_ENCODED = "{http://purl.org/rss/1.0/modules/content/}encoded"
@@ -54,6 +55,10 @@ def fetch_feed(url):
     return items
 
 def run():
+    if should_skip():
+        print("Dzisiejsza prasówka już poszła – ten zaplanowany start kończy się bez wysyłki.")
+        return
+
     articles = []
     seen_links = {}
     history = load_history()
@@ -246,6 +251,7 @@ def run():
     webhook_url = os.environ.get("DISCORD_WEBHOOK_URL", "").strip()
     delivery_failed = False
     archive_failed = False
+    articles_sent = 0
 
     if not messages:
         print("Brak artykułów do wysłania.")
@@ -259,6 +265,7 @@ def run():
             print(f"BŁĄD WYSYŁKI NA DISCORD: {error}")
         else:
             print("Wysłane wiadomości:", len(messages))
+            articles_sent = len(selected_articles)
             history["published_links"] = list(
                 dict.fromkeys(
                     history["published_links"]
@@ -279,6 +286,11 @@ def run():
                 print("Zarchiwizowane artykuły:", archived)
 
     save_history(history)
+
+    # After a failed delivery the marker is not written, so a later
+    # scheduled attempt the same day can try again.
+    if not delivery_failed:
+        mark_done(articles_sent)
 
     print("Linki zapamiętane w historii:", len(history["seen_links"]))
     print("Linki opublikowane łącznie:", len(history["published_links"]))

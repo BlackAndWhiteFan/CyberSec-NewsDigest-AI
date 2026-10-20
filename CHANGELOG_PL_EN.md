@@ -22,6 +22,52 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v21 --- 20.10.2026
+
+**Mirror glosariusza z matki Mozaiki v84 i objaśnienia w nawiasach tylko
+przy 7 wybranych terminach.**
+
+`data/glosariusz_mirror.csv` wygenerowano z matki CyberSec Mozaika v84
+(727 haseł): doszły H723 wiper, H724 komunikat bezpieczeństwa, H725
+obejście uwierzytelniania i H726 DLL sideloading, które zastąpiły
+tymczasowe wpisy z arkusza „Hasła do dopisania” (DOP-9…11).
+
+Powód drugiej zmiany: w testach v20 kod objaśniał każdy z około 270
+angielskich terminów z mirrora, więc nawiasów było za dużo, a część była
+błędna („NATO (translacja adresów sieciowych)” – skrót NAT dopasowany
+wewnątrz NATO; „DLL sideloading (instalacja spoza sklepu)” – krótsze
+hasło dopasowane wewnątrz dłuższego). Decyzja z 20.10.2026: nawiasy
+tylko przy 7 terminach – ransomware (program żądający okupu), infostealer
+(program kradnący dane), exploit (kod wykorzystujący podatność), botnet
+(sieć zainfekowanych urządzeń), MFA (uwierzytelnianie wieloskładnikowe),
+podwyższenie (eskalacja) uprawnień oraz poświadczenia (dane logowania).
+„Łatka” (zamiast „poprawka”) i „opłacani przez państwo” – bez nawiasu.
+Pozostałe hasła nadal wymuszają formę w tekście i kontrolę form
+zakazanych, tylko bez nawiasu.
+
+Zmiany w kodzie: `tools/eksport_mirrora.py` nie dodaje już objaśnień
+automatycznie (tylko z listy decyzji prasówki), a przy rozpoznawaniu
+nazw „angielski pierwszy” pomija spacje i myślniki („DLL sideloading” =
+„DLL side-loading”). `src/glossary.py`: skróty dopasowywane tylko jako
+całe słowa (opcjonalnie z końcówką po myślniku, np. „IAB-ów”), dłuższe
+terminy sprawdzane przed krótszymi; usunięto reguły odmiany dla
+„poprawki” i „opłacanych przez państwo”. Testy zaktualizowano
+(`src/test_glossary.py`, `src/test_discord_output.py`); test pilnuje, by
+nawiasy miało dokładnie 7 wybranych haseł.
+
+Zmianę zweryfikowano: testy jednostkowe (170) zakończone powodzeniem.
+Ręczne uruchomienie na gałęzi `v21-mirror-v84` (20.10.2026, 23:06):
+8 artykułów spośród 92, prasówka wyłącznie na `#prasówka-test`;
+nawiasy dodane przez kod tylko przy ransomware, exploit i poświadczeniach
+(odmienione: „poświadczeń (danych logowania)”), brak błędnych objaśnień.
+
+**Ograniczenia:** AI w jednym streszczeniu napisało „poprawce” zamiast
+„łatce” – forma „poprawka” nie jest na liście zakazanych, więc kontrola
+jej nie wyłapuje (do rozważenia w wersji o jakości streszczeń). Matka
+Mozaiki ma przy H166 „poprawka, łatka”, a w uwagach do H015
+„oprogramowanie wymuszające okup” – zgodnie z zasadą ujednolicenia
+formy z prasówki można przenieść do matki w kolejnej jej wersji.
+
 ## v20 --- 20.10.2026
 
 **Kanał testowy dla uruchomień z gałęzi: test nie trafia na kanał
@@ -690,6 +736,53 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v21 --- 2026-10-20
+
+**Glossary mirror from CyberSec Mozaika v84 and explanations in
+parentheses for 7 chosen terms only.**
+
+`data/glosariusz_mirror.csv` was generated from the CyberSec Mozaika
+mother workbook v84 (727 entries): new H723 wiper, H724 komunikat
+bezpieczeństwa, H725 obejście uwierzytelniania and H726 DLL sideloading,
+replacing the temporary rows from the "Hasła do dopisania" sheet
+(DOP-9…11).
+
+Reason for the second change: in the v20 tests code explained each of
+about 270 English mirror terms, so there were too many parentheses and
+some were wrong ("NATO (translacja adresów sieciowych)" – the acronym NAT
+matched inside NATO; "DLL sideloading (instalacja spoza sklepu)" – the
+shorter entry matched inside the longer one). Decision of 2026-10-20:
+parentheses only for 7 terms – ransomware (program żądający okupu),
+infostealer (program kradnący dane), exploit (kod wykorzystujący
+podatność), botnet (sieć zainfekowanych urządzeń), MFA (uwierzytelnianie
+wieloskładnikowe), podwyższenie (eskalacja) uprawnień and poświadczenia
+(dane logowania). "Łatka" (instead of "poprawka") and "opłacani przez
+państwo" – without parentheses. All other entries still enforce the text
+form and the forbidden-form check, just without parentheses.
+
+Code changes: `tools/eksport_mirrora.py` no longer adds explanations
+automatically (only from the digest's decision list), and ignores spaces
+and hyphens when detecting English-first names ("DLL sideloading" = "DLL
+side-loading"). `src/glossary.py`: acronyms match only as whole words
+(optionally with an ending after a hyphen, e.g. "IAB-ów"), longer terms
+are checked before shorter ones; inflection rules for "poprawka" and
+"opłacani przez państwo" removed. Tests updated (`src/test_glossary.py`,
+`src/test_discord_output.py`); a test ensures exactly the 7 chosen
+entries have parentheses.
+
+The change was verified: unit tests (170) passed. A manual run on the
+`v21-mirror-v84` branch (2026-10-20, 23:06): 8 of 92 articles, digest
+only on `#prasówka-test`; parentheses added by code only for ransomware,
+exploit and poświadczenia (inflected: "poświadczeń (danych logowania)"),
+no wrong explanations.
+
+**Limitations:** in one summary the AI wrote "poprawce" instead of
+"łatce" – "poprawka" is not on the forbidden list, so the check does not
+catch it (to consider in the summary quality version). The Mozaika
+mother workbook has "poprawka, łatka" at H166 and "oprogramowanie
+wymuszające okup" in the notes of H015 – under the unification rule the
+digest's forms can be moved to the mother workbook in its next version.
 
 ## v20 --- 2026-10-20
 

@@ -53,7 +53,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 - Saves the article history and archive even if the digest step fails, unless the run is cancelled.
 - Merges articles from different sources about the same event into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
 - On the first day of each month, sends the top 10 events of the previous month (ranked by number of articles, then sources and score) to a separate Discord channel.
-- Adds an AI summary in Polish (up to 2 sentences) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description. Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped; explanations in parentheses are added by code at the first occurrence of a term in the digest. Without the `GROQ_API_KEY` secret the digest is sent without summaries.
+- Adds an AI summary in Polish (up to 2 sentences) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description. Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped; explanations in parentheses are added by code at the first occurrence of a term in the digest, only for 7 chosen terms (e.g. ransomware, exploit, MFA, podwyższenie (eskalacja) uprawnień). Without the `GROQ_API_KEY` secret the digest is sent without summaries.
 - Continues processing when an individual RSS feed fails.
 - Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
 - Runs unit tests before executing the RSS ingestion script.
@@ -124,7 +124,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `data/last_digest.json` — date, trigger and number of articles of the last completed digest run.
 - `src/ai_summaries.py` — AI summaries (Groq), glossary enforcement and correction.
 - `src/glossary.py` — glossary conventions from the mirror: prompt entries, forbidden forms, explanations at first use.
-- `data/glosariusz_mirror.csv` — standalone mirror of the CyberSec Mozaika glossary used by the digest.
+- `data/glosariusz_mirror.csv` — standalone mirror of the CyberSec Mozaika glossary used by the digest (currently from mother workbook v84).
 - `tools/eksport_mirrora.py` — manual export of the mirror from the Mozaika mother workbook (`python tools/eksport_mirrora.py <workbook.xlsx>`, requires openpyxl).
 - `.github/workflows/monthly-top.yml` — monthly top 10 workflow (1st day of the month, 08:17 Polish time, or on demand).
 - `src/article_history.py` — loading, validating, saving, and filtering persistent article history.

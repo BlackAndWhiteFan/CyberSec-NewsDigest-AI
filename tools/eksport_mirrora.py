@@ -23,10 +23,10 @@ Mirror columns:
   objasnienie – first sentence of the entry's explanation (reference only)
 
 Default rule (decision 19.10.2026, "wariant 1"): an entry named
-"X (Y)" is written as X, and Y is added in parentheses at the first
-occurrence – but only when X is the English term or an acronym (the v32
-naming rule of the mother workbook). OVERRIDES below hold the digest's own
-decisions for specific entries.
+"X (Y)" is written as X when X is the English term or an acronym (the v32
+naming rule of the mother workbook). Explanations in parentheses only for
+the entries JW chose (decision 20.10.2026, option B): by default "nawias"
+is empty and OVERRIDES set it. OVERRIDES hold all digest decisions.
 """
 
 import csv
@@ -47,7 +47,8 @@ OVERRIDES = {
     "H153": {"forma": "exploit", "nawias": "kod wykorzystujący podatność",
              "regula": "nie spolszczaj", "unikaj": r"eksploit\w*"},
     "H159": {"unikaj": r"(?:podatnoś|luk)\w* dnia zerowego"},
-    "H166": {"forma": "poprawka", "nawias": "łatka", "unikaj": r"łat(?:k\w*|a|y|ę|ą|om|ami|ach)\b"},
+    # 20.10.2026: "łatka" without parentheses ("wiadomo, że to poprawka").
+    "H166": {"forma": "łatka", "nawias": ""},
     "H090": {"unikaj": r"zdaln\w+ wykonani\w+ kodu"},
     "H182": {"forma": "podwyższenie uprawnień", "nawias": "eskalacja",
              "unikaj": r"eskalacj\w* uprawnień | podniesieni\w* uprawnień"},
@@ -57,8 +58,8 @@ OVERRIDES = {
     "H207": {"forma": "poświadczenia", "nawias": "dane logowania", "unikaj": r"kredencja\w*"},
     "H028": {"unikaj": r"złośliw\w+ oprogramowa\w+"},
     "H012": {"unikaj": r"oprogramowa\w+ szpiegując\w*"},
-    "H015": {"nawias": "oprogramowanie wymuszające okup", "regula": "bez tłumaczenia"},
-    "H019": {"forma": "infostealer", "nawias": "złośliwe oprogramowanie kradnące dane",
+    "H015": {"nawias": "program żądający okupu", "regula": "bez tłumaczenia"},
+    "H019": {"forma": "infostealer", "nawias": "program kradnący dane",
              "regula": "bez tłumaczenia"},
     "H023": {"unikaj": r"tyln\w+ (?:furt\w+|drzwi)"},
     "H004": {"nawias": "sieć zainfekowanych urządzeń", "regula": "bez tłumaczenia"},
@@ -76,7 +77,7 @@ OVERRIDES = {
 # entries still waiting in "Hasła do dopisania").
 EXTRA_ROWS = [
     {"id": "H371-sponsored", "termin_en": "state-sponsored", "haslo": "",
-     "forma": "opłacani przez państwo", "nawias": "sponsorowani",
+     "forma": "opłacani przez państwo", "nawias": "",
      "regula": "odmieniaj zgodnie z kontekstem", "unikaj": r"sponsorowan\w* przez państwo",
      "objasnienie": "Wariant z kolumny „Terminologia PL” hasła H371."},
 ]
@@ -104,13 +105,17 @@ def split_name(name):
 def default_forms(name, english):
     main, bracket = split_name(name)
     first = re.split(r",\s*", main)[0].strip()
-    english_lower = (english or "").lower()
+    # Spaces and hyphens ignored: "DLL sideloading" = "DLL side-loading" (v84).
+    def normalize(text):
+        return re.sub(r"[\s\-]", "", (text or "").lower())
+
     english_first = bool(first) and (
-        ACRONYM.match(first) or first.lower() in english_lower
+        ACRONYM.match(first) or normalize(first) in normalize(english)
     )
 
     if english_first:
-        return first, bracket
+        # Option B (20.10.2026): no automatic explanation; see OVERRIDES.
+        return first, ""
 
     # Polish entry names stay whole (e.g. "deidentyfikacja: anonimizacja, ...").
     return main, ""

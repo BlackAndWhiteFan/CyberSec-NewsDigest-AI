@@ -138,6 +138,20 @@ class TestParseSummaries(unittest.TestCase):
         content = '<think>Plan: {"x": 1}</think>{"streszczenia": [{"id": 1, "tekst": "Tekst."}]}'
         self.assertEqual(parse_summaries(content, {1}), {1: "Tekst."})
 
+    def test_meta_answers_about_missing_material_are_dropped(self):
+        content = json.dumps({"streszczenia": [
+            {"id": 1, "tekst": "Brak dostępnych informacji w treści artykułu."},
+            {"id": 2, "tekst": "Tekst artykułu nie zawiera szczegółów."},
+            {"id": 3, "tekst": "Microsoft potwierdził problemy z Exchange."},
+        ]})
+        self.assertEqual(parse_summaries(content, {1, 2, 3}), {3: "Microsoft potwierdził problemy z Exchange."})
+
+    def test_summary_mentioning_missing_details_is_kept(self):
+        content = json.dumps({"streszczenia": [
+            {"id": 1, "tekst": "W raporcie brak informacji o sprawcach, ale firma potwierdziła atak."},
+        ]})
+        self.assertEqual(len(parse_summaries(content, {1})), 1)
+
     def test_answer_without_json_raises(self):
         with self.assertRaises(ValueError):
             parse_summaries("Nie mogę pomóc.", {1})

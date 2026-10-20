@@ -52,7 +52,7 @@ class TestBackfill(unittest.TestCase):
         self.assertEqual(self.run_backfill(save=True), 2)
         self.assertEqual(self.saved(), {
             "https://example.com/old": "Streszczenie: Opis z RSS.",
-            "https://example.com/gone": "Streszczenie: z tytułu",
+            "https://example.com/gone": "Streszczenie: Old article",
             "https://example.com/done": "Już jest.",
         })
 
@@ -77,7 +77,7 @@ class TestBackfill(unittest.TestCase):
         )
         self.assertEqual(used, ["RSS", "tylko tytuł"])
         self.assertEqual(articles[0]["description"], "Opis z RSS.")
-        self.assertEqual(articles[1]["description"], "")
+        self.assertEqual(articles[1]["description"], "Old article")
 
 
 if __name__ == "__main__":

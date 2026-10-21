@@ -141,5 +141,130 @@
     "related": [],
     "continuation": false,
     "summary": "Siemens naprawił podatność typu DLL sideloading w Siemens Software Center, którą wykorzystano w atakach ClickFix. Atakujący mogli umieścić spreparowaną bibliotekę DLL, co umożliwiło uruchomienie złośliwego kodu z takimi samymi uprawnieniami jak aplikacja."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "PHP warns admins of two critical flaws, emergency patches coming tomorrow",
+    "link": "https://www.bleepingcomputer.com/news/security/php-warns-admins-of-two-critical-flaws-emergency-patches-coming-tomorrow/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "PHP2Shell: Two Unpatched Critical PHP RCE Flaws (CVSS 9.2) Trigger Emergency Security Alert",
+        "link": "https://thehackernews.com/2026/10/php2shell-two-unpatched-critical-php.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Zespół bezpieczeństwa PHP ostrzega administratorów o konieczności przygotowania się na awaryjne aktualizacje bezpieczeństwa, które mają naprawić dwie krytyczne podatności. Łatki zostaną udostępnione jutro."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Qilin and INC Ransomware Groups Exploit Palo Alto Networks Flaw to Bypass MFA",
+    "link": "https://thehackernews.com/2026/10/qilin-and-inc-ransomware-groups-exploit.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupy ransomware Qilin i INC wykorzystały lukę w PAN-OS i Prisma Access, umożliwiając obejście MFA poprzez obejście uwierzytelniania. Luka (CVE-2026-0257) została załatana w maju 2026 roku."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Cyberatak na niemiecką AfD. Skala może być ogromna",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-niemiecka-afd-skala-moze-byc-ogromna",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Hakerzy włamały się do skrzynek pocztowych polityków AfD i opublikowały setki tysięcy e‑maili oraz dokumenty. Partia potwierdziła atak, nie podając jego skali."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Stolen UpdraftCentral keys used to backdoor WordPress sites",
+    "link": "https://www.bleepingcomputer.com/news/security/stolen-updraftcentral-keys-used-to-backdoor-wordpress-sites/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Sprawcy przełamali zabezpieczenia TeamUpdraft, uzyskując dostęp do kluczy UpdraftCentral, które mogą służyć do instalacji backdoora na stronach WordPress. Dzięki temu mogli wysyłać polecenia do połączonych witryn."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Zeabur shutting down after second security breach in two months",
+    "link": "https://www.bleepingcomputer.com/news/security/zeabur-shutting-down-after-second-security-breach-in-two-months/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Zeabur ujawnił, że atakujący wykorzystali wyciek wewnętrznych poświadczeń zapisanych w postaci niezaszyfrowanej, co doprowadziło do kompromitacji infrastruktury. Skradziono ponad 3,2 mln rekordów zmiennych środowiskowych i dane ponad 321 tys. kont."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Hackers Use Autonomous AI Agents to Breach Company Websites, Target Over 1,200 Sites",
+    "link": "https://thehackernews.com/2026/10/hackers-use-autonomous-ai-agents-to.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Chińskojęzyczny przestępca skierował autonomiczne agenty AI na witryny firmowe, które próbowały włamać się do ponad 1 200 stron przy minimalnym udziale operatora. Badacz bezpieczeństwa obserwował atak, ponieważ panele sterowania pozostawiono otwarte w Internecie."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Russian APT28 Breaches NATO Naval Shipbuilder in NATO Country, Deploys New Reflective Loader",
+    "link": "https://thehackernews.com/2026/10/russian-apt28-breaches-nato-naval.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Opłacani przez państwo grupa APT28, znana także jako BlueDelta, Fancy Bear i Forest Blizzard, użyła backdoora HOOKEDGE w atakach na dwa państwa członkowskie NATO. Dodatkowo wprowadzono nowy refleksyjny loader, co zwiększyło skuteczność ich działań."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Windows Server 2025 gets support for quick machine recovery",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/windows-server-2025-gets-support-for-quick-machine-recovery/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft ogłosił, że administratorzy IT mogą korzystać z szybkiego przywracania maszyn w Windows Server 2025 po zainstalowaniu aktualizacji zabezpieczeń z października 2026 roku. Funkcja ma ułatwić odzyskiwanie systemów po awariach."
+  },
+  {
+    "date": "2026-10-21",
+    "title": "Critical FortiSIEM Flaw Gets Public Exploit PoC for Unauthenticated Remote Code Execution",
+    "link": "https://thehackernews.com/2026/10/critical-fortisiem-flaw-gets-public.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Badacze opublikowali PoC exploit wykorzystujący krytyczną podatność (luka) typu path traversal w Fortinet FortiSIEM, oznaczoną jako CVE-2026-106173 z wynikiem CVSS 9,4. Luka umożliwia nieautoryzowanemu atakującemu wykonanie dowolnego kodu bez uwierzytelnienia."
   }
 ]

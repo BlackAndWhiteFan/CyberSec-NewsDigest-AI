@@ -54,8 +54,14 @@ Nowe i zmienione pliki: `src/kev.py` (nowy), `src/test_kev.py` (nowy),
 `src/test_weekly_top.py` (testy nie pobierają katalogu), README (PL/EN).
 
 Zmianę zweryfikowano: testy jednostkowe (250) zakończone powodzeniem.
-Test na gałęzi (dostęp serwera GitHuba do katalogu, liczba oznaczonych
-artykułów) oczekuje na wykonanie.
+Test na gałęzi `v28-kev` 23.10.2026 (01:34): katalog pobrany z
+www.cisa.gov (1754 pozycje), oznaczone 2 z 20 artykułów (Arista
+VeloCloud Orchestrator CVE-2026-114625, BeyondTrust Remote Support
+CVE-2026-102764), objaśnienie 🔥 pod prasówką; streszczenia AI 20 z 20
+(jedna poprawka po błędzie 429 u obu modeli uratowana naprawą przez
+kod). Do dalszej obserwacji: uwagi w formie „Nie podano informacji…” /
+„Nie podano zaleceń” nie są jeszcze wykrywane, a przegląd typu
+„ThreatsDay” streszczany jest jednym tematem z wielu.
 
 ## v27 --- 22.10.2026
 
@@ -1245,8 +1251,15 @@ New and changed files: `src/kev.py` (new), `src/test_kev.py` (new),
 `src/test_weekly_top.py` (tests do not download the catalog), README
 (PL/EN).
 
-The change was verified: unit tests (250) passed. A branch test (GitHub
-runner access to the catalog, number of marked articles) is pending.
+The change was verified: unit tests (250) passed. Test on the `v28-kev`
+branch on 2026-10-23 (01:34): catalog downloaded from www.cisa.gov (1754
+entries), 2 of 20 articles marked (Arista VeloCloud Orchestrator
+CVE-2026-114625, BeyondTrust Remote Support CVE-2026-102764), 🔥 note
+below the digest; AI summaries 20 of 20 (one correction after a 429 from
+both models was saved by the code repair). To watch: remarks in the form
+"Nie podano informacji…" / "Nie podano zaleceń" are not detected yet,
+and a roundup such as "ThreatsDay" is summarized by one of its many
+topics.
 
 ## v27 --- 2026-10-22
 

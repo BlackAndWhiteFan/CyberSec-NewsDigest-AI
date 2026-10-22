@@ -266,5 +266,184 @@
     "related": [],
     "continuation": false,
     "summary": "Badacze opublikowali PoC exploit wykorzystujący krytyczną podatność (luka) typu path traversal w Fortinet FortiSIEM, oznaczoną jako CVE-2026-106173 z wynikiem CVSS 9,4. Luka umożliwia nieautoryzowanemu atakującemu wykonanie dowolnego kodu bez uwierzytelnienia."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Krytyczne podatności w PHP core. Wyszła łatka.",
+    "link": "https://sekurak.pl/krytyczne-podatnosci-w-php-core-dzisiaj-wychodzi-latka/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "W PHP core wykryto krytyczne podatności umożliwiające zdalny dostęp bez uwierzytelnienia, opisane w CVE-2026-109618 i CVE-2026-109619. Wydano łatkę, której instalacja eliminuje ryzyko exploitacji nawet w najprostszych aplikacjach."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Cyberatak na francuskie sklepy. Lodówki za stare na łatki",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-francuskie-sklepy-lodowki-za-stare-na-latki",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Zhakowane lodówki w francuskich sklepach nie otrzymają już łatek od producentów po zakończeniu okresu wsparcia. Agencja UE ds. Cyberbezpieczeństwa przypomina, że obowiązek zgłaszania podatności pozostaje jedynie w ramach Aktu o cyberodporności."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Krytyczne podatności w PHP. Konieczna pilna aktualizacja",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/krytyczna-podatnosci-w-php-konieczna-pilna-aktualizacja",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "W PHP wykryto dwie krytyczne podatności umożliwiające RCE. Użytkownicy powinni niezwłocznie zastosować udostępnione łatki."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "CISA: Hackers chain Plex flaws in Plex2Shell attacks to breach servers",
+    "link": "https://www.bleepingcomputer.com/news/security/cisa-hackers-chain-plex-flaws-in-plex2shell-attacks-to-breach-servers/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "CISA Orders Federal Agencies to Patch Exploited Plex2Shell, Siemens, and SiteGuard Flaws",
+        "link": "https://thehackernews.com/2026/10/cisa-orders-federal-agencies-to-patch.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "CISA ostrzega, że cyberprzestępcy aktywnie wykorzystują cztery podatności w Plex Media Server. exploit tych luk mogą prowadzić do przejęcia kontroli nad serwerami."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Rosyjscy hakerzy w przemyśle zbrojeniowym państw NATO. Odkryto nieznane narzędzie",
+    "link": "https://cyberdefence24.pl/rosyjscy-hakerzy-w-przemysle-zbrojeniowym-panstw-nato-odkryto-nieznane-narzedzie",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa powiązana z rosyjskim wywiadem wojskowym GRU atakowała organizacje obronne NATO, zdobywając poświadczenia i wykorzystując nieznane dotąd narzędzie. Badacze Symanteca odtworzyli przebieg włamania, pokazując metodologię podwyższenia uprawnień i dalszego dostępu do zasobów."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Japan's Onamae Desktop Cloud hacked, up to 27,000 servers affected",
+    "link": "https://www.bleepingcomputer.com/news/security/japans-onamae-desktop-cloud-hacked-up-to-27-000-servers-affected/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Hakerzy przejęli infrastrukturę Onamae Desktop Cloud i zainstalowali malware na serwerach klientów. Dotyczy to maksymalnie 26 739 serwerów VPS."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "CISA: SafePay ransomware hit over 600 critical infrastructure orgs",
+    "link": "https://www.bleepingcomputer.com/news/security/cisa-and-fbi-safepay-ransomware-has-hit-over-600-critical-infrastructure-organizations/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CISA poinformowała, że grupa ransomware SafePay dokonała wycieku danych w ponad 600 organizacjach infrastruktury krytycznej od 2024 roku. Atak ten stanowi poważne zagrożenie dla kluczowych sektorów."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Attackers Abuse UpdraftCentral Keys to Plant Backdoors on WordPress Sites",
+    "link": "https://thehackernews.com/2026/10/attackers-abuse-updraftcentral-keys-to.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Nieznani sprawcy przełamali zabezpieczenia witryny TeamUpdraft i uzyskali dostęp do kluczy połączeń UpdraftCentral, UpdraftVault i UpdraftClone. Następnie wykorzystali je do instalacji backdoorów na stronach WordPress."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "State Bank of India Confirms Data Leak After 3,897 Customer Records Found on Dark Web",
+    "link": "https://thehackernews.com/2026/10/state-bank-of-india-confirms-data-leak.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "State Bank of India potwierdził wyciek danych, w wyniku którego 3 897 rekordów klientów pojawiło się w dark web. Bank nie zna źródła incydentu i prowadzi dalsze dochodzenie."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Złośliwy serwer może przechwycić dane uwierzytelniające OAuth w MCP Python SDK",
+    "link": "https://sekurak.pl/zlosliwy-serwer-moze-przechwycic-dane-uwierzytelniajace-oauth-w-mcp-python-sdk/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Badacze z Cycode odkryli podatność w protokole MCP, umożliwiającą złośliwemu serwerowi przechwycenie poświadczeń OAuth z SDK Python. Luka pozwala atakującemu na nieautoryzowany dostęp do danych uwierzytelniających."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "PHP ships emergency patches for critical PHP2Shell flaws",
+    "link": "https://www.bleepingcomputer.com/news/security/php-ships-emergency-patches-for-critical-php2shell-flaws/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół bezpieczeństwa PHP wydał emergency łatki naprawiające dwie krytyczne podatności (luka) typu RCE, znane jako PHP2Shell. Łatki eliminują możliwość RCE na serwerze bez uprzedniego uwierzytelnienia."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "Critical GitLab Flaw (CVSS 10.0) Could Allow Unauthenticated RCE Across 12 Years of Releases",
+    "link": "https://thehackernews.com/2026/10/critical-gitlab-flaw-cvss-100-could.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "GitLab opublikował łatki usuwające krytyczną podatność (luka) RCE, ocenioną CVSS 10.0, która umożliwiała nieautoryzowane uruchamianie kodu na serwerach self‑managed od wersji 7.0. Łatki obejmują wszystkie wersje od 7.0 do najnowszych, wymagając aktualizacji do najnowszych wersji."
+  },
+  {
+    "date": "2026-10-22",
+    "title": "PHP Issues Emergency Patches for Two Critical PHP2Shell RCE Flaws as Exploit Attempts Emerge",
+    "link": "https://thehackernews.com/2026/10/php-issues-emergency-patches-for-two.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "PHP wydało emergency łatki naprawiające dwie krytyczne podatności (luka) RCE, określane jako PHP2Shell, po wykryciu prób exploitów. Aktualizacje dostępne są w wersjach 8.5.12, 8.4.27, 8.3.36 i 8.2.35 i w pełni zabezpieczają serwery przed RCE."
   }
 ]

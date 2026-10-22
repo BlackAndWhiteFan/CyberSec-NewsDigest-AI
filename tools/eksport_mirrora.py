@@ -42,8 +42,12 @@ COLUMNS = ["id", "termin_en", "haslo", "forma", "nawias", "regula", "unikaj", "o
 # Digest decisions (JW, 19.10.2026). Keys: entry ID. Missing keys keep the
 # default value of the column.
 OVERRIDES = {
+    # 22.10.2026 (v25): the AI added "(luka)" uninflected after every
+    # "podatność" ("dwie krytyczne podatności (luka)"), so it is forbidden;
+    # "luka" may still be used on its own.
     "H164": {"forma": "podatność", "nawias": "",
-             "regula": "dopisz „(luka)” w nawiasie tylko wtedy, gdy to słowo naprawdę pasuje do kontekstu"},
+             "regula": "nie dopisuj „(luka)” w nawiasie; słowa „luka” możesz używać zamiennie",
+             "unikaj": r"\(luk\w*\)"},
     "H153": {"forma": "exploit", "nawias": "kod wykorzystujący podatność",
              "regula": "nie spolszczaj", "unikaj": r"eksploit\w*"},
     "H159": {"unikaj": r"(?:podatnoś|luk)\w* dnia zerowego"},

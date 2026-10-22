@@ -75,7 +75,12 @@ sprawdzane na przykładowym haśle), README (PL/EN).
 Zmianę zweryfikowano: testy jednostkowe (203) zakończone powodzeniem;
 uruchomienie testowe zadania Weekly Top 5 w cron-job.org 21.10.2026
 zwróciło 204 i uruchomiło workflow na `main` (zakończony powodzeniem,
-bez wysyłki, bo archiwum nie obejmuje tygodnia 12–18.10). Pierwsze
+bez wysyłki, bo archiwum nie obejmuje tygodnia 12–18.10). Test na
+gałęzi `v24-budzik` 22.10.2026: uruchomienie bez pola `budzik`
+dostarczyło prasówkę (2 artykuły) na kanał testowy, a uruchomienie z
+zaznaczonym polem `budzik` zakończyło się bez wysyłki z komunikatem
+„Dzisiejsza prasówka już poszła – ten zaplanowany start kończy się bez
+wysyłki.”. Pierwsze
 poranne uruchomienie prasówki przez budzik i blokada kolejnych prób
 oczekują na potwierdzenie po scaleniu.
 
@@ -978,7 +983,12 @@ a sample entry), README (PL/EN).
 The change was verified: unit tests (203) passed; a test run of the
 Weekly Top 5 job in cron-job.org on 2026-10-21 returned 204 and started
 the workflow on `main` (successful, nothing sent, because the archive
-does not cover the week of 12–18 October). The first morning digest
+does not cover the week of 12–18 October). Test on the `v24-budzik`
+branch on 2026-10-22: a run without `budzik` delivered a digest (2
+articles) to the test channel, and a run with `budzik` checked ended
+without sending, with the message "Dzisiejsza prasówka już poszła – ten
+zaplanowany start kończy się bez wysyłki." (today's digest has already
+been sent). The first morning digest
 started by the alarm clock and the skipping of later attempts are
 awaiting confirmation after merging.
 

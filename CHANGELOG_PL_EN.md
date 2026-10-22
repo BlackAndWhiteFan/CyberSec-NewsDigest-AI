@@ -147,7 +147,16 @@ Dalsze poprawki:
   znaków pilnuje kontrola i naprawa przez kod (całe zdania).
 
 Zmianę zweryfikowano: testy jednostkowe (240) zakończone powodzeniem.
-Trzeci test na gałęzi oczekuje na wykonanie.
+Trzeci test na gałęzi 22.10.2026: pełna treść pobrana z 12 z 12 stron,
+streszczenia AI **16 z 16**, tylko jedna prośba o poprawkę (uwaga
+„Raport nie podaje…”, poprawiona przez AI), bez błędu limitu zapytań i
+bez naprawy przez kod. Streszczenia mają 1–3 zdania z kropkami, bez
+średników i ucięć, z numerami CVE, wersjami i liczbami ze stron
+artykułów; odmiana poprawna („chroniące przed exploitem (kodem
+wykorzystującym podatność)”), „także:” wymienia każdy serwis raz.
+Zauważony błąd do dalszej obserwacji: w jednym streszczeniu rok
+„2024” z tytułu trafił do daty łatki („21 października 2024”); kontrola
+faktów tego nie wykrywa, bo liczba występuje w materiale.
 
 ## v26 --- 22.10.2026
 
@@ -1301,8 +1310,17 @@ Further fixes:
   the 400-character length is kept by the check and the code repair
   (whole sentences).
 
-The change was verified: unit tests (240) passed. A third branch test is
-pending.
+The change was verified: unit tests (240) passed. Third branch test on
+2026-10-22: full text fetched from 12 of 12 pages, AI summaries **16 of
+16**, only one correction request (the remark "Raport nie podaje…",
+corrected by the AI), no rate-limit error and no code repair. Summaries
+have 1–3 sentences with full stops, no semicolons and no cuts, with CVE
+ids, versions and numbers from the article pages; inflection correct
+("chroniące przed exploitem (kodem wykorzystującym podatność)"),
+"także:" lists each site once. An error to watch: in one summary the
+year "2024" from the title ended up in the patch date ("21 października
+2024"); the fact check does not catch it, because the number is in the
+material.
 
 ## v26 --- 2026-10-22
 

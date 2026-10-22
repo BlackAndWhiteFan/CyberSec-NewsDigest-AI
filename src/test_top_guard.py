@@ -25,6 +25,11 @@ class TestTopGuard(unittest.TestCase):
         mark_sent("month", "2026-10", self.path)
         self.assertFalse(should_skip("month", "2026-10", "workflow_dispatch", self.path))
 
+    def test_alarm_clock_run_is_skipped_after_period_was_sent(self):
+        mark_sent("week", "2026-W43", self.path)
+        self.assertTrue(should_skip("week", "2026-W43", "budzik", self.path))
+        self.assertFalse(should_skip("week", "2026-W44", "budzik", self.path))
+
     def test_missing_or_damaged_marker_does_not_block(self):
         self.assertFalse(should_skip("month", "2026-10", "schedule", self.path))
         self.path.parent.mkdir(parents=True)

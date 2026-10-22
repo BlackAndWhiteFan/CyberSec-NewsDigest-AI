@@ -22,6 +22,7 @@ from datetime import datetime
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from discord_output import polish_plural, send_messages, split_into_messages
 from event_grouping import SIMILARITY_THRESHOLD, document_frequency, same_event
+from kev import KEV_NOTE, MARKER as KEV_MARKER, load_kev, refresh_records
 import test_mode
 import top_guard
 
@@ -131,6 +132,7 @@ def summarize_event(event):
         "score": max(record.get("score", 0) for record in event),
         "first_date": min(record.get("date", "") for record in event),
         "summary": event_summary(event),
+        "kev": sorted(set().union(*(set(record.get("kev", [])) for record in event))),
     }
 
 
@@ -158,8 +160,9 @@ def format_event_line(number, event):
     sources = polish_plural(event["sources"], "serwis", "serwisy", "serwisów")
     day, month = event["first_date"][8:10], event["first_date"][5:7]
 
+    marker = KEV_MARKER if event.get("kev") else ""
     line = (
-        f"{number}. [{title}](<{event['link']}>) · "
+        f"{number}. {marker}[{title}](<{event['link']}>) · "
         f"{event['articles']} {articles}, {event['sources']} {sources} · od {day}.{month}"
     )
 
@@ -187,10 +190,17 @@ def build_top_lines(month, records, limit=TOP_LIMIT):
 
     lines.append("")
 
-    for number, event in enumerate(rank_events(records, limit), start=1):
+    events = rank_events(records, limit)
+
+    for number, event in enumerate(events, start=1):
         lines.append(format_event_line(number, event))
 
-    return lines
+    return lines + kev_note(events)
+
+
+def kev_note(events):
+    """The 🔥 legend, when any event is marked (v28)."""
+    return ["", KEV_NOTE] if any(event.get("kev") for event in events) else []
 
 
 def deliver(kind, period, lines, real_variable, marker_path=top_guard.MARKER_PATH, complete=True):
@@ -229,7 +239,8 @@ def deliver(kind, period, lines, real_variable, marker_path=top_guard.MARKER_PAT
         top_guard.mark_sent(kind, period, marker_path)
 
 
-def run(month=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, today=None):
+def run(month=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, today=None,
+        load_kev_catalog=None):
     today = today or datetime.now(TIMEZONE).date()
     month = month or os.environ.get("MONTH", "").strip() or previous_month(today)
 
@@ -244,6 +255,8 @@ def run(month=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, 
 
     records = load_archive(f"{archive_dir}/{month}.json")
     print("Artykuły w archiwum:", len(records))
+    # v28: CVE ids checked again with the current CISA KEV catalog.
+    refresh_records(records, (load_kev_catalog or load_kev)())
 
     complete = month < today.strftime("%Y-%m")
     deliver("month", month, build_top_lines(month, records), "DISCORD_MONTHLY_WEBHOOK_URL", marker_path, complete)

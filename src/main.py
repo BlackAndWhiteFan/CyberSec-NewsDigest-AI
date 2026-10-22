@@ -21,6 +21,7 @@ from article_selection import (
 from discord_output import build_digest_messages, send_messages
 from ai_summaries import summarize_articles, summary_source
 from article_pages import add_page_texts
+from kev import load_kev, mark_kev
 from article_archive import append_to_archive, load_recent
 from event_grouping import group_events, mark_continuations
 from run_guard import mark_done, should_skip
@@ -254,6 +255,8 @@ def run():
     print("STRESZCZENIA AI")
     # v27: short feed teasers are completed with text from the article page.
     add_page_texts(selected_articles, lambda article: len(summary_source(article)))
+    # v28: 🔥 for vulnerabilities from the CISA KEV catalog (set by code).
+    mark_kev(selected_articles, load_kev())
     summarize_articles(selected_articles)
 
     print()

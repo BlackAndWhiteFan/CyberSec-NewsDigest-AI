@@ -54,7 +54,8 @@ OVERRIDES = {
     # 20.10.2026: "łatka" without parentheses ("wiadomo, że to poprawka");
     # 21.10.2026: "poprawka" forbidden, so the AI keeps to "łatka".
     "H166": {"forma": "łatka", "nawias": "", "unikaj": r"poprawk\w*|poprawce|poprawek"},
-    "H090": {"unikaj": r"zdaln\w+ wykonani\w+ kodu"},
+    # 22.10.2026 (v25): also the English form left untranslated by the AI.
+    "H090": {"unikaj": r"zdaln\w+ wykonani\w+ kodu | remote code execution"},
     "H182": {"forma": "podwyższenie uprawnień", "nawias": "eskalacja",
              "unikaj": r"eskalacj\w* uprawnień | podniesieni\w* uprawnień"},
     "H152": {"unikaj": r"dow[oó]d\w* koncepcji"},

@@ -171,6 +171,7 @@ class TestConventionViolations(unittest.TestCase):
             "Grupa sponsorowana przez państwo.": "opłacani przez państwo",
             "Załatano dwie podatności (luka) RCE.": "podatność",
             "Błąd może umożliwić remote code execution.": "RCE",
+            "Aktualizacje patchują zero-day.": "łatka",
         }
 
         for text, required in cases.items():

@@ -140,6 +140,30 @@ INFLECTED = {
 }
 
 
+# Forbidden forms that code can replace safely (v27, third branch test of
+# 22.10.2026: most correction requests were for "poprawki" and "zdalne
+# wykonanie kodu", and a rate-limited correction round lost five
+# summaries). Replacing them in code saves AI requests. "łatka" inflects
+# like "poprawka" (poprawce -> łatce), RCE does not inflect, and "eksploit"
+# forms map to the same "exploit" forms.
+AUTOFIX = [
+    (re.compile(r"(?<!\w)([Pp])opraw(ka|ki|kę|ką|ce|ek|kom|kami|kach)(?!\w)"),
+     lambda m: ("Ł" if m.group(1) == "P" else "ł") + "at" + m.group(2)),
+    (re.compile(r"(?<!\w)zdaln\w+ wykonani\w+ (?:dowolnego )?kodu(?!\w)", re.IGNORECASE), lambda m: "RCE"),
+    (re.compile(r"(?<!\w)remote code execution(?!\w)", re.IGNORECASE), lambda m: "RCE"),
+    (re.compile(r"(?<!\w)([Ee])ksploi(t|ta|ty|tem|tów|tom|tami|tach|towi|cie)(?!\w)"),
+     lambda m: m.group(1) + "xploi" + m.group(2)),
+]
+
+
+def autofix(text):
+    """Replace forbidden forms that have a safe automatic replacement."""
+    for pattern, replacement in AUTOFIX:
+        text = pattern.sub(replacement, text)
+
+    return text
+
+
 def load_mirror(path=MIRROR_PATH):
     """Return mirror entries as a list of dicts (comment lines skipped)."""
     with open(path, encoding="utf-8-sig") as file:

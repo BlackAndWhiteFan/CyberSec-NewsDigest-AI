@@ -41,6 +41,7 @@ GENERIC_PHRASES = [
     # What the article does not say (test 22.10.2026: "raport nie podaje
     # informacji o sprawcach ani o dostępnych środkach zaradczych").
     r"nie (podaje|podają|zawiera|wskazuje|ujawnia|precyzuje)\w* (żadnych )?(informacji|szczegółów|danych)",
+    r"(raport|artykuł|tekst|źródło|komunikat)\w* nie (podaje|zawiera|wskazuje|wymienia|precyzuje|ujawnia)\w*",
     r"brak (jest )?(informacji|szczegółów|danych) (o|na temat)",
 ]
 GENERIC = [re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE) for pattern in GENERIC_PHRASES]
@@ -210,3 +211,48 @@ def fix_sentence_case(text):
         text = text[0].upper() + text[1:]
 
     return text
+
+
+def split_sentences(text):
+    """Split a summary into sentences (not after abbreviations such as "m.in.")."""
+    sentences = []
+    start = 0
+
+    for match in re.finditer(r"[.!?](\s+)(?=[A-ZĄĆĘŁŃÓŚŹŻ0-9„\"])", text):
+        word_before = re.search(r"([\w.]*\w)?$", text[start:match.start()]).group(0)
+
+        if word_before.lower() in ABBREVIATIONS:
+            continue
+
+        sentences.append(text[start:match.end(1) - len(match.group(1))].strip())
+        start = match.end()
+
+    if text[start:].strip():
+        sentences.append(text[start:].strip())
+
+    return sentences
+
+
+def repair_summary(text, has_problems, limit=MAX_SUMMARY_LENGTH):
+    """Repair a summary by code when the AI correction failed (v27).
+
+    Semicolons become sentence ends, sentences with problems are removed
+    (has_problems(sentence) -> list) and the summary is cut to whole
+    sentences within the limit. Returns "" when nothing good is left.
+    """
+    text = fix_sentence_case(re.sub(r"\s*;\s*", ". ", text))
+    kept = []
+
+    for sentence in split_sentences(text):
+        if not sentence.endswith((".", "!", "?")):
+            continue
+
+        if has_problems(sentence):
+            continue
+
+        if len(" ".join(kept + [sentence])) > limit:
+            break
+
+        kept.append(sentence)
+
+    return " ".join(kept)

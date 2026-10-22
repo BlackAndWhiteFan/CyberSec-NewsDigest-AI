@@ -262,8 +262,8 @@ class TestGlossaryEnforcement(unittest.TestCase):
     def test_summary_still_wrong_after_correction_is_dropped(self):
         articles = [make_article("A"), make_article("B")]
         opener = ScriptedOpener([
-            {1: "Opublikowano eksploit.", 2: "Producent wydał łatkę."},
-            {1: "Opublikowano eksploit ponownie."},
+            {1: "Wykradziono kredencjały.", 2: "Producent wydał łatkę."},
+            {1: "Wykradziono kredencjały ponownie."},
         ])
 
         summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
@@ -303,6 +303,54 @@ class TestGlossaryEnforcement(unittest.TestCase):
         summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
 
         self.assertEqual(articles[0]["summary"], "Luka w routerach. Exploit krąży w sieci.")
+
+    def test_failed_correction_is_repaired_by_code(self):
+        articles = [make_article("Pegasus", "Citizen Lab confirmed Pegasus on the rector's iPhone on October 19.")]
+        long = ("Citizen Lab potwierdził infekcję Pegasusem na iPhonie rektora 19 października; "
+                "raport nie podaje sprawcy. Infekcję wykryto przed wyborami.")
+
+        class FailingCorrection(ScriptedOpener):
+            def __call__(self, request, timeout):
+                if self.requests:
+                    raise urllib.error.HTTPError("https://api", 500, "error", {}, None)
+                return super().__call__(request, timeout)
+
+        opener = FailingCorrection([{1: long}])
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
+
+        self.assertEqual(
+            articles[0]["summary"],
+            "Citizen Lab potwierdził infekcję Pegasusem na iPhonie rektora 19 października. "
+            "Infekcję wykryto przed wyborami.",
+        )
+
+    def test_safe_replacements_need_no_correction_request(self):
+        articles = [make_article("A")]
+        opener = ScriptedOpener([{1: "Producent wydał poprawki; luka umożliwiała zdalne wykonanie kodu."}])
+
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
+
+        self.assertEqual(articles[0]["summary"], "Producent wydał łatki. Luka umożliwiała RCE.")
+        self.assertEqual(len(opener.requests), 1)
+
+    def test_failed_correction_falls_back_to_second_model(self):
+        articles = [make_article("A")]
+
+        class FirstCorrectionFails(ScriptedOpener):
+            def __call__(self, request, timeout):
+                model = json.loads(request.data.decode("utf-8"))["model"]
+                if self.requests and model == "openai/gpt-oss-120b":
+                    raise urllib.error.HTTPError("https://api", 500, "error", {}, None)
+                return super().__call__(request, timeout)
+
+        opener = FirstCorrectionFails([
+            {1: "Wykradziono kredencjały."},
+            {1: "Wykradziono poświadczenia."},
+        ])
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
+
+        self.assertEqual(articles[0]["summary"], "Wykradziono poświadczenia.")
+        self.assertEqual(opener.requests[1]["model"], "qwen/qwen3.8-27b")
 
     def test_correct_summaries_need_no_second_request(self):
         articles = [make_article("A")]

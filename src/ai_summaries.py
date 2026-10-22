@@ -25,8 +25,8 @@ import time
 import urllib.error
 import urllib.request
 
-from glossary import convention_violations, is_acronym, prompt_glossary
-from summary_quality import fix_sentence_case, quality_problems
+from glossary import autofix, convention_violations, is_acronym, prompt_glossary
+from summary_quality import fix_sentence_case, quality_problems, repair_summary
 
 
 PROVIDERS = [
@@ -50,7 +50,8 @@ PROVIDERS = [
 
 BATCH_SIZE = 5
 SOURCE_TEXT_LIMIT = 1500
-SUMMARY_LIMIT = 450
+# Safety limit only; the quality check keeps summaries within 400 characters.
+SUMMARY_LIMIT = 1000
 REQUEST_TIMEOUT = 60
 MAX_RATE_LIMIT_RETRIES = 2
 MAX_RETRY_WAIT = 60
@@ -150,7 +151,11 @@ def clean_summary(text, limit=SUMMARY_LIMIT):
     text = re.sub(r"https?://\S+", "", str(text))
     text = re.sub(r"[`*_~|>#\[\]<]", "", text)
     text = text.replace("@", "")
-    text = fix_sentence_case(re.sub(r"\s+", " ", text).strip())
+    text = re.sub(r"\s+", " ", text).strip()
+    # v27: fixes that need no AI request: semicolons become sentence ends,
+    # forbidden forms with a safe replacement are replaced (glossary.autofix).
+    text = re.sub(r"\s*;\s*", ". ", text)
+    text = fix_sentence_case(autofix(text))
 
     if len(text) > limit:
         text = text[:limit - 1].rsplit(" ", 1)[0] + "…"
@@ -285,8 +290,18 @@ def find_problems(summaries, sources=None):
     }
 
 
-def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep, sources=None):
-    """Return summaries without problems; correct once, then drop."""
+def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep, sources=None,
+                  fallbacks=()):
+    """Return summaries without problems.
+
+    A summary with problems is sent back to the AI once. When the corrected
+    summary still has problems (or the correction request failed, e.g. rate
+    limited), code repairs it: semicolons become sentence ends, sentences
+    with problems are removed and the text is cut to whole sentences (v27,
+    test 22.10.2026: eight summaries lost). Only a summary with nothing good
+    left is dropped.
+    """
+    sources = sources or {}
     problems = find_problems(summaries, sources)
 
     if not problems:
@@ -295,26 +310,41 @@ def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep
     for number, items in problems.items():
         print(f"KONTROLA: streszczenie {number} – " + "; ".join(items))
 
-    try:
-        corrected = parse_summaries(
-            ask_provider(provider, api_key, correction_messages(messages, content, problems), opener, sleep),
-            set(problems),
-        )
-    except Exception as error:
-        print(f"BŁĄD AI przy poprawce streszczeń: {type(error).__name__}: {str(error)[:200]}")
-        corrected = {}
+    corrected = {}
+
+    # The correction may be rate limited (429 seen 22.10.2026); then the
+    # other model (separate limits) is asked before code repair.
+    for name, ask in [(provider["name"], (provider, api_key))] + [(p["name"], (p, k)) for p, k in fallbacks]:
+        try:
+            corrected = parse_summaries(
+                ask_provider(ask[0], ask[1], correction_messages(messages, content, problems), opener, sleep),
+                set(problems),
+            )
+            break
+        except Exception as error:
+            print(f"BŁĄD AI przy poprawce streszczeń ({name}): {type(error).__name__}: {str(error)[:200]}")
 
     result = {number: text for number, text in summaries.items() if number not in problems}
 
     for number in problems:
+        source = sources.get(number)
         text = corrected.get(number)
-        remaining = all_problems(text, (sources or {}).get(number)) if text else ["brak poprawki"]
 
-        if not remaining:
+        if text and not all_problems(text, source):
             result[number] = text
             print(f"KONTROLA: streszczenie {number} poprawione.")
+            continue
+
+        repaired = repair_summary(
+            text or summaries[number],
+            lambda sentence: all_problems(sentence, source),
+        )
+
+        if repaired and not all_problems(repaired, source):
+            result[number] = repaired
+            print(f"KONTROLA: streszczenie {number} naprawione przez kod (bez zdań z problemami).")
         else:
-            print(f"KONTROLA: streszczenie {number} odrzucone ({'; '.join(remaining)}).")
+            print(f"KONTROLA: streszczenie {number} odrzucone (nic poprawnego nie zostało).")
 
     return result
 
@@ -354,8 +384,12 @@ def summarize_articles(articles, environ=None, opener=urllib.request.urlopen, sl
             try:
                 content = ask_provider(provider, api_key, messages, opener, sleep)
                 summaries = parse_summaries(content, expected)
+                fallbacks = [
+                    (other, environ[other["key_variable"]].strip())
+                    for other in providers if other is not provider
+                ]
                 summaries = enforce_rules(
-                    provider, api_key, messages, content, summaries, opener, sleep, sources
+                    provider, api_key, messages, content, summaries, opener, sleep, sources, fallbacks
                 )
             except Exception as error:
                 # The key is never part of the message: only the provider

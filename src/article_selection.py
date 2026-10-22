@@ -165,6 +165,10 @@ MIN_PRIORITY_SCORE = 2
 DEFAULT_SOURCE_LIMIT = 4
 SOURCE_LIMITS = {
     "niebezpiecznik.pl": 2,
+    # v26: frequent English sources get less room, so that with eleven
+    # sources the Polish ones are not pushed out of the 20 articles.
+    "securityweek.com": 3,
+    "therecord.media": 3,
 }
 
 

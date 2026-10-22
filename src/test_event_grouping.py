@@ -220,5 +220,43 @@ class TestContinuations(unittest.TestCase):
         self.assertFalse(article.get("continuation", False))
 
 
+class TestEventNames(unittest.TestCase):
+    """Titles from the digest test of 22.10.2026 (v26)."""
+
+    PHP = [
+        ("https://www.bleepingcomputer.com/a", "Amazon says PHP2Shell exploitation began 4 days before patches"),
+        ("https://thehackernews.com/b", "Someone Tried to Exploit PHP2Shell 4 Days Before the Vulnerabilities Were Publicly Disclosed"),
+        ("https://thehackernews.com/c", "PHP2Shell: What Actually Protects You Before the 14:00 UTC PHP RCE Patch, and What Doesn't"),
+        ("https://www.securityweek.com/d", "PHP2Shell Exploitation Started Days Before Patches"),
+        ("https://www.bleepingcomputer.com/e", "CISA: Hackers chain Plex flaws in Plex2Shell attacks to breach servers"),
+        ("https://therecord.media/f", "Russian APT28 hackers target Polish energy firm"),
+        ("https://www.securityweek.com/g", "APT28 Uses New Backdoor Against NATO Shipbuilder"),
+    ]
+
+    def articles(self):
+        return [{"title": title, "link": link, "description": ""} for link, title in self.PHP]
+
+    def test_shared_event_name_merges_articles_also_from_the_same_source(self):
+        groups = group_events(self.articles())
+        php = [g for g in groups if "PHP2Shell" in g["title"]]
+
+        self.assertEqual(len(php), 1)
+        self.assertEqual(len(php[0]["related"]), 3)
+
+    def test_different_event_names_and_group_names_are_not_merged(self):
+        groups = group_events(self.articles())
+        titles = [g["title"] for g in groups]
+
+        self.assertEqual(sum("Plex2Shell" in t for t in titles), 1)
+        self.assertEqual(sum("APT28" in t for t in titles), 2)
+
+    def test_similar_titles_from_one_source_without_strong_match_stay_apart(self):
+        articles = [
+            {"title": "Microsoft fixes Exchange sign-in bug", "link": "https://www.bleepingcomputer.com/x", "description": ""},
+            {"title": "Microsoft fixes Exchange mail flow bug", "link": "https://www.bleepingcomputer.com/y", "description": ""},
+        ]
+        self.assertEqual(len(group_events(articles)), 2)
+
+
 if __name__ == "__main__":
     unittest.main()

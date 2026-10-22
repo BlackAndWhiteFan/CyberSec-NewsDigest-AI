@@ -7,7 +7,9 @@ counts only when it is rare in the day's pool of articles: "Fakturownia",
 found in two titles, is strong evidence; "Microsoft", found in ten, is not.
 Generic security vocabulary ("exploit", "wyciek", "million"...) is ignored.
 
-Two titles describe the same event when they share a CVE identifier, when
+Two titles describe the same event when they share a CVE identifier or an
+event name made of letters and digits ("PHP2Shell", "Plex2Shell", "Log4j";
+v26), when
 their rare shared words reach SIMILARITY_THRESHOLD, or when they share one
 name found in no other title. A word counts as a name when it has a capital
 letter inside ("BeyondTrust") or is capitalized in the middle of a title
@@ -16,6 +18,12 @@ titles every word is capitalized, so capitalization says nothing there.
 
 The rules favour precision: a missed duplicate only repeats a story, while a
 false match would hide a different one.
+
+Event names with digits are checked before word rarity, because a big event
+appears in many titles of the day ("PHP2Shell" in five), so its name is not
+"rare" (seen in the digest test of 22.10.2026: three PHP2Shell articles shown
+separately). Such a shared name or CVE is also strong enough to merge two
+articles from the same source (The Hacker News wrote about PHP2Shell twice).
 """
 
 import re
@@ -30,6 +38,11 @@ NAME_MIN_LENGTH = 6
 NAME_ENDING_LENGTH = 3
 
 CVE_PATTERN = re.compile(r"cve-\d{4}-\d{4,}")
+# A word of at least 5 characters with at least 2 letters and a digit.
+EVENT_NAME_PATTERN = re.compile(r"(?<![\w-])(?=\w*[^\W\d_]\w*[^\W\d_])(?=\w*\d)\w{5,}(?![\w-])")
+# Names of threat groups and generic technical names with digits are not one
+# event: APT28 or Storm-1849 appear in many different stories.
+NOT_EVENT_NAME = re.compile(r"^(apt|unc|fin|ta|tag|storm|dev|uat|win|windows|covid|ipv|sha|aes|arm|x86|x64)\d")
 
 STOPWORDS = frozenset(
     """
@@ -61,6 +74,20 @@ GENERIC_STEMS = frozenset(
 
 def title_cves(title):
     return set(CVE_PATTERN.findall(title.casefold()))
+
+
+def title_event_names(title):
+    """Names with letters and digits, e.g. "php2shell" (CVE ids excluded)."""
+    names = EVENT_NAME_PATTERN.findall(CVE_PATTERN.sub(" ", title.casefold()))
+    return {name for name in names if not NOT_EVENT_NAME.match(name)}
+
+
+def strong_match(title_a, title_b):
+    """True when two titles share a CVE id or an event name with digits."""
+    return bool(
+        title_cves(title_a) & title_cves(title_b)
+        or title_event_names(title_a) & title_event_names(title_b)
+    )
 
 
 def is_title_case(words):
@@ -138,7 +165,7 @@ def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare
     as rare. Within one day it is 2 (only the compared pair); across a month
     it grows with the event, whose name appears in all of its articles.
     """
-    if title_cves(title_a) & title_cves(title_b):
+    if strong_match(title_a, title_b):
         return True
 
     words_a = title_words(title_a)
@@ -178,7 +205,9 @@ def group_events(articles, pool=None):
     first group whose leading article describes the same event, otherwise it
     starts a new group. Comparing with the leader only (not with every member)
     prevents chains of loosely related titles. Articles from the same source
-    are never merged, because a site does not report the same event twice.
+    are merged only on a strong match (shared CVE id or event name with
+    digits): a site may follow up its own story, but similar titles from one
+    site are usually different stories.
 
     Returns one representative per group, highest priority first; each
     representative gets a "related" list with the other articles.
@@ -196,6 +225,10 @@ def group_events(articles, pool=None):
             sources = {source_domain(member) for member in group}
 
             if source_domain(article) in sources:
+                if strong_match(leader.get("title", ""), article.get("title", "")):
+                    group.append(article)
+                    break
+
                 continue
 
             if same_event(leader.get("title", ""), article.get("title", ""), frequency):

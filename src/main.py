@@ -2,7 +2,7 @@ import os
 import urllib.request
 import xml.etree.ElementTree as ET
 import urllib.parse
-from rss_helpers import clean_title, is_valid_url, is_duplicate_link
+from rss_helpers import MAX_ARTICLE_AGE_DAYS, clean_title, is_duplicate_link, is_too_old, is_valid_url
 from article_history import (
     filter_unpublished_articles,
     load_history,
@@ -36,6 +36,12 @@ RSS_FEEDS = [
     "https://cyberdefence24.pl/rss",
     "https://www.bleepingcomputer.com/feed/",
     "https://thehackernews.com/feeds/posts/default",
+    # v26: more sources (research of 22.10.2026).
+    "https://cert.pl/rss.xml",
+    "https://kapitanhack.pl/feed/",
+    "https://www.securityweek.com/feed/",
+    "https://therecord.media/feed",
+    "https://krebsonsecurity.com/feed/",
 ]
 
 def fetch_feed(url):
@@ -71,6 +77,7 @@ def run():
     duplicate_items = 0
     previously_published_items = 0
     failed_feeds = 0
+    too_old_items = 0
     
     print("CyberSec NewsDigest AI")
     
@@ -129,6 +136,10 @@ def run():
                 print("POMINIĘTO: brak prawidłowego tytułu lub linku")
                 skipped_invalid_items += 1
                 continue
+
+            if is_too_old(item):
+                too_old_items += 1
+                continue
     
             
             if is_duplicate_link(link, seen_links):
@@ -174,6 +185,7 @@ def run():
     print("Duplikaty w bieżącym uruchomieniu:", duplicate_items)
     print("Artykuły opublikowane wcześniej (pominięte):", previously_published_items)
     print("Pominięte nieprawidłowe wpisy:", skipped_invalid_items)
+    print(f"Pominięte jako starsze niż {MAX_ARTICLE_AGE_DAYS} dni:", too_old_items)
     print("Nieudane feedy:", failed_feeds)
     
     grouped_articles = group_events(

@@ -271,6 +271,39 @@ class TestGlossaryEnforcement(unittest.TestCase):
         self.assertNotIn("summary", articles[0])
         self.assertEqual(articles[1]["summary"], "Producent wydał łatkę.")
 
+    def test_quality_problem_is_corrected(self):
+        articles = [make_article("PHP flaws", "PHP will release emergency patches tomorrow, 14:00 UTC.")]
+        opener = ScriptedOpener([
+            {1: "PHP wyda łatki jutro, co podkreśla wagę aktualizacji."},
+            {1: "PHP zapowiedział awaryjne łatki na 14:00 UTC."},
+        ])
+
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
+
+        self.assertEqual(articles[0]["summary"], "PHP zapowiedział awaryjne łatki na 14:00 UTC.")
+        correction = opener.requests[1]["messages"][-1]["content"]
+        self.assertIn("„jutro”", correction)
+        self.assertIn("ogólnik", correction)
+
+    def test_invented_number_still_wrong_after_correction_is_dropped(self):
+        articles = [make_article("Nikkei breach", "1.83M records exposed.")]
+        opener = ScriptedOpener([
+            {1: "Nikkei ujawniło 2,5 mln rekordów."},
+            {1: "Nikkei ujawniło 2,4 mln rekordów."},
+        ])
+
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
+
+        self.assertNotIn("summary", articles[0])
+
+    def test_summary_sentences_start_with_capital_letter(self):
+        articles = [make_article("A", "Text.")]
+        opener = ScriptedOpener([{1: "Luka w routerach. exploit krąży w sieci."}])
+
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
+
+        self.assertEqual(articles[0]["summary"], "Luka w routerach. Exploit krąży w sieci.")
+
     def test_correct_summaries_need_no_second_request(self):
         articles = [make_article("A")]
         opener = ScriptedOpener([{1: "Badacze opublikowali PoC."}])

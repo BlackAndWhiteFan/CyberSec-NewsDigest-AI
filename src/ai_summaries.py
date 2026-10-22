@@ -77,7 +77,7 @@ CO MA BYĆ W STRESZCZENIU:
 SŁOWNICZEK JEST OBOWIĄZKOWY:
 - Każdy termin, który występuje w słowniczku poniżej, zapisuj wyłącznie w formie podanej po strzałce (odmieniając ją zgodnie z polską gramatyką). Nie używaj żadnych innych odpowiedników, synonimów ani kalk – także wtedy, gdy artykuł źródłowy (polski lub angielski) używa innego słowa.
 - Przestrzegaj uwag w nawiasach przy terminach.
-- Odmieniaj terminy ze słowniczka zgodnie z polską gramatyką (np. „kilku exploitów”, „instalację backdoora”); przy liczbach używaj rzeczownika, np. „98 luk zero-day”, a nie „98 zero-day”.
+- Odmieniaj terminy ze słowniczka zgodnie z polską gramatyką jak polskie rzeczowniki (np. „przed exploitem”, „kilku exploitów”, „instalację backdoora”, „z botnetu”, „do infostealera”); nigdy nie zostawiaj ich w formie podstawowej po przyimku („przed exploit” jest błędem). Przy liczbach używaj rzeczownika, np. „98 luk zero-day”, a nie „98 zero-day”.
 - Nie dodawaj objaśnień terminów w nawiasach (robi to automatycznie kod), chyba że wymaga tego uwaga przy terminie.
 - Streszczenia są automatycznie sprawdzane: streszczenie niezgodne ze słowniczkiem lub z zasadami powyżej zostanie odrzucone.
 
@@ -109,11 +109,15 @@ def html_to_text(value):
 
 
 def summary_source(article, limit=SOURCE_TEXT_LIMIT):
-    """Return the text to summarize: the longer of the feed description and
-    the full content (when the feed provides it), cut at a word boundary."""
+    """Return the text to summarize: the longest of the feed description, the
+    full content (when the feed provides it) and the text from the article
+    page (when it was fetched), cut at a word boundary."""
     candidates = [
         html_to_text(article.get("description", "")),
         html_to_text(article.get("content", "")),
+        # v27: text from the article page, when the feed gave too little
+        # (article_pages.py); already plain text.
+        article.get("page_text", ""),
     ]
     text = max(candidates, key=len)
 
@@ -239,7 +243,8 @@ def ask_provider(provider, api_key, messages, opener=urllib.request.urlopen, sle
 
 def glossary_problems(text):
     return [
-        f"użyto „{used}”, a słowniczek wymaga „{required}”"
+        f"użyto „{used}”, a słowniczek wymaga „{required}” – odmień „{required}” "
+        f"tak jak „{used}” (ten sam przypadek i liczba)"
         for used, required in convention_violations(text)
     ]
 

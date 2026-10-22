@@ -40,6 +40,23 @@ class TestRelativeTime(unittest.TestCase):
         self.assertEqual(quality_problems("Łatki wydano we wtorek, 20 października."), [])
 
 
+class TestInflection(unittest.TestCase):
+    def test_uninflected_terms_after_prepositions_are_reported(self):
+        for text in ["Eksperci ostrzegają przed exploit, który krąży w sieci.",
+                     "Atak przeprowadzono przy użyciu botnet Mirai.",
+                     "Ochrona przed nowym infostealer."]:
+            with self.subTest(text=text):
+                problems = quality_problems(text)
+                self.assertEqual(len(problems), 1)
+                self.assertIn("nieodmieniony termin", problems[0])
+
+    def test_inflected_terms_and_accusative_are_fine(self):
+        for text in ["Eksperci ostrzegają przed exploitem.", "Opublikowano exploit.",
+                     "Zainstalowali backdoor w routerze.", "Członkowie botnetu zatrzymani."]:
+            with self.subTest(text=text):
+                self.assertEqual(quality_problems(text), [])
+
+
 class TestFacts(unittest.TestCase):
     SOURCE = "Nikkei discloses third data breach, 1.83M records exposed. CVE-2026-41234 was used. 14:00 UTC"
 

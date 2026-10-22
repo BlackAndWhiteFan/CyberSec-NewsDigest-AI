@@ -14,6 +14,10 @@ A summary with problems is sent back once for correction (together with
 glossary violations) and dropped if it still has problems: a missing
 summary is better than a wrong one.
 
+4. English terms left in the base form after a preposition that needs
+   another case ("przed exploit", "z botnet"; v27): the AI must inflect
+   them like Polish nouns ("przed exploitem").
+
 Sentence case is fixed by code, not by the AI (seen 22.10.2026: "exploit
 tych luk mogą…" at the start of a sentence after a glossary correction).
 """
@@ -54,6 +58,24 @@ RELATIVE_TIME = re.compile(
 # is as unclear in a weekly top as "jutro"; "w środę 21 października" is fine.
 WEEKDAY = re.compile(
     r"(?<!\w)we? (poniedziałek|wtorek|środę|czwartek|piątek|sobotę|niedzielę)(?![\w,]*\s*\(?\d)",
+    re.IGNORECASE,
+)
+
+# Declinable English terms (glossary forms) and prepositions or phrases
+# after which their base form (nominative/accusative) is wrong (v27).
+DECLINABLE_TERMS = (
+    "exploit", "botnet", "infostealer", "backdoor", "keylogger", "rootkit",
+    "loader", "dropper", "trojan", "phishing", "stealer",
+)
+NON_ACCUSATIVE_CONTEXT = (
+    "do", "od", "ode", "dla", "bez", "u", "według", "wokół", "podczas", "obok",
+    "około", "zamiast", "oprócz", "z", "ze", "przy", "przed", "nad", "między",
+    "dzięki", "wobec", "przeciwko", "za pomocą", "przy użyciu", "w wyniku",
+    "w postaci", "w ramach",
+)
+UNINFLECTED = re.compile(
+    r"(?<!\w)(?:" + "|".join(re.escape(c) for c in sorted(NON_ACCUSATIVE_CONTEXT, key=len, reverse=True)) + r")"
+    r"\s+(?:[\w-]+\s+)?(" + "|".join(DECLINABLE_TERMS) + r")(?![\w-])",
     re.IGNORECASE,
 )
 
@@ -135,6 +157,12 @@ def quality_problems(text, source=None):
         problems.append(
             f"względne określenie czasu „{match.group(0)}” – podaj datę z artykułu albo pomiń czas "
             "(streszczenie trafia też do zestawień tygodniowych i miesięcznych)"
+        )
+
+    for match in UNINFLECTED.finditer(text):
+        problems.append(
+            f"nieodmieniony termin w „{match.group(0)}” – odmień „{match.group(1)}” jak polski "
+            "rzeczownik (np. „przed exploitem”, „z botnetu”, „do infostealera”)"
         )
 
     if source is not None:

@@ -47,11 +47,96 @@ CREDENTIALS = {
     "poświadczeniem": "danymi logowania",
     "poświadczeniu": "danym logowania",
 }
+# English terms inflected like Polish nouns (v27, test 22.10.2026: "przed
+# exploit (kod wykorzystujący podatność)"). Morfeusz 2 does not know these
+# words, so their forms follow Polish model nouns generated with Morfeusz 2:
+# exploit like "kotlet" (exploicie), botnet like "budżet" (botnecie),
+# infostealer like "komputer" (infostealerze). The explanation phrases were
+# generated with Morfeusz 2 as well ("kodem wykorzystującym podatność").
+# Each form lists its possible cases; "exploita" and "infostealera" may be
+# genitive or accusative (both forms are used in Polish).
+def noun_forms(stem, endings):
+    return {stem + ending: cases for ending, cases in endings.items()}
+
+
+EXPLOIT_FORMS = noun_forms("exploi", {
+    "t": ("sg_acc",), "ta": ("sg_acc", "sg_gen"), "towi": ("sg_dat",), "tem": ("sg_inst",),
+    "cie": ("sg_loc",), "ty": ("pl_acc",), "tów": ("pl_gen",), "tom": ("pl_dat",),
+    "tami": ("pl_inst",), "tach": ("pl_loc",),
+})
+BOTNET_FORMS = noun_forms("botne", {
+    "t": ("sg_acc",), "tu": ("sg_gen",), "towi": ("sg_dat",), "tem": ("sg_inst",),
+    "cie": ("sg_loc",), "ty": ("pl_acc",), "tów": ("pl_gen",), "tom": ("pl_dat",),
+    "tami": ("pl_inst",), "tach": ("pl_loc",),
+})
+INFOSTEALER_FORMS = noun_forms("infosteale", {
+    "r": ("sg_acc",), "ra": ("sg_acc", "sg_gen"), "rowi": ("sg_dat",), "rem": ("sg_inst",),
+    "rze": ("sg_loc",), "ry": ("pl_acc",), "rów": ("pl_gen",), "rom": ("pl_dat",),
+    "rami": ("pl_inst",), "rach": ("pl_loc",),
+})
+# Nominative and accusative explanations are the same for these phrases, so
+# the accusative stands for both.
+EXPLOIT_GLOSS = {
+    "sg_acc": "kod wykorzystujący podatność", "sg_gen": "kodu wykorzystującego podatność",
+    "sg_dat": "kodowi wykorzystującemu podatność", "sg_inst": "kodem wykorzystującym podatność",
+    "sg_loc": "kodzie wykorzystującym podatność", "pl_acc": "kody wykorzystujące podatność",
+    "pl_gen": "kodów wykorzystujących podatność", "pl_dat": "kodom wykorzystującym podatność",
+    "pl_inst": "kodami wykorzystującymi podatność", "pl_loc": "kodach wykorzystujących podatność",
+}
+BOTNET_GLOSS = {
+    "sg_acc": "sieć zainfekowanych urządzeń", "sg_gen": "sieci zainfekowanych urządzeń",
+    "sg_dat": "sieci zainfekowanych urządzeń", "sg_inst": "siecią zainfekowanych urządzeń",
+    "sg_loc": "sieci zainfekowanych urządzeń", "pl_acc": "sieci zainfekowanych urządzeń",
+    "pl_gen": "sieci zainfekowanych urządzeń", "pl_dat": "sieciom zainfekowanych urządzeń",
+    "pl_inst": "sieciami zainfekowanych urządzeń", "pl_loc": "sieciach zainfekowanych urządzeń",
+}
+INFOSTEALER_GLOSS = {
+    "sg_acc": "program kradnący dane", "sg_gen": "programu kradnącego dane",
+    "sg_dat": "programowi kradnącemu dane", "sg_inst": "programem kradnącym dane",
+    "sg_loc": "programie kradnącym dane", "pl_acc": "programy kradnące dane",
+    "pl_gen": "programów kradnących dane", "pl_dat": "programom kradnącym dane",
+    "pl_inst": "programami kradnącymi dane", "pl_loc": "programach kradnących dane",
+}
+
+# Context that requires the genitive for a genitive/accusative form:
+# prepositions, negation, verbs and verbal nouns that govern the genitive
+# ("użycie exploita", "nie wykryto exploita", "do exploita").
+GENITIVE_CONTEXT = re.compile(
+    r"(?:^|[\s(])(?:do|od|ode|dla|bez|u|według|wokół|podczas|obok|około|zamiast|oprócz|"
+    r"spośród|z|ze|brak\w*|pomocą|użyciu|wyniku|postaci|ramach|"
+    r"uży\w*|używa\w*|szuka\w*|potrzeb\w*|unika\w*|\w+(?:nie|cie|cja|cji|cją))\s+(?:\w+\s+)?$"
+    r"|(?:^|\s)nie\s+(?:\w+\s+){0,2}$",
+    re.IGNORECASE,
+)
+
+
+def explain_in_case(forms, gloss):
+    """Return a function giving the explanation in the case of the matched form."""
+    def explain(match):
+        cases = forms[match.group("anchor").lower()]
+        case = cases[0]
+
+        if "sg_gen" in cases and GENITIVE_CONTEXT.search(match.string[: match.start("anchor")]):
+            case = "sg_gen"
+
+        return gloss[case]
+
+    return explain
+
+
+def forms_pattern(forms):
+    alternatives = "|".join(sorted(forms, key=len, reverse=True))
+    return rf"(?<!\w)(?P<anchor>{alternatives})(?!\w)"
+
+
 INFLECTED = {
     "H182": (r"\b(?P<anchor>podwyższeni(?:e|a|u|em)|podwyższeń)\s+uprawnień\b",
              lambda m: ESCALATION.get(m.group("anchor").lower())),
     "H207": (r"\b(?P<anchor>poświadcze(?:nia|ń|niom|niami|niach|nie|niem|niu))\b",
              lambda m: CREDENTIALS.get(m.group("anchor").lower())),
+    "H153": (forms_pattern(EXPLOIT_FORMS), explain_in_case(EXPLOIT_FORMS, EXPLOIT_GLOSS)),
+    "H004": (forms_pattern(BOTNET_FORMS), explain_in_case(BOTNET_FORMS, BOTNET_GLOSS)),
+    "H019": (forms_pattern(INFOSTEALER_FORMS), explain_in_case(INFOSTEALER_FORMS, INFOSTEALER_GLOSS)),
 }
 
 

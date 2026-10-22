@@ -48,7 +48,7 @@ Zmiany:
 - **Kontrola jakości** (nowy `src/summary_quality.py`), w tej samej
   rundzie poprawek co słowniczek: ogólniki (lista fraz), względne
   określenia czasu („jutro”, „dziś”, „wczoraj”, „w przyszłym
-  tygodniu”…), numery CVE i liczby większe niż 12, których nie ma w
+  tygodniu”…, a także dzień tygodnia bez daty, np. „w środę”), numery CVE i liczby większe niż 12, których nie ma w
   tytule ani tekście artykułu (bez sprawdzania bieżącego roku i lat
   sąsiednich; „26 739” i „1,83” porównywane z „26,739” i „1.83M”).
   Streszczenie z problemem wraca raz do AI z opisem problemu, a jeśli
@@ -58,9 +58,10 @@ Zmiany:
   skrótów: np., m.in., ok., tys., Inc. itd.).
 - **Słowniczek, drobna zmiana bez osobnej wersji:** przy „podatność”
   (H164) AI nie dopisuje już „(luka)”; forma „(luka)” w nawiasie jest
-  zakazana, a słowa „luka” można używać zamiennie. Zmiany:
-  `tools/eksport_mirrora.py` (OVERRIDES H164), `data/glosariusz_mirror.csv`
-  (tylko wiersz H164).
+  zakazana, a słowa „luka” można używać zamiennie. Przy RCE (H090)
+  zakazana jest też angielska forma „remote code execution”. Zmiany:
+  `tools/eksport_mirrora.py` (OVERRIDES H164 i H090),
+  `data/glosariusz_mirror.csv` (tylko wiersze H164 i H090).
 
 Nowe i zmienione pliki: `src/summary_quality.py`,
 `src/test_summary_quality.py`, `src/ai_summaries.py`,
@@ -71,8 +72,14 @@ Zmianę zweryfikowano: testy jednostkowe (218) zakończone powodzeniem;
 kontrola uruchomiona na 33 streszczeniach z archiwum października
 wychwyciła 7 z nich („jutro”, „W minionym tygodniu”, „stanowi poważne
 zagrożenie dla”, 4 × „podatności (luka)”), a poprawka wielkich liter
-naprawiła „exploit tych luk mogą…”. Test na kanale testowym oczekuje na
-wykonanie.
+naprawiła „exploit tych luk mogą…”. Test na gałęzi
+`v25-streszczenia` 22.10.2026: prasówka z 10 artykułami na kanale
+testowym, streszczenia AI 10 z 10; kontrola zgłosiła 4 streszczenia
+(„poprawka” zamiast „łatka”, „zdalnego wykonania kodu” zamiast „RCE”),
+wszystkie poprawione w drugiej rundzie; kontrola faktów nie odrzuciła
+żadnego streszczenia. Streszczenia podają daty, liczby i nazwy z
+artykułów. Po teście dodano zakaz dnia tygodnia bez daty („przed
+wydaniem łatki w środę”) i formy „remote code execution”.
 
 ## v24 --- 22.10.2026
 
@@ -1009,7 +1016,7 @@ Changes:
 - **Quality check** (new `src/summary_quality.py`), in the same
   correction round as the glossary: filler phrases (a phrase list),
   relative time words ("jutro", "dziś", "wczoraj", "w przyszłym
-  tygodniu"…), CVE ids and numbers above 12 that are not in the article
+  tygodniu"…, and a weekday without a date, e.g. "w środę"), CVE ids and numbers above 12 that are not in the article
   title or text (the current year and its neighbours are not checked;
   "26 739" and "1,83" are compared with "26,739" and "1.83M"). A summary
   with a problem is sent back once with a description of the problem
@@ -1019,9 +1026,10 @@ Changes:
   after abbreviations: np., m.in., ok., tys., Inc. etc.).
 - **Glossary, a small change without its own version:** the AI no
   longer adds "(luka)" after "podatność" (H164); "(luka)" in
-  parentheses is forbidden, and "luka" may be used on its own. Changes:
-  `tools/eksport_mirrora.py` (OVERRIDES H164), `data/glosariusz_mirror.csv`
-  (only row H164).
+  parentheses is forbidden, and "luka" may be used on its own. For RCE
+  (H090) the English form "remote code execution" is forbidden too.
+  Changes: `tools/eksport_mirrora.py` (OVERRIDES H164 and H090),
+  `data/glosariusz_mirror.csv` (only rows H164 and H090).
 
 New and changed files: `src/summary_quality.py`,
 `src/test_summary_quality.py`, `src/ai_summaries.py`,
@@ -1032,7 +1040,14 @@ The change was verified: unit tests (218) passed; the check run on 33
 summaries from the October archive caught 7 of them ("jutro", "W
 minionym tygodniu", "stanowi poważne zagrożenie dla", 4 × "podatności
 (luka)"), and the capitalization fix corrected "exploit tych luk
-mogą…". A test on the test channel is pending.
+mogą…". Test on the `v25-streszczenia` branch on 2026-10-22: a digest
+with 10 articles on the test channel, AI summaries 10 of 10; the check
+reported 4 summaries ("poprawka" instead of "łatka", "zdalnego
+wykonania kodu" instead of "RCE"), all corrected in the second round;
+the fact check rejected no summary. Summaries give dates, numbers and
+names from the articles. After the test, a weekday without a date
+("przed wydaniem łatki w środę") and the form "remote code execution"
+were added as forbidden.
 
 ## v24 --- 2026-10-22
 

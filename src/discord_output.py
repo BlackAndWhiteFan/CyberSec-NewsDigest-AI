@@ -3,6 +3,8 @@
 import json
 import time
 import urllib.parse
+
+from kev import KEV_NOTE, MARKER as KEV_MARKER
 import urllib.request
 from datetime import datetime
 from zoneinfo import ZoneInfo
@@ -80,7 +82,8 @@ def format_article_line(number, article, summary=None):
     domain = urllib.parse.urlparse(link).netloc.removeprefix("www.")
 
     # <...> around the link stops Discord from showing a large preview card.
-    line = f"{number}. [{title}](<{link}>) · {domain}"
+    marker = KEV_MARKER if article.get("kev") else ""
+    line = f"{number}. {marker}[{title}](<{link}>) · {domain}"
 
     # Each other source once, with its first article (v26: an event may have
     # several articles from one site, e.g. two from The Hacker News).
@@ -145,9 +148,17 @@ def build_digest_lines(articles, eligible_count, source_count, date_text):
             lines.append(format_article_line(number, article, summary))
             number += 1
 
+    notes = []
+
     if any(article.get("summary") for article in articles):
+        notes.append(AI_NOTE)
+
+    if any(article.get("kev") for article in articles):
+        notes.append(KEV_NOTE)
+
+    if notes:
         lines.append("")
-        lines.append(AI_NOTE)
+        lines.extend(notes)
 
     return lines
 

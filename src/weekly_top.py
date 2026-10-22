@@ -14,7 +14,8 @@ import re
 from datetime import date, datetime, timedelta
 
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
-from monthly_top import deliver, format_event_line, rank_events
+from kev import load_kev, refresh_records
+from monthly_top import deliver, format_event_line, kev_note, rank_events
 import top_guard
 
 
@@ -81,10 +82,12 @@ def build_week_lines(monday, records, limit=TOP_LIMIT):
 
     lines.append("")
 
-    for number, event in enumerate(rank_events(records, limit), start=1):
+    events = rank_events(records, limit)
+
+    for number, event in enumerate(events, start=1):
         lines.append(format_event_line(number, event))
 
-    return lines
+    return lines + kev_note(events)
 
 
 def parse_week(text):
@@ -98,7 +101,8 @@ def parse_week(text):
         raise SystemExit(f"Nieprawidłowa data tygodnia: {text!r}.") from None
 
 
-def run(week=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, today=None):
+def run(week=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, today=None,
+        load_kev_catalog=None):
     today = today or datetime.now(TIMEZONE).date()
     text = week or os.environ.get("WEEK", "").strip()
     monday = parse_week(text) if text else previous_week(today)
@@ -112,6 +116,8 @@ def run(week=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, t
 
     records = week_records(monday, archive_dir)
     print("Artykuły w archiwum:", len(records))
+    # v28: CVE ids checked again with the current CISA KEV catalog.
+    refresh_records(records, (load_kev_catalog or load_kev)())
 
     complete = monday + timedelta(days=6) < today
     deliver("week", period, build_week_lines(monday, records), "DISCORD_WEEKLY_WEBHOOK_URL", marker_path, complete)

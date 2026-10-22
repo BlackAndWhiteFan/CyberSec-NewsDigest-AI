@@ -16,6 +16,18 @@ def record(title, link, source, day_text, score=3):
     }
 
 
+
+# Tests never download the CISA KEV catalog (v28).
+_KEV_PATCH = unittest.mock.patch("weekly_top.load_kev", lambda: {})
+
+
+def setUpModule():
+    _KEV_PATCH.start()
+
+
+def tearDownModule():
+    _KEV_PATCH.stop()
+
 class TestWeekDates(unittest.TestCase):
     def test_previous_week_is_monday_to_sunday(self):
         self.assertEqual(previous_week(date(2026, 10, 26)), date(2026, 10, 19))

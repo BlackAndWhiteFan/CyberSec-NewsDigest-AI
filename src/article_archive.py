@@ -47,6 +47,10 @@ def build_record(article, date_text):
         "continuation": bool(article.get("continuation")),
         # AI summary as delivered (v22), so weekly and monthly tops can show it.
         "summary": article.get("summary", ""),
+        # CVE ids and those from the CISA KEV catalog (v28); the tops check
+        # the CVE ids again with the current catalog.
+        "cves": article.get("cves", []),
+        "kev": article.get("kev", []),
     }
 
 

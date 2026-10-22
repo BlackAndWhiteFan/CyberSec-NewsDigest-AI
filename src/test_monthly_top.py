@@ -72,6 +72,18 @@ SINGLE = record(
 )
 
 
+
+# Tests never download the CISA KEV catalog (v28).
+_KEV_PATCH = unittest.mock.patch("monthly_top.load_kev", lambda: {})
+
+
+def setUpModule():
+    _KEV_PATCH.start()
+
+
+def tearDownModule():
+    _KEV_PATCH.stop()
+
 class TestMonths(unittest.TestCase):
 
     def test_previous_month(self):

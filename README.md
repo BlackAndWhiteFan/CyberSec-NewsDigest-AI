@@ -54,6 +54,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 - Archives each delivered article (date, title, link, source, categories, score) in a monthly file `data/archive/YYYY-MM.json`. An archive error is logged and ends the run with an error, but the article history is still saved, so delivered links are not sent again.
 - Saves the article history and archive even if the digest step fails, unless the run is cancelled.
 - Merges articles about the same event (from different sources, and also from one source when they share a CVE id or a name with digits such as PHP2Shell) into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
+- Marks with 🔥 articles about vulnerabilities from the CISA KEV catalog (Known Exploited Vulnerabilities – confirmed exploitation in attacks). The marker is set by code, not by the AI: CVE ids from the title, feed text and article page (also of articles merged into the same event) are compared with the catalog downloaded on every run (`src/kev.py`); the weekly and monthly tops check the saved CVE ids again with the current catalog. Without access to the catalog the digest is sent without markers.
 - On the first day of each month, sends the top 10 events of the previous month to a separate Discord channel, and on Mondays the top 5 events of the previous week to `#top-tygodnia` (ranked by number of articles, then sources and score), with AI summaries. Each top has four start attempts and is sent only once (marker `data/last_top.json`).
 - Adds a concrete AI summary in Polish (2–3 sentences; 1 sentence when the material is only a title or a short teaser) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description; when the feed gives fewer than 600 characters, the article text is fetched from its page (`src/article_pages.py`, paragraphs without menus, ads and footer; a page error never stops the digest). Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped. The same check (`src/summary_quality.py`) rejects filler phrases ("co podkreśla wagę…"), relative time words ("jutro", "dziś"), uninflected terms after a preposition ("przed exploit") and numbers or CVE ids that are not in the article; sentence capitalization is fixed by code; explanations in parentheses are added by code at the first occurrence of a term in the digest, only for 6 chosen terms (e.g. ransomware, exploit, podwyższenie (eskalacja) uprawnień), in the same case as the term ("przed exploitem (kodem wykorzystującym podatność)"). Without the `GROQ_API_KEY` secret the digest is sent without summaries.
 - Continues processing when an individual RSS feed fails.
@@ -131,6 +132,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/glossary.py` — glossary conventions from the mirror: prompt entries, forbidden forms, explanations at first use.
 - `src/summary_quality.py` — quality checks of AI summaries: filler phrases, relative time words, uninflected terms, numbers and CVE ids not in the source, sentence capitalization.
 - `src/article_pages.py` — article text from the article page when the feed gives too little.
+- `src/kev.py` — 🔥 marker: CISA KEV catalog download, CVE ids in articles and archive records.
 - `data/glosariusz_mirror.csv` — standalone mirror of the CyberSec Mozaika glossary used by the digest (currently from mother workbook v84).
 - `tools/eksport_mirrora.py` — manual export of the mirror from the Mozaika mother workbook (`python tools/eksport_mirrora.py <workbook.xlsx>`, requires openpyxl).
 - `src/backfill_summaries.py` — one-time backfill of AI summaries for archived articles that have none.
@@ -156,6 +158,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/test_glossary.py` — glossary mirror, explanations and forbidden-form tests.
 - `src/test_summary_quality.py` — summary quality check tests.
 - `src/test_article_pages.py` — article page text extraction and fetching tests (no network access).
+- `src/test_kev.py` — CISA KEV marker tests (no network access).
 - `src/test_article_history.py` — persistent article history and publication-filtering tests.
 - `src/test_article_selection.py` — categorization, Polish keyword, filtering, and selection tests based on real article titles.
 

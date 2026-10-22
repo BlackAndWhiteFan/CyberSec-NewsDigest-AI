@@ -24,6 +24,39 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v28 --- 23.10.2026
+
+**🔥 przy lukach z katalogu CISA KEV.**
+
+Katalog Known Exploited Vulnerabilities (CISA) zawiera luki z
+potwierdzonym wykorzystywaniem w atakach; w 2025 r. dodano do niego 245
+pozycji (ok. 4–5 tygodniowo). Dla analityka SOC to sygnał „łatać
+najpierw”.
+
+- **Znacznik ustawia kod, nie AI** (nowy `src/kev.py`): katalog (JSON)
+  jest pobierany raz na uruchomienie z CISA, a gdy to się nie uda – z
+  lustra CISA na GitHubie. Numery CVE są szukane w tytule, tekście z
+  kanału i tekście ze strony artykułu, także w artykułach połączonych w
+  to samo wydarzenie. Artykuł z numerem CVE z katalogu dostaje 🔥 przed
+  tytułem, a pod prasówką pojawia się objaśnienie „🔥 luka z katalogu
+  CISA KEV – potwierdzone wykorzystywanie w atakach”. Bez dostępu do
+  katalogu prasówka idzie bez znaczników (log: „CISA KEV: …”).
+- **Archiwum** zapisuje numery CVE artykułu (`cves`) i te z katalogu
+  (`kev`).
+- **Zestawienia tygodniowe i miesięczne** pobierają katalog jeszcze raz i
+  sprawdzają zapisane numery CVE (oraz numery w tytule i streszczeniu),
+  bo CISA często dodaje lukę kilka dni po pierwszych artykułach. 🔥 i
+  objaśnienie pojawiają się także tam.
+
+Nowe i zmienione pliki: `src/kev.py` (nowy), `src/test_kev.py` (nowy),
+`src/main.py`, `src/discord_output.py`, `src/article_archive.py`,
+`src/monthly_top.py`, `src/weekly_top.py`, `src/test_monthly_top.py` i
+`src/test_weekly_top.py` (testy nie pobierają katalogu), README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (250) zakończone powodzeniem.
+Test na gałęzi (dostęp serwera GitHuba do katalogu, liczba oznaczonych
+artykułów) oczekuje na wykonanie.
+
 ## v27 --- 22.10.2026
 
 **Odmiana terminów i objaśnień oraz pełna treść artykułów ze stron.**
@@ -1182,6 +1215,38 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v28 --- 2026-10-23
+
+**🔥 for vulnerabilities from the CISA KEV catalog.**
+
+CISA's Known Exploited Vulnerabilities catalog lists vulnerabilities
+with confirmed exploitation in attacks; 245 entries were added in 2025
+(about 4–5 a week). For a SOC analyst this is a "patch first" signal.
+
+- **The marker is set by code, not by the AI** (new `src/kev.py`): the
+  catalog (JSON) is downloaded once per run from CISA, or from CISA's
+  GitHub mirror when that fails. CVE ids are searched in the title, feed
+  text and article page text, also of articles merged into the same
+  event. An article with a CVE id from the catalog gets 🔥 before its
+  title, and a note "🔥 luka z katalogu CISA KEV – potwierdzone
+  wykorzystywanie w atakach" appears below the digest. Without access to
+  the catalog the digest is sent without markers (log: "CISA KEV: …").
+- **The archive** saves the article's CVE ids (`cves`) and those from the
+  catalog (`kev`).
+- **The weekly and monthly tops** download the catalog again and check
+  the saved CVE ids (and ids in the title and summary), because CISA
+  often adds a vulnerability a few days after the first articles. 🔥 and
+  the note appear there too.
+
+New and changed files: `src/kev.py` (new), `src/test_kev.py` (new),
+`src/main.py`, `src/discord_output.py`, `src/article_archive.py`,
+`src/monthly_top.py`, `src/weekly_top.py`, `src/test_monthly_top.py` and
+`src/test_weekly_top.py` (tests do not download the catalog), README
+(PL/EN).
+
+The change was verified: unit tests (250) passed. A branch test (GitHub
+runner access to the catalog, number of marked articles) is pending.
 
 ## v27 --- 2026-10-22
 

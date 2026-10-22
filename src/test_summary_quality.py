@@ -35,9 +35,23 @@ class TestRelativeTime(unittest.TestCase):
                 self.assertIn("względne określenie czasu", problems[0])
 
     def test_dates_and_similar_words_are_allowed(self):
-        self.assertEqual(quality_problems("Łatki wydano 21 października; dzisiejszość."), [])
+        self.assertEqual(quality_problems("Łatki wydano 21 października, a dzisiejszość tego nie zmienia."), [])
         self.assertEqual(quality_problems("Łatki wydano w środę 21 października."), [])
         self.assertEqual(quality_problems("Łatki wydano we wtorek, 20 października."), [])
+
+
+class TestLengthAndForm(unittest.TestCase):
+    def test_long_summary_and_semicolons_are_reported(self):
+        long_text = "Cisco wydał łatki dla 34 podatności w Expressway i IOS XR. " * 8
+        self.assertTrue(any("znaków" in p for p in quality_problems(long_text)))
+        problems = quality_problems("Splunk wydał łatki; SolarWinds także.")
+        self.assertEqual(len(problems), 1)
+        self.assertIn("średnikiem", problems[0])
+
+    def test_missing_information_remarks_are_reported(self):
+        problems = quality_problems("Citizen Lab potwierdził infekcję, a raport nie podaje informacji o sprawcach.")
+        self.assertEqual(len(problems), 1)
+        self.assertIn("ogólnik", problems[0])
 
 
 class TestInflection(unittest.TestCase):

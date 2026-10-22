@@ -25,7 +25,7 @@ import time
 import urllib.error
 import urllib.request
 
-from glossary import convention_violations, prompt_glossary
+from glossary import convention_violations, is_acronym, prompt_glossary
 from summary_quality import fix_sentence_case, quality_problems
 
 
@@ -72,6 +72,9 @@ CO MA BYĆ W STRESZCZENIU:
 - Każde zdanie musi zawierać informację z artykułu. Nie pisz ogólników ani komentarzy, np. „co podkreśla wagę…”, „to kolejny przykład…”, „warto pamiętać…”, „należy zachować ostrożność”.
 - Nie używaj względnych określeń czasu („jutro”, „dziś”, „wczoraj”, „w przyszłym tygodniu”): streszczenie czyta się też po tygodniu. Podaj datę z artykułu albo pomiń czas.
 - Liczby, nazwy i numery CVE przepisuj dokładnie z artykułu; nie zaokrąglaj i nie przeliczaj.
+- Zalecenia (aktualizacja, obejście, wyłączenie usługi) podawaj tylko wtedy, gdy artykuł je wymienia; nie dopisuj własnych.
+- Nie pisz, czego artykuł nie podaje (np. „raport nie podaje informacji o sprawcach”) – pomiń to.
+- Całe streszczenie ma najwyżej 350 znaków. Pisz krótkie zdania zakończone kropką; nie łącz zdań średnikami. Wymień najwyżej 3 najważniejsze numery CVE lub wersje.
 - Jeśli materiał to tylko tytuł lub krótka zajawka, napisz 1 zdanie i nie dopowiadaj niczego.
 
 SŁOWNICZEK JEST OBOWIĄZKOWY:
@@ -243,8 +246,8 @@ def ask_provider(provider, api_key, messages, opener=urllib.request.urlopen, sle
 
 def glossary_problems(text):
     return [
-        f"użyto „{used}”, a słowniczek wymaga „{required}” – odmień „{required}” "
-        f"tak jak „{used}” (ten sam przypadek i liczba)"
+        f"użyto „{used}”, a słowniczek wymaga „{required}”"
+        + ("" if is_acronym(required) else f" – odmień „{required}” tak jak „{used}” (ten sam przypadek i liczba)")
         for used, required in convention_violations(text)
     ]
 

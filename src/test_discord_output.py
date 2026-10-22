@@ -58,6 +58,20 @@ class TestFormatArticleLine(unittest.TestCase):
 
 
 class TestRelatedAndContinuations(unittest.TestCase):
+    def test_each_related_source_is_listed_once(self):
+        article = {"title": "PHP2Shell", "link": "https://www.bleepingcomputer.com/a"}
+        article["related"] = [
+            {"title": "x", "link": "https://thehackernews.com/b"},
+            {"title": "y", "link": "https://thehackernews.com/c"},
+            {"title": "z", "link": "https://www.securityweek.com/d"},
+            {"title": "w", "link": "https://www.bleepingcomputer.com/e"},
+        ]
+        line = format_article_line(1, article)
+        self.assertTrue(line.endswith(
+            " · także: [thehackernews.com](<https://thehackernews.com/b>), "
+            "[securityweek.com](<https://www.securityweek.com/d>)"
+        ))
+
     def test_related_sources_are_listed(self):
         article = make_article("Fakturownia.pl zhackowana", "https://niebezpiecznik.pl/a")
         article["related"] = [

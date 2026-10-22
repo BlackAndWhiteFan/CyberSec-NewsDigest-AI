@@ -82,13 +82,18 @@ def format_article_line(number, article, summary=None):
     # <...> around the link stops Discord from showing a large preview card.
     line = f"{number}. [{title}](<{link}>) · {domain}"
 
-    related = article.get("related", [])
+    # Each other source once, with its first article (v26: an event may have
+    # several articles from one site, e.g. two from The Hacker News).
+    others = {}
 
-    if related:
-        others = ", ".join(
-            f"[{source_label(item)}](<{item['link']}>)" for item in related
-        )
-        line += f" · także: {others}"
+    for item in article.get("related", []):
+        label = source_label(item)
+
+        if label != domain:
+            others.setdefault(label, item["link"])
+
+    if others:
+        line += " · także: " + ", ".join(f"[{label}](<{url}>)" for label, url in others.items())
 
     if summary:
         line += f"\n> {summary}"

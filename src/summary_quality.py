@@ -38,6 +38,10 @@ GENERIC_PHRASES = [
     r"to kolejny (przykład|dowód)",
     r"rosnące zagrożenie",
     r"stanowi\w* (poważne |realne |duże )?zagrożenie dla",
+    # What the article does not say (test 22.10.2026: "raport nie podaje
+    # informacji o sprawcach ani o dostępnych środkach zaradczych").
+    r"nie (podaje|podają|zawiera|wskazuje|ujawnia|precyzuje)\w* (żadnych )?(informacji|szczegółów|danych)",
+    r"brak (jest )?(informacji|szczegółów|danych) (o|na temat)",
 ]
 GENERIC = [re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE) for pattern in GENERIC_PHRASES]
 
@@ -140,9 +144,23 @@ def unsupported_facts(text, source, year=None):
     return problems
 
 
+# v27: summaries became long single sentences joined with semicolons and
+# were cut at SUMMARY_LIMIT (test 22.10.2026).
+MAX_SUMMARY_LENGTH = 400
+
+
 def quality_problems(text, source=None):
     """Return descriptions of quality problems (empty list = summary is fine)."""
     problems = []
+
+    if len(text) > MAX_SUMMARY_LENGTH:
+        problems.append(
+            f"streszczenie ma {len(text)} znaków – skróć je do najwyżej 350 znaków "
+            "(2–3 krótkie zdania, najważniejsze fakty)"
+        )
+
+    if ";" in text:
+        problems.append("zdania połączone średnikiem – podziel je na osobne zdania zakończone kropką")
 
     for pattern in GENERIC:
         match = pattern.search(text)

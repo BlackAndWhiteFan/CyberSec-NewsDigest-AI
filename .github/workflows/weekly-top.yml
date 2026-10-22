@@ -1,12 +1,18 @@
 name: Weekly Top 5
 
 on:
+  # Main trigger since v24: the external alarm clock (cron-job.org) calls the
+  # GitHub API Mondays at 08:17 Polish time with budzik=true.
   workflow_dispatch:
     inputs:
       week:
         description: "Any date in the week to summarize (YYYY-MM-DD); empty = previous week"
         required: false
         default: ""
+      budzik:
+        description: "Started by the external alarm clock (cron-job.org); leave unchecked for manual runs"
+        type: boolean
+        default: false
   schedule:
     # Mondays, attempts at 08:17, 09:17, 10:17 and 11:17 Polish time, for
     # the previous week (Monday–Sunday). GitHub skips or delays many
@@ -40,6 +46,9 @@ jobs:
           # Runs on branches other than main go to the test channel only.
           DISCORD_TEST_WEBHOOK_URL: ${{ secrets.DISCORD_TEST_WEBHOOK_URL }}
           WEEK: ${{ inputs.week }}
+          # "budzik" for the external alarm clock (cron-job.org, v24), otherwise
+          # the event name; src/top_guard.py treats "budzik" like a scheduled run.
+          TRIGGER: ${{ inputs.budzik && 'budzik' || github.event_name }}
         run: python src/weekly_top.py
 
       - name: Persist top marker

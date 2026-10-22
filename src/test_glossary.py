@@ -1,6 +1,7 @@
 import unittest
 
 from glossary import (
+    gloss_rule,
     GLOSS_RULES,
     CORE_ENTRIES,
     ENTRIES,
@@ -36,7 +37,6 @@ class TestMirror(unittest.TestCase):
             "H015": ("ransomware", "program żądający okupu"),
             "H019": ("infostealer", "program kradnący dane"),
             "H004": ("botnet", "sieć zainfekowanych urządzeń"),
-            "H232": ("MFA", "uwierzytelnianie wieloskładnikowe"),
         }
         with_explanation = {item["id"] for item in ENTRIES if item["nawias"]}
 
@@ -62,7 +62,6 @@ class TestExplanations(unittest.TestCase):
             "Atak ransomware sparaliżował szpital.":
                 "Atak ransomware (program żądający okupu) sparaliżował szpital.",
             "Grupa użyła exploita.": "Grupa użyła exploita (kod wykorzystujący podatność).",
-            "Włączono MFA dla kont.": "Włączono MFA (uwierzytelnianie wieloskładnikowe) dla kont.",
         }
 
         for text, expected in cases.items():
@@ -105,26 +104,36 @@ class TestExplanations(unittest.TestCase):
         self.assertIn("H004", used)
 
     def test_term_inside_parentheses_gets_no_nested_explanation(self):
-        text = "Wdrożono drugi składnik (MFA) dla administratorów."
-        self.assertNotIn("(MFA (", gloss(text))
+        text = "Przejęto sieć urządzeń (botnet) w trzech krajach."
+        self.assertNotIn("(botnet (", gloss(text))
 
     def test_term_after_parentheses_is_still_explained(self):
         used = set()
-        apply_glossary("Wdrożono drugi składnik (MFA).", used)
-        self.assertIn("MFA (uwierzytelnianie", apply_glossary("Firma wymaga MFA.", used))
+        apply_glossary("Przejęto sieć urządzeń (botnet).", used)
+        self.assertIn("botnet (sieć zainfekowanych", apply_glossary("Policja rozbiła botnet.", used))
+
+    def test_mfa_has_no_explanation(self):
+        self.assertEqual(gloss("Firma wymaga MFA."), "Firma wymaga MFA.")
 
     def test_longer_terms_are_checked_first(self):
         lengths = [len(next(item for item in ENTRIES if item["id"] == key)["forma"]) for key, *_ in GLOSS_RULES]
         self.assertEqual(lengths, sorted(lengths, reverse=True))
 
-    def test_acronym_is_not_matched_inside_a_longer_word(self):
-        self.assertEqual(gloss("Projekt MFAX ruszył."), "Projekt MFAX ruszył.")
+    # No chosen explanation is an acronym any more (MFA without parentheses
+    # since 21.10.2026), so acronym matching is tested on a sample entry.
+    ACRONYM_ENTRY = {"id": "TEST", "forma": "NAT", "nawias": "translacja adresów"}
 
-    def test_inflected_acronym_after_hyphen_is_explained(self):
-        self.assertIn("MFA-ą (uwierzytelnianie wieloskładnikowe)", gloss("Konta chronione MFA-ą."))
+    def test_acronym_is_not_matched_inside_a_longer_word(self):
+        pattern, _ = gloss_rule(self.ACRONYM_ENTRY)
+        self.assertIsNone(pattern.search("Zaatakowano członków NATO."))
+
+    def test_inflected_acronym_after_hyphen_is_matched(self):
+        pattern, _ = gloss_rule(self.ACRONYM_ENTRY)
+        self.assertEqual(pattern.search("Router z NAT-em.").group("anchor"), "NAT-em")
 
     def test_acronyms_are_case_sensitive(self):
-        self.assertEqual(gloss("Klient zamówił mfa."), "Klient zamówił mfa.")
+        pattern, _ = gloss_rule(self.ACRONYM_ENTRY)
+        self.assertIsNone(pattern.search("Słowo nat w zdaniu."))
 
 
 class TestConventionViolations(unittest.TestCase):

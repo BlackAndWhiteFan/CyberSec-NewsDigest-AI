@@ -231,7 +231,7 @@ H228;AD CS;AD CS (usługi certyfikatów AD);AD CS;;;;"Wydawanie i unieważnianie
 H229;802.1X / EAP;802.1X / EAP (uwierzytelnianie dostępu do sieci);802.1X / EAP;;;;"802.1X dopuszcza urządzenie do sieci dopiero po uwierzytelnieniu (zwykle przez RADIUS); EAP to rama dla różnych metod uwierzytelniania."
 H230;bidirectional (mutual) authentication;uwierzytelnianie dwukierunkowe (wzajemne);uwierzytelnianie dwukierunkowe;;;;Obie strony połączenia uwierzytelniają się nawzajem, np.
 H231;out-of-band authentication;uwierzytelnianie poza kanałem;uwierzytelnianie poza kanałem;;;;Potwierdzenie tożsamości innym kanałem niż główne logowanie, np.
-H232;MFA / 2FA;MFA / 2FA (uwierzytelnianie wieloskładnikowe);MFA;uwierzytelnianie wieloskładnikowe;;uwierzytelniani\w* wieloskładnikow\w*;Hasło plus drugi składnik.
+H232;MFA / 2FA;MFA / 2FA (uwierzytelnianie wieloskładnikowe);MFA;;;uwierzytelniani\w* wieloskładnikow\w*;Hasło plus drugi składnik.
 H233;AAA;AAA (uwierzytelnienie, autoryzacja, rozliczalność);AAA;;;;Trzy filary kontroli dostępu: kim jest podmiot, co mu wolno i co zrobił.
 H234;authentication;uwierzytelnienie, ustalanie tożsamości;uwierzytelnienie, ustalanie tożsamości;;;;Sprawdzenie tożsamości użytkownika, procesu lub urządzenia albo źródła i integralności danych.
 H235;DAC;DAC (uznaniowa kontrola dostępu);DAC;;;;Właściciel zasobu sam decyduje, komu nadać dostęp (np.

@@ -1,13 +1,21 @@
 name: Daily CyberSec Digest
 
 on:
+  # Main trigger since v24: the external alarm clock (cron-job.org) calls the
+  # GitHub API at 06:17 Polish time, Monday to Saturday, with budzik=true.
   workflow_dispatch:
+    inputs:
+      budzik:
+        description: "Started by the external alarm clock (cron-job.org); leave unchecked for manual runs"
+        type: boolean
+        default: false
   schedule:
-    # Attempts at 06:17, 07:17, 08:17 and 09:17 Polish time, Monday to
-    # Saturday (no digest on Sundays). GitHub skips or delays many scheduled
-    # starts, so there are four attempts; src/run_guard.py lets only the
-    # first completed run of the day send the digest (manual runs always run).
-    # The timezone field keeps the hours fixed across daylight saving changes.
+    # Backup: attempts at 06:17, 07:17, 08:17 and 09:17 Polish time, Monday
+    # to Saturday (no digest on Sundays). GitHub skips or delays many
+    # scheduled starts; src/run_guard.py lets only the first completed
+    # scheduled or alarm-clock run of the day send the digest (manual runs
+    # always run). The timezone field keeps the hours fixed across daylight
+    # saving changes.
     - cron: "17 6-9 * * 1-6"
       timezone: "Europe/Warsaw"
 
@@ -40,6 +48,9 @@ jobs:
           # AI summaries (Groq: two models, one key). Without the key the
           # digest is sent without summaries.
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          # "budzik" for the external alarm clock, otherwise the event name;
+          # src/run_guard.py treats "budzik" like a scheduled run.
+          TRIGGER: ${{ inputs.budzik && 'budzik' || github.event_name }}
         run: python src/main.py
 
       - name: Persist article history and archive

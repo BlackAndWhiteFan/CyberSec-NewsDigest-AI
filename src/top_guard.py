@@ -5,11 +5,14 @@ several attempts. The marker data/last_top.json remembers the last period
 sent for each kind ("week": "2026-W43", "month": "2026-10"). A scheduled
 attempt for a period that was already sent ends without sending; manual
 runs are never blocked. Test runs from branches do not write the marker.
+Runs started by the external alarm clock (TRIGGER=budzik, v24) count as
+scheduled, like in run_guard.
 """
 
 import json
-import os
 from pathlib import Path
+
+from run_guard import SCHEDULED_TRIGGERS, current_trigger
 
 
 MARKER_PATH = Path("data/last_top.json")
@@ -26,8 +29,8 @@ def load_marker(path=MARKER_PATH):
 
 def should_skip(kind, period, event_name=None, path=MARKER_PATH):
     """True for a scheduled run when this period has already been sent."""
-    event_name = os.environ.get("GITHUB_EVENT_NAME", "") if event_name is None else event_name
-    return event_name == "schedule" and load_marker(path).get(kind) == period
+    event_name = current_trigger() if event_name is None else event_name
+    return event_name in SCHEDULED_TRIGGERS and load_marker(path).get(kind) == period
 
 
 def mark_sent(kind, period, path=MARKER_PATH):

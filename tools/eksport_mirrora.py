@@ -53,7 +53,9 @@ OVERRIDES = {
     "H159": {"unikaj": r"(?:podatnoś|luk)\w* dnia zerowego"},
     # 20.10.2026: "łatka" without parentheses ("wiadomo, że to poprawka");
     # 21.10.2026: "poprawka" forbidden, so the AI keeps to "łatka".
-    "H166": {"forma": "łatka", "nawias": "", "unikaj": r"poprawk\w*|poprawce|poprawek"},
+    # 22.10.2026 (v27): also anglicisms such as "patchują" (Arista test).
+    "H166": {"forma": "łatka", "nawias": "",
+             "unikaj": r"poprawk\w*|poprawce|poprawek | (?:s|za)?patch(?:uj|ow)\w*"},
     # 22.10.2026 (v25): also the English form left untranslated by the AI.
     "H090": {"unikaj": r"zdaln\w+ wykonani\w+ kodu | remote code execution"},
     "H182": {"forma": "podwyższenie uprawnień", "nawias": "eskalacja",

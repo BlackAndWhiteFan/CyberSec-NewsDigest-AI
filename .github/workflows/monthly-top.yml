@@ -1,12 +1,18 @@
 name: Monthly Top 10
 
 on:
+  # Main trigger since v24: the external alarm clock (cron-job.org) calls the
+  # GitHub API on the 1st of each month at 08:17 Polish time with budzik=true.
   workflow_dispatch:
     inputs:
       month:
         description: "Month to summarize (YYYY-MM); empty = previous month"
         required: false
         default: ""
+      budzik:
+        description: "Started by the external alarm clock (cron-job.org); leave unchecked for manual runs"
+        type: boolean
+        default: false
   schedule:
     # First day of each month, attempts at 08:17, 09:17, 10:17 and 11:17
     # Polish time, for the previous month. GitHub skips or delays many
@@ -40,6 +46,9 @@ jobs:
           # Runs on branches other than main go to the test channel only.
           DISCORD_TEST_WEBHOOK_URL: ${{ secrets.DISCORD_TEST_WEBHOOK_URL }}
           MONTH: ${{ inputs.month }}
+          # "budzik" for the external alarm clock (cron-job.org, v24), otherwise
+          # the event name; src/top_guard.py treats "budzik" like a scheduled run.
+          TRIGGER: ${{ inputs.budzik && 'budzik' || github.event_name }}
         run: python src/monthly_top.py
 
       - name: Persist top marker

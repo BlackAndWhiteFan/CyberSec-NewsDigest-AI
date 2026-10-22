@@ -165,7 +165,7 @@ H162;patch gap;patch gap (luka we wdrażaniu poprawek);patch gap;;;;Czas między
 H163;rogue devices / unmanaged systems;rogue devices (nieautoryzowane i niezarządzane urządzenia);rogue devices;;;;Urządzenia podłączone bez zgody (np.
 H164;vulnerability;podatność, luka;podatność;;"nie dopisuj „(luka)” w nawiasie; słowa „luka” możesz używać zamiennie";\(luk\w*\);Słabość w kodzie lub konfiguracji, którą można wykorzystać.
 H165;resource reuse;ponowne użycie zasobów (wirtualizacja);ponowne użycie zasobów;;;;Pamięć lub dysk przydzielone wcześniej innej maszynie wirtualnej nie zostały wyczyszczone, więc nowa maszyna może odczytać cudze dane.
-H166;patch;poprawka, łatka;łatka;;;poprawk\w*|poprawce|poprawek;Patch Tuesday = comiesięczny cykl poprawek Microsoftu.
+H166;patch;poprawka, łatka;łatka;;;poprawk\w*|poprawce|poprawek | (?:s|za)?patch(?:uj|ow)\w*;Patch Tuesday = comiesięczny cykl poprawek Microsoftu.
 H167;public repositories / public object storage;publiczne repozytoria i publiczne zasobniki danych;publiczne repozytoria i publiczne zasobniki danych;;;;Kod i dane wystawione publicznie przez pomyłkę: repozytorium z sekretami (hasła, klucze), zasobnik w chmurze (np.
 H168;shadow IT;shadow IT;shadow IT;;;;"Sprzęt, oprogramowanie i usługi chmurowe używane w firmie bez wiedzy i zgody działu IT; poza kontrolą, łataniem i monitoringiem."
 H169;EPSS;EPSS (wskaźnik prawdopodobieństwa wykorzystania luki);EPSS;;;;Model organizacji FIRST szacujący, jak prawdopodobne jest wykorzystanie danej luki w ciągu najbliższych 30 dni.

@@ -61,7 +61,7 @@ class TestExplanations(unittest.TestCase):
         cases = {
             "Atak ransomware sparaliżował szpital.":
                 "Atak ransomware (program żądający okupu) sparaliżował szpital.",
-            "Grupa użyła exploita.": "Grupa użyła exploita (kod wykorzystujący podatność).",
+            "Grupa użyła exploita.": "Grupa użyła exploita (kodu wykorzystującego podatność).",
         }
 
         for text, expected in cases.items():
@@ -82,6 +82,28 @@ class TestExplanations(unittest.TestCase):
             "Doszło do podwyższenia uprawnień.": "Doszło do podwyższenia (eskalacji) uprawnień.",
             "Wykradziono poświadczenia.": "Wykradziono poświadczenia (dane logowania).",
             "Użyto skradzionych poświadczeń.": "Użyto skradzionych poświadczeń (danych logowania).",
+        }
+
+        for text, expected in cases.items():
+            with self.subTest(text=text):
+                self.assertEqual(gloss(text), expected)
+
+    def test_english_terms_get_explanation_in_the_same_case(self):
+        # v27: "przed exploit (kod wykorzystujący podatność)" seen 22.10.2026.
+        cases = {
+            "Eksperci ostrzegają przed exploitem.":
+                "Eksperci ostrzegają przed exploitem (kodem wykorzystującym podatność).",
+            "Badacze opublikowali exploita.":
+                "Badacze opublikowali exploita (kod wykorzystujący podatność).",
+            "Nie wykryto exploita w sieci.":
+                "Nie wykryto exploita (kodu wykorzystującego podatność) w sieci.",
+            "Kilka exploitów krąży w sieci.":
+                "Kilka exploitów (kodów wykorzystujących podatność) krąży w sieci.",
+            "W exploicie ukryto błąd.": "W exploicie (kodzie wykorzystującym podatność) ukryto błąd.",
+            "Członkowie botnetu zatrzymani.": "Członkowie botnetu (sieci zainfekowanych urządzeń) zatrzymani.",
+            "Policja przejęła botnet.": "Policja przejęła botnet (sieć zainfekowanych urządzeń).",
+            "Ochrona przed infostealerami.": "Ochrona przed infostealerami (programami kradnącymi dane).",
+            "Do infostealera dodano moduł.": "Do infostealera (programu kradnącego dane) dodano moduł.",
         }
 
         for text, expected in cases.items():
@@ -149,6 +171,7 @@ class TestConventionViolations(unittest.TestCase):
             "Grupa sponsorowana przez państwo.": "opłacani przez państwo",
             "Załatano dwie podatności (luka) RCE.": "podatność",
             "Błąd może umożliwić remote code execution.": "RCE",
+            "Aktualizacje patchują zero-day.": "łatka",
         }
 
         for text, required in cases.items():

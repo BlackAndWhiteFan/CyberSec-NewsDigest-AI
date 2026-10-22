@@ -24,6 +24,140 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v27 --- 22.10.2026
+
+**Odmiana terminów i objaśnień oraz pełna treść artykułów ze stron.**
+
+Powód: w teście v26 (22.10.2026) pojawiło się „ostrzegają przed exploit
+(kod wykorzystujący podatność)”: termin bez odmiany i objaśnienie w
+mianowniku. Część kanałów (BleepingComputer, The Hacker News, The
+Record) daje tylko jedno-dwa zdania zajawki, więc AI miało mało
+materiału.
+
+Zmiany:
+
+- **Objaśnienia w nawiasach w tym samym przypadku co termin**
+  (`src/glossary.py`): exploit, botnet i infostealer odmieniają się jak
+  polskie rzeczowniki, a objaśnienie idzie za nimi: „przed exploitem
+  (kodem wykorzystującym podatność)”, „członkowie botnetu (sieci
+  zainfekowanych urządzeń)”, „ochrona przed infostealerami (programami
+  kradnącymi dane)”. Morfeusz 2 nie zna tych słów, więc ich formy
+  odpowiadają polskim wzorom wygenerowanym przez Morfeusz 2 (exploit jak
+  „kotlet” – exploicie, botnet jak „budżet” – botnecie, infostealer jak
+  „komputer” – infostealerze); objaśnienia też wygenerowano Morfeuszem 2.
+  Forma „exploita”/„infostealera” może być dopełniaczem albo biernikiem:
+  dopełniacz jest wybierany po przyimku (do, od, bez, z…), po
+  przeczeniu („nie wykryto exploita”), po „użyć/używać”, „szukać”,
+  „potrzebować” i po rzeczowniku odczasownikowym („wykorzystanie
+  exploita”); w pozostałych przypadkach biernik (zgodnie z decyzją z
+  19.10.2026 dla form niejednoznacznych). Ransomware jest nieodmienne.
+- **Kontrola nieodmienionych terminów** (`src/summary_quality.py`):
+  exploit, botnet, infostealer, backdoor, keylogger, rootkit, loader,
+  dropper, trojan, phishing w formie podstawowej po przyimku lub
+  wyrażeniu wymagającym innego przypadku („przed exploit”, „przy użyciu
+  botnet”, „przed nowym infostealer”) wracają do AI do poprawki.
+  Prompt wymaga odmiany z przykładami, a prośba o poprawkę słowniczka
+  mówi, żeby odmienić wymaganą formę tak jak użytą („eksploitem” →
+  „exploitem”).
+- **Pełna treść ze strony artykułu** (nowy `src/article_pages.py`): gdy
+  materiał z kanału ma mniej niż 600 znaków, strona artykułu jest
+  pobierana raz (limit czasu 15 s, do 2 MB, tylko HTML), a z niej
+  zbierane są akapity (`<p>`), najlepiej z wnętrza `<article>`, bez
+  skryptów, menu, stopki, bocznych ramek, krótkich akapitów i
+  typowych dopisków (newsletter, cookies, „czytaj też”, reklama). Tekst
+  strony jest danymi jak tekst z kanału i służy tylko jako materiał
+  dla AI i kontroli faktów; nie trafia do historii ani archiwum. Błąd
+  strony (np. 403 z ochrony przed botami) zostawia artykuł z materiałem
+  z kanału. Log: „Pełna treść ze stron: N z M…” oraz „PEŁNA TREŚĆ: …”
+  przy błędach.
+
+Zmienione i nowe pliki: `src/glossary.py`, `src/summary_quality.py`,
+`src/ai_summaries.py`, `src/test_ai_summaries.py`, `src/main.py`,
+`src/article_pages.py` (nowy),
+`src/test_article_pages.py` (nowy), `src/test_glossary.py`,
+`src/test_summary_quality.py`, `src/discord_output.py`,
+`src/test_discord_output.py`, README (PL/EN).
+
+Pierwszy test na gałęzi `v27-odmiana-strony` 22.10.2026: pełna treść
+pobrana z 10 z 11 stron (jedna: przekroczony czas połączenia), w tym z
+BleepingComputer, The Hacker News, SecurityWeek, Kapitana Hacka, CERT
+Polska i Krebsa; streszczenia AI 15 z 15, odmiana poprawna („przed
+exploitem (kodem wykorzystującym podatność)”). Streszczenia stały się
+konkretne (numery CVE, wersje z łatką, liczby z operacji Interpolu), ale
+też za długie: jedno zdanie łączone średnikami, dwa ucięte na limicie
+450 znaków, do tego dopisane zalecenia i uwaga, czego raport nie podaje.
+
+Poprawki po teście:
+
+- Kontrola (`src/summary_quality.py`) zgłasza streszczenie dłuższe niż
+  400 znaków, średnik łączący zdania oraz uwagi o braku informacji
+  („nie podaje informacji o…”, „brak informacji o…”).
+- Prompt: najwyżej 350 znaków, krótkie zdania bez średników, najwyżej 3
+  numery CVE lub wersje; zalecenia tylko, gdy wymienia je artykuł; bez
+  uwag o tym, czego artykuł nie podaje.
+- Prośba o poprawkę słowniczka nie każe „odmieniać” skrótów (RCE).
+- Uzupełnienie v26: pliki z poprawką dopisku „także:”
+  (`src/discord_output.py`, `src/test_discord_output.py`) nie trafiły do
+  scalenia v26, choć changelog v26 ją opisuje; w teście v27 nadal było
+  „thehackernews.com, thehackernews.com…”. Pliki dochodzą w v27.
+
+Drugi test na gałęzi 22.10.2026: streszczenia krótsze, w zdaniach z
+kropkami i bez ucięć, ale 8 z 16 artykułów zostało **bez streszczenia**:
+nowa kontrola długości i średników zgłosiła więcej streszczeń, a
+streszczenie, które po rundzie poprawek nadal miało problem (albo
+którego poprawka się nie udała), było w całości odrzucane. Do tego
+„patchują” w streszczeniu Aristy i „Raport nie podaje sprawcy” w
+streszczeniu o Pegasusie.
+
+Poprawki po drugim teście:
+
+- **Naprawa przez kod zamiast odrzucenia** (`src/ai_summaries.py`,
+  `src/summary_quality.py`): gdy poprawione przez AI streszczenie nadal
+  ma problem albo prośba o poprawkę się nie udała (np. limit zapytań),
+  kod zamienia średniki na kropki, usuwa zdania z problemami i skraca
+  tekst do całych zdań w limicie 400 znaków. Odrzucane jest tylko
+  streszczenie, w którym nie zostało żadne poprawne zdanie. Log:
+  „KONTROLA: streszczenie N naprawione przez kod…”.
+- Kontrola uwag o braku informacji obejmuje też „raport/artykuł nie
+  podaje…”.
+- Słowniczek, drobna zmiana: przy „łatka” (H166) zakazane są też
+  spolszczenia „patchować” („patchują”, „spatchowany”);
+  `tools/eksport_mirrora.py` (OVERRIDES H166),
+  `data/glosariusz_mirror.csv` (tylko wiersz H166).
+
+Pełny log drugiego testu pokazał przyczynę: większość próśb o poprawkę
+dotyczyła „poprawki” → „łatka”, „zdalne wykonanie kodu” → „RCE” i
+średników, a jedna runda poprawek dostała od Groq błąd 429 (limit
+zapytań), więc pięć streszczeń odpadło naraz („brak poprawki”). Jedno
+odpadło przez datę „21”, której nie było w materiale.
+
+Dalsze poprawki:
+
+- **Poprawki bez zapytania do AI** (`src/glossary.py`, funkcja
+  `autofix`, wywoływana w `clean_summary`): „poprawka” w każdej formie →
+  „łatka” w tej samej formie (poprawce → łatce), „zdalne wykonanie
+  (dowolnego) kodu” i „remote code execution” → „RCE” (nieodmienne),
+  „eksploit…” → „exploit…”, średnik → koniec zdania. Mniej próśb o
+  poprawkę to mniejsze ryzyko limitu zapytań.
+- **Druga szansa przy błędzie poprawki**: gdy prośba o poprawkę do
+  jednego modelu się nie uda (np. 429), pytany jest drugi model Groq
+  (osobne limity), a dopiero potem działa naprawa przez kod.
+- Ucięcie na limicie znaków nie tworzy już niedokończonego zdania: limit
+  bezpieczeństwa w `clean_summary` to 1000 znaków, a długość do 400
+  znaków pilnuje kontrola i naprawa przez kod (całe zdania).
+
+Zmianę zweryfikowano: testy jednostkowe (240) zakończone powodzeniem.
+Trzeci test na gałęzi 22.10.2026: pełna treść pobrana z 12 z 12 stron,
+streszczenia AI **16 z 16**, tylko jedna prośba o poprawkę (uwaga
+„Raport nie podaje…”, poprawiona przez AI), bez błędu limitu zapytań i
+bez naprawy przez kod. Streszczenia mają 1–3 zdania z kropkami, bez
+średników i ucięć, z numerami CVE, wersjami i liczbami ze stron
+artykułów; odmiana poprawna („chroniące przed exploitem (kodem
+wykorzystującym podatność)”), „także:” wymienia każdy serwis raz.
+Zauważony błąd do dalszej obserwacji: w jednym streszczeniu rok
+„2024” z tytułu trafił do daty łatki („21 października 2024”); kontrola
+faktów tego nie wykrywa, bo liczba występuje w materiale.
+
 ## v26 --- 22.10.2026
 
 **Pięć nowych źródeł, filtr wieku artykułów i lepsze łączenie tego
@@ -1048,6 +1182,145 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v27 --- 2026-10-22
+
+**Inflection of terms and explanations, and full article text from
+pages.**
+
+Reason: the v26 test (2026-10-22) showed "ostrzegają przed exploit (kod
+wykorzystujący podatność)": the term not inflected and the explanation
+in the nominative. Some feeds (BleepingComputer, The Hacker News, The
+Record) give only a one- or two-sentence teaser, so the AI had little
+material.
+
+Changes:
+
+- **Explanations in parentheses in the same case as the term**
+  (`src/glossary.py`): exploit, botnet and infostealer are inflected
+  like Polish nouns, and the explanation follows them: "przed exploitem
+  (kodem wykorzystującym podatność)", "członkowie botnetu (sieci
+  zainfekowanych urządzeń)", "ochrona przed infostealerami (programami
+  kradnącymi dane)". Morfeusz 2 does not know these words, so their
+  forms follow Polish model nouns generated with Morfeusz 2 (exploit
+  like "kotlet" – exploicie, botnet like "budżet" – botnecie,
+  infostealer like "komputer" – infostealerze); the explanations were
+  generated with Morfeusz 2 as well. The form "exploita"/"infostealera"
+  may be genitive or accusative: the genitive is chosen after a
+  preposition (do, od, bez, z…), after negation ("nie wykryto
+  exploita"), after "użyć/używać", "szukać", "potrzebować" and after a
+  verbal noun ("wykorzystanie exploita"); otherwise the accusative (as
+  decided on 2026-10-19 for ambiguous forms). Ransomware is
+  indeclinable.
+- **Check of uninflected terms** (`src/summary_quality.py`): exploit,
+  botnet, infostealer, backdoor, keylogger, rootkit, loader, dropper,
+  trojan, phishing in the base form after a preposition or phrase that
+  needs another case ("przed exploit", "przy użyciu botnet", "przed
+  nowym infostealer") go back to the AI for correction. The prompt
+  requires inflection with examples, and the glossary correction request
+  says to inflect the required form like the used one ("eksploitem" →
+  "exploitem").
+- **Full text from the article page** (new `src/article_pages.py`):
+  when the feed material is shorter than 600 characters, the article
+  page is fetched once (15 s timeout, up to 2 MB, HTML only), and its
+  paragraphs (`<p>`) are collected, preferably from inside `<article>`,
+  without scripts, menus, footer, sidebars, short paragraphs and typical
+  notes (newsletter, cookies, "czytaj też", ads). The page text is data
+  like the feed text and is used only as material for the AI and the
+  fact check; it is not saved to history or the archive. A page error
+  (e.g. 403 from bot protection) leaves the article with its feed
+  material. Log: "Pełna treść ze stron: N z M…" and "PEŁNA TREŚĆ: …" on
+  errors.
+
+Changed and new files: `src/glossary.py`, `src/summary_quality.py`,
+`src/ai_summaries.py`, `src/test_ai_summaries.py`, `src/main.py`,
+`src/article_pages.py` (new),
+`src/test_article_pages.py` (new), `src/test_glossary.py`,
+`src/test_summary_quality.py`, `src/discord_output.py`,
+`src/test_discord_output.py`, README (PL/EN).
+
+First test on the `v27-odmiana-strony` branch on 2026-10-22: full text
+fetched from 10 of 11 pages (one: connection timeout), including
+BleepingComputer, The Hacker News, SecurityWeek, Kapitan Hack, CERT
+Polska and Krebs; AI summaries 15 of 15, inflection correct ("przed
+exploitem (kodem wykorzystującym podatność)"). Summaries became concrete
+(CVE ids, patched versions, numbers from the Interpol operation), but
+also too long: one sentence joined with semicolons, two cut at the
+450-character limit, plus added recommendations and a remark on what
+the report does not say.
+
+Fixes after the test:
+
+- The check (`src/summary_quality.py`) reports summaries longer than 400
+  characters, semicolons joining sentences and remarks about missing
+  information ("nie podaje informacji o…", "brak informacji o…").
+- Prompt: at most 350 characters, short sentences without semicolons, at
+  most 3 CVE ids or versions; recommendations only when the article
+  lists them; no remarks about what the article does not say.
+- The glossary correction request no longer asks to "inflect" acronyms
+  (RCE).
+- Completion of v26: the files with the "także:" fix
+  (`src/discord_output.py`, `src/test_discord_output.py`) did not reach
+  the v26 merge, although the v26 changelog describes the fix; the v27
+  test still showed "thehackernews.com, thehackernews.com…". The files
+  are added in v27.
+
+Second branch test on 2026-10-22: summaries shorter, in sentences with
+full stops and not cut, but 8 of 16 articles were left **without a
+summary**: the new length and semicolon check reported more summaries,
+and a summary that still had a problem after the correction round (or
+whose correction failed) was dropped entirely. Also "patchują" in the
+Arista summary and "Raport nie podaje sprawcy" in the Pegasus summary.
+
+Fixes after the second test:
+
+- **Repair by code instead of dropping** (`src/ai_summaries.py`,
+  `src/summary_quality.py`): when the AI-corrected summary still has a
+  problem or the correction request failed (e.g. rate limit), code turns
+  semicolons into full stops, removes sentences with problems and cuts
+  the text to whole sentences within 400 characters. Only a summary with
+  no correct sentence left is dropped. Log: "KONTROLA: streszczenie N
+  naprawione przez kod…".
+- The check of remarks about missing information also covers
+  "raport/artykuł nie podaje…".
+- Glossary, a small change: for "łatka" (H166) the anglicisms "patchować"
+  ("patchują", "spatchowany") are forbidden too;
+  `tools/eksport_mirrora.py` (OVERRIDES H166), `data/glosariusz_mirror.csv`
+  (only row H166).
+
+The full log of the second test showed the cause: most correction
+requests were for "poprawki" → "łatka", "zdalne wykonanie kodu" → "RCE"
+and semicolons, and one correction round got error 429 (rate limit) from
+Groq, so five summaries were dropped at once ("brak poprawki"). One was
+dropped for the date "21", which was not in the material.
+
+Further fixes:
+
+- **Corrections without an AI request** (`src/glossary.py`, function
+  `autofix`, called in `clean_summary`): "poprawka" in every form →
+  "łatka" in the same form (poprawce → łatce), "zdalne wykonanie
+  (dowolnego) kodu" and "remote code execution" → "RCE" (indeclinable),
+  "eksploit…" → "exploit…", semicolon → sentence end. Fewer correction
+  requests mean less risk of the rate limit.
+- **Second chance when a correction fails**: when the correction request
+  to one model fails (e.g. 429), the other Groq model (separate limits)
+  is asked, and only then does the code repair run.
+- Cutting at the character limit no longer leaves an unfinished
+  sentence: the safety limit in `clean_summary` is 1000 characters, and
+  the 400-character length is kept by the check and the code repair
+  (whole sentences).
+
+The change was verified: unit tests (240) passed. Third branch test on
+2026-10-22: full text fetched from 12 of 12 pages, AI summaries **16 of
+16**, only one correction request (the remark "Raport nie podaje…",
+corrected by the AI), no rate-limit error and no code repair. Summaries
+have 1–3 sentences with full stops, no semicolons and no cuts, with CVE
+ids, versions and numbers from the article pages; inflection correct
+("chroniące przed exploitem (kodem wykorzystującym podatność)"),
+"także:" lists each site once. An error to watch: in one summary the
+year "2024" from the title ended up in the patch date ("21 października
+2024"); the fact check does not catch it, because the number is in the
+material.
 
 ## v26 --- 2026-10-22
 

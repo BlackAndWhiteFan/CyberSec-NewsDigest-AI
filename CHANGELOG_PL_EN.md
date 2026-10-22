@@ -66,11 +66,21 @@ Zmienione i nowe pliki: `src/main.py` (lista źródeł, filtr wieku, log),
 `src/event_grouping.py`, `src/test_event_grouping.py`,
 `src/test_article_age.py` (nowy), README (PL/EN).
 
-Zmianę zweryfikowano: testy jednostkowe (226) zakończone powodzeniem, w
-tym tytuły z testu 22.10.2026 (cztery artykuły o PHP2Shell łączą się w
+Zmianę zweryfikowano: testy jednostkowe zakończone powodzeniem, w tym
+tytuły z testu 22.10.2026 (cztery artykuły o PHP2Shell łączą się w
 jedną pozycję, Plex2Shell zostaje osobno, dwa artykuły o APT28 nie
-łączą się). Adresy kanałów CERT Polska i Kapitana Hacka oraz dostęp
-serwera GitHuba do nowych źródeł sprawdza test na gałęzi.
+łączą się). Test na gałęzi `v26-zrodla` 22.10.2026: wszystkie 11
+kanałów pobrane bez błędów (CERT Polska 100 wpisów, Kapitan Hack 10,
+SecurityWeek 10, The Record 5, Krebs 10); 173 wpisy pominięte jako
+starsze niż 3 dni; prasówka z 15 artykułami (dotąd ok. 10) z 11 źródeł,
+w tym 7 z polskich; 6 artykułów połączonych z innymi (PHP2Shell: 5
+artykułów z 3 serwisów w jednej pozycji); streszczenia AI 15 z 15.
+
+Poprawka po teście: dopisek „także:” wymieniał ten sam serwis kilka
+razy („thehackernews.com, thehackernews.com, securityweek.com,
+securityweek.com”). Teraz każdy inny serwis jest podany raz (z
+pierwszym artykułem), a serwis artykułu głównego nie jest powtarzany
+(`src/discord_output.py`, `src/test_discord_output.py`; testy: 227).
 
 ## v25 --- 22.10.2026
 
@@ -1080,11 +1090,21 @@ Changed and new files: `src/main.py` (source list, age filter, log),
 `src/event_grouping.py`, `src/test_event_grouping.py`,
 `src/test_article_age.py` (new), README (PL/EN).
 
-The change was verified: unit tests (226) passed, including titles from
+The change was verified: unit tests passed, including titles from
 the test of 2026-10-22 (four PHP2Shell articles merge into one item,
-Plex2Shell stays separate, two APT28 articles are not merged). The feed
-addresses of CERT Polska and Kapitan Hack and the GitHub runner's
-access to the new sources are checked by the branch test.
+Plex2Shell stays separate, two APT28 articles are not merged). Test on
+the `v26-zrodla` branch on 2026-10-22: all 11 feeds fetched without
+errors (CERT Polska 100 entries, Kapitan Hack 10, SecurityWeek 10, The
+Record 5, Krebs 10); 173 entries skipped as older than 3 days; a digest
+with 15 articles (about 10 before) from 11 sources, 7 of them Polish; 6
+articles merged with others (PHP2Shell: 5 articles from 3 sites in one
+item); AI summaries 15 of 15.
+
+Fix after the test: the "także:" note listed the same site several
+times ("thehackernews.com, thehackernews.com, securityweek.com,
+securityweek.com"). Now each other site is given once (with its first
+article), and the site of the main article is not repeated
+(`src/discord_output.py`, `src/test_discord_output.py`; tests: 227).
 
 ## v25 --- 2026-10-22
 

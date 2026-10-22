@@ -24,6 +24,62 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v27 --- 22.10.2026
+
+**Odmiana terminów i objaśnień oraz pełna treść artykułów ze stron.**
+
+Powód: w teście v26 (22.10.2026) pojawiło się „ostrzegają przed exploit
+(kod wykorzystujący podatność)”: termin bez odmiany i objaśnienie w
+mianowniku. Część kanałów (BleepingComputer, The Hacker News, The
+Record) daje tylko jedno-dwa zdania zajawki, więc AI miało mało
+materiału.
+
+Zmiany:
+
+- **Objaśnienia w nawiasach w tym samym przypadku co termin**
+  (`src/glossary.py`): exploit, botnet i infostealer odmieniają się jak
+  polskie rzeczowniki, a objaśnienie idzie za nimi: „przed exploitem
+  (kodem wykorzystującym podatność)”, „członkowie botnetu (sieci
+  zainfekowanych urządzeń)”, „ochrona przed infostealerami (programami
+  kradnącymi dane)”. Morfeusz 2 nie zna tych słów, więc ich formy
+  odpowiadają polskim wzorom wygenerowanym przez Morfeusz 2 (exploit jak
+  „kotlet” – exploicie, botnet jak „budżet” – botnecie, infostealer jak
+  „komputer” – infostealerze); objaśnienia też wygenerowano Morfeuszem 2.
+  Forma „exploita”/„infostealera” może być dopełniaczem albo biernikiem:
+  dopełniacz jest wybierany po przyimku (do, od, bez, z…), po
+  przeczeniu („nie wykryto exploita”), po „użyć/używać”, „szukać”,
+  „potrzebować” i po rzeczowniku odczasownikowym („wykorzystanie
+  exploita”); w pozostałych przypadkach biernik (zgodnie z decyzją z
+  19.10.2026 dla form niejednoznacznych). Ransomware jest nieodmienne.
+- **Kontrola nieodmienionych terminów** (`src/summary_quality.py`):
+  exploit, botnet, infostealer, backdoor, keylogger, rootkit, loader,
+  dropper, trojan, phishing w formie podstawowej po przyimku lub
+  wyrażeniu wymagającym innego przypadku („przed exploit”, „przy użyciu
+  botnet”, „przed nowym infostealer”) wracają do AI do poprawki.
+  Prompt wymaga odmiany z przykładami, a prośba o poprawkę słowniczka
+  mówi, żeby odmienić wymaganą formę tak jak użytą („eksploitem” →
+  „exploitem”).
+- **Pełna treść ze strony artykułu** (nowy `src/article_pages.py`): gdy
+  materiał z kanału ma mniej niż 600 znaków, strona artykułu jest
+  pobierana raz (limit czasu 15 s, do 2 MB, tylko HTML), a z niej
+  zbierane są akapity (`<p>`), najlepiej z wnętrza `<article>`, bez
+  skryptów, menu, stopki, bocznych ramek, krótkich akapitów i
+  typowych dopisków (newsletter, cookies, „czytaj też”, reklama). Tekst
+  strony jest danymi jak tekst z kanału i służy tylko jako materiał
+  dla AI i kontroli faktów; nie trafia do historii ani archiwum. Błąd
+  strony (np. 403 z ochrony przed botami) zostawia artykuł z materiałem
+  z kanału. Log: „Pełna treść ze stron: N z M…” oraz „PEŁNA TREŚĆ: …”
+  przy błędach.
+
+Zmienione i nowe pliki: `src/glossary.py`, `src/summary_quality.py`,
+`src/ai_summaries.py`, `src/main.py`, `src/article_pages.py` (nowy),
+`src/test_article_pages.py` (nowy), `src/test_glossary.py`,
+`src/test_summary_quality.py`, README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (234) zakończone powodzeniem.
+Test na gałęzi (które strony wpuszczają serwer GitHuba, jakość
+wyciągniętego tekstu) oczekuje na wykonanie.
+
 ## v26 --- 22.10.2026
 
 **Pięć nowych źródeł, filtr wieku artykułów i lepsze łączenie tego
@@ -1048,6 +1104,64 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v27 --- 2026-10-22
+
+**Inflection of terms and explanations, and full article text from
+pages.**
+
+Reason: the v26 test (2026-10-22) showed "ostrzegają przed exploit (kod
+wykorzystujący podatność)": the term not inflected and the explanation
+in the nominative. Some feeds (BleepingComputer, The Hacker News, The
+Record) give only a one- or two-sentence teaser, so the AI had little
+material.
+
+Changes:
+
+- **Explanations in parentheses in the same case as the term**
+  (`src/glossary.py`): exploit, botnet and infostealer are inflected
+  like Polish nouns, and the explanation follows them: "przed exploitem
+  (kodem wykorzystującym podatność)", "członkowie botnetu (sieci
+  zainfekowanych urządzeń)", "ochrona przed infostealerami (programami
+  kradnącymi dane)". Morfeusz 2 does not know these words, so their
+  forms follow Polish model nouns generated with Morfeusz 2 (exploit
+  like "kotlet" – exploicie, botnet like "budżet" – botnecie,
+  infostealer like "komputer" – infostealerze); the explanations were
+  generated with Morfeusz 2 as well. The form "exploita"/"infostealera"
+  may be genitive or accusative: the genitive is chosen after a
+  preposition (do, od, bez, z…), after negation ("nie wykryto
+  exploita"), after "użyć/używać", "szukać", "potrzebować" and after a
+  verbal noun ("wykorzystanie exploita"); otherwise the accusative (as
+  decided on 2026-10-19 for ambiguous forms). Ransomware is
+  indeclinable.
+- **Check of uninflected terms** (`src/summary_quality.py`): exploit,
+  botnet, infostealer, backdoor, keylogger, rootkit, loader, dropper,
+  trojan, phishing in the base form after a preposition or phrase that
+  needs another case ("przed exploit", "przy użyciu botnet", "przed
+  nowym infostealer") go back to the AI for correction. The prompt
+  requires inflection with examples, and the glossary correction request
+  says to inflect the required form like the used one ("eksploitem" →
+  "exploitem").
+- **Full text from the article page** (new `src/article_pages.py`):
+  when the feed material is shorter than 600 characters, the article
+  page is fetched once (15 s timeout, up to 2 MB, HTML only), and its
+  paragraphs (`<p>`) are collected, preferably from inside `<article>`,
+  without scripts, menus, footer, sidebars, short paragraphs and typical
+  notes (newsletter, cookies, "czytaj też", ads). The page text is data
+  like the feed text and is used only as material for the AI and the
+  fact check; it is not saved to history or the archive. A page error
+  (e.g. 403 from bot protection) leaves the article with its feed
+  material. Log: "Pełna treść ze stron: N z M…" and "PEŁNA TREŚĆ: …" on
+  errors.
+
+Changed and new files: `src/glossary.py`, `src/summary_quality.py`,
+`src/ai_summaries.py`, `src/main.py`, `src/article_pages.py` (new),
+`src/test_article_pages.py` (new), `src/test_glossary.py`,
+`src/test_summary_quality.py`, README (PL/EN).
+
+The change was verified: unit tests (234) passed. A test on the branch
+(which pages let the GitHub runner in, quality of the extracted text) is
+pending.
 
 ## v26 --- 2026-10-22
 

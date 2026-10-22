@@ -70,7 +70,8 @@ OVERRIDES = {
     "H371": {"forma": "powiązani z państwem", "nawias": ""},
     "H365": {"unikaj": r"broker\w* pierwszego dostępu"},
     "H337": {"unikaj": r"rozbici\w* infrastruktury"},
-    "H232": {"forma": "MFA", "nawias": "uwierzytelnianie wieloskładnikowe",
+    # 21.10.2026: MFA without parentheses ("wszyscy mamy z tym do czynienia").
+    "H232": {"forma": "MFA", "nawias": "",
              "unikaj": r"uwierzytelniani\w* wieloskładnikow\w*"},
 }
 

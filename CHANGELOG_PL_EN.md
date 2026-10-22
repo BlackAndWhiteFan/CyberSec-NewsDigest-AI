@@ -24,6 +24,54 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v26 --- 22.10.2026
+
+**Pięć nowych źródeł, filtr wieku artykułów i lepsze łączenie tego
+samego wydarzenia.**
+
+Nowe źródła (wybór z 22.10.2026 na podstawie częstotliwości publikacji i
+znaczenia w branży): **CERT Polska** i **Kapitan Hack** (polskie),
+**SecurityWeek** (ok. 6–7 tekstów dziennie, najlepsze pokrycie łatek
+producentów), **The Record** (ok. 4 dziennie, dziennikarstwo: ataki
+państwowe, policja, polityka) i **Krebs on Security** (ok. 1 tygodniowo,
+własne śledztwa). Odrzucone: Help Net Security (dużo materiałów
+producentów), Dark Reading (dużo opinii), Security Affairs i agregatory
+(przedruki). Źródeł jest teraz 11 (6 polskich, 5 angielskich).
+
+Zmiany w kodzie:
+
+- **Filtr wieku** (`src/rss_helpers.py`): wpisy starsze niż 3 dni (data
+  `pubDate` w RSS albo `published`/`updated` w Atom) są pomijane, bo
+  kanały nowych źródeł zawierają też starsze teksty (Krebs: ok. dwa
+  miesiące). 3 dni obejmują przerwę niedzielną. Wpisy bez daty lub z
+  nieczytelną datą przechodzą. Log pokazuje ich liczbę („Pominięte jako
+  starsze niż 3 dni”).
+- **Limity źródeł** (`src/article_selection.py`): SecurityWeek i The
+  Record po 3 artykuły, żeby częste źródła angielskie nie wypychały
+  polskich z dziennej dwudziestki; pozostałe bez zmian (4, Niebezpiecznik
+  2).
+- **Łączenie wydarzeń** (`src/event_grouping.py`): wspólna nazwa z
+  literami i cyframi (np. PHP2Shell, Plex2Shell, Log4j) łączy artykuły
+  jak wspólny numer CVE. Dotąd nazwa dużego wydarzenia występowała w
+  wielu tytułach dnia, więc nie była „rzadka” i nie łączyła artykułów
+  (test 22.10.2026: trzy osobne pozycje o PHP2Shell). Wspólny CVE lub
+  taka nazwa łączy też dwa artykuły z jednego serwisu (The Hacker News
+  pisał o PHP2Shell dwa razy). Nazwy grup (APT28, UNC…, Storm-…) i
+  ogólne nazwy techniczne (Win32, x64…) nie łączą artykułów, bo
+  występują w różnych historiach. Ta sama reguła działa w zestawieniach
+  tygodniowych i miesięcznych oraz w sekcji „Ciąg dalszy”.
+
+Zmienione i nowe pliki: `src/main.py` (lista źródeł, filtr wieku, log),
+`src/rss_helpers.py`, `src/article_selection.py`,
+`src/event_grouping.py`, `src/test_event_grouping.py`,
+`src/test_article_age.py` (nowy), README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (226) zakończone powodzeniem, w
+tym tytuły z testu 22.10.2026 (cztery artykuły o PHP2Shell łączą się w
+jedną pozycję, Plex2Shell zostaje osobno, dwa artykuły o APT28 nie
+łączą się). Adresy kanałów CERT Polska i Kapitana Hacka oraz dostęp
+serwera GitHuba do nowych źródeł sprawdza test na gałęzi.
+
 ## v25 --- 22.10.2026
 
 **Ostrzejsze streszczenia AI: konkrety zamiast ogólników, kontrola faktów
@@ -990,6 +1038,53 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v26 --- 2026-10-22
+
+**Five new sources, an article age filter and better merging of the
+same event.**
+
+New sources (chosen on 2026-10-22 by publishing frequency and standing
+in the industry): **CERT Polska** and **Kapitan Hack** (Polish),
+**SecurityWeek** (about 6–7 articles a day, the best coverage of vendor
+patches), **The Record** (about 4 a day, journalism: nation-state
+attacks, police, policy) and **Krebs on Security** (about 1 a week, own
+investigations). Rejected: Help Net Security (many vendor pieces), Dark
+Reading (much opinion), Security Affairs and aggregators (reprints).
+There are now 11 sources (6 Polish, 5 English).
+
+Code changes:
+
+- **Age filter** (`src/rss_helpers.py`): entries older than 3 days
+  (`pubDate` in RSS or `published`/`updated` in Atom) are skipped,
+  because feeds of the new sources also contain older articles (Krebs:
+  about two months). 3 days cover the Sunday break. Entries without a
+  date or with an unreadable date pass. The log shows their number
+  ("Pominięte jako starsze niż 3 dni").
+- **Source limits** (`src/article_selection.py`): SecurityWeek and The
+  Record 3 articles each, so frequent English sources do not push Polish
+  ones out of the daily twenty; others unchanged (4, Niebezpiecznik 2).
+- **Event merging** (`src/event_grouping.py`): a shared name with
+  letters and digits (e.g. PHP2Shell, Plex2Shell, Log4j) merges articles
+  like a shared CVE id. Until now the name of a big event appeared in
+  many titles of the day, so it was not "rare" and did not merge
+  articles (test of 2026-10-22: three separate PHP2Shell items). A
+  shared CVE or such a name also merges two articles from one source
+  (The Hacker News wrote about PHP2Shell twice). Group names (APT28,
+  UNC…, Storm-…) and generic technical names (Win32, x64…) do not merge
+  articles, because they appear in different stories. The same rule
+  works in the weekly and monthly tops and in the "Ciąg dalszy" section.
+
+Changed and new files: `src/main.py` (source list, age filter, log),
+`src/rss_helpers.py`, `src/article_selection.py`,
+`src/event_grouping.py`, `src/test_event_grouping.py`,
+`src/test_article_age.py` (new), README (PL/EN).
+
+The change was verified: unit tests (226) passed, including titles from
+the test of 2026-10-22 (four PHP2Shell articles merge into one item,
+Plex2Shell stays separate, two APT28 articles are not merged). The feed
+addresses of CERT Polska and Kapitan Hack and the GitHub runner's
+access to the new sources are checked by the branch test.
 
 ## v25 --- 2026-10-22
 

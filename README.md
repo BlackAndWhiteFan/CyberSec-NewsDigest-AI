@@ -38,7 +38,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 ### Current Implementation
 
-- Retrieves RSS or Atom entries from six configured cybersecurity news sources.
+- Retrieves RSS or Atom entries from eleven cybersecurity news sources: Polish (Niebezpiecznik, Sekurak, Zaufana Trzecia Strona, CyberDefence24, CERT Polska, Kapitan Hack) and English (BleepingComputer, The Hacker News, SecurityWeek, The Record, Krebs on Security). Entries older than 3 days are skipped, so a new source does not send its whole archive.
 - Extracts article titles, links, and descriptions, decoding HTML entities left in feed titles.
 - Skips entries with missing titles or invalid URLs.
 - Detects duplicate links within a single run and tracks the feeds in which an article appears.
@@ -48,12 +48,12 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 - Assigns priority scores (critical +3, vulnerabilities +2, Poland +1) and subtracts 2 points from titles written in an event, report, or advice context (e.g. conferences, experts, how-to guides, resilience, regulatory fines).
 - Excludes promotional titles (webinars, free trainings, e-books, discounts, sponsored content, lectures, sign-ups).
 - Selects up to 20 articles with a score of at least 2, so Poland-related articles without a security signal are not selected and the digest may contain fewer than 20 articles.
-- Limits each source to 4 articles (Niebezpiecznik: 2); limits are configured in `src/article_selection.py`.
+- Limits each source to 4 articles (Niebezpiecznik: 2, SecurityWeek and The Record: 3, so that frequent English sources do not push out Polish ones); limits are configured in `src/article_selection.py`.
 - Sends the digest to a Discord channel through a webhook, grouped by each article's most important category, with clickable titles and source domains, split into messages within Discord's length limit.
 - Records links in `published_links` only after a successful delivery; a delivery failure ends the run with an error, so the workflow is marked as failed.
 - Archives each delivered article (date, title, link, source, categories, score) in a monthly file `data/archive/YYYY-MM.json`. An archive error is logged and ends the run with an error, but the article history is still saved, so delivered links are not sent again.
 - Saves the article history and archive even if the digest step fails, unless the run is cancelled.
-- Merges articles from different sources about the same event into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
+- Merges articles about the same event (from different sources, and also from one source when they share a CVE id or a name with digits such as PHP2Shell) into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
 - On the first day of each month, sends the top 10 events of the previous month to a separate Discord channel, and on Mondays the top 5 events of the previous week to `#top-tygodnia` (ranked by number of articles, then sources and score), with AI summaries. Each top has four start attempts and is sent only once (marker `data/last_top.json`).
 - Adds a concrete AI summary in Polish (2–3 sentences; 1 sentence when the material is only a title or a short teaser) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description. Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped. The same check (`src/summary_quality.py`) rejects filler phrases ("co podkreśla wagę…"), relative time words ("jutro", "dziś") and numbers or CVE ids that are not in the article; sentence capitalization is fixed by code; explanations in parentheses are added by code at the first occurrence of a term in the digest, only for 6 chosen terms (e.g. ransomware, exploit, podwyższenie (eskalacja) uprawnień). Without the `GROQ_API_KEY` secret the digest is sent without summaries.
 - Continues processing when an individual RSS feed fails.
@@ -116,7 +116,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `data/archive/YYYY-MM.json` — monthly archive of delivered articles.
 - `src/main.py` — main RSS ingestion and processing script.
 - `src/deduplication.py` — article deduplication and source tracking.
-- `src/rss_helpers.py` — URL validation, duplicate-link detection, and title cleanup helpers.
+- `src/rss_helpers.py` — URL validation, duplicate-link detection, title cleanup, and article age (publication date, 3-day limit).
 - `src/discord_output.py` — digest formatting, message splitting, and delivery to a Discord webhook.
 - `src/article_archive.py` — monthly archive of delivered articles.
 - `src/event_grouping.py` — detection of the same event reported by different sources and of follow-ups.
@@ -140,6 +140,7 @@ GitHub Actions executes the workflow, while Python implements the processing log
 - `src/article_selection.py` — keyword lists, categorization, priority scoring, promotional filter, source limits, and article selection.
 - `src/test_deduplication.py` — deduplication unit tests.
 - `src/test_url_validation.py` — URL validation, duplicate-detection, and title cleanup tests.
+- `src/test_article_age.py` — article age tests (RSS and Atom dates, weekend, missing dates).
 - `src/test_discord_output.py` — digest formatting and message-splitting tests (no network access).
 - `src/test_article_archive.py` — monthly archive tests.
 - `src/test_event_grouping.py` — event grouping tests based on real title pairs.

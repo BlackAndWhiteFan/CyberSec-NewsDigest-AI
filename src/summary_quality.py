@@ -50,6 +50,13 @@ RELATIVE_TIME = re.compile(
     re.IGNORECASE,
 )
 
+# A weekday without a date ("przed wydaniem łatki w środę", test 22.10.2026)
+# is as unclear in a weekly top as "jutro"; "w środę 21 października" is fine.
+WEEKDAY = re.compile(
+    r"(?<!\w)we? (poniedziałek|wtorek|środę|czwartek|piątek|sobotę|niedzielę)(?![\w,]*\s*\(?\d)",
+    re.IGNORECASE,
+)
+
 CVE = re.compile(r"CVE-\d{4}-\d{4,7}", re.IGNORECASE)
 # "26 739" (Polish thousands separator) is one number.
 NUMBER = re.compile(r"\d{1,3}(?:[ \u00a0]\d{3})+(?![\d.,])|\d+(?:[.,]\d+)*")
@@ -122,7 +129,7 @@ def quality_problems(text, source=None):
             problems.append(f"ogólnik „{match.group(0)}” – zastąp go konkretem z artykułu albo usuń")
             break
 
-    match = RELATIVE_TIME.search(text)
+    match = RELATIVE_TIME.search(text) or WEEKDAY.search(text)
 
     if match:
         problems.append(

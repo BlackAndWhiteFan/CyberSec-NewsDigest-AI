@@ -27,7 +27,8 @@ class TestGenericPhrases(unittest.TestCase):
 class TestRelativeTime(unittest.TestCase):
     def test_relative_time_words_are_reported(self):
         for text in ["Łatki zostaną udostępnione jutro.", "Dziś CISA dodała lukę do katalogu.",
-                     "W przyszłym tygodniu firma wyda poprawioną wersję."]:
+                     "W przyszłym tygodniu firma wyda poprawioną wersję.",
+                     "Ataki zaczęły się cztery dni przed wydaniem łatki w środę."]:
             with self.subTest(text=text):
                 problems = quality_problems(text)
                 self.assertEqual(len(problems), 1)
@@ -35,6 +36,8 @@ class TestRelativeTime(unittest.TestCase):
 
     def test_dates_and_similar_words_are_allowed(self):
         self.assertEqual(quality_problems("Łatki wydano 21 października; dzisiejszość."), [])
+        self.assertEqual(quality_problems("Łatki wydano w środę 21 października."), [])
+        self.assertEqual(quality_problems("Łatki wydano we wtorek, 20 października."), [])
 
 
 class TestFacts(unittest.TestCase):

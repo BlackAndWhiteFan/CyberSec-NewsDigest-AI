@@ -14,13 +14,70 @@ kosmetyczne, tymczasowe diagnostyki i eksperymenty usunięte później.
 Od v11 wpisy są dodawane na bieżąco, razem z każdą zmianą, przed jej
 scaleniem do gałęzi `main`. Jedna wersja odpowiada jednej logicznej
 zmianie; automatyczne aktualizacje historii artykułów przez workflow nie
-otrzymują osobnych wersji.
+otrzymują osobnych wersji. Od v24 drobne poprawki (np. zmiana jednego
+objaśnienia) nie dostają osobnego numeru: są opisywane w najbliższej
+wersji jako osobny akapit.
 
 Format inspirowany [Keep a Changelog](https://keepachangelog.com/).
 Źródło wpisów v1--v10: historia Git (113 commitów), opisy commitów i
 przeanalizowane diffy.
 
 ------------------------------------------------------------------------
+
+## v24 --- 22.10.2026
+
+**Zewnętrzny budzik (cron-job.org) jako główny wyzwalacz prasówki i
+zestawień; MFA bez nawiasu.**
+
+Powód: harmonogram GitHuba w tym repozytorium jest praktycznie
+bezużyteczny. Sondy z 19–20.10 dały ok. 4 starty na 70 oczekiwanych, a
+20–21.10 nie ruszyła ani jedna z czterech porannych prób; prasówki
+trzeba było uruchamiać ręcznie.
+
+Rozwiązanie: serwis cron-job.org wywołuje API GitHuba
+(`POST /repos/…/actions/workflows/<plik>/dispatches`, body
+`{"ref":"main","inputs":{"budzik":"true"}}`) z tokenem fine-grained PAT
+(tylko to repozytorium, uprawnienie Actions: Read and write, ważny rok;
+przechowywany wyłącznie w cron-job.org). Trzy zadania w strefie
+Europe/Warsaw:
+
+- Daily Digest -- poniedziałek–sobota, 6:17 (`daily-digest.yml`),
+- Weekly Top 5 -- poniedziałek, 8:17 (`weekly-top.yml`),
+- Monthly Top 10 -- 1. dzień miesiąca, 8:17 (`monthly-top.yml`).
+
+Harmonogram GitHuba zostaje jako zapas. Żeby budzik i zapas nigdy nie
+wysłały tego samego dwa razy, wszystkie trzy workflowy mają nowe pole
+`budzik` (przełącznik, domyślnie wyłączony) i przekazują zmienną
+`TRIGGER` (`budzik` albo nazwa zdarzenia GitHuba). Strażnicy
+(`src/run_guard.py`, `src/top_guard.py`) traktują `budzik` jak
+uruchomienie z harmonogramu: jeśli dzień, tydzień lub miesiąc został już
+obsłużony, uruchomienie kończy się bez wysyłki. Ręczne uruchomienie
+(przełącznik `budzik` niezaznaczony) nadal nigdy nie jest blokowane.
+Znacznik `data/last_digest.json` zapisuje `"trigger": "budzik"`, więc
+widać, co wysłało prasówkę.
+
+Przy okazji (drobna zmiana bez osobnej wersji): **MFA bez nawiasu.**
+Skrót jest powszechnie znany („praktycznie wszyscy mamy z tym do
+czynienia”), więc kod nie dopisuje już przy nim „(uwierzytelnianie
+wieloskładnikowe)”. Objaśnienia w nawiasach ma teraz 6 terminów:
+ransomware, infostealer, exploit, botnet, podwyższenie (eskalacja)
+uprawnień i poświadczenia (dane logowania). Forma „MFA” i zakaz
+rozwiniętej formy polskiej w tekście zostają.
+
+Zmienione pliki: `.github/workflows/daily-digest.yml`, `weekly-top.yml`,
+`monthly-top.yml` (pole `budzik`, zmienna `TRIGGER`, komentarze),
+`src/run_guard.py`, `src/top_guard.py`, `src/test_run_guard.py`,
+`src/test_top_guard.py`, `tools/eksport_mirrora.py` (OVERRIDES H232),
+`data/glosariusz_mirror.csv` (tylko wiersz H232), `src/test_glossary.py`
+(testy objaśnień przeniesione z MFA na botnet; dopasowanie skrótów
+sprawdzane na przykładowym haśle), README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (203) zakończone powodzeniem;
+uruchomienie testowe zadania Weekly Top 5 w cron-job.org 21.10.2026
+zwróciło 204 i uruchomiło workflow na `main` (zakończony powodzeniem,
+bez wysyłki, bo archiwum nie obejmuje tygodnia 12–18.10). Pierwsze
+poranne uruchomienie prasówki przez budzik i blokada kolejnych prób
+oczekują na potwierdzenie po scaleniu.
 
 ## v23 --- 21.10.2026
 
@@ -862,13 +919,68 @@ omitted.
 From v11 onwards, entries are added together with each change, before
 it is merged into the `main` branch. One version corresponds to one
 logical change; automatic article-history updates made by the workflow
-do not receive separate versions.
+do not receive separate versions. From v24 onwards, small tweaks (e.g.
+changing one explanation) do not get their own number: they are
+described in the nearest version as a separate paragraph.
 
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v24 --- 2026-10-22
+
+**External alarm clock (cron-job.org) as the main trigger of the digest
+and tops; MFA without parentheses.**
+
+Reason: GitHub's schedule is practically unusable in this repository.
+Probes on 19–20 October gave about 4 starts out of 70 expected, and on
+20–21 October none of the four morning attempts started; digests had to
+be run manually.
+
+Solution: cron-job.org calls the GitHub API
+(`POST /repos/…/actions/workflows/<file>/dispatches`, body
+`{"ref":"main","inputs":{"budzik":"true"}}`) with a fine-grained PAT
+(this repository only, Actions: Read and write, valid for one year;
+stored only in cron-job.org). Three jobs in the Europe/Warsaw time zone:
+
+- Daily Digest -- Monday to Saturday, 06:17 (`daily-digest.yml`),
+- Weekly Top 5 -- Monday, 08:17 (`weekly-top.yml`),
+- Monthly Top 10 -- 1st day of the month, 08:17 (`monthly-top.yml`).
+
+GitHub's schedule stays as a backup. So that the alarm clock and the
+backup never send the same thing twice, all three workflows have a new
+`budzik` input (a checkbox, off by default) and pass a `TRIGGER`
+variable (`budzik` or GitHub's event name). The guards
+(`src/run_guard.py`, `src/top_guard.py`) treat `budzik` like a scheduled
+run: if the day, week or month has already been handled, the run ends
+without sending. A manual run (`budzik` unchecked) is still never
+blocked. The marker `data/last_digest.json` records `"trigger":
+"budzik"`, so it shows what sent the digest.
+
+Also (a small change without its own version): **MFA without
+parentheses.** The acronym is widely known ("practically all of us deal
+with it"), so code no longer adds "(uwierzytelnianie wieloskładnikowe)"
+to it. Explanations in parentheses now cover 6 terms: ransomware,
+infostealer, exploit, botnet, podwyższenie (eskalacja) uprawnień and
+poświadczenia (dane logowania). The form "MFA" and the ban on the
+expanded Polish form in the text remain.
+
+Changed files: `.github/workflows/daily-digest.yml`, `weekly-top.yml`,
+`monthly-top.yml` (`budzik` input, `TRIGGER` variable, comments),
+`src/run_guard.py`, `src/top_guard.py`, `src/test_run_guard.py`,
+`src/test_top_guard.py`, `tools/eksport_mirrora.py` (OVERRIDES H232),
+`data/glosariusz_mirror.csv` (only row H232), `src/test_glossary.py`
+(explanation tests moved from MFA to botnet; acronym matching tested on
+a sample entry), README (PL/EN).
+
+The change was verified: unit tests (203) passed; a test run of the
+Weekly Top 5 job in cron-job.org on 2026-10-21 returned 204 and started
+the workflow on `main` (successful, nothing sent, because the archive
+does not cover the week of 12–18 October). The first morning digest
+started by the alarm clock and the skipping of later attempts are
+awaiting confirmation after merging.
 
 ## v23 --- 2026-10-21
 

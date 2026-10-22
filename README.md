@@ -22,7 +22,7 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 
 **Phase 5 — Selection quality (Polish keywords, relevance threshold, source limits, promotional filter): implemented and verified in workflow runs.**
 
-**Phase 6 — Automatic schedule (attempts at 06:17, 07:17, 08:17 and 09:17 Polish time, Monday to Saturday, one digest per day): configured; GitHub runs schedules irregularly, hence four attempts and a guard; skipping later attempts is awaiting confirmation on `main`.**
+**Phase 6 — Automatic start (external alarm clock cron-job.org at 06:17 Polish time, Monday to Saturday; GitHub's schedule as a backup; one digest per day): configured; the alarm clock was checked with a test run, the first morning digest started by it is awaiting confirmation.**
 
 **Phase 7 — Monthly archive of delivered articles: implemented and verified in a run that delivered an article.**
 
@@ -55,13 +55,13 @@ The project aims to operate with a budget of 0 PLN by using free service tiers w
 - Saves the article history and archive even if the digest step fails, unless the run is cancelled.
 - Merges articles from different sources about the same event into one item with "także:" links to the other sources, and shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section.
 - On the first day of each month, sends the top 10 events of the previous month to a separate Discord channel, and on Mondays the top 5 events of the previous week to `#top-tygodnia` (ranked by number of articles, then sources and score), with AI summaries. Each top has four start attempts and is sent only once (marker `data/last_top.json`).
-- Adds an AI summary in Polish (up to 2 sentences) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description. Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped; explanations in parentheses are added by code at the first occurrence of a term in the digest, only for 7 chosen terms (e.g. ransomware, exploit, MFA, podwyższenie (eskalacja) uprawnień). Without the `GROQ_API_KEY` secret the digest is sent without summaries.
+- Adds an AI summary in Polish (up to 2 sentences) to each article (Groq: `gpt-oss-120b`, fallback `qwen3.8-27b`), based on the full feed text or the RSS description. Terms must follow the glossary `data/glosariusz_mirror.csv` (a mirror of the CyberSec Mozaika glossary): a summary that breaks it is sent back for correction and then dropped; explanations in parentheses are added by code at the first occurrence of a term in the digest, only for 6 chosen terms (e.g. ransomware, exploit, podwyższenie (eskalacja) uprawnień). Without the `GROQ_API_KEY` secret the digest is sent without summaries.
 - Continues processing when an individual RSS feed fails.
 - Displays diagnostic information about retrieved, skipped, and processed entries, as well as article selection.
 - Runs unit tests before executing the RSS ingestion script.
 - Uses GitHub Actions to commit and push changes to the persistent article history when that file changes.
 
-The workflow tries to start automatically at 06:17, 07:17, 08:17 and 09:17 Polish time (`Europe/Warsaw`), Monday to Saturday; the first completed attempt sends the digest and later attempts that day end without sending (marker `data/last_digest.json`). It can also be triggered manually through GitHub Actions – manual runs are never blocked and also count as today's digest. GitHub does not guarantee that scheduled runs start (it skips or delays many of them), so the digest may arrive later or need a manual run. A concurrency group prevents two runs from overlapping.
+The main trigger is an external alarm clock: cron-job.org calls the GitHub API (workflow_dispatch with the `budzik` input) at 06:17 Polish time, Monday to Saturday, and the tops on Monday (weekly) and on the 1st of the month (monthly) at 08:17. It uses a fine-grained PAT limited to this repository and the Actions permission (Read and write), stored only in cron-job.org; the token must be renewed before it expires after one year. GitHub's schedule (attempts at 06:17, 07:17, 08:17 and 09:17, `Europe/Warsaw`) stays as a backup, because GitHub skips or delays many scheduled runs. The first completed alarm-clock or scheduled run sends the digest and later runs that day end without sending (marker `data/last_digest.json`). The workflow can also be triggered manually through GitHub Actions (leave `budzik` unchecked) – manual runs are never blocked and also count as today's digest. A concurrency group prevents two runs from overlapping.
 
 ### Latest Verified Results
 

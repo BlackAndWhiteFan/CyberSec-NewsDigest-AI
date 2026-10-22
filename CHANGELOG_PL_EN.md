@@ -24,6 +24,63 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v25 --- 22.10.2026
+
+**Ostrzejsze streszczenia AI: konkrety zamiast ogólników, kontrola faktów
+i czasu, poprawna wielka litera.**
+
+Powód: prasówka trafia już do kilku osób, w tym mentorów, a w
+streszczeniach z 19–22.10 powtarzały się błędy: ogólniki („co stanowi
+poważne zagrożenie…”), „Łatki zostaną udostępnione jutro” pokazane
+potem w zestawieniu tygodniowym, „98 zero-day” bez rzeczownika,
+„exploit tych luk mogą prowadzić” z małej litery po poprawce
+słowniczka, „emergency łatki” oraz „podatności (luka)” bez odmiany.
+
+Zmiany:
+
+- **Nowy prompt** (`src/ai_summaries.py`): 2–3 zdania; pierwsze zdanie
+  mówi, co się stało i kogo dotyczy (firma, produkt i wersja, grupa,
+  CVE), kolejne – skala, skutki i co zrobić, jeśli artykuł o tym pisze;
+  zakaz ogólników i względnych określeń czasu; liczby i nazwy dokładnie
+  z artykułu; liczby z rzeczownikiem („98 luk zero-day”); bez
+  angielskich wtrąceń poza nazwami własnymi i słowniczkiem; 1 zdanie,
+  gdy materiałem jest tylko tytuł lub zajawka.
+- **Kontrola jakości** (nowy `src/summary_quality.py`), w tej samej
+  rundzie poprawek co słowniczek: ogólniki (lista fraz), względne
+  określenia czasu („jutro”, „dziś”, „wczoraj”, „w przyszłym
+  tygodniu”…, a także dzień tygodnia bez daty, np. „w środę”), numery CVE i liczby większe niż 12, których nie ma w
+  tytule ani tekście artykułu (bez sprawdzania bieżącego roku i lat
+  sąsiednich; „26 739” i „1,83” porównywane z „26,739” i „1.83M”).
+  Streszczenie z problemem wraca raz do AI z opisem problemu, a jeśli
+  nadal jest złe, zostaje odrzucone (lepiej bez streszczenia niż z
+  błędną liczbą). Log pokazuje każdą kontrolę jako „KONTROLA: …”.
+- **Wielka litera na początku zdań** poprawiana przez kod (z wyjątkiem
+  skrótów: np., m.in., ok., tys., Inc. itd.).
+- **Słowniczek, drobna zmiana bez osobnej wersji:** przy „podatność”
+  (H164) AI nie dopisuje już „(luka)”; forma „(luka)” w nawiasie jest
+  zakazana, a słowa „luka” można używać zamiennie. Przy RCE (H090)
+  zakazana jest też angielska forma „remote code execution”. Zmiany:
+  `tools/eksport_mirrora.py` (OVERRIDES H164 i H090),
+  `data/glosariusz_mirror.csv` (tylko wiersze H164 i H090).
+
+Nowe i zmienione pliki: `src/summary_quality.py`,
+`src/test_summary_quality.py`, `src/ai_summaries.py`,
+`src/test_ai_summaries.py`, `src/test_glossary.py`,
+`tools/eksport_mirrora.py`, `data/glosariusz_mirror.csv`, README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (218) zakończone powodzeniem;
+kontrola uruchomiona na 33 streszczeniach z archiwum października
+wychwyciła 7 z nich („jutro”, „W minionym tygodniu”, „stanowi poważne
+zagrożenie dla”, 4 × „podatności (luka)”), a poprawka wielkich liter
+naprawiła „exploit tych luk mogą…”. Test na gałęzi
+`v25-streszczenia` 22.10.2026: prasówka z 10 artykułami na kanale
+testowym, streszczenia AI 10 z 10; kontrola zgłosiła 4 streszczenia
+(„poprawka” zamiast „łatka”, „zdalnego wykonania kodu” zamiast „RCE”),
+wszystkie poprawione w drugiej rundzie; kontrola faktów nie odrzuciła
+żadnego streszczenia. Streszczenia podają daty, liczby i nazwy z
+artykułów. Po teście dodano zakaz dnia tygodnia bez daty („przed
+wydaniem łatki w środę”) i formy „remote code execution”.
+
 ## v24 --- 22.10.2026
 
 **Zewnętrzny budzik (cron-job.org) jako główny wyzwalacz prasówki i
@@ -933,6 +990,64 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v25 --- 2026-10-22
+
+**Sharper AI summaries: facts instead of filler, fact and time checks,
+correct capitalization.**
+
+Reason: the digest now goes to several people, including mentors, and
+summaries from 19–22 October repeated the same errors: filler phrases
+("co stanowi poważne zagrożenie…"), "Łatki zostaną udostępnione jutro"
+(patches will be released tomorrow) later shown in the weekly top, "98
+zero-day" without a noun, "exploit tych luk mogą prowadzić" starting
+with a lowercase letter after a glossary correction, "emergency łatki"
+and uninflected "podatności (luka)".
+
+Changes:
+
+- **New prompt** (`src/ai_summaries.py`): 2–3 sentences; the first says
+  what happened and whom it affects (company, product and version,
+  group, CVE), the next ones the scale, impact and what to do, if the
+  article says so; no filler and no relative time words; numbers and
+  names exactly as in the article; numbers with a noun ("98 luk
+  zero-day"); no English words except proper names and glossary terms;
+  1 sentence when the material is only a title or a teaser.
+- **Quality check** (new `src/summary_quality.py`), in the same
+  correction round as the glossary: filler phrases (a phrase list),
+  relative time words ("jutro", "dziś", "wczoraj", "w przyszłym
+  tygodniu"…, and a weekday without a date, e.g. "w środę"), CVE ids and numbers above 12 that are not in the article
+  title or text (the current year and its neighbours are not checked;
+  "26 739" and "1,83" are compared with "26,739" and "1.83M"). A summary
+  with a problem is sent back once with a description of the problem
+  and dropped if it is still wrong (no summary is better than a wrong
+  number). The log shows each check as "KONTROLA: …".
+- **Capital letter at the start of sentences** fixed by code (except
+  after abbreviations: np., m.in., ok., tys., Inc. etc.).
+- **Glossary, a small change without its own version:** the AI no
+  longer adds "(luka)" after "podatność" (H164); "(luka)" in
+  parentheses is forbidden, and "luka" may be used on its own. For RCE
+  (H090) the English form "remote code execution" is forbidden too.
+  Changes: `tools/eksport_mirrora.py` (OVERRIDES H164 and H090),
+  `data/glosariusz_mirror.csv` (only rows H164 and H090).
+
+New and changed files: `src/summary_quality.py`,
+`src/test_summary_quality.py`, `src/ai_summaries.py`,
+`src/test_ai_summaries.py`, `src/test_glossary.py`,
+`tools/eksport_mirrora.py`, `data/glosariusz_mirror.csv`, README (PL/EN).
+
+The change was verified: unit tests (218) passed; the check run on 33
+summaries from the October archive caught 7 of them ("jutro", "W
+minionym tygodniu", "stanowi poważne zagrożenie dla", 4 × "podatności
+(luka)"), and the capitalization fix corrected "exploit tych luk
+mogą…". Test on the `v25-streszczenia` branch on 2026-10-22: a digest
+with 10 articles on the test channel, AI summaries 10 of 10; the check
+reported 4 summaries ("poprawka" instead of "łatka", "zdalnego
+wykonania kodu" instead of "RCE"), all corrected in the second round;
+the fact check rejected no summary. Summaries give dates, numbers and
+names from the articles. After the test, a weekday without a date
+("przed wydaniem łatki w środę") and the form "remote code execution"
+were added as forbidden.
 
 ## v24 --- 2026-10-22
 

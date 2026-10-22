@@ -147,6 +147,8 @@ class TestConventionViolations(unittest.TestCase):
             "Opublikowano dowód koncepcji.": "PoC",
             "Wykradziono kredencjały.": "poświadczenia",
             "Grupa sponsorowana przez państwo.": "opłacani przez państwo",
+            "Załatano dwie podatności (luka) RCE.": "podatność",
+            "Błąd może umożliwić remote code execution.": "RCE",
         }
 
         for text, required in cases.items():

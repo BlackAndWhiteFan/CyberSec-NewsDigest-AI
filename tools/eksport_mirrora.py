@@ -42,15 +42,20 @@ COLUMNS = ["id", "termin_en", "haslo", "forma", "nawias", "regula", "unikaj", "o
 # Digest decisions (JW, 19.10.2026). Keys: entry ID. Missing keys keep the
 # default value of the column.
 OVERRIDES = {
+    # 22.10.2026 (v25): the AI added "(luka)" uninflected after every
+    # "podatność" ("dwie krytyczne podatności (luka)"), so it is forbidden;
+    # "luka" may still be used on its own.
     "H164": {"forma": "podatność", "nawias": "",
-             "regula": "dopisz „(luka)” w nawiasie tylko wtedy, gdy to słowo naprawdę pasuje do kontekstu"},
+             "regula": "nie dopisuj „(luka)” w nawiasie; słowa „luka” możesz używać zamiennie",
+             "unikaj": r"\(luk\w*\)"},
     "H153": {"forma": "exploit", "nawias": "kod wykorzystujący podatność",
              "regula": "nie spolszczaj", "unikaj": r"eksploit\w*"},
     "H159": {"unikaj": r"(?:podatnoś|luk)\w* dnia zerowego"},
     # 20.10.2026: "łatka" without parentheses ("wiadomo, że to poprawka");
     # 21.10.2026: "poprawka" forbidden, so the AI keeps to "łatka".
     "H166": {"forma": "łatka", "nawias": "", "unikaj": r"poprawk\w*|poprawce|poprawek"},
-    "H090": {"unikaj": r"zdaln\w+ wykonani\w+ kodu"},
+    # 22.10.2026 (v25): also the English form left untranslated by the AI.
+    "H090": {"unikaj": r"zdaln\w+ wykonani\w+ kodu | remote code execution"},
     "H182": {"forma": "podwyższenie uprawnień", "nawias": "eskalacja",
              "unikaj": r"eskalacj\w* uprawnień | podniesieni\w* uprawnień"},
     "H152": {"unikaj": r"dow[oó]d\w* koncepcji"},

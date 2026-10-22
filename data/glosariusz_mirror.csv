@@ -89,7 +89,7 @@ H086;command injection;command injection (wstrzyknięcie poleceń systemowych);c
 H087;prompt injection;prompt injection (wstrzyknięcie promptu);prompt injection;;;;Podsuwanie modelowi AI własnych instrukcji.
 H088;SQL injection;SQL injection (wstrzyknięcie SQL);SQL injection;;;;Podsuwanie poleceń bazie danych przez formularz lub parametr.
 H089;XSS;XSS;XSS;;;;Wstrzyknięcie skryptu do strony.
-H090;RCE;RCE (zdalne wykonanie kodu);RCE;;;zdaln\w+ wykonani\w+ kodu;Określenie „pre-auth” oznacza atak bez logowania.
+H090;RCE;RCE (zdalne wykonanie kodu);RCE;;;zdaln\w+ wykonani\w+ kodu | remote code execution;Określenie „pre-auth” oznacza atak bez logowania.
 H091;malicious update;złośliwa aktualizacja;złośliwa aktualizacja;;;;Aktualizacja z ukrytym złośliwym kodem, dostarczona kanałem producenta (np.
 H092;active attack;atak aktywny;atak aktywny;;;;Atak, który zmienia stan systemu lub danych, w odróżnieniu od ataku pasywnego (np.
 H093;zero-click attack;zero-click (atak bez klikania);zero-click;;;;"Atak, w którym ofiara nie musi klikać linku ani załącznika; wystarczy np."
@@ -163,7 +163,7 @@ H160;actively exploited vulnerability;luka aktywnie wykorzystywana;luka aktywnie
 H161;n-day;luka n-day;luka n-day;;;;Znana i załatana, ale ofiary jeszcze nie wdrożyły poprawki.
 H162;patch gap;patch gap (luka we wdrażaniu poprawek);patch gap;;;;Czas między publikacją poprawki a jej instalacją.
 H163;rogue devices / unmanaged systems;rogue devices (nieautoryzowane i niezarządzane urządzenia);rogue devices;;;;Urządzenia podłączone bez zgody (np.
-H164;vulnerability;podatność, luka;podatność;;dopisz „(luka)” w nawiasie tylko wtedy, gdy to słowo naprawdę pasuje do kontekstu;;Słabość w kodzie lub konfiguracji, którą można wykorzystać.
+H164;vulnerability;podatność, luka;podatność;;"nie dopisuj „(luka)” w nawiasie; słowa „luka” możesz używać zamiennie";\(luk\w*\);Słabość w kodzie lub konfiguracji, którą można wykorzystać.
 H165;resource reuse;ponowne użycie zasobów (wirtualizacja);ponowne użycie zasobów;;;;Pamięć lub dysk przydzielone wcześniej innej maszynie wirtualnej nie zostały wyczyszczone, więc nowa maszyna może odczytać cudze dane.
 H166;patch;poprawka, łatka;łatka;;;poprawk\w*|poprawce|poprawek;Patch Tuesday = comiesięczny cykl poprawek Microsoftu.
 H167;public repositories / public object storage;publiczne repozytoria i publiczne zasobniki danych;publiczne repozytoria i publiczne zasobniki danych;;;;Kod i dane wystawione publicznie przez pomyłkę: repozytorium z sekretami (hasła, klucze), zasobnik w chmurze (np.

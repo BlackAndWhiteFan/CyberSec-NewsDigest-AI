@@ -74,11 +74,34 @@ Zmiany:
 Zmienione i nowe pliki: `src/glossary.py`, `src/summary_quality.py`,
 `src/ai_summaries.py`, `src/main.py`, `src/article_pages.py` (nowy),
 `src/test_article_pages.py` (nowy), `src/test_glossary.py`,
-`src/test_summary_quality.py`, README (PL/EN).
+`src/test_summary_quality.py`, `src/discord_output.py`,
+`src/test_discord_output.py`, README (PL/EN).
 
-Zmianę zweryfikowano: testy jednostkowe (234) zakończone powodzeniem.
-Test na gałęzi (które strony wpuszczają serwer GitHuba, jakość
-wyciągniętego tekstu) oczekuje na wykonanie.
+Pierwszy test na gałęzi `v27-odmiana-strony` 22.10.2026: pełna treść
+pobrana z 10 z 11 stron (jedna: przekroczony czas połączenia), w tym z
+BleepingComputer, The Hacker News, SecurityWeek, Kapitana Hacka, CERT
+Polska i Krebsa; streszczenia AI 15 z 15, odmiana poprawna („przed
+exploitem (kodem wykorzystującym podatność)”). Streszczenia stały się
+konkretne (numery CVE, wersje z łatką, liczby z operacji Interpolu), ale
+też za długie: jedno zdanie łączone średnikami, dwa ucięte na limicie
+450 znaków, do tego dopisane zalecenia i uwaga, czego raport nie podaje.
+
+Poprawki po teście:
+
+- Kontrola (`src/summary_quality.py`) zgłasza streszczenie dłuższe niż
+  400 znaków, średnik łączący zdania oraz uwagi o braku informacji
+  („nie podaje informacji o…”, „brak informacji o…”).
+- Prompt: najwyżej 350 znaków, krótkie zdania bez średników, najwyżej 3
+  numery CVE lub wersje; zalecenia tylko, gdy wymienia je artykuł; bez
+  uwag o tym, czego artykuł nie podaje.
+- Prośba o poprawkę słowniczka nie każe „odmieniać” skrótów (RCE).
+- Uzupełnienie v26: pliki z poprawką dopisku „także:”
+  (`src/discord_output.py`, `src/test_discord_output.py`) nie trafiły do
+  scalenia v26, choć changelog v26 ją opisuje; w teście v27 nadal było
+  „thehackernews.com, thehackernews.com…”. Pliki dochodzą w v27.
+
+Zmianę zweryfikowano: testy jednostkowe (237) zakończone powodzeniem.
+Drugi test na gałęzi oczekuje na wykonanie.
 
 ## v26 --- 22.10.2026
 
@@ -1157,11 +1180,37 @@ Changes:
 Changed and new files: `src/glossary.py`, `src/summary_quality.py`,
 `src/ai_summaries.py`, `src/main.py`, `src/article_pages.py` (new),
 `src/test_article_pages.py` (new), `src/test_glossary.py`,
-`src/test_summary_quality.py`, README (PL/EN).
+`src/test_summary_quality.py`, `src/discord_output.py`,
+`src/test_discord_output.py`, README (PL/EN).
 
-The change was verified: unit tests (234) passed. A test on the branch
-(which pages let the GitHub runner in, quality of the extracted text) is
-pending.
+First test on the `v27-odmiana-strony` branch on 2026-10-22: full text
+fetched from 10 of 11 pages (one: connection timeout), including
+BleepingComputer, The Hacker News, SecurityWeek, Kapitan Hack, CERT
+Polska and Krebs; AI summaries 15 of 15, inflection correct ("przed
+exploitem (kodem wykorzystującym podatność)"). Summaries became concrete
+(CVE ids, patched versions, numbers from the Interpol operation), but
+also too long: one sentence joined with semicolons, two cut at the
+450-character limit, plus added recommendations and a remark on what
+the report does not say.
+
+Fixes after the test:
+
+- The check (`src/summary_quality.py`) reports summaries longer than 400
+  characters, semicolons joining sentences and remarks about missing
+  information ("nie podaje informacji o…", "brak informacji o…").
+- Prompt: at most 350 characters, short sentences without semicolons, at
+  most 3 CVE ids or versions; recommendations only when the article
+  lists them; no remarks about what the article does not say.
+- The glossary correction request no longer asks to "inflect" acronyms
+  (RCE).
+- Completion of v26: the files with the "także:" fix
+  (`src/discord_output.py`, `src/test_discord_output.py`) did not reach
+  the v26 merge, although the v26 changelog describes the fix; the v27
+  test still showed "thehackernews.com, thehackernews.com…". The files
+  are added in v27.
+
+The change was verified: unit tests (237) passed. A second branch test
+is pending.
 
 ## v26 --- 2026-10-22
 

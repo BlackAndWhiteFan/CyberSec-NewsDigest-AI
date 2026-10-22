@@ -72,7 +72,8 @@ Zmiany:
   przy błędach.
 
 Zmienione i nowe pliki: `src/glossary.py`, `src/summary_quality.py`,
-`src/ai_summaries.py`, `src/main.py`, `src/article_pages.py` (nowy),
+`src/ai_summaries.py`, `src/test_ai_summaries.py`, `src/main.py`,
+`src/article_pages.py` (nowy),
 `src/test_article_pages.py` (nowy), `src/test_glossary.py`,
 `src/test_summary_quality.py`, `src/discord_output.py`,
 `src/test_discord_output.py`, README (PL/EN).
@@ -100,8 +101,53 @@ Poprawki po teście:
   scalenia v26, choć changelog v26 ją opisuje; w teście v27 nadal było
   „thehackernews.com, thehackernews.com…”. Pliki dochodzą w v27.
 
-Zmianę zweryfikowano: testy jednostkowe (237) zakończone powodzeniem.
-Drugi test na gałęzi oczekuje na wykonanie.
+Drugi test na gałęzi 22.10.2026: streszczenia krótsze, w zdaniach z
+kropkami i bez ucięć, ale 8 z 16 artykułów zostało **bez streszczenia**:
+nowa kontrola długości i średników zgłosiła więcej streszczeń, a
+streszczenie, które po rundzie poprawek nadal miało problem (albo
+którego poprawka się nie udała), było w całości odrzucane. Do tego
+„patchują” w streszczeniu Aristy i „Raport nie podaje sprawcy” w
+streszczeniu o Pegasusie.
+
+Poprawki po drugim teście:
+
+- **Naprawa przez kod zamiast odrzucenia** (`src/ai_summaries.py`,
+  `src/summary_quality.py`): gdy poprawione przez AI streszczenie nadal
+  ma problem albo prośba o poprawkę się nie udała (np. limit zapytań),
+  kod zamienia średniki na kropki, usuwa zdania z problemami i skraca
+  tekst do całych zdań w limicie 400 znaków. Odrzucane jest tylko
+  streszczenie, w którym nie zostało żadne poprawne zdanie. Log:
+  „KONTROLA: streszczenie N naprawione przez kod…”.
+- Kontrola uwag o braku informacji obejmuje też „raport/artykuł nie
+  podaje…”.
+- Słowniczek, drobna zmiana: przy „łatka” (H166) zakazane są też
+  spolszczenia „patchować” („patchują”, „spatchowany”);
+  `tools/eksport_mirrora.py` (OVERRIDES H166),
+  `data/glosariusz_mirror.csv` (tylko wiersz H166).
+
+Pełny log drugiego testu pokazał przyczynę: większość próśb o poprawkę
+dotyczyła „poprawki” → „łatka”, „zdalne wykonanie kodu” → „RCE” i
+średników, a jedna runda poprawek dostała od Groq błąd 429 (limit
+zapytań), więc pięć streszczeń odpadło naraz („brak poprawki”). Jedno
+odpadło przez datę „21”, której nie było w materiale.
+
+Dalsze poprawki:
+
+- **Poprawki bez zapytania do AI** (`src/glossary.py`, funkcja
+  `autofix`, wywoływana w `clean_summary`): „poprawka” w każdej formie →
+  „łatka” w tej samej formie (poprawce → łatce), „zdalne wykonanie
+  (dowolnego) kodu” i „remote code execution” → „RCE” (nieodmienne),
+  „eksploit…” → „exploit…”, średnik → koniec zdania. Mniej próśb o
+  poprawkę to mniejsze ryzyko limitu zapytań.
+- **Druga szansa przy błędzie poprawki**: gdy prośba o poprawkę do
+  jednego modelu się nie uda (np. 429), pytany jest drugi model Groq
+  (osobne limity), a dopiero potem działa naprawa przez kod.
+- Ucięcie na limicie znaków nie tworzy już niedokończonego zdania: limit
+  bezpieczeństwa w `clean_summary` to 1000 znaków, a długość do 400
+  znaków pilnuje kontrola i naprawa przez kod (całe zdania).
+
+Zmianę zweryfikowano: testy jednostkowe (240) zakończone powodzeniem.
+Trzeci test na gałęzi oczekuje na wykonanie.
 
 ## v26 --- 22.10.2026
 
@@ -1178,7 +1224,8 @@ Changes:
   errors.
 
 Changed and new files: `src/glossary.py`, `src/summary_quality.py`,
-`src/ai_summaries.py`, `src/main.py`, `src/article_pages.py` (new),
+`src/ai_summaries.py`, `src/test_ai_summaries.py`, `src/main.py`,
+`src/article_pages.py` (new),
 `src/test_article_pages.py` (new), `src/test_glossary.py`,
 `src/test_summary_quality.py`, `src/discord_output.py`,
 `src/test_discord_output.py`, README (PL/EN).
@@ -1209,8 +1256,53 @@ Fixes after the test:
   test still showed "thehackernews.com, thehackernews.com…". The files
   are added in v27.
 
-The change was verified: unit tests (237) passed. A second branch test
-is pending.
+Second branch test on 2026-10-22: summaries shorter, in sentences with
+full stops and not cut, but 8 of 16 articles were left **without a
+summary**: the new length and semicolon check reported more summaries,
+and a summary that still had a problem after the correction round (or
+whose correction failed) was dropped entirely. Also "patchują" in the
+Arista summary and "Raport nie podaje sprawcy" in the Pegasus summary.
+
+Fixes after the second test:
+
+- **Repair by code instead of dropping** (`src/ai_summaries.py`,
+  `src/summary_quality.py`): when the AI-corrected summary still has a
+  problem or the correction request failed (e.g. rate limit), code turns
+  semicolons into full stops, removes sentences with problems and cuts
+  the text to whole sentences within 400 characters. Only a summary with
+  no correct sentence left is dropped. Log: "KONTROLA: streszczenie N
+  naprawione przez kod…".
+- The check of remarks about missing information also covers
+  "raport/artykuł nie podaje…".
+- Glossary, a small change: for "łatka" (H166) the anglicisms "patchować"
+  ("patchują", "spatchowany") are forbidden too;
+  `tools/eksport_mirrora.py` (OVERRIDES H166), `data/glosariusz_mirror.csv`
+  (only row H166).
+
+The full log of the second test showed the cause: most correction
+requests were for "poprawki" → "łatka", "zdalne wykonanie kodu" → "RCE"
+and semicolons, and one correction round got error 429 (rate limit) from
+Groq, so five summaries were dropped at once ("brak poprawki"). One was
+dropped for the date "21", which was not in the material.
+
+Further fixes:
+
+- **Corrections without an AI request** (`src/glossary.py`, function
+  `autofix`, called in `clean_summary`): "poprawka" in every form →
+  "łatka" in the same form (poprawce → łatce), "zdalne wykonanie
+  (dowolnego) kodu" and "remote code execution" → "RCE" (indeclinable),
+  "eksploit…" → "exploit…", semicolon → sentence end. Fewer correction
+  requests mean less risk of the rate limit.
+- **Second chance when a correction fails**: when the correction request
+  to one model fails (e.g. 429), the other Groq model (separate limits)
+  is asked, and only then does the code repair run.
+- Cutting at the character limit no longer leaves an unfinished
+  sentence: the safety limit in `clean_summary` is 1000 characters, and
+  the 400-character length is kept by the check and the code repair
+  (whole sentences).
+
+The change was verified: unit tests (240) passed. A third branch test is
+pending.
 
 ## v26 --- 2026-10-22
 

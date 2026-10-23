@@ -368,9 +368,14 @@ gałęzi `v24-budzik` 22.10.2026: uruchomienie bez pola `budzik`
 dostarczyło prasówkę (2 artykuły) na kanał testowy, a uruchomienie z
 zaznaczonym polem `budzik` zakończyło się bez wysyłki z komunikatem
 „Dzisiejsza prasówka już poszła – ten zaplanowany start kończy się bez
-wysyłki.”. Pierwsze
-poranne uruchomienie prasówki przez budzik i blokada kolejnych prób
-oczekują na potwierdzenie po scaleniu.
+wysyłki.”. Potwierdzone 23.10.2026: budzik uruchomił prasówkę o 6:17
+(`workflow_dispatch` na `main`, zakończone powodzeniem), znacznik
+`data/last_digest.json` zapisał `"trigger": "budzik"` i 20 artykułów;
+harmonogram GitHuba tego ranka nie uruchomił żadnej próby, więc nie
+było czego blokować (sama blokada jest potwierdzona testem na gałęzi).
+Była to też pierwsza prawdziwa prasówka z v28: 2 artykuły z 🔥
+(Arista VeloCloud Orchestrator, BeyondTrust Remote Support),
+streszczenia 20 z 20.
 
 ## v23 --- 21.10.2026
 
@@ -1569,9 +1574,13 @@ branch on 2026-10-22: a run without `budzik` delivered a digest (2
 articles) to the test channel, and a run with `budzik` checked ended
 without sending, with the message "Dzisiejsza prasówka już poszła – ten
 zaplanowany start kończy się bez wysyłki." (today's digest has already
-been sent). The first morning digest
-started by the alarm clock and the skipping of later attempts are
-awaiting confirmation after merging.
+been sent). Confirmed on 2026-10-23: the alarm clock started the digest
+at 06:17 (`workflow_dispatch` on `main`, successful), the marker
+`data/last_digest.json` recorded `"trigger": "budzik"` and 20 articles;
+GitHub's schedule started no attempt that morning, so there was nothing
+to skip (the skipping itself is confirmed by the branch test). It was
+also the first real digest with v28: 2 articles with 🔥 (Arista
+VeloCloud Orchestrator, BeyondTrust Remote Support), summaries 20 of 20.
 
 ## v23 --- 2026-10-21
 

@@ -445,5 +445,399 @@
     "related": [],
     "continuation": false,
     "summary": "PHP wydało emergency łatki naprawiające dwie krytyczne podatności (luka) RCE, określane jako PHP2Shell, po wykryciu prób exploitów. Aktualizacje dostępne są w wersjach 8.5.12, 8.4.27, 8.3.36 i 8.2.35 i w pełni zabezpieczają serwery przed RCE."
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Krytyczne podatności w urządzeniach Fortinet. Łatajcie się!",
+    "link": "https://sekurak.pl/krytyczne-podatnosci-w-urzadzeniach-fortinet-latajcie-sie/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Fortinet ogłosił dostępność łatek dla krytycznych i poważnych podatności w FortiOS, FortiManager, FortiAnalyzer (22 października) oraz już dostępne dla FortiMail i FortiAuthenticator. Producent zaleca traktowanie tych łatek jako priorytetowej zmiany.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Twórcy PHP: pierwsze sygnały o lukach pojawiły się w 2024",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/tworcy-php-pierwsze-sygnaly-o-lukach-pojawily-sie-w-2024",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "W dniu 21 października ujawniono dwie krytyczne podatności w PHP – CVE-2026-109618 i CVE-2026-109619 (CVSS 9.2) umożliwiające RCE we wszystkich wersjach od 5.0. Publikuje się natychmiastowa łatka, której zastosowanie jest zalecane.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Hakerzy podmienili narzędzia OVHcloud, by wykraść sekrety",
+    "link": "https://kapitanhack.pl/hakerzy-podmienili-narzedzia-ovhcloud-by-wykrasc-sekrety/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Cyberprzestępcy podmienili pliki binarne pięciu wydań OVHcloud CLI (v0.11.0‑v0.15.0) 19 października 2026, dostępne 94 minuty (12:47‑14:21 UTC), aby wykradać sekrety z dysków administratorów i programistów.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Arista patches new VeloCloud Orchestrator zero-day exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/arista-patches-new-velocloud-orchestrator-zero-day-exploited-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Arista Warns of Critical VeloCloud SQL Injection Zero-Day Exploited in Attacks",
+        "link": "https://thehackernews.com/2026/10/arista-warns-of-critical-velocloud-sql.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Arista Networks wydała łatki na aktywnie wykorzystywaną zero‑day podatność CVE-2026-114625 w VeloCloud Orchestrator, umożliwiającą podwyższenie uprawnień przez SQL injection. Łatki obowiązują od wersji 5.2.3.18, 6.1.3.10 i 6.4.2.12.",
+    "cves": [
+      "CVE-2026-114625",
+      "CVE-2026-16812",
+      "CVE-2026-7473",
+      "CVE-2026-93952"
+    ],
+    "kev": [
+      "CVE-2026-16812",
+      "CVE-2026-7473",
+      "CVE-2026-93952"
+    ]
+  },
+  {
+    "date": "2026-10-23",
+    "title": "ThreatsDay: AI Secrets Leak, PingCAP Source Theft, Signal Hang-Up Flaw, Laravel Auth Bypass + 21 More",
+    "link": "https://thehackernews.com/2026/10/threatsday-ai-secrets-leak-pingcap.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Signal Vulnerability Lets Malicious Callers Block Hang-Ups",
+        "link": "https://www.securityweek.com/signal-vulnerability-lets-malicious-callers-block-hang-ups/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "W tygodniu zgłoszono ponad 4 500 przejętych kont w ataku phishingowym na platformę Bluesky oraz liczne inne incydenty, w tym RCE w PHP i GitLab, Linux bugs i kradzież kodu źródłowego, co wymaga szybkich reakcji administratorów.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Two CVSS 9.0 Linux KSMBD RCE Flaws Disclosed on Public Mailing Lists Before Kernel Fixes",
+    "link": "https://thehackernews.com/2026/10/two-cvss-90-linux-ksmbd-rce-flaws.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Wykryto dwie podatności RCE w serwerze KSMBD w jądrze Linux: ZDI-CAN-33774 i ZDI-CAN-33549, obie ocenione CVSS 9.0. Obie wymagają specyficznego środowiska (RDMA lub brak uwierzytelnienia) i umożliwiają nadpisanie pamięci. Do tej pory nie ma jeszcze nazwanego łatki w głównym jądrze.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Widespread PHP Flaw May Cause Many Site Outages Today",
+    "link": "https://krebsonsecurity.com/2026/10/widespread-php-flaw-may-cause-many-site-outages-today/",
+    "source": "krebsonsecurity.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "PHP wydało awaryjną aktualizację naprawiającą dwie krytyczne podatności, które według Reuters dotknęły około 70 % stron i są już wykorzystywane w atakach. Exploity umożliwiają RCE, odmowę usługi i wyciek danych. Zaleca się natychmiastową aktualizację core PHP.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Zero-day w BeyondTrust Remote Support. Jak ARMORY CASTLE wykorzystało do ataku narzędzie zdalnego wsparcia",
+    "link": "https://kapitanhack.pl/zero-day-w-beyondtrust-remote-support-jak-armory-castle-wykorzystalo-do-ataku-narzedzie-zdalnego-wsparcia/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Node.js Brotli Decoder Bug Could Allow Remote Code Execution in All Supported Versions",
+        "link": "https://thehackernews.com/2026/10/nodejs-brotli-decoder-bug-could-allow.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Grupa ARMORY CASTLE wykorzystała zero‑day CVE‑2026‑102764 w BeyondTrust Remote Support, oceniony CVSS 9,3, ujawniony 15 października. Pierwsze ataki odnotowano 29 sierpnia, gdy łatka nie była dostępna. Luka pozwalała na operacje na plikach serwera bez uwierzytelnienia.",
+    "cves": [
+      "CVE-2026-102764"
+    ],
+    "kev": [
+      "CVE-2026-102764"
+    ]
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Railway warns devs to rotate secrets after potential breach",
+    "link": "https://www.bleepingcomputer.com/news/security/railway-warns-devs-to-rotate-secrets-after-potential-breach/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Railway ostrzega użytkowników po wykryciu nieautoryzowanego dostępu do zaszyfrowanych zmiennych środowiskowych, które w niektórych przypadkach zostały odszyfrowane. Firma zaleca natychmiastową rotację wszystkich sekretów i poświadczeń przechowywanych na platformie.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Capcom confirms data breach affecting 11.7 million accounts",
+    "link": "https://www.bleepingcomputer.com/news/security/capcom-confirms-data-breach-affecting-117-million-accounts/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Capcom potwierdziło wyciek danych z usługi CAPCOM ID, w którym ujawniono adresy e‑mail ponad 11,7 mln kont oraz dodatkowe informacje. Dla 196 kont zmieniono hasła, a dane kart kredytowych nie zostały naruszone. Firma poinformowała o incydencie 19 października.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "LiteLLM release pipeline hacked to distribute info-stealer malware",
+    "link": "https://www.bleepingcomputer.com/news/security/litellm-release-pipeline-hacked-to-distribute-info-stealer-malware/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Hackers compromised the LiteLLM project’s PyPI package and published malicious Docker images for LiteLLM version 1.107.0, embedding a payload that steals credentials, secrets and environment variables. Attack affected Windows, Linux and macOS systems using the compromised .whl installation packages.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Cybercrime crackdown across Africa leads to 1,462 arrests, $105 million seized",
+    "link": "https://therecord.media/africa-cybercrime-interpol-arrests",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Authorities disrupt nearly 11,000 cybercrime networks in Africa",
+        "link": "https://www.bleepingcomputer.com/news/security/authorities-disrupt-nearly-11-000-cybercrime-networks-in-africa/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Operacja Interpolu Serengeti III doprowadziła do aresztowania 1 462 osób w Afryce, skonfiskowania 105 milionów dolarów oraz zakłócenia ponad 10 000 złośliwych sieci komputerowych.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Toronto crime tips org freezes operations after details of data breach come to light",
+    "link": "https://therecord.media/toronto-crime-tips-org-freezes-ops-after-breach",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "A data breach exposed over 1.5 million tips from Crime Stoppers, with about half containing personal information, leading the Toronto chapter to pause its operations.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Poważne luki w Javie i Node.js. Jedna może prowadzić do zdalnego wykonania kodu",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/powazne-luki-w-javie-i-nodejs-jedna-moze-prowadzic-do-zdalnego-wykonania-kodu",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CVE‑2026‑91403 in Java’s JSSE component (CVSS 9.1) allows remote exploitation without authentication, risking confidentiality and integrity of data. CVE‑2026‑111497 in Node.js Brotli decoder enables out‑of‑bounds write that may lead to RCE.",
+    "cves": [
+      "CVE-2026-111497",
+      "CVE-2026-91403"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Podatność w oprogramowaniu MTW CleanShot X",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-16477/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CVE‑2026‑16477 in MTW CleanShot X for macOS deserializes untrusted data in .cleanshot files, allowing arbitrary code execution. Vulnerability fixed in versions 4.5.2, 4.6.3, 4.7.8 and 4.8.10.",
+    "cves": [
+      "CVE-2026-16477"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "WPSplinter – 16-letnia luka w Broadcom Wi-Fi pozwala przejąć router bez hasła",
+    "link": "https://kapitanhack.pl/wpsplinter-16-letnia-luka-w-broadcom-wi-fi-pozwala-przejac-router-bez-hasla/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "WPSplinter – 16‑letnia luka w oprogramowaniu Broadcom Wi‑Fi pozwala atakującemu w zasięgu sieci wykonać kod z uprawnieniami root i przejąć router bez hasła. Problem może dotyczyć milionów urządzeń, a starsze modele prawdopodobnie nie otrzymają łatki.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Someone Tried to Exploit PHP2Shell 4 Days Before the Vulnerabilities Were Publicly Disclosed",
+    "link": "https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "Amazon says PHP2Shell exploitation began 4 days before patches",
+        "link": "https://www.bleepingcomputer.com/news/security/amazon-says-php2shell-exploitation-began-4-days-before-patches/",
+        "source": "bleepingcomputer.com"
+      },
+      {
+        "title": "PHP2Shell: What Actually Protects You Before the 14:00 UTC PHP RCE Patch, and What Doesn't",
+        "link": "https://thehackernews.com/2026/10/php2shell-what-actually-protects-you.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Tech and Security Companies Respond to PHP2Shell Vulnerabilities",
+        "link": "https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/",
+        "source": "securityweek.com"
+      },
+      {
+        "title": "PHP2Shell Exploitation Started Days Before Patches",
+        "link": "https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Amazon wykryło próbę exploitu PHP2Shell na usłudze MadPot honeypot przed publicznym ujawnieniem podatności, które obejmują CVE‑2026‑109618 i CVE‑2026‑109619 z oceną 9.2 CVSS i umożliwiają pre‑auth RCE w każdej wersji PHP 7.x i 8.x.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Pegasus Spyware Infection Confirmed on Serbian University Rector's iPhone Days Before Election",
+    "link": "https://thehackernews.com/2026/10/pegasus-spyware-infection-confirmed-on.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Citizen Lab potwierdziło infekcję Pegasus spyware na iPhoneie rektora Uniwersytetu w Belgradzie, wykrytą 19 października 2026, przy użyciu zero‑click exploitu. Nie podano sprawcy ani dalszych szczegółów.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Splunk, SolarWinds Release Fresh Security Updates",
+    "link": "https://www.securityweek.com/splunk-solarwinds-release-fresh-security-updates/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Splunk wydał łatki dla wersji Enterprise 9.4.16, 10.0.11, 10.2.8, 10.4.4 oraz SOAR 8.7.0, naprawiając m.in. CVE‑2026‑76299, CVE‑2026‑76302, CVE‑2026‑76531 i CVE‑2026‑76407. SolarWinds wydał aktualizacje Observability 2026.4 i Patch Manager 2026.4, usuwając CVE‑2026‑28328 oraz inne XSS i SSRF.",
+    "cves": [
+      "CVE-2026-28328",
+      "CVE-2026-76299",
+      "CVE-2026-76302",
+      "CVE-2026-76407",
+      "CVE-2026-76531"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-23",
+    "title": "Cisco Patches 34 Vulnerabilities Across Multiple Products",
+    "link": "https://www.securityweek.com/cisco-patches-34-vulnerabilities-across-multiple-products/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Cisco opublikował łatki dla 34 luk w produktach Expressway Series, IOS XR, Snort 3 i Unified Communications, w tym krytyczną RCE CVE‑2026‑76466. Łatki w Expressway Series wersja X15.5.20 rozwiązują także CVE‑2026‑76473, CVE‑2026‑76474 i CVE‑2026‑76475.",
+    "cves": [
+      "CVE-2026-20043",
+      "CVE-2026-20236",
+      "CVE-2026-76462",
+      "CVE-2026-76466",
+      "CVE-2026-76473",
+      "CVE-2026-76474",
+      "CVE-2026-76475",
+      "CVE-2026-76505"
+    ],
+    "kev": []
   }
 ]

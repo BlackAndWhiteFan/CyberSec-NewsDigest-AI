@@ -839,5 +839,335 @@
       "CVE-2026-76505"
     ],
     "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "PHP2Shell: dwie krytyczne luki w jednym z fundamentów Internetu",
+    "link": "https://kapitanhack.pl/php2shell-dwie-krytyczne-luki-w-jednym-z-fundamentow-internetu/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "PHP Warns of Another Unpatched RCE Risk Two Days After Emergency PHP2Shell Patches",
+        "link": "https://thehackernews.com/2026/10/urgent-php-warns-of-another-unpatched.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "PHP2Shell Exploit Attempts Hit Millions as Attackers Try to Deploy Mirai Malware",
+        "link": "https://thehackernews.com/2026/10/php2shell-exploit-attempts-hit-millions.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Mirai Botnet Operators Join PHP2Shell Attacks as ASLR Bypass Exploits Emerge",
+        "link": "https://www.securityweek.com/mirai-botnet-operators-join-php2shell-attacks-as-aslr-bypass-exploits-emerge/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Ujawniono dwie krytyczne podatności w PHP: CVE-2026-109618 i CVE-2026-109619, obie ocenione 9,2 w skali CVSS 4.0, umożliwiające RCE (RCE) bez uwierzytelnienia i dostęp do danych w pamięci serwera.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-115560"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Attackers Exploit Third Arista VCO Zero-Day in Four Months",
+    "link": "https://www.securityweek.com/attackers-exploit-third-velocloud-orchestrator-zero-day-in-four-months/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Arista Networks wydała łatki dla krytycznej podatności CVE-2026-114625 (CVSS 9,9) w VeloCloud Orchestrator, opisanej jako zdalny SQL injection, który pozwalał autoryzowanemu użytkownikowi na podwyższenie uprawnień do superużytkownika.",
+    "cves": [
+      "CVE-2026-114625",
+      "CVE-2026-16812",
+      "CVE-2026-93952"
+    ],
+    "kev": [
+      "CVE-2026-114625",
+      "CVE-2026-16812",
+      "CVE-2026-93952"
+    ]
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Nowa metoda rosyjskich hakerów. Użyli zdecentralizowanej sieci",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/nowa-metoda-rosyjskich-hakerow-uzyli-zdecentralizowanej-sieci",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "Rosyjscy hakerzy zaatakowali ukraińską firmę rolniczą w lipcu 2025 r., wykorzystując phishing i złośliwy załącznik, a następnie ukryli ruch w zdecentralizowanej sieci Yggdrasil, co jest pierwszym znanym przypadkiem takiego użycia przez opłacanych przez państwo sprawców.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Podatności w oprogramowaniu CGM CLININET",
+    "link": "https://cert.pl/posts/2026/10/CVE-2025-30043/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W oprogramowaniu CGM CLININET wykryto trzy podatności: CVE-2025-30043 (brak uwierzytelnienia w /DocManagment), CVE-2025-30045 (wstrzyknięcie kodu w ConvExpr z uprawnieniami root) oraz CVE-2025-30046 (rootowy kod w procesach HL7), wszystkie naprawiono w wersji 2026.MS3.",
+    "cves": [
+      "CVE-2025-30043",
+      "CVE-2025-30045",
+      "CVE-2025-30046",
+      "CVE-2025-30047",
+      "CVE-2025-30049",
+      "CVE-2025-30050",
+      "CVE-2025-30051",
+      "CVE-2025-30052",
+      "CVE-2025-30053",
+      "CVE-2025-30054",
+      "CVE-2025-58403"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Quest Diagnostics confirms data breach exposed patient records",
+    "link": "https://www.bleepingcomputer.com/news/security/quest-diagnostics-confirms-data-breach-exposed-patient-records/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Quest Diagnostics poinformował 21 października 2026 r. o nieautoryzowanym dostępie do systemu Quanum LSM, w wyniku którego mogły zostać ujawnione rekordy pacjentów. Firma uruchomiła protokół reagowania na incydenty i prowadzi dalsze dochodzenie.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Exposed Infrastructure Reveals How Ransomware Affiliates Used AI Agents to Execute Intrusions",
+    "link": "https://thehackernews.com/2026/10/exposed-infrastructure-reveals-how.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupy ransomware INC i The Gentlemen używały AI‑zarządzanego frameworka Phantom do intruzji, eksploatując FortiClient EMS, SimpleHelp, cPanel i bramy VPN. Zarejestrowano 8 257 wiadomości w 133 sesjach, a ataki były prowadzone w modelu „AI‑executed, human‑approved”.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Hackers Breach Enterprise Firewalls and VPNs, Exposing Over 70,000 Credentials",
+    "link": "https://thehackernews.com/2026/10/hackers-breach-enterprise-firewalls-and.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół k0t (aliasy CryptoFeel, Member19, QazWsxShop) przełamał firewalle FortiGate i GlobalProtect, uzyskując dostęp do ponad 70 000 poświadczeń. Kompromisy wystąpiły głównie w regionie Azji‑Pacyfiku (38 % ofiar) w okresie luty‑czerwiec 2026.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "In Other News: Tor Exit Relays Hijacked, Banks Spot Rogue AI Agents, Self-Rebuilding macOS Ransomware",
+    "link": "https://www.securityweek.com/in-other-news-tor-exit-relays-hijacked-banks-spot-rogue-ai-agents-self-rebuilding-macos-ransomware/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Badany ransomware Heartbreaker, napisany w Rust, szyfruje pliki w folderze Downloads, używa jednego stałego klucza AES i samodzielnie się rekompiluje, choć jego framework Rust nie jest już publicznie dostępny.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "11 Million Impacted by Capcom Data Breach",
+    "link": "https://www.securityweek.com/11-million-impacted-by-capcom-data-breach/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Capcom ujawniło wyciek danych obejmujący 11 774 247 adresów e‑mail oraz informacje o kontach. W 196 przypadkach zmieniono hasła, a firma zresetowała je i ostrzega przed fałszywymi wiadomościami.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Quest Diagnostics warns of potential data theft after attack on lab service system",
+    "link": "https://therecord.media/quest-diagnostics-network-intrusion",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Quest Diagnostics odłączyło system Quanum Lab Services Manager po wykryciu nieautoryzowanego dostępu, informując o możliwej eksfiltracji danych pacjentów. System ma wrócić do działania do piątku, a incydent nie jest powiązany z ostatnimi lukami PHP.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Node2Shell (CVE-2026-111497): RCE przez dekompresję Brotli w Node.js",
+    "link": "https://sekurak.pl/node2shell-cve-2026-111497-rce-przez-dekompresje-brotli-w-node-js/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "Researchers Demonstrate Node2Shell RCE Exploit on Node.js Build Using Crafted Brotli Data",
+        "link": "https://thehackernews.com/2026/10/researchers-demonstrate-node2shell-rce.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Node2Shell (CVE-2026-111497) umożliwia RCE przez dekompresję Brotli w Node.js.",
+    "cves": [
+      "CVE-2026-111497"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Weekendowa Lektura: odcinek 699 [2026-10-23]. Bierzcie i czytajcie",
+    "link": "https://zaufanatrzeciastrona.pl/post/weekendowa-lektura-odcinek-699-2026-10-23-bierzcie-i-czytajcie/",
+    "source": "zaufanatrzeciastrona.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Weekendowa Lektura odcinek 699 opublikowano 2026-10-23.",
+    "cves": [
+      "CVE-2024-47575"
+    ],
+    "kev": [
+      "CVE-2024-47575"
+    ]
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Abandoned Popcorn Time app exposed millions of devices to RCE attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/abandoned-popcorn-time-app-exposed-millions-of-device-to-rce-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CVE-2026-30612 w aplikacji Time4Popcorn umożliwia RCE przez niezweryfikowane aktualizacje w Windows i macOS. Zarejestrowano do 3 milionów połączeń Windows i 350 000 macOS. Badacze wyłączyli podatny updater.",
+    "cves": [
+      "CVE-2026-30612"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Microsoft: Windows Server 2016 reaches end of support in January",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-windows-server-2016-reaches-end-of-support-in-january/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft ogłosił koniec wsparcia dla Windows Server 2016 w styczniu 2027 i zalecił migrację do Windows Server 2025, dostępnego od listopada 2024.",
+    "cves": [],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "PHP shares mitigation for new RCE vulnerability with no patch",
+    "link": "https://www.bleepingcomputer.com/news/security/php-shares-mitigation-for-new-and-unpatched-rce-vulnerability/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "PHP opublikowało informacje o podatności CVE-2026-115560 umożliwiającej RCE przy nietypowej konfiguracji. Ponad 5,1 mln hostów jest narażonych. Do czasu łatki zaleca się wyłączenie session.uploadprogress.enabled=0.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-115560"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Ruby Fixes Three Regex Engine Bugs Responsible for Four Critical GitLab RCE Flaws",
+    "link": "https://thehackernews.com/2026/10/ruby-fixes-three-regex-engine-bugs.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "GitLab warns of new max severity code execution vulnerability",
+        "link": "https://www.bleepingcomputer.com/news/security/gitlab-warns-of-new-max-severity-code-execution-vulnerability/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "",
+    "cves": [
+      "CVE-2026-110264",
+      "CVE-2026-97229"
+    ],
+    "kev": []
+  },
+  {
+    "date": "2026-10-24",
+    "title": "Critical Flaw in Python’s Popular Pillow Image Library Allows Code Execution via a Crafted Image",
+    "link": "https://thehackernews.com/2026/10/critical-flaw-in-pythons-popular-pillow.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "",
+    "cves": [
+      "CVE-2026-112393",
+      "CVE-2026-112403",
+      "CVE-2026-112900"
+    ],
+    "kev": []
   }
 ]

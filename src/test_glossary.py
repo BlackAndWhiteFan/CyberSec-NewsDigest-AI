@@ -228,6 +228,17 @@ class TestAutofixV29(unittest.TestCase):
             autofix("Luki umożliwiają zdalne wykonanie kodu (RCE) na iPhoneie."),
             "Luki umożliwiają RCE na iPhonie.",
         )
+        self.assertEqual(autofix("Luka pozwala na wykonanie kodu zdalnie."), "Luka pozwala na RCE.")
+
+    def test_escalation_after_typu_is_nominative(self):
+        self.assertEqual(
+            gloss("Osiem luk typu podwyższenie uprawnień."),
+            "Osiem luk typu podwyższenie (eskalacja) uprawnień.",
+        )
+        self.assertEqual(
+            gloss("Luka umożliwia podwyższenie uprawnień."),
+            "Luka umożliwia podwyższenie (eskalację) uprawnień.",
+        )
 
 if __name__ == "__main__":
     unittest.main()

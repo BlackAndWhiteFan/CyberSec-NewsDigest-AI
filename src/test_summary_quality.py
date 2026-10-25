@@ -132,6 +132,9 @@ class TestLanguageV29(unittest.TestCase):
                 problems = quality_problems(text)
                 self.assertTrue(any(f"„{calque}”" in p and "kalka" in p for p in problems))
 
+    def test_number_of_data_is_a_calque(self):
+        self.assertTrue(any("kalka" in p for p in quality_problems("Mogło to narazić nieokreśloną liczbę danych pacjentów.")))
+
     def test_record_numbers_are_not_calques(self):
         self.assertEqual(quality_problems("Odnotowano rekordową liczbę ataków."), [])
 

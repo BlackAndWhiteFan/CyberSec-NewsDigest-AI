@@ -423,7 +423,11 @@ def summarize_batch(batch, providers, environ, opener, sleep, used):
 
 
 PROOFREAD_PROMPT = """Jesteś korektorem polskiej prasówki o cyberbezpieczeństwie.
-Popraw w każdym streszczeniu wyłącznie błędy językowe: gramatykę (odmiana, rodzaj, liczba, składnia), interpunkcję, literówki oraz kalki z angielskiego (np. „rekordy pacjentów” → „dane pacjentów”, „AI-zarządzany” → „zarządzany przez AI”, „intruzja” → „włamanie”, „eksploatować lukę” → „wykorzystywać lukę”).
+Przeczytaj uważnie każde zdanie i popraw wyłącznie błędy językowe: gramatykę (odmiana, rodzaj, liczba, składnia), interpunkcję, literówki oraz kalki z angielskiego. Typowe błędy do wyłapania:
+- przypadek po imiesłowie lub czasowniku: „dotykających wersje AOS” → „dotykających wersji AOS”, „brak łatki” (nie „brak łatka”);
+- rodzaj i liczba: „dwa krytyczne luki” → „dwie krytyczne luki”, „nazwanego łatki” → „nazwanej łatki”;
+- kalki: „rekordy pacjentów” → „dane pacjentów”, „AI-zarządzany” → „zarządzany przez AI”, „intruzja” → „włamanie”, „eksploatować lukę” → „wykorzystywać lukę”, „nieokreślona liczba danych” → „nieokreślony zakres danych”;
+- składnia bezosobowa: „Publikuje się natychmiastowa łatka” → „Opublikowano łatkę”.
 Nie zmieniaj faktów, liczb, dat, nazw, numerów CVE ani wersji. Nie dodawaj i nie usuwaj informacji. Nie zmieniaj terminów: exploit, RCE, PoC, zero-day, łatka, backdoor, malware, ransomware, MFA i nazw własnych.
 Jeśli streszczenie jest poprawne, zwróć je bez zmian.
 Odpowiedz wyłącznie obiektem JSON: {{"streszczenia": [{{"id": 1, "tekst": "..."}}]}}"""
@@ -440,7 +444,7 @@ def same_facts(old, new):
 def proofread_summaries(articles, providers, environ, opener=urllib.request.urlopen, sleep=time.sleep):
     """Language correction of all summaries in one request (v29).
 
-    The second model is asked first (separate rate limits). A corrected
+    The main model is asked first, the second one if it fails. A corrected
     summary is used only when it keeps the numbers and CVE ids and passes
     all checks; otherwise the summary stays as it was.
     """
@@ -459,7 +463,9 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
     ]
     corrected = None
 
-    for provider in list(reversed(providers)):
+    # The stronger model first (test 25.10.2026: the second model returned
+    # all six summaries unchanged, including "dotykających wersje").
+    for provider in providers:
         try:
             corrected = parse_summaries(
                 ask_provider(provider, environ[provider["key_variable"]].strip(), messages, opener, sleep),

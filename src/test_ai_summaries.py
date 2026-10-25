@@ -400,13 +400,13 @@ class TestProofreading(unittest.TestCase):
         )
         return changed, opener
 
-    def test_language_fix_is_accepted_and_second_model_asked_first(self):
+    def test_language_fix_is_accepted_and_main_model_asked_first(self):
         articles = self.articles()
         changed, opener = self.run_proofreading(articles, "Ujawniono dane pacjentów z 2 laboratoriów.")
 
         self.assertEqual(changed, 1)
         self.assertEqual(articles[0]["summary"], "Ujawniono dane pacjentów z 2 laboratoriów.")
-        self.assertEqual(opener.requests[0]["model"], "qwen/qwen3.8-27b")
+        self.assertEqual(opener.requests[0]["model"], "openai/gpt-oss-120b")
 
     def test_correction_that_changes_facts_is_rejected(self):
         articles = self.articles()

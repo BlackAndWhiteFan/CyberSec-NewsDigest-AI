@@ -76,8 +76,20 @@ Nowe i zmienione pliki: `src/gemini.py` (nowy), `src/languagetool.py`
 zmienna `GEMINI_MODEL`), README (PL/EN).
 
 Zmianę zweryfikowano: testy jednostkowe (277) zakończone powodzeniem.
-Test na gałęzi oczekuje na wykonanie. Rozbiór „Weekendowej lektury” i
-łączenie po nazwach firm przechodzą do v31.
+Test na gałęzi `v30-Polacy` 25.10.2026: korektę zrobił
+`gemini-3.8-flash` (klucz i nazwa modelu działają), poprawione 6 z 6
+streszczeń, żadna poprawka nie odrzucona. Przykłady z logu „przed →
+po”: „Exploit CVE-2026-110447 umożliwia instalację backdoora” → „Luka
+CVE-2026-110447 pozwala zainstalować backdoora”; „łatki dla 72
+podatności…, w tym osiem krytycznych luk” → „ośmiu krytycznych luk”;
+„Atlassian wydało” → „Atlassian wydał”; „wyciekiem niektórych wpisów
+pacjentów” → „wyciekiem danych niektórych pacjentów”; „kolejne
+aktualizacje pojawiają się w kolejnych produktach” → bez powtórzenia.
+LanguageTool nie zgłosił uwag (0 z 6), mimo błędów przypadku – jego
+polskie reguły są słabe, więc główną pracę robi Gemini. Do dalszej
+obserwacji: uwaga „Liczba poszkodowanych nie została podana” (forma
+„nie została podana” nie jest jeszcze wykrywana). Rozbiór „Weekendowej
+lektury” i łączenie po nazwach firm przechodzą do v31.
 
 ## v29 --- 25.10.2026
 
@@ -1417,9 +1429,20 @@ New and changed files: `src/gemini.py` (new), `src/languagetool.py`
 `.github/workflows/daily-digest.yml` (secret `GEMINI_API_KEY`, variable
 `GEMINI_MODEL`), README (PL/EN).
 
-The change was verified: unit tests (277) passed. A branch test is
-pending. Parsing "Weekendowa lektura" and merging by company names move
-to v31.
+The change was verified: unit tests (277) passed. Test on the
+`v30-Polacy` branch on 2026-10-25: the correction was done by
+`gemini-3.8-flash` (key and model name work), 6 of 6 summaries
+corrected, no correction rejected. Examples from the "przed → po" log:
+"Exploit CVE-2026-110447 umożliwia instalację backdoora" → "Luka
+CVE-2026-110447 pozwala zainstalować backdoora"; "łatki dla 72
+podatności…, w tym osiem krytycznych luk" → "ośmiu krytycznych luk";
+"Atlassian wydało" → "Atlassian wydał"; "wyciekiem niektórych wpisów
+pacjentów" → "wyciekiem danych niektórych pacjentów"; a repeated
+"kolejne… kolejnych" removed. LanguageTool reported nothing (0 of 6)
+despite case errors – its Polish rules are weak, so Gemini does the
+main work. To watch: the remark "Liczba poszkodowanych nie została
+podana" (the form "nie została podana" is not detected yet). Parsing
+"Weekendowa lektura" and merging by company names move to v31.
 
 ## v29 --- 2026-10-25
 

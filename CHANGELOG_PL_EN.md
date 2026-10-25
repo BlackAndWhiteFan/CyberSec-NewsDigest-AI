@@ -24,6 +24,60 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v31 --- 25.10.2026
+
+**Rozbiór „Weekendowej lektury” na linki, łączenie tematów po nazwach
+firm, alarm przy błędzie workflow.**
+
+- **„Weekendowa lektura” rozbierana na części** (nowy
+  `src/roundup_parts.py`, `src/main.py`): zgodnie z pierwotnym zamysłem
+  JW (25.10.2026) przegląd ZTS nie jest jedną pozycją, tylko źródłem
+  linków. Każdy element listy lub akapit z linkiem do innego serwisu
+  staje się kandydatem do prasówki (tytuł: tekst linku albo początek
+  komentarza; opis: komentarz ZTS) i przechodzi tę samą punktację,
+  próg, odrzucanie opublikowanych linków i łączenie wydarzeń. W
+  prasówce najwyżej 3 takie linki (`LEKTURA_LIMIT` w
+  `src/article_selection.py`), podpisane „via Zaufana Trzecia Strona”;
+  archiwum zapisuje pole `via`. Log wypisuje znalezione pozycje
+  („WEEKENDOWA LEKTURA: N pozycji”, „LEKTURA: …”). Gdy w treści nie ma
+  takich linków (zmiana układu), lektura zostaje jedną pozycją ze
+  stałym opisem jak w v29.
+- **Łączenie po nazwach firm i produktów** (`src/event_grouping.py`,
+  `src/monthly_top.py`): w tytułach pisanych wielkimi literami (Title
+  Case) każde słowo jest wielką literą, więc dotychczasowa reguła nazw
+  nic nie widziała (Quest Diagnostics i Capcom dwa razy w prasówkach z
+  23–24.10). Nowe reguły: wspólna para wyrazów z wielkiej litery,
+  niegenerycznych i rzadkich w puli („Quest Diagnostics”); pojedyncze
+  wspólne słowo tylko wtedy, gdy teksty artykułów (opisy, polskie
+  streszczenia) pokazują, że to nazwa – zawsze wielką literą, nigdy
+  małą („Capcom”); nazwy platform występujące w różnych historiach
+  (Microsoft, Windows, Chrome, Python, WordPress…) nigdy nie łączą
+  same. Działa w prasówce, „Ciągu dalszym” i zestawieniach.
+- **Alarm przy błędzie** (`.github/workflows/daily-digest.yml`,
+  `weekly-top.yml`, `monthly-top.yml`): gdy workflow zakończy się
+  błędem, na kanał testowy przychodzi komunikat „⚠️ … workflow
+  zakończył się błędem” z linkiem do logu – właściciel dowiaduje się o
+  awarii przed czytelnikami.
+- Drobna zmiana: uwagi „… nie została podana / ujawniona / wskazana”
+  zgłaszane jak ogólniki („Liczba poszkodowanych nie została podana”,
+  test v30).
+
+Sprawdzono na archiwum października (70 artykułów): zestawienie łączy
+teraz Quest Diagnostics, Capcom i Arista VCO, bez nowych błędnych
+połączeń (dwa połączenia z wcześniejszych reguł – Fortinet/FortiSIEM i
+MCP Python SDK/Pillow – zostają do obserwacji).
+
+Nowe i zmienione pliki: `src/roundup_parts.py` (nowy),
+`src/test_roundup_parts.py` (nowy), `src/main.py`,
+`src/article_selection.py`, `src/discord_output.py`,
+`src/article_archive.py`, `src/event_grouping.py`,
+`src/test_event_grouping.py`, `src/monthly_top.py`,
+`src/summary_quality.py`, trzy workflowy, README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (286) zakończone powodzeniem.
+Test na gałęzi oczekuje na wykonanie; rozbiór lektury pierwszy raz
+zadziała na najbliższej lekturze w kanale ZTS.
+
 ## v30 --- 25.10.2026
 
 **„Polacy nie gęsi”: korekta językowa Gemini, podpowiedzi
@@ -1376,6 +1430,58 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v31 --- 2026-10-25
+
+**Splitting "Weekendowa lektura" into links, merging stories by company
+names, alarm on workflow failure.**
+
+- **"Weekendowa lektura" split into parts** (new `src/roundup_parts.py`,
+  `src/main.py`): as JW originally intended (2026-10-25), the ZTS
+  roundup is not one item but a source of links. Every list item or
+  paragraph with a link to another site becomes a candidate article
+  (title: the link text or the beginning of the comment; description:
+  the ZTS comment) and goes through the same scoring, threshold,
+  filtering of published links and event merging. At most 3 such links
+  per digest (`LEKTURA_LIMIT` in `src/article_selection.py`), labelled
+  "via Zaufana Trzecia Strona"; the archive saves the `via` field. The
+  log lists the parts found ("WEEKENDOWA LEKTURA: N pozycji",
+  "LEKTURA: …"). When the content has no such links (layout change), the
+  roundup stays one item with the fixed description, as in v29.
+- **Merging by company and product names** (`src/event_grouping.py`,
+  `src/monthly_top.py`): in Title Case titles every word is capitalized,
+  so the earlier name rule saw nothing (Quest Diagnostics and Capcom twice
+  in the digests of 23–24 October). New rules: a shared pair of
+  capitalized, non-generic words rare in the pool ("Quest Diagnostics");
+  a single shared word only when the article texts (descriptions, Polish
+  summaries) show it is a name – always capitalized, never lowercase
+  ("Capcom"); platform names that appear in different stories
+  (Microsoft, Windows, Chrome, Python, WordPress…) never merge alone.
+  Works in the digest, "Ciąg dalszy" and the tops.
+- **Alarm on failure** (`.github/workflows/daily-digest.yml`,
+  `weekly-top.yml`, `monthly-top.yml`): when a workflow fails, a message
+  "⚠️ … workflow zakończył się błędem" with a link to the log goes to
+  the test channel – the owner learns about a failure before the
+  readers.
+- Small change: remarks "… nie została podana / ujawniona / wskazana"
+  are reported like filler ("Liczba poszkodowanych nie została podana",
+  v30 test).
+
+Checked on the October archive (70 articles): the top now merges Quest
+Diagnostics, Capcom and Arista VCO, without new wrong merges (two merges
+from earlier rules – Fortinet/FortiSIEM and MCP Python SDK/Pillow – stay
+under observation).
+
+New and changed files: `src/roundup_parts.py` (new),
+`src/test_roundup_parts.py` (new), `src/main.py`,
+`src/article_selection.py`, `src/discord_output.py`,
+`src/article_archive.py`, `src/event_grouping.py`,
+`src/test_event_grouping.py`, `src/monthly_top.py`,
+`src/summary_quality.py`, three workflows, README (PL/EN).
+
+The change was verified: unit tests (286) passed. A branch test is
+pending; the roundup splitting will first run on the next roundup in
+the ZTS feed.
 
 ## v30 --- 2026-10-25
 

@@ -12,7 +12,7 @@ The project runs with a budget of 0 PLN, using free service tiers only (GitHub A
 
 ## Project Status
 
-The digest has been running in production since October 2026 (version v31). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+The digest has been running in production since October 2026 (version v32). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Stage | Scope | Status |
 |---|---|---|
@@ -31,7 +31,8 @@ The digest has been running in production since October 2026 (version v31). Ever
 | 13 | Full article text from the article page and inflection of terms (v27) | completed and verified |
 | 14 | 🔥 marker for vulnerabilities from the CISA KEV catalog (v28) | completed and verified |
 | 15 | Language quality: style list, language check, proofreading by Google Gemini with LanguageTool hints (v29, v30) | completed and verified |
-| 16 | "Weekendowa lektura" split into links, merging by company names, alarm on workflow failure (v31) | completed; verified on the test branch |
+| 16 | "Weekendowa lektura" split into links, merging by company names, alarm on workflow failure (v31) | completed and verified |
+| 17 | Language log: corrections of summaries saved in the archive (v32) | completed; verified with unit tests and real errors from the logs |
 
 ## Current Implementation
 
@@ -59,11 +60,12 @@ The digest has been running in production since October 2026 (version v31). Ever
 - Terms follow the glossary `data/glosariusz_mirror.csv`, a mirror of the CyberSec Mozaika glossary. Simple forbidden forms are corrected by code without an AI request ("poprawka" → "łatka", "zdalne wykonanie kodu" → "RCE"); explanations in parentheses are added by code at the first occurrence of 6 chosen terms, in the case of the term ("przed exploitem (kodem wykorzystującym podatność)").
 - Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
 - Proofreading: one request per digest to Google Gemini (`gemini-3.8-flash`, fallback `gemini-3.5-flash`), with grammar hints from LanguageTool; when Gemini is unavailable, the Groq models take over. A correction is accepted only when it keeps the numbers, CVE ids and length; every correction is logged as "przed" / "po".
+- Language log (v32): every correction of a summary is saved with the article in the archive (field `language`): forbidden glossary forms with the entry id, calques from the style list, terms left uninflected, replacements made by code and changes made by the proofreading, each with its outcome (fixed by the AI, by code, still present, or summary dropped). The notes describe the AI output only; they change nothing and never write to the glossary.
 
 ### Delivery and tops
 
 - Sends the digest to Discord through a webhook, grouped by each article's most important category, with clickable titles, source domains and the "via" label, split into messages within Discord's length limit.
-- Records links in `published_links` only after a successful delivery, and archives each delivered article (date, title, link, source, categories, score, summary, CVE ids, KEV, via) in `data/archive/YYYY-MM.json`. History and archive are saved even when the digest step fails (unless the run is cancelled).
+- Records links in `published_links` only after a successful delivery, and archives each delivered article (date, title, link, source, categories, score, summary, CVE ids, KEV, via, language notes) in `data/archive/YYYY-MM.json`. History and archive are saved even when the digest step fails (unless the run is cancelled).
 - On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`).
 - Runs from branches other than `main` send only to the test channel, with a "🧪 TEST" banner, and save nothing.
 - When the digest or a top workflow fails, an alarm with a link to the log goes to the test channel.
@@ -74,9 +76,13 @@ The main trigger is an external alarm clock: cron-job.org calls the GitHub API (
 
 ## Latest Verified Results
 
+Version v32 (2026-10-25):
+
+- Unit tests: **305 passed**.
+- Language notes checked on real errors from the logs of 22–25 October 2026 ("rekordy pacjentów", "AI‑zarządzanego", "patchują", "przed exploit", "eksploatując", "intruzji"): all recorded, with entry ids H166 and H153 where the glossary has them.
+
 Version v31 (2026-10-25):
 
-- Unit tests: **290 passed**.
 - Test on the `v31-lektura` branch: "Weekendowa lektura" episode 699 split into 53 parts, 3 entered the digest; after the fixes the ranking favours threat-research analyses (Unit 42, Mandiant) over commentary.
 - October archive (70 articles): the top merges Quest Diagnostics, Capcom and Arista VCO without new wrong merges.
 
@@ -93,7 +99,7 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v32):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms. The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika (v33):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
 - Branch protection for `main`.
 
 Planned features are not considered implemented until they have been developed and verified.
@@ -106,7 +112,7 @@ Planned features are not considered implemented until they have been developed a
 4. Categorize, score, exclude promotional titles and roundups.
 5. Select up to 20 articles within source limits; merge articles about the same event; mark follow-ups of the last 3 days.
 6. Fetch article pages when the feed text is too short; mark CISA KEV vulnerabilities.
-7. Write AI summaries, check and correct them, proofread them.
+7. Write AI summaries, check and correct them, proofread them; keep the language notes.
 8. Format and deliver the digest to Discord.
 9. Record published links, archive delivered articles, save the day marker.
 
@@ -137,6 +143,7 @@ Code (`src/`):
 - `languagetool.py` — grammar hints from LanguageTool.
 - `glossary.py` — glossary rules from the mirror: prompt entries, forbidden forms, autofix, explanations in parentheses.
 - `summary_quality.py` — quality and language checks of summaries, repair by code.
+- `language_notes.py` — language log: corrections of summaries as notes for the archive.
 - `discord_output.py` — digest formatting, message splitting, delivery.
 - `article_archive.py` — monthly archive.
 - `weekly_top.py`, `monthly_top.py` — tops from the archive.

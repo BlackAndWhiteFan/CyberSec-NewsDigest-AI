@@ -84,9 +84,28 @@ Nowe i zmienione pliki: `data/styl_unikaj.csv` (nowy),
 `src/test_kev.py`, `src/test_event_grouping.py`, README (PL/EN).
 
 Zmianę zweryfikowano: testy jednostkowe (268) zakończone powodzeniem,
-w tym przykłady z prasówek z 23–24.10.2026. Test na gałęzi oczekuje na
-wykonanie. Łączenie tematów po nazwach firm w tytułach (Quest
-Diagnostics, Capcom) zostaje na kolejną wersję.
+w tym przykłady z prasówek z 23–24.10.2026. Łączenie tematów po nazwach
+firm w tytułach (Quest Diagnostics, Capcom) zostaje na kolejną wersję.
+
+Test na gałęzi `v29-jezyk` 25.10.2026 (niedziela, 6 artykułów):
+wszystkie streszczenia po polsku, bez kalek i ogólników, z konkretami;
+katalog KEV pobrany (1756 pozycji), oznaczony 1 artykuł; runda korekty
+nie zmieniła żadnego streszczenia („poprawione językowo 0 z 6”), choć
+zostały błędy („dotykających wersje”, „nieokreśloną liczbę danych”).
+
+Poprawki po teście (decyzje JW z 25.10.2026):
+
+- Korekta językowa najpierw głównym modelem (gpt-oss-120b), drugim
+  dopiero przy błędzie; prompt korekty dostał listę typowych błędów z
+  przykładami (przypadek po imiesłowie, rodzaj i liczba, kalki,
+  składnia bezosobowa).
+- „wykonanie kodu zdalnie” (odwrócona kolejność) → „RCE”, zgodnie ze
+  słowniczkiem.
+- Po „typu”/„rodzaju” objaśnienie „podwyższenia uprawnień” w
+  mianowniku: „luk typu podwyższenie (eskalacja) uprawnień”.
+- Lista stylu: „liczb* danych” → „zakres danych, wolumen danych”.
+
+Testy jednostkowe po poprawkach: 270, zakończone powodzeniem.
 
 ## v28 --- 23.10.2026
 
@@ -1348,9 +1367,28 @@ New and changed files: `data/styl_unikaj.csv` (new),
 `src/test_kev.py`, `src/test_event_grouping.py`, README (PL/EN).
 
 The change was verified: unit tests (268) passed, including examples
-from the digests of 23–24 October 2026. A branch test is pending.
-Merging stories by company names in titles (Quest Diagnostics, Capcom)
-is left for the next version.
+from the digests of 23–24 October 2026. Merging stories by company
+names in titles (Quest Diagnostics, Capcom) is left for the next
+version.
+
+Test on the `v29-jezyk` branch on 2026-10-25 (Sunday, 6 articles): all
+summaries in Polish, without calques or filler, with facts; KEV catalog
+downloaded (1756 entries), 1 article marked; the proofreading round
+changed no summary ("poprawione językowo 0 z 6"), although errors
+remained ("dotykających wersje", "nieokreśloną liczbę danych").
+
+Fixes after the test (JW's decisions of 2026-10-25):
+
+- Proofreading with the main model first (gpt-oss-120b), the second one
+  only on error; the proofreading prompt got a list of typical errors
+  with examples (case after participles, gender and number, calques,
+  impersonal syntax).
+- "wykonanie kodu zdalnie" (reversed order) → "RCE", as in the glossary.
+- After "typu"/"rodzaju" the explanation of "podwyższenie uprawnień" is
+  in the nominative: "luk typu podwyższenie (eskalacja) uprawnień".
+- Style list: "liczb* danych" → "zakres danych, wolumen danych".
+
+Unit tests after the fixes: 270, passed.
 
 ## v28 --- 2026-10-23
 

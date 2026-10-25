@@ -78,7 +78,7 @@ Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHub
 
 Wersja v32 (25.10.2026):
 
-- Testy jednostkowe: **305 zaliczonych**.
+- Testy jednostkowe: **307 zaliczonych**.
 - Notatki językowe sprawdzone na prawdziwych błędach z logów 22–25.10.2026 („rekordy pacjentów”, „AI‑zarządzanego”, „patchują”, „przed exploit”, „eksploatując”, „intruzji”): wszystkie zapisane, z numerami haseł H166 i H153 tam, gdzie słowniczek je ma.
 
 Wersja v31 (25.10.2026):

@@ -66,12 +66,32 @@ pacjentów” i „AI‑zarządzanego” (styl), „patchują” (słowniczek, H
 „przed exploit” (odmiana, H153), „eksploatując”, „intruzji”,
 „Kompromisy”, „rootowy” (styl) – wszystkie zapisane.
 
+Test na gałęzi `v32-jezyk` 25.10.2026: streszczenia AI 9 z 9, korekta
+poprawiła 7; log „JĘZYK: … słowniczek 0, styl 2, odmiana 0,
+autopoprawki 2, korekta 7” zgodny z liniami KONTROLA i KOREKTA. „Ciąg
+dalszy” miał 6 z 9 pozycji. Pięć było trafnych (PHP, Arista VCO,
+BeyondTrust/Armory Castle, Brotli/Node.js, Quest Diagnostics), ale
+analiza Unit 42 o FortiManagerze trafiła tam przez CVE-2024-47575 z
+całej lektury 699, dostarczonej 24.10 jako jedna pozycja. Do tego w
+streszczeniach: „eliminują ryzyko ataków” (ogólnik), „75 unikalnych
+podatności” i „wpływających na wersje” (kalki).
+
+Poprawki po teście:
+
+- **„Ciąg dalszy” po CVE pomija rekordy całej lektury** (`src/main.py`):
+  ich numery CVE pochodzą z dziesiątek różnych linków, więc nowa analiza
+  jednego z nich nie jest kontynuacją wydarzenia.
+- Ogólnik „eliminuje ryzyko / zagrożenie” (`src/summary_quality.py`).
+- Lista stylu `data/styl_unikaj.csv`: „unikaln*” (→ różny albo bez
+  przymiotnika) i „wpływając* na wersj*” (→ dotyczący wersji).
+
 Nowe i zmienione pliki: `src/language_notes.py` (nowy),
 `src/test_language_notes.py` (nowy), `src/ai_summaries.py`,
 `src/glossary.py`, `src/summary_quality.py`, `src/article_archive.py`,
+`src/main.py`, `src/test_roundup_parts.py`, `data/styl_unikaj.csv`,
 README (PL/EN).
 
-Testy jednostkowe: 305, zakończone powodzeniem.
+Testy jednostkowe: 307, zakończone powodzeniem.
 
 ------------------------------------------------------------------------
 
@@ -1571,12 +1591,32 @@ pacjentów" and "AI‑zarządzanego" (style), "patchują" (glossary, H166),
 "przed exploit" (inflection, H153), "eksploatując", "intruzji",
 "Kompromisy", "rootowy" (style) – all recorded.
 
+Test on the `v32-jezyk` branch on 2026-10-25: AI summaries 9 of 9,
+proofreading changed 7; log "JĘZYK: … słowniczek 0, styl 2, odmiana 0,
+autopoprawki 2, korekta 7", consistent with the KONTROLA and KOREKTA
+lines. "Ciąg dalszy" had 6 of 9 items. Five were right (PHP, Arista
+VCO, BeyondTrust/Armory Castle, Brotli/Node.js, Quest Diagnostics), but
+the Unit 42 analysis of FortiManager got there through CVE-2024-47575
+from the whole roundup 699, delivered on 2026-10-24 as one item. Also in
+the summaries: "eliminują ryzyko ataków" (filler), "75 unikalnych
+podatności" and "wpływających na wersje" (calques).
+
+Fixes after the test:
+
+- **CVE-based "Ciąg dalszy" skips records of a whole roundup**
+  (`src/main.py`): their CVE ids come from dozens of different links, so
+  a new analysis of one of them is not a follow-up of an event.
+- Filler "eliminuje ryzyko / zagrożenie" (`src/summary_quality.py`).
+- Style list `data/styl_unikaj.csv`: "unikaln*" (→ różny, or no
+  adjective) and "wpływając* na wersj*" (→ dotyczący wersji).
+
 New and changed files: `src/language_notes.py` (new),
 `src/test_language_notes.py` (new), `src/ai_summaries.py`,
 `src/glossary.py`, `src/summary_quality.py`, `src/article_archive.py`,
+`src/main.py`, `src/test_roundup_parts.py`, `data/styl_unikaj.csv`,
 README (PL/EN).
 
-Unit tests: 305, passed.
+Unit tests: 307, passed.
 
 ------------------------------------------------------------------------
 

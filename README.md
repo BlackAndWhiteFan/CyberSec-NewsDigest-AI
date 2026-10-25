@@ -78,7 +78,7 @@ The main trigger is an external alarm clock: cron-job.org calls the GitHub API (
 
 Version v32 (2026-10-25):
 
-- Unit tests: **305 passed**.
+- Unit tests: **307 passed**.
 - Language notes checked on real errors from the logs of 22–25 October 2026 ("rekordy pacjentów", "AI‑zarządzanego", "patchują", "przed exploit", "eksploatując", "intruzji"): all recorded, with entry ids H166 and H153 where the glossary has them.
 
 Version v31 (2026-10-25):

@@ -24,6 +24,70 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v29 --- 25.10.2026
+
+**Zaostrzona kontrola językowa streszczeń, ochrona przed limitem
+zapytań, przeglądy zbiorcze i precyzyjniejszy 🔥.**
+
+Powód: lektura prasówek z 23–24.10.2026. Cztery streszczenia po
+angielsku; kalki („rekordy pacjentów”, „AI‑zarządzanego frameworka”,
+„do intruzji”, „eksploatując”, „Kompromisy wystąpiły”, „rootowy kod”);
+błędy gramatyczne („Publikuje się natychmiastowa łatka”, „nazwanego
+łatki”, „iPhoneie”); „RCE (RCE)” po autokorekcie z v27; streszczenia
+powtarzające tytuł („Node2Shell… umożliwia RCE przez dekompresję
+Brotli”); dwa artykuły bez streszczenia, bo partia dostała błąd 429 od
+obu modeli; przeglądy zbiorcze (ThreatsDay, In Other News, Weekendowa
+lektura) streszczane jednym tematem, a Weekendowa lektura z 🔥; 🔥 przy
+Ariście za starsze numery CVE z dalszej części strony; PHP trzy razy
+(różne tytuły, te same CVE).
+
+Zmiany:
+
+- **Lista stylu `data/styl_unikaj.csv`** (nowa, edytowana przez JW):
+  kalka i podpowiedź, `*` = dowolna końcówka. Lista trafia do promptu i
+  do kontroli; kalka wraca do poprawki, ale nigdy nie powoduje ucięcia
+  ani odrzucenia streszczenia (problem „miękki”).
+- **Kontrola języka** (`src/summary_quality.py`): streszczenie po
+  angielsku wraca do poprawki, a jeśli nadal jest po angielsku –
+  odpada (lepiej sam tytuł niż angielski tekst); streszczenie
+  powtarzające tytuł (najwyżej dwa nowe słowa) wraca do poprawki;
+  uwagi „Nie podano…” i samo „w tygodniu” (bez dat) zgłaszane jak
+  ogólniki i względne określenia czasu.
+- **Runda korekty językowej** (`src/ai_summaries.py`): po wszystkich
+  streszczeniach jedno zapytanie do drugiego modelu (osobne limity):
+  „popraw wyłącznie gramatykę, interpunkcję, literówki i kalki, nie
+  zmieniaj faktów”. Poprawka jest przyjmowana tylko, gdy zachowuje
+  liczby i numery CVE, długość (60–140%), nie wprowadza nowych
+  problemów; inaczej zostaje wersja sprzed korekty. Log: „KOREKTA: …”.
+- **Limit zapytań**: zapytania do jednego modelu są rozłożone w czasie
+  (co najmniej 20 s odstępu), a partia, której nie obsłużył żaden model,
+  jest ponawiana na końcu po 60 s.
+- **Autokorekta**: „zdalne wykonanie kodu (RCE)” daje „RCE” (bez
+  „RCE (RCE)”), słowo powtórzone w nawiasie za sobą jest usuwane,
+  „iPhoneie” → „iPhonie”.
+- **Przeglądy zbiorcze**: ThreatsDay, Weekly Recap i In Other News są
+  pomijane jak treści promocyjne (ich tematy i tak są w prasówce
+  osobno; licznik „Odrzucone jako promocja” obejmuje je w logu).
+  „Weekendowa lektura” zostaje (decyzja z v12), ale jako przegląd:
+  stały opis zamiast streszczenia AI, bez 🔥 i bez łączenia po
+  numerach CVE.
+- **Precyzyjniejszy 🔥 i łączenie po CVE** (`src/kev.py`,
+  `src/event_grouping.py`): liczą się tylko numery CVE z tytułu i
+  pierwszych 600 znaków tekstu; wspólny taki numer łączy artykuły w to
+  samo wydarzenie (także z jednego serwisu).
+
+Nowe i zmienione pliki: `data/styl_unikaj.csv` (nowy),
+`src/summary_quality.py`, `src/ai_summaries.py`, `src/glossary.py`,
+`src/article_selection.py`, `src/kev.py`, `src/event_grouping.py`,
+`src/test_ai_summaries.py`, `src/test_summary_quality.py`,
+`src/test_glossary.py`, `src/test_article_selection.py`,
+`src/test_kev.py`, `src/test_event_grouping.py`, README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (268) zakończone powodzeniem,
+w tym przykłady z prasówek z 23–24.10.2026. Test na gałęzi oczekuje na
+wykonanie. Łączenie tematów po nazwach firm w tytułach (Quest
+Diagnostics, Capcom) zostaje na kolejną wersję.
+
 ## v28 --- 23.10.2026
 
 **🔥 przy lukach z katalogu CISA KEV.**
@@ -1226,6 +1290,67 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v29 --- 2026-10-25
+
+**Stricter language check of summaries, protection against the rate
+limit, roundups and a more precise 🔥.**
+
+Reason: reading the digests of 23–24 October 2026. Four summaries in
+English; calques ("rekordy pacjentów", "AI‑zarządzanego frameworka",
+"do intruzji", "eksploatując", "Kompromisy wystąpiły", "rootowy kod");
+grammar errors ("Publikuje się natychmiastowa łatka", "nazwanego
+łatki", "iPhoneie"); "RCE (RCE)" after the v27 autofix; summaries
+restating the title; two articles without a summary because a batch got
+429 from both models; roundups (ThreatsDay, In Other News, Weekendowa
+lektura) summarized by one topic, and Weekendowa lektura with 🔥; 🔥
+on Arista for older CVE ids further down the page; PHP three times
+(different titles, same CVE ids).
+
+Changes:
+
+- **Style list `data/styl_unikaj.csv`** (new, edited by JW): calque and
+  suggestion, `*` = any ending. The list goes into the prompt and the
+  check; a calque goes back for correction but never causes a summary to
+  be cut or dropped (a "soft" problem).
+- **Language check** (`src/summary_quality.py`): an English summary goes
+  back for correction and is dropped if still English (the title alone
+  is better than English text); a summary restating the title (at most
+  two new words) goes back for correction; "Nie podano…" remarks and a
+  bare "w tygodniu" (without dates) are reported like filler and
+  relative time words.
+- **Proofreading round** (`src/ai_summaries.py`): after all summaries,
+  one request to the second model (separate limits): "fix only grammar,
+  punctuation, typos and calques, do not change facts". A correction is
+  accepted only when it keeps the numbers and CVE ids and the length
+  (60–140%) and adds no problems; otherwise the earlier version stays.
+  Log: "KOREKTA: …".
+- **Rate limit**: requests to one model are spaced out (at least 20 s),
+  and a batch that no model handled is retried at the end after 60 s.
+- **Autofix**: "zdalne wykonanie kodu (RCE)" gives "RCE" (no "RCE
+  (RCE)"), a word repeated in parentheses right after itself is removed,
+  "iPhoneie" → "iPhonie".
+- **Roundups**: ThreatsDay, Weekly Recap and In Other News are left out
+  like promotional content (their stories are in the digest separately;
+  the log counter "Odrzucone jako promocja" includes them). "Weekendowa
+  lektura" stays (decision of v12), but as a roundup: a fixed
+  description instead of an AI summary, no 🔥 and no merging by CVE ids.
+- **More precise 🔥 and merging by CVE** (`src/kev.py`,
+  `src/event_grouping.py`): only CVE ids from the title and the first
+  600 characters of the text count; such a shared id merges articles
+  into one event (also from one site).
+
+New and changed files: `data/styl_unikaj.csv` (new),
+`src/summary_quality.py`, `src/ai_summaries.py`, `src/glossary.py`,
+`src/article_selection.py`, `src/kev.py`, `src/event_grouping.py`,
+`src/test_ai_summaries.py`, `src/test_summary_quality.py`,
+`src/test_glossary.py`, `src/test_article_selection.py`,
+`src/test_kev.py`, `src/test_event_grouping.py`, README (PL/EN).
+
+The change was verified: unit tests (268) passed, including examples
+from the digests of 23–24 October 2026. A branch test is pending.
+Merging stories by company names in titles (Quest Diagnostics, Capcom)
+is left for the next version.
 
 ## v28 --- 2026-10-23
 

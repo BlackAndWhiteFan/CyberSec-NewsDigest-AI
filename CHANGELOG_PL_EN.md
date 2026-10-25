@@ -24,6 +24,73 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v30 --- 25.10.2026
+
+**„Polacy nie gęsi”: korekta językowa Gemini, podpowiedzi
+LanguageTool, prostsze zdania.**
+
+Powód: w teście v29 (25.10.2026) korekta (gpt-oss-120b) poprawiła 5 z
+6 streszczeń, ale zostały błędy rekcji i uzgodnienia, które gubią sens:
+„CISA dodało do listy KEV dwóch podatności” (powinno być: „CISA dodała
+… dwie podatności”) i „Exploit CVE-2026-110447 umożliwia backdoor”.
+Modele Groq piszą po polsku zbyt słabo, by to wyłapać. Uzupełnienie
+v29: drugi test na gałęzi `v29-jezyk` dał „KOREKTA: poprawione językowo
+5 z 6 streszczeń” po przejściu korekty na gpt-oss-120b.
+
+Decyzja JW z 25.10.2026: korekta przez Google Gemini w ramach
+darmowego limitu (projekt „PolacyNieGesi4Digest”, bez płatności;
+sekret `GEMINI_API_KEY`). Przyjęto do wiadomości zapis warunków Gemini
+API o planie płatnym dla aplikacji udostępnianych użytkownikom w EOG –
+z API korzysta tylko automat na GitHubie, a w EOG nawet darmowe użycie
+podlega zasadom planu płatnego (treści nie są używane do trenowania);
+przy problemie korekta wraca do Groq.
+
+Zmiany:
+
+- **Korekta przez Gemini** (nowy `src/gemini.py`): modele
+  `gemini-3.8-flash`, zapasowo `gemini-3.5-flash` (odczytane z AI
+  Studio; zmienna repozytorium `GEMINI_MODEL` może je podmienić). Klucz
+  w nagłówku `x-goog-api-key`, nigdy w adresie ani w logu. Kolejność:
+  Gemini → gpt-oss-120b → qwen3.8-27b; po wyczerpaniu darmowego limitu
+  (błąd 429) korekta przechodzi na Groq, a prasówka działa dalej. Jedno
+  zapytanie dziennie.
+- **Podpowiedzi LanguageTool** (nowy `src/languagetool.py`): wszystkie
+  streszczenia sprawdzane jednym zapytaniem do publicznego API
+  LanguageTool (pl-PL, bez klucza); uwagi z kategorii gramatyka,
+  interpunkcja, mylone słowa i semantyka trafiają do korekty jako
+  „uwagi” przy konkretnym streszczeniu (literówki są pomijane, bo to
+  zwykle nazwy techniczne). Kod nie stosuje ich sam.
+- **Prompt streszczeń**: krótkie, proste zdania (do ok. 20 słów, jedno
+  zdanie – jeden fakt), uzgadnianie czasownika z podmiotem („CISA
+  dodała”, „Microsoft wydał”), biernik po „dodać/wydać/załatać”, numer
+  CVE to luka, a nie exploit.
+- **Prompt korekty**: rekcja i uzgodnienie na przykładzie z testu,
+  przeformułowanie niejasnego zdania przy zachowaniu faktów, możliwość
+  podziału długiego zdania.
+- **Log „przed → po”** dla każdego poprawionego streszczenia oraz
+  nazwa modelu, który zrobił korektę.
+
+Nowe i zmienione pliki: `src/gemini.py` (nowy), `src/languagetool.py`
+(nowy), `src/test_proofreading.py` (nowy), `src/ai_summaries.py`,
+`.github/workflows/daily-digest.yml` (sekret `GEMINI_API_KEY`,
+zmienna `GEMINI_MODEL`), README (PL/EN).
+
+Zmianę zweryfikowano: testy jednostkowe (277) zakończone powodzeniem.
+Test na gałęzi `v30-Polacy` 25.10.2026: korektę zrobił
+`gemini-3.8-flash` (klucz i nazwa modelu działają), poprawione 6 z 6
+streszczeń, żadna poprawka nie odrzucona. Przykłady z logu „przed →
+po”: „Exploit CVE-2026-110447 umożliwia instalację backdoora” → „Luka
+CVE-2026-110447 pozwala zainstalować backdoora”; „łatki dla 72
+podatności…, w tym osiem krytycznych luk” → „ośmiu krytycznych luk”;
+„Atlassian wydało” → „Atlassian wydał”; „wyciekiem niektórych wpisów
+pacjentów” → „wyciekiem danych niektórych pacjentów”; „kolejne
+aktualizacje pojawiają się w kolejnych produktach” → bez powtórzenia.
+LanguageTool nie zgłosił uwag (0 z 6), mimo błędów przypadku – jego
+polskie reguły są słabe, więc główną pracę robi Gemini. Do dalszej
+obserwacji: uwaga „Liczba poszkodowanych nie została podana” (forma
+„nie została podana” nie jest jeszcze wykrywana). Rozbiór „Weekendowej
+lektury” i łączenie po nazwach firm przechodzą do v31.
+
 ## v29 --- 25.10.2026
 
 **Zaostrzona kontrola językowa streszczeń, ochrona przed limitem
@@ -1309,6 +1376,73 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v30 --- 2026-10-25
+
+**"Polacy nie gęsi": Gemini language correction, LanguageTool hints,
+simpler sentences.**
+
+Reason: in the v29 test (2026-10-25) the correction (gpt-oss-120b)
+fixed 5 of 6 summaries, but errors of government and agreement that
+lose the meaning remained: "CISA dodało do listy KEV dwóch podatności"
+(should be "CISA dodała … dwie podatności") and "Exploit CVE-2026-110447
+umożliwia backdoor". The Groq models write Polish too poorly to catch
+this. Completion of v29: the second test on the `v29-jezyk` branch gave
+"KOREKTA: poprawione językowo 5 z 6 streszczeń" after the correction
+moved to gpt-oss-120b.
+
+JW's decision of 2026-10-25: correction by Google Gemini within the free
+quota (project "PolacyNieGesi4Digest", no billing; secret
+`GEMINI_API_KEY`). The Gemini API terms clause on the paid tier for apps
+made available to users in the EEA was noted – only the GitHub
+automation uses the API, and in the EEA even free use follows the paid
+tier's data terms (content is not used for training); on any problem
+the correction falls back to Groq.
+
+Changes:
+
+- **Correction by Gemini** (new `src/gemini.py`): models
+  `gemini-3.8-flash`, fallback `gemini-3.5-flash` (read from AI Studio;
+  the repository variable `GEMINI_MODEL` can override them). The key is
+  sent in the `x-goog-api-key` header, never in the URL or the log.
+  Order: Gemini → gpt-oss-120b → qwen3.8-27b; when the free quota is used
+  up (error 429) the correction moves to Groq and the digest goes on.
+  One request a day.
+- **LanguageTool hints** (new `src/languagetool.py`): all summaries are
+  checked in one request to the public LanguageTool API (pl-PL, no key);
+  findings in grammar, punctuation, confused words and semantics go to
+  the correction as "uwagi" next to the summary (spelling findings are
+  skipped, as they are mostly technical names). Code does not apply them
+  itself.
+- **Summary prompt**: short, simple sentences (up to about 20 words, one
+  fact per sentence), verb agreement with the subject ("CISA dodała",
+  "Microsoft wydał"), accusative after "dodać/wydać/załatać", a CVE id is
+  a vulnerability, not an exploit.
+- **Correction prompt**: government and agreement with the example from
+  the test, rephrasing an unclear sentence while keeping the facts,
+  splitting a long sentence allowed.
+- **"przed → po" log** for every corrected summary and the name of the
+  model that did the correction.
+
+New and changed files: `src/gemini.py` (new), `src/languagetool.py`
+(new), `src/test_proofreading.py` (new), `src/ai_summaries.py`,
+`.github/workflows/daily-digest.yml` (secret `GEMINI_API_KEY`, variable
+`GEMINI_MODEL`), README (PL/EN).
+
+The change was verified: unit tests (277) passed. Test on the
+`v30-Polacy` branch on 2026-10-25: the correction was done by
+`gemini-3.8-flash` (key and model name work), 6 of 6 summaries
+corrected, no correction rejected. Examples from the "przed → po" log:
+"Exploit CVE-2026-110447 umożliwia instalację backdoora" → "Luka
+CVE-2026-110447 pozwala zainstalować backdoora"; "łatki dla 72
+podatności…, w tym osiem krytycznych luk" → "ośmiu krytycznych luk";
+"Atlassian wydało" → "Atlassian wydał"; "wyciekiem niektórych wpisów
+pacjentów" → "wyciekiem danych niektórych pacjentów"; a repeated
+"kolejne… kolejnych" removed. LanguageTool reported nothing (0 of 6)
+despite case errors – its Polish rules are weak, so Gemini does the
+main work. To watch: the remark "Liczba poszkodowanych nie została
+podana" (the form "nie została podana" is not detected yet). Parsing
+"Weekendowa lektura" and merging by company names move to v31.
 
 ## v29 --- 2026-10-25
 

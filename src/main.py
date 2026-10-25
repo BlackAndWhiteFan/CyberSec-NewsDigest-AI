@@ -14,6 +14,7 @@ from article_selection import (
     MIN_PRIORITY_SCORE,
     categorize_article,
     is_excluded,
+    is_roundup,
     prioritize_article,
     relevant_articles,
     select_top_articles,
@@ -22,6 +23,7 @@ from discord_output import build_digest_messages, send_messages
 from ai_summaries import summarize_articles, summary_source
 from article_pages import add_page_texts
 from kev import load_kev, mark_kev
+from roundup_parts import VIA_LEKTURA, extract_parts
 from article_archive import append_to_archive, load_recent
 from event_grouping import group_events, mark_continuations
 from run_guard import mark_done, should_skip
@@ -144,6 +146,24 @@ def run():
                 continue
     
             
+            # v31: "Weekendowa lektura" is split into its links; each link is
+            # a candidate article ("via Zaufana Trzecia Strona").
+            if is_roundup({"title": title}):
+                parts = extract_parts(content or description)
+                print(f"WEEKENDOWA LEKTURA: {len(parts)} pozycji – {title}")
+
+                for part in parts:
+                    print("  LEKTURA:", part["title"][:100], "|", part["link"])
+
+                    if part["link"] in seen_links:
+                        continue
+
+                    add_article(articles, seen_links, feed_url, part["title"], part["link"], part["description"])
+                    articles[-1]["via"] = VIA_LEKTURA
+
+                if parts:
+                    continue
+
             if is_duplicate_link(link, seen_links):
                 duplicate_items += 1
     

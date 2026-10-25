@@ -21,7 +21,7 @@ from datetime import datetime
 
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from discord_output import polish_plural, send_messages, split_into_messages
-from event_grouping import SIMILARITY_THRESHOLD, document_frequency, same_event
+from event_grouping import SIMILARITY_THRESHOLD, document_frequency, same_event, text_names
 from kev import KEV_NOTE, MARKER as KEV_MARKER, load_kev, refresh_records
 import test_mode
 import top_guard
@@ -75,6 +75,8 @@ def group_month(records):
         for related in record.get("related", [])
     ]
     frequency = document_frequency(titles)
+    # v31: names shown by the summaries (see event_grouping.text_names).
+    names = text_names(record.get("summary", "") for record in records)
 
     ordered = sorted(
         records,
@@ -100,6 +102,7 @@ def group_month(records):
                 frequency,
                 threshold=threshold,
                 rare_limit=rare_limit,
+                names=names,
             ):
                 event.append(record)
                 break

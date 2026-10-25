@@ -1,6 +1,7 @@
 import unittest
 
 from event_grouping import (
+    text_names,
     document_frequency,
     group_events,
     mark_continuations,
@@ -147,8 +148,8 @@ class TestSameEvent(unittest.TestCase):
 
     def test_known_limitation_name_at_title_start_in_english(self):
         # Both titles start with "Drupal" and one is in Title Case, so the
-        # name cannot be recognized; the duplicate is missed on purpose
-        # rather than risking false matches.
+        # name cannot be recognized from the titles alone; since v31 the
+        # article texts can show it is a name (TestCompanyNamesV31).
         self.assertFalse(
             same_event(
                 find("Drupal patches critical RCE flaws")["title"],
@@ -279,6 +280,37 @@ class TestLeadCvesV29(unittest.TestCase):
              "description": "CVE-2026-76466 is critical."},
         ]
         self.assertEqual(len(group_events(articles)), 2)
+
+class TestCompanyNamesV31(unittest.TestCase):
+    """Titles from the digests of 23–24.10.2026."""
+
+    def test_pair_of_capitalized_words(self):
+        titles = [
+            "Quest Diagnostics confirms data breach exposed patient records",
+            "Quest Diagnostics warns of potential data theft after attack on lab service system",
+            "Hackers Use Autonomous AI Agents to Breach Company Websites",
+        ]
+        self.assertTrue(same_event(titles[0], titles[1], document_frequency(titles)))
+
+    def test_single_name_needs_evidence_from_texts(self):
+        titles = ["11 Million Impacted by Capcom Data Breach", "Capcom confirms data breach affecting 11.7 million accounts"]
+        frequency = document_frequency(titles)
+        names = text_names(["Japanese game developer Capcom confirmed a breach.", "Capcom potwierdziło wyciek."])
+
+        self.assertFalse(same_event(titles[0], titles[1], frequency))
+        self.assertTrue(same_event(titles[0], titles[1], frequency, names=names))
+
+    def test_common_words_are_not_names(self):
+        texts = ["A popular image library allows code execution.", "Popular apps were hit."]
+        self.assertNotIn("popular", text_names(texts))
+        titles = ["Critical Flaw in Popular Pillow Library", "Popular Messaging App Leaks Data"]
+        self.assertFalse(same_event(titles[0], titles[1], document_frequency(titles), names=text_names(texts)))
+
+    def test_platform_names_never_merge_alone(self):
+        titles = ["Windows Update Breaks VPN", "Hackers Abuse Windows Shortcut Files"]
+        names = text_names(["Microsoft Windows users."])
+        self.assertFalse(same_event(titles[0], titles[1], document_frequency(titles), names=names))
+
 
 if __name__ == "__main__":
     unittest.main()

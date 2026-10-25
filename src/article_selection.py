@@ -176,6 +176,8 @@ CONTEXT_PENALTY = 2
 MIN_PRIORITY_SCORE = 2
 
 DEFAULT_SOURCE_LIMIT = 4
+# v31: links from "Weekendowa lektura" (article["via"]) per digest.
+LEKTURA_LIMIT = 3
 SOURCE_LIMITS = {
     "niebezpiecznik.pl": 2,
     # v26: frequent English sources get less room, so that with eleven
@@ -338,6 +340,12 @@ def select_top_articles(articles, limit=20, min_score=MIN_PRIORITY_SCORE):
                 {key: value for key, value in member.items() if key != "related"}
                 for member in others
             ]
+
+        if chosen.get("via"):
+            if per_source.get("via", 0) >= LEKTURA_LIMIT:
+                continue
+
+            per_source["via"] = per_source.get("via", 0) + 1
 
         domain = source_domain(chosen)
         per_source[domain] = per_source.get(domain, 0) + 1

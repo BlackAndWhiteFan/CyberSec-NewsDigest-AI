@@ -110,6 +110,18 @@ o FortiManagerze, Mandiant o Armory Castle; „Najbezpieczniejsza
 przeglądarka” spada poniżej progu. Testy jednostkowe: 290, zakończone
 powodzeniem.
 
+Dokumentacja przed scaleniem: README (PL/EN) napisane od nowa na stan
+v31. Usunięte nieaktualne stany (budzik „oczekuje na potwierdzenie”,
+grupowanie „jeszcze nie wystąpiło na żywo”, wyniki v13 z 69 testami,
+„planowane przetwarzanie AI”); tabela 16 etapów z wersjami; opis
+podzielony na sekcje (źródła i selekcja, wydarzenia i znaczniki,
+streszczenia AI, wysyłka i zestawienia, wyzwalacze); aktualne
+ograniczenia i plan rozwoju (most do Mozaiki, v32). Polskie README
+dostało brakujące sekcje: architekturę, strukturę repozytorium,
+konfigurację i sekrety, testy. Sekcja „Stan projektu wynikający z
+przeanalizowanej historii” na końcu changelogu jest oznaczona jako
+zapis historyczny po v10.
+
 ## v30 --- 25.10.2026
 
 **„Polacy nie gęsi”: korekta językowa Gemini, podpowiedzi
@@ -1421,7 +1433,10 @@ deduplikację, historię artykułów i selekcję według priorytetu.
 
 ------------------------------------------------------------------------
 
-## Stan projektu wynikający z przeanalizowanej historii
+## Stan projektu wynikający z przeanalizowanej historii (zapis historyczny po v10)
+
+Zapis stanu z odtworzenia historii v1–v10; nie opisuje obecnego stanu.
+Aktualny stan projektu: [README_PL.md](README_PL.md).
 
 -   **Potwierdzone funkcje:** pobieranie i parsowanie RSS/Atom z wielu
     źródeł, walidacja wpisów, deduplikacja po linku, przechowywanie
@@ -1545,6 +1560,18 @@ Fixes before merging (JW's decision: right away, before v32):
 Simulation on the titles of roundup 699: top of the ranking Nginx, PHP,
 Unit 42 on FortiManager, Mandiant on Armory Castle; "Najbezpieczniejsza
 przeglądarka" falls below the threshold. Unit tests: 290, passed.
+
+Documentation before merging: README (PL/EN) rewritten for the state of
+v31. Outdated statuses removed (alarm clock "awaiting confirmation",
+grouping "not yet observed live", v13 results with 69 tests, "planned
+AI processing"); a table of 16 stages with versions; the description
+split into sections (sources and selection, events and markers, AI
+summaries, delivery and tops, triggers); current limitations and the
+roadmap (bridge to Mozaika, v32). The Polish README got the missing
+sections: architecture, repository structure, configuration and
+secrets, testing. The section "Project status based on the reviewed
+history" at the end of the changelog is marked as a historical record
+after v10.
 
 ## v30 --- 2026-10-25
 
@@ -2830,7 +2857,10 @@ selection.
 
 ------------------------------------------------------------------------
 
-## Project status based on the reviewed history
+## Project status based on the reviewed history (historical record after v10)
+
+A record of the state reconstructed for v1–v10; it does not describe
+the current state. Current status: [README.md](README.md).
 
 -   **Confirmed features:** retrieval and parsing of RSS/Atom from
     multiple sources, entry validation, deduplication by link, source

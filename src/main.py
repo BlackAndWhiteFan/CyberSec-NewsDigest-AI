@@ -66,10 +66,19 @@ def fetch_feed(url):
     return items
 
 def mark_continuations_by_cve(articles, recent_records):
-    """Mark articles whose summary shares a CVE id with a recent record."""
+    """Mark articles whose summary shares a CVE id with a recent record.
+
+    v32: records of a whole roundup ("Weekendowa lektura" delivered as one
+    item) are skipped: their CVE ids come from dozens of different links, so
+    a new analysis of one of them is not a follow-up (v32 test, 25.10.2026:
+    Unit 42 on FortiManager marked by CVE-2024-47575 from roundup 699).
+    """
     recent = set()
 
     for record in recent_records:
+        if is_roundup(record):
+            continue
+
         recent.update(record.get("cves", []))
         recent.update(find_cves(record.get("title", ""), record.get("summary", "")))
 

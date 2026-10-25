@@ -49,6 +49,8 @@ GENERIC_PHRASES = [
     r"nie podano",
     # v31: "Liczba poszkodowanych nie została podana" (test 25.10.2026).
     r"nie (został|została|zostało|zostały|zostali) (podan|ujawnion|wskazan|sprecyzowan|określon)\w*",
+    # v32: "Aktualizacje … eliminują ryzyko ataków" (test 25.10.2026).
+    r"eliminuj\w* (to |te |tę )?(ryzyk|zagrożeni)\w*",
 ]
 GENERIC = [re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE) for pattern in GENERIC_PHRASES]
 

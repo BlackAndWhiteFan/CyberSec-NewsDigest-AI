@@ -221,5 +221,13 @@ class TestPrompt(unittest.TestCase):
         self.assertLessEqual(len(relevant_entries([long_text])), len(CORE_ENTRIES) + 40)
 
 
+class TestAutofixV29(unittest.TestCase):
+    def test_duplicate_acronym_and_iphone(self):
+        from glossary import autofix
+        self.assertEqual(
+            autofix("Luki umożliwiają zdalne wykonanie kodu (RCE) na iPhoneie."),
+            "Luki umożliwiają RCE na iPhonie.",
+        )
+
 if __name__ == "__main__":
     unittest.main()

@@ -153,6 +153,10 @@ AUTOFIX = [
     (re.compile(r"(?<!\w)remote code execution(?!\w)", re.IGNORECASE), lambda m: "RCE"),
     (re.compile(r"(?<!\w)([Ee])ksploi(t|ta|ty|tem|tów|tom|tami|tach|towi|cie)(?!\w)"),
      lambda m: m.group(1) + "xploi" + m.group(2)),
+    # v29: "zdalne wykonanie kodu (RCE)" became "RCE (RCE)" (24.10.2026);
+    # a word repeated in parentheses right after itself is removed.
+    (re.compile(r"(?<!\w)(\w+) \(\1\)"), lambda m: m.group(1)),
+    (re.compile(r"(?<!\w)iPhoneie(?!\w)"), lambda m: "iPhonie"),
 ]
 
 

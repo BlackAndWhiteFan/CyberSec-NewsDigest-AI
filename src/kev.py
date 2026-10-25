@@ -3,8 +3,9 @@
 CISA's Known Exploited Vulnerabilities catalog lists vulnerabilities with
 confirmed exploitation in real attacks (245 were added in 2025). The marker
 is set by code, not by the AI: the catalog (JSON) is downloaded once per run,
-CVE ids are found in the article material (title, feed text, page text and
-the related articles of the same event) and compared with the catalog.
+CVE ids are found in the title and the lead (first 600 characters) of the
+feed text and page text, also of the related articles of the same event,
+and compared with the catalog (v29: only the lead, see LEAD_CHARS).
 
 The catalog is downloaded from CISA, with CISA's GitHub mirror as a
 fallback. When neither works, the digest goes out without markers.
@@ -17,6 +18,8 @@ after the first articles about it.
 import json
 import re
 import urllib.request
+
+from article_selection import is_roundup
 
 
 KEV_URLS = [
@@ -65,13 +68,25 @@ def find_cves(*texts):
     return sorted(found)
 
 
+# v29: only CVE ids from the title and the beginning of the text count.
+# Articles often mention older vulnerabilities further on (Arista article of
+# 23.10.2026 got the marker for earlier VeloCloud CVE ids).
+LEAD_CHARS = 600
+
+
+def plain_text(value):
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", value or "")).strip()
+
+
 def article_cves(article):
-    """CVE ids in the article material and in the related articles."""
-    texts = [
-        item.get(field, "")
-        for item in [article] + list(article.get("related", []))
-        for field in ("title", "description", "content", "page_text")
-    ]
+    """CVE ids in the title and the lead of the article and of its related
+    articles (same event)."""
+    texts = []
+
+    for item in [article] + list(article.get("related", [])):
+        texts.append(item.get("title", ""))
+        texts.extend(plain_text(item.get(field, ""))[:LEAD_CHARS] for field in ("description", "content", "page_text"))
+
     return find_cves(*texts)
 
 
@@ -80,6 +95,11 @@ def mark_kev(articles, catalog):
     marked = 0
 
     for article in articles:
+        # A roundup lists CVE ids of many stories (v29).
+        if is_roundup(article):
+            article["cves"], article["kev"] = [], []
+            continue
+
         article["cves"] = article_cves(article)
         article["kev"] = [cve for cve in article["cves"] if cve in catalog]
         marked += bool(article["kev"])

@@ -4,6 +4,7 @@ import unittest
 from article_selection import (
     categorize_article,
     is_excluded,
+    is_roundup,
     prioritize_article,
     select_top_articles,
 )
@@ -182,8 +183,17 @@ class TestSelectionRules(unittest.TestCase):
         )
         self.assertTrue(is_excluded(article))
 
-    def test_weekly_roundups_are_not_excluded(self):
-        self.assertFalse(is_excluded(make_article("Weekendowa lektura: odcinek 697")))
+    def test_weekendowa_lektura_is_kept_as_a_roundup(self):
+        article = make_article("Weekendowa lektura: odcinek 697")
+        self.assertFalse(is_excluded(article))
+        self.assertTrue(is_roundup(article))
+
+    def test_english_roundups_are_excluded(self):
+        for title in ["ThreatsDay: AI Secrets Leak, PingCAP Source Theft + 21 More",
+                      "⚡ Weekly Recap: 98 Zero-Days, Rogue AI Agents",
+                      "In Other News: Tor Exit Relays Hijacked"]:
+            with self.subTest(title=title):
+                self.assertTrue(is_excluded(make_article(title)))
 
     def test_default_source_limit_is_four(self):
         articles = [

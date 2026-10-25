@@ -22,8 +22,10 @@ Sentence case is fixed by code, not by the AI (seen 22.10.2026: "exploit
 tych luk mogą…" at the start of a sentence after a glossary correction).
 """
 
+import csv
 import re
 from datetime import date
+from pathlib import Path
 
 
 GENERIC_PHRASES = [
@@ -43,6 +45,8 @@ GENERIC_PHRASES = [
     r"nie (podaje|podają|zawiera|wskazuje|ujawnia|precyzuje)\w* (żadnych )?(informacji|szczegółów|danych)",
     r"(raport|artykuł|tekst|źródło|komunikat)\w* nie (podaje|zawiera|wskazuje|wymienia|precyzuje|ujawnia)\w*",
     r"brak (jest )?(informacji|szczegółów|danych) (o|na temat)",
+    # v29: impersonal form ("Nie podano sprawcy ani dalszych szczegółów").
+    r"nie podano",
 ]
 GENERIC = [re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE) for pattern in GENERIC_PHRASES]
 
@@ -54,6 +58,7 @@ RELATIVE_TIME = re.compile(
     r"jutro|pojutrze|wczoraj|dziś|dzisiaj"
     rf"|(jutrzejsz|wczorajsz|dzisiejsz){ADJECTIVE_ENDINGS}"
     r"|w (przyszłym|zeszłym|ubiegłym|minionym|tym|bieżącym) tygodniu"
+    r"|w tygodniu(?!\s*\d)"
     r"|w (przyszłym|zeszłym|ubiegłym|tym|bieżącym) miesiącu"
     r")(?!\w)",
     re.IGNORECASE,
@@ -145,13 +150,101 @@ def unsupported_facts(text, source, year=None):
     return problems
 
 
+# v29: style list (data/styl_unikaj.csv), edited by JW: calques and
+# anglicisms with a suggestion ("rekordy" -> "wpisy, dane").
+STYLE_PATH = Path(__file__).resolve().parent.parent / "data" / "styl_unikaj.csv"
+
+
+def load_style(path=STYLE_PATH):
+    """Return [(compiled pattern, form, suggestion)] from the style list."""
+    try:
+        with open(path, encoding="utf-8-sig") as file:
+            lines = [line for line in file if line.strip() and not line.lstrip().startswith("#")]
+    except FileNotFoundError:
+        return []
+
+    rules = []
+
+    for row in csv.DictReader(lines, delimiter=";"):
+        form = (row.get("forma") or "").strip()
+
+        if not form:
+            continue
+
+        # "*" at the end of a word means any ending; hyphen variants match.
+        pattern = re.escape(form.replace("\u2011", "-")).replace(r"\*", r"\w*").replace(r"\-", "[-\u2011‐]")
+        rules.append((
+            re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE),
+            form,
+            (row.get("zamiast") or "").strip(),
+        ))
+
+    return rules
+
+
+STYLE_RULES = load_style()
+
+
+def style_problems(text, rules=None):
+    """Calques and anglicisms from the style list, with suggestions."""
+    problems = []
+
+    for pattern, form, suggestion in STYLE_RULES if rules is None else rules:
+        match = pattern.search(text)
+
+        if match:
+            problems.append(f"kalka „{match.group(0)}” – użyj: {suggestion}")
+
+    return problems
+
+
+# v29: English summaries (24.10.2026: four summaries in English).
+ENGLISH_WORDS = frozenset(
+    "the and of to in with that is was are were for by which has have from this "
+    "allows affected attackers vulnerability vulnerabilities exposed data".split()
+)
+POLISH_LETTERS = re.compile(r"[ąćęłńóśźż]", re.IGNORECASE)
+
+
+def looks_english(text):
+    """True when a summary is written in English rather than Polish."""
+    words = re.findall(r"[a-ząćęłńóśźż]+", text.lower())
+
+    if len(words) < 6:
+        return False
+
+    english = sum(1 for word in words if word in ENGLISH_WORDS)
+    return english / len(words) >= 0.12 and len(POLISH_LETTERS.findall(text)) < 3
+
+
+def content_words(text):
+    return {word for word in re.findall(r"\w{4,}", text.lower())}
+
+
+def repeats_title(text, title):
+    """True when the summary only restates the title (24.10.2026: "Node2Shell
+    (CVE-2026-111497) umożliwia RCE przez dekompresję Brotli w Node.js.")."""
+    words = content_words(text)
+    title_words = content_words(title or "")
+
+    # Short titles say too little to compare with.
+    if not words or len(title_words) < 4:
+        return False
+
+    return len(words - title_words) <= 2
+
+
 # v27: summaries became long single sentences joined with semicolons and
 # were cut at SUMMARY_LIMIT (test 22.10.2026).
 MAX_SUMMARY_LENGTH = 400
 
 
-def quality_problems(text, source=None):
-    """Return descriptions of quality problems (empty list = summary is fine)."""
+def quality_problems(text, source=None, soft=True):
+    """Return descriptions of quality problems (empty list = summary is fine).
+
+    soft=False leaves out style problems (calques from the style list): the
+    AI is asked to fix them, but a summary is never cut or dropped for them.
+    """
     problems = []
 
     if len(text) > MAX_SUMMARY_LENGTH:
@@ -184,8 +277,17 @@ def quality_problems(text, source=None):
             "rzeczownik (np. „przed exploitem”, „z botnetu”, „do infostealera”)"
         )
 
+    if soft:
+        problems.extend(style_problems(text))
+
+    if looks_english(text):
+        problems.append("streszczenie nie jest po polsku – napisz je po polsku")
+
     if source is not None:
         problems.extend(unsupported_facts(text, source))
+
+        if repeats_title(text, source.split("\n", 1)[0]):
+            problems.append("streszczenie powtarza tytuł – dodaj konkret z tekstu artykułu (kto, ile, skutki)")
 
     return problems
 

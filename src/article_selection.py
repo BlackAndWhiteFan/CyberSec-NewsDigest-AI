@@ -124,7 +124,20 @@ EXCLUDED_TITLE_KEYWORDS = (
     "wykład",
     "zapisy$",
     "zapisz się",
+    # v29: English roundups of many stories; their stories come in the
+    # digest separately anyway, and the AI summarized one of them at random.
+    "threatsday",
+    "weekly recap",
+    "in other news",
 )
+
+# v29: "Weekendowa lektura" (Zaufana Trzecia Strona) stays in the digest
+# (decision of v12), but as a roundup: a fixed description instead of an AI
+# summary, no KEV marker and no merging by the CVE ids it lists.
+ROUNDUP_TITLE_KEYWORDS = (
+    "weekendowa lektura",
+)
+ROUNDUP_SUMMARY = "Cotygodniowy przegląd linków Zaufanej Trzeciej Strony – wybór artykułów z ostatnich dni."
 
 # Event, report and advice contexts: they lower the score instead of
 # excluding the article (see CONTEXT_PENALTY).
@@ -194,6 +207,7 @@ TITLE_ONLY_CRITICAL_PATTERNS = compile_keywords(TITLE_ONLY_CRITICAL_KEYWORDS)
 VULNERABILITY_PATTERNS = compile_keywords(VULNERABILITY_KEYWORDS)
 POLAND_PATTERNS = compile_keywords(POLAND_KEYWORDS)
 EXCLUDED_TITLE_PATTERNS = compile_keywords(EXCLUDED_TITLE_KEYWORDS)
+ROUNDUP_TITLE_PATTERNS = compile_keywords(ROUNDUP_TITLE_KEYWORDS)
 CONTEXT_TITLE_PATTERNS = compile_keywords(CONTEXT_TITLE_KEYWORDS)
 
 
@@ -247,6 +261,11 @@ def has_context_title(article):
     """Return True when the title suggests an event, report or advice piece."""
     title = article.get("title", "").casefold()
     return matches_any(title, CONTEXT_TITLE_PATTERNS)
+
+
+def is_roundup(article):
+    """True for a roundup kept in the digest ("Weekendowa lektura")."""
+    return matches_any(article.get("title", "").casefold(), ROUNDUP_TITLE_PATTERNS)
 
 
 def is_excluded(article):

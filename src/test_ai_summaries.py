@@ -3,6 +3,8 @@ import json
 import unittest
 import urllib.error
 
+import ai_summaries
+
 from ai_summaries import (
     BATCH_SIZE,
     SOURCE_TEXT_LIMIT,
@@ -24,6 +26,18 @@ def make_article(title, description="", content=""):
         "content": content,
     }
 
+
+
+# Most tests count requests: no spacing between requests and no language
+# correction round (tested separately in TestProofreading).
+def setUpModule():
+    ai_summaries.MIN_REQUEST_INTERVAL = 0
+    ai_summaries.PROOFREAD = False
+
+
+def tearDownModule():
+    ai_summaries.MIN_REQUEST_INTERVAL = 20
+    ai_summaries.PROOFREAD = True
 
 class FakeResponse(io.BytesIO):
     def __enter__(self):
@@ -213,12 +227,23 @@ class TestSummarizeArticles(unittest.TestCase):
 
     def test_all_providers_failing_never_raises(self):
         articles = [make_article("A")]
-        opener = FakeOpener([http_error(401), http_error(503)])
+        opener = FakeOpener([http_error(401), http_error(503), http_error(401), http_error(503)])
 
         used = summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, self.sleep)
 
         self.assertEqual(used, [])
         self.assertNotIn("summary", articles[0])
+
+    def test_failed_batch_is_retried_at_the_end(self):
+        # 24.10.2026: a batch got 429 from both models and lost its summaries.
+        articles = [make_article("A")]
+        opener = FakeOpener([http_error(500), http_error(500)])
+
+        used = summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, self.sleep)
+
+        self.assertEqual(used, ["Groq gpt-oss-120b"])
+        self.assertEqual(articles[0]["summary"], "Streszczenie A.")
+        self.assertIn(ai_summaries.FAILED_BATCH_WAIT, self.sleeps)
 
 
 if __name__ == "__main__":
@@ -359,3 +384,61 @@ class TestGlossaryEnforcement(unittest.TestCase):
         summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
 
         self.assertEqual(len(opener.requests), 1)
+
+
+class TestProofreading(unittest.TestCase):
+    def articles(self):
+        article = make_article("Quest Diagnostics breach", "Patient records of 2 labs exposed.")
+        article["summary"] = "Ujawniono rekordy pacjentów z 2 laboratoriów."
+        article["summary_material"] = "Quest Diagnostics breach\nPatient records of 2 labs exposed."
+        return [article]
+
+    def run_proofreading(self, articles, reply):
+        opener = ScriptedOpener([{1: reply}])
+        changed = ai_summaries.proofread_summaries(
+            articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g"}, opener, lambda s: None
+        )
+        return changed, opener
+
+    def test_language_fix_is_accepted_and_second_model_asked_first(self):
+        articles = self.articles()
+        changed, opener = self.run_proofreading(articles, "Ujawniono dane pacjentów z 2 laboratoriów.")
+
+        self.assertEqual(changed, 1)
+        self.assertEqual(articles[0]["summary"], "Ujawniono dane pacjentów z 2 laboratoriów.")
+        self.assertEqual(opener.requests[0]["model"], "qwen/qwen3.8-27b")
+
+    def test_correction_that_changes_facts_is_rejected(self):
+        articles = self.articles()
+        changed, _ = self.run_proofreading(articles, "Ujawniono dane pacjentów z 3 laboratoriów.")
+
+        self.assertEqual(changed, 0)
+        self.assertEqual(articles[0]["summary"], "Ujawniono rekordy pacjentów z 2 laboratoriów.")
+
+    def test_failed_proofreading_keeps_summaries(self):
+        articles = self.articles()
+
+        def opener(request, timeout):
+            raise urllib.error.HTTPError("https://api", 429, "Too Many Requests", {"Retry-After": "1"}, None)
+
+        changed = ai_summaries.proofread_summaries(
+            articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g"}, opener, lambda s: None
+        )
+        self.assertEqual(changed, 0)
+        self.assertEqual(articles[0]["summary"], "Ujawniono rekordy pacjentów z 2 laboratoriów.")
+
+
+class TestRoundupV29(unittest.TestCase):
+    def test_roundup_gets_fixed_summary_without_ai(self):
+        from article_selection import ROUNDUP_SUMMARY
+        articles = [make_article("Weekendowa Lektura: odcinek 699"), make_article("A")]
+        opener = FakeOpener([])
+
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
+
+        self.assertEqual(articles[0]["summary"], ROUNDUP_SUMMARY)
+        sent = json.loads(json.loads(opener.requests[0].data.decode("utf-8"))["messages"][1]["content"])
+        self.assertEqual([item["tytul"] for item in sent["artykuly"]], ["A"])
+
+if __name__ == "__main__":
+    unittest.main()

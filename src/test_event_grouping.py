@@ -258,5 +258,27 @@ class TestEventNames(unittest.TestCase):
         self.assertEqual(len(group_events(articles)), 2)
 
 
+class TestLeadCvesV29(unittest.TestCase):
+    def test_shared_cve_in_the_lead_merges_articles(self):
+        articles = [
+            {"title": "Twórcy PHP: pierwsze sygnały o lukach pojawiły się w 2024", "link": "https://cyberdefence24.pl/a",
+             "description": "Luki CVE-2026-109618 i CVE-2026-109619 w PHP."},
+            {"title": "Widespread PHP Flaw May Cause Many Site Outages Today", "link": "https://krebsonsecurity.com/b",
+             "description": "The bugs, CVE-2026-109618 and CVE-2026-109619, affect most sites."},
+            {"title": "Cisco Patches 34 Vulnerabilities", "link": "https://www.securityweek.com/c",
+             "description": "CVE-2026-76466 is critical."},
+        ]
+        groups = group_events(articles)
+        self.assertEqual(len(groups), 2)
+
+    def test_roundup_cves_do_not_merge(self):
+        articles = [
+            {"title": "Weekendowa Lektura: odcinek 699", "link": "https://zaufanatrzeciastrona.pl/a",
+             "description": "CVE-2026-109618, CVE-2026-76466"},
+            {"title": "Cisco Patches 34 Vulnerabilities", "link": "https://www.securityweek.com/c",
+             "description": "CVE-2026-76466 is critical."},
+        ]
+        self.assertEqual(len(group_events(articles)), 2)
+
 if __name__ == "__main__":
     unittest.main()

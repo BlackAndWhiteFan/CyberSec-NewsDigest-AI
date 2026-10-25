@@ -37,6 +37,19 @@ ESCALATION = {
     "podwyższeniem": "eskalacją",
     "podwyższeń": "eskalacji",
 }
+def escalation(match):
+    """Explanation for "podwyższenie uprawnień": accusative for the ambiguous
+    form, but nominative after "typu"/"rodzaju" (v29, test 25.10.2026:
+    "podatności typu podwyższenie (eskalacja) uprawnień")."""
+    anchor = match.group("anchor").lower()
+    before = match.string[: match.start("anchor")]
+
+    if anchor == "podwyższenie" and re.search(r"(?:typu|rodzaju)\s+$", before, re.IGNORECASE):
+        return "eskalacja"
+
+    return ESCALATION.get(anchor)
+
+
 CREDENTIALS = {
     "poświadczenia": "dane logowania",
     "poświadczeń": "danych logowania",
@@ -131,7 +144,7 @@ def forms_pattern(forms):
 
 INFLECTED = {
     "H182": (r"\b(?P<anchor>podwyższeni(?:e|a|u|em)|podwyższeń)\s+uprawnień\b",
-             lambda m: ESCALATION.get(m.group("anchor").lower())),
+             lambda m: escalation(m)),
     "H207": (r"\b(?P<anchor>poświadcze(?:nia|ń|niom|niami|niach|nie|niem|niu))\b",
              lambda m: CREDENTIALS.get(m.group("anchor").lower())),
     "H153": (forms_pattern(EXPLOIT_FORMS), explain_in_case(EXPLOIT_FORMS, EXPLOIT_GLOSS)),
@@ -151,8 +164,14 @@ AUTOFIX = [
      lambda m: ("Ł" if m.group(1) == "P" else "ł") + "at" + m.group(2)),
     (re.compile(r"(?<!\w)zdaln\w+ wykonani\w+ (?:dowolnego )?kodu(?!\w)", re.IGNORECASE), lambda m: "RCE"),
     (re.compile(r"(?<!\w)remote code execution(?!\w)", re.IGNORECASE), lambda m: "RCE"),
+    # v29: reversed order ("wykonanie kodu zdalnie", test 25.10.2026).
+    (re.compile(r"(?<!\w)wykonani\w+ (?:dowolnego )?kodu zdalnie(?!\w)", re.IGNORECASE), lambda m: "RCE"),
     (re.compile(r"(?<!\w)([Ee])ksploi(t|ta|ty|tem|tów|tom|tami|tach|towi|cie)(?!\w)"),
      lambda m: m.group(1) + "xploi" + m.group(2)),
+    # v29: "zdalne wykonanie kodu (RCE)" became "RCE (RCE)" (24.10.2026);
+    # a word repeated in parentheses right after itself is removed.
+    (re.compile(r"(?<!\w)(\w+) \(\1\)"), lambda m: m.group(1)),
+    (re.compile(r"(?<!\w)iPhoneie(?!\w)"), lambda m: "iPhonie"),
 ]
 
 

@@ -105,5 +105,20 @@ class TestFindCves(unittest.TestCase):
         self.assertEqual(find_cves("cve-2026-1234 and CVE-2026-1234", None), ["CVE-2026-1234"])
 
 
+class TestLeadOnlyV29(unittest.TestCase):
+    def test_cves_far_into_the_text_are_ignored(self):
+        # Arista, 23.10.2026: older VeloCloud CVE ids further on in the page.
+        article = {
+            "title": "Arista patches new VeloCloud Orchestrator zero-day",
+            "description": "Arista fixed CVE-2026-114625, exploited in attacks.",
+            "page_text": "x " * 400 + "Earlier flaws CVE-2026-16812 and CVE-2026-7473 were also exploited.",
+        }
+        self.assertEqual(article_cves(article), ["CVE-2026-114625"])
+
+    def test_roundup_gets_no_marker(self):
+        articles = [{"title": "Weekendowa Lektura: odcinek 699", "description": "CVE-2026-102764"}]
+        mark_kev(articles, {"CVE-2026-102764": "x"})
+        self.assertEqual(articles[0]["kev"], [])
+
 if __name__ == "__main__":
     unittest.main()

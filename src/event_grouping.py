@@ -28,7 +28,8 @@ articles from the same source (The Hacker News wrote about PHP2Shell twice).
 
 import re
 
-from article_selection import prioritize_article, source_domain
+from article_selection import is_roundup, prioritize_article, source_domain
+from kev import article_cves
 
 
 STEM_LENGTH = 5
@@ -219,19 +220,28 @@ def group_events(articles, pool=None):
 
     groups = []
 
+    # v29: CVE ids from the title and the lead of the feed text also tie
+    # articles (PHP2Shell articles without the name in the title, 23.10).
+    lead = {id(article): set() if is_roundup(article) else set(article_cves(article)) for article in articles}
+
+    def strong(leader, article):
+        return strong_match(leader.get("title", ""), article.get("title", "")) or bool(
+            lead.get(id(leader), set()) & lead.get(id(article), set())
+        )
+
     for article in sorted(articles, key=representative_key, reverse=True):
         for group in groups:
             leader = group[0]
             sources = {source_domain(member) for member in group}
 
             if source_domain(article) in sources:
-                if strong_match(leader.get("title", ""), article.get("title", "")):
+                if strong(leader, article):
                     group.append(article)
                     break
 
                 continue
 
-            if same_event(leader.get("title", ""), article.get("title", ""), frequency):
+            if strong(leader, article) or same_event(leader.get("title", ""), article.get("title", ""), frequency):
                 group.append(article)
                 break
         else:

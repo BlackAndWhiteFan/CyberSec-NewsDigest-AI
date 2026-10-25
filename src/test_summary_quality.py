@@ -98,7 +98,7 @@ class TestFacts(unittest.TestCase):
         self.assertEqual(unsupported_facts(text, "Two flaws patched on October 21.", year=2026), [])
 
     def test_no_source_means_no_fact_check(self):
-        self.assertEqual(quality_problems("Ujawniono 2,5 mln rekordów."), [])
+        self.assertEqual(quality_problems("Ujawniono 2,5 mln wpisów."), [])
 
 
 class TestSentenceCase(unittest.TestCase):
@@ -116,6 +116,49 @@ class TestSentenceCase(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertEqual(fix_sentence_case(text), text)
 
+
+class TestLanguageV29(unittest.TestCase):
+    """Examples from the digests of 23–24.10.2026."""
+
+    def test_calques_from_the_style_list(self):
+        cases = {
+            "Mogły zostać ujawnione rekordy pacjentów.": "rekordy",
+            "Grupy używały AI‑zarządzanego frameworka.": "AI‑zarządzanego",
+            "Framework służył do intruzji.": "intruzji",
+            "Napastnicy eksploatując FortiClient przejęli serwery.": "eksploatując",
+        }
+        for text, calque in cases.items():
+            with self.subTest(text=text):
+                problems = quality_problems(text)
+                self.assertTrue(any(f"„{calque}”" in p and "kalka" in p for p in problems))
+
+    def test_number_of_data_is_a_calque(self):
+        self.assertTrue(any("kalka" in p for p in quality_problems("Mogło to narazić nieokreśloną liczbę danych pacjentów.")))
+
+    def test_record_numbers_are_not_calques(self):
+        self.assertEqual(quality_problems("Odnotowano rekordową liczbę ataków."), [])
+
+    def test_style_problems_are_soft(self):
+        self.assertEqual(quality_problems("Ujawniono rekordy pacjentów.", soft=False), [])
+
+    def test_english_summary_is_reported(self):
+        text = ("Hackers compromised the LiteLLM project and published malicious Docker images "
+                "with a payload that steals credentials from the affected systems.")
+        self.assertIn("streszczenie nie jest po polsku – napisz je po polsku", quality_problems(text))
+
+    def test_polish_summary_with_english_names_is_fine(self):
+        text = "Splunk wydał łatki dla Enterprise i SOAR, a SolarWinds dla Observability i Patch Manager."
+        self.assertEqual(quality_problems(text), [])
+
+    def test_summary_repeating_the_title(self):
+        source = "Node2Shell (CVE-2026-111497): RCE przez dekompresję Brotli w Node.js\ntekst"
+        problems = quality_problems("Node2Shell (CVE-2026-111497) umożliwia RCE przez dekompresję Brotli w Node.js.", source)
+        self.assertTrue(any("powtarza tytuł" in p for p in problems))
+
+    def test_impersonal_missing_information_and_bare_week(self):
+        self.assertTrue(quality_problems("Infekcję potwierdzono. Nie podano sprawcy ani dalszych szczegółów."))
+        self.assertTrue(quality_problems("W tygodniu zgłoszono ponad 4 500 przejętych kont."))
+        self.assertEqual(quality_problems("Ataki trwały w tygodniu 12–18 października."), [])
 
 if __name__ == "__main__":
     unittest.main()

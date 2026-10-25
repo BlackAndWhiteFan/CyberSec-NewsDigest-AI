@@ -48,6 +48,11 @@ jobs:
           # AI summaries (Groq: two models, one key). Without the key the
           # digest is sent without summaries.
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          # v30: Gemini for the language correction (free quota); without
+          # the secret the correction uses the Groq models.
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # Optional repository variable: Gemini model names, comma-separated.
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
           # "budzik" for the external alarm clock, otherwise the event name;
           # src/run_guard.py treats "budzik" like a scheduled run.
           TRIGGER: ${{ inputs.budzik && 'budzik' || github.event_name }}

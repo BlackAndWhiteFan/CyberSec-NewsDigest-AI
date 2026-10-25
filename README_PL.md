@@ -1,97 +1,182 @@
 [English](README.md) | [Polski](README_PL.md)
 
-_# CyberSec NewsDigest AI_
+# CyberSec NewsDigest AI
 
-Zautomatyzowany przegląd wiadomości z obszaru cyberbezpieczeństwa, tworzony z wykorzystaniem Pythona, GitHub Actions, kanałów RSS oraz planowanego przetwarzania treści z wykorzystaniem AI.
+Automatyczna codzienna prasówka o cyberbezpieczeństwie po polsku, tworzona w Pythonie i GitHub Actions z kanałów RSS i streszczeń AI, dostarczana na Discorda.
 
 ## Cel projektu
 
-CyberSec NewsDigest AI ma za zadanie pobierać wiadomości o cyberbezpieczeństwie z wybranych kanałów RSS, identyfikować istotne artykuły, generować ich krótkie podsumowania i dostarczać codzienny przegląd na Discordzie.
+CyberSec NewsDigest AI pobiera wiadomości o cyberbezpieczeństwie z polskich i angielskich kanałów RSS, wybiera istotne artykuły, łączy doniesienia o tym samym wydarzeniu, pisze do każdego artykułu konkretne streszczenie po polsku i dostarcza codzienną prasówkę na Discorda, a do tego tygodniowe top 5 i miesięczne top 10.
 
-Projekt ma działać przy budżecie operacyjnym 0 PLN, w miarę możliwości korzystając z bezpłatnych planów usług.
+Projekt działa przy budżecie 0 PLN, wyłącznie na bezpłatnych planach usług (GitHub Actions, Groq, Google Gemini bez płatności, publiczne API LanguageTool, cron-job.org).
 
 ## Aktualny stan projektu
 
-**Etap 1 — pobieranie RSS, walidacja adresów URL i kontrola jakości: zakończony.**
+Prasówka działa produkcyjnie od października 2026 (wersja v31). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
-**Etap 2 — trwała historia artykułów i filtrowanie uwzględniające publikację: zaimplementowane; workflow i testy jednostkowe zweryfikowane.**
+| Etap | Zakres | Stan |
+|---|---|---|
+| 1 | Pobieranie RSS, walidacja adresów URL, kontrola jakości | zakończony (v1–v10) |
+| 2 | Trwała historia artykułów, filtrowanie opublikowanych linków | zakończony i zweryfikowany |
+| 3 | Kategoryzacja i punktacja na podstawie reguł | zakończony i zweryfikowany |
+| 4 | Dostarczanie prasówki na Discorda | zakończony i zweryfikowany |
+| 5 | Jakość selekcji: polskie słowa kluczowe, próg trafności, limity źródeł, filtr promocji; 11 źródeł i filtr wieku 3 dni (v26) | zakończony i zweryfikowany |
+| 6 | Automatyczne uruchamianie: zewnętrzny budzik cron-job.org, harmonogram GitHuba jako zapas, jedna prasówka dziennie (v14, v19, v24) | zakończony; pierwsza prasówka z budzika potwierdzona 23.10.2026 |
+| 7 | Miesięczne archiwum dostarczonych artykułów (v15) | zakończony i zweryfikowany |
+| 8 | Łączenie artykułów o tym samym wydarzeniu i sekcja „🔁 Ciąg dalszy” (v16, v26, v29, v31) | zakończony; łączenie widoczne w prasówkach na żywo |
+| 9 | Miesięczne top 10 na osobnym kanale (v17) | zakończony; zweryfikowany w uruchomieniach ręcznych, pierwsze automatyczne 1.11.2026 |
+| 10 | Streszczenia AI po polsku z obowiązkowym słowniczkiem z CyberSec Mozaika (v18, v21, v25) | zakończony i zweryfikowany |
+| 11 | Kanał testowy dla uruchomień z gałęzi (v20) | zakończony i zweryfikowany |
+| 12 | Tygodniowe top 5 i jednorazowa wysyłka zestawień (v22, v23) | zakończony; pierwszy podgląd na żywo dotarł na `#top-tygodnia` 21.10.2026, pierwsze automatyczne 26.10.2026 |
+| 13 | Pełna treść ze strony artykułu i odmiana terminów (v27) | zakończony i zweryfikowany |
+| 14 | Znacznik 🔥 dla luk z katalogu CISA KEV (v28) | zakończony i zweryfikowany |
+| 15 | Jakość językowa: lista stylu, kontrola językowa, korekta przez Google Gemini z podpowiedziami LanguageTool (v29, v30) | zakończony i zweryfikowany |
+| 16 | „Weekendowa lektura” rozbierana na linki, łączenie po nazwach firm, alarm o błędzie workflow (v31) | zakończony; zweryfikowany na gałęzi testowej |
 
-**Etap 3 — kategoryzacja artykułów i ustalanie priorytetów na podstawie reguł: zaimplementowane i zweryfikowane w pełnym uruchomieniu workflow.**
+## Obecna implementacja
 
-**Etap 4 — dostarczanie prasówki na Discorda (bez AI): zaimplementowane i zweryfikowane w uruchomieniach workflow.**
+### Źródła i selekcja
 
-**Etap 5 — jakość selekcji (polskie słowa kluczowe, próg trafności, limity źródeł, filtr promocji): zaimplementowane i zweryfikowane w uruchomieniach workflow.**
+- Pobiera wpisy RSS lub Atom z jedenastu źródeł: polskich (Niebezpiecznik, Sekurak, Zaufana Trzecia Strona, CyberDefence24, CERT Polska, Kapitan Hack) i angielskich (BleepingComputer, The Hacker News, SecurityWeek, The Record, Krebs on Security). Pomija wpisy starsze niż 3 dni. Błąd jednego kanału nie zatrzymuje uruchomienia.
+- Odczytuje tytuły, linki i opisy (dekodując encje HTML w tytułach) i pomija wpisy bez tytułu lub z nieprawidłowym adresem URL.
+- Prowadzi trwałą historię w pliku `data/seen_articles.json`: `seen_links` (napotkane) i `published_links` (dostarczone). Z kolejnych prasówek wykluczane są tylko linki już dostarczone.
+- Kategoryzuje artykuły jako najważniejsze wiadomości, podatności i wiadomości związane z Polską na podstawie angielskich i polskich słów kluczowych zapisanych jako rdzenie (polskie rdzenie sprawdzone z formami wygenerowanymi przez analizator morfologiczny Morfeusz 2).
+- Przydziela punkty (najważniejsze +3, podatności +2, Polska +1) i odejmuje 2 punkty tytułom w kontekście wydarzeń, raportów lub poradników (konferencje, eksperci, poradniki, kary regulacyjne).
+- Wyklucza tytuły promocyjne (webinary, szkolenia, e-booki, rabaty, treści sponsorowane) i angielskie przeglądy (ThreatsDay, Weekly Recap, In Other News), których tematy trafiają do prasówki osobno.
+- Wybiera maksymalnie 20 artykułów z wynikiem co najmniej 2, więc prasówka może być krótsza niż 20 pozycji. Każde źródło ma limit 4 artykułów (Niebezpiecznik 2, SecurityWeek i The Record 3); limity są ustawiane w `src/article_selection.py`.
+- Rozbiera „Weekendową lekturę” (Zaufana Trzecia Strona) na pojedyncze linki: każdy link do innego serwisu staje się kandydatem do prasówki z komentarzem ZTS jako opisem i przechodzi tę samą punktację. Pytajnik w tytule linku oznacza publicystykę (−2), linki do publikacji badawczych (Unit 42, Securelist, ESET, Mandiant, Microsoft Security Blog, Talos, CERT Polska i inne) dostają +2, a linki do wideo, czatów i mediów społecznościowych są pomijane. Najwyżej 3 takie linki w prasówce, podpisane „via Zaufana Trzecia Strona”.
 
-**Etap 6 — automatyczne uruchamianie (zewnętrzny budzik cron-job.org o 6:17 czasu polskiego, od poniedziałku do soboty; harmonogram GitHuba jako zapas; jedna prasówka dziennie): skonfigurowane; budzik sprawdzony uruchomieniem testowym, pierwsza poranna prasówka z budzika oczekuje na potwierdzenie.**
+### Wydarzenia i znaczniki
 
-**Etap 7 — miesięczne archiwum dostarczonych artykułów: zaimplementowane i zweryfikowane w uruchomieniu, które dostarczyło artykuł.**
+- Łączy artykuły o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł. Reguły: podobne tytuły; wspólny numer CVE lub nazwa wydarzenia z cyframi (np. PHP2Shell), także w obrębie jednego serwisu; wspólna nazwa firmy lub produktu („Quest Diagnostics”, „Capcom”), gdy teksty artykułów pokazują, że to nazwa. Nazwy platform występujące w wielu różnych historiach (Microsoft, Windows, Chrome, Python…) same nie łączą.
+- Artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”, także wtedy, gdy wspólny numer CVE jest dopiero w streszczeniu.
+- Oznacza 🔥 artykuły o lukach z katalogu CISA KEV (potwierdzone wykorzystywanie w atakach). Znacznik ustawia kod, nie AI: numery CVE z tytułu i początku tekstu artykułu są porównywane z katalogiem pobieranym przy każdym uruchomieniu (z CISA, zapasowo z lustra CISA na GitHubie). Zestawienia sprawdzają zapisane numery CVE jeszcze raz z aktualnym katalogiem. Bez katalogu prasówka idzie bez znaczników.
 
-**Etap 8 — wykrywanie tego samego wydarzenia opisanego przez różne serwisy: zaimplementowane; zweryfikowane testami i symulacjami, grupowanie na żywo jeszcze nie wystąpiło.**
+### Streszczenia AI po polsku
 
-**Etap 9 — miesięczne top 10 wydarzeń na osobnym kanale Discorda: zaimplementowane i zweryfikowane w ręcznym uruchomieniu, które dostarczyło zestawienie na kanał; pierwsze automatyczne uruchomienie zaplanowano na 1.11.2026.**
+- Każdy artykuł dostaje konkretne streszczenie po polsku (2–3 krótkie zdania, do około 350 znaków; 1 zdanie, gdy materiałem jest tylko krótka zajawka), które pisze Groq `gpt-oss-120b`, a zapasowo `qwen3.8-27b`. Zapytania są rozłożone w czasie (co najmniej 20 s odstępu), a partia, której nie obsłużył żaden model, jest ponawiana raz na końcu.
+- Materiał: pełny tekst lub opis z kanału; gdy kanał daje mniej niż 600 znaków, tekst artykułu jest pobierany z jego strony (akapity bez menu, reklam i stopki). Tekst strony jest tylko materiałem dla AI i nigdzie nie jest zapisywany.
+- Terminy są zgodne ze słowniczkiem `data/glosariusz_mirror.csv` – mirrorem glosariusza CyberSec Mozaika. Proste formy zakazane poprawia kod bez zapytania do AI („poprawka” → „łatka”, „zdalne wykonanie kodu” → „RCE”); objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu 6 wybranych terminów, w tym samym przypadku co termin („przed exploitem (kodem wykorzystującym podatność)”).
+- Kontrola jakości (`src/summary_quality.py`): niezgodność ze słowniczkiem, ogólniki („co podkreśla wagę…”, „nie została podana”), względne określenia czasu, nieodmienione terminy po przyimku, liczby i numery CVE spoza materiału, streszczenia za długie, po angielsku albo powtarzające tylko tytuł oraz kalki z edytowalnej listy stylu `data/styl_unikaj.csv`. Streszczenie z problemem wraca do AI na jedną poprawkę; jeśli problem zostaje, kod usuwa błędne zdania. Streszczenie jest odrzucane tylko wtedy, gdy nie zostaje w nim żadne poprawne zdanie (albo nadal jest po angielsku).
+- Korekta językowa: jedno zapytanie na prasówkę do Google Gemini (`gemini-3.8-flash`, zapasowo `gemini-3.5-flash`) z podpowiedziami gramatycznymi z LanguageTool; gdy Gemini jest niedostępny, korektę przejmują modele Groq. Poprawka jest przyjmowana tylko wtedy, gdy zachowuje liczby, numery CVE i długość; każda trafia do logu jako „przed” / „po”.
 
-**Etap 10 — streszczenia AI po polsku z obowiązkowym słowniczkiem zgodnym z glosariuszem CyberSec Mozaika: zaimplementowane i zweryfikowane w uruchomieniu, które dostarczyło prasówkę ze streszczeniami.**
+### Wysyłka i zestawienia
 
-**Etap 11 — kanał testowy dla uruchomień z gałęzi (bez zapisu w historii i archiwum): zaimplementowane i zweryfikowane w uruchomieniu, które dostarczyło prasówkę na kanał testowy.**
+- Wysyła prasówkę na Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami, domeną źródła i podpisem „via”, podzielone na wiadomości mieszczące się w limicie długości Discorda.
+- Dopisuje linki do `published_links` dopiero po udanej wysyłce i archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty, streszczenie, numery CVE, KEV, via) w pliku `data/archive/RRRR-MM.json`. Historia i archiwum są zapisywane także wtedy, gdy krok prasówki zakończy się błędem (chyba że uruchomienie zostanie anulowane).
+- W poniedziałek wysyła na `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia, a 1. dnia miesiąca na osobny kanał 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami z archiwum. Każde zestawienie idzie tylko raz (znacznik `data/last_top.json`).
+- Uruchomienia z gałęzi innych niż `main` idą wyłącznie na kanał testowy z nagłówkiem „🧪 TEST” i niczego nie zapisują.
+- Gdy workflow prasówki albo zestawienia zakończy się błędem, na kanał testowy przychodzi alarm z linkiem do logu.
 
-**Etap 12 — tygodniowe top 5 i jednorazowa wysyłka zestawień (cztery próby, znacznik `data/last_top.json`) ze streszczeniami AI: zaimplementowane; zestawienie miesięczne zweryfikowane na kanale testowym, pierwsze tygodniowe oczekuje na potwierdzenie po scaleniu.**
+### Wyzwalacze
 
-### Obecna implementacja
+Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHuba (workflow_dispatch z polem `budzik`) o 6:17 czasu polskiego od poniedziałku do soboty, a zestawienia uruchamia w poniedziałek (tygodniowe) i 1. dnia miesiąca (miesięczne) o 8:17. Używa tokenu fine-grained PAT ograniczonego do tego repozytorium i uprawnienia Actions (Read and write), przechowywanego tylko w cron-job.org; token trzeba odnowić przed wygaśnięciem (po roku). Harmonogram GitHuba zostaje jako zapas (prasówka: próby 6:17–9:17, zestawienia: 8:17–11:17, `Europe/Warsaw`), bo GitHub pomija lub opóźnia wiele zaplanowanych uruchomień. Pierwsze zakończone uruchomienie z budzika albo harmonogramu wysyła prasówkę, a kolejne tego dnia kończą się bez wysyłki (znacznik `data/last_digest.json`). Uruchomienie ręczne (bez zaznaczania pola `budzik`) nigdy nie jest blokowane i również „zalicza dzień”. Grupa współbieżności zapobiega nakładaniu się uruchomień.
 
-- Pobiera wpisy RSS lub Atom z jedenastu źródeł wiadomości o cyberbezpieczeństwie: polskich (Niebezpiecznik, Sekurak, Zaufana Trzecia Strona, CyberDefence24, CERT Polska, Kapitan Hack) i angielskich (BleepingComputer, The Hacker News, SecurityWeek, The Record, Krebs on Security). Pomija wpisy starsze niż 3 dni, więc nowe źródło nie wysyła całego swojego archiwum.
-- Odczytuje tytuły artykułów, linki i opisy, dekodując encje HTML pozostawione w tytułach przez niektóre kanały.
-- Pomija wpisy bez tytułów lub z nieprawidłowymi adresami URL.
-- Wykrywa powtarzające się linki w obrębie jednego uruchomienia i śledzi źródła, w których pojawia się dany artykuł.
-- Prowadzi trwałą historię artykułów w pliku `data/seen_articles.json`, rozdzielając linki wcześniej zauważone od linków opublikowanych.
-- Odrzuca artykuły, których linki znajdują się już na liście `published_links`, zamiast wykluczać wszystkie wcześniej zauważone artykuły.
-- Kategoryzuje artykuły jako najważniejsze wiadomości, podatności i wiadomości związane z Polską na podstawie angielskich i polskich słów kluczowych zapisanych jako rdzenie wyrazów; polskie rdzenie sprawdzono z formami fleksyjnymi wygenerowanymi przez analizator morfologiczny Morfeusz 2.
-- Przydziela punkty priorytetu (najważniejsze +3, podatności +2, Polska +1) i odejmuje 2 punkty tytułom w kontekście wydarzeń, raportów lub poradników (np. konferencje, eksperci, poradniki, odporność, kary regulacyjne).
-- Wyklucza tytuły promocyjne (webinary, bezpłatne szkolenia, e-booki, rabaty, treści sponsorowane, wykłady, zapisy).
-- Wybiera maksymalnie 20 artykułów z wynikiem co najmniej 2, więc artykuły związane z Polską bez sygnału bezpieczeństwa nie są wybierane, a prasówka może liczyć mniej niż 20 pozycji.
-- Ogranicza każde źródło do 4 artykułów (Niebezpiecznik: 2, SecurityWeek i The Record: 3, żeby częste źródła angielskie nie wypychały polskich); limity są ustawiane w `src/article_selection.py`.
-- Wysyła prasówkę na kanał Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami i domeną źródła, podzielone na wiadomości mieszczące się w limicie długości Discorda.
-- Dopisuje linki do `published_links` dopiero po udanej wysyłce; błąd wysyłki kończy uruchomienie błędem, więc workflow zostaje oznaczony jako nieudany.
-- Archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty) w miesięcznym pliku `data/archive/RRRR-MM.json`. Błąd archiwum jest zapisywany w logu i kończy uruchomienie błędem, ale historia artykułów zostaje zapisana, więc dostarczone linki nie są wysyłane ponownie.
-- Zapisuje historię artykułów i archiwum także wtedy, gdy krok prasówki zakończy się błędem, chyba że uruchomienie zostanie anulowane.
-- Łączy artykuły o tym samym wydarzeniu (z różnych serwisów, a przy wspólnym numerze CVE lub nazwie z cyframi, np. PHP2Shell, także z jednego serwisu) w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł, a artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”.
-- Oznacza 🔥 artykuły o lukach z katalogu CISA KEV (Known Exploited Vulnerabilities – luki z potwierdzonym wykorzystywaniem w atakach). Znacznik ustawia kod, nie AI: numery CVE z tytułu, tekstu z kanału i ze strony artykułu (także artykułów połączonych w to samo wydarzenie) są porównywane z katalogiem pobieranym przy każdym uruchomieniu (`src/kev.py`); zestawienia tygodniowe i miesięczne sprawdzają zapisane numery CVE jeszcze raz z aktualnym katalogiem. Bez dostępu do katalogu prasówka idzie bez znaczników.
-- Pierwszego dnia miesiąca wysyła na osobny kanał Discorda 10 najważniejszych wydarzeń poprzedniego miesiąca, a w poniedziałek na kanał `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami AI. Każde zestawienie ma cztery próby startu i idzie tylko raz (znacznik `data/last_top.json`); zestawienie tygodniowe wymaga sekretu `DISCORD_WEEKLY_WEBHOOK_URL`.
-- Dodaje do każdego artykułu konkretne streszczenie po polsku (2–3 zdania; 1 zdanie, gdy materiałem jest tylko tytuł lub krótka zajawka) przygotowane przez AI (Groq: `gpt-oss-120b`, zapasowo `qwen3.8-27b`) z pełnego tekstu z kanału albo opisu RSS; gdy kanał daje mniej niż 600 znaków, pobiera tekst artykułu z jego strony (`src/article_pages.py`, akapity bez menu, reklam i stopki; błąd strony nie zatrzymuje prasówki). Terminy muszą być zgodne ze słowniczkiem `data/glosariusz_mirror.csv` (mirror glosariusza CyberSec Mozaika): streszczenie niezgodne wraca do AI do poprawki, a potem jest odrzucane. Ta sama kontrola (`src/summary_quality.py`) odrzuca ogólniki („co podkreśla wagę…”), względne określenia czasu („jutro”, „dziś”), nieodmienione terminy po przyimku („przed exploit”) oraz liczby i numery CVE, których nie ma w artykule; wielkie litery na początku zdań poprawia kod; objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu terminu w prasówce, tylko dla 6 wybranych terminów (np. ransomware, exploit, podwyższenie (eskalacja) uprawnień), w tym samym przypadku co termin („przed exploitem (kodem wykorzystującym podatność)”). Od v29 streszczenia przechodzą też kontrolę językową: streszczenie po angielsku, kalki z edytowalnej listy stylu `data/styl_unikaj.csv` („rekordy” → „dane”, „AI-zarządzany” → „zarządzany przez AI”) i streszczenie powtarzające tytuł wracają do poprawki, a osobna runda korekty poprawia gramatykę bez zmiany faktów: od v30 robi to Google Gemini (z podpowiedziami LanguageTool), a zapasowo Groq; każda poprawka jest zapisywana w logu jako „przed”/„po”. „Weekendowa lektura” dostaje stały opis zamiast streszczenia AI, a angielskie przeglądy (ThreatsDay, Weekly Recap, In Other News) są pomijane. Bez sekretu `GROQ_API_KEY` prasówka idzie bez streszczeń. Sekret `GEMINI_API_KEY` (darmowy limit, bez płatności) jest opcjonalny: bez niego korekta językowa idzie przez modele Groq; zmienna repozytorium `GEMINI_MODEL` może podmienić nazwy modeli Gemini.
-- Wymaga sekretu repozytorium `DISCORD_WEBHOOK_URL` (adres webhooka kanału); bez niego wysyłka jest pomijana bez błędu. Zestawienie miesięczne wymaga sekretu `DISCORD_MONTHLY_WEBHOOK_URL`. Uruchomienia z gałęzi innych niż `main` idą wyłącznie na kanał testowy (sekret `DISCORD_TEST_WEBHOOK_URL`) z nagłówkiem „🧪 TEST” i niczego nie zapisują; bez tego sekretu nic nie wysyłają.
-- Kontynuuje pracę, gdy pobranie pojedynczego kanału RSS się nie powiedzie.
-- Wyświetla informacje diagnostyczne o pobranych, pominiętych i przetwarzanych wpisach oraz wynikach selekcji artykułów.
-- Uruchamia testy jednostkowe przed wykonaniem skryptu pobierającego wiadomości RSS.
-- Wykorzystuje GitHub Actions do zatwierdzania i wysyłania zmian w historii artykułów, gdy zawartość tego pliku ulegnie zmianie.
+## Ostatnie zweryfikowane wyniki
 
-Głównym wyzwalaczem jest zewnętrzny budzik: serwis cron-job.org wywołuje API GitHuba (workflow_dispatch z polem `budzik`) o 6:17 czasu polskiego od poniedziałku do soboty, a zestawienia w poniedziałek (tygodniowe) i 1. dnia miesiąca (miesięczne) o 8:17. Używa tokenu fine-grained PAT ograniczonego do tego repozytorium i uprawnienia Actions (Read and write), przechowywanego tylko w cron-job.org; token trzeba odnowić przed upływem roku. Harmonogram GitHuba (próby o 6:17, 7:17, 8:17 i 9:17, `Europe/Warsaw`) zostaje jako zapas, bo GitHub pomija lub opóźnia wiele zaplanowanych uruchomień. Pierwsze zakończone uruchomienie z budzika albo harmonogramu wysyła prasówkę, a kolejne tego dnia kończą się bez wysyłki (znacznik `data/last_digest.json`). Workflow można też uruchomić ręcznie w GitHub Actions (bez zaznaczania pola `budzik`) – uruchomienie ręczne nigdy nie jest blokowane i również „zalicza dzień”. Grupa współbieżności zapobiega nakładaniu się dwóch uruchomień.
+Wersja v31 (25.10.2026):
 
-### Ostatnie zweryfikowane wyniki
+- Testy jednostkowe: **290 zaliczonych**.
+- Test na gałęzi `v31-lektura`: „Weekendowa lektura” nr 699 rozebrana na 53 części, 3 weszły do prasówki; po poprawkach ranking stawia analizy badawcze (Unit 42, Mandiant) przed publicystyką.
+- Archiwum październikowe (70 artykułów): zestawienie łączy Quest Diagnostics, Capcom i Arista VCO bez nowych błędnych połączeń.
 
-Ostatnie zweryfikowane uruchomienia (v13, 17.10.2026) zakończyły się powodzeniem:
+Wcześniej: w teście v30 korekta Gemini poprawiła 6 z 6 streszczeń; w teście v28 🔥 dostały 2 z 20 artykułów (katalog 1754 pozycji). Liczby dotyczą konkretnych uruchomień; szczegóły każdej wersji są w changelogu.
 
-- Testy jednostkowe: **69 zaliczonych**.
-- Pierwsze uruchomienie: 20 artykułów wybranych spośród 105, w tym 13 ze źródeł polskich; żadne źródło nie przekroczyło limitu.
-- Drugie uruchomienie: 8 artykułów wybranych spośród 85; 1 artykuł odrzucono jako promocję, a 76 znalazło się poniżej progu trafności, więc prasówka nie została uzupełniona do 20 pozycji.
-- Lista `published_links` zawiera po tych uruchomieniach 88 linków.
+## Znane ograniczenia
 
-Są to wyniki konkretnych uruchomień i mogą się zmieniać. Wyniki weryfikacji każdej zmiany są zapisywane w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+- Punkty priorytetu są wskaźnikami opartymi na słowach kluczowych, a nie oceną AI istotności redakcyjnej.
+- Łączenie wydarzeń działa na regułach i rzadko może połączyć dwie różne historie albo przeoczyć parę; takie przypadki są obserwowane i poprawiane na prawdziwych przykładach.
+- AI wciąż może popełnić błąd, którego kontrole nie wykryją, np. fakt obecny w materiale, ale w złym kontekście (rok z tytułu w dacie). Prasówka oznacza streszczenia jako przygotowane przez AI.
+- Tytuły artykułów zostają w języku źródła.
+- Nie ma kolejki oczekujących artykułów: artykuł, który zniknie z kanału, zanim zostanie wybrany, nie jest już dostępny.
+- `seen_links` znaczy „napotkane”, a nie „opublikowane”; z kolejnych prasówek wyklucza tylko `published_links`.
 
-Deduplikacja oparta na linkach nie gwarantuje, że różne adresy URL nie prowadzą do informacji o tym samym wydarzeniu.
+## Plan rozwoju
 
-### Ważne ograniczenia historii i selekcji
-
-Lista `seen_links` rejestruje linki napotkane podczas pobierania RSS. Nie oznacza to, że artykuły zostały opublikowane.
-
-Lista `published_links` przechowuje linki do artykułów pomyślnie dostarczonych na Discord. Artykuły, których linki znajdują się już na tej liście, są wykluczane z kolejnych selekcji.
-
-Obecna implementacja nie przechowuje pełnej treści artykułów w osobnej kolejce oczekujących. W związku z tym artykuł kwalifikujący się do selekcji, który zniknie z kanałów RSS, zanim zostanie wybrany, może nie być już dostępny w kolejnym digescie.
-
-Punkty priorytetu są wskaźnikami opartymi na słowach kluczowych. Nie stanowią oceny AI ani gwarancji, że artykuł jest istotny z redakcyjnego punktu widzenia.
-
-## Planowane funkcje
-
-- Dokumentacja operacyjna i instrukcje rozwiązywania problemów.
-- Weryfikacja pełnego przepływu od początku do końca.
+- **Most do CyberSec Mozaika (v32):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi. Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
+- Ochrona gałęzi `main`.
 
 Planowane funkcje nie są uznawane za wdrożone, dopóki nie zostaną opracowane i zweryfikowane.
 
+## Architektura
+
+1. Pobranie wpisów z kanałów RSS/Atom i pominięcie wpisów starszych niż 3 dni.
+2. Walidacja wpisów, usunięcie powtórzonych linków, rozebranie „Weekendowej lektury” na linki.
+3. Aktualizacja historii i wykluczenie linków już opublikowanych.
+4. Kategoryzacja, punktacja, wykluczenie promocji i przeglądów.
+5. Wybór do 20 artykułów w limitach źródeł; łączenie artykułów o tym samym wydarzeniu; oznaczenie ciągów dalszych z ostatnich 3 dni.
+6. Pobranie stron artykułów, gdy tekst z kanału jest za krótki; oznaczenie luk z CISA KEV.
+7. Streszczenia AI, ich kontrola, poprawki i korekta językowa.
+8. Sformatowanie i wysłanie prasówki na Discorda.
+9. Zapis opublikowanych linków, archiwum dostarczonych artykułów i znacznika dnia.
+
+Zestawienia tygodniowe i miesięczne czytają archiwum. GitHub Actions uruchamia workflow, a Python realizuje logikę.
+
+## Struktura repozytorium
+
+Workflow (`.github/workflows/`):
+
+- `daily-digest.yml` — codzienna prasówka: pole budzika, zapasowy harmonogram, testy jednostkowe, uruchomienie prasówki, zapis historii i archiwum, alarm o błędzie.
+- `weekly-top.yml` — tygodniowe top 5 (poniedziałki).
+- `monthly-top.yml` — miesięczne top 10 (1. dzień miesiąca).
+- `backfill-summaries.yml` — jednorazowe ręczne uzupełnienie streszczeń w archiwum (podgląd, potem zapis).
+
+Kod (`src/`):
+
+- `main.py` — uruchomienie codziennej prasówki.
+- `rss_helpers.py` — walidacja URL, powtórzone linki, porządkowanie tytułów, wiek artykułu.
+- `deduplication.py` — deduplikacja i śledzenie źródeł.
+- `article_history.py` — trwała historia linków napotkanych i opublikowanych.
+- `article_selection.py` — słowa kluczowe, kategorie, punktacja, filtr promocji i przeglądów, limity źródeł, ranking lektury.
+- `roundup_parts.py` — rozbieranie „Weekendowej lektury” na linki.
+- `event_grouping.py` — łączenie artykułów o tym samym wydarzeniu i ciągi dalsze.
+- `article_pages.py` — tekst artykułu ze strony artykułu.
+- `kev.py` — znacznik 🔥: katalog CISA KEV i numery CVE.
+- `ai_summaries.py` — streszczenia AI (Groq), poprawki i korekta językowa.
+- `gemini.py` — Google Gemini do korekty językowej.
+- `languagetool.py` — podpowiedzi gramatyczne z LanguageTool.
+- `glossary.py` — reguły słowniczka z mirrora: hasła do promptu, formy zakazane, autopoprawki, objaśnienia w nawiasach.
+- `summary_quality.py` — kontrola jakości i języka streszczeń, naprawa przez kod.
+- `discord_output.py` — formatowanie prasówki, podział na wiadomości, wysyłka.
+- `article_archive.py` — miesięczne archiwum.
+- `weekly_top.py`, `monthly_top.py` — zestawienia z archiwum.
+- `run_guard.py`, `top_guard.py` — jedna prasówka dziennie, jedno zestawienie na tydzień i miesiąc.
+- `test_mode.py` — uruchomienia testowe z gałęzi.
+- `backfill_summaries.py` — uzupełnianie streszczeń w archiwum.
+- `test_*.py` — testy jednostkowe (bez dostępu do sieci), po jednym pliku na moduł.
+
+Dane i narzędzia:
+
+- `data/seen_articles.json` — historia linków napotkanych i opublikowanych.
+- `data/archive/RRRR-MM.json` — miesięczne archiwum dostarczonych artykułów.
+- `data/last_digest.json`, `data/last_top.json` — znaczniki ostatniej prasówki i zestawień.
+- `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (ze skoroszytu matki v84).
+- `data/styl_unikaj.csv` — lista stylu: kalki i anglicyzmy z propozycjami, edytowana ręcznie (`*` = dowolna końcówka).
+- `tools/eksport_mirrora.py` — ręczny eksport mirrora ze skoroszytu matki Mozaiki (`python tools/eksport_mirrora.py <skoroszyt.xlsx>`, wymaga openpyxl).
+
+## Konfiguracja i sekrety
+
+Sekrety repozytorium (Settings → Secrets and variables → Actions):
+
+- `DISCORD_WEBHOOK_URL` — webhook kanału prasówki. Bez niego wysyłka jest pomijana bez błędu.
+- `DISCORD_WEEKLY_WEBHOOK_URL` — webhook kanału `#top-tygodnia` (tygodniowe top 5).
+- `DISCORD_MONTHLY_WEBHOOK_URL` — webhook kanału miesięcznego top 10.
+- `DISCORD_TEST_WEBHOOK_URL` — webhook kanału testowego: uruchomienia z gałęzi i alarmy o błędach. Bez niego uruchomienia z gałęzi niczego nie wysyłają.
+- `GROQ_API_KEY` — klucz API Groq do streszczeń AI. Bez niego prasówka idzie bez streszczeń.
+- `GEMINI_API_KEY` — klucz API Google Gemini (darmowy limit, bez płatności) do korekty językowej; opcjonalny. Bez niego korektę robią modele Groq. Opcjonalna zmienna repozytorium `GEMINI_MODEL` (nazwy po przecinku) podmienia nazwy modeli.
+
+Każdy sekret trafia tylko do kroku workflow, który go potrzebuje. Token budzika jest przechowywany wyłącznie w cron-job.org. Nigdy nie zapisuj w repozytorium kluczy API, adresów webhooków, tokenów ani haseł.
+
+## Rozwój i testy
+
+Testy jednostkowe uruchamia się z katalogu głównego repozytorium:
+
+```bash
+python -m unittest discover -s src -p "test_*.py"
+```
+
+Każdy workflow uruchamia testy przed swoim głównym krokiem. Zmiany powstają na gałęzi, są testowane na kanale testowym, opisywane w changelogu (PL/EN) i scalane przez Squash and merge.
+
+## Dokumentacja
+
+Dokumentacja jest prowadzona po angielsku i po polsku; każda zmiana techniczna trafia do obu wersji README i do pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).

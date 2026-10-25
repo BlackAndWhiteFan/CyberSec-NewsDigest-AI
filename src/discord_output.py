@@ -85,6 +85,10 @@ def format_article_line(number, article, summary=None):
     marker = KEV_MARKER if article.get("kev") else ""
     line = f"{number}. {marker}[{title}](<{link}>) · {domain}"
 
+    # v31: links taken from "Weekendowa lektura".
+    if article.get("via"):
+        line += " · via Zaufana Trzecia Strona"
+
     # Each other source once, with its first article (v26: an event may have
     # several articles from one site, e.g. two from The Hacker News).
     others = {}

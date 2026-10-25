@@ -47,6 +47,8 @@ GENERIC_PHRASES = [
     r"brak (jest )?(informacji|szczegółów|danych) (o|na temat)",
     # v29: impersonal form ("Nie podano sprawcy ani dalszych szczegółów").
     r"nie podano",
+    # v31: "Liczba poszkodowanych nie została podana" (test 25.10.2026).
+    r"nie (został|została|zostało|zostały|zostali) (podan|ujawnion|wskazan|sprecyzowan|określon)\w*",
 ]
 GENERIC = [re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE) for pattern in GENERIC_PHRASES]
 

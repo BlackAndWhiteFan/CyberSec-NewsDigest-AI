@@ -51,6 +51,8 @@ def build_record(article, date_text):
         # the CVE ids again with the current catalog.
         "cves": article.get("cves", []),
         "kev": article.get("kev", []),
+        # v31: a link from "Weekendowa lektura".
+        "via": article.get("via", ""),
     }
 
 

@@ -24,6 +24,104 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v31 --- 25.10.2026
+
+**Rozbiór „Weekendowej lektury” na linki, łączenie tematów po nazwach
+firm, alarm przy błędzie workflow.**
+
+- **„Weekendowa lektura” rozbierana na części** (nowy
+  `src/roundup_parts.py`, `src/main.py`): zgodnie z pierwotnym zamysłem
+  JW (25.10.2026) przegląd ZTS nie jest jedną pozycją, tylko źródłem
+  linków. Każdy element listy lub akapit z linkiem do innego serwisu
+  staje się kandydatem do prasówki (tytuł: tekst linku albo początek
+  komentarza; opis: komentarz ZTS) i przechodzi tę samą punktację,
+  próg, odrzucanie opublikowanych linków i łączenie wydarzeń. W
+  prasówce najwyżej 3 takie linki (`LEKTURA_LIMIT` w
+  `src/article_selection.py`), podpisane „via Zaufana Trzecia Strona”;
+  archiwum zapisuje pole `via`. Log wypisuje znalezione pozycje
+  („WEEKENDOWA LEKTURA: N pozycji”, „LEKTURA: …”). Gdy w treści nie ma
+  takich linków (zmiana układu), lektura zostaje jedną pozycją ze
+  stałym opisem jak w v29.
+- **Łączenie po nazwach firm i produktów** (`src/event_grouping.py`,
+  `src/monthly_top.py`): w tytułach pisanych wielkimi literami (Title
+  Case) każde słowo jest wielką literą, więc dotychczasowa reguła nazw
+  nic nie widziała (Quest Diagnostics i Capcom dwa razy w prasówkach z
+  23–24.10). Nowe reguły: wspólna para wyrazów z wielkiej litery,
+  niegenerycznych i rzadkich w puli („Quest Diagnostics”); pojedyncze
+  wspólne słowo tylko wtedy, gdy teksty artykułów (opisy, polskie
+  streszczenia) pokazują, że to nazwa – zawsze wielką literą, nigdy
+  małą („Capcom”); nazwy platform występujące w różnych historiach
+  (Microsoft, Windows, Chrome, Python, WordPress…) nigdy nie łączą
+  same. Działa w prasówce, „Ciągu dalszym” i zestawieniach.
+- **Alarm przy błędzie** (`.github/workflows/daily-digest.yml`,
+  `weekly-top.yml`, `monthly-top.yml`): gdy workflow zakończy się
+  błędem, na kanał testowy przychodzi komunikat „⚠️ … workflow
+  zakończył się błędem” z linkiem do logu – właściciel dowiaduje się o
+  awarii przed czytelnikami.
+- Drobna zmiana: uwagi „… nie została podana / ujawniona / wskazana”
+  zgłaszane jak ogólniki („Liczba poszkodowanych nie została podana”,
+  test v30).
+
+Sprawdzono na archiwum października (70 artykułów): zestawienie łączy
+teraz Quest Diagnostics, Capcom i Arista VCO, bez nowych błędnych
+połączeń (dwa połączenia z wcześniejszych reguł – Fortinet/FortiSIEM i
+MCP Python SDK/Pillow – zostają do obserwacji).
+
+Nowe i zmienione pliki: `src/roundup_parts.py` (nowy),
+`src/test_roundup_parts.py` (nowy), `src/main.py`,
+`src/article_selection.py`, `src/discord_output.py`,
+`src/article_archive.py`, `src/event_grouping.py`,
+`src/test_event_grouping.py`, `src/monthly_top.py`,
+`src/summary_quality.py`, trzy workflowy, README (PL/EN).
+
+Test na gałęzi `v31-lektura` 25.10.2026: Weekendowa Lektura odcinek
+699 rozebrana na 53 pozycje z polskimi tytułami ZTS; do prasówki weszły
+3 (m.in. Krebs o negocjatorze współpracującym z ShinyHunters); link do
+subskrypcji, YouTube i Discord odpadły przez próg trafności. Wady:
+weszła publicystyka („Najbezpieczniejsza przeglądarka 2026? …”, +3 za
+„zero-day”), a odpadły analizy zagrożeń bez słów kluczowych w tytule
+(Unit 42, ESET, Mandiant, Microsoft, Securelist); pozycja o PHP z
+lektury trafiła do „Najważniejszych”, choć PHP2Shell był już w
+prasówce (komentarz ZTS nie ma numeru CVE, tytuł – nazwy).
+
+Poprawki przed scaleniem (decyzja JW: od razu, przed v32):
+
+- **Pytajnik w tytule linku z lektury** = publicystyka: kara jak za
+  kontekst wydarzeń/poradników (`has_context_title`); tylko dla
+  lektury, bo w zwykłych kanałach pytajnik bywa w newsach
+  („Fakturownia zhakowana?”).
+- **Premia +2 dla linków z lektury do publikacji badawczych**
+  (`ANALYSIS_SOURCES`: Unit 42, Securelist, ESET WeLiveSecurity,
+  Google/Mandiant Threat Intelligence, Microsoft Security Blog, Sophos,
+  Sekoia, Zscaler, Symantec, Check Point Research, Talos, CrowdStrike,
+  Proofpoint, Elastic Security Labs, Huntress, GreyNoise, Hunt.io,
+  CERT Polska), więc analizy bez słów kluczowych w tytule przechodzą
+  próg.
+- **Pomijane linki bez treści artykułu**: z3s.pl (skrót ZTS), YouTube,
+  Discord, X/Twitter, Facebook, LinkedIn, Instagram, TikTok, Telegram
+  (dopasowanie domeny lub subdomeny, nie końcówki – „x.com” to nie
+  „netflix.com”).
+- **„Ciąg dalszy” po numerach CVE ze streszczeń** (`src/main.py`):
+  po streszczeniach artykuł, którego streszczenie ma numer CVE z
+  rekordu archiwum z ostatnich 3 dni, trafia do „Ciągu dalszego”.
+
+Symulacja na tytułach lektury 699: na górze rankingu Nginx, PHP, Unit 42
+o FortiManagerze, Mandiant o Armory Castle; „Najbezpieczniejsza
+przeglądarka” spada poniżej progu. Testy jednostkowe: 290, zakończone
+powodzeniem.
+
+Dokumentacja przed scaleniem: README (PL/EN) napisane od nowa na stan
+v31. Usunięte nieaktualne stany (budzik „oczekuje na potwierdzenie”,
+grupowanie „jeszcze nie wystąpiło na żywo”, wyniki v13 z 69 testami,
+„planowane przetwarzanie AI”); tabela 16 etapów z wersjami; opis
+podzielony na sekcje (źródła i selekcja, wydarzenia i znaczniki,
+streszczenia AI, wysyłka i zestawienia, wyzwalacze); aktualne
+ograniczenia i plan rozwoju (most do Mozaiki, v32). Polskie README
+dostało brakujące sekcje: architekturę, strukturę repozytorium,
+konfigurację i sekrety, testy. Sekcja „Stan projektu wynikający z
+przeanalizowanej historii” na końcu changelogu jest oznaczona jako
+zapis historyczny po v10.
+
 ## v30 --- 25.10.2026
 
 **„Polacy nie gęsi”: korekta językowa Gemini, podpowiedzi
@@ -1335,7 +1433,10 @@ deduplikację, historię artykułów i selekcję według priorytetu.
 
 ------------------------------------------------------------------------
 
-## Stan projektu wynikający z przeanalizowanej historii
+## Stan projektu wynikający z przeanalizowanej historii (zapis historyczny po v10)
+
+Zapis stanu z odtworzenia historii v1–v10; nie opisuje obecnego stanu.
+Aktualny stan projektu: [README_PL.md](README_PL.md).
 
 -   **Potwierdzone funkcje:** pobieranie i parsowanie RSS/Atom z wielu
     źródeł, walidacja wpisów, deduplikacja po linku, przechowywanie
@@ -1376,6 +1477,101 @@ Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
 
 ------------------------------------------------------------------------
+
+## v31 --- 2026-10-25
+
+**Splitting "Weekendowa lektura" into links, merging stories by company
+names, alarm on workflow failure.**
+
+- **"Weekendowa lektura" split into parts** (new `src/roundup_parts.py`,
+  `src/main.py`): as JW originally intended (2026-10-25), the ZTS
+  roundup is not one item but a source of links. Every list item or
+  paragraph with a link to another site becomes a candidate article
+  (title: the link text or the beginning of the comment; description:
+  the ZTS comment) and goes through the same scoring, threshold,
+  filtering of published links and event merging. At most 3 such links
+  per digest (`LEKTURA_LIMIT` in `src/article_selection.py`), labelled
+  "via Zaufana Trzecia Strona"; the archive saves the `via` field. The
+  log lists the parts found ("WEEKENDOWA LEKTURA: N pozycji",
+  "LEKTURA: …"). When the content has no such links (layout change), the
+  roundup stays one item with the fixed description, as in v29.
+- **Merging by company and product names** (`src/event_grouping.py`,
+  `src/monthly_top.py`): in Title Case titles every word is capitalized,
+  so the earlier name rule saw nothing (Quest Diagnostics and Capcom twice
+  in the digests of 23–24 October). New rules: a shared pair of
+  capitalized, non-generic words rare in the pool ("Quest Diagnostics");
+  a single shared word only when the article texts (descriptions, Polish
+  summaries) show it is a name – always capitalized, never lowercase
+  ("Capcom"); platform names that appear in different stories
+  (Microsoft, Windows, Chrome, Python, WordPress…) never merge alone.
+  Works in the digest, "Ciąg dalszy" and the tops.
+- **Alarm on failure** (`.github/workflows/daily-digest.yml`,
+  `weekly-top.yml`, `monthly-top.yml`): when a workflow fails, a message
+  "⚠️ … workflow zakończył się błędem" with a link to the log goes to
+  the test channel – the owner learns about a failure before the
+  readers.
+- Small change: remarks "… nie została podana / ujawniona / wskazana"
+  are reported like filler ("Liczba poszkodowanych nie została podana",
+  v30 test).
+
+Checked on the October archive (70 articles): the top now merges Quest
+Diagnostics, Capcom and Arista VCO, without new wrong merges (two merges
+from earlier rules – Fortinet/FortiSIEM and MCP Python SDK/Pillow – stay
+under observation).
+
+New and changed files: `src/roundup_parts.py` (new),
+`src/test_roundup_parts.py` (new), `src/main.py`,
+`src/article_selection.py`, `src/discord_output.py`,
+`src/article_archive.py`, `src/event_grouping.py`,
+`src/test_event_grouping.py`, `src/monthly_top.py`,
+`src/summary_quality.py`, three workflows, README (PL/EN).
+
+Test on the `v31-lektura` branch on 2026-10-25: Weekendowa Lektura
+episode 699 split into 53 parts with Polish ZTS titles; 3 entered the
+digest (incl. Krebs on the negotiator working with ShinyHunters); the
+subscription link, YouTube and Discord fell below the threshold.
+Weaknesses: commentary got in ("Najbezpieczniejsza przeglądarka 2026?
+…", +3 for "zero-day"), while threat analyses without keywords in the
+title were left out (Unit 42, ESET, Mandiant, Microsoft, Securelist);
+the PHP item from the roundup went to "Najważniejsze" although PHP2Shell
+had already been in the digest (the ZTS comment has no CVE id, the
+title no name).
+
+Fixes before merging (JW's decision: right away, before v32):
+
+- **A question mark in the title of a lektura link** = commentary: the
+  same penalty as for event/advice context (`has_context_title`); only
+  for lektura, because in regular feeds news titles also use question
+  marks ("Fakturownia zhakowana?").
+- **+2 bonus for lektura links to threat-research publications**
+  (`ANALYSIS_SOURCES`: Unit 42, Securelist, ESET WeLiveSecurity,
+  Google/Mandiant Threat Intelligence, Microsoft Security Blog, Sophos,
+  Sekoia, Zscaler, Symantec, Check Point Research, Talos, CrowdStrike,
+  Proofpoint, Elastic Security Labs, Huntress, GreyNoise, Hunt.io, CERT
+  Polska), so analyses without keywords in the title pass the threshold.
+- **Links without article text skipped**: z3s.pl (ZTS short link),
+  YouTube, Discord, X/Twitter, Facebook, LinkedIn, Instagram, TikTok,
+  Telegram (matching the domain or a subdomain, not the ending – "x.com"
+  is not "netflix.com").
+- **"Ciąg dalszy" by CVE ids in summaries** (`src/main.py`): after the
+  summaries, an article whose summary has a CVE id from an archive
+  record of the last 3 days goes to "Ciąg dalszy".
+
+Simulation on the titles of roundup 699: top of the ranking Nginx, PHP,
+Unit 42 on FortiManager, Mandiant on Armory Castle; "Najbezpieczniejsza
+przeglądarka" falls below the threshold. Unit tests: 290, passed.
+
+Documentation before merging: README (PL/EN) rewritten for the state of
+v31. Outdated statuses removed (alarm clock "awaiting confirmation",
+grouping "not yet observed live", v13 results with 69 tests, "planned
+AI processing"); a table of 16 stages with versions; the description
+split into sections (sources and selection, events and markers, AI
+summaries, delivery and tops, triggers); current limitations and the
+roadmap (bridge to Mozaika, v32). The Polish README got the missing
+sections: architecture, repository structure, configuration and
+secrets, testing. The section "Project status based on the reviewed
+history" at the end of the changelog is marked as a historical record
+after v10.
 
 ## v30 --- 2026-10-25
 
@@ -2661,7 +2857,10 @@ selection.
 
 ------------------------------------------------------------------------
 
-## Project status based on the reviewed history
+## Project status based on the reviewed history (historical record after v10)
+
+A record of the state reconstructed for v1–v10; it does not describe
+the current state. Current status: [README.md](README.md).
 
 -   **Confirmed features:** retrieval and parsing of RSS/Atom from
     multiple sources, entry validation, deduplication by link, source

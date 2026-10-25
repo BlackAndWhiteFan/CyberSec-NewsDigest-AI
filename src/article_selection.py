@@ -176,6 +176,8 @@ CONTEXT_PENALTY = 2
 MIN_PRIORITY_SCORE = 2
 
 DEFAULT_SOURCE_LIMIT = 4
+# v31: links from "Weekendowa lektura" (article["via"]) per digest.
+LEKTURA_LIMIT = 3
 SOURCE_LIMITS = {
     "niebezpiecznik.pl": 2,
     # v26: frequent English sources get less room, so that with eleven
@@ -254,13 +256,59 @@ def prioritize_article(article):
     if has_context_title(article):
         score -= CONTEXT_PENALTY
 
+    # v31: a link from "Weekendowa lektura" to a threat-research publication
+    # is the analysis the digest wants, even when its title has no keyword
+    # ("Bronze Sandcastle wdraża zmodyfikowane powłoki…").
+    if article.get("via") and is_analysis_link(article.get("link", "")):
+        score += ANALYSIS_BONUS
+
     return max(score, 0)
 
 
 def has_context_title(article):
-    """Return True when the title suggests an event, report or advice piece."""
+    """Return True when the title suggests an event, report or advice piece.
+
+    v31: in "Weekendowa lektura" a title with a question mark is commentary
+    ("Najbezpieczniejsza przeglądarka 2026? …" outranked threat analyses).
+    Only lektura links: news titles elsewhere also use question marks
+    ("Fakturownia zhakowana?").
+    """
     title = article.get("title", "").casefold()
-    return matches_any(title, CONTEXT_TITLE_PATTERNS)
+    return matches_any(title, CONTEXT_TITLE_PATTERNS) or bool(article.get("via") and "?" in title)
+
+
+# v31: threat-research publications (domain, optional path prefix) whose
+# links in "Weekendowa lektura" get ANALYSIS_BONUS.
+ANALYSIS_BONUS = 2
+ANALYSIS_SOURCES = (
+    ("unit42.paloaltonetworks.com", ""),
+    ("securelist.com", ""),
+    ("welivesecurity.com", ""),
+    ("cloud.google.com", "/blog/topics/threat-intelligence"),
+    ("microsoft.com", "/en-us/security/blog"),
+    ("sophos.com", ""),
+    ("sekoia.io", ""),
+    ("zscaler.com", "/blogs/security-research"),
+    ("security.com", "/threat-intelligence"),
+    ("research.checkpoint.com", ""),
+    ("blog.talosintelligence.com", ""),
+    ("crowdstrike.com", "/blog"),
+    ("proofpoint.com", ""),
+    ("elastic.co", "/security-labs"),
+    ("huntress.com", ""),
+    ("greynoise.io", ""),
+    ("hunt.io", ""),
+    ("cert.pl", ""),
+)
+
+
+def is_analysis_link(link):
+    parsed = urllib.parse.urlparse(link)
+    domain = parsed.netloc.lower().removeprefix("www.")
+    return any(
+        (domain == host or domain.endswith("." + host)) and parsed.path.startswith(prefix)
+        for host, prefix in ANALYSIS_SOURCES
+    )
 
 
 def is_roundup(article):
@@ -338,6 +386,12 @@ def select_top_articles(articles, limit=20, min_score=MIN_PRIORITY_SCORE):
                 {key: value for key, value in member.items() if key != "related"}
                 for member in others
             ]
+
+        if chosen.get("via"):
+            if per_source.get("via", 0) >= LEKTURA_LIMIT:
+                continue
+
+            per_source["via"] = per_source.get("via", 0) + 1
 
         domain = source_domain(chosen)
         per_source[domain] = per_source.get(domain, 0) + 1

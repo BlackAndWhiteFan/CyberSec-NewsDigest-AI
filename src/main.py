@@ -14,6 +14,7 @@ from article_selection import (
     MIN_PRIORITY_SCORE,
     categorize_article,
     is_excluded,
+    is_roundup,
     prioritize_article,
     relevant_articles,
     select_top_articles,
@@ -21,7 +22,8 @@ from article_selection import (
 from discord_output import build_digest_messages, send_messages
 from ai_summaries import summarize_articles, summary_source
 from article_pages import add_page_texts
-from kev import load_kev, mark_kev
+from kev import find_cves, load_kev, mark_kev
+from roundup_parts import VIA_LEKTURA, extract_parts
 from article_archive import append_to_archive, load_recent
 from event_grouping import group_events, mark_continuations
 from run_guard import mark_done, should_skip
@@ -62,6 +64,28 @@ def fetch_feed(url):
     )
 
     return items
+
+def mark_continuations_by_cve(articles, recent_records):
+    """Mark articles whose summary shares a CVE id with a recent record."""
+    recent = set()
+
+    for record in recent_records:
+        recent.update(record.get("cves", []))
+        recent.update(find_cves(record.get("title", ""), record.get("summary", "")))
+
+    marked = 0
+
+    for article in articles:
+        if article.get("continuation"):
+            continue
+
+        if set(find_cves(article.get("title", ""), article.get("summary", ""))) & recent:
+            article["continuation"] = True
+            marked += 1
+
+    print("Ciąg dalszy po numerach CVE ze streszczeń:", marked)
+    return marked
+
 
 def run():
     if should_skip():
@@ -144,6 +168,24 @@ def run():
                 continue
     
             
+            # v31: "Weekendowa lektura" is split into its links; each link is
+            # a candidate article ("via Zaufana Trzecia Strona").
+            if is_roundup({"title": title}):
+                parts = extract_parts(content or description)
+                print(f"WEEKENDOWA LEKTURA: {len(parts)} pozycji – {title}")
+
+                for part in parts:
+                    print("  LEKTURA:", part["title"][:100], "|", part["link"])
+
+                    if part["link"] in seen_links:
+                        continue
+
+                    add_article(articles, seen_links, feed_url, part["title"], part["link"], part["description"])
+                    articles[-1]["via"] = VIA_LEKTURA
+
+                if parts:
+                    continue
+
             if is_duplicate_link(link, seen_links):
                 duplicate_items += 1
     
@@ -258,6 +300,10 @@ def run():
     # v28: 🔥 for vulnerabilities from the CISA KEV catalog (set by code).
     mark_kev(selected_articles, load_kev())
     summarize_articles(selected_articles)
+    # v31: a story already delivered in recent days is a continuation also
+    # when only the summaries share a CVE id (the ZTS comment of a lektura
+    # link has none; PHP2Shell, test 25.10.2026).
+    mark_continuations_by_cve(selected_articles, recent_records)
 
     print()
     print("DISCORD")

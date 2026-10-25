@@ -159,7 +159,85 @@ def stem_weight(count, rare_limit=2):
     return 0.0
 
 
-def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare_limit=2):
+# v31: names of companies and products in Title Case titles ("Quest
+# Diagnostics", "Capcom"). In such titles every word is capitalized, so the
+# name rule further below says nothing. Two rules:
+# 1. A pair of capitalized, non-generic words shared by both titles and rare
+#    in the pool ("Quest Diagnostics").
+# 2. A single shared word counts only when the article texts (descriptions,
+#    Polish summaries) show it is a name: always capitalized, never written
+#    in lowercase ("Capcom"). Without such evidence ("Popular", "Allows") a
+#    single word never merges stories.
+# Common platform names appear in different stories on the same day, so
+# they never count.
+COMMON_NAMES = frozenset(
+    """
+    microsoft google apple amazon meta windows linux android chrome firefox
+    office exchange azure cloud server servers update updates security cisa
+    fbi nsa europol interpol github openai cisco fortinet ivanti oracle
+    router routers plugin plugins browser browsers firewall firewalls
+    report reports warning researchers python javascript wordpress docker
+    kubernetes nodejs gitlab apache nginx
+    """.split()
+)
+CAPITALIZED = re.compile(r"[A-ZĄĆĘŁŃÓŚŹŻ][\w-]*")
+
+
+def usable_name(word):
+    lower = word.casefold()
+    return not (
+        len(lower) < 4
+        or lower in STOPWORDS
+        or lower in COMMON_NAMES
+        or lower[:STEM_LENGTH] in GENERIC_STEMS
+        or NOT_EVENT_NAME.match(lower)
+        or lower.isdigit()
+    )
+
+
+def title_name_pairs(title):
+    """Pairs of consecutive capitalized usable words, lowercased."""
+    words = re.findall(r"[\w-]+", CVE_PATTERN.sub(" ", title))
+    return {
+        f"{a.casefold()} {b.casefold()}"
+        for a, b in zip(words, words[1:])
+        if CAPITALIZED.fullmatch(a) and CAPITALIZED.fullmatch(b) and usable_name(a) and usable_name(b)
+    }
+
+
+def text_names(texts):
+    """Words that the texts show to be names: always capitalized, never
+    written in lowercase ("Capcom potwierdziło…", "…dewelopera Capcom").
+    The texts are article descriptions and Polish summaries, where ordinary
+    words also appear in lowercase."""
+    capitalized, lowercase = set(), set()
+
+    for text in texts:
+        for word in re.findall(r"[\w-]+", re.sub(r"<[^>]+>", " ", text or "")):
+            if word.islower():
+                lowercase.add(word)
+            elif CAPITALIZED.fullmatch(word) and not word.isupper():
+                capitalized.add(word.casefold())
+
+    return {name for name in capitalized - lowercase if usable_name(name)}
+
+
+def shared_rare_name(title_a, title_b, frequency, rare_limit, names=frozenset()):
+    """True when both titles name the same rare company or product."""
+    for pair in title_name_pairs(title_a) & title_name_pairs(title_b):
+        if all(frequency.get(word[:STEM_LENGTH], 2) <= rare_limit for word in pair.split()):
+            return True
+
+    words_a = {word.casefold() for word in re.findall(r"[\w-]+", title_a)}
+    words_b = {word.casefold() for word in re.findall(r"[\w-]+", title_b)}
+
+    return any(
+        len(word) >= 5 and frequency.get(word[:STEM_LENGTH], 2) <= rare_limit
+        for word in words_a & words_b & set(names)
+    )
+
+
+def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare_limit=2, names=frozenset()):
     """Return True when two titles most likely describe the same event.
 
     rare_limit is the largest number of titles in which a word still counts
@@ -176,6 +254,9 @@ def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare
     score = sum(stem_weight(frequency.get(stem, 2), rare_limit) for stem in shared)
 
     if score >= threshold:
+        return True
+
+    if shared_rare_name(title_a, title_b, frequency, rare_limit, names):
         return True
 
     # One name found only in these titles. The two words may differ only by
@@ -223,6 +304,7 @@ def group_events(articles, pool=None):
     # v29: CVE ids from the title and the lead of the feed text also tie
     # articles (PHP2Shell articles without the name in the title, 23.10).
     lead = {id(article): set() if is_roundup(article) else set(article_cves(article)) for article in articles}
+    names = text_names(article.get("description", "") for article in (pool if pool is not None else articles))
 
     def strong(leader, article):
         return strong_match(leader.get("title", ""), article.get("title", "")) or bool(
@@ -241,7 +323,9 @@ def group_events(articles, pool=None):
 
                 continue
 
-            if strong(leader, article) or same_event(leader.get("title", ""), article.get("title", ""), frequency):
+            if strong(leader, article) or same_event(
+                leader.get("title", ""), article.get("title", ""), frequency, names=names
+            ):
                 group.append(article)
                 break
         else:
@@ -269,13 +353,17 @@ def mark_continuations(articles, recent_records, pool_titles=()):
         + [article.get("title", "") for article in articles]
     )
     recent_links = {r.get("link") for r in recent_records}
+    names = text_names(
+        [record.get("summary", "") for record in recent_records]
+        + [article.get("description", "") for article in articles]
+    )
 
     for article in articles:
         if article.get("link") in recent_links:
             continue
 
         for record in recent_records:
-            if same_event(article.get("title", ""), record.get("title", ""), frequency):
+            if same_event(article.get("title", ""), record.get("title", ""), frequency, names=names):
                 article["continuation"] = True
                 break
 

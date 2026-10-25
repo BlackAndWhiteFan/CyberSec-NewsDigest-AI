@@ -64,3 +64,27 @@ jobs:
             git pull --rebase origin "$GITHUB_REF_NAME"
             git push
           fi
+
+      # v31: alarm on the test channel when this workflow fails, so the
+      # owner learns about it before the readers do.
+      - name: Alarm on failure
+        if: ${{ failure() }}
+        env:
+          DISCORD_TEST_WEBHOOK_URL: ${{ secrets.DISCORD_TEST_WEBHOOK_URL }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -z "$DISCORD_TEST_WEBHOOK_URL" ]; then
+            echo "Brak DISCORD_TEST_WEBHOOK_URL – alarm pominięty."
+            exit 0
+          fi
+          python3 - <<'PY'
+          import json, os, urllib.request
+          text = "⚠️ Top 10 miesiąca: workflow zakończył się błędem (gałąź " + os.environ.get("GITHUB_REF_NAME", "?") + "). Log: <" + os.environ["RUN_URL"] + ">"
+          request = urllib.request.Request(
+              os.environ["DISCORD_TEST_WEBHOOK_URL"],
+              data=json.dumps({"content": text}).encode("utf-8"),
+              headers={"Content-Type": "application/json", "User-Agent": "CyberSec-NewsDigest-AI/1.0"},
+          )
+          urllib.request.urlopen(request, timeout=20).close()
+          print("Alarm wysłany na kanał testowy.")
+          PY

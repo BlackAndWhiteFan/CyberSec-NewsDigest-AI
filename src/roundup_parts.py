@@ -21,7 +21,12 @@ from html.parser import HTMLParser
 
 
 VIA_LEKTURA = "Zaufana Trzecia Strona (Weekendowa lektura)"
-OWN_DOMAINS = ("zaufanatrzeciastrona.pl",)
+OWN_DOMAINS = ("zaufanatrzeciastrona.pl", "z3s.pl")
+# v31: links without article text (video, chat, social media).
+SKIPPED_DOMAINS = (
+    "youtube.com", "youtu.be", "discord.gg", "discord.com", "twitter.com", "x.com",
+    "facebook.com", "linkedin.com", "instagram.com", "tiktok.com", "t.me",
+)
 MIN_PART_TEXT = 40
 MIN_TITLE_LENGTH = 15
 MAX_TITLE_LENGTH = 200
@@ -29,6 +34,12 @@ MAX_TITLE_LENGTH = 200
 
 def domain(url):
     return urllib.parse.urlparse(url).netloc.lower().removeprefix("www.")
+
+
+def in_domains(url, domains):
+    """True for a domain from the list or its subdomain ("x.com", not "netflix.com")."""
+    host = domain(url)
+    return any(host == item or host.endswith("." + item) for item in domains)
 
 
 class PartsParser(HTMLParser):
@@ -48,7 +59,8 @@ class PartsParser(HTMLParser):
         elif tag == "a" and self.block is not None:
             href = dict(attrs).get("href", "") or ""
 
-            if not self.block["link"] and href.startswith(("http://", "https://")) and not domain(href).endswith(OWN_DOMAINS):
+            if (not self.block["link"] and href.startswith(("http://", "https://"))
+                    and not in_domains(href, OWN_DOMAINS + SKIPPED_DOMAINS)):
                 self.block["link"] = href
                 self.block["in_anchor"] = True
 

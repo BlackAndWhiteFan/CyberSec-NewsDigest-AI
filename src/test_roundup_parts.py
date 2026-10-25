@@ -58,6 +58,48 @@ class TestLekturaInDigest(unittest.TestCase):
         self.assertIn("· bleepingcomputer.com · via Zaufana Trzecia Strona", format_article_line(1, article))
 
 
+class TestFixesBeforeMergeV31(unittest.TestCase):
+    """Lektura 699 (test of 25.10.2026)."""
+
+    def test_question_title_loses_to_threat_analysis(self):
+        from article_selection import prioritize_article
+        commentary = {"title": "Najbezpieczniejsza przeglądarka 2026? Chrome, Edge i Safari – 15 zero-dayów",
+                      "link": "https://my127001.pl/a", "description": "", "via": VIA_LEKTURA}
+        analysis = {"title": "Bronze Sandcastle wdraża zmodyfikowane powłoki oparte na Meterpreterze",
+                    "link": "https://www.sophos.com/en-us/blog/bronze-sandcastle", "description": "", "via": VIA_LEKTURA}
+
+        self.assertLess(prioritize_article(commentary), prioritize_article(analysis))
+        self.assertEqual(prioritize_article(analysis), 2)
+
+    def test_analysis_bonus_only_for_lektura_and_matching_paths(self):
+        from article_selection import is_analysis_link, prioritize_article
+        self.assertTrue(is_analysis_link("https://unit42.paloaltonetworks.com/fortimanager/"))
+        self.assertTrue(is_analysis_link("https://www.microsoft.com/en-us/security/blog/2026/10/21/storm-0940/"))
+        self.assertFalse(is_analysis_link("https://www.microsoft.com/en-us/windows/"))
+        self.assertEqual(prioritize_article({"title": "Bronze Sandcastle", "link": "https://www.sophos.com/x"}), 0)
+
+    def test_links_without_article_text_are_skipped(self):
+        html = """<ul>
+        <li><a href="https://z3s.pl/wl">Jeśli chcecie otrzymywać e-mailową wersję</a> Weekendowej Lektury, zapiszcie się.</li>
+        <li><a href="https://www.youtube.com/watch?v=x">Cyber Legion – od społeczności do cyberobrony państwa</a> nagranie.</li>
+        <li><a href="https://discord.gg/zaufana">discord.gg/zaufana</a> – zapraszamy na nasz serwer Discord.</li>
+        <li><a href="https://www.netflix.com/title/1">Serial o hakerach z ciekawym wątkiem</a> do obejrzenia.</li>
+        </ul>"""
+        self.assertEqual([part["link"] for part in extract_parts(html)], ["https://www.netflix.com/title/1"])
+
+    def test_continuation_by_cve_in_summary(self):
+        from main import mark_continuations_by_cve
+        articles = [
+            {"title": "Dwie krytyczne luki w PHP", "summary": "PHP załatało CVE-2026-109618 i CVE-2026-109619."},
+            {"title": "Signal", "summary": "Luka CVE-2026-113380 w RingRTC."},
+        ]
+        records = [{"title": "PHP2Shell: dwie krytyczne luki", "cves": ["CVE-2026-109618"], "summary": ""}]
+
+        self.assertEqual(mark_continuations_by_cve(articles, records), 1)
+        self.assertTrue(articles[0]["continuation"])
+        self.assertNotIn("continuation", articles[1])
+
+
 class TestQualityV31(unittest.TestCase):
     def test_not_given_remark(self):
         problems = quality_problems("Doszło do wycieku danych. Liczba poszkodowanych nie została podana.")

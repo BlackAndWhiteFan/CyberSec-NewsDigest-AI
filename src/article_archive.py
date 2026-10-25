@@ -1,8 +1,9 @@
 """Monthly archive of articles delivered in the digest.
 
 Each successfully delivered article is stored in data/archive/YYYY-MM.json
-with its title, link, source, categories, score and the digest date. The
-archive is the basis for monthly summaries and other later analyses.
+with its title, link, source, categories, score, AI summary, CVE ids, the
+"via" label, language notes (v32) and the digest date. The archive is the
+basis for the weekly and monthly tops and other later analyses.
 """
 
 import json
@@ -53,6 +54,9 @@ def build_record(article, date_text):
         "kev": article.get("kev", []),
         # v31: a link from "Weekendowa lektura".
         "via": article.get("via", ""),
+        # v32: language notes (language_notes.py) – what was corrected in the
+        # AI summary; material for the reports to CyberSec Mozaika.
+        "language": article.get("language", []),
     }
 
 

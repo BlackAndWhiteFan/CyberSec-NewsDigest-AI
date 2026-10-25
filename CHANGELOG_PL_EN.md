@@ -24,6 +24,77 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v32 --- 25.10.2026
+
+**Dziennik języka: poprawki językowe streszczeń zapisywane w archiwum.**
+
+Powód: do v31 poprawki językowe istniały tylko w logu uruchomienia
+(„KONTROLA: …”, „KOREKTA: przed/po”). Log znika po 90 dniach i nie da
+się go policzyć, więc nie było danych do raportów dla CyberSec Mozaika.
+Decyzja JW z 25.10.2026: najpierw załatać tę lukę (v32), a raporty dla
+Mozaiki zrobić w v33.
+
+Zmiany:
+
+- **Notatki językowe przy artykule** (nowy `src/language_notes.py`):
+  każdy dostarczony artykuł ma w archiwum pole `language` z listą
+  poprawek jego streszczenia. Rodzaje: `glossary` (forma zakazana
+  zamiast wymaganej, z numerem hasła H), `style` (kalka z listy
+  `data/styl_unikaj.csv`), `inflection` (termin w formie podstawowej po
+  przyimku, np. „przed exploit”, z numerem hasła), `autofix` (zamiana
+  przez kod bez zapytania do AI, z numerem hasła, gdy reguła wynika ze
+  słowniczka) i `proofreading` (streszczenie przed i po korekcie oraz
+  model, który ją zrobił).
+- **Wynik poprawki** (`fixed_by`) przy formach ze szkicu AI: `ai`
+  (poprawiło AI), `code` (kod usunął zdanie), `remains` (forma została w
+  streszczeniu – możliwe tylko przy kalkach, które nigdy nie skracają
+  streszczenia) albo `dropped` (streszczenie odrzucone; notatki zostają
+  przy artykule).
+- `src/glossary.py`: reguły autopoprawek mają przypisaną formę ze
+  słowniczka (łatka, RCE, exploit) albo nazwę reguły; nowe funkcje
+  `entry_by_form` i `violation_entries` (forma zakazana razem z hasłem).
+  `src/summary_quality.py`: kalki i nieodmienione terminy dostępne jako
+  dane (`style_hits`, `uninflected_hits`).
+- Log: „JĘZYK: uwagi językowe do archiwum – słowniczek N, styl N,
+  odmiana N, autopoprawki N, korekta N”.
+- Notatki opisują tylko to, co napisało AI: niczego nie zmieniają w
+  streszczeniu i nie zapisują nic do glosariusza. Uruchomienia testowe
+  niczego nie zapisują, jak dotąd.
+
+Sprawdzone na prawdziwych błędach z logów 22–25.10.2026: „rekordy
+pacjentów” i „AI‑zarządzanego” (styl), „patchują” (słowniczek, H166),
+„przed exploit” (odmiana, H153), „eksploatując”, „intruzji”,
+„Kompromisy”, „rootowy” (styl) – wszystkie zapisane.
+
+Test na gałęzi `v32-jezyk` 25.10.2026: streszczenia AI 9 z 9, korekta
+poprawiła 7; log „JĘZYK: … słowniczek 0, styl 2, odmiana 0,
+autopoprawki 2, korekta 7” zgodny z liniami KONTROLA i KOREKTA. „Ciąg
+dalszy” miał 6 z 9 pozycji. Pięć było trafnych (PHP, Arista VCO,
+BeyondTrust/Armory Castle, Brotli/Node.js, Quest Diagnostics), ale
+analiza Unit 42 o FortiManagerze trafiła tam przez CVE-2024-47575 z
+całej lektury 699, dostarczonej 24.10 jako jedna pozycja. Do tego w
+streszczeniach: „eliminują ryzyko ataków” (ogólnik), „75 unikalnych
+podatności” i „wpływających na wersje” (kalki).
+
+Poprawki po teście:
+
+- **„Ciąg dalszy” po CVE pomija rekordy całej lektury** (`src/main.py`):
+  ich numery CVE pochodzą z dziesiątek różnych linków, więc nowa analiza
+  jednego z nich nie jest kontynuacją wydarzenia.
+- Ogólnik „eliminuje ryzyko / zagrożenie” (`src/summary_quality.py`).
+- Lista stylu `data/styl_unikaj.csv`: „unikaln*” (→ różny albo bez
+  przymiotnika) i „wpływając* na wersj*” (→ dotyczący wersji).
+
+Nowe i zmienione pliki: `src/language_notes.py` (nowy),
+`src/test_language_notes.py` (nowy), `src/ai_summaries.py`,
+`src/glossary.py`, `src/summary_quality.py`, `src/article_archive.py`,
+`src/main.py`, `src/test_roundup_parts.py`, `data/styl_unikaj.csv`,
+README (PL/EN).
+
+Testy jednostkowe: 307, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v31 --- 25.10.2026
 
 **Rozbiór „Weekendowej lektury” na linki, łączenie tematów po nazwach
@@ -1475,6 +1546,77 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v32 --- 2026-10-25
+
+**Language log: language corrections of summaries saved in the
+archive.**
+
+Reason: until v31 the language corrections existed only in the run log
+("KONTROLA: …", "KOREKTA: przed/po"). The log is deleted after 90 days
+and cannot be counted, so there was no data for reports to CyberSec
+Mozaika. JW's decision of 2026-10-25: close this gap first (v32), and
+build the reports for Mozaika in v33.
+
+Changes:
+
+- **Language notes on the article** (new `src/language_notes.py`):
+  every delivered article has a `language` field in the archive with the
+  corrections of its summary. Types: `glossary` (a forbidden form
+  instead of the required one, with the entry id), `style` (a calque
+  from `data/styl_unikaj.csv`), `inflection` (a term left in the base
+  form after a preposition, e.g. "przed exploit", with the entry id),
+  `autofix` (a replacement by code without an AI request, with the entry
+  id when the rule follows the glossary) and `proofreading` (the summary
+  before and after the correction and the model that made it).
+- **Outcome** (`fixed_by`) for forms from the AI draft: `ai` (fixed by
+  the AI), `code` (code removed the sentence), `remains` (still in the
+  summary – possible only for calques, which never cut a summary) or
+  `dropped` (summary dropped; the notes stay on the article).
+- `src/glossary.py`: autofix rules carry the glossary form (łatka, RCE,
+  exploit) or a rule name; new functions `entry_by_form` and
+  `violation_entries` (forbidden form with its entry).
+  `src/summary_quality.py`: calques and uninflected terms available as
+  data (`style_hits`, `uninflected_hits`).
+- Log: "JĘZYK: uwagi językowe do archiwum – słowniczek N, styl N,
+  odmiana N, autopoprawki N, korekta N".
+- The notes only describe what the AI wrote: they change nothing in the
+  summary and write nothing to the glossary. Test runs save nothing, as
+  before.
+
+Checked on real errors from the logs of 22–25 October 2026: "rekordy
+pacjentów" and "AI‑zarządzanego" (style), "patchują" (glossary, H166),
+"przed exploit" (inflection, H153), "eksploatując", "intruzji",
+"Kompromisy", "rootowy" (style) – all recorded.
+
+Test on the `v32-jezyk` branch on 2026-10-25: AI summaries 9 of 9,
+proofreading changed 7; log "JĘZYK: … słowniczek 0, styl 2, odmiana 0,
+autopoprawki 2, korekta 7", consistent with the KONTROLA and KOREKTA
+lines. "Ciąg dalszy" had 6 of 9 items. Five were right (PHP, Arista
+VCO, BeyondTrust/Armory Castle, Brotli/Node.js, Quest Diagnostics), but
+the Unit 42 analysis of FortiManager got there through CVE-2024-47575
+from the whole roundup 699, delivered on 2026-10-24 as one item. Also in
+the summaries: "eliminują ryzyko ataków" (filler), "75 unikalnych
+podatności" and "wpływających na wersje" (calques).
+
+Fixes after the test:
+
+- **CVE-based "Ciąg dalszy" skips records of a whole roundup**
+  (`src/main.py`): their CVE ids come from dozens of different links, so
+  a new analysis of one of them is not a follow-up of an event.
+- Filler "eliminuje ryzyko / zagrożenie" (`src/summary_quality.py`).
+- Style list `data/styl_unikaj.csv`: "unikaln*" (→ różny, or no
+  adjective) and "wpływając* na wersj*" (→ dotyczący wersji).
+
+New and changed files: `src/language_notes.py` (new),
+`src/test_language_notes.py` (new), `src/ai_summaries.py`,
+`src/glossary.py`, `src/summary_quality.py`, `src/article_archive.py`,
+`src/main.py`, `src/test_roundup_parts.py`, `data/styl_unikaj.csv`,
+README (PL/EN).
+
+Unit tests: 307, passed.
 
 ------------------------------------------------------------------------
 

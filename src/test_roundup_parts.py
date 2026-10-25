@@ -100,10 +100,34 @@ class TestFixesBeforeMergeV31(unittest.TestCase):
         self.assertNotIn("continuation", articles[1])
 
 
+    def test_roundup_record_is_not_an_event(self):
+        # v32 test, 25.10.2026: Unit 42 on FortiManager was marked by a CVE id
+        # from the whole roundup 699 delivered as one item.
+        from main import mark_continuations_by_cve
+        articles = [{"title": "Luka w FortiManagerze", "summary": "Atakujący wykorzystali CVE-2024-47575."}]
+        records = [{"title": "Weekendowa Lektura: odcinek 699 [2026-10-23]. Bierzcie i czytajcie",
+                    "cves": ["CVE-2024-47575"], "summary": ""}]
+
+        self.assertEqual(mark_continuations_by_cve(articles, records), 0)
+        self.assertNotIn("continuation", articles[0])
+
+
 class TestQualityV31(unittest.TestCase):
     def test_not_given_remark(self):
         problems = quality_problems("Doszło do wycieku danych. Liczba poszkodowanych nie została podana.")
         self.assertTrue(any("ogólnik" in problem for problem in problems))
+
+    def test_v32_filler_and_calques(self):
+        # v32 test, 25.10.2026 (Atlassian and HPE summaries).
+        problems = quality_problems(
+            "Atlassian opublikował łatki usuwające 75 unikalnych podatności. "
+            "Aktualizacje obejmują wszystkie komponenty i eliminują ryzyko ataków."
+        )
+        self.assertTrue(any("ogólnik „eliminują ryzyko”" in problem for problem in problems))
+        self.assertTrue(any("kalka „unikalnych”" in problem for problem in problems))
+        self.assertTrue(any("kalka „wpływających na wersje”" in problem
+                            for problem in quality_problems("Luki RCE wpływających na wersje AOS-10.")))
+        self.assertEqual(quality_problems("Luka wpływa na wydajność serwera."), [])
 
 
 if __name__ == "__main__":

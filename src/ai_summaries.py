@@ -7,10 +7,15 @@ the digest to fail.
 
 Glossary conventions are mandatory: the prompt requires the forms from the
 glossary mirror, and every summary is checked against forbidden forms. A
-summary that breaks the convention is sent back once for correction and
-dropped if it is still wrong. Since v25 the same correction round also
-covers quality problems (summary_quality.py): generic phrases, relative time
-words and numbers or CVE ids that are not in the source.
+summary that breaks the convention is sent back once for correction; code
+removes the sentences that are still wrong (v27). Since v25 the same
+correction round also covers quality problems (summary_quality.py): generic
+phrases, relative time words and numbers or CVE ids that are not in the
+source.
+
+Since v32 every language correction (forbidden forms, calques, uninflected
+terms, autofix, proofreading) is kept on the article as "language" notes and
+saved in the archive (language_notes.py).
 
 Feed text is untrusted: it is sent to the model as data, the prompt tells the
 model to ignore instructions inside it, and every summary is cleaned before it
@@ -29,6 +34,7 @@ from article_selection import ROUNDUP_SUMMARY, is_roundup
 from gemini import ask_gemini, gemini_models
 from languagetool import grammar_hints
 from glossary import autofix, convention_violations, is_acronym, prompt_glossary
+from language_notes import findings, log_line, settle, unique
 from summary_quality import STYLE_RULES, fix_sentence_case, quality_problems, repair_summary
 
 
@@ -168,8 +174,11 @@ def build_request_messages(batch):
     ]
 
 
-def clean_summary(text, limit=SUMMARY_LIMIT):
-    """Return a safe one-line summary for Discord."""
+def clean_summary(text, limit=SUMMARY_LIMIT, changes=None):
+    """Return a safe one-line summary for Discord.
+
+    changes: optional list that gets the autofix replacements (v32).
+    """
     text = re.sub(r"https?://\S+", "", str(text))
     text = re.sub(r"[`*_~|>#\[\]<]", "", text)
     text = text.replace("@", "")
@@ -177,7 +186,7 @@ def clean_summary(text, limit=SUMMARY_LIMIT):
     # v27: fixes that need no AI request: semicolons become sentence ends,
     # forbidden forms with a safe replacement are replaced (glossary.autofix).
     text = re.sub(r"\s*;\s*", ". ", text)
-    text = fix_sentence_case(autofix(text))
+    text = fix_sentence_case(autofix(text, changes))
 
     if len(text) > limit:
         text = text[:limit - 1].rsplit(" ", 1)[0] + "…"
@@ -201,8 +210,11 @@ def is_meta_answer(text):
     return bool(META_ANSWER.search(text))
 
 
-def parse_summaries(content, expected_ids):
-    """Return {id: summary} from the model answer; ignore unknown ids."""
+def parse_summaries(content, expected_ids, notes=None):
+    """Return {id: summary} from the model answer; ignore unknown ids.
+
+    notes: optional {id: [note]} that gets the autofix replacements (v32).
+    """
     # Some models may still put their reasoning in <think> tags.
     content = re.sub(r"<think>.*?</think>", "", content or "", flags=re.S)
     match = re.search(r"\{.*\}", content, flags=re.S)
@@ -218,10 +230,14 @@ def parse_summaries(content, expected_ids):
             continue
 
         number = item.get("id")
-        text = clean_summary(item.get("tekst", ""))
+        changes = []
+        text = clean_summary(item.get("tekst", ""), changes=changes)
 
         if number in expected_ids and text and not is_meta_answer(text):
             summaries[number] = text
+
+            if notes is not None:
+                notes.setdefault(number, []).extend(changes)
 
     return summaries
 
@@ -329,7 +345,7 @@ def find_problems(summaries, sources=None):
 
 
 def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep, sources=None,
-                  fallbacks=()):
+                  fallbacks=(), notes=None):
     """Return summaries without problems.
 
     A summary with problems is sent back to the AI once. When the corrected
@@ -338,8 +354,12 @@ def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep
     with problems are removed and the text is cut to whole sentences (v27,
     test 22.10.2026: eight summaries lost). Only a summary with nothing good
     left is dropped.
+
+    notes: optional {id: [note]} that gets the language notes of the drafts
+    with problems and how each was fixed (v32).
     """
     sources = sources or {}
+    notes = {} if notes is None else notes
     problems = find_problems(summaries, sources)
 
     if not problems:
@@ -357,6 +377,7 @@ def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep
             corrected = parse_summaries(
                 ask_provider(ask[0], ask[1], correction_messages(messages, content, problems), opener, sleep),
                 set(problems),
+                notes,
             )
             break
         except Exception as error:
@@ -367,9 +388,11 @@ def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep
     for number in problems:
         source = sources.get(number)
         text = corrected.get(number)
+        draft_notes = findings(summaries[number])
 
         if text and not all_problems(text, source, soft=False):
             result[number] = text
+            notes.setdefault(number, []).extend(settle(draft_notes, text, "ai"))
             print(f"KONTROLA: streszczenie {number} poprawione.")
             continue
 
@@ -380,8 +403,10 @@ def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep
 
         if repaired and not all_problems(repaired, source, soft=False):
             result[number] = repaired
+            notes.setdefault(number, []).extend(settle(draft_notes, repaired, "code"))
             print(f"KONTROLA: streszczenie {number} naprawione przez kod (bez zdań z problemami).")
         else:
+            notes.setdefault(number, []).extend(settle(draft_notes, "", "dropped"))
             print(f"KONTROLA: streszczenie {number} odrzucone (nic poprawnego nie zostało).")
 
     return result
@@ -400,15 +425,18 @@ def summarize_batch(batch, providers, environ, opener, sleep, used):
     for provider in providers:
         api_key = environ[provider["key_variable"]].strip()
 
+        # Notes of a failed attempt are not kept: the next model starts again.
+        notes = {}
+
         try:
             content = ask_provider(provider, api_key, messages, opener, sleep)
-            summaries = parse_summaries(content, expected)
+            summaries = parse_summaries(content, expected, notes)
             fallbacks = [
                 (other, environ[other["key_variable"]].strip())
                 for other in providers if other is not provider
             ]
             summaries = enforce_rules(
-                provider, api_key, messages, content, summaries, opener, sleep, sources, fallbacks
+                provider, api_key, messages, content, summaries, opener, sleep, sources, fallbacks, notes
             )
         except Exception as error:
             # The key is never part of the message: only the provider
@@ -420,6 +448,9 @@ def summarize_batch(batch, providers, environ, opener, sleep, used):
             if number in summaries:
                 article["summary"] = summaries[number]
                 article["summary_material"] = sources[number]
+
+            if notes.get(number):
+                article["language"] = unique(article.get("language", []) + notes[number])
 
         used.append(provider["name"])
         return True
@@ -503,10 +534,14 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
     system = PROOFREAD_PROMPT.format()
     user = json.dumps({"streszczenia": items}, ensure_ascii=False)
     corrected = None
+    model = ""
+    changes = {}
 
     for name, ask in proofreaders(providers, environ):
         try:
-            corrected = parse_summaries(ask(system, user, opener, sleep), {item["id"] for item in items})
+            changes = {}
+            corrected = parse_summaries(ask(system, user, opener, sleep), {item["id"] for item in items}, changes)
+            model = name
             print(f"KOREKTA: model {name}")
             break
         except Exception as error:
@@ -534,6 +569,10 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
             and len(all_problems(new, material)) <= len(all_problems(old, material))
         ):
             article["summary"] = new
+            # v32: the change is kept for the reports to Mozaika.
+            article["language"] = unique(article.get("language", []) + changes.get(number, []) + [
+                {"type": "proofreading", "before": old, "after": new, "model": model}
+            ])
             changed += 1
             print(f"KOREKTA: streszczenie {number}\n  przed: {old}\n  po:    {new}")
         else:
@@ -584,6 +623,7 @@ def summarize_articles(articles, environ=None, opener=urllib.request.urlopen, sl
     if PROOFREAD:
         proofread_summaries(articles, providers, environ, opener, sleep)
 
+    print(log_line(articles))
     print(
         "Streszczenia AI:",
         sum(1 for article in articles if article.get("summary")),

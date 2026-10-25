@@ -3,13 +3,15 @@ CyberSec Mozaika glossary (data/glosariusz_mirror.csv).
 
 The digest never reads the Mozaika mother workbook; the mirror is exported
 from it manually (tools/eksport_mirrora.py) and committed to this repository.
+Since v32 every forbidden form found or replaced is kept as a language note
+with the entry id (see ai_summaries.py), for the reports to Mozaika.
 
 Conventions are enforced in three places:
 1. Prompt: the AI gets the glossary entries relevant to the articles and a
    hard rule to use only the forms listed there.
 2. Check: every summary is checked for forbidden forms ("unikaj" column);
-   a summary that breaks the convention is sent back for correction and
-   dropped if it is still wrong.
+   a summary that breaks the convention is sent back for correction, and
+   code removes the sentences that are still wrong (v27).
 3. Explanations: code (not the AI) adds the explanation in parentheses
    ("nawias" column) at the first occurrence of a term in the whole digest,
    so it is consistent and testable.
@@ -160,25 +162,46 @@ INFLECTED = {
 # like "poprawka" (poprawce -> łatce), RCE does not inflect, and "eksploit"
 # forms map to the same "exploit" forms.
 AUTOFIX = [
+    # (pattern, replacement, required glossary form or a label of the rule)
     (re.compile(r"(?<!\w)([Pp])opraw(ka|ki|kę|ką|ce|ek|kom|kami|kach)(?!\w)"),
-     lambda m: ("Ł" if m.group(1) == "P" else "ł") + "at" + m.group(2)),
-    (re.compile(r"(?<!\w)zdaln\w+ wykonani\w+ (?:dowolnego )?kodu(?!\w)", re.IGNORECASE), lambda m: "RCE"),
-    (re.compile(r"(?<!\w)remote code execution(?!\w)", re.IGNORECASE), lambda m: "RCE"),
+     lambda m: ("Ł" if m.group(1) == "P" else "ł") + "at" + m.group(2), "łatka"),
+    (re.compile(r"(?<!\w)zdaln\w+ wykonani\w+ (?:dowolnego )?kodu(?!\w)", re.IGNORECASE), lambda m: "RCE", "RCE"),
+    (re.compile(r"(?<!\w)remote code execution(?!\w)", re.IGNORECASE), lambda m: "RCE", "RCE"),
     # v29: reversed order ("wykonanie kodu zdalnie", test 25.10.2026).
-    (re.compile(r"(?<!\w)wykonani\w+ (?:dowolnego )?kodu zdalnie(?!\w)", re.IGNORECASE), lambda m: "RCE"),
+    (re.compile(r"(?<!\w)wykonani\w+ (?:dowolnego )?kodu zdalnie(?!\w)", re.IGNORECASE), lambda m: "RCE", "RCE"),
     (re.compile(r"(?<!\w)([Ee])ksploi(t|ta|ty|tem|tów|tom|tami|tach|towi|cie)(?!\w)"),
-     lambda m: m.group(1) + "xploi" + m.group(2)),
+     lambda m: m.group(1) + "xploi" + m.group(2), "exploit"),
     # v29: "zdalne wykonanie kodu (RCE)" became "RCE (RCE)" (24.10.2026);
     # a word repeated in parentheses right after itself is removed.
-    (re.compile(r"(?<!\w)(\w+) \(\1\)"), lambda m: m.group(1)),
-    (re.compile(r"(?<!\w)iPhoneie(?!\w)"), lambda m: "iPhonie"),
+    (re.compile(r"(?<!\w)(\w+) \(\1\)"), lambda m: m.group(1), "powtórzenie w nawiasie"),
+    (re.compile(r"(?<!\w)iPhoneie(?!\w)"), lambda m: "iPhonie", "odmiana"),
 ]
 
 
-def autofix(text):
-    """Replace forbidden forms that have a safe automatic replacement."""
-    for pattern, replacement in AUTOFIX:
-        text = pattern.sub(replacement, text)
+def autofix(text, changes=None):
+    """Replace forbidden forms that have a safe automatic replacement.
+
+    v32: when `changes` is a list, every replacement is added to it as a
+    language note (type "autofix", glossary id when the rule follows a
+    glossary entry), so the archive keeps what code corrected.
+    """
+    for pattern, replacement, target in AUTOFIX:
+        def replace(match, replacement=replacement, target=target):
+            fixed = replacement(match)
+
+            if changes is not None and fixed != match.group(0):
+                entry = entry_by_form(target)
+                changes.append({
+                    "type": "autofix",
+                    "id": entry["id"] if entry else "",
+                    "rule": target,
+                    "used": match.group(0),
+                    "fixed": fixed,
+                })
+
+            return fixed
+
+        text = pattern.sub(replace, text)
 
     return text
 
@@ -192,6 +215,12 @@ def load_mirror(path=MIRROR_PATH):
 
 
 ENTRIES = load_mirror()
+ENTRIES_BY_FORM = {entry["forma"].lower(): entry for entry in ENTRIES}
+
+
+def entry_by_form(form):
+    """Return the mirror entry with this required form ("łatka", "RCE"), or None."""
+    return ENTRIES_BY_FORM.get((form or "").lower())
 
 
 def is_acronym(text):
@@ -272,8 +301,8 @@ def forbidden_patterns(entry):
 FORBIDDEN = [(entry, forbidden_patterns(entry)) for entry in ENTRIES if entry["unikaj"]]
 
 
-def convention_violations(text):
-    """Return a list of (used form, required form) for forbidden forms."""
+def violation_entries(text):
+    """Return a list of (entry, used form) for forbidden forms (v32: with the entry)."""
     found = []
 
     for entry, patterns in FORBIDDEN:
@@ -281,10 +310,15 @@ def convention_violations(text):
             match = pattern.search(text)
 
             if match:
-                found.append((match.group(0), entry["forma"]))
+                found.append((entry, match.group(0)))
                 break
 
     return found
+
+
+def convention_violations(text):
+    """Return a list of (used form, required form) for forbidden forms."""
+    return [(used, entry["forma"]) for entry, used in violation_entries(text)]
 
 
 def gloss_rule(entry):

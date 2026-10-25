@@ -49,6 +49,8 @@ GENERIC_PHRASES = [
     r"nie podano",
     # v31: "Liczba poszkodowanych nie została podana" (test 25.10.2026).
     r"nie (został|została|zostało|zostały|zostali) (podan|ujawnion|wskazan|sprecyzowan|określon)\w*",
+    # v32: "Aktualizacje … eliminują ryzyko ataków" (test 25.10.2026).
+    r"eliminuj\w* (to |te |tę )?(ryzyk|zagrożeni)\w*",
 ]
 GENERIC = [re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE) for pattern in GENERIC_PHRASES]
 
@@ -187,17 +189,27 @@ def load_style(path=STYLE_PATH):
 STYLE_RULES = load_style()
 
 
-def style_problems(text, rules=None):
-    """Calques and anglicisms from the style list, with suggestions."""
-    problems = []
+def style_hits(text, rules=None):
+    """Return [(used text, form from the list, suggestion)] for calques (v32)."""
+    hits = []
 
     for pattern, form, suggestion in STYLE_RULES if rules is None else rules:
         match = pattern.search(text)
 
         if match:
-            problems.append(f"kalka „{match.group(0)}” – użyj: {suggestion}")
+            hits.append((match.group(0), form, suggestion))
 
-    return problems
+    return hits
+
+
+def style_problems(text, rules=None):
+    """Calques and anglicisms from the style list, with suggestions."""
+    return [f"kalka „{used}” – użyj: {suggestion}" for used, _, suggestion in style_hits(text, rules)]
+
+
+def uninflected_hits(text):
+    """Return [(phrase, term)] for terms left in the base form ("przed exploit", v32)."""
+    return [(match.group(0), match.group(1)) for match in UNINFLECTED.finditer(text)]
 
 
 # v29: English summaries (24.10.2026: four summaries in English).

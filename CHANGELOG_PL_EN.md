@@ -74,9 +74,41 @@ Nowe i zmienione pliki: `src/roundup_parts.py` (nowy),
 `src/test_event_grouping.py`, `src/monthly_top.py`,
 `src/summary_quality.py`, trzy workflowy, README (PL/EN).
 
-Zmianę zweryfikowano: testy jednostkowe (286) zakończone powodzeniem.
-Test na gałęzi oczekuje na wykonanie; rozbiór lektury pierwszy raz
-zadziała na najbliższej lekturze w kanale ZTS.
+Test na gałęzi `v31-lektura` 25.10.2026: Weekendowa Lektura odcinek
+699 rozebrana na 53 pozycje z polskimi tytułami ZTS; do prasówki weszły
+3 (m.in. Krebs o negocjatorze współpracującym z ShinyHunters); link do
+subskrypcji, YouTube i Discord odpadły przez próg trafności. Wady:
+weszła publicystyka („Najbezpieczniejsza przeglądarka 2026? …”, +3 za
+„zero-day”), a odpadły analizy zagrożeń bez słów kluczowych w tytule
+(Unit 42, ESET, Mandiant, Microsoft, Securelist); pozycja o PHP z
+lektury trafiła do „Najważniejszych”, choć PHP2Shell był już w
+prasówce (komentarz ZTS nie ma numeru CVE, tytuł – nazwy).
+
+Poprawki przed scaleniem (decyzja JW: od razu, przed v32):
+
+- **Pytajnik w tytule linku z lektury** = publicystyka: kara jak za
+  kontekst wydarzeń/poradników (`has_context_title`); tylko dla
+  lektury, bo w zwykłych kanałach pytajnik bywa w newsach
+  („Fakturownia zhakowana?”).
+- **Premia +2 dla linków z lektury do publikacji badawczych**
+  (`ANALYSIS_SOURCES`: Unit 42, Securelist, ESET WeLiveSecurity,
+  Google/Mandiant Threat Intelligence, Microsoft Security Blog, Sophos,
+  Sekoia, Zscaler, Symantec, Check Point Research, Talos, CrowdStrike,
+  Proofpoint, Elastic Security Labs, Huntress, GreyNoise, Hunt.io,
+  CERT Polska), więc analizy bez słów kluczowych w tytule przechodzą
+  próg.
+- **Pomijane linki bez treści artykułu**: z3s.pl (skrót ZTS), YouTube,
+  Discord, X/Twitter, Facebook, LinkedIn, Instagram, TikTok, Telegram
+  (dopasowanie domeny lub subdomeny, nie końcówki – „x.com” to nie
+  „netflix.com”).
+- **„Ciąg dalszy” po numerach CVE ze streszczeń** (`src/main.py`):
+  po streszczeniach artykuł, którego streszczenie ma numer CVE z
+  rekordu archiwum z ostatnich 3 dni, trafia do „Ciągu dalszego”.
+
+Symulacja na tytułach lektury 699: na górze rankingu Nginx, PHP, Unit 42
+o FortiManagerze, Mandiant o Armory Castle; „Najbezpieczniejsza
+przeglądarka” spada poniżej progu. Testy jednostkowe: 290, zakończone
+powodzeniem.
 
 ## v30 --- 25.10.2026
 
@@ -1479,9 +1511,40 @@ New and changed files: `src/roundup_parts.py` (new),
 `src/test_event_grouping.py`, `src/monthly_top.py`,
 `src/summary_quality.py`, three workflows, README (PL/EN).
 
-The change was verified: unit tests (286) passed. A branch test is
-pending; the roundup splitting will first run on the next roundup in
-the ZTS feed.
+Test on the `v31-lektura` branch on 2026-10-25: Weekendowa Lektura
+episode 699 split into 53 parts with Polish ZTS titles; 3 entered the
+digest (incl. Krebs on the negotiator working with ShinyHunters); the
+subscription link, YouTube and Discord fell below the threshold.
+Weaknesses: commentary got in ("Najbezpieczniejsza przeglądarka 2026?
+…", +3 for "zero-day"), while threat analyses without keywords in the
+title were left out (Unit 42, ESET, Mandiant, Microsoft, Securelist);
+the PHP item from the roundup went to "Najważniejsze" although PHP2Shell
+had already been in the digest (the ZTS comment has no CVE id, the
+title no name).
+
+Fixes before merging (JW's decision: right away, before v32):
+
+- **A question mark in the title of a lektura link** = commentary: the
+  same penalty as for event/advice context (`has_context_title`); only
+  for lektura, because in regular feeds news titles also use question
+  marks ("Fakturownia zhakowana?").
+- **+2 bonus for lektura links to threat-research publications**
+  (`ANALYSIS_SOURCES`: Unit 42, Securelist, ESET WeLiveSecurity,
+  Google/Mandiant Threat Intelligence, Microsoft Security Blog, Sophos,
+  Sekoia, Zscaler, Symantec, Check Point Research, Talos, CrowdStrike,
+  Proofpoint, Elastic Security Labs, Huntress, GreyNoise, Hunt.io, CERT
+  Polska), so analyses without keywords in the title pass the threshold.
+- **Links without article text skipped**: z3s.pl (ZTS short link),
+  YouTube, Discord, X/Twitter, Facebook, LinkedIn, Instagram, TikTok,
+  Telegram (matching the domain or a subdomain, not the ending – "x.com"
+  is not "netflix.com").
+- **"Ciąg dalszy" by CVE ids in summaries** (`src/main.py`): after the
+  summaries, an article whose summary has a CVE id from an archive
+  record of the last 3 days goes to "Ciąg dalszy".
+
+Simulation on the titles of roundup 699: top of the ranking Nginx, PHP,
+Unit 42 on FortiManager, Mandiant on Armory Castle; "Najbezpieczniejsza
+przeglądarka" falls below the threshold. Unit tests: 290, passed.
 
 ## v30 --- 2026-10-25
 

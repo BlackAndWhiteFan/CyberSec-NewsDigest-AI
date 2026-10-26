@@ -12,7 +12,7 @@ Projekt działa przy budżecie 0 PLN, wyłącznie na bezpłatnych planach usług
 
 ## Aktualny stan projektu
 
-Prasówka działa produkcyjnie od października 2026 (wersja v33). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+Prasówka działa produkcyjnie od października 2026 (wersja v34). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Etap | Zakres | Stan |
 |---|---|---|
@@ -34,6 +34,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v33). Każda zmiana
 | 16 | „Weekendowa lektura” rozbierana na linki, łączenie po nazwach firm, alarm o błędzie workflow (v31) | zakończony i zweryfikowany |
 | 17 | Dziennik języka: poprawki streszczeń zapisywane w archiwum (v32) | zakończony; zweryfikowany testami jednostkowymi i prawdziwymi błędami z logów |
 | 18 | Jakość streszczeń i zestawień: bez formułek, określenia tylko z pokryciem w artykule, łączenie w zestawieniach po CVE, polscy liderzy, porządek i korekta streszczeń w zestawieniach (v33) | zakończony; zweryfikowany na gałęzi testowej i w symulacji na archiwum |
+| 19 | Streszczenia z sensem i łatwe w czytaniu: co – dlaczego ważne – co zrobić, kontekst wcześniejszych doniesień, CISA KEV dla AI, streszczenia wydarzeń w zestawieniach (v34) | w toku na gałęzi testowej |
 
 ## Obecna implementacja
 
@@ -56,7 +57,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v33). Każda zmiana
 
 ### Streszczenia AI po polsku
 
-- Każdy artykuł dostaje konkretne streszczenie po polsku (2–3 krótkie zdania, do około 350 znaków; 1 zdanie, gdy materiałem jest tylko krótka zajawka), które pisze Groq `gpt-oss-120b`, a zapasowo `qwen3.8-27b`. Zapytania są rozłożone w czasie (co najmniej 20 s odstępu), a partia, której nie obsłużył żaden model, jest ponawiana raz na końcu.
+- Każdy artykuł dostaje konkretne streszczenie po polsku (2–3 krótkie zdania, do około 420 znaków; 1 zdanie, gdy materiałem jest tylko krótka zajawka), które pisze Groq `gpt-oss-120b`, a zapasowo `qwen3.8-27b`. Od v34 streszczenie odpowiada na pytania praktyka SOC: co się stało i kogo dotyczy (zwykłymi słowami, bez numerów CVE na początku), dlaczego to ważne (wykorzystywanie w atakach, publiczny exploit, skala, łatka albo jej brak) i co zrobić, jeśli artykuł to podaje. AI dostaje informację, że luka jest w katalogu CISA KEV, a ciąg dalszy – wcześniejsze doniesienie z archiwum jako kontekst („co nowego”). Zdania dłuższe niż 25 słów i więcej niż 2 numery CVE wracają do poprawki (miękko: nigdy nie skracają streszczenia); zdanie bez konkretu (liczby, daty, numeru CVE, nazwy), za to ze słownictwem oceniającym („poważne zagrożenie”, „współpracuje z ekspertami”), to ogólnik. „Aktywnie wykorzystywana” i „brak łatki” są dozwolone tylko wtedy, gdy materiał to mówi. Zapytania są rozłożone w czasie (co najmniej 20 s odstępu), a partia, której nie obsłużył żaden model, jest ponawiana raz na końcu.
 - Materiał: pełny tekst lub opis z kanału; gdy kanał daje mniej niż 600 znaków, tekst artykułu jest pobierany z jego strony (akapity bez menu, reklam i stopki). Tekst strony jest tylko materiałem dla AI i nigdzie nie jest zapisywany.
 - Terminy są zgodne ze słowniczkiem `data/glosariusz_mirror.csv` – mirrorem glosariusza CyberSec Mozaika. Proste formy zakazane poprawia kod bez zapytania do AI („poprawka” → „łatka”, „zdalne wykonanie kodu” → „RCE”); objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu 6 wybranych terminów, w tym samym przypadku co termin („przed exploitem (kodem wykorzystującym podatność)”).
 - Kontrola jakości (`src/summary_quality.py`): niezgodność ze słowniczkiem, ogólniki („co podkreśla wagę…”, „nie została podana”), względne określenia czasu, nieodmienione terminy po przyimku, liczby i numery CVE spoza materiału, określenia „zero-day” i „natychmiast”, gdy artykuł ich nie używa, formułki bez konkretu („Zaleca się natychmiastową aktualizację.”), streszczenia za długie, po angielsku albo powtarzające tylko tytuł oraz kalki z edytowalnej listy stylu `data/styl_unikaj.csv`. Streszczenie z problemem wraca do AI na jedną poprawkę; jeśli problem zostaje, kod usuwa błędne zdania. Streszczenie jest odrzucane tylko wtedy, gdy nie zostaje w nim żadne poprawne zdanie (albo nadal jest po angielsku).
@@ -67,7 +68,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v33). Każda zmiana
 
 - Wysyła prasówkę na Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami, domeną źródła i podpisem „via”, podzielone na wiadomości mieszczące się w limicie długości Discorda.
 - Dopisuje linki do `published_links` dopiero po udanej wysyłce i archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty, streszczenie, numery CVE, KEV, via, notatki językowe) w pliku `data/archive/RRRR-MM.json`. Historia i archiwum są zapisywane także wtedy, gdy krok prasówki zakończy się błędem (chyba że uruchomienie zostanie anulowane).
-- W poniedziałek wysyła na `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia, a 1. dnia miesiąca na osobny kanał 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami z archiwum. Każde zestawienie idzie tylko raz (znacznik `data/last_top.json`). Od v33 zestawienia łączą też rekordy ze wspólnym numerem CVE albo nazwą wydarzenia z cyframi w dowolnym tytule (także artykułów powiązanych), pokazują wydarzenie pod najlepszym rekordem (najwyższa punktacja, potem polskie źródło, potem najwięcej powiązanych artykułów), pomijają przeglądy, porządkują streszczenia z archiwum kodem (streszczenie po angielsku albo powtarzające tytuł zastępuje streszczenie kolejnego artykułu) i przepuszczają je przez jedną korektę językową (Gemini, zapasowo Groq); każda zmiana zrobiona przez kod trafia do logu jako „PORZĄDEK”.
+- W poniedziałek wysyła na `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia, a 1. dnia miesiąca na osobny kanał 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami z archiwum. Każde zestawienie idzie tylko raz (znacznik `data/last_top.json`). Od v33 zestawienia łączą też rekordy ze wspólnym numerem CVE albo nazwą wydarzenia z cyframi w dowolnym tytule (także artykułów powiązanych), pokazują wydarzenie pod najlepszym rekordem (najwyższa punktacja, potem polskie źródło, potem najwięcej powiązanych artykułów), pomijają przeglądy, porządkują streszczenia z archiwum kodem (streszczenie po angielsku albo powtarzające tytuł zastępuje streszczenie kolejnego artykułu) i przepuszczają je przez jedną korektę językową (Gemini, zapasowo Groq); każda zmiana zrobiona przez kod trafia do logu jako „PORZĄDEK”. Od v34 jedno zapytanie na zestawienie pisze krótką historię całego wydarzenia (co się wysypało, jak to szło, co dzieje się teraz i czy eskaluje, jak łatać) z polskich streszczeń wszystkich jego artykułów i tytułów artykułów powiązanych; jest użyte tylko wtedy, gdy przejdzie kontrolę względem tego materiału (log „ZESTAWIENIE AI”).
 - Uruchomienia z gałęzi innych niż `main` idą wyłącznie na kanał testowy z nagłówkiem „🧪 TEST” i niczego nie zapisują.
 - Gdy workflow prasówki albo zestawienia zakończy się błędem, na kanał testowy przychodzi alarm z linkiem do logu.
 
@@ -106,7 +107,7 @@ Wcześniej: w teście v30 korekta Gemini poprawiła 6 z 6 streszczeń; w teście
 
 ## Plan rozwoju
 
-- **Most do CyberSec Mozaika (v34):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
+- **Most do CyberSec Mozaika (v35):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
 - Ochrona gałęzi `main`.
 
 Planowane funkcje nie są uznawane za wdrożone, dopóki nie zostaną opracowane i zweryfikowane.

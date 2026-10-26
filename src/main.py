@@ -22,7 +22,7 @@ from article_selection import (
 from discord_output import build_digest_messages, send_messages
 from ai_summaries import summarize_articles, summary_source
 from article_pages import add_page_texts
-from kev import find_cves, load_kev, mark_kev
+from kev import VIA_LEAD_CHARS, find_cves, load_kev, mark_kev
 from roundup_parts import VIA_LEKTURA, extract_parts
 from article_archive import append_to_archive, load_recent
 from event_grouping import group_events, mark_continuations
@@ -88,7 +88,16 @@ def mark_continuations_by_cve(articles, recent_records):
         if article.get("continuation"):
             continue
 
-        if set(find_cves(article.get("title", ""), article.get("summary", ""))) & recent:
+        texts = [article.get("title", ""), article.get("summary", "")]
+
+        # v33: for a lektura link the ZTS comment is short and the CVE ids are
+        # in the linked page, often after its first 600 characters (digest of
+        # 26.10.2026: PHP 8.5.12 release, CVE-2026-109618 in the PHP
+        # Foundation post, shown again in "Najważniejsze").
+        if article.get("via"):
+            texts.append(article.get("page_text", "")[:VIA_LEAD_CHARS])
+
+        if set(find_cves(*texts)) & recent:
             article["continuation"] = True
             marked += 1
 

@@ -35,7 +35,15 @@ from gemini import ask_gemini, gemini_models
 from languagetool import grammar_hints
 from glossary import autofix, convention_violations, is_acronym, prompt_glossary
 from language_notes import findings, log_line, settle, unique
-from summary_quality import STYLE_RULES, fix_sentence_case, quality_problems, repair_summary
+from summary_quality import (
+    STYLE_RULES,
+    fix_sentence_case,
+    quality_problems,
+    remove_unsupported_labels,
+    repair_summary,
+    split_sentences,
+    suggestion_text,
+)
 
 
 PROVIDERS = [
@@ -90,7 +98,8 @@ CO MA BYĆ W STRESZCZENIU:
 - Każde zdanie musi zawierać informację z artykułu. Nie pisz ogólników ani komentarzy, np. „co podkreśla wagę…”, „to kolejny przykład…”, „warto pamiętać…”, „należy zachować ostrożność”.
 - Nie używaj względnych określeń czasu („jutro”, „dziś”, „wczoraj”, „w przyszłym tygodniu”): streszczenie czyta się też po tygodniu. Podaj datę z artykułu albo pomiń czas.
 - Liczby, nazwy i numery CVE przepisuj dokładnie z artykułu; nie zaokrąglaj i nie przeliczaj.
-- Zalecenia (aktualizacja, obejście, wyłączenie usługi) podawaj tylko wtedy, gdy artykuł je wymienia; nie dopisuj własnych.
+- Zalecenia (aktualizacja, obejście, wyłączenie usługi) podawaj tylko wtedy, gdy artykuł je wymienia; nie dopisuj własnych. Nie kończ streszczenia formułką „Zaleca się (natychmiastową) aktualizację” ani „Zaleca się zastosowanie łatki”: informacja o łatce już to mówi. Zalecenie pisz tylko konkretnie (wersja z poprawką, obejście, co wyłączyć).
+- Nie dodawaj określeń, których nie ma w artykule: „zero-day” tylko wtedy, gdy artykuł tak nazywa lukę; „natychmiast” tylko wtedy, gdy artykuł mówi o pilności.
 - Nie pisz, czego artykuł nie podaje (np. „raport nie podaje informacji o sprawcach”) – pomiń to.
 - Całe streszczenie ma najwyżej 350 znaków. Pisz krótkie zdania zakończone kropką; nie łącz zdań średnikami. Wymień najwyżej 3 najważniejsze numery CVE lub wersje.
 - Jeśli materiał to tylko tytuł lub krótka zajawka, napisz 1 zdanie i nie dopowiadaj niczego.
@@ -156,7 +165,7 @@ def summary_source(article, limit=SOURCE_TEXT_LIMIT):
 
 def prompt_style():
     """Calques from the style list with their replacements, for the prompt."""
-    return "; ".join(f"„{form}” → {suggestion}" for _, form, suggestion in STYLE_RULES) or "—"
+    return "; ".join(f"„{form}” → {suggestion_text(suggestion)}" for _, form, suggestion in STYLE_RULES) or "—"
 
 
 def build_request_messages(batch):
@@ -396,8 +405,15 @@ def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep
             print(f"KONTROLA: streszczenie {number} poprawione.")
             continue
 
+        # v33: "zero-day" and "natychmiast…" without support in the article
+        # are removed as words first, so the sentence with the facts stays.
+        base = text or summaries[number]
+
+        if source is not None:
+            base = remove_unsupported_labels(base, source)
+
         repaired = repair_summary(
-            text or summaries[number],
+            base,
             lambda sentence: all_problems(sentence, source, soft=False),
         )
 
@@ -580,6 +596,59 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
 
     print(f"KOREKTA: poprawione językowo {changed} z {len(items)} streszczeń.")
     return changed
+
+
+def tidy_summary(text, notes=None):
+    """Clean an archived summary for the tops (v33).
+
+    Summaries archived before the later checks can still have "RCE (RCE)",
+    a lowercase sentence start, "jutro" or filler (weekly top of 26.10.2026).
+    Code applies the autofix and sentence case, and removes sentences with
+    problems; the material is not available here, so facts are not checked.
+
+    notes: optional list that gets a description of every change, for the
+    "PORZĄDEK" lines of the top log.
+    """
+    changes = []
+    cleaned = clean_summary(text or "", changes=changes)
+
+    if notes is not None:
+        notes.extend(f"autopoprawka „{change['used']}” → „{change['fixed']}”" for change in changes)
+
+    if cleaned and all_problems(cleaned, None, soft=False):
+        repaired = repair_summary(cleaned, lambda sentence: all_problems(sentence, None, soft=False))
+
+        # A summary with nothing left is reported once by the caller.
+        if notes is not None and repaired:
+            kept = set(split_sentences(repaired))
+            notes.extend(
+                f"usunięte zdanie: „{sentence}” ({'; '.join(all_problems(sentence, None, soft=False))})"
+                for sentence in split_sentences(cleaned)
+                if sentence not in kept
+            )
+
+        cleaned = repaired
+
+    return cleaned
+
+
+def proofread_top(events, environ=None, opener=urllib.request.urlopen, sleep=time.sleep):
+    """One language correction of the top summaries (v33): Gemini, then Groq.
+
+    Never raises; without keys the summaries stay as they are.
+    """
+    environ = os.environ if environ is None else environ
+    providers = [provider for provider in PROVIDERS if environ.get(provider["key_variable"], "").strip()]
+
+    if not providers and not environ.get("GEMINI_API_KEY", "").strip():
+        print("KOREKTA: pominięta (brak kluczy API).")
+        return 0
+
+    try:
+        return proofread_summaries(events, providers, environ, opener, sleep)
+    except Exception as error:
+        print(f"KOREKTA: pominięta – {type(error).__name__}: {str(error)[:120]}")
+        return 0
 
 
 def summarize_articles(articles, environ=None, opener=urllib.request.urlopen, sleep=time.sleep):

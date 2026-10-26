@@ -12,7 +12,7 @@ The project runs with a budget of 0 PLN, using free service tiers only (GitHub A
 
 ## Project Status
 
-The digest has been running in production since October 2026 (version v32). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+The digest has been running in production since October 2026 (version v33). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Stage | Scope | Status |
 |---|---|---|
@@ -33,6 +33,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 | 15 | Language quality: style list, language check, proofreading by Google Gemini with LanguageTool hints (v29, v30) | completed and verified |
 | 16 | "Weekendowa lektura" split into links, merging by company names, alarm on workflow failure (v31) | completed and verified |
 | 17 | Language log: corrections of summaries saved in the archive (v32) | completed; verified with unit tests and real errors from the logs |
+| 18 | Quality of summaries and tops: no closing formulas, labels only with support, tops merging by CVE, Polish leaders, clean-up and correction of top summaries (v33) | completed; verified on the test branch and a simulation on the archive |
 
 ## Current Implementation
 
@@ -50,7 +51,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 ### Events and markers
 
 - Merges articles about the same event into one item with "także:" links to the other sources. The rules: similar titles; a shared CVE id or an event name with digits (e.g. PHP2Shell), also within one source; a shared company or product name ("Quest Diagnostics", "Capcom") when the article texts show the word is a name. Platform names that appear in many different stories (Microsoft, Windows, Chrome, Python…) never merge on their own.
-- Shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section, also when only the summary shares a CVE id with such an event.
+- Shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section, also when only the summary (for lektura links also the linked page) shares a CVE id with such an event.
 - Marks with 🔥 articles about vulnerabilities from the CISA KEV catalog (confirmed exploitation in attacks). The marker is set by code, not by the AI: CVE ids from the title and the beginning of the article text are compared with the catalog downloaded on every run (from CISA, with CISA's GitHub mirror as a fallback). The tops check the saved CVE ids again against the current catalog. Without the catalog the digest is sent without markers.
 
 ### AI summaries in Polish
@@ -58,7 +59,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 - Each article gets a concrete summary in Polish (2–3 short sentences, up to about 350 characters; 1 sentence when the material is only a short teaser) written by Groq `gpt-oss-120b`, with `qwen3.8-27b` as a fallback. Requests are spaced out (at least 20 s) and a batch that no model handled is retried once at the end.
 - Material: the full feed text or description; when the feed gives fewer than 600 characters, the article text is fetched from its page (paragraphs without menus, ads and footer). Page text is only material for the AI and is never saved.
 - Terms follow the glossary `data/glosariusz_mirror.csv`, a mirror of the CyberSec Mozaika glossary. Simple forbidden forms are corrected by code without an AI request ("poprawka" → "łatka", "zdalne wykonanie kodu" → "RCE"); explanations in parentheses are added by code at the first occurrence of 6 chosen terms, in the case of the term ("przed exploitem (kodem wykorzystującym podatność)").
-- Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
+- Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, the labels "zero-day" and "natychmiast" (urgent) when the article does not use them, closing formulas without content ("Zaleca się natychmiastową aktualizację."), summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
 - Proofreading: one request per digest to Google Gemini (`gemini-3.8-flash`, fallback `gemini-3.5-flash`), with grammar hints from LanguageTool; when Gemini is unavailable, the Groq models take over. A correction is accepted only when it keeps the numbers, CVE ids and length; every correction is logged as "przed" / "po".
 - Language log (v32): every correction of a summary is saved with the article in the archive (field `language`): forbidden glossary forms with the entry id, calques from the style list, terms left uninflected, replacements made by code and changes made by the proofreading, each with its outcome (fixed by the AI, by code, still present, or summary dropped). The notes describe the AI output only; they change nothing and never write to the glossary.
 
@@ -66,7 +67,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 
 - Sends the digest to Discord through a webhook, grouped by each article's most important category, with clickable titles, source domains and the "via" label, split into messages within Discord's length limit.
 - Records links in `published_links` only after a successful delivery, and archives each delivered article (date, title, link, source, categories, score, summary, CVE ids, KEV, via, language notes) in `data/archive/YYYY-MM.json`. History and archive are saved even when the digest step fails (unless the run is cancelled).
-- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`).
+- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`). Since v33 the tops also merge records that share a CVE id or an event name with digits in any title (also of related articles), show each event under its best record (highest score, then a Polish source, then the most related articles), leave out roundups, tidy the archived summaries by code (an English or title-only summary falls back to the next article) and send them through one language correction (Gemini, then Groq); every change made by code is logged as "PORZĄDEK".
 - Runs from branches other than `main` send only to the test channel, with a "🧪 TEST" banner, and save nothing.
 - When the digest or a top workflow fails, an alarm with a link to the log goes to the test channel.
 
@@ -75,6 +76,12 @@ The digest has been running in production since October 2026 (version v32). Ever
 The main trigger is an external alarm clock: cron-job.org calls the GitHub API (workflow_dispatch with the `budzik` input) at 06:17 Polish time, Monday to Saturday, and starts the tops on Mondays (weekly) and on the 1st of the month (monthly) at 08:17. It uses a fine-grained PAT limited to this repository and the Actions permission (Read and write), stored only in cron-job.org; the token must be renewed before it expires (one year). GitHub's schedule stays as a backup (digest attempts at 06:17–09:17, tops at 08:17–11:17, `Europe/Warsaw`), because GitHub skips or delays many scheduled runs. The first completed alarm-clock or scheduled run sends the digest, later runs that day end without sending (marker `data/last_digest.json`). A manual run (leave `budzik` unchecked) is never blocked and also counts as today's digest. A concurrency group prevents overlapping runs.
 
 ## Latest Verified Results
+
+Version v33 (2026-10-26):
+
+- Unit tests: **346 passed**.
+- Weekly top 5 for 19–25 October run from the branch: PHP2Shell as one event (17 articles, 7 sources) under a Polish title, no duplicate, no Fortinet/FortiSIEM merge, no roundup; the Gemini correction fixed the old summaries.
+- The rules catch the closing formulas and "nie są znane" in the summaries of 26 October; the style list caught six calques in the branch digest.
 
 Version v32 (2026-10-25):
 
@@ -99,7 +106,7 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v33):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika (v34):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
 - Branch protection for `main`.
 
 Planned features are not considered implemented until they have been developed and verified.
@@ -169,8 +176,8 @@ Repository secrets (Settings → Secrets and variables → Actions):
 - `DISCORD_WEEKLY_WEBHOOK_URL` — webhook of `#top-tygodnia` (weekly top 5).
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook of the monthly top 10 channel.
 - `DISCORD_TEST_WEBHOOK_URL` — webhook of the test channel: runs from branches and failure alarms. Without it, branch runs send nothing.
-- `GROQ_API_KEY` — Groq API key for AI summaries. Without it, the digest is sent without summaries.
-- `GEMINI_API_KEY` — Google Gemini API key (free quota, no billing) for proofreading; optional. Without it, proofreading uses the Groq models. The optional repository variable `GEMINI_MODEL` (comma-separated) overrides the model names.
+- `GROQ_API_KEY` — Groq API key for AI summaries (and, since v33, the fallback correction of top summaries). Without it, the digest is sent without summaries.
+- `GEMINI_API_KEY` — Google Gemini API key (free quota, no billing) for proofreading of the digest and the tops; optional. Without it, proofreading uses the Groq models. The optional repository variable `GEMINI_MODEL` (comma-separated) overrides the model names.
 
 Each secret is passed only to the workflow step that needs it. The cron-job.org token is kept only in cron-job.org. Never commit API keys, webhook URLs, tokens or passwords to the repository.
 

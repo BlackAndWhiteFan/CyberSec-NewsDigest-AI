@@ -1,6 +1,7 @@
 """Formatting and delivery of the daily digest to a Discord webhook."""
 
 import json
+import re
 import time
 import urllib.parse
 
@@ -167,6 +168,14 @@ def build_digest_lines(articles, eligible_count, source_count, date_text):
     return lines
 
 
+ITEM_LINE = re.compile(r"\d+\.\s")
+
+
+def next_text_line(lines, index):
+    """The next non-empty line after lines[index], or ""."""
+    return next((line for line in lines[index + 1:] if line), "")
+
+
 def split_into_messages(lines, limit=DISCORD_MESSAGE_LIMIT, section_headers=()):
     """Join lines into messages no longer than the limit, never splitting a line.
 
@@ -177,9 +186,15 @@ def split_into_messages(lines, limit=DISCORD_MESSAGE_LIMIT, section_headers=()):
     current = ""
     current_header = None
 
-    for line in lines:
+    for index, line in enumerate(lines):
         if line in section_headers:
             current_header = line
+        elif line == "" and not ITEM_LINE.match(next_text_line(lines, index)):
+            # v33: an empty line followed by something other than a numbered
+            # item (the next header or the notes) ends the section, so the
+            # notes never get a "(cd.)" header (test of 26.10.2026: "🔁 CIĄG
+            # DALSZY (cd.)" above the AI note only).
+            current_header = None
 
         candidate = f"{current}\n{line}" if current else line
 

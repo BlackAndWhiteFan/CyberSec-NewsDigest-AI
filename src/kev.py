@@ -72,6 +72,10 @@ def find_cves(*texts):
 # Articles often mention older vulnerabilities further on (Arista article of
 # 23.10.2026 got the marker for earlier VeloCloud CVE ids).
 LEAD_CHARS = 600
+# v33: for a link from "Weekendowa lektura" the description is a short ZTS
+# comment and the page is the linked publication itself, whose CVE ids often
+# come after its first 600 characters (PHP Foundation post, 26.10.2026).
+VIA_LEAD_CHARS = 2000
 
 
 def plain_text(value):
@@ -85,7 +89,9 @@ def article_cves(article):
 
     for item in [article] + list(article.get("related", [])):
         texts.append(item.get("title", ""))
-        texts.extend(plain_text(item.get(field, ""))[:LEAD_CHARS] for field in ("description", "content", "page_text"))
+        texts.extend(plain_text(item.get(field, ""))[:LEAD_CHARS] for field in ("description", "content"))
+        page_lead = VIA_LEAD_CHARS if item.get("via") else LEAD_CHARS
+        texts.append(plain_text(item.get("page_text", ""))[:page_lead])
 
     return find_cves(*texts)
 

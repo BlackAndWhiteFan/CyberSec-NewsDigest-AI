@@ -135,5 +135,37 @@ class TestLekturaContinuation(unittest.TestCase):
         self.assertEqual(mark_continuations_by_cve([article], records), 0)
 
 
+class TestRansomwareExplanation(unittest.TestCase):
+    # Branch test of 26.10.2026: "Negocjatorzy ransomware (program żądający okupu)".
+    def test_not_after_people_or_groups(self):
+        from glossary import apply_glossary
+        used = set()
+        text = apply_glossary("Negocjatorzy ransomware pomagali grupie. Zespół wykrył ransomware w sieci.", used)
+        self.assertEqual(text, "Negocjatorzy ransomware pomagali grupie. "
+                               "Zespół wykrył ransomware (program żądający okupu) w sieci.")
+
+    def test_skipped_term_can_be_explained_in_a_later_summary(self):
+        from glossary import apply_glossary
+        used = set()
+        self.assertEqual(apply_glossary("Grupy ransomware INC i The Gentlemen.", used),
+                         "Grupy ransomware INC i The Gentlemen.")
+        self.assertIn("(program żądający okupu)", apply_glossary("Atak ransomware na szpital.", used))
+
+    def test_genitive_after_verb(self):
+        from glossary import apply_glossary
+        self.assertEqual(apply_glossary("Grupa użyła ransomware do szyfrowania.", set()),
+                         "Grupa użyła ransomware (programu żądającego okupu) do szyfrowania.")
+
+
+class TestStyleV33(unittest.TestCase):
+    def test_new_calques(self):
+        problems = quality_problems("Panele systemu AI-hackingowego Cairn. Przygotowano 46 buildów szyfrujących.")
+        self.assertTrue(has(problems, "kalka „AI-hackingowego”"))
+        self.assertTrue(has(problems, "kalka „buildów”"))
+
+    def test_product_name_is_not_a_calque(self):
+        self.assertFalse(has(quality_problems("Atakujący użyli narzędzia Build Tools."), "kalka"))
+
+
 if __name__ == "__main__":
     unittest.main()

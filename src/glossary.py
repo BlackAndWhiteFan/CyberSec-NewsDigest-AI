@@ -144,7 +144,18 @@ def forms_pattern(forms):
     return rf"(?<!\w)(?P<anchor>{alternatives})(?!\w)"
 
 
+def ransomware_gloss(match):
+    """v33: "ransomware" does not inflect, but its explanation does: genitive
+    after a verb or preposition that governs it ("użyła ransomware
+    (programu żądającego okupu)"), otherwise nominative/accusative."""
+    if GENITIVE_CONTEXT.search(match.string[: match.start("anchor")]):
+        return "programu żądającego okupu"
+
+    return "program żądający okupu"
+
+
 INFLECTED = {
+    "H015": (r"(?<!\w)(?P<anchor>ransomware)(?!\w)", ransomware_gloss),
     "H182": (r"\b(?P<anchor>podwyższeni(?:e|a|u|em)|podwyższeń)\s+uprawnień\b",
              lambda m: escalation(m)),
     "H207": (r"\b(?P<anchor>poświadcze(?:nia|ń|niom|niami|niach|nie|niem|niu))\b",
@@ -350,6 +361,31 @@ GLOSS_RULES = [
 ]
 
 
+# v33: an indeclinable term used as an attribute of a person or group
+# ("negocjatorzy ransomware", "grupy ransomware INC") cannot take the
+# explanation: "Negocjatorzy ransomware (program żądający okupu)" reads as if
+# the negotiators were a program (test 26.10.2026). Such an occurrence is
+# skipped; the explanation goes to a later one, or to a later summary of the
+# digest. "Atak ransomware (program żądający okupu)" stays as before.
+ATTRIBUTIVE_BEFORE = re.compile(
+    r"(?<!\w)(?:negocjator|grup|gang|operator|afiliant|ugrupowani|kartel|cyberprzestęp|przestęp|"
+    r"twórc|autor|członk|lider|ofiar)\w*\s+$",
+    re.IGNORECASE,
+)
+ATTRIBUTIVE_TERMS = {"H015"}
+
+
+def first_usable_match(key, pattern, text):
+    """First match of a term that can take an explanation."""
+    for match in pattern.finditer(text):
+        if key in ATTRIBUTIVE_TERMS and ATTRIBUTIVE_BEFORE.search(text[: match.start("anchor")]):
+            continue
+
+        return match
+
+    return None
+
+
 def apply_glossary(text, used_terms):
     """Add explanations in parentheses at the first occurrence of each term.
 
@@ -364,7 +400,7 @@ def apply_glossary(text, used_terms):
         if key in used_terms:
             continue
 
-        match = pattern.search(text)
+        match = first_usable_match(key, pattern, text)
 
         if not match:
             continue

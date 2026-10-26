@@ -596,6 +596,41 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
     return changed
 
 
+def tidy_summary(text):
+    """Clean an archived summary for the tops (v33).
+
+    Summaries archived before the later checks can still have "RCE (RCE)",
+    a lowercase sentence start, "jutro" or filler (weekly top of 26.10.2026).
+    Code applies the autofix and sentence case, and removes sentences with
+    problems; the material is not available here, so facts are not checked.
+    """
+    text = clean_summary(text or "")
+
+    if text and all_problems(text, None, soft=False):
+        text = repair_summary(text, lambda sentence: all_problems(sentence, None, soft=False))
+
+    return text
+
+
+def proofread_top(events, environ=None, opener=urllib.request.urlopen, sleep=time.sleep):
+    """One language correction of the top summaries (v33): Gemini, then Groq.
+
+    Never raises; without keys the summaries stay as they are.
+    """
+    environ = os.environ if environ is None else environ
+    providers = [provider for provider in PROVIDERS if environ.get(provider["key_variable"], "").strip()]
+
+    if not providers and not environ.get("GEMINI_API_KEY", "").strip():
+        print("KOREKTA: pominięta (brak kluczy API).")
+        return 0
+
+    try:
+        return proofread_summaries(events, providers, environ, opener, sleep)
+    except Exception as error:
+        print(f"KOREKTA: pominięta – {type(error).__name__}: {str(error)[:120]}")
+        return 0
+
+
 def summarize_articles(articles, environ=None, opener=urllib.request.urlopen, sleep=time.sleep):
     """Add a "summary" field to articles; return the name of each provider used.
 

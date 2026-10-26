@@ -20,9 +20,10 @@ import re
 from datetime import datetime
 
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
+from article_selection import is_excluded, is_roundup
 from discord_output import polish_plural, send_messages, split_into_messages
-from event_grouping import SIMILARITY_THRESHOLD, document_frequency, same_event, text_names
-from kev import KEV_NOTE, MARKER as KEV_MARKER, load_kev, refresh_records
+from event_grouping import SIMILARITY_THRESHOLD, document_frequency, same_event, strong_match, text_names
+from kev import KEV_NOTE, MARKER as KEV_MARKER, find_cves, load_kev, refresh_records
 import test_mode
 import top_guard
 
@@ -63,11 +64,52 @@ def record_article_count(record):
     return 1 + len(record.get("related", []))
 
 
+def record_titles(record):
+    return [record.get("title", "")] + [related.get("title", "") for related in record.get("related", [])]
+
+
+def record_cves(record):
+    """CVE ids saved with the record (v28) or found in its title and summary.
+
+    A whole roundup ("Weekendowa lektura" as one item) has CVE ids from dozens
+    of links, so it links nothing (as in "Ciąg dalszy", v32).
+    """
+    if is_roundup(record):
+        return set()
+
+    return set(record.get("cves", [])) | set(find_cves(record.get("title", ""), record.get("summary", "")))
+
+
+def strongly_linked(record, event):
+    """v33: a shared CVE id, or an event name with digits in any title of the
+    record and any title of the event (also the titles of related articles).
+
+    Weekly top of 26.10.2026: "PHP warns admins of two critical flaws" (21.10)
+    stood apart from PHP2Shell, although its related article was "PHP2Shell:
+    Two Unpatched Critical PHP RCE…", and four PHP articles with the CVE ids
+    of PHP2Shell were separate events.
+    """
+    cves = record_cves(record)
+
+    if any(cves & record_cves(member) for member in event):
+        return True
+
+    titles = record_titles(record)
+    return any(
+        strong_match(title, other)
+        for member in event
+        for other in record_titles(member)
+        for title in titles
+    )
+
+
 def group_month(records):
     """Group archive records of one month into events.
 
     Records are taken from the highest score and earliest date; each joins
-    the first event whose leading record describes the same event.
+    the first event whose leading record describes the same event, or that
+    shares a CVE id or an event name with digits with any of its records
+    (v33).
     """
     titles = [record.get("title", "") for record in records] + [
         related.get("title", "")
@@ -96,7 +138,7 @@ def group_month(records):
             same_source = record.get("source") in {member.get("source") for member in event}
             threshold = float("inf") if same_source else SIMILARITY_THRESHOLD
 
-            if same_event(
+            if strongly_linked(record, event) or same_event(
                 event[0].get("title", ""),
                 record.get("title", ""),
                 frequency,
@@ -109,22 +151,67 @@ def group_month(records):
         else:
             events.append([record])
 
-    return events
+    return merge_linked_events(events)
+
+
+def merge_linked_events(events):
+    """Join events that share a CVE id or an event name with digits (v33).
+
+    The first pass compares a record only with the events formed so far, so
+    an event can split in two when its linking article comes later (weekly
+    top of 26.10.2026: two PHP2Shell events).
+    """
+    merged = []
+
+    for event in events:
+        for target in merged:
+            if any(strongly_linked(record, target) for record in event):
+                target.extend(event)
+                break
+        else:
+            merged.append(list(event))
+
+    return merged if len(merged) == len(events) else merge_linked_events(merged)
 
 
 def event_summary(event):
     """Return the AI summary of the leading article, or of the first article
-    in the event that has one (records archived before v22 have none)."""
-    for record in event:
-        if record.get("summary"):
-            return record["summary"]
+    in the event that has one (records archived before v22 have none).
 
-    return ""
+    v33: summaries are tidied first (ai_summaries.tidy_summary): an English
+    or empty one falls back to the next article of the event.
+    """
+    from ai_summaries import tidy_summary
+    from summary_quality import repeats_title
+
+    fallback = ""
+
+    for record in event:
+        summary = tidy_summary(record.get("summary", ""))
+
+        # A summary that only restates its title says nothing new next to
+        # the title; the next article's summary is better, if there is one.
+        if summary and repeats_title(summary, record.get("title", "")):
+            fallback = fallback or summary
+            continue
+
+        if summary:
+            return summary
+
+    return fallback
+
+
+def leader_key(record):
+    """v33: the record shown for an event – highest score, then a Polish
+    source, then the most related articles (weekly top of 26.10.2026 showed
+    the English announcement "… patches coming tomorrow" for PHP2Shell)."""
+    return (record.get("score", 0), record.get("source", "").endswith(".pl"), len(record.get("related", [])))
 
 
 def summarize_event(event):
     """Return the figures used to rank and display one event."""
-    leader = event[0]
+    leader = max(event, key=leader_key)
+    event = [leader] + [record for record in event if record is not leader]
     sources = set().union(*(record_sources(record) for record in event))
 
     return {
@@ -140,7 +227,12 @@ def summarize_event(event):
 
 
 def rank_events(records, limit=TOP_LIMIT):
-    """Return the top events of a month, most important first."""
+    """Return the top events of a month, most important first.
+
+    v33: roundups and promotional titles archived before their filters
+    (ThreatsDay, Weekendowa lektura as one item) are left out.
+    """
+    records = [record for record in records if not (is_roundup(record) or is_excluded(record))]
     summaries = [summarize_event(event) for event in group_month(records)]
     summaries.sort(
         key=lambda item: (
@@ -177,8 +269,21 @@ def format_event_line(number, event):
     return line
 
 
-def build_top_lines(month, records, limit=TOP_LIMIT):
-    """Return the lines of the monthly message, or [] for an empty month."""
+def polish_events(events):
+    """v33: one language correction of the top summaries (they are tidied by
+    code in event_summary, see ai_summaries.proofread_top)."""
+    from ai_summaries import proofread_top
+
+    proofread_top([event for event in events if event.get("summary")])
+    return events
+
+
+def build_top_lines(month, records, limit=TOP_LIMIT, polish=None):
+    """Return the lines of the monthly message, or [] for an empty month.
+
+    polish(events): optional step on the ranked events (v33: tidy and
+    proofread summaries); the tests run without it.
+    """
     if not records:
         return []
 
@@ -194,6 +299,9 @@ def build_top_lines(month, records, limit=TOP_LIMIT):
     lines.append("")
 
     events = rank_events(records, limit)
+
+    if polish:
+        polish(events)
 
     for number, event in enumerate(events, start=1):
         lines.append(format_event_line(number, event))
@@ -262,7 +370,8 @@ def run(month=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, 
     refresh_records(records, (load_kev_catalog or load_kev)())
 
     complete = month < today.strftime("%Y-%m")
-    deliver("month", month, build_top_lines(month, records), "DISCORD_MONTHLY_WEBHOOK_URL", marker_path, complete)
+    deliver("month", month, build_top_lines(month, records, polish=polish_events), "DISCORD_MONTHLY_WEBHOOK_URL",
+            marker_path, complete)
 
 
 if __name__ == "__main__":

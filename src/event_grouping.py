@@ -178,8 +178,12 @@ COMMON_NAMES = frozenset(
     router routers plugin plugins browser browsers firewall firewalls
     report reports warning researchers python javascript wordpress docker
     kubernetes nodejs gitlab apache nginx
+    center centre manager software product products platform portal suite
+    studio console service services system systems enterprise edition
     """.split()
 )
+# v33: the product-type words at the end ("Siemens Software Center" and
+# "Atlassian … Data Center", 26.10.2026) name no company on their own.
 CAPITALIZED = re.compile(r"[A-ZĄĆĘŁŃÓŚŹŻ][\w-]*")
 
 
@@ -234,6 +238,7 @@ def shared_rare_name(title_a, title_b, frequency, rare_limit, names=frozenset())
     return any(
         len(word) >= 5 and frequency.get(word[:STEM_LENGTH], 2) <= rare_limit
         for word in words_a & words_b & set(names)
+        if usable_name(word)
     )
 
 
@@ -267,8 +272,32 @@ def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare
         and (words_a[stem][1] or words_b[stem][1])
         and max(len(words_a[stem][0]), len(words_b[stem][0])) >= NAME_MIN_LENGTH
         and abs(len(words_a[stem][0]) - len(words_b[stem][0])) <= NAME_ENDING_LENGTH
+        and same_name(words_a[stem][0], words_b[stem][0])
         for stem in shared
     )
+
+
+def same_name(word_a, word_b):
+    """True when two words are one name in different inflected forms (v33).
+
+    The weekly top of 26.10.2026 merged "Fortinet" with "FortiSIEM" (only
+    the beginning "forti" is shared) and an MCP Python SDK story with a
+    Pillow flaw (Python is a platform name, see COMMON_NAMES). Forms of one
+    name share everything but the ending: "Capcom" / "Capcomu",
+    "Fakturownia" / "Fakturowni".
+    """
+    a, b = word_a.casefold(), word_b.casefold()
+
+    if not (usable_name(a) and usable_name(b)):
+        return False
+
+    shorter = min(len(a), len(b))
+    prefix = 0
+
+    while prefix < shorter and a[prefix] == b[prefix]:
+        prefix += 1
+
+    return prefix >= shorter - 2
 
 
 def is_polish(article):

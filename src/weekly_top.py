@@ -15,7 +15,7 @@ from datetime import date, datetime, timedelta
 
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from kev import load_kev, refresh_records
-from monthly_top import deliver, format_event_line, kev_note, rank_events
+from monthly_top import deliver, format_event_line, kev_note, polish_events, rank_events
 import top_guard
 
 
@@ -67,7 +67,7 @@ def week_records(monday, archive_dir=ARCHIVE_DIR):
     return [record for record in records if first <= record.get("date", "") <= last]
 
 
-def build_week_lines(monday, records, limit=TOP_LIMIT):
+def build_week_lines(monday, records, limit=TOP_LIMIT, polish=None):
     """Return the lines of the weekly message, or [] for an empty week."""
     if not records:
         return []
@@ -83,6 +83,9 @@ def build_week_lines(monday, records, limit=TOP_LIMIT):
     lines.append("")
 
     events = rank_events(records, limit)
+
+    if polish:
+        polish(events)
 
     for number, event in enumerate(events, start=1):
         lines.append(format_event_line(number, event))
@@ -120,7 +123,8 @@ def run(week=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, t
     refresh_records(records, (load_kev_catalog or load_kev)())
 
     complete = monday + timedelta(days=6) < today
-    deliver("week", period, build_week_lines(monday, records), "DISCORD_WEEKLY_WEBHOOK_URL", marker_path, complete)
+    deliver("week", period, build_week_lines(monday, records, polish=polish_events), "DISCORD_WEEKLY_WEBHOOK_URL",
+            marker_path, complete)
 
 
 if __name__ == "__main__":

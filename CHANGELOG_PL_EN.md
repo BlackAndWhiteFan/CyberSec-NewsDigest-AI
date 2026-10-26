@@ -26,9 +26,10 @@ przeanalizowane diffy.
 
 ## v33 --- 26.10.2026
 
-**Część 1: jakość streszczeń po prasówce z 26.10.2026.** Część 2 –
-raport dla CyberSec Mozaika z dziennika języka (v32) – dojdzie w tej
-samej wersji, gdy dziennik zbierze dane z kilku dni.
+**Jakość streszczeń i zestawień po prasówce i pierwszym automatycznym
+top 5 z 26.10.2026.** Decyzja JW z 26.10.2026: ta wersja zamyka się
+na poprawkach jakości, a raport dla CyberSec Mozaika z dziennika języka
+(v32) będzie wersją v34, gdy dziennik zbierze dane.
 
 Powód: pierwsza prasówka po v32 (26.10.2026, budzik, 10 artykułów)
 wyglądała „kulawo” (JW): formułka „Zaleca się natychmiastową
@@ -174,7 +175,17 @@ VeraCrypt opisuje mechanizm, ale pomija sedno (utrata znacznika Mark of
 the Web); w PHP2Shell zdanie bez podmiotu („podatności … potwierdzono
 ich wykorzystywanie”), którego korekta nie poprawiła.
 
-Testy jednostkowe: 343, zakończone powodzeniem.
+Dziennik porządków w zestawieniach (`src/ai_summaries.py`,
+`src/monthly_top.py`, `src/weekly_top.py`): każda zmiana streszczenia
+zrobiona przez kod trafia do logu workflow jako „PORZĄDEK: wydarzenie
+N – …” (autopoprawka, usunięte zdanie z powodem, streszczenie pominięte
+jako angielskie albo powtarzające tytuł) i podsumowanie „streszczenia
+zmienione przez kod: N z M”. Wcześniej porządkowanie było ciche, a log
+zestawienia pokazywał tylko korektę („KOREKTA: …”). Symulacja na top 5
+z 19–25.10: „RCE (RCE)” → „RCE” (PHP2Shell) i pominięte streszczenie po
+angielsku (Node2Shell) – 2 z 5.
+
+Testy jednostkowe: 346, zakończone powodzeniem.
 
 ------------------------------------------------------------------------
 
@@ -1705,9 +1716,10 @@ and reviewed diffs.
 
 ## v33 --- 2026-10-26
 
-**Part 1: summary quality after the digest of 2026-10-26.** Part 2 – the
-report for CyberSec Mozaika from the language log (v32) – will be added
-in the same version once the log has data from a few days.
+**Quality of summaries and tops after the digest and the first
+scheduled weekly top 5 of 2026-10-26.** JW's decision of 2026-10-26:
+this version closes with the quality fixes, and the report for CyberSec
+Mozaika from the language log (v32) becomes v34 once the log has data.
 
 Reason: the first digest after v32 (2026-10-26, alarm clock, 10
 articles) looked "lame" (JW): the formula "Zaleca się natychmiastową
@@ -1857,7 +1869,16 @@ summary describes the mechanism but misses the point (loss of the Mark
 of the Web); in PHP2Shell a sentence without a subject ("podatności …
 potwierdzono ich wykorzystywanie") that the correction did not fix.
 
-Unit tests: 343, passed.
+Clean-up log in the tops (`src/ai_summaries.py`, `src/monthly_top.py`,
+`src/weekly_top.py`): every change code makes to a top summary goes to
+the workflow log as "PORZĄDEK: wydarzenie N – …" (autofix, removed
+sentence with the reason, summary skipped as English or title-only) and
+a summary "streszczenia zmienione przez kod: N z M". The clean-up used
+to be silent, and the top log showed only the correction ("KOREKTA:
+…"). Simulation on the top 5 of 19–25 October: "RCE (RCE)" → "RCE"
+(PHP2Shell) and a skipped English summary (Node2Shell) – 2 of 5.
+
+Unit tests: 346, passed.
 
 ------------------------------------------------------------------------
 

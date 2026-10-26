@@ -12,7 +12,7 @@ Projekt działa przy budżecie 0 PLN, wyłącznie na bezpłatnych planach usług
 
 ## Aktualny stan projektu
 
-Prasówka działa produkcyjnie od października 2026 (wersja v32). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+Prasówka działa produkcyjnie od października 2026 (wersja v33). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Etap | Zakres | Stan |
 |---|---|---|
@@ -33,6 +33,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v32). Każda zmiana
 | 15 | Jakość językowa: lista stylu, kontrola językowa, korekta przez Google Gemini z podpowiedziami LanguageTool (v29, v30) | zakończony i zweryfikowany |
 | 16 | „Weekendowa lektura” rozbierana na linki, łączenie po nazwach firm, alarm o błędzie workflow (v31) | zakończony i zweryfikowany |
 | 17 | Dziennik języka: poprawki streszczeń zapisywane w archiwum (v32) | zakończony; zweryfikowany testami jednostkowymi i prawdziwymi błędami z logów |
+| 18 | Jakość streszczeń i zestawień: bez formułek, określenia tylko z pokryciem w artykule, łączenie w zestawieniach po CVE, polscy liderzy, porządek i korekta streszczeń w zestawieniach (v33) | zakończony; zweryfikowany na gałęzi testowej i w symulacji na archiwum |
 
 ## Obecna implementacja
 
@@ -66,7 +67,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v32). Każda zmiana
 
 - Wysyła prasówkę na Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami, domeną źródła i podpisem „via”, podzielone na wiadomości mieszczące się w limicie długości Discorda.
 - Dopisuje linki do `published_links` dopiero po udanej wysyłce i archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty, streszczenie, numery CVE, KEV, via, notatki językowe) w pliku `data/archive/RRRR-MM.json`. Historia i archiwum są zapisywane także wtedy, gdy krok prasówki zakończy się błędem (chyba że uruchomienie zostanie anulowane).
-- W poniedziałek wysyła na `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia, a 1. dnia miesiąca na osobny kanał 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami z archiwum. Każde zestawienie idzie tylko raz (znacznik `data/last_top.json`). Od v33 zestawienia łączą też rekordy ze wspólnym numerem CVE albo nazwą wydarzenia z cyframi w dowolnym tytule (także artykułów powiązanych), pokazują wydarzenie pod najlepszym rekordem (najwyższa punktacja, potem polskie źródło, potem najwięcej powiązanych artykułów), pomijają przeglądy, porządkują streszczenia z archiwum kodem (streszczenie po angielsku albo powtarzające tytuł zastępuje streszczenie kolejnego artykułu) i przepuszczają je przez jedną korektę językową (Gemini, zapasowo Groq).
+- W poniedziałek wysyła na `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia, a 1. dnia miesiąca na osobny kanał 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami z archiwum. Każde zestawienie idzie tylko raz (znacznik `data/last_top.json`). Od v33 zestawienia łączą też rekordy ze wspólnym numerem CVE albo nazwą wydarzenia z cyframi w dowolnym tytule (także artykułów powiązanych), pokazują wydarzenie pod najlepszym rekordem (najwyższa punktacja, potem polskie źródło, potem najwięcej powiązanych artykułów), pomijają przeglądy, porządkują streszczenia z archiwum kodem (streszczenie po angielsku albo powtarzające tytuł zastępuje streszczenie kolejnego artykułu) i przepuszczają je przez jedną korektę językową (Gemini, zapasowo Groq); każda zmiana zrobiona przez kod trafia do logu jako „PORZĄDEK”.
 - Uruchomienia z gałęzi innych niż `main` idą wyłącznie na kanał testowy z nagłówkiem „🧪 TEST” i niczego nie zapisują.
 - Gdy workflow prasówki albo zestawienia zakończy się błędem, na kanał testowy przychodzi alarm z linkiem do logu.
 
@@ -76,9 +77,15 @@ Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHub
 
 ## Ostatnie zweryfikowane wyniki
 
+Wersja v33 (26.10.2026):
+
+- Testy jednostkowe: **346 zaliczonych**.
+- Top 5 za 19–25.10 uruchomiony z gałęzi: PHP2Shell jako jedno wydarzenie (17 artykułów, 7 serwisów) pod polskim tytułem, bez duplikatu, bez połączenia Fortinet/FortiSIEM i bez przeglądów; korekta Gemini poprawiła stare streszczenia.
+- Reguły łapią formułki i „nie są znane” w streszczeniach z 26.10; lista stylu złapała sześć kalk w prasówce testowej.
+
 Wersja v32 (25.10.2026):
 
-- Testy jednostkowe: **307 zaliczonych** (343 po części 1 v33, 26.10.2026).
+- Testy jednostkowe: **307 zaliczonych**.
 - Notatki językowe sprawdzone na prawdziwych błędach z logów 22–25.10.2026 („rekordy pacjentów”, „AI‑zarządzanego”, „patchują”, „przed exploit”, „eksploatując”, „intruzji”): wszystkie zapisane, z numerami haseł H166 i H153 tam, gdzie słowniczek je ma.
 
 Wersja v31 (25.10.2026):
@@ -99,7 +106,7 @@ Wcześniej: w teście v30 korekta Gemini poprawiła 6 z 6 streszczeń; w teście
 
 ## Plan rozwoju
 
-- **Most do CyberSec Mozaika (v33):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
+- **Most do CyberSec Mozaika (v34):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
 - Ochrona gałęzi `main`.
 
 Planowane funkcje nie są uznawane za wdrożone, dopóki nie zostaną opracowane i zweryfikowane.

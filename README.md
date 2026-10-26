@@ -12,7 +12,7 @@ The project runs with a budget of 0 PLN, using free service tiers only (GitHub A
 
 ## Project Status
 
-The digest has been running in production since October 2026 (version v32). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+The digest has been running in production since October 2026 (version v33). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Stage | Scope | Status |
 |---|---|---|
@@ -33,6 +33,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 | 15 | Language quality: style list, language check, proofreading by Google Gemini with LanguageTool hints (v29, v30) | completed and verified |
 | 16 | "Weekendowa lektura" split into links, merging by company names, alarm on workflow failure (v31) | completed and verified |
 | 17 | Language log: corrections of summaries saved in the archive (v32) | completed; verified with unit tests and real errors from the logs |
+| 18 | Quality of summaries and tops: no closing formulas, labels only with support, tops merging by CVE, Polish leaders, clean-up and correction of top summaries (v33) | completed; verified on the test branch and a simulation on the archive |
 
 ## Current Implementation
 
@@ -66,7 +67,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 
 - Sends the digest to Discord through a webhook, grouped by each article's most important category, with clickable titles, source domains and the "via" label, split into messages within Discord's length limit.
 - Records links in `published_links` only after a successful delivery, and archives each delivered article (date, title, link, source, categories, score, summary, CVE ids, KEV, via, language notes) in `data/archive/YYYY-MM.json`. History and archive are saved even when the digest step fails (unless the run is cancelled).
-- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`). Since v33 the tops also merge records that share a CVE id or an event name with digits in any title (also of related articles), show each event under its best record (highest score, then a Polish source, then the most related articles), leave out roundups, tidy the archived summaries by code (an English or title-only summary falls back to the next article) and send them through one language correction (Gemini, then Groq).
+- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`). Since v33 the tops also merge records that share a CVE id or an event name with digits in any title (also of related articles), show each event under its best record (highest score, then a Polish source, then the most related articles), leave out roundups, tidy the archived summaries by code (an English or title-only summary falls back to the next article) and send them through one language correction (Gemini, then Groq); every change made by code is logged as "PORZĄDEK".
 - Runs from branches other than `main` send only to the test channel, with a "🧪 TEST" banner, and save nothing.
 - When the digest or a top workflow fails, an alarm with a link to the log goes to the test channel.
 
@@ -76,9 +77,15 @@ The main trigger is an external alarm clock: cron-job.org calls the GitHub API (
 
 ## Latest Verified Results
 
+Version v33 (2026-10-26):
+
+- Unit tests: **346 passed**.
+- Weekly top 5 for 19–25 October run from the branch: PHP2Shell as one event (17 articles, 7 sources) under a Polish title, no duplicate, no Fortinet/FortiSIEM merge, no roundup; the Gemini correction fixed the old summaries.
+- The rules catch the closing formulas and "nie są znane" in the summaries of 26 October; the style list caught six calques in the branch digest.
+
 Version v32 (2026-10-25):
 
-- Unit tests: **307 passed** (343 after v33 part 1, 2026-10-26).
+- Unit tests: **307 passed**.
 - Language notes checked on real errors from the logs of 22–25 October 2026 ("rekordy pacjentów", "AI‑zarządzanego", "patchują", "przed exploit", "eksploatując", "intruzji"): all recorded, with entry ids H166 and H153 where the glossary has them.
 
 Version v31 (2026-10-25):
@@ -99,7 +106,7 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v33):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika (v34):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
 - Branch protection for `main`.
 
 Planned features are not considered implemented until they have been developed and verified.

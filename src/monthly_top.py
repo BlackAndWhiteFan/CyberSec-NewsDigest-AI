@@ -230,6 +230,7 @@ def summarize_event(event):
     event = [leader] + [record for record in event if record is not leader]
     summary, notes = event_summary_with_notes(event)
     sources = set().union(*(record_sources(record) for record in event))
+    kev = sorted(set().union(*(set(record.get("kev", [])) for record in event)))
 
     return {
         "title": leader.get("title", ""),
@@ -240,8 +241,39 @@ def summarize_event(event):
         "first_date": min(record.get("date", "") for record in event),
         "summary": summary,
         "tidy_notes": notes,
-        "kev": sorted(set().union(*(set(record.get("kev", [])) for record in event))),
+        "kev": kev,
+        "material": event_material(event),
     }
+
+
+MATERIAL_ITEMS = 8
+RELATED_TITLES = 10
+
+
+def event_material(event):
+    """v34: material for the event summary – the Polish summaries of its
+    records in date order (with date and source) and the titles of related
+    articles, which often tell how the story developed ("Mirai Botnet
+    Operators Join PHP2Shell Attacks")."""
+    from ai_summaries import tidy_summary
+    from summary_quality import looks_english
+
+    lines = []
+
+    for record in sorted(event, key=lambda item: item.get("date", "")):
+        summary = tidy_summary(record.get("summary", ""))
+        date = record.get("date", "")
+
+        if summary and not looks_english(summary):
+            lines.append(f"{date[8:10]}.{date[5:7]} · {record.get('source', '')} · {record.get('title', '')}: {summary}")
+
+    lines = lines[:MATERIAL_ITEMS]
+    related = [item.get("title", "") for record in event for item in record.get("related", []) if item.get("title")]
+
+    if related:
+        lines.append("Powiązane artykuły: " + " | ".join(related[:RELATED_TITLES]))
+
+    return lines
 
 
 def rank_events(records, limit=TOP_LIMIT):
@@ -289,9 +321,11 @@ def format_event_line(number, event):
 
 def polish_events(events):
     """v33: one language correction of the top summaries (they are tidied by
-    code in event_summary, see ai_summaries.proofread_top)."""
-    from ai_summaries import proofread_top
+    code in event_summary, see ai_summaries.proofread_top). v34: before it,
+    one request writes a summary of each whole event (summarize_events)."""
+    from ai_summaries import proofread_top, summarize_events
 
+    summarize_events(events)
     proofread_top([event for event in events if event.get("summary")])
     return events
 

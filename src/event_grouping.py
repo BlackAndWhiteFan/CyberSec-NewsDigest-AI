@@ -394,6 +394,12 @@ def mark_continuations(articles, recent_records, pool_titles=()):
         for record in recent_records:
             if same_event(article.get("title", ""), record.get("title", ""), frequency, names=names):
                 article["continuation"] = True
+                # v34: the earlier report, as context for the AI summary.
+                article["previous"] = {
+                    "date": record.get("date", ""),
+                    "title": record.get("title", ""),
+                    "summary": record.get("summary", ""),
+                }
                 break
 
     return articles

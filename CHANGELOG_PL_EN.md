@@ -65,10 +65,116 @@ Sprawdzone na streszczeniach z 26.10.2026: reguły łapią trzy formułki
 (PHP, Armory Castle, Atlassian) i „nie są znane” (Quest Diagnostics);
 zalecenie HPE z konkretem zostaje.
 
-Nowe i zmienione pliki: `src/summary_quality.py`, `src/ai_summaries.py`,
-`src/main.py`, `src/test_quality_v33.py` (nowy), README (PL/EN).
+Test na gałęzi `v33-jakosc` 26.10.2026 (7:26): 3 artykuły z 78 (resztę
+zabrała poranna prasówka), wszystkie z lektury; żadne streszczenie nie
+kończy się formułką, kontrola zgłosiła tylko liczbę „2023” spoza
+artykułu (poprawioną przez AI). Usterki: „Negocjatorzy ransomware
+(program żądający okupu)” – objaśnienie wygląda, jakby negocjatorzy byli
+programem; kalki „AI-hackingowego” i „buildów szyfrujących”.
 
-Testy jednostkowe: 318, zakończone powodzeniem.
+Poprawki po teście:
+
+- **Objaśnienie ransomware** (`src/glossary.py`): pomijane, gdy
+  ransomware określa osoby lub grupy („negocjatorzy / grupy / gang /
+  operatorzy / członkowie ransomware”); objaśnienie trafia wtedy do
+  dalszego wystąpienia albo do kolejnego streszczenia. „Atak ransomware
+  (program żądający okupu)” zostaje jak dotąd. Po czasowniku lub
+  przyimku z dopełniaczem objaśnienie jest w dopełniaczu: „użyła
+  ransomware (programu żądającego okupu)” – ten sam mechanizm co dla
+  exploita i infostealera (v27), formy zgodne z odmianą wygenerowaną
+  wcześniej Morfeuszem 2.
+- Lista stylu `data/styl_unikaj.csv`: „AI-hacking*” (→ do włamań z
+  użyciem AI) i „buildy / buildów / buildami / buildach” (→ wersje,
+  kompilacje); bez gołego „build”, żeby nie łapać nazw produktów
+  („Build Tools”).
+
+**Poprawki po pierwszym automatycznym top 5** (26.10.2026, 8:17,
+`#top-tygodnia`, tydzień 19–25.10). Zestawienie poszło o czasie, ale:
+PHP2Shell był dwa razy (pozycja 4 to zapowiedź z 21.10 „… patches
+coming tomorrow” ze streszczeniem „Łatki zostaną udostępnione jutro”, a
+cztery inne artykuły o PHP2Shell były osobnymi wydarzeniami); pozycja 5
+łączyła Fortinet (Sekurak) z FortiSIEM (The Hacker News); w starych
+streszczeniach z archiwum zostały „RCE (RCE)”, „exploit tych luk mogą
+prowadzić” (mała litera, błędna składnia) i „zero‑day podatność”.
+Zestawienia nie łączyły po numerach CVE ani po tytułach artykułów
+powiązanych i pokazywały streszczenia z archiwum bez żadnej kontroli.
+
+- **Reguła jednej nazwy** (`src/event_grouping.py`): formy jednej nazwy
+  muszą różnić się tylko końcówką („Capcom” / „Capcomu”), więc
+  „Fortinet” i „FortiSIEM” (wspólny tylko początek „forti”) się nie
+  łączą; nazwy platform (Python) nie łączą także w tej regule (błędne
+  połączenie MCP Python SDK z Pillow). Słowa typu produktu (center,
+  manager, software, platform, suite…) nie są nazwą firmy (dane z
+  26.10: „Siemens Software Center” z „Atlassian … Data Center”).
+  Obserwowane od v31 błędne połączenia Fortinet/FortiSIEM i MCP Python
+  SDK/Pillow są usunięte.
+- **Łączenie w zestawieniach** (`src/monthly_top.py`): wspólny numer
+  CVE (zapisany w archiwum albo w tytule lub streszczeniu) albo nazwa
+  wydarzenia z cyframi w dowolnym tytule rekordu i wydarzenia, także w
+  tytułach artykułów powiązanych; drugi przebieg scala wydarzenia
+  rozdzielone przez kolejność. Rekord całej lektury nie łączy po CVE.
+- **Lider wydarzenia**: najwyższa punktacja, potem polskie źródło,
+  potem najwięcej artykułów powiązanych (PHP2Shell pod tytułem Kapitana
+  Hacka zamiast angielskiej zapowiedzi).
+- **Streszczenia w zestawieniach**: kod stosuje autopoprawki („RCE
+  (RCE)” → „RCE”), wielkie litery i usuwa zdania z problemami („jutro”,
+  ogólniki); streszczenie po angielsku albo powtarzające tytuł zastępuje
+  streszczenie kolejnego artykułu wydarzenia. Potem jedna korekta
+  językowa całego zestawienia (Gemini, zapasowo Groq; jedno zapytanie
+  na tydzień lub miesiąc). Workflow `weekly-top.yml` i
+  `monthly-top.yml` dostają sekrety `GROQ_API_KEY`, `GEMINI_API_KEY` i
+  zmienną `GEMINI_MODEL`; bez nich zestawienie idzie bez korekty.
+- **Przeglądy pomijane w zestawieniach**: ThreatsDay i lektura jako
+  jedna pozycja, zarchiwizowane przed filtrem z v29.
+- **Numery CVE linków z lektury** (`src/kev.py`): dla artykułów „via
+  Zaufana Trzecia Strona” liczy się 2000 pierwszych znaków strony linku
+  (zamiast 600), więc archiwum zapisuje CVE takiej publikacji (dla 🔥 i
+  łączenia w zestawieniach); „Ciąg dalszy” używa tej samej granicy.
+
+Symulacja na archiwum: top 5 za 19–25.10 to PHP2Shell (17 artykułów,
+7 serwisów, tytuł Kapitana Hacka, streszczenie bez „RCE (RCE)”), Arista
+VCO, Node2Shell, Plex2Shell, OpenCode; bez duplikatu PHP, bez
+Fortinet/FortiSIEM i bez ThreatsDay. Grupowanie całego października: bez
+utraty trafnych połączeń. Zostaje do korekty AI: „Exploit tych luk mogą
+prowadzić” (Plex) – kod poprawia tylko wielką literę.
+
+Nowe i zmienione pliki: `src/summary_quality.py`, `src/ai_summaries.py`,
+`src/main.py`, `src/glossary.py`, `src/event_grouping.py`,
+`src/monthly_top.py`, `src/weekly_top.py`, `src/kev.py`,
+`src/test_quality_v33.py` (nowy), `src/test_tops_v33.py` (nowy),
+`src/discord_output.py`, `.github/workflows/weekly-top.yml`,
+`.github/workflows/monthly-top.yml`, `data/styl_unikaj.csv`, README
+(PL/EN).
+
+Drugi test na gałęzi (26.10.2026, 10:50) – prasówka i top 5 uruchomione
+z gałęzi na kanał testowy. Top 5 zgodny z symulacją, a korekta Gemini
+poprawiła „Exploity tych luk mogą prowadzić” i „podatność zero-day”.
+Prasówka: lista stylu złapała „rekordów”, „Breaches”, „AI‑napędzany”,
+„eksploatacji”, „AI‑zarządzany” i „buildów”. Nowe usterki: pusty
+nagłówek „🔁 CIĄG DALSZY (cd.)” nad samą stopką; „46 własnych wersji,
+kompilacji szyfrujących” (AI wpisało obie podpowiedzi z listy stylu);
+„4,1 mln danych” (dane są niepoliczalne); „firm negocjujących
+ransomware (program żądający okupu)”.
+
+- **Podział na wiadomości** (`src/discord_output.py`): pusta linia, po
+  której nie ma już numerowanej pozycji, kończy sekcję, więc stopka nie
+  dostaje nagłówka „(cd.)”; sekcja zestawienia (pusta linia pod
+  nagłówkiem) dalej się kontynuuje.
+- **Podpowiedzi z listy stylu jako alternatywy**
+  (`src/summary_quality.py`, `src/ai_summaries.py`): „wersji,
+  kompilacji” trafia do AI jako „wersji albo kompilacji (wybierz jedno
+  słowo, nie wpisuj obu)”; plik listy bez zmian w tej sprawie.
+- Lista stylu: „mln / tys. / mld danych” → „wpisów” (dane są
+  niepoliczalne).
+- Objaśnienie ransomware pomijane także po „negocjujących” (rdzeń
+  „negocj”).
+
+Do obserwacji (sens, nie forma – kod tego nie wykryje): streszczenie
+VeraCrypt opisuje mechanizm, ale pomija sedno (utrata znacznika Mark of
+the Web); w PHP2Shell zdanie bez podmiotu („podatności … potwierdzono
+ich wykorzystywanie”), którego korekta nie poprawiła.
+
+Testy jednostkowe: 343, zakończone powodzeniem.
 
 ------------------------------------------------------------------------
 
@@ -1640,10 +1746,118 @@ Checked on the summaries of 2026-10-26: the rules catch the three
 formulas (PHP, Armory Castle, Atlassian) and "nie są znane" (Quest
 Diagnostics); the HPE advice with content stays.
 
-New and changed files: `src/summary_quality.py`, `src/ai_summaries.py`,
-`src/main.py`, `src/test_quality_v33.py` (new), README (PL/EN).
+Test on the `v33-jakosc` branch on 2026-10-26 (07:26): 3 articles of 78
+(the morning digest took the rest), all from the roundup; no summary
+ends with a formula, the check reported only the number "2023" not in
+the article (corrected by the AI). Weaknesses: "Negocjatorzy ransomware
+(program żądający okupu)" – the explanation reads as if the negotiators
+were a program; calques "AI-hackingowego" and "buildów szyfrujących".
 
-Unit tests: 318, passed.
+Fixes after the test:
+
+- **Ransomware explanation** (`src/glossary.py`): skipped when ransomware
+  describes people or groups ("negocjatorzy / grupy / gang / operatorzy /
+  członkowie ransomware"); the explanation then goes to a later
+  occurrence or the next summary. "Atak ransomware (program żądający
+  okupu)" stays as before. After a verb or preposition that governs the
+  genitive, the explanation is in the genitive: "użyła ransomware
+  (programu żądającego okupu)" – the same mechanism as for exploit and
+  infostealer (v27), forms following the inflection generated earlier
+  with Morfeusz 2.
+- Style list `data/styl_unikaj.csv`: "AI-hacking*" (→ do włamań z użyciem
+  AI) and "buildy / buildów / buildami / buildach" (→ wersje,
+  kompilacje); no bare "build", so product names ("Build Tools") are not
+  caught.
+
+**Fixes after the first scheduled weekly top 5** (2026-10-26, 08:17,
+`#top-tygodnia`, week 19–25 October). The top was sent on time, but:
+PHP2Shell appeared twice (item 4 was the announcement of 21 October
+"… patches coming tomorrow" with the summary "Łatki zostaną udostępnione
+jutro", and four other PHP2Shell articles were separate events); item 5
+merged Fortinet (Sekurak) with FortiSIEM (The Hacker News); old archived
+summaries still had "RCE (RCE)", "exploit tych luk mogą prowadzić"
+(lowercase, wrong syntax) and "zero‑day podatność". The tops did not
+merge by CVE ids or by the titles of related articles, and showed
+archived summaries without any check.
+
+- **Single-name rule** (`src/event_grouping.py`): forms of one name may
+  differ only by the ending ("Capcom" / "Capcomu"), so "Fortinet" and
+  "FortiSIEM" (only "forti" shared) no longer merge; platform names
+  (Python) do not merge in this rule either (wrong MCP Python SDK /
+  Pillow merge). Product-type words (center, manager, software,
+  platform, suite…) are not company names (data of 2026-10-26: "Siemens
+  Software Center" with "Atlassian … Data Center"). The wrong merges
+  Fortinet/FortiSIEM and MCP Python SDK/Pillow watched since v31 are
+  gone.
+- **Merging in the tops** (`src/monthly_top.py`): a shared CVE id (saved
+  in the archive or in the title or summary) or an event name with
+  digits in any title of the record and the event, including titles of
+  related articles; a second pass joins events split by order. A whole
+  roundup record links nothing by CVE.
+- **Event leader**: highest score, then a Polish source, then the most
+  related articles (PHP2Shell under the Kapitan Hack title instead of
+  the English announcement).
+- **Summaries in the tops**: code applies the autofix ("RCE (RCE)" →
+  "RCE") and sentence case and removes sentences with problems
+  ("jutro", filler); an English or title-only summary falls back to the
+  next article of the event. Then one language correction of the whole
+  top (Gemini, Groq as fallback; one request per week or month). The
+  workflows `weekly-top.yml` and `monthly-top.yml` get the secrets
+  `GROQ_API_KEY`, `GEMINI_API_KEY` and the variable `GEMINI_MODEL`;
+  without them the top goes out without the correction.
+- **Roundups left out of the tops**: ThreatsDay and Weekendowa lektura
+  as one item, archived before the v29 filter.
+- **CVE ids of lektura links** (`src/kev.py`): for articles "via Zaufana
+  Trzecia Strona" the first 2000 characters of the linked page count
+  (instead of 600), so the archive keeps the CVE ids of such a
+  publication (for 🔥 and merging in the tops); "Ciąg dalszy" uses the
+  same limit.
+
+Simulation on the archive: the top 5 for 19–25 October is PHP2Shell (17
+articles, 7 sources, Kapitan Hack title, summary without "RCE (RCE)"),
+Arista VCO, Node2Shell, Plex2Shell, OpenCode; no PHP duplicate, no
+Fortinet/FortiSIEM and no ThreatsDay. Grouping of the whole of October:
+no correct merges lost. Left to the AI correction: "Exploit tych luk
+mogą prowadzić" (Plex) – code only fixes the capital letter.
+
+New and changed files: `src/summary_quality.py`, `src/ai_summaries.py`,
+`src/main.py`, `src/glossary.py`, `src/event_grouping.py`,
+`src/monthly_top.py`, `src/weekly_top.py`, `src/kev.py`,
+`src/test_quality_v33.py` (new), `src/test_tops_v33.py` (new),
+`src/discord_output.py`, `.github/workflows/weekly-top.yml`,
+`.github/workflows/monthly-top.yml`, `data/styl_unikaj.csv`, README
+(PL/EN).
+
+Second branch test (2026-10-26, 10:50) – digest and weekly top run from
+the branch to the test channel. The top 5 matches the simulation, and
+the Gemini correction fixed "Exploity tych luk mogą prowadzić" and
+"podatność zero-day". Digest: the style list caught "rekordów",
+"Breaches", "AI‑napędzany", "eksploatacji", "AI‑zarządzany" and
+"buildów". New weaknesses: an empty "🔁 CIĄG DALSZY (cd.)" header above
+the notes only; "46 własnych wersji, kompilacji szyfrujących" (the AI
+pasted both suggestions from the style list); "4,1 mln danych" (data
+cannot be counted); "firm negocjujących ransomware (program żądający
+okupu)".
+
+- **Message splitting** (`src/discord_output.py`): an empty line not
+  followed by a numbered item ends the section, so the notes get no
+  "(cd.)" header; a top section (empty line below its header) still
+  continues.
+- **Style-list suggestions as alternatives** (`src/summary_quality.py`,
+  `src/ai_summaries.py`): "wersji, kompilacji" reaches the AI as "wersji
+  albo kompilacji (wybierz jedno słowo, nie wpisuj obu)"; the list file
+  itself unchanged for this.
+- Style list: "mln / tys. / mld danych" → "wpisów" (data cannot be
+  counted).
+- Ransomware explanation also skipped after "negocjujących" (stem
+  "negocj").
+
+To watch (meaning, not form – code cannot detect it): the VeraCrypt
+summary describes the mechanism but misses the point (loss of the Mark
+of the Web); in PHP2Shell a sentence without a subject ("podatności …
+potwierdzono ich wykorzystywanie") that the correction did not fix.
+
+Unit tests: 343, passed.
 
 ------------------------------------------------------------------------
 

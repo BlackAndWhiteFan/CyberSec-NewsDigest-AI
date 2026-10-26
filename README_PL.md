@@ -66,7 +66,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v32). Każda zmiana
 
 - Wysyła prasówkę na Discorda przez webhook: artykuły pogrupowane według najważniejszej kategorii, z klikalnymi tytułami, domeną źródła i podpisem „via”, podzielone na wiadomości mieszczące się w limicie długości Discorda.
 - Dopisuje linki do `published_links` dopiero po udanej wysyłce i archiwizuje każdy dostarczony artykuł (data, tytuł, link, źródło, kategorie, punkty, streszczenie, numery CVE, KEV, via, notatki językowe) w pliku `data/archive/RRRR-MM.json`. Historia i archiwum są zapisywane także wtedy, gdy krok prasówki zakończy się błędem (chyba że uruchomienie zostanie anulowane).
-- W poniedziałek wysyła na `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia, a 1. dnia miesiąca na osobny kanał 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami z archiwum. Każde zestawienie idzie tylko raz (znacznik `data/last_top.json`).
+- W poniedziałek wysyła na `#top-tygodnia` 5 najważniejszych wydarzeń poprzedniego tygodnia, a 1. dnia miesiąca na osobny kanał 10 najważniejszych wydarzeń poprzedniego miesiąca (według liczby artykułów, następnie serwisów i punktacji), ze streszczeniami z archiwum. Każde zestawienie idzie tylko raz (znacznik `data/last_top.json`). Od v33 zestawienia łączą też rekordy ze wspólnym numerem CVE albo nazwą wydarzenia z cyframi w dowolnym tytule (także artykułów powiązanych), pokazują wydarzenie pod najlepszym rekordem (najwyższa punktacja, potem polskie źródło, potem najwięcej powiązanych artykułów), pomijają przeglądy, porządkują streszczenia z archiwum kodem (streszczenie po angielsku albo powtarzające tytuł zastępuje streszczenie kolejnego artykułu) i przepuszczają je przez jedną korektę językową (Gemini, zapasowo Groq).
 - Uruchomienia z gałęzi innych niż `main` idą wyłącznie na kanał testowy z nagłówkiem „🧪 TEST” i niczego nie zapisują.
 - Gdy workflow prasówki albo zestawienia zakończy się błędem, na kanał testowy przychodzi alarm z linkiem do logu.
 
@@ -78,7 +78,7 @@ Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHub
 
 Wersja v32 (25.10.2026):
 
-- Testy jednostkowe: **307 zaliczonych** (318 po części 1 v33, 26.10.2026).
+- Testy jednostkowe: **307 zaliczonych** (343 po części 1 v33, 26.10.2026).
 - Notatki językowe sprawdzone na prawdziwych błędach z logów 22–25.10.2026 („rekordy pacjentów”, „AI‑zarządzanego”, „patchują”, „przed exploit”, „eksploatując”, „intruzji”): wszystkie zapisane, z numerami haseł H166 i H153 tam, gdzie słowniczek je ma.
 
 Wersja v31 (25.10.2026):
@@ -169,8 +169,8 @@ Sekrety repozytorium (Settings → Secrets and variables → Actions):
 - `DISCORD_WEEKLY_WEBHOOK_URL` — webhook kanału `#top-tygodnia` (tygodniowe top 5).
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook kanału miesięcznego top 10.
 - `DISCORD_TEST_WEBHOOK_URL` — webhook kanału testowego: uruchomienia z gałęzi i alarmy o błędach. Bez niego uruchomienia z gałęzi niczego nie wysyłają.
-- `GROQ_API_KEY` — klucz API Groq do streszczeń AI. Bez niego prasówka idzie bez streszczeń.
-- `GEMINI_API_KEY` — klucz API Google Gemini (darmowy limit, bez płatności) do korekty językowej; opcjonalny. Bez niego korektę robią modele Groq. Opcjonalna zmienna repozytorium `GEMINI_MODEL` (nazwy po przecinku) podmienia nazwy modeli.
+- `GROQ_API_KEY` — klucz API Groq do streszczeń AI (od v33 także do zapasowej korekty streszczeń w zestawieniach). Bez niego prasówka idzie bez streszczeń.
+- `GEMINI_API_KEY` — klucz API Google Gemini (darmowy limit, bez płatności) do korekty językowej prasówki i zestawień; opcjonalny. Bez niego korektę robią modele Groq. Opcjonalna zmienna repozytorium `GEMINI_MODEL` (nazwy po przecinku) podmienia nazwy modeli.
 
 Każdy sekret trafia tylko do kroku workflow, który go potrzebuje. Token budzika jest przechowywany wyłącznie w cron-job.org. Nigdy nie zapisuj w repozytorium kluczy API, adresów webhooków, tokenów ani haseł.
 

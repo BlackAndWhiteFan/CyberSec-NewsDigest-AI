@@ -66,7 +66,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 
 - Sends the digest to Discord through a webhook, grouped by each article's most important category, with clickable titles, source domains and the "via" label, split into messages within Discord's length limit.
 - Records links in `published_links` only after a successful delivery, and archives each delivered article (date, title, link, source, categories, score, summary, CVE ids, KEV, via, language notes) in `data/archive/YYYY-MM.json`. History and archive are saved even when the digest step fails (unless the run is cancelled).
-- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`).
+- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`). Since v33 the tops also merge records that share a CVE id or an event name with digits in any title (also of related articles), show each event under its best record (highest score, then a Polish source, then the most related articles), leave out roundups, tidy the archived summaries by code (an English or title-only summary falls back to the next article) and send them through one language correction (Gemini, then Groq).
 - Runs from branches other than `main` send only to the test channel, with a "🧪 TEST" banner, and save nothing.
 - When the digest or a top workflow fails, an alarm with a link to the log goes to the test channel.
 
@@ -78,7 +78,7 @@ The main trigger is an external alarm clock: cron-job.org calls the GitHub API (
 
 Version v32 (2026-10-25):
 
-- Unit tests: **307 passed** (318 after v33 part 1, 2026-10-26).
+- Unit tests: **307 passed** (343 after v33 part 1, 2026-10-26).
 - Language notes checked on real errors from the logs of 22–25 October 2026 ("rekordy pacjentów", "AI‑zarządzanego", "patchują", "przed exploit", "eksploatując", "intruzji"): all recorded, with entry ids H166 and H153 where the glossary has them.
 
 Version v31 (2026-10-25):
@@ -169,8 +169,8 @@ Repository secrets (Settings → Secrets and variables → Actions):
 - `DISCORD_WEEKLY_WEBHOOK_URL` — webhook of `#top-tygodnia` (weekly top 5).
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook of the monthly top 10 channel.
 - `DISCORD_TEST_WEBHOOK_URL` — webhook of the test channel: runs from branches and failure alarms. Without it, branch runs send nothing.
-- `GROQ_API_KEY` — Groq API key for AI summaries. Without it, the digest is sent without summaries.
-- `GEMINI_API_KEY` — Google Gemini API key (free quota, no billing) for proofreading; optional. Without it, proofreading uses the Groq models. The optional repository variable `GEMINI_MODEL` (comma-separated) overrides the model names.
+- `GROQ_API_KEY` — Groq API key for AI summaries (and, since v33, the fallback correction of top summaries). Without it, the digest is sent without summaries.
+- `GEMINI_API_KEY` — Google Gemini API key (free quota, no billing) for proofreading of the digest and the tops; optional. Without it, proofreading uses the Groq models. The optional repository variable `GEMINI_MODEL` (comma-separated) overrides the model names.
 
 Each secret is passed only to the workflow step that needs it. The cron-job.org token is kept only in cron-job.org. Never commit API keys, webhook URLs, tokens or passwords to the repository.
 

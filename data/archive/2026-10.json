@@ -1169,5 +1169,302 @@
       "CVE-2026-112900"
     ],
     "kev": []
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Dwie krytyczne luki w PHP umożliwiające zdalny dostęp do serwera",
+    "link": "https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/",
+    "source": "thephp.foundation",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Wydano wersje PHP 8.5.12, 8.4.27, 8.3.36 i 8.2.35, które łatają dwie krytyczne podatności umożliwiające nieautoryzowane wykonanie kodu na serwerach PHP. Zaleca się natychmiastową aktualizację.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "PHP wydało wersje 8.5.12, 8.4.27, 8.3.36 i 8.2.35, które załatały dwie krytyczne podatności umożliwiające nieupoważnionemu atakującemu wykonanie kodu na serwerach PHP. Aktualizacja jest wymagana natychmiast.",
+        "after": "Wydano wersje PHP 8.5.12, 8.4.27, 8.3.36 i 8.2.35, które łatają dwie krytyczne podatności umożliwiające nieautoryzowane wykonanie kodu na serwerach PHP. Zaleca się natychmiastową aktualizację.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "CISA Flags Two Actively Exploited Critical Flaws in Collabora Online and Arista VeloCloud",
+    "link": "https://thehackernews.com/2026/10/cisa-flags-two-actively-exploited.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "CISA dodała do katalogu KEV dwie krytyczne podatności – CVE-2026-110447 w Collabora Online oraz CVE-2026-114625 w Arista VeloCloud – które są aktywnie wykorzystywane. Firma Arista nie podaje liczby ofiar, ale wskazała dwa japońskie adresy IP.",
+    "cves": [
+      "CVE-2026-110447",
+      "CVE-2026-114625"
+    ],
+    "kev": [
+      "CVE-2026-110447",
+      "CVE-2026-114625"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CISA dodała do KEV dwie krytyczne podatności – CVE-2026-110447 w Collabora Online i CVE-2026-114625 w Arista VeloCloud – które są aktywnie wykorzystywane. Arista nie podaje liczby ofiar, ale wskazała dwa japońskie adresy IP.",
+        "after": "CISA dodała do katalogu KEV dwie krytyczne podatności – CVE-2026-110447 w Collabora Online oraz CVE-2026-114625 w Arista VeloCloud – które są aktywnie wykorzystywane. Firma Arista nie podaje liczby ofiar, ale wskazała dwa japońskie adresy IP.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Luka w FortiManagerze pomogła w zainfekowaniu zapór FortiGate",
+    "link": "https://unit42.paloaltonetworks.com/fortimanager-cve-2024-47575-peerstitch-malware/",
+    "source": "unit42.paloaltonetworks.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół Unit 42 wykrył, że atakujący wykorzystali podatność CVE-2024-47575 w FortiManager, co pozwoliło na wykradzenie konfiguracji i kluczy z ponad 500 zapór FortiGate. Następnie użyli CVE-2025-61624 w FortiOS do wdrożenia malware'u PEERSTITCH.",
+    "cves": [
+      "CVE-2024-47575"
+    ],
+    "kev": [
+      "CVE-2024-47575"
+    ],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół Unit 42 wykrył, że atakujący wykorzystali CVE-2024-47575 w FortiManager, co pozwoliło wykradać konfiguracje i klucze z ponad 500 zapór FortiGate. Następnie użyto CVE-2025-61624 w FortiOS do wdrożenia malware PEERSTITCH.",
+        "after": "Zespół Unit 42 wykrył, że atakujący wykorzystali podatność CVE-2024-47575 w FortiManager, co pozwoliło na wykradzenie konfiguracji i kluczy z ponad 500 zapór FortiGate. Następnie użyli CVE-2025-61624 w FortiOS do wdrożenia malware'u PEERSTITCH.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Chińska grupa Armory Castle wykorzystuje lukę o-day w usłudze BeyondTrust",
+    "link": "https://cloud.google.com/blog/topics/threat-intelligence/armory-castle-exploits-beyondtrust/",
+    "source": "cloud.google.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": true,
+    "summary": "Firma Mandiant potwierdziła, że grupa ARMORY CASTLE wykorzystała podatność zero-day CVE-2026-102764 w BeyondTrust Remote Support do nieautoryzowanego wgrywania plików i uzyskania trwałego dostępu. Zaleca się natychmiastowe zastosowanie łatki.",
+    "cves": [
+      "CVE-2026-102764"
+    ],
+    "kev": [
+      "CVE-2026-102764"
+    ],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Mandiant potwierdziło, że grupa ARMORY CASTLE wykorzystała zero‑day CVE-2026-102764 w BeyondTrust Remote Support do nieautoryzowanego wgrywania plików i uzyskania trwałego dostępu. Zaleca się natychmiastowe zastosowanie łatki.",
+        "after": "Firma Mandiant potwierdziła, że grupa ARMORY CASTLE wykorzystała podatność zero-day CVE-2026-102764 w BeyondTrust Remote Support do nieautoryzowanego wgrywania plików i uzyskania trwałego dostępu. Zaleca się natychmiastowe zastosowanie łatki.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Unpatched Tailscale SSH Flaws Could Let a Hacked Device Reach Root on Other Servers",
+    "link": "https://thehackernews.com/2026/10/unpatched-tailscale-ssh-flaws-could-let.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Badacz wykazał, że niezałatane luki w Tailscale SSH (wersja 1.104.2) i headscale (0.29.5) umożliwiają przejętemu urządzeniu uzyskanie uprawnień roota na innych serwerach. Firma Tailscale nie wydała jeszcze łatki ani numeru CVE.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Badacz wykazał, że niezałatane luki w Tailscale SSH (wersja 1.104.2) i headscale (0.29.5) umożliwiają zhakowanemu urządzeniu uzyskanie uprawnień root na innych serwerach. Tailscale nie wydało jeszcze łatki ani CVE.",
+        "after": "Badacz wykazał, że niezałatane luki w Tailscale SSH (wersja 1.104.2) i headscale (0.29.5) umożliwiają przejętemu urządzeniu uzyskanie uprawnień roota na innych serwerach. Firma Tailscale nie wydała jeszcze łatki ani numeru CVE.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Quest Diagnostics Data Breach Exposed ‘Certain Patient Records’",
+    "link": "https://www.securityweek.com/quest-diagnostics-reports-cyber-breach-affecting-certain-patient-records/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Firma Quest Diagnostics poinformowała o nieautoryzowanym dostępie do platformy Quanum Lab Services Manager, co może oznaczać wyciek części danych pacjentów. Liczba i rodzaj naruszonych danych nie są znane. Firma współpracuje z organami ścigania i ekspertami ds. cyberbezpieczeństwa.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "rekordów",
+        "form": "rekordów",
+        "suggestion": "wpisów, danych",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Quest Diagnostics poinformował o nieautoryzowanym dostępie do platformy Quanum Lab Services Manager, co może oznaczać wyciek niektórych wpisów pacjentów. Liczba i rodzaj dotkniętych danych nie jest znany, firma współpracuje z organami ścigania i ekspertami ds. cyberbezpieczeństwa.",
+        "after": "Firma Quest Diagnostics poinformowała o nieautoryzowanym dostępie do platformy Quanum Lab Services Manager, co może oznaczać wyciek części danych pacjentów. Liczba i rodzaj naruszonych danych nie są znane. Firma współpracuje z organami ścigania i ekspertami ds. cyberbezpieczeństwa.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "BlackX UEFI bootkit exploits Baton Drop flaw to bypass Secure Boot",
+    "link": "https://www.bleepingcomputer.com/news/security/blackx-uefi-bootkit-exploits-baton-drop-flaw-to-bypass-secure-boot/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Bootkit BlackX wykorzystał podatność Baton Drop (CVE-2022-21894) do obejścia mechanizmu Secure Boot i załadowania złośliwego sterownika, atakując agencje dyplomatyczne w Azji Środkowej. Kampania jest przypisywana grupie APT41.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Bootkit BlackX wykorzystał podatność Baton Drop (CVE-2022-21894) do obejścia Secure Boot i załadowania złośliwego sterownika, atakując agencje dyplomatyczne w Azji Środkowej. Kampania przypisywana jest grupie APT41.",
+        "after": "Bootkit BlackX wykorzystał podatność Baton Drop (CVE-2022-21894) do obejścia mechanizmu Secure Boot i załadowania złośliwego sterownika, atakując agencje dyplomatyczne w Azji Środkowej. Kampania jest przypisywana grupie APT41.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "HPE patches eight max severity RCE and auth bypass AOS flaws",
+    "link": "https://www.bleepingcomputer.com/news/security/hpe-patches-eight-max-severity-rce-and-auth-bypass-aos-flaws/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma HPE wydała aktualizacje łatające 72 podatności w ArubaOS, w tym osiem krytycznych luk umożliwiających obejście uwierzytelniania i RCE. Zaleca się natychmiastowe zastosowanie łatek i ograniczenie dostępu do interfejsów zarządzania.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "wykonanie kodu zdalnie",
+        "fixed": "RCE"
+      },
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawek",
+        "fixed": "łatek"
+      },
+      {
+        "type": "proofreading",
+        "before": "HPE wydało aktualizacje łatające 72 podatności w ArubaOS, w tym osiem krytycznych luk umożliwiających obejście uwierzytelniania i RCE. Zaleca się natychmiastowe zastosowanie łatki i ograniczenie dostępu do interfejsów zarządzania.",
+        "after": "Firma HPE wydała aktualizacje łatające 72 podatności w ArubaOS, w tym osiem krytycznych luk umożliwiających obejście uwierzytelniania i RCE. Zaleca się natychmiastowe zastosowanie łatek i ograniczenie dostępu do interfejsów zarządzania.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Brotli Decoder Flaw Behind Node.js RCE Also Affects Bun, Python and Other Widely Used Software",
+    "link": "https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Wykryto podatność zero-day CVE-2026-111497 w dekoderze Brotli od Google, umożliwiającą przepełnienie bufora i wykonanie kodu. Potwierdzono działanie exploita w niezałatanej wersji Node.js. Inne programy wymagają aktualizacji własnych kopii dekodera.",
+    "cves": [
+      "CVE-2026-111497"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Wykryto podatność zero-day CVE-2026-111497 w dekoderze Brotli Google, umożliwiającą przepełnienie bufora i wykonanie kodu. Potwierdzono exploit w niezałatanej wersji Node.js, inne programy wymagają aktualizacji własnych kopii dekodera.",
+        "after": "Wykryto podatność zero-day CVE-2026-111497 w dekoderze Brotli od Google, umożliwiającą przepełnienie bufora i wykonanie kodu. Potwierdzono działanie exploita w niezałatanej wersji Node.js. Inne programy wymagają aktualizacji własnych kopii dekodera.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Atlassian Patches 75 Flaws in Data Center and Server Products",
+    "link": "https://www.securityweek.com/atlassian-patches-75-third-party-flaws-in-data-center-and-server-products/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma Atlassian wydała łatki dla 75 podatności w produktach Data Center i Server, w tym dla trzech krytycznych: CVE-2026-65637, CVE-2026-65182 i CVE-2026-68525, dotyczących Apache Tomcat. Zaleca się aktualizację wszystkich wymienionych komponentów.",
+    "cves": [
+      "CVE-2026-65182",
+      "CVE-2026-65637",
+      "CVE-2026-68525"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "style",
+        "used": "unikalnych",
+        "form": "unikaln*",
+        "suggestion": "różny, albo bez przymiotnika (np. „75 podatności”)",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Atlassian wydał łatki dla 75 podatności w produktach Data Center i Server, w tym trzy krytyczne CVE-2026-65637, CVE-2026-65182 i CVE-2026-68525 dotyczące Apache Tomcat. Zaleca się aktualizację wszystkich wymienionych komponentów.",
+        "after": "Firma Atlassian wydała łatki dla 75 podatności w produktach Data Center i Server, w tym dla trzech krytycznych: CVE-2026-65637, CVE-2026-65182 i CVE-2026-68525, dotyczących Apache Tomcat. Zaleca się aktualizację wszystkich wymienionych komponentów.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
   }
 ]

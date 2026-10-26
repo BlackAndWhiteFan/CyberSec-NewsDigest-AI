@@ -50,7 +50,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v32). Każda zmiana
 ### Wydarzenia i znaczniki
 
 - Łączy artykuły o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł. Reguły: podobne tytuły; wspólny numer CVE lub nazwa wydarzenia z cyframi (np. PHP2Shell), także w obrębie jednego serwisu; wspólna nazwa firmy lub produktu („Quest Diagnostics”, „Capcom”), gdy teksty artykułów pokazują, że to nazwa. Nazwy platform występujące w wielu różnych historiach (Microsoft, Windows, Chrome, Python…) same nie łączą.
-- Artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”, także wtedy, gdy wspólny numer CVE jest dopiero w streszczeniu.
+- Artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”, także wtedy, gdy wspólny numer CVE jest dopiero w streszczeniu (przy linkach z lektury także na stronie linku).
 - Oznacza 🔥 artykuły o lukach z katalogu CISA KEV (potwierdzone wykorzystywanie w atakach). Znacznik ustawia kod, nie AI: numery CVE z tytułu i początku tekstu artykułu są porównywane z katalogiem pobieranym przy każdym uruchomieniu (z CISA, zapasowo z lustra CISA na GitHubie). Zestawienia sprawdzają zapisane numery CVE jeszcze raz z aktualnym katalogiem. Bez katalogu prasówka idzie bez znaczników.
 
 ### Streszczenia AI po polsku
@@ -58,7 +58,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v32). Każda zmiana
 - Każdy artykuł dostaje konkretne streszczenie po polsku (2–3 krótkie zdania, do około 350 znaków; 1 zdanie, gdy materiałem jest tylko krótka zajawka), które pisze Groq `gpt-oss-120b`, a zapasowo `qwen3.8-27b`. Zapytania są rozłożone w czasie (co najmniej 20 s odstępu), a partia, której nie obsłużył żaden model, jest ponawiana raz na końcu.
 - Materiał: pełny tekst lub opis z kanału; gdy kanał daje mniej niż 600 znaków, tekst artykułu jest pobierany z jego strony (akapity bez menu, reklam i stopki). Tekst strony jest tylko materiałem dla AI i nigdzie nie jest zapisywany.
 - Terminy są zgodne ze słowniczkiem `data/glosariusz_mirror.csv` – mirrorem glosariusza CyberSec Mozaika. Proste formy zakazane poprawia kod bez zapytania do AI („poprawka” → „łatka”, „zdalne wykonanie kodu” → „RCE”); objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu 6 wybranych terminów, w tym samym przypadku co termin („przed exploitem (kodem wykorzystującym podatność)”).
-- Kontrola jakości (`src/summary_quality.py`): niezgodność ze słowniczkiem, ogólniki („co podkreśla wagę…”, „nie została podana”), względne określenia czasu, nieodmienione terminy po przyimku, liczby i numery CVE spoza materiału, streszczenia za długie, po angielsku albo powtarzające tylko tytuł oraz kalki z edytowalnej listy stylu `data/styl_unikaj.csv`. Streszczenie z problemem wraca do AI na jedną poprawkę; jeśli problem zostaje, kod usuwa błędne zdania. Streszczenie jest odrzucane tylko wtedy, gdy nie zostaje w nim żadne poprawne zdanie (albo nadal jest po angielsku).
+- Kontrola jakości (`src/summary_quality.py`): niezgodność ze słowniczkiem, ogólniki („co podkreśla wagę…”, „nie została podana”), względne określenia czasu, nieodmienione terminy po przyimku, liczby i numery CVE spoza materiału, określenia „zero-day” i „natychmiast”, gdy artykuł ich nie używa, formułki bez konkretu („Zaleca się natychmiastową aktualizację.”), streszczenia za długie, po angielsku albo powtarzające tylko tytuł oraz kalki z edytowalnej listy stylu `data/styl_unikaj.csv`. Streszczenie z problemem wraca do AI na jedną poprawkę; jeśli problem zostaje, kod usuwa błędne zdania. Streszczenie jest odrzucane tylko wtedy, gdy nie zostaje w nim żadne poprawne zdanie (albo nadal jest po angielsku).
 - Korekta językowa: jedno zapytanie na prasówkę do Google Gemini (`gemini-3.8-flash`, zapasowo `gemini-3.5-flash`) z podpowiedziami gramatycznymi z LanguageTool; gdy Gemini jest niedostępny, korektę przejmują modele Groq. Poprawka jest przyjmowana tylko wtedy, gdy zachowuje liczby, numery CVE i długość; każda trafia do logu jako „przed” / „po”.
 - Dziennik języka (v32): każda poprawka streszczenia jest zapisywana razem z artykułem w archiwum (pole `language`): formy zakazane ze słowniczka z numerem hasła, kalki z listy stylu, nieodmienione terminy, zamiany zrobione przez kod i zmiany z korekty, każda z wynikiem (poprawiło AI, poprawił kod, forma została, streszczenie odrzucone). Notatki opisują tylko to, co napisało AI: niczego nie zmieniają i nigdy nie zapisują do glosariusza.
 
@@ -78,7 +78,7 @@ Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHub
 
 Wersja v32 (25.10.2026):
 
-- Testy jednostkowe: **307 zaliczonych**.
+- Testy jednostkowe: **307 zaliczonych** (318 po części 1 v33, 26.10.2026).
 - Notatki językowe sprawdzone na prawdziwych błędach z logów 22–25.10.2026 („rekordy pacjentów”, „AI‑zarządzanego”, „patchują”, „przed exploit”, „eksploatując”, „intruzji”): wszystkie zapisane, z numerami haseł H166 i H153 tam, gdzie słowniczek je ma.
 
 Wersja v31 (25.10.2026):

@@ -50,7 +50,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 ### Events and markers
 
 - Merges articles about the same event into one item with "także:" links to the other sources. The rules: similar titles; a shared CVE id or an event name with digits (e.g. PHP2Shell), also within one source; a shared company or product name ("Quest Diagnostics", "Capcom") when the article texts show the word is a name. Platform names that appear in many different stories (Microsoft, Windows, Chrome, Python…) never merge on their own.
-- Shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section, also when only the summary shares a CVE id with such an event.
+- Shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section, also when only the summary (for lektura links also the linked page) shares a CVE id with such an event.
 - Marks with 🔥 articles about vulnerabilities from the CISA KEV catalog (confirmed exploitation in attacks). The marker is set by code, not by the AI: CVE ids from the title and the beginning of the article text are compared with the catalog downloaded on every run (from CISA, with CISA's GitHub mirror as a fallback). The tops check the saved CVE ids again against the current catalog. Without the catalog the digest is sent without markers.
 
 ### AI summaries in Polish
@@ -58,7 +58,7 @@ The digest has been running in production since October 2026 (version v32). Ever
 - Each article gets a concrete summary in Polish (2–3 short sentences, up to about 350 characters; 1 sentence when the material is only a short teaser) written by Groq `gpt-oss-120b`, with `qwen3.8-27b` as a fallback. Requests are spaced out (at least 20 s) and a batch that no model handled is retried once at the end.
 - Material: the full feed text or description; when the feed gives fewer than 600 characters, the article text is fetched from its page (paragraphs without menus, ads and footer). Page text is only material for the AI and is never saved.
 - Terms follow the glossary `data/glosariusz_mirror.csv`, a mirror of the CyberSec Mozaika glossary. Simple forbidden forms are corrected by code without an AI request ("poprawka" → "łatka", "zdalne wykonanie kodu" → "RCE"); explanations in parentheses are added by code at the first occurrence of 6 chosen terms, in the case of the term ("przed exploitem (kodem wykorzystującym podatność)").
-- Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
+- Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, the labels "zero-day" and "natychmiast" (urgent) when the article does not use them, closing formulas without content ("Zaleca się natychmiastową aktualizację."), summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
 - Proofreading: one request per digest to Google Gemini (`gemini-3.8-flash`, fallback `gemini-3.5-flash`), with grammar hints from LanguageTool; when Gemini is unavailable, the Groq models take over. A correction is accepted only when it keeps the numbers, CVE ids and length; every correction is logged as "przed" / "po".
 - Language log (v32): every correction of a summary is saved with the article in the archive (field `language`): forbidden glossary forms with the entry id, calques from the style list, terms left uninflected, replacements made by code and changes made by the proofreading, each with its outcome (fixed by the AI, by code, still present, or summary dropped). The notes describe the AI output only; they change nothing and never write to the glossary.
 
@@ -78,7 +78,7 @@ The main trigger is an external alarm clock: cron-job.org calls the GitHub API (
 
 Version v32 (2026-10-25):
 
-- Unit tests: **307 passed**.
+- Unit tests: **307 passed** (318 after v33 part 1, 2026-10-26).
 - Language notes checked on real errors from the logs of 22–25 October 2026 ("rekordy pacjentów", "AI‑zarządzanego", "patchują", "przed exploit", "eksploatując", "intruzji"): all recorded, with entry ids H166 and H153 where the glossary has them.
 
 Version v31 (2026-10-25):

@@ -24,6 +24,54 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v33 --- 26.10.2026
+
+**Część 1: jakość streszczeń po prasówce z 26.10.2026.** Część 2 –
+raport dla CyberSec Mozaika z dziennika języka (v32) – dojdzie w tej
+samej wersji, gdy dziennik zbierze dane z kilku dni.
+
+Powód: pierwsza prasówka po v32 (26.10.2026, budzik, 10 artykułów)
+wyglądała „kulawo” (JW): formułka „Zaleca się natychmiastową
+aktualizację / natychmiastowe zastosowanie łatki” w 4 z 10 streszczeń;
+„podatność zero-day” przy luce w Brotli, załatanej 21.10 (pierwszy
+potwierdzony przypadek etykiety dopisanej przez AI); „Liczba i rodzaj
+naruszonych danych nie są znane”; wydanie PHP 8.5.12 z lektury na górze
+„Najważniejszych”, choć PHP2Shell był w prasówkach 22–24.10.
+
+Zmiany:
+
+- **Formułka bez konkretu jako ogólnik** (`src/summary_quality.py`):
+  zdanie „Zaleca się (natychmiastową) aktualizację / zastosowanie łatki
+  / aktualizację wszystkich wymienionych komponentów.” wraca do
+  poprawki, a jeśli zostanie – kod je usuwa. Zalecenie z konkretem
+  („… i ograniczenie dostępu do interfejsów zarządzania”, „do wersji
+  8.5.12”) zostaje. Prompt: zalecenie tylko konkretne, bez formułki na
+  końcu.
+- **„zero-day” i „natychmiast…” tylko wtedy, gdy są w materiale**:
+  sprawdzanie jak przy liczbach spoza artykułu (w materiale liczą się
+  zero-day, 0-day, immediately, urgent, imperative, natychmiast,
+  niezwłocznie, pilnie, jak najszybciej itp.). Gdy poprawka AI nie
+  pomoże, kod usuwa samo określenie („podatność zero-day CVE-…” →
+  „podatność CVE-…”), więc zdanie z faktami zostaje. Korekta językowa
+  nie może takich określeń dodać.
+- Ogólnik „nie jest / nie są (jeszcze) znane”.
+- **„Ciąg dalszy” po CVE ze strony linku z lektury** (`src/main.py`):
+  dla artykułów „via Zaufana Trzecia Strona” liczą się też numery CVE
+  z pierwszych 2000 znaków pobranej strony (komentarz ZTS jest krótki,
+  a post PHP Foundation wymienia CVE-2026-109618 i CVE-2026-109619 po
+  pierwszych 600 znakach). Dla zwykłych artykułów bez zmian.
+
+Sprawdzone na streszczeniach z 26.10.2026: reguły łapią trzy formułki
+(PHP, Armory Castle, Atlassian) i „nie są znane” (Quest Diagnostics);
+zalecenie HPE z konkretem zostaje.
+
+Nowe i zmienione pliki: `src/summary_quality.py`, `src/ai_summaries.py`,
+`src/main.py`, `src/test_quality_v33.py` (nowy), README (PL/EN).
+
+Testy jednostkowe: 318, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v32 --- 25.10.2026
 
 **Dziennik języka: poprawki językowe streszczeń zapisywane w archiwum.**
@@ -1546,6 +1594,56 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v33 --- 2026-10-26
+
+**Part 1: summary quality after the digest of 2026-10-26.** Part 2 – the
+report for CyberSec Mozaika from the language log (v32) – will be added
+in the same version once the log has data from a few days.
+
+Reason: the first digest after v32 (2026-10-26, alarm clock, 10
+articles) looked "lame" (JW): the formula "Zaleca się natychmiastową
+aktualizację / natychmiastowe zastosowanie łatki" in 4 of 10 summaries;
+"podatność zero-day" for the Brotli flaw patched on 21 October (the
+first confirmed case of a label added by the AI); "Liczba i rodzaj
+naruszonych danych nie są znane"; the PHP 8.5.12 release from the
+roundup at the top of "Najważniejsze", although PHP2Shell had been in
+the digests of 22–24 October.
+
+Changes:
+
+- **A closing formula without content counts as filler**
+  (`src/summary_quality.py`): the sentence "Zaleca się (natychmiastową)
+  aktualizację / zastosowanie łatki / aktualizację wszystkich
+  wymienionych komponentów." goes back for correction and is removed by
+  code if it stays. Advice with content ("… i ograniczenie dostępu do
+  interfejsów zarządzania", "do wersji 8.5.12") stays. Prompt: advice
+  only when concrete, no closing formula.
+- **"zero-day" and "natychmiast…" only when the material has them**:
+  checked like numbers not in the article (the material counts with
+  zero-day, 0-day, immediately, urgent, imperative, natychmiast,
+  niezwłocznie, pilnie, jak najszybciej etc.). When the AI correction
+  does not help, code removes only the label ("podatność zero-day CVE-…"
+  → "podatność CVE-…"), so the sentence with the facts stays. The
+  proofreading cannot add such labels.
+- Filler "nie jest / nie są (jeszcze) znane".
+- **"Ciąg dalszy" by CVE ids from the page of a lektura link**
+  (`src/main.py`): for articles "via Zaufana Trzecia Strona" the CVE ids
+  in the first 2000 characters of the fetched page count too (the ZTS
+  comment is short, and the PHP Foundation post names CVE-2026-109618
+  and CVE-2026-109619 after the first 600 characters). Regular articles
+  unchanged.
+
+Checked on the summaries of 2026-10-26: the rules catch the three
+formulas (PHP, Armory Castle, Atlassian) and "nie są znane" (Quest
+Diagnostics); the HPE advice with content stays.
+
+New and changed files: `src/summary_quality.py`, `src/ai_summaries.py`,
+`src/main.py`, `src/test_quality_v33.py` (new), README (PL/EN).
+
+Unit tests: 318, passed.
 
 ------------------------------------------------------------------------
 

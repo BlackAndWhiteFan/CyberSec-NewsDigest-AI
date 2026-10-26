@@ -368,7 +368,7 @@ GLOSS_RULES = [
 # skipped; the explanation goes to a later one, or to a later summary of the
 # digest. "Atak ransomware (program żądający okupu)" stays as before.
 ATTRIBUTIVE_BEFORE = re.compile(
-    r"(?<!\w)(?:negocjator|grup|gang|operator|afiliant|ugrupowani|kartel|cyberprzestęp|przestęp|"
+    r"(?<!\w)(?:negocj|grup|gang|operator|afiliant|ugrupowani|kartel|cyberprzestęp|przestęp|"
     r"twórc|autor|członk|lider|ofiar)\w*\s+$",
     re.IGNORECASE,
 )

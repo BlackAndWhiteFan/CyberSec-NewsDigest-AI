@@ -167,5 +167,41 @@ class TestStyleV33(unittest.TestCase):
         self.assertFalse(has(quality_problems("Atakujący użyli narzędzia Build Tools."), "kalka"))
 
 
+class TestSecondBranchTest(unittest.TestCase):
+    # Second branch test of 26.10.2026 (10:50).
+    def test_notes_never_get_a_continued_header(self):
+        from discord_output import split_into_messages
+        header = "**🔁 CIĄG DALSZY**"
+        lines = ["x" * 30, header, "1. " + "a" * 27, "", "Streszczenia przygotowało AI."]
+        messages = split_into_messages(lines, limit=70, section_headers={header})
+
+        self.assertEqual(messages[-1], "Streszczenia przygotowało AI.")
+
+    def test_section_still_continues_after_its_header_gap(self):
+        from discord_output import split_into_messages
+        header = "**📅 Top 10**"
+        lines = [header, "", "1. " + "a" * 40, "2. " + "b" * 40]
+        messages = split_into_messages(lines, limit=60, section_headers={header})
+
+        self.assertTrue(messages[1].startswith("**📅 Top 10 (cd.)**"))
+
+    def test_ransomware_after_a_negotiating_participle(self):
+        from glossary import apply_glossary
+        text = "Śledczy zidentyfikowali wykonawców firm negocjujących ransomware."
+        self.assertEqual(apply_glossary(text, set()), text)
+
+    def test_alternatives_are_not_a_phrase(self):
+        from summary_quality import suggestion_text
+        self.assertEqual(suggestion_text("wersji, kompilacji"),
+                         "wersji albo kompilacji (wybierz jedno słowo, nie wpisuj obu)")
+        self.assertEqual(suggestion_text("wpisy, dane (np. „dane pacjentów”, „1,8 mln wpisów”)"),
+                         "wpisy albo dane (np. „dane pacjentów”, „1,8 mln wpisów”) "
+                         "(wybierz jedno słowo, nie wpisuj obu)")
+        self.assertEqual(suggestion_text("włamanie"), "włamanie")
+
+    def test_counted_data(self):
+        self.assertTrue(has(quality_problems("Pozyskał ponad 4,1 mln danych partii."), "kalka „mln danych”"))
+
+
 if __name__ == "__main__":
     unittest.main()

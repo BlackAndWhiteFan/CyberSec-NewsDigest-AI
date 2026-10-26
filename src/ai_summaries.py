@@ -41,6 +41,7 @@ from summary_quality import (
     quality_problems,
     remove_unsupported_labels,
     repair_summary,
+    suggestion_text,
 )
 
 
@@ -163,7 +164,7 @@ def summary_source(article, limit=SOURCE_TEXT_LIMIT):
 
 def prompt_style():
     """Calques from the style list with their replacements, for the prompt."""
-    return "; ".join(f"„{form}” → {suggestion}" for _, form, suggestion in STYLE_RULES) or "—"
+    return "; ".join(f"„{form}” → {suggestion_text(suggestion)}" for _, form, suggestion in STYLE_RULES) or "—"
 
 
 def build_request_messages(batch):

@@ -259,9 +259,31 @@ def style_hits(text, rules=None):
     return hits
 
 
+def suggestion_text(suggestion):
+    """v33: "wersji, kompilacji" as alternatives, not a phrase to paste (test of
+    26.10.2026: "46 własnych wersji, kompilacji szyfrujących")."""
+    depth = 0
+    parts = [""]
+
+    for char in suggestion:
+        depth += {"(": 1, ")": -1}.get(char, 0)
+
+        if char == "," and depth == 0:
+            parts.append("")
+        else:
+            parts[-1] += char
+
+    parts = [part.strip() for part in parts if part.strip()]
+
+    if len(parts) < 2:
+        return suggestion
+
+    return " albo ".join(parts) + " (wybierz jedno słowo, nie wpisuj obu)"
+
+
 def style_problems(text, rules=None):
     """Calques and anglicisms from the style list, with suggestions."""
-    return [f"kalka „{used}” – użyj: {suggestion}" for used, _, suggestion in style_hits(text, rules)]
+    return [f"kalka „{used}” – użyj: {suggestion_text(suggestion)}" for used, _, suggestion in style_hits(text, rules)]
 
 
 def uninflected_hits(text):

@@ -24,6 +24,160 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v34 --- 26.10.2026
+
+**Streszczenia z sensem i łatwe w czytaniu: co się stało, dlaczego to
+ważne, co zrobić; streszczenia całych wydarzeń w zestawieniach.**
+
+Powód: ocena top 5 z 26.10.2026 (JW): streszczenia bez waty, ale
+telegraficzne – stos numerów CVE i wersji, długie łańcuchy imiesłowów,
+bez odpowiedzi na pytania praktyka SOC „czy to jest wykorzystywane?”,
+„czy łatać dziś?”. W zestawieniu wydarzenie dostawało streszczenie
+jednego artykułu z jednego dnia: PHP2Shell (17 artykułów, 7 serwisów)
+to jedno zdanie z numerami CVE i oceną CVSS, bez historii tygodnia
+(próby ataków 4 dni przed ujawnieniem, awarie stron, kolejna luka bez
+łatki). Cel JW: jakościowo, a jednocześnie strawnie. Decyzja JW z
+26.10.2026: most do Mozaiki będzie wersją v35.
+
+Zmiany w prasówce dziennej:
+
+- **Układ streszczenia** (prompt w `src/ai_summaries.py`): 1. zdanie –
+  co się stało i kogo dotyczy, zwykłymi słowami, z nazwą produktu lub
+  firmy (numer CVE najwyżej jeden, nie na początku); 2. zdanie –
+  dlaczego to ważne dla obrońcy: wykorzystywanie w atakach, publiczny
+  exploit, skala, łatka albo jej brak; 3. zdanie, gdy artykuł to podaje
+  – co zrobić konkretnie. Najwyżej 420 znaków (kontrola: 480), 2 numery
+  CVE i 3 wersje.
+- **CISA KEV dla AI**: znacznik 🔥 ustawiany przez kod trafia też do
+  AI jako pole „kev”, więc „wykorzystywana w atakach” opiera się na
+  katalogu, a nie na domysłach; fakt jest dopisany do materiału kontroli.
+- **Kontekst ciągu dalszego** (`src/event_grouping.py`): artykuł
+  oznaczony jako ciąg dalszy po tytule dostaje wcześniejsze doniesienie
+  z archiwum (data i streszczenie) jako pole „kontekst”; AI pisze, co
+  nowego, z krótkim nawiązaniem („Kilka dni po ujawnieniu PHP2Shell
+  (22.10) …”). Kontekst należy do materiału kontroli faktów.
+- **Bezpieczniki** (`src/summary_quality.py`): „aktywnie
+  wykorzystywana”, „wykorzystywana w atakach” i „brak łatki / nie
+  wydano łatki / niezałatana” tylko wtedy, gdy materiał to mówi (jak
+  „zero-day” w v33) – drugie zdanie nie może dramatyzować. Domysły o
+  eskalacji („sytuacja może eskalować”, „ataki mogą się nasilić”) to
+  ogólnik.
+- **Wykrywacz zdań bez konkretu** (`src/summary_quality.py`, pytanie
+  JW: jak upewnić się, że AI nie dopcha waty do historii): zdanie bez
+  żadnego konkretu (cyfry, numeru CVE, skrótu, nazwy, liczebnika
+  słownego) za to ze słownictwem oceniającym („pokazuje”, „wyzwania”,
+  „poważne zagrożenie”, „ryzyko”, „współpracuje z ekspertami”) wraca do
+  poprawki, a jeśli zostanie – kod je usuwa. Pierwsza wersja (samo „bez
+  konkretu”) oznaczyła 35 ze 140 zdań archiwum, z czego połowa była
+  dobra („Luka umożliwia wykonanie dowolnego kodu bez
+  uwierzytelnienia”), więc odpadła; obecna oznacza 8 ze 140 – wszystkie
+  to wata („Firma współpracuje z organami ścigania i ekspertami ds.
+  cyberbezpieczeństwa”, „Problemy te pokazały, że … mogą stać się
+  wektorem zagrożenia”). Zdanie złapane już przez listę ogólników nie
+  jest zgłaszane drugi raz.
+- **Czytelność** (miękko, jak lista stylu – nigdy nie skraca
+  streszczenia): zdanie dłuższe niż 25 słów i więcej niż 2 numery CVE
+  wracają do poprawki z prośbą o podział. Na 60 streszczeniach z
+  22–26.10 dotyczy to 14 (np. zdanie PHP z czterema wersjami, 28 słów).
+
+Zmiany w zestawieniach:
+
+- **Streszczenie całego wydarzenia** (`src/ai_summaries.py`,
+  `src/monthly_top.py`): jedno zapytanie na zestawienie (Gemini,
+  zapasowo Groq) pisze dla każdego wydarzenia z co najmniej dwoma
+  pozycjami materiału krótką historię w 3–4 bardzo krótkich zdaniach
+  (doprecyzowanie JW z 26.10.2026): co się wysypało i kogo dotyczy, jak
+  to szło (najważniejszy zwrot z datą), co dzieje się teraz i czy sprawa
+  eskaluje (ataki trwają, nowe botnety, kolejne luki, łatka – tylko na
+  podstawie konkretnego zwrotu z materiału), jak to łatać; element bez
+  pokrycia w materiale jest pomijany. Historia ma zostać w pamięci
+  („człowiek najlepiej uczy się przez historie, które przemawiają do
+  wyobraźni”, JW): AI wybiera z materiału jeden konkretny, obrazowy
+  szczegół („ataki zaczęły się 4 dni przed ujawnieniem”), bez metafor –
+  to samo w prompcie prasówki dziennej zamiast „duża skala”. Historia
+  ma się nadawać do opowiedzenia przy kawie ludziom z SOC („case study
+  condensate”, JW): w „jak to szło” AI podaje, jeśli materiał to mówi,
+  jak atakujący weszli – wektor i technika (SQL injection, skradzione
+  klucze, phishing, łańcuch kilku luk). Bez morału i „lekcji” – wnioski
+  wyciąga czytelnik; „Ta historia pokazuje, że…” i „lekcja z tego…” to
+  ogólniki. Materiał: polskie
+  streszczenia artykułów wydarzenia w kolejności dat (z serwisem) i
+  tytuły artykułów powiązanych. Nowe streszczenie jest użyte tylko
+  wtedy, gdy przejdzie kontrolę faktów, słowniczka i jakości względem
+  tego materiału; inaczej zostaje dotychczasowe. Log: „ZESTAWIENIE AI:
+  wydarzenie N – przed / po” i „streszczenia wydarzeń N z M”. Potem,
+  jak w v33, korekta językowa.
+
+Materiał dla PHP2Shell (top 5 za 19–25.10) to 8 streszczeń od 21.10
+do 24.10 i tytuły powiązane („PHP Warns of Another Unpatched RCE Risk…”,
+„PHP2Shell Exploit Attempts Hit Millions…”, „Mirai Botnet Operators
+Join PHP2Shell Attacks”).
+
+Test prasówki na gałęzi `v34-sens` 26.10.2026 (12:09): 3 artykuły, wszystkie
+analizy z lektury. Kontrola złapała zdanie z 26 słowami i adres IP
+spoza artykułu. Usterki sprawdzone u źródła: Signal – „nie ma jeszcze
+dostępnej łatki”, choć RingRTC 2.72.0 i nowsze aplikacje Signal mają
+poprawkę (bezpiecznik przepuścił, bo strona mówi o „unpatched
+versions”); Plex2Shell – jedno techniczne zdanie zamiast sedna (łańcuch
+czterech luk, RCE bez logowania, CVSS 9.8) i bez historii, bo
+ostrzeżenie CISA z 22.10 było starsze niż 3 dni; PaperCut – angielskie
+„AI‑orchestrated toolkit”.
+
+Poprawki po teście:
+
+- **Kontekst z 14 dni** (`src/event_grouping.py`, `src/main.py`):
+  każdy artykuł dostaje najnowsze wcześniejsze doniesienie o tym samym
+  wydarzeniu z archiwum z 14 dni (wspólny numer CVE albo reguła tego
+  samego wydarzenia; bez rekordów całej lektury), nie tylko ciąg dalszy
+  z 3 dni. Sekcja „Ciąg dalszy” bez zmian (3 dni). Log: „KONTEKST:
+  wcześniejsze doniesienie z archiwum dla N z M artykułów”.
+- **„Brak łatki” przy wersji z poprawką** (`src/summary_quality.py`):
+  „unpatched” / „niezałatane” w źródle nie wystarcza, gdy źródło podaje
+  wersję z poprawką („before 2.72.0”, „fixed in”); streszczenie, które
+  podaje wersję z poprawką i jednocześnie „brak łatki”, to sprzeczność.
+- Lista stylu: „AI-orchestrat*”, „AI-powered”, „AI-driven”,
+  „toolkit*”.
+
+Test top 5 na gałęzi (26.10.2026, 12:24): oba modele Gemini
+niedostępne (timeout, 503), historie napisał Groq gpt-oss-120b;
+„streszczenia wydarzeń 5 z 5”. Lepiej niż dotąd – pojawiły się elementy
+historii („exploity 4 dni przed publicznym ujawnieniem”, „kryptominery i
+backdoor w postaci proxy”). Słabości: w 3 z 5 historii uwagi o
+materiale zamiast faktów („Materiał nie podaje żadnych ataków ani
+łatek”, „CISA … nie podaje łatek”, „nie ma informacji o dalszych
+atakach ani o dostępnych łatach” przy wycieku kluczy API); błędy słów
+i sensu, których kontrola nie łapie („mógł wyczerpać klucze API”,
+„aktywnie wykorzystywaną zero‑day”, „Od końca października dostępne są
+łatki”, „łatki w pełni blokują RCE” bez kolejnej luki z 24.10); puste
+zdanie przy Ariście i pominięty szczegół „trzecia taka luka w cztery
+miesiące”. Poprawka (ta sama rodzina co „Nie podano…” z v29 i „nie są
+znane” z v33): uwagi „materiał nie…”, „nie podaje…”, „nie ma
+informacji…” to ogólniki (na 80 streszczeniach archiwum: 2, obie to
+takie uwagi); prompt historii: element bez pokrycia pominąć bez słowa,
+łatki tylko przy lukach – przy wycieku, co wyciekło i co zrobić. Błędy
+słów i sensu nie dostają reguł: to argument za eksperymentem z modelem
+piszącym (Gemini pisze streszczenia dzienne, Groq jako zapas; więcej
+materiału) po okresie obserwacji.
+
+Pytanie JW (26.10.2026): czy nie wpadamy w pętlę „test → reguła →
+test”? Wniosek: po części tak – kolejne reguły z pojedynczych przykładów
+na małych próbkach (tu 3 artykuły z lektury) grożą przeuczeniem i
+przeładowaniem promptu. Dlatego reguła o bezosobowym początku („Wykryto…”,
+3 z 80 streszczeń) została wycofana, a v34 zamyka się na poprawkach
+prawdziwych błędów (fałszywy fakt, za krótki kontekst). Decyzja JW: po
+scaleniu 1–2 dni obserwacji zwykłych prasówek bez nowych zmian; dalsze
+poprawki tylko na podstawie powtarzających się problemów, nie
+pojedynczych zdań.
+
+Nowe i zmienione pliki: `src/ai_summaries.py`, `src/summary_quality.py`,
+`src/event_grouping.py`, `src/monthly_top.py`, `src/main.py`,
+`src/test_summaries_v34.py` (nowy), `src/test_summary_quality.py`
+(limit długości), `data/styl_unikaj.csv`, README (PL/EN).
+
+Testy jednostkowe: 377, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v33 --- 26.10.2026
 
 **Jakość streszczeń i zestawień po prasówce i pierwszym automatycznym
@@ -1711,6 +1865,158 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v34 --- 2026-10-26
+
+**Summaries that say why it matters and read easily: what happened, why
+it matters, what to do; summaries of whole events in the tops.**
+
+Reason: JW's review of the weekly top of 2026-10-26: summaries without
+filler, but telegraphic – stacks of CVE ids and versions, long chains of
+participles, no answer to the SOC practitioner's questions "is it
+exploited?", "do I patch today?". In a top an event got the summary of
+one article from one day: PHP2Shell (17 articles, 7 sources) was one
+sentence of CVE ids and the CVSS score, without the story of the week
+(exploit attempts 4 days before disclosure, site outages, another flaw
+without a patch). JW's goal: quality, and at the same time easy to
+read. JW's decision of 2026-10-26: the bridge to Mozaika becomes v35.
+
+Changes in the daily digest:
+
+- **Summary layout** (prompt in `src/ai_summaries.py`): sentence 1 – what
+  happened and whom it concerns, in plain words, with the product or
+  company name (at most one CVE id, not first); sentence 2 – why it
+  matters for a defender: exploitation in attacks, public exploit,
+  scale, patch or no patch; sentence 3, when the article says so – what
+  to do. At most 420 characters (check: 480), 2 CVE ids and 3 versions.
+- **CISA KEV for the AI**: the 🔥 marker set by code also reaches the AI
+  as the field "kev", so "wykorzystywana w atakach" rests on the
+  catalog, not on guesses; the fact is added to the check material.
+- **Context of a follow-up** (`src/event_grouping.py`): an article
+  marked as a follow-up by its title gets the earlier report from the
+  archive (date and summary) as the field "kontekst"; the AI writes what
+  is new, with a short reference ("Kilka dni po ujawnieniu PHP2Shell
+  (22.10) …"). The context is part of the fact-check material.
+- **Guards** (`src/summary_quality.py`): "aktywnie wykorzystywana",
+  "wykorzystywana w atakach" and "brak łatki / nie wydano łatki /
+  niezałatana" only when the material says so (like "zero-day" in v33) –
+  the second sentence must not dramatize. Speculation about escalation
+  ("sytuacja może eskalować", "ataki mogą się nasilić") counts as
+  filler.
+- **Detector of sentences without a concrete detail**
+  (`src/summary_quality.py`, JW's question: how to make sure the AI does
+  not push filler into the story): a sentence with no concrete detail
+  (digit, CVE id, acronym, name, number word) but with evaluative words
+  ("pokazuje", "wyzwania", "poważne zagrożenie", "ryzyko", "współpracuje
+  z ekspertami") goes back for correction and is removed by code if it
+  stays. The first version (only "no concrete detail") flagged 35 of
+  140 archive sentences, half of them good ("Luka umożliwia wykonanie
+  dowolnego kodu bez uwierzytelnienia"), so it was dropped; the current
+  one flags 8 of 140 – all filler ("Firma współpracuje z organami
+  ścigania i ekspertami ds. cyberbezpieczeństwa", "Problemy te pokazały,
+  że … mogą stać się wektorem zagrożenia"). A sentence already caught by
+  the filler list is not reported twice.
+- **Readability** (soft, like the style list – never cuts a summary): a
+  sentence over 25 words and more than 2 CVE ids go back for correction
+  with a request to split. On 60 summaries of 22–26 October this
+  concerns 14 (e.g. the PHP sentence with four versions, 28 words).
+
+Changes in the tops:
+
+- **Summary of the whole event** (`src/ai_summaries.py`,
+  `src/monthly_top.py`): one request per top (Gemini, Groq as fallback)
+  writes a short story in 3–4 very short sentences for each event with
+  at least two material items (JW's clarification of 2026-10-26): what
+  broke and whom it concerns, how it went (the key turn with a date),
+  what is happening now and whether it escalates (attacks ongoing, new
+  botnets, further flaws, a patch – only from a concrete turn in the
+  material), how to patch; an element without support in the material
+  is left out. The story should stick ("people learn and remember best
+  through stories that speak to the imagination", JW): the AI picks one
+  concrete, vivid detail from the material ("attacks began 4 days before
+  disclosure"), no metaphors – the same in the daily prompt instead of
+  "large scale". The story should work as a case study to tell SOC
+  people over coffee ("case study condensate", JW): in "how it went"
+  the AI gives, when the material says so, how the attackers got in –
+  vector and technique (SQL injection, stolen keys, phishing, a chain of
+  flaws). No moral or "lesson" – the reader draws the conclusions; "Ta
+  historia pokazuje, że…" and "lekcja z tego…" count as filler. Material: the Polish summaries of the event's
+  articles in date order (with the source) and the titles of related
+  articles. The new summary is used only when it passes the fact,
+  glossary and quality checks against that material; otherwise the
+  previous one stays. Log: "ZESTAWIENIE AI: wydarzenie N – przed / po"
+  and "streszczenia wydarzeń N z M". Then, as in v33, the language
+  correction.
+
+The material for PHP2Shell (top 5 for 19–25 October) is 8 summaries from
+21 to 24 October and related titles ("PHP Warns of Another Unpatched RCE
+Risk…", "PHP2Shell Exploit Attempts Hit Millions…", "Mirai Botnet
+Operators Join PHP2Shell Attacks").
+
+Digest test on the `v34-sens` branch on 2026-10-26 (12:09): 3 articles, all
+analyses from the roundup. The check caught a 26-word sentence and an IP
+address not in the article. Weaknesses checked at the source: Signal –
+"nie ma jeszcze dostępnej łatki", although RingRTC 2.72.0 and newer
+Signal apps are fixed (the guard let it through because the page
+mentions "unpatched versions"); Plex2Shell – one technical sentence
+instead of the point (a chain of four flaws, unauthenticated RCE, CVSS
+9.8) and no story, because the CISA warning of 22 October was older than
+3 days; PaperCut – English "AI‑orchestrated toolkit".
+
+Fixes after the test:
+
+- **Context from 14 days** (`src/event_grouping.py`, `src/main.py`):
+  every article gets the latest earlier report of the same event from the
+  archive of 14 days (shared CVE id or the same-event rule; no whole
+  roundup records), not only a follow-up from 3 days. The "Ciąg dalszy"
+  section unchanged (3 days). Log: "KONTEKST: wcześniejsze doniesienie z
+  archiwum dla N z M artykułów".
+- **"No patch" with a fixed version** (`src/summary_quality.py`):
+  "unpatched" / "niezałatane" in the source is not enough when the source
+  gives a fixed version ("before 2.72.0", "fixed in"); a summary that
+  gives a fixed version and "no patch" at the same time is a
+  contradiction.
+- Style list: "AI-orchestrat*", "AI-powered", "AI-driven", "toolkit*".
+
+Weekly top test on the branch (2026-10-26, 12:24): both Gemini models
+unavailable (timeout, 503), the stories were written by Groq
+gpt-oss-120b; "streszczenia wydarzeń 5 z 5". Better than before – story
+elements appeared ("exploity 4 dni przed publicznym ujawnieniem",
+"kryptominery i backdoor w postaci proxy"). Weaknesses: in 3 of 5
+stories remarks about the material instead of facts ("Materiał nie
+podaje żadnych ataków ani łatek", "CISA … nie podaje łatek", "nie ma
+informacji o dalszych atakach ani o dostępnych łatach" for a leak of
+API keys); word and meaning errors the checks cannot see ("mógł
+wyczerpać klucze API", "aktywnie wykorzystywaną zero‑day", "Od końca
+października dostępne są łatki", "łatki w pełni blokują RCE" without
+the further flaw of 24 October); an empty sentence for Arista and the
+missed detail "the third such flaw in four months". Fix (the same family
+as "Nie podano…" in v29 and "nie są znane" in v33): remarks "materiał
+nie…", "nie podaje…", "nie ma informacji…" count as filler (on 80
+archive summaries: 2, both such remarks); story prompt: skip an element
+without support silently, patches only for software flaws – for a leak,
+what leaked and what to do. Word and meaning errors get no rules: an
+argument for an experiment with the writing model (Gemini writes the
+daily summaries, Groq as fallback; more material) after the observation
+period.
+
+JW's question (2026-10-26): are we in a "test → rule → test" loop?
+Conclusion: partly yes – more rules from single examples on small samples
+(here 3 roundup articles) risk overfitting and an overloaded prompt.
+Therefore the rule on impersonal openings ("Wykryto…", 3 of 80
+summaries) was withdrawn, and v34 closes with fixes of real errors (a
+false fact, too short a context). JW's decision: after merging, 1–2 days
+of watching regular digests without new changes; further fixes only for
+recurring problems, not single sentences.
+
+New and changed files: `src/ai_summaries.py`, `src/summary_quality.py`,
+`src/event_grouping.py`, `src/monthly_top.py`, `src/main.py`,
+`src/test_summaries_v34.py` (new), `src/test_summary_quality.py` (length
+limit), `data/styl_unikaj.csv`, README (PL/EN).
+
+Unit tests: 377, passed.
 
 ------------------------------------------------------------------------
 

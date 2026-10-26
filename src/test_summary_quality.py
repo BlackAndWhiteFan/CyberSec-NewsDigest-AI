@@ -42,7 +42,7 @@ class TestRelativeTime(unittest.TestCase):
 
 class TestLengthAndForm(unittest.TestCase):
     def test_long_summary_and_semicolons_are_reported(self):
-        long_text = "Cisco wydał łatki dla 34 podatności w Expressway i IOS XR. " * 8
+        long_text = "Cisco wydał łatki dla 34 podatności w Expressway i IOS XR. " * 9
         self.assertTrue(any("znaków" in p for p in quality_problems(long_text)))
         problems = quality_problems("Splunk wydał łatki; SolarWinds także.")
         self.assertEqual(len(problems), 1)

@@ -12,7 +12,7 @@ The project runs with a budget of 0 PLN, using free service tiers only (GitHub A
 
 ## Project Status
 
-The digest has been running in production since October 2026 (version v33). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+The digest has been running in production since October 2026 (version v34). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Stage | Scope | Status |
 |---|---|---|
@@ -34,6 +34,7 @@ The digest has been running in production since October 2026 (version v33). Ever
 | 16 | "Weekendowa lektura" split into links, merging by company names, alarm on workflow failure (v31) | completed and verified |
 | 17 | Language log: corrections of summaries saved in the archive (v32) | completed; verified with unit tests and real errors from the logs |
 | 18 | Quality of summaries and tops: no closing formulas, labels only with support, tops merging by CVE, Polish leaders, clean-up and correction of top summaries (v33) | completed; verified on the test branch and a simulation on the archive |
+| 19 | Summaries that say why it matters and read easily: what – why it matters – what to do, context of earlier reports, CISA KEV for the AI, event summaries in the tops (v34) | completed; verified on the test branch (digest and weekly top) |
 
 ## Current Implementation
 
@@ -56,7 +57,7 @@ The digest has been running in production since October 2026 (version v33). Ever
 
 ### AI summaries in Polish
 
-- Each article gets a concrete summary in Polish (2–3 short sentences, up to about 350 characters; 1 sentence when the material is only a short teaser) written by Groq `gpt-oss-120b`, with `qwen3.8-27b` as a fallback. Requests are spaced out (at least 20 s) and a batch that no model handled is retried once at the end.
+- Each article gets a concrete summary in Polish (2–3 short sentences, up to about 420 characters; 1 sentence when the material is only a short teaser) written by Groq `gpt-oss-120b`, with `qwen3.8-27b` as a fallback. Since v34 the summary answers the questions of a SOC practitioner: what happened and whom it concerns (in plain words, CVE ids not first), why it matters (exploitation in attacks, public exploit, scale, patch or no patch) and what to do, if the article says so. The AI is told when a vulnerability is in the CISA KEV catalog, and every article gets the latest earlier report of the same event from the archive of 14 days as context (the story; "what is new"). Sentences over 25 words and more than 2 CVE ids go back for correction (soft: never cut); a sentence with no concrete detail (number, date, CVE id, name) but with evaluative words ("poważne zagrożenie", "współpracuje z ekspertami") counts as filler. "Actively exploited" and "no patch" are allowed only when the material says so. Requests are spaced out (at least 20 s) and a batch that no model handled is retried once at the end.
 - Material: the full feed text or description; when the feed gives fewer than 600 characters, the article text is fetched from its page (paragraphs without menus, ads and footer). Page text is only material for the AI and is never saved.
 - Terms follow the glossary `data/glosariusz_mirror.csv`, a mirror of the CyberSec Mozaika glossary. Simple forbidden forms are corrected by code without an AI request ("poprawka" → "łatka", "zdalne wykonanie kodu" → "RCE"); explanations in parentheses are added by code at the first occurrence of 6 chosen terms, in the case of the term ("przed exploitem (kodem wykorzystującym podatność)").
 - Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, the labels "zero-day" and "natychmiast" (urgent) when the article does not use them, closing formulas without content ("Zaleca się natychmiastową aktualizację."), summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
@@ -67,7 +68,7 @@ The digest has been running in production since October 2026 (version v33). Ever
 
 - Sends the digest to Discord through a webhook, grouped by each article's most important category, with clickable titles, source domains and the "via" label, split into messages within Discord's length limit.
 - Records links in `published_links` only after a successful delivery, and archives each delivered article (date, title, link, source, categories, score, summary, CVE ids, KEV, via, language notes) in `data/archive/YYYY-MM.json`. History and archive are saved even when the digest step fails (unless the run is cancelled).
-- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`). Since v33 the tops also merge records that share a CVE id or an event name with digits in any title (also of related articles), show each event under its best record (highest score, then a Polish source, then the most related articles), leave out roundups, tidy the archived summaries by code (an English or title-only summary falls back to the next article) and send them through one language correction (Gemini, then Groq); every change made by code is logged as "PORZĄDEK".
+- On Mondays sends the top 5 events of the previous week to `#top-tygodnia`, and on the 1st of each month the top 10 events of the previous month to a separate channel (ranked by number of articles, then sources and score), with the archived summaries. Each top is sent only once (marker `data/last_top.json`). Since v33 the tops also merge records that share a CVE id or an event name with digits in any title (also of related articles), show each event under its best record (highest score, then a Polish source, then the most related articles), leave out roundups, tidy the archived summaries by code (an English or title-only summary falls back to the next article) and send them through one language correction (Gemini, then Groq); every change made by code is logged as "PORZĄDEK". Since v34 one request per top writes a short story of each whole event (what broke, how it went, what is happening now and whether it escalates, how to patch) from the Polish summaries of all its articles and the titles of related articles; it is used only when it passes the checks against that material (log "ZESTAWIENIE AI").
 - Runs from branches other than `main` send only to the test channel, with a "🧪 TEST" banner, and save nothing.
 - When the digest or a top workflow fails, an alarm with a link to the log goes to the test channel.
 
@@ -106,8 +107,10 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v34):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika (v35):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
 - Branch protection for `main`.
+
+- Experiment with the writing model: Google Gemini writes the daily summaries (Groq as fallback) and gets more article material; compared on regular weekday digests with the current setup.
 
 Planned features are not considered implemented until they have been developed and verified.
 

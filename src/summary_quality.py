@@ -51,6 +51,12 @@ GENERIC_PHRASES = [
     r"nie (został|została|zostało|zostały|zostali) (podan|ujawnion|wskazan|sprecyzowan|określon)\w*",
     # v32: "Aktualizacje … eliminują ryzyko ataków" (test 25.10.2026).
     r"eliminuj\w* (to |te |tę )?(ryzyk|zagrożeni)\w*",
+    # v34: a moral instead of a fact ("Ta historia pokazuje, że…", "lekcja").
+    r"(ta |cała )?(historia|sprawa|incydent|przypadek) (pokazuje|uczy|przypomina)\w*",
+    r"lekcj\w* (z tego|z tej|dla)",
+    # v34: speculation about escalation instead of a fact from the material.
+    r"(sytuacja|sprawa|zagrożenie|problem|atak\w*) (może|mogą|moż\w+ będzie) (się )?(eskalować|nasilić|rozszerzyć|narastać)",
+    r"(może|mogą) (dojść do )?(dalsz\w+ )?eskalacj\w*",
     # v33: "Liczba i rodzaj naruszonych danych nie są znane" (digest 26.10.2026).
     r"(nie|nadal nie) (jest|są|był|była|było|były) (jeszcze )?znan\w*",
     # v33: a bare closing formula with no concrete advice (4 of 10 summaries
@@ -142,6 +148,24 @@ def is_unchecked_number(number, year):
 ZERO_DAY = re.compile(r"(?<!\w)(?:zero|0)[-\u2011‐ ]?day\w*|(?<!\w)dni\w* zerow\w*", re.IGNORECASE)
 ZERO_DAY_SOURCE = re.compile(r"(?:zero|0)[-\u2011‐ ]?days?|zeroday|dni\w* zerow\w*", re.IGNORECASE)
 URGENCY = re.compile(r"(?<!\w)natychmiast\w*", re.IGNORECASE)
+# v34: the "why it matters" sentence must not dramatize: exploitation in
+# attacks and a missing patch only when the material says so.
+EXPLOITED = re.compile(
+    r"(?<!\w)aktywnie wykorzyst\w*|(?<!\w)wykorzystywan\w* (?:w atakach|w praktyce|przez atakujących)",
+    re.IGNORECASE,
+)
+EXPLOITED_SOURCE = re.compile(
+    r"exploit(?:ed|ation|ing)|in the wild|wykorzyst\w*|CISA KEV|atak\w*|attack\w*", re.IGNORECASE
+)
+NO_PATCH = re.compile(
+    r"(?<!\w)(?:brak\w* łat\w*|bez łat\w*|niezałatan\w*|nie (?:ma|wydano|wydał\w*|jest dostępn\w*) (?:jeszcze )?łat\w*)",
+    re.IGNORECASE,
+)
+NO_PATCH_SOURCE = re.compile(
+    r"no (?:patch|fix)|unpatched|not (?:yet )?(?:been )?(?:patched|fixed)|without a (?:patch|fix)|"
+    r"zero[- ]?day|0[- ]?day|brak\w* łat\w*|niezałatan\w*|nie ma (?:jeszcze )?łat\w*|bez łat\w*",
+    re.IGNORECASE,
+)
 URGENCY_SOURCE = re.compile(
     r"immediate\w*|urgent\w*|as soon as possible|asap|without delay|right away|imperative|"
     r"natychmiast\w*|niezwłoczn\w*|pilni\w*|jak najszybciej",
@@ -170,6 +194,16 @@ def unsupported_labels(text, source):
         problems.append(
             f"„{match.group(0)}” – artykuł nie mówi o pilności; usuń to słowo albo całe zalecenie"
         )
+
+    match = EXPLOITED.search(text)
+
+    if match and not EXPLOITED_SOURCE.search(source):
+        problems.append(f"„{match.group(0)}” – artykuł nie mówi o wykorzystywaniu w atakach; usuń to")
+
+    match = NO_PATCH.search(text)
+
+    if match and not NO_PATCH_SOURCE.search(source):
+        problems.append(f"„{match.group(0)}” – artykuł nie mówi o braku łatki; usuń to")
 
     return problems
 
@@ -329,7 +363,76 @@ def repeats_title(text, title):
 
 # v27: summaries became long single sentences joined with semicolons and
 # were cut at SUMMARY_LIMIT (test 22.10.2026).
-MAX_SUMMARY_LENGTH = 400
+# v34: three short sentences (what, why it matters, what to do) need a bit
+# more room than 350 characters; the prompt asks for at most 420.
+MAX_SUMMARY_LENGTH = 480
+
+
+# v34: filler without a known phrase ("Atak ten stanowi poważne zagrożenie
+# dla kluczowych sektorów"): a sentence with no concrete detail – no digit,
+# CVE id, acronym, name or number word – but with evaluative words. Checked
+# on 140 sentences of the October archive: 8 found, all filler; sentences
+# that state an effect without names ("Luka umożliwia wykonanie dowolnego
+# kodu bez uwierzytelnienia") have no evaluative words and stay.
+CONCRETE = re.compile(r"\d|CVE-|[A-ZĄĆĘŁŃÓŚŹŻ]{2,}|[a-ząćęłńóśźż][A-ZĄĆĘŁŃÓŚŹŻ]")
+NUMBER_WORDS = re.compile(
+    r"(?<!\w)(?:jed[ne]\w*|dw[aie]\w*|trz[eiy]\w*|czter\w*|pię[ćc]\w*|sześ\w*|siedem\w*|osiem\w*|"
+    r"dziesię\w*|kilk\w*|setk\w*|tysi[ąę]c\w*|milion\w*|miliard\w*|pierwsz\w*|drug[aiy]\w*|trzeci\w*|"
+    r"połow\w*)(?!\w)",
+    re.IGNORECASE,
+)
+EVALUATIVE = re.compile(
+    r"(?<!\w)(?:pokaz\w*|pokazuj\w*|podkreśl\w*|wyzwa\w*|konsekwencj\w*|zagrożeni\w*|ryzyk\w*|"
+    r"skuteczn\w*|istotn\w*|znaczeni\w*|kluczow\w*|poważn\w*|współprac\w*|ekspert\w*|dochodzeni\w*|"
+    r"protok\w* reagowania|sytuacj\w*|wektor\w*|świadomoś\w*|czujnoś\w*|ostrożnoś\w*|bezpieczeństw\w*)(?!\w)",
+    re.IGNORECASE,
+)
+
+
+def has_concrete(sentence):
+    if CONCRETE.search(sentence) or NUMBER_WORDS.search(sentence):
+        return True
+
+    # A capitalized word after the first one is a name (firm, product, group).
+    return any(word[0].isupper() for word in re.findall(r"[\w-]+", sentence)[1:])
+
+
+def empty_sentences(text):
+    """Sentences without a concrete detail but with evaluative words (v34)."""
+    return [sentence for sentence in split_sentences(text)
+            if not has_concrete(sentence) and EVALUATIVE.search(sentence)
+            # Already reported as a known filler phrase.
+            and not any(pattern.search(sentence) for pattern in GENERIC)]
+
+
+# v34: readable for a busy reader ("żeby mózg się nie pocił", JW): long
+# sentences and stacks of CVE ids go back for correction as soft problems,
+# which never cut or drop a summary.
+MAX_SENTENCE_WORDS = 25
+MAX_CVE_IDS = 2
+
+
+def readability_problems(text):
+    problems = []
+
+    for sentence in split_sentences(text):
+        words = len(re.findall(r"[\w-]+", CVE.sub("CVE", sentence)))
+
+        if words > MAX_SENTENCE_WORDS:
+            problems.append(
+                f"zdanie ma {words} słów – podziel je na dwa krótsze zdania "
+                f"(najwyżej {MAX_SENTENCE_WORDS} słów): „{sentence[:60]}…”"
+            )
+
+    cves = {cve.upper() for cve in CVE.findall(text)}
+
+    if len(cves) > MAX_CVE_IDS:
+        problems.append(
+            f"{len(cves)} numery CVE – zostaw najwyżej {MAX_CVE_IDS} najważniejsze, resztę opisz słowami "
+            "(np. „i dwie inne luki”)"
+        )
+
+    return problems
 
 
 def quality_problems(text, source=None, soft=True):
@@ -342,7 +445,7 @@ def quality_problems(text, source=None, soft=True):
 
     if len(text) > MAX_SUMMARY_LENGTH:
         problems.append(
-            f"streszczenie ma {len(text)} znaków – skróć je do najwyżej 350 znaków "
+            f"streszczenie ma {len(text)} znaków – skróć je do najwyżej 420 znaków "
             "(2–3 krótkie zdania, najważniejsze fakty)"
         )
 
@@ -370,8 +473,15 @@ def quality_problems(text, source=None, soft=True):
             "rzeczownik (np. „przed exploitem”, „z botnetu”, „do infostealera”)"
         )
 
+    for sentence in empty_sentences(text):
+        problems.append(
+            f"zdanie bez konkretu („{sentence[:70]}”) – zastąp je faktem z artykułu "
+            "(kto, co, ile, kiedy) albo usuń"
+        )
+
     if soft:
         problems.extend(style_problems(text))
+        problems.extend(readability_problems(text))
 
     if looks_english(text):
         problems.append("streszczenie nie jest po polsku – napisz je po polsku")

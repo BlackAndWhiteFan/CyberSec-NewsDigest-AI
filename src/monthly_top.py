@@ -181,24 +181,40 @@ def event_summary(event):
     v33: summaries are tidied first (ai_summaries.tidy_summary): an English
     or empty one falls back to the next article of the event.
     """
+    return event_summary_with_notes(event)[0]
+
+
+def event_summary_with_notes(event):
+    """Return (summary, notes): notes describe what code changed or skipped."""
     from ai_summaries import tidy_summary
-    from summary_quality import repeats_title
+    from summary_quality import looks_english, repeats_title
 
     fallback = ""
+    notes = []
 
     for record in event:
-        summary = tidy_summary(record.get("summary", ""))
+        original = record.get("summary", "")
+        summary = tidy_summary(original, notes)
+        title = record.get("title", "")[:60]
 
         # A summary that only restates its title says nothing new next to
         # the title; the next article's summary is better, if there is one.
         if summary and repeats_title(summary, record.get("title", "")):
+            notes.append(f"streszczenie „{title}” tylko powtarza tytuł – szukam kolejnego")
             fallback = fallback or summary
             continue
 
         if summary:
-            return summary
+            return summary, notes
 
-    return fallback
+        if original:
+            reason = "po angielsku" if looks_english(original) else "nic poprawnego nie zostało"
+            notes.append(f"streszczenie „{title}” pominięte ({reason}) – szukam kolejnego")
+
+    if fallback:
+        notes.append("brak lepszego streszczenia – zostaje powtarzające tytuł")
+
+    return fallback, notes
 
 
 def leader_key(record):
@@ -212,6 +228,7 @@ def summarize_event(event):
     """Return the figures used to rank and display one event."""
     leader = max(event, key=leader_key)
     event = [leader] + [record for record in event if record is not leader]
+    summary, notes = event_summary_with_notes(event)
     sources = set().union(*(record_sources(record) for record in event))
 
     return {
@@ -221,7 +238,8 @@ def summarize_event(event):
         "sources": len(sources - {""}),
         "score": max(record.get("score", 0) for record in event),
         "first_date": min(record.get("date", "") for record in event),
-        "summary": event_summary(event),
+        "summary": summary,
+        "tidy_notes": notes,
         "kev": sorted(set().union(*(set(record.get("kev", [])) for record in event))),
     }
 
@@ -299,6 +317,7 @@ def build_top_lines(month, records, limit=TOP_LIMIT, polish=None):
     lines.append("")
 
     events = rank_events(records, limit)
+    log_tidy(events)
 
     if polish:
         polish(events)
@@ -307,6 +326,20 @@ def build_top_lines(month, records, limit=TOP_LIMIT, polish=None):
         lines.append(format_event_line(number, event))
 
     return lines + kev_note(events)
+
+
+def log_tidy(events):
+    """v33: one "PORZĄDEK" line for each change code made in a top summary."""
+    changed = 0
+
+    for number, event in enumerate(events, start=1):
+        for note in event.get("tidy_notes", []):
+            print(f"PORZĄDEK: wydarzenie {number} – {note}")
+
+        changed += bool(event.get("tidy_notes"))
+
+    print(f"PORZĄDEK: streszczenia zmienione przez kod: {changed} z {len(events)}")
+    return changed
 
 
 def kev_note(events):

@@ -41,6 +41,7 @@ from summary_quality import (
     quality_problems,
     remove_unsupported_labels,
     repair_summary,
+    split_sentences,
     suggestion_text,
 )
 
@@ -597,20 +598,38 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
     return changed
 
 
-def tidy_summary(text):
+def tidy_summary(text, notes=None):
     """Clean an archived summary for the tops (v33).
 
     Summaries archived before the later checks can still have "RCE (RCE)",
     a lowercase sentence start, "jutro" or filler (weekly top of 26.10.2026).
     Code applies the autofix and sentence case, and removes sentences with
     problems; the material is not available here, so facts are not checked.
+
+    notes: optional list that gets a description of every change, for the
+    "PORZĄDEK" lines of the top log.
     """
-    text = clean_summary(text or "")
+    changes = []
+    cleaned = clean_summary(text or "", changes=changes)
 
-    if text and all_problems(text, None, soft=False):
-        text = repair_summary(text, lambda sentence: all_problems(sentence, None, soft=False))
+    if notes is not None:
+        notes.extend(f"autopoprawka „{change['used']}” → „{change['fixed']}”" for change in changes)
 
-    return text
+    if cleaned and all_problems(cleaned, None, soft=False):
+        repaired = repair_summary(cleaned, lambda sentence: all_problems(sentence, None, soft=False))
+
+        # A summary with nothing left is reported once by the caller.
+        if notes is not None and repaired:
+            kept = set(split_sentences(repaired))
+            notes.extend(
+                f"usunięte zdanie: „{sentence}” ({'; '.join(all_problems(sentence, None, soft=False))})"
+                for sentence in split_sentences(cleaned)
+                if sentence not in kept
+            )
+
+        cleaned = repaired
+
+    return cleaned
 
 
 def proofread_top(events, environ=None, opener=urllib.request.urlopen, sleep=time.sleep):

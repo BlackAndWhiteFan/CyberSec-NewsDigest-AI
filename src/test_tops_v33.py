@@ -146,6 +146,37 @@ class TestTidyAndProofread(unittest.TestCase):
         self.assertEqual(events[0]["summary"], "Tekst.")
 
 
+class TestTidyLog(unittest.TestCase):
+    def test_notes_of_tidy(self):
+        notes = []
+        tidy_summary("Wydano łatki na RCE (RCE). Łatki zostaną udostępnione jutro.", notes)
+        self.assertEqual(notes[0], "autopoprawka „RCE (RCE)” → „RCE”")
+        self.assertTrue(notes[1].startswith("usunięte zdanie: „Łatki zostaną udostępnione jutro.”"))
+
+    def test_log_lines(self):
+        import contextlib
+        import io as text_io
+        from monthly_top import log_tidy
+
+        output = text_io.StringIO()
+        with contextlib.redirect_stdout(output):
+            log_tidy([{"tidy_notes": ["autopoprawka „RCE (RCE)” → „RCE”"]}, {"tidy_notes": []}])
+
+        self.assertEqual(output.getvalue().splitlines(), [
+            "PORZĄDEK: wydarzenie 1 – autopoprawka „RCE (RCE)” → „RCE”",
+            "PORZĄDEK: streszczenia zmienione przez kod: 1 z 2",
+        ])
+
+    def test_english_summary_is_reported(self):
+        records = [
+            record("Poważne luki w Javie", "cyberdefence24.pl", score=5,
+                   summary="CVE-2026-111497 in Node.js Brotli decoder enables out-of-bounds write that may "
+                           "lead to RCE and allows remote exploitation without authentication."),
+        ]
+        notes = rank_events(records)[0]["tidy_notes"]
+        self.assertEqual(notes, ["streszczenie „Poważne luki w Javie” pominięte (po angielsku) – szukam kolejnego"])
+
+
 class TestLekturaCves(unittest.TestCase):
     def test_longer_page_lead_for_lektura_links(self):
         page = "x" * 900 + " CVE-2026-109618"

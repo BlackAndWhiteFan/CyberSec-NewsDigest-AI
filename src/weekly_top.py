@@ -15,7 +15,7 @@ from datetime import date, datetime, timedelta
 
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from kev import load_kev, refresh_records
-from monthly_top import deliver, format_event_line, kev_note, polish_events, rank_events
+from monthly_top import deliver, format_event_line, kev_note, log_tidy, polish_events, rank_events
 import top_guard
 
 
@@ -83,6 +83,7 @@ def build_week_lines(monday, records, limit=TOP_LIMIT, polish=None):
     lines.append("")
 
     events = rank_events(records, limit)
+    log_tidy(events)
 
     if polish:
         polish(events)

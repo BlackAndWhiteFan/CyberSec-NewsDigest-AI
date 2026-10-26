@@ -51,6 +51,14 @@ GENERIC_PHRASES = [
     r"nie (został|została|zostało|zostały|zostali) (podan|ujawnion|wskazan|sprecyzowan|określon)\w*",
     # v32: "Aktualizacje … eliminują ryzyko ataków" (test 25.10.2026).
     r"eliminuj\w* (to |te |tę )?(ryzyk|zagrożeni)\w*",
+    # v33: "Liczba i rodzaj naruszonych danych nie są znane" (digest 26.10.2026).
+    r"(nie|nadal nie) (jest|są|był|była|było|były) (jeszcze )?znan\w*",
+    # v33: a bare closing formula with no concrete advice (4 of 10 summaries
+    # on 26.10.2026: "Zaleca się natychmiastową aktualizację."). Advice with
+    # content ("… i ograniczenie dostępu do interfejsów zarządzania") stays.
+    r"zaleca się (natychmiastow\w+ |piln\w+ |niezwłoczn\w+ )?"
+    r"(aktualizacj\w+|zastosowanie (łat\w+|aktualizacj\w+)|instalacj\w+ (łat\w+|aktualizacj\w+)|wgranie łat\w+)"
+    r"( (systemu|oprogramowania|wszystkich wymienionych komponentów))?\.",
 ]
 GENERIC = [re.compile(rf"(?<!\w){pattern}(?!\w)", re.IGNORECASE) for pattern in GENERIC_PHRASES]
 
@@ -128,9 +136,58 @@ def is_unchecked_number(number, year):
     return value <= UNCHECKED_NUMBER_LIMIT or year - 1 <= value <= year + 1
 
 
+# v33: labels the AI adds on its own (digest 26.10.2026: "podatność zero-day"
+# for a flaw patched five days earlier; "natychmiastowa aktualizacja" in four
+# summaries). They are allowed only when the article material has them too.
+ZERO_DAY = re.compile(r"(?<!\w)(?:zero|0)[-\u2011‐ ]?day\w*|(?<!\w)dni\w* zerow\w*", re.IGNORECASE)
+ZERO_DAY_SOURCE = re.compile(r"(?:zero|0)[-\u2011‐ ]?days?|zeroday|dni\w* zerow\w*", re.IGNORECASE)
+URGENCY = re.compile(r"(?<!\w)natychmiast\w*", re.IGNORECASE)
+URGENCY_SOURCE = re.compile(
+    r"immediate\w*|urgent\w*|as soon as possible|asap|without delay|right away|imperative|"
+    r"natychmiast\w*|niezwłoczn\w*|pilni\w*|jak najszybciej",
+    re.IGNORECASE,
+)
+# Code fix when the AI correction does not remove such a label.
+ZERO_DAY_AFTER_NOUN = re.compile(
+    r"(?<!\w)((?:luk|podatnoś|podatnosc)\w*)(?: typu)? \(?(?:zero|0)[-\u2011‐ ]?day\)?(?!\w)", re.IGNORECASE
+)
+URGENCY_WORD = re.compile(r"(?<!\w)natychmiast(?:ow\w+)?\s+", re.IGNORECASE)
+
+
+def unsupported_labels(text, source):
+    """Return "zero-day" and "natychmiast…" when the source does not say so."""
+    problems = []
+    match = ZERO_DAY.search(text)
+
+    if match and not ZERO_DAY_SOURCE.search(source):
+        problems.append(
+            f"„{match.group(0)}” – artykuł nie nazywa tej luki zero-day; usuń to określenie"
+        )
+
+    match = URGENCY.search(text)
+
+    if match and not URGENCY_SOURCE.search(source):
+        problems.append(
+            f"„{match.group(0)}” – artykuł nie mówi o pilności; usuń to słowo albo całe zalecenie"
+        )
+
+    return problems
+
+
+def remove_unsupported_labels(text, source):
+    """Remove "zero-day" after luka/podatność and "natychmiast…" when the source lacks them."""
+    if not ZERO_DAY_SOURCE.search(source):
+        text = ZERO_DAY_AFTER_NOUN.sub(lambda m: m.group(1), text)
+
+    if not URGENCY_SOURCE.search(source):
+        text = URGENCY_WORD.sub("", text)
+
+    return fix_sentence_case(text)
+
+
 def unsupported_facts(text, source, year=None):
     """Return CVE numbers and numbers above 12 that are not in the source."""
-    problems = []
+    problems = unsupported_labels(text, source)
     source_cves = {cve.upper() for cve in CVE.findall(source)}
 
     for cve in CVE.findall(text):

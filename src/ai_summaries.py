@@ -35,7 +35,13 @@ from gemini import ask_gemini, gemini_models
 from languagetool import grammar_hints
 from glossary import autofix, convention_violations, is_acronym, prompt_glossary
 from language_notes import findings, log_line, settle, unique
-from summary_quality import STYLE_RULES, fix_sentence_case, quality_problems, repair_summary
+from summary_quality import (
+    STYLE_RULES,
+    fix_sentence_case,
+    quality_problems,
+    remove_unsupported_labels,
+    repair_summary,
+)
 
 
 PROVIDERS = [
@@ -90,7 +96,8 @@ CO MA BYĆ W STRESZCZENIU:
 - Każde zdanie musi zawierać informację z artykułu. Nie pisz ogólników ani komentarzy, np. „co podkreśla wagę…”, „to kolejny przykład…”, „warto pamiętać…”, „należy zachować ostrożność”.
 - Nie używaj względnych określeń czasu („jutro”, „dziś”, „wczoraj”, „w przyszłym tygodniu”): streszczenie czyta się też po tygodniu. Podaj datę z artykułu albo pomiń czas.
 - Liczby, nazwy i numery CVE przepisuj dokładnie z artykułu; nie zaokrąglaj i nie przeliczaj.
-- Zalecenia (aktualizacja, obejście, wyłączenie usługi) podawaj tylko wtedy, gdy artykuł je wymienia; nie dopisuj własnych.
+- Zalecenia (aktualizacja, obejście, wyłączenie usługi) podawaj tylko wtedy, gdy artykuł je wymienia; nie dopisuj własnych. Nie kończ streszczenia formułką „Zaleca się (natychmiastową) aktualizację” ani „Zaleca się zastosowanie łatki”: informacja o łatce już to mówi. Zalecenie pisz tylko konkretnie (wersja z poprawką, obejście, co wyłączyć).
+- Nie dodawaj określeń, których nie ma w artykule: „zero-day” tylko wtedy, gdy artykuł tak nazywa lukę; „natychmiast” tylko wtedy, gdy artykuł mówi o pilności.
 - Nie pisz, czego artykuł nie podaje (np. „raport nie podaje informacji o sprawcach”) – pomiń to.
 - Całe streszczenie ma najwyżej 350 znaków. Pisz krótkie zdania zakończone kropką; nie łącz zdań średnikami. Wymień najwyżej 3 najważniejsze numery CVE lub wersje.
 - Jeśli materiał to tylko tytuł lub krótka zajawka, napisz 1 zdanie i nie dopowiadaj niczego.
@@ -396,8 +403,15 @@ def enforce_rules(provider, api_key, messages, content, summaries, opener, sleep
             print(f"KONTROLA: streszczenie {number} poprawione.")
             continue
 
+        # v33: "zero-day" and "natychmiast…" without support in the article
+        # are removed as words first, so the sentence with the facts stays.
+        base = text or summaries[number]
+
+        if source is not None:
+            base = remove_unsupported_labels(base, source)
+
         repaired = repair_summary(
-            text or summaries[number],
+            base,
             lambda sentence: all_problems(sentence, source, soft=False),
         )
 

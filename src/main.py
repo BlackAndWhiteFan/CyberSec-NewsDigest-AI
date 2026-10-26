@@ -65,6 +65,9 @@ def fetch_feed(url):
 
     return items
 
+VIA_PAGE_CHARS = 2000
+
+
 def mark_continuations_by_cve(articles, recent_records):
     """Mark articles whose summary shares a CVE id with a recent record.
 
@@ -88,7 +91,16 @@ def mark_continuations_by_cve(articles, recent_records):
         if article.get("continuation"):
             continue
 
-        if set(find_cves(article.get("title", ""), article.get("summary", ""))) & recent:
+        texts = [article.get("title", ""), article.get("summary", "")]
+
+        # v33: for a lektura link the ZTS comment is short and the CVE ids are
+        # in the linked page, often after its first 600 characters (digest of
+        # 26.10.2026: PHP 8.5.12 release, CVE-2026-109618 in the PHP
+        # Foundation post, shown again in "Najważniejsze").
+        if article.get("via"):
+            texts.append(article.get("page_text", "")[:VIA_PAGE_CHARS])
+
+        if set(find_cves(*texts)) & recent:
             article["continuation"] = True
             marked += 1
 

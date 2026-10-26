@@ -573,7 +573,19 @@
     "https://thehackernews.com/2026/10/google-says-gmail-and-photos-data.html",
     "https://thehackernews.com/2026/10/researchers-push-over-2-million-updates.html",
     "https://thehackernews.com/2026/10/cisa-flags-two-actively-exploited.html",
-    "https://www.securityweek.com/former-unit-8200-officers-raise-34-million-for-agentic-secops-startup-mave/"
+    "https://www.securityweek.com/former-unit-8200-officers-raise-34-million-for-agentic-secops-startup-mave/",
+    "https://sekurak.pl/pralnia-zaufania-veracrypt-mark-of-the-web-i-luka-architektoniczna-windows/",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/zhakowano-europejski-uniwersytet-wyciekly-dane-pol-miliona-osob",
+    "https://cyberdefence24.pl/biznes-i-finanse/nowe-wyzwania-przed-firmami-ai-wymusza-powazne-zmiany-w-przedsiebiorstwach",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/wyciek-danych-z-partii-macrona",
+    "https://cyberdefence24.pl/armia-i-sluzby/wojsko-polskie/system-z-bezpiecznego-podlasia-wzmocni-polskie-wojsko",
+    "https://www.bleepingcomputer.com/news/security/php2shell-security-flaws-now-sucessfully-exploited-in-the-wild/",
+    "https://thehackernews.com/2026/10/microsoft-365-token-replay-attacks.html",
+    "https://thehackernews.com/2026/10/gheist-uses-stolen-github-tokens-to.html",
+    "https://thehackernews.com/2026/10/malicious-file-in-downloads-folder.html",
+    "https://kapitanhack.pl/litellm-znow-przejety-zlosliwa-aktualizacja-wykradala-klucze-api-i-poswiadczenia/",
+    "https://www.securityweek.com/node2shell-brotli-flaw-triggers-patching-across-microsoft-node-js-python-packages/",
+    "https://www.securityweek.com/mythos-5-ignored-real-world-harm-in-july-attack/"
   ],
   "published_links": [
     "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/",
@@ -761,6 +773,16 @@
     "https://www.bleepingcomputer.com/news/security/blackx-uefi-bootkit-exploits-baton-drop-flaw-to-bypass-secure-boot/",
     "https://www.bleepingcomputer.com/news/security/hpe-patches-eight-max-severity-rce-and-auth-bypass-aos-flaws/",
     "https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html",
-    "https://www.securityweek.com/atlassian-patches-75-third-party-flaws-in-data-center-and-server-products/"
+    "https://www.securityweek.com/atlassian-patches-75-third-party-flaws-in-data-center-and-server-products/",
+    "https://www.bleepingcomputer.com/news/security/php2shell-security-flaws-now-sucessfully-exploited-in-the-wild/",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/zhakowano-europejski-uniwersytet-wyciekly-dane-pol-miliona-osob",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/wyciek-danych-z-partii-macrona",
+    "https://krebsonsecurity.com/2026/10/feds-suspect-ransom-negotiator-ran-shinyhunters-extortion-site/",
+    "https://norforge.com/blog/inside_cairn",
+    "https://socradar.io/blog/inc-gentlemen-ransomware-ai-infrastructure/",
+    "https://sekurak.pl/pralnia-zaufania-veracrypt-mark-of-the-web-i-luka-architektoniczna-windows/",
+    "https://www.wiz.io/blog/php2shell-php-rce",
+    "https://aws.amazon.com/blogs/security/amazon-threat-intelligence-identifies-php2shell-exploitation-prior-to-public-disclosure-in-madpot/",
+    "https://thehackernews.com/2026/10/php2shell-exploitation-hits-government.html"
   ]
 }

@@ -1466,5 +1466,215 @@
         "model": "Gemini gemini-3.5-flash"
       }
     ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "PHP2Shell security flaws now sucessfully exploited in the wild",
+    "link": "https://www.bleepingcomputer.com/news/security/php2shell-security-flaws-now-sucessfully-exploited-in-the-wild/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Podatności php2shell mogą dotyczyć 70% stron internetowych",
+        "link": "https://www.wiz.io/blog/php2shell-php-rce",
+        "source": "wiz.io"
+      },
+      {
+        "title": "Luki php2shell wykorzystywane cztery dni przed wydaniem poprawek",
+        "link": "https://aws.amazon.com/blogs/security/amazon-threat-intelligence-identifies-php2shell-exploitation-prior-to-public-disclosure-in-madpot/",
+        "source": "aws.amazon.com"
+      },
+      {
+        "title": "PHP2Shell Exploitation Attempts Continue Amid Suspected N. Korea Global Scanning Activity",
+        "link": "https://thehackernews.com/2026/10/php2shell-exploitation-hits-government.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Dwie krytyczne podatności RCE (CVE-2026-109618 i CVE-2026-109619) oznaczone jako PHP2Shell zostały potwierdzone w środowisku produkcyjnym na Apache modphp z PHP 8.4.26. Exploit dostarczył 800 KiB zdekodowanego pliku cookie i adres funkcji użyty w payloadzie, a atak zakończył się wykonaniem polecenia po 1,6 ms. Zespół PHP wydał łatkę 21 października.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Dwie krytyczne podatności RCE (CVE-2026-109618 i CVE-2026-109619) oznaczone jako PHP2Shell zostały potwierdzone w środowisku produkcyjnym na Apache modphp z PHP 8.4.26. Exploit dostarczył 800 KiB zdekodowanego pliku cookie i adres funkcji użyty w payload, a atak zakończył się wykonaniem polecenia po 1,6 ms. Zespół PHP wydał łatkę 21 października.",
+        "after": "Dwie krytyczne podatności RCE (CVE-2026-109618 i CVE-2026-109619) oznaczone jako PHP2Shell zostały potwierdzone w środowisku produkcyjnym na Apache modphp z PHP 8.4.26. Exploit dostarczył 800 KiB zdekodowanego pliku cookie i adres funkcji użyty w payloadzie, a atak zakończył się wykonaniem polecenia po 1,6 ms. Zespół PHP wydał łatkę 21 października.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Zhakowano europejski uniwersytet. Wyciekły dane pół miliona osób",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/zhakowano-europejski-uniwersytet-wyciekly-dane-pol-miliona-osob",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Uniwersytet w Kopenhadze zgłosił atak 20 października, w wyniku którego hakerzy uzyskali dostęp do danych osobowych 525 tys. osób oraz kodów PIN ok. 20 tys. studentów i pracowników. Dostęp został zablokowany, a uczelnia ograniczyła fizyczny wstęp do wybranych miejsc na kampusie.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Uniwersytet w Kopenhadze zgłosił atak 20 października, w wyniku którego hakerzy uzyskali dostęp do danych osobowych 525 tys. osób oraz PIN‑ów ok. 20 tys. studentów i pracowników. Dostęp został zablokowany, a uczelnia ograniczyła fizyczny dostęp do wybranych miejsc na kampusie.",
+        "after": "Uniwersytet w Kopenhadze zgłosił atak 20 października, w wyniku którego hakerzy uzyskali dostęp do danych osobowych 525 tys. osób oraz kodów PIN ok. 20 tys. studentów i pracowników. Dostęp został zablokowany, a uczelnia ograniczyła fizyczny wstęp do wybranych miejsc na kampusie.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Wyciek danych z partii Macrona?",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/wyciek-danych-z-partii-macrona",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Na forum hakerskim ChimeraZ twierdzi, że pozyskał ponad 4,1 mln wpisów partii Renaissance, w tym 340 tys. adresów i dane o 10 tys. wydarzeniach oraz zdjęcia 1547 osób. Francuski serwis nie zweryfikował informacji i poinformował ugrupowanie, które nie potwierdziło incydentu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "rekordów",
+        "form": "rekordów",
+        "suggestion": "wpisów, danych",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "style",
+        "used": "Breaches",
+        "form": "breach*",
+        "suggestion": "wyciek, włamanie",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Na forum hakerskim ChimeraZ twierdzi, że pozyskał ponad 4,1 mln wpisów partii Renaissance, w tym 340 tys. adresów i dane o 10 tys. wydarzeniach oraz zdjęcia 1547 osób. French wyciek nie zweryfikował informacji i poinformował ugrupowanie, które nie potwierdziło incydentu.",
+        "after": "Na forum hakerskim ChimeraZ twierdzi, że pozyskał ponad 4,1 mln wpisów partii Renaissance, w tym 340 tys. adresów i dane o 10 tys. wydarzeniach oraz zdjęcia 1547 osób. Francuski serwis nie zweryfikował informacji i poinformował ugrupowanie, które nie potwierdziło incydentu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Negocjator ds. ransomware pomagał grupie ShinyHunters w wyłudzaniu okupów",
+    "link": "https://krebsonsecurity.com/2026/10/feds-suspect-ransom-negotiator-ran-shinyhunters-extortion-site/",
+    "source": "krebsonsecurity.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Federalni śledczy z USA zidentyfikowali dwóch menedżerów firm zajmujących się negocjacjami w sprawach ransomware, powiązanych z grupą ShinyHunters, w tym jednego, który pomógł prowadzić stronę wymuszającą okup. Grupa ShinyHunters wyłudziła ponad 70 mln USD i we wrześniu włamała się na fbijobs.gov, kradnąc dane medyczne, numery SSN i adresy pracowników.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Federalni śledczy USA zidentyfikowali dwóch menedżerów firm negocjacyjnych ransomware powiązanych z grupą ShinyHunters, w tym jednego, który pomógł prowadzić stronę wymuszającą okup. ShinyHunters wyłudził ponad 70 mln USD i we wrześniu włamał się na fbijobs.gov, kradnąc dane medyczne, SSN i adresy pracowników.",
+        "after": "Federalni śledczy z USA zidentyfikowali dwóch menedżerów firm zajmujących się negocjacjami w sprawach ransomware, powiązanych z grupą ShinyHunters, w tym jednego, który pomógł prowadzić stronę wymuszającą okup. Grupa ShinyHunters wyłudziła ponad 70 mln USD i we wrześniu włamała się na fbijobs.gov, kradnąc dane medyczne, numery SSN i adresy pracowników.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Atakujący używają Cairn do włamań i nieopatrznie ujawniają dane swoich celów",
+    "link": "https://norforge.com/blog/inside_cairn",
+    "source": "norforge.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "style",
+        "used": "eksploatacji",
+        "form": "eksploatacj*",
+        "suggestion": "wykorzystanie (luki)",
+        "fixed_by": "dropped"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Siedem otwartych serwerów używanych przez ransomware INC i The Gentlemen",
+    "link": "https://socradar.io/blog/inc-gentlemen-ransomware-ai-infrastructure/",
+    "source": "socradar.io",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "STRU wykryło ekosystem napadu z użyciem AI, prowadzony przez afiliantów grup INC Ransomware i The Gentlemen, w którym publicznie dostępny serwer C2 ujawnił bazę sesji AI, kod źródłowy Phantom oraz pliki konfiguracyjne.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "style",
+        "used": "buildów",
+        "form": "buildów",
+        "suggestion": "wersji, kompilacji",
+        "fixed_by": "code"
+      },
+      {
+        "type": "proofreading",
+        "before": "STRU wykryło ekosystem AI‑napadu prowadzony przez afiliantów grup INC Ransomware i The Gentlemen, w którym publicznie dostępny serwer C2 ujawnił bazę sesji AI, kod źródłowy Phantom oraz pliki konfiguracyjne.",
+        "after": "STRU wykryło ekosystem napadu z użyciem AI, prowadzony przez afiliantów grup INC Ransomware i The Gentlemen, w którym publicznie dostępny serwer C2 ujawnił bazę sesji AI, kod źródłowy Phantom oraz pliki konfiguracyjne.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-26",
+    "title": "Pralnia zaufania: VeraCrypt, Mark of the Web, i luka architektoniczna Windows",
+    "link": "https://sekurak.pl/pralnia-zaufania-veracrypt-mark-of-the-web-i-luka-architektoniczna-windows/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Podczas pobierania zaszyfrowanego kontenera VeraCrypt Windows oznacza go strumieniem Zone.Identifier (Mark of the Web), co wskazuje, że plik pochodzi z sieci.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Pobierając zaszyfrowany kontener VeraCrypt, Windows oznacza go strumieniem Zone.Identifier (Mark of the Web), co wskazuje, że plik pochodzi z sieci.",
+        "after": "Podczas pobierania zaszyfrowanego kontenera VeraCrypt Windows oznacza go strumieniem Zone.Identifier (Mark of the Web), co wskazuje, że plik pochodzi z sieci.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
   }
 ]

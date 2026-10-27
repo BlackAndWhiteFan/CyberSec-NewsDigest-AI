@@ -176,6 +176,62 @@ class TestEmptySentences(unittest.TestCase):
                          "Bank XYZ padł ofiarą ataku 12.10.")
 
 
+class TestBranchTestFixes(unittest.TestCase):
+    # Daily branch test of 26.10.2026 (12:09).
+    def test_no_patch_with_a_fixed_version_is_rejected(self):
+        source = ("Signal vulnerability\nThe flaw affects RingRTC versions before 2.72.0. "
+                  "Users running unpatched versions should update.")
+        text = "Luka dotyczy wersji starszych niż 2.72.0 i nie ma jeszcze dostępnej łatki."
+        self.assertTrue(has(quality_problems(text, source), "braku łatki"))
+
+    def test_clear_no_patch_stays(self):
+        source = "Tailscale\nTailscale has not yet released a patch for the flaws."
+        self.assertFalse(has(quality_problems("Tailscale nie wydał jeszcze łatki.", source), "braku łatki"))
+
+    def test_english_ai_compounds(self):
+        problems = quality_problems("Badacze ujawnili AI‑orchestrated toolkit używany w atakach.")
+        self.assertTrue(has(problems, "kalka „AI‑orchestrated”"))
+        self.assertTrue(has(problems, "kalka „toolkit”"))
+
+    def test_context_from_two_weeks_back(self):
+        from event_grouping import add_context
+        articles = [{"title": "Plex2Shell: łańcuch podatności w serwerze multimediów Plex", "link": "https://z/1",
+                     "cves": ["CVE-2026-96652"]}]
+        records = [
+            {"title": "CISA: Hackers chain Plex flaws in Plex2Shell attacks to breach servers", "link": "https://b/1",
+             "date": "2026-10-22", "summary": "CISA ostrzega przed atakami na Plex Media Server.",
+             "cves": ["CVE-2026-96652"]},
+            {"title": "Weekendowa Lektura: odcinek 699", "link": "https://z3s/1", "date": "2026-10-24",
+             "summary": "Przegląd.", "cves": ["CVE-2026-96652"]},
+        ]
+
+        self.assertEqual(add_context(articles, records), 1)
+        self.assertEqual(articles[0]["previous"]["date"], "2026-10-22")
+
+    def test_continuation_context_is_kept(self):
+        from event_grouping import add_context
+        articles = [{"title": "X", "previous": {"date": "2026-10-25", "summary": "Wcześniej."}}]
+        self.assertEqual(add_context(articles, [{"title": "X", "summary": "Inne.", "date": "2026-10-20"}]), 0)
+        self.assertEqual(articles[0]["previous"]["summary"], "Wcześniej.")
+
+
+class TestMaterialRemarks(unittest.TestCase):
+    # Weekly top branch test of 26.10.2026 (12:24), written by gpt-oss-120b.
+    def test_remarks_about_the_material_are_filler(self):
+        for text in ("Materiał nie podaje żadnych ataków ani łatek, jedynie opisuje mechanizm exploitu.",
+                     "CISA ostrzega przed dalszymi wykorzystaniami, nie podaje łatek.",
+                     "Incydent zgłoszono 19 października, nie ma informacji o dalszych atakach."):
+            self.assertTrue(has(quality_problems(text), "ogólnik"), text)
+
+    def test_facts_stay(self):
+        self.assertFalse(has(quality_problems("Sprawcy zainstalowali kryptominery na serwerach Plex."), "ogólnik"))
+
+    def test_prompt_skips_missing_elements_silently(self):
+        from ai_summaries import EVENT_PROMPT
+        self.assertIn("Pomiń bez słowa", EVENT_PROMPT)
+        self.assertIn("przy wycieku danych", EVENT_PROMPT)
+
+
 class TestDailySummary(unittest.TestCase):
     def test_kev_sentence_passes_the_check(self):
         article = {"title": "Arista patches VeloCloud zero-day", "link": "https://x/a",

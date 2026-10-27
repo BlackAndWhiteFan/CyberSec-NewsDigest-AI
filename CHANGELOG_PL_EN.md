@@ -176,6 +176,18 @@ Nowe i zmienione pliki: `src/ai_summaries.py`, `src/summary_quality.py`,
 
 Testy jednostkowe: 377, zakończone powodzeniem.
 
+Dokończenie v34 (27.10.2026): prasówka z 27.10 nie miała linii
+„KONTEKST” w logu. Pięć plików kodu z drugiej paczki (`ai_summaries.py`,
+`summary_quality.py`, `event_grouping.py`, `main.py`,
+`test_summaries_v34.py`) trafiło przy wgrywaniu do katalogu głównego
+repozytorium zamiast do `src`, więc weszło do scalenia v34, ale nie
+działało: workflow uruchamia `src/main.py`. Na `main` brakowało więc
+kontekstu z 14 dni, blokady fałszywego „brak łatki” i wyłapywania uwag
+o materiale. Pliki przeniesione do `src`, kopie z katalogu głównego
+usunięte. To trzeci taki przypadek (v22, v26), więc nowy test
+`src/test_repo_layout.py` zatrzymuje workflow, gdy w katalogu głównym
+pojawi się plik `.py`. Testy jednostkowe: 379.
+
 ------------------------------------------------------------------------
 
 ## v33 --- 26.10.2026
@@ -2017,6 +2029,18 @@ New and changed files: `src/ai_summaries.py`, `src/summary_quality.py`,
 limit), `data/styl_unikaj.csv`, README (PL/EN).
 
 Unit tests: 377, passed.
+
+Completion of v34 (2026-10-27): the digest of 27 October had no
+"KONTEKST" line in its log. The five code files of the second package
+(`ai_summaries.py`, `summary_quality.py`, `event_grouping.py`, `main.py`,
+`test_summaries_v34.py`) were uploaded to the repository root instead of
+`src`, so they were part of the v34 merge but never ran: the workflow
+runs `src/main.py`. Main therefore lacked the 14-day context, the guard
+against a false "no patch" and the check of remarks about the material.
+The files were moved to `src` and the root copies deleted. It is the
+third such case (v22, v26), so a new test `src/test_repo_layout.py`
+stops the workflow when a `.py` file appears in the root. Unit tests:
+379.
 
 ------------------------------------------------------------------------
 

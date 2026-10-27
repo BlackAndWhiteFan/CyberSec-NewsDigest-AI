@@ -370,6 +370,65 @@ def group_events(articles, pool=None):
     return representatives
 
 
+CONTEXT_DAYS = 14
+
+
+def add_context(articles, records, pool_titles=()):
+    """v34: the latest earlier report of the same event from the archive
+    (up to CONTEXT_DAYS days back) as "previous", so the AI can tell the
+    story (test of 26.10.2026: a Plex2Shell write-up without the CISA
+    warning of 22.10, which was older than the 3 days of "Ciąg dalszy").
+
+    A record matches by a shared CVE id (the lead CVE ids, see kev), an
+    event name with digits or the same-event rule. Articles that already
+    have a context (continuations) are left as they are. Returns the
+    number of articles that got a context.
+    """
+    from kev import find_cves
+
+    frequency = document_frequency(
+        list(pool_titles)
+        + [record.get("title", "") for record in records]
+        + [article.get("title", "") for article in articles]
+    )
+    names = text_names(
+        [record.get("summary", "") for record in records]
+        + [article.get("description", "") for article in articles]
+    )
+    ordered = sorted(
+        (record for record in records if record.get("summary") and not is_roundup(record)),
+        key=lambda record: record.get("date", ""),
+        reverse=True,
+    )
+    added = 0
+
+    for article in articles:
+        if article.get("previous") or is_roundup(article):
+            continue
+
+        cves = set(article.get("cves", []))
+
+        for record in ordered:
+            if record.get("link") == article.get("link"):
+                continue
+
+            record_cves = set(record.get("cves", [])) | set(find_cves(record.get("title", ""), record.get("summary", "")))
+
+            if (cves & record_cves) or same_event(
+                article.get("title", ""), record.get("title", ""), frequency, names=names
+            ):
+                article["previous"] = {
+                    "date": record.get("date", ""),
+                    "title": record.get("title", ""),
+                    "summary": record.get("summary", ""),
+                }
+                added += 1
+                break
+
+    print(f"KONTEKST: wcześniejsze doniesienie z archiwum dla {added} z {len(articles)} artykułów")
+    return added
+
+
 def mark_continuations(articles, recent_records, pool_titles=()):
     """Mark articles that continue events delivered in recent digests.
 

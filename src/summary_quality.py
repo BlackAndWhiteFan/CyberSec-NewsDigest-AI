@@ -47,6 +47,12 @@ GENERIC_PHRASES = [
     r"brak (jest )?(informacji|szczegółów|danych) (o|na temat)",
     # v29: impersonal form ("Nie podano sprawcy ani dalszych szczegółów").
     r"nie podano",
+    # v34: remarks about the material in event stories (weekly top test of
+    # 26.10.2026: "Materiał nie podaje żadnych ataków ani łatek", "CISA … nie
+    # podaje łatek", "nie ma informacji o dalszych atakach").
+    r"materiał\w* (nie|nic|jedynie|tylko)",
+    r"nie podaj\w*",
+    r"(nie ma|brak\w*|nie było) (żadnych |dalszych )?(informacji|danych|wzmianek|doniesień)",
     # v31: "Liczba poszkodowanych nie została podana" (test 25.10.2026).
     r"nie (został|została|zostało|zostały|zostali) (podan|ujawnion|wskazan|sprecyzowan|określon)\w*",
     # v32: "Aktualizacje … eliminują ryzyko ataków" (test 25.10.2026).
@@ -158,14 +164,32 @@ EXPLOITED_SOURCE = re.compile(
     r"exploit(?:ed|ation|ing)|in the wild|wykorzyst\w*|CISA KEV|atak\w*|attack\w*", re.IGNORECASE
 )
 NO_PATCH = re.compile(
-    r"(?<!\w)(?:brak\w* łat\w*|bez łat\w*|niezałatan\w*|nie (?:ma|wydano|wydał\w*|jest dostępn\w*) (?:jeszcze )?łat\w*)",
+    r"(?<!\w)(?:brak\w* łat\w*|bez łat\w*|niezałatan\w*|nie (?:ma|wydano|wydał\w*|jest dostępn\w*) (?:jeszcze )?(?:\w+ )?łat\w*)",
     re.IGNORECASE,
 )
+# Clear statements that there is no patch.
 NO_PATCH_SOURCE = re.compile(
-    r"no (?:patch|fix)|unpatched|not (?:yet )?(?:been )?(?:patched|fixed)|without a (?:patch|fix)|"
-    r"zero[- ]?day|0[- ]?day|brak\w* łat\w*|niezałatan\w*|nie ma (?:jeszcze )?łat\w*|bez łat\w*",
+    r"no (?:patch|fix)|not (?:yet )?(?:been )?(?:patched|fixed)|without a (?:patch|fix)|"
+    r"has(?: not|n't) (?:yet )?released a (?:patch|fix)|has yet to (?:release|patch|fix)|"
+    r"zero[- ]?day|0[- ]?day|brak\w* łat\w*|nie ma (?:jeszcze )?łat\w*|bez łat\w*",
     re.IGNORECASE,
 )
+# "unpatched" also describes old versions when a fix exists (Signal,
+# test of 26.10.2026: "versions before 2.72.0", summary "nie ma łatki").
+NO_PATCH_WEAK = re.compile(r"unpatched|niezałatan\w*", re.IGNORECASE)
+FIXED_VERSION = re.compile(
+    r"(?:prior to|before|earlier than|below) (?:version )?v?\d|fixed in|patched in|addressed in|resolved in|"
+    r"update to (?:version )?v?\d|upgrade to|starsz\w* niż (?:wersj\w* )?\d|przed wersją|"
+    r"(?:naprawion|poprawion|załatan)\w* w wersji|łat\w* w wersji|poprawk\w* w wersji",
+    re.IGNORECASE,
+)
+
+
+def no_patch_supported(source):
+    if NO_PATCH_SOURCE.search(source):
+        return True
+
+    return bool(NO_PATCH_WEAK.search(source)) and not FIXED_VERSION.search(source)
 URGENCY_SOURCE = re.compile(
     r"immediate\w*|urgent\w*|as soon as possible|asap|without delay|right away|imperative|"
     r"natychmiast\w*|niezwłoczn\w*|pilni\w*|jak najszybciej",
@@ -202,8 +226,11 @@ def unsupported_labels(text, source):
 
     match = NO_PATCH.search(text)
 
-    if match and not NO_PATCH_SOURCE.search(source):
-        problems.append(f"„{match.group(0)}” – artykuł nie mówi o braku łatki; usuń to")
+    if match and not no_patch_supported(source):
+        problems.append(f"„{match.group(0)}” – artykuł nie mówi o braku łatki (albo podaje wersję z poprawką); usuń to")
+
+    if match and FIXED_VERSION.search(text):
+        problems.append(f"„{match.group(0)}” – sprzeczność: streszczenie podaje też wersję z poprawką; usuń to")
 
     return problems
 

@@ -25,7 +25,7 @@ from article_pages import add_page_texts
 from kev import VIA_LEAD_CHARS, find_cves, load_kev, mark_kev
 from roundup_parts import VIA_LEKTURA, extract_parts
 from article_archive import append_to_archive, load_recent
-from event_grouping import group_events, mark_continuations
+from event_grouping import CONTEXT_DAYS, add_context, group_events, mark_continuations
 from run_guard import mark_done, should_skip
 import test_mode
 
@@ -258,8 +258,11 @@ def run():
 
     try:
         recent_records = load_recent(days=3)
+        # v34: a longer look back for the story of an event (context only).
+        context_records = load_recent(days=CONTEXT_DAYS)
     except Exception as error:
         recent_records = []
+        context_records = []
         print(f"BŁĄD ODCZYTU ARCHIWUM (pominięto ciąg dalszy): {error}")
 
     mark_continuations(
@@ -317,6 +320,7 @@ def run():
     add_page_texts(selected_articles, lambda article: len(summary_source(article)))
     # v28: 🔥 for vulnerabilities from the CISA KEV catalog (set by code).
     mark_kev(selected_articles, load_kev())
+    add_context(selected_articles, context_records, pool_titles=[article["title"] for article in eligible_articles])
     summarize_articles(selected_articles)
     # v31: a story already delivered in recent days is a continuation also
     # when only the summaries share a CVE id (the ZTS comment of a lektura

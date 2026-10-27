@@ -1676,5 +1676,297 @@
         "model": "Gemini gemini-3.5-flash"
       }
     ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "Microsoft releases emergency .NET patches for critical Brotli flaw",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-emergency-net-patches-for-critical-brotli-flaw/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Microsoft wydał awaryjne aktualizacje .NET naprawiające krytyczną podatność Brotli CVE-2026-111497, umożliwiającą RCE i podwyższenie uprawnień. Wykorzystanie podatności pozwala atakującemu na uruchomienie złośliwego kodu po przetworzeniu skompresowanego strumienia. Należy zastosować udostępnione łatki.",
+    "cves": [
+      "CVE-2026-111497"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "Microsoft wydał awaryjne aktualizacje .NET naprawiające krytyczną podatność Brotli CVE-2026-111497, umożliwiającą RCE i podwyższenie uprawnień. Exploitacja pozwala atakującemu na uruchomienie złośliwego kodu po przetworzeniu skompresowanego strumienia. Należy zastosować udostępnione łatki.",
+        "after": "Microsoft wydał awaryjne aktualizacje .NET naprawiające krytyczną podatność Brotli CVE-2026-111497, umożliwiającą RCE i podwyższenie uprawnień. Wykorzystanie podatności pozwala atakującemu na uruchomienie złośliwego kodu po przetworzeniu skompresowanego strumienia. Należy zastosować udostępnione łatki.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "„Cyberatak nie dotyczy już tylko systemów IT”. Jak budować odporność biznesu?",
+    "link": "https://cyberdefence24.pl/biznes-i-finanse/cyberatak-nie-dotyczy-juz-tylko-systemow-it-jak-budowac-odpornosc-biznesu",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W wywiadzie z Lenovo Polska eksperci podkreślają, że cyberataki dotyczą nie tylko systemów IT, ale także procesów biznesowych, co wymaga budowania odporności organizacji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W wywiadzie z Lenovo Polska eksperci podkreślają, że cyberatak dotyczy nie tylko systemów IT, ale także procesów biznesowych, wymagając budowania odporności organizacji.",
+        "after": "W wywiadzie z Lenovo Polska eksperci podkreślają, że cyberataki dotyczą nie tylko systemów IT, ale także procesów biznesowych, co wymaga budowania odporności organizacji.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "University of Copenhagen data breach exposes data of 525,000 people",
+    "link": "https://www.bleepingcomputer.com/news/security/university-of-copenhagen-data-breach-exposes-data-of-525-000-people/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "University of Copenhagen potwierdził wyciek danych osobowych 525 000 osób, a później dodatkowych 20 000, co zwiększa ryzyko phishingu i socjotechniki.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "University of Copenhagen potwierdził wyciek danych osobowych 525 000 osób, a później dodatkowych 20 000, zwiększając ryzyko phishingu i socjotechniki.",
+        "after": "University of Copenhagen potwierdził wyciek danych osobowych 525 000 osób, a później dodatkowych 20 000, co zwiększa ryzyko phishingu i socjotechniki.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "Former pentester used ARTEX AI to steal 8.2 million data records",
+    "link": "https://www.bleepingcomputer.com/news/security/former-pentester-used-artex-ai-to-steal-82-million-data-records/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Policja ustaliła, że grupa przestępcza użyła frameworka ARTEX AI do kradzieży 8,2 mln wpisów z ponad 90 organizacji w Korei Południowej.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "rekordów",
+        "form": "rekordów",
+        "suggestion": "wpisów, danych",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Policja ustaliła, że grupa przestępcza użyła frameworku ARTEX AI do kradzieży 8,2 mln wpisów z ponad 90 organizacji w Korei Południowej.",
+        "after": "Policja ustaliła, że grupa przestępcza użyła frameworka ARTEX AI do kradzieży 8,2 mln wpisów z ponad 90 organizacji w Korei Południowej.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "Attackers Use Microsoft Teams IT Support Scams to Deploy Malware and Ransomware",
+    "link": "https://thehackernews.com/2026/10/attackers-use-microsoft-teams-it.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Badacze wykryli, że cyberprzestępcy wykorzystują funkcję tworzenia zewnętrznych czatów w Microsoft Teams do podszywania się pod wsparcie IT. W atakach używają tymczasowych tenantów i domen .onmicrosoft.com, aby rozpowszechniać malware i ransomware.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Badacze wykryli, że zagrożeniowcy wykorzystują funkcję tworzenia zewnętrznych czatów w Microsoft Teams do podszywania się pod wsparcie IT. W atakach używają tymczasowych tenantów i domen .onmicrosoft.com, aby rozpowszechniać malware i ransomware.",
+        "after": "Badacze wykryli, że cyberprzestępcy wykorzystują funkcję tworzenia zewnętrznych czatów w Microsoft Teams do podszywania się pod wsparcie IT. W atakach używają tymczasowych tenantów i domen .onmicrosoft.com, aby rozpowszechniać malware i ransomware.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "Podatności w produktach boneIO",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-77052/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Produkty boneIO zawierają API niewymagające uwierzytelnienia, które umożliwia RCE i przejęcie kontroli nad systemem automatyki domowej (CVE-2026-77052, CVE-2026-77053). Problem rozwiązano w wersji 1.6.0. Na starszych urządzeniach należy ponownie wgrać obraz systemowy.",
+    "cves": [
+      "CVE-2026-77052",
+      "CVE-2026-77053",
+      "CVE-2026-77062"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "Produkty boneIO mają nieautoryzowane API, które umożliwia RCE i przejęcie kontroli nad systemem automatyki domowej (CVE-2026-77052, CVE-2026-77053). Problem rozwiązano w wersji 1.6.0, starsze urządzenia trzeba ponownie wgrać obraz systemowy.",
+        "after": "Produkty boneIO zawierają API niewymagające uwierzytelnienia, które umożliwia RCE i przejęcie kontroli nad systemem automatyki domowej (CVE-2026-77052, CVE-2026-77053). Problem rozwiązano w wersji 1.6.0. Na starszych urządzeniach należy ponownie wgrać obraz systemowy.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "Critical 'HTTP2Shell' Brotli vulnerability triggers emergency patches",
+    "link": "https://www.bleepingcomputer.com/news/security/critical-http2shell-brotli-vulnerability-triggers-emergency-patches/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "W bibliotece Brotli używanej w Node.js wykryto krytyczną podatność CVE-2026-111497, pozwalającą na uszkodzenie pamięci i dostęp do danych. Podatność zgłoszono jako „HTTP2Shell”, a Microsoft wydał awaryjną aktualizację .NET, aby załatać lukę.",
+    "cves": [
+      "CVE-2026-111497"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W bibliotece Brotli używanej w Node.js wykryto krytyczną podatność CVE-2026-111497, pozwalającą na korupcję pamięci i dostęp do danych. Awarie zgłoszono jako „HTTP2Shell”, a Microsoft wydał awaryjną aktualizację .NET, aby załatać lukę.",
+        "after": "W bibliotece Brotli używanej w Node.js wykryto krytyczną podatność CVE-2026-111497, pozwalającą na uszkodzenie pamięci i dostęp do danych. Podatność zgłoszono jako „HTTP2Shell”, a Microsoft wydał awaryjną aktualizację .NET, aby załatać lukę.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "PHP Issues Second Windows Security Update in Five Days to Fix Brotli Code Execution Flaw",
+    "link": "https://thehackernews.com/2026/10/php-issues-second-windows-security.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Wydano nowe pakiety PHP dla systemu Windows (8.5.12‑1, 8.4.27‑1, 8.3.36‑1, 8.2.35‑1) naprawiające podatność CVE-2026-111497 w bibliotece Brotli. Pakiety zawierają Brotli 1.2.1. Użytkownicy systemu Windows powinni zainstalować nowe wersje.",
+    "cves": [
+      "CVE-2026-111497"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "buildy",
+        "form": "buildy",
+        "suggestion": "wersje, kompilacje",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "PHP wydało nowe pakiety Windows (8.5.12‑1, 8.4.27‑1, 8.3.36‑1, 8.2.35‑1) naprawiające podatność CVE-2026-111497 w bibliotece Brotli. Pakiety zawierają Brotli 1.2.1. Użytkownicy Windows powinni zainstalować nowe wersje.",
+        "after": "Wydano nowe pakiety PHP dla systemu Windows (8.5.12‑1, 8.4.27‑1, 8.3.36‑1, 8.2.35‑1) naprawiające podatność CVE-2026-111497 w bibliotece Brotli. Pakiety zawierają Brotli 1.2.1. Użytkownicy systemu Windows powinni zainstalować nowe wersje.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-27",
+    "title": "Industrial Vendors Check Products for PHP2Shell Vulnerabilities",
+    "link": "https://www.securityweek.com/industrial-vendors-check-products-for-php2shell-vulnerabilities/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "PHP2Shell Exploitation Moves From Probes to Working Shells",
+        "link": "https://www.securityweek.com/php2shell-exploitation-moves-from-probes-to-working-shells/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Siemens, Schneider Electric, ABB i inni sprawdzili swoje produkty pod kątem podatności PHP2Shell (CVE-2026-109618, CVE-2026-109619). Luka była aktywnie wykorzystywana – miliony prób od 17 10, a niektóre urządzenia wymagają aktualizacji lub kontaktu z wsparciem.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-27",
+    "title": "Ukraine warns hackers are exploiting Chinese-made Dahua surveillance cameras",
+    "link": "https://therecord.media/ukraine-cert-ua-warning-chinese-dahua-cameras-hacked",
+    "source": "therecord.media",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT‑UA ostrzega, że hakerzy wykorzystują funkcję Easy4IP w kamerach Dahua, odgadując numery seryjne i uzyskując dostęp do podglądu oraz sterowania urządzeniami.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawek",
+        "fixed": "łatek"
+      },
+      {
+        "type": "proofreading",
+        "before": "CERT‑UA ostrzega, że hakerzy wykorzystują funkcję Easy4IP w kamerach Dahua, zgadując seriale i uzyskując dostęp do podglądu oraz sterowania urządzeniami.",
+        "after": "CERT‑UA ostrzega, że hakerzy wykorzystują funkcję Easy4IP w kamerach Dahua, odgadując numery seryjne i uzyskując dostęp do podglądu oraz sterowania urządzeniami.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
   }
 ]

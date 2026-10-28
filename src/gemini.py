@@ -23,7 +23,10 @@ GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models/{model}:ge
 # Read from Google AI Studio on 25.10.2026 (project PolacyNieGesi4Digest);
 # the second one is a fallback if the first is renamed or withdrawn.
 GEMINI_MODELS = ["gemini-3.8-flash", "gemini-3.5-flash"]
-REQUEST_TIMEOUT = 90
+# v35: 30 s instead of 90 s. A working Gemini answers in a few seconds; on
+# 28.10.2026 gemini-3.8-flash timed out twice (2 × 90 s) and the branch digest
+# waited over 3.5 minutes for nothing before skipping the correction.
+REQUEST_TIMEOUT = 30
 
 
 def gemini_models(environ=None):

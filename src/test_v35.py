@@ -145,5 +145,20 @@ class TestSelection(unittest.TestCase):
         self.assertGreaterEqual(prioritize_article({"title": "Krytyczna luka w routerach TP-Link", "description": ""}), 2)
 
 
+class TestGeminiTimeout(unittest.TestCase):
+    def test_short_timeout(self):
+        import gemini
+        seen = []
+
+        def opener(request, timeout):
+            seen.append(timeout)
+            raise TimeoutError("The read operation timed out")
+
+        with self.assertRaises(TimeoutError):
+            gemini.ask_gemini("gemini-3.5-flash", "k", "system", "user", opener)
+
+        self.assertEqual(seen, [30])
+
+
 if __name__ == "__main__":
     unittest.main()

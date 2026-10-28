@@ -1968,5 +1968,316 @@
         "model": "Gemini gemini-3.5-flash"
       }
     ]
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Apple backports CoreGraphics zero-day patches to older iPhones",
+    "link": "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Apple Backports Fix for Exploited CoreGraphics Flaw to Older iPhones and iPads",
+        "link": "https://thehackernews.com/2026/10/apple-backports-fix-for-exploited.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Apple wydało łatki zabezpieczające starsze iPhone’ów i iPad’ów przed podatnością CoreGraphics (CVE‑2026‑86950), wykorzystywaną w wysoce ukierunkowanych atakach. Luka umożliwiała RCE poprzez zapis poza granicami bufora. Zainstaluj aktualizacje dla iPhone XS, XS Max, XR, iPad 7, iPad Air 4, iPad 9 i nowsze oraz iPad mini 6 i nowsze.",
+    "cves": [
+      "CVE-2026-86950"
+    ],
+    "kev": [
+      "CVE-2026-86950"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "Apple wydało łatki zabezpieczające starsze iPhone’y i iPad’y przed podatnością CoreGraphics (CVE‑2026‑86950), wykorzystywaną w wysoce ukierunkowanych atakach. Luka umożliwiała RCE poprzez zapis poza granicami bufora. Zainstaluj aktualizacje dla iPhone XS, XS Max, XR, iPad 7., iPad Air 4., iPad 9. I nowszych oraz iPad mini 6. I nowszych.",
+        "after": "Apple wydało łatki zabezpieczające starsze iPhone’ów i iPad’ów przed podatnością CoreGraphics (CVE‑2026‑86950), wykorzystywaną w wysoce ukierunkowanych atakach. Luka umożliwiała RCE poprzez zapis poza granicami bufora. Zainstaluj aktualizacje dla iPhone XS, XS Max, XR, iPad 7, iPad Air 4, iPad 9 i nowsze oraz iPad mini 6 i nowsze.",
+        "model": "Groq gpt-oss-120b"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-28",
+    "title": "CISA confirms PHP2Shell vulnerabilities now exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/cisa-confirms-php2shell-vulnerabilities-now-exploited-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "CISA Confirms Active Exploitation of Two PHP2Shell Flaws Enabling Remote Code Execution",
+        "link": "https://thehackernews.com/2026/10/cisa-confirms-active-exploitation-of.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "CISA dodała do katalogu KEV dwie krytyczne podatności PHP (CVE‑2026‑109618 i CVE‑2026‑109619) oznaczone jako PHP2Shell, które były wykorzystywane w atakach przed wydaniem łatek. Exploitów PoC pojawiły się online, ale nie działały. Wykryto liczne nieudane próby ataków. Zaktualizuj PHP do wersji zawierającej łatki opublikowane 21 października.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "proofreading",
+        "before": "CISA dodała do katalogu KEV dwie krytyczne podatności PHP (CVE‑2026‑109618 i CVE‑2026‑109619) oznaczone jako PHP2Shell, które były wykorzystywane w atakach przed wydaniem łatek. Exploity PoC pojawiły się online, ale nie działały. Wykryto liczne nieudane próby ataków. Zaktualizuj PHP do wersji zawierającej łatki opublikowane 21 października.",
+        "after": "CISA dodała do katalogu KEV dwie krytyczne podatności PHP (CVE‑2026‑109618 i CVE‑2026‑109619) oznaczone jako PHP2Shell, które były wykorzystywane w atakach przed wydaniem łatek. Exploitów PoC pojawiły się online, ale nie działały. Wykryto liczne nieudane próby ataków. Zaktualizuj PHP do wersji zawierającej łatki opublikowane 21 października.",
+        "model": "Groq gpt-oss-120b"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-28",
+    "title": "iOS, macOS 27.2 Patch 286 Bugs; Fix for Exploited Flaw Backported to iOS 18",
+    "link": "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Apple wydało aktualizacje iOS 27.2, iPadOS 27.2, macOS Golden Gate 27.2 oraz iOS 18.7.11, naprawiając łącznie 286 podatności, w tym ponowne wprowadzenie łaty dla CVE‑2026‑86950, wcześniej wykorzystywanej jako zero‑day. Zainstaluj najnowsze wersje systemów, aby usunąć te luki.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Podatności we wtyczce twofactor_gauthenticator dla Roundcube",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-107145/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymała zgłoszenie o trzech podatnościach w wtyczce twofactorgauthenticator dla Roundcube (CVE‑2026‑107145, CVE‑2026‑107146, CVE‑2026‑107147), umożliwiających brute‑force, utrzymanie sesji i obejście 2FA. Brak dostępnych łatek w artykule. Zaleca się aktualizację wtyczki po jej wydaniu.",
+    "cves": [
+      "CVE-2026-107145",
+      "CVE-2026-107146",
+      "CVE-2026-107147"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska otrzymał zgłoszenie o trzech podatnościach w wtyczce twofactorgauthenticator dla Roundcube (CVE‑2026‑107145, CVE‑2026‑107146, CVE‑2026‑107147), umożliwiających brute‑force, utrzymanie sesji i obejście 2FA. Brak dostępnych łatek w artykule. Zaleca się aktualizację wtyczki po jej wydaniu.",
+        "after": "CERT Polska otrzymała zgłoszenie o trzech podatnościach w wtyczce twofactorgauthenticator dla Roundcube (CVE‑2026‑107145, CVE‑2026‑107146, CVE‑2026‑107147), umożliwiających brute‑force, utrzymanie sesji i obejście 2FA. Brak dostępnych łatek w artykule. Zaleca się aktualizację wtyczki po jej wydaniu.",
+        "model": "Groq gpt-oss-120b"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Japan's GMO urges customers to shut down PCs amid ransomware threat",
+    "link": "https://www.bleepingcomputer.com/news/security/japans-gmo-urges-customers-to-shut-down-pcs-amid-ransomware-threat/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "GMO Group wezwało klientów do odłączenia komputerów od internetu i wyłączenia ich po wykryciu zagrożenia ransomware wobec usługi Onamae Desktop Cloud. Firma potwierdziła wyciek danych i żądanie okupu, a także zaleciła reset haseł i zakończenie aktywnych sesji. Postępuj zgodnie z zaleceniami GMO i wyłącz zainfekowane maszyny.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-28",
+    "title": "UNM Health ransomware attack disrupts patient care, surgeries",
+    "link": "https://www.bleepingcomputer.com/news/security/unm-health-ransomware-attack-disrupts-patient-care-surgeries/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "UNM Health, niezależny dostawca opieki medycznej w Nowym Meksyku, został zaatakowany ransomware grupy Byod, co spowodowało awarie systemów i ograniczenie przyjęć pacjentów oraz przekierowanie ambulansów. Grupa twierdzi, że przejęła kontrolę nad 36 000 systemami, w tym lasami Active Directory, infrastrukturą Group Policy, całą dzierżawą Microsoft Entra i dwoma bazami Oracle.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "UNM Health, uni‑związany dostawca opieki medycznej w Nowym Meksyku, został zaatakowany ransomware grupy Byod, co spowodowało awarie systemów i ograniczenie przyjęć pacjentów oraz przekierowanie ambulansów. Grupa twierdzi, że przejęła kontrolę nad 36 000 systemami, w tym lasami Active Directory, infrastrukturą Group Policy, całą dzierżawą Microsoft Entra i dwoma bazami Oracle.",
+        "after": "UNM Health, niezależny dostawca opieki medycznej w Nowym Meksyku, został zaatakowany ransomware grupy Byod, co spowodowało awarie systemów i ograniczenie przyjęć pacjentów oraz przekierowanie ambulansów. Grupa twierdzi, że przejęła kontrolę nad 36 000 systemami, w tym lasami Active Directory, infrastrukturą Group Policy, całą dzierżawą Microsoft Entra i dwoma bazami Oracle.",
+        "model": "Groq gpt-oss-120b"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-28",
+    "title": "This is Fine: What NetScaler Zero-Days Tell Us About the New Normal",
+    "link": "https://www.securityweek.com/this-is-fine-what-netscaler-zero-days-tell-us-about-the-new-normal/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Artykuł opisuje serię zero‑dayów w Citrix NetScaler ADC i Gateway zgłoszonych we wrześniu 2026 oraz ich wykorzystanie przez globalne grupy zagrożeń.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Nefilim, Hive ransomware operator given five-year-plus sentence after guilty plea",
+    "link": "https://therecord.media/nefilim-hive-ransomware-operator-70-months-prison",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Arbiter sądowy skazał Artema Stryzhaka, byłego operatora ransomware Nefilim i Hive, na 70 miesięcy więzienia za udział w atakach na szpitale i instytucje rządowe. Ataki spowodowały utratę możliwości opieki nad pacjentami i ponad 100 mln USD strat.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Arbiter sądowy skazał Artema Stryzhaka, byłego operatora ransomware Nefilim i Hive, na 70 miesięcy więzienia za udział w atakach na szpitale i instytucje rządowe. Ataki spowodowały utratę opieki nad pacjentami i ponad 100 mln USD strat.",
+        "after": "Arbiter sądowy skazał Artema Stryzhaka, byłego operatora ransomware Nefilim i Hive, na 70 miesięcy więzienia za udział w atakach na szpitale i instytucje rządowe. Ataki spowodowały utratę możliwości opieki nad pacjentami i ponad 100 mln USD strat.",
+        "model": "Groq gpt-oss-120b"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Hackers repeatedly breached suppliers holding UK police data, watchdog finds",
+    "link": "https://therecord.media/uk-police-data-breached-from-suppliers-watchdog-report",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Raport His Majesty’s Inspectorate of Constabulary wykazał, że od 2021 roku hakerzy wielokrotnie włamali się do dostawców zewnętrznych przechowujących dane brytyjskiej policji. W pierwszym kwartale tego roku odnotowano 252 incydenty cyberbezpieczeństwa i 796 sytuacji bliskich naruszeniu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Bezpłatne e-dzienniki z lukami w przepisach",
+    "link": "https://cyberdefence24.pl/polityka-i-prawo/polska/bezplatne-e-dzienniki-z-lukami-w-przepisach",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Prezes UODO ostrzega, że projekt nowelizacji ustawy oświatowej dotyczący e‑dzienników nie reguluje wystarczająco ochrony danych osobowych pięciu milionów uczniów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Podatność w oprogramowaniu KGS Software tia Viewer",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-105987/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "W oprogramowaniu KGS Software tia Viewer wykryto podatność CVE-2026-105987 umożliwiającą atak typu Stored XSS przez API adnotacji. Uwierzytelniony atakujący może wstrzyknąć kod JavaScript do adnotacji stickynote, co po otwarciu dokumentu może prowadzić do przejęcia sesji użytkownika.",
+    "cves": [
+      "CVE-2026-105987"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Microsoft Authenticator Flaw Let Permissionless Android Apps Steal Work Account Tokens",
+    "link": "https://thehackernews.com/2026/10/microsoft-authenticator-flaw-let.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft naprawił lukę CVE-2026-80097 w aplikacji Authenticator dla Android, w której złośliwa aplikacja mogła pozyskać tokeny konta roboczego bez uprawnień. Luka pozwalała na przejęcie pełnego dostępu do poczty, plików i kalendarza po uzyskaniu tokenu. Użytkownicy powinni zaktualizować do wersji 6.2606.4246.",
+    "cves": [
+      "CVE-2026-80097"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-28",
+    "title": "Maritime Coalition Launches Free Vulnerability Database for Ship and Port Systems",
+    "link": "https://www.securityweek.com/maritime-coalition-launches-free-vulnerability-database-for-ship-and-port-systems/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Współpraca kilku organizacji uruchomiła publiczną bazę Blue Initiative, zawierającą prawie 30 000 wpisów o podatnościach IT i OT w sektorze morskim. Baza obejmuje ponad 2 000 krytycznych i 580 podatności znanych jako wykorzystywane.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
   }
 ]

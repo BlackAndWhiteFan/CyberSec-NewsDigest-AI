@@ -115,16 +115,38 @@ class TestProofreadingOrder(unittest.TestCase):
         self.assertIn("contents", sent[0])
         self.assertIn("„dodało”: rodzaj", sent[0]["contents"][0]["parts"][0]["text"])
 
-    def test_gemini_quota_falls_back_to_groq(self):
+    # v35: no correction by Groq – it made Polish worse on 28.10.2026.
+    def test_gemini_unavailable_means_no_correction(self):
         articles = [article(WRONG)]
-        models = []
+        urls = []
+        waits = []
 
         def opener(request, timeout):
-            if "generativelanguage" in request.full_url:
-                models.append("gemini")
-                raise urllib.error.HTTPError(request.full_url, 429, "Too Many Requests", {}, None)
-            models.append(json.loads(request.data.decode())["model"])
-            return groq_reply({1: RIGHT})
+            urls.append(request.full_url)
+            raise urllib.error.HTTPError(request.full_url, 503, "Service Unavailable", {}, None)
+
+        changed = ai_summaries.proofread_summaries(
+            articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g", "GEMINI_API_KEY": "m"}, opener,
+            waits.append, hints_source=lambda texts, opener: {},
+        )
+
+        self.assertEqual(changed, 0)
+        self.assertEqual(articles[0]["summary"], WRONG)
+        self.assertTrue(all("generativelanguage" in url for url in urls))
+        self.assertEqual(len(urls), 2 * len(GEMINI_MODELS))
+        self.assertIn(ai_summaries.GEMINI_RETRY_WAIT, waits)
+
+    def test_second_round_after_a_temporary_error(self):
+        articles = [article(WRONG)]
+        calls = []
+
+        def opener(request, timeout):
+            calls.append(request.full_url)
+
+            if len(calls) <= len(GEMINI_MODELS):
+                raise urllib.error.HTTPError(request.full_url, 503, "Service Unavailable", {}, None)
+
+            return gemini_reply({1: RIGHT})
 
         changed = ai_summaries.proofread_summaries(
             articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g", "GEMINI_API_KEY": "m"}, opener,
@@ -132,10 +154,9 @@ class TestProofreadingOrder(unittest.TestCase):
         )
 
         self.assertEqual(changed, 1)
-        self.assertEqual(models[0], "gemini")
-        self.assertEqual(models[-1], "openai/gpt-oss-120b")
+        self.assertEqual(articles[0]["summary"], RIGHT)
 
-    def test_without_gemini_key_groq_is_used(self):
+    def test_without_gemini_key_no_correction(self):
         articles = [article(WRONG)]
         urls = []
 
@@ -143,11 +164,11 @@ class TestProofreadingOrder(unittest.TestCase):
             urls.append(request.full_url)
             return groq_reply({1: RIGHT})
 
-        ai_summaries.proofread_summaries(
+        changed = ai_summaries.proofread_summaries(
             articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g"}, opener,
             lambda s: None, hints_source=lambda texts, opener: {},
         )
-        self.assertTrue(all("groq" in url for url in urls))
+        self.assertEqual((changed, urls), (0, []))
 
 
 if __name__ == "__main__":

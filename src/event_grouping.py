@@ -370,6 +370,66 @@ def group_events(articles, pool=None):
     return representatives
 
 
+def merge_by_cves(articles, use_summaries=False):
+    """v35: merge selected articles that share a lead CVE id, after the page
+    texts are fetched and "cves" set (kev.mark_kev).
+
+    group_events runs before the article pages are fetched, and many feeds
+    give only a teaser without the CVE id, so one vulnerability could appear
+    several times (Brotli CVE-2026-111497 three times on 27.10.2026, Apple
+    CVE-2026-86950 twice on 28.10.2026). The article with the highest
+    priority (Polish source on ties) leads; the others and their related
+    articles become its related articles. Returns the merged list, in the
+    original order of the leaders.
+
+    use_summaries=True (second pass, after the AI summaries): CVE ids in the
+    summaries count too, for articles whose page names the CVE only after its
+    first 600 characters (SecurityWeek on Apple CVE-2026-86950, 28.10.2026);
+    the leader keeps its own summary.
+    """
+    from kev import find_cves
+
+    def known(item):
+        found = set(item.get("cves", []))
+
+        if use_summaries:
+            found |= set(find_cves(item.get("summary", "")))
+
+        return found
+
+    merged = []
+
+    for article in articles:
+        cves = known(article)
+        target = next(
+            (item for item in merged if cves and cves & known(item) and not is_roundup(item)),
+            None,
+        )
+
+        if target is None or is_roundup(article):
+            merged.append(article)
+            continue
+
+        if representative_key(article) > representative_key(target):
+            position = merged.index(target)
+            article, target = target, article
+            merged[position] = target
+
+        target["related"] = list(target.get("related", [])) + [
+            {key: value for key, value in article.items() if key != "related"}
+        ] + list(article.get("related", []))
+        target["cves"] = sorted(set(target.get("cves", [])) | set(article.get("cves", [])))
+        target["kev"] = sorted(set(target.get("kev", [])) | set(article.get("kev", [])))
+        target["continuation"] = bool(target.get("continuation") or article.get("continuation"))
+
+        if not target.get("previous") and article.get("previous"):
+            target["previous"] = article["previous"]
+
+    stage = "ze streszczeń" if use_summaries else "ze stron"
+    print(f"SCALENIE PO CVE ({stage}): {len(articles) - len(merged)} artykułów dołączonych do innych pozycji")
+    return merged
+
+
 CONTEXT_DAYS = 14
 
 

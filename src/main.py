@@ -25,7 +25,7 @@ from article_pages import add_page_texts
 from kev import VIA_LEAD_CHARS, find_cves, load_kev, mark_kev
 from roundup_parts import VIA_LEKTURA, extract_parts
 from article_archive import append_to_archive, load_recent
-from event_grouping import CONTEXT_DAYS, add_context, group_events, mark_continuations
+from event_grouping import CONTEXT_DAYS, add_context, group_events, mark_continuations, merge_by_cves
 from run_guard import mark_done, should_skip
 import test_mode
 
@@ -320,11 +320,15 @@ def run():
     add_page_texts(selected_articles, lambda article: len(summary_source(article)))
     # v28: 🔥 for vulnerabilities from the CISA KEV catalog (set by code).
     mark_kev(selected_articles, load_kev())
+    # v35: one vulnerability, one item – merge by CVE ids known from the pages.
+    selected_articles = merge_by_cves(selected_articles)
     add_context(selected_articles, context_records, pool_titles=[article["title"] for article in eligible_articles])
     summarize_articles(selected_articles)
     # v31: a story already delivered in recent days is a continuation also
     # when only the summaries share a CVE id (the ZTS comment of a lektura
     # link has none; PHP2Shell, test 25.10.2026).
+    # v35: second pass with CVE ids from the summaries (Apple, 28.10.2026).
+    selected_articles = merge_by_cves(selected_articles, use_summaries=True)
     mark_continuations_by_cve(selected_articles, recent_records)
 
     print()

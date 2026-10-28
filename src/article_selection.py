@@ -161,12 +161,23 @@ CONTEXT_TITLE_KEYWORDS = (
     "jak nie dać",
     "jak używać",
     "jak rozpoznać",
+    # v35: a loophole in the law is not a vulnerability ("Bezpłatne e-dzienniki
+    # z lukami w przepisach", 28.10.2026).
+    "luk w przepis",
+    "luk w praw",
+    "luk w ustaw",
+    "luk prawn",
     # English
     "conference",
     "experts",
     "survey",
     "how to",
     "fined",
+    # v35: commentary ("This is Fine: What NetScaler Zero-Days Tell Us About the
+    # New Normal", 28.10.2026).
+    "tell us$",
+    "new normal$",
+    "lessons from",
 )
 
 CONTEXT_PENALTY = 2

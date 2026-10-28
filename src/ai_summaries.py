@@ -96,7 +96,7 @@ Dla każdego artykułu napisz po polsku konkretne streszczenie z 2–3 krótkich
 CO MA BYĆ W STRESZCZENIU (v34):
 - Pierwsze zdanie: co się stało i kogo dotyczy – zwykłymi słowami, z nazwą firmy, produktu lub grupy z artykułu. Nie zaczynaj od numerów CVE ani listy wersji; numer CVE (najwyżej jeden) może być dalej w zdaniu.
 - Drugie zdanie: dlaczego to ważne dla obrońcy – fakty z artykułu, które odpowiadają na pytania „czy to jest wykorzystywane?” i „czy jest łatka?”: wykorzystywanie w atakach, publiczny exploit (PoC), skala (liczba ofiar, systemów, wpisów), brak łatki albo wersja z poprawką. Pole „kev” oznacza, że luka jest w katalogu CISA KEV, czyli jest wykorzystywana w atakach – napisz to.
-- Trzecie zdanie, tylko jeśli artykuł to podaje: co zrobić – konkretnie (wersja z poprawką, obejście, co wyłączyć).
+- Trzecie zdanie jest opcjonalne: tylko jeśli artykuł podaje konkretną czynność (numer wersji z poprawką, obejście, co wyłączyć). Pisz je opisowo, jako fakt, nie trybem rozkazującym: „Poprawka jest w wersji 6.2606.4246.”, a nie „Zaktualizuj…”, „Zainstaluj…”, „Użytkownicy powinni…”. Bez konkretu pomiń to zdanie – dwa dobre zdania są lepsze niż trzy.
 - Pole „kontekst” to wcześniejsze doniesienie o tym samym wydarzeniu (z prasówki z ostatnich dni). Wtedy napisz przede wszystkim, co nowego, i nawiąż do początku sprawy w kilku słowach, np. „Kilka dni po ujawnieniu luk PHP2Shell (22.10) …”. Nie powtarzaj kontekstu.
 - Jeśli artykuł ma konkretny, obrazowy szczegół, który pokazuje skalę albo przebieg (np. „4 dni przed ujawnieniem”, „11,7 mln kont”, „trzecia taka luka w cztery miesiące”), użyj go zamiast ogólnego określenia („duża skala”, „poważne zagrożenie”). Tylko fakt z artykułu, bez metafor.
 - Każde zdanie musi zawierać informację z artykułu (albo z kontekstu). Nie pisz ogólników ani komentarzy, np. „co podkreśla wagę…”, „to kolejny przykład…”, „warto pamiętać…”, „należy zachować ostrożność”.
@@ -231,8 +231,14 @@ def clean_summary(text, limit=SUMMARY_LIMIT, changes=None):
     changes: optional list that gets the autofix replacements (v32).
     """
     text = re.sub(r"https?://\S+", "", str(text))
-    text = re.sub(r"[`*_~|>#\[\]<]", "", text)
+    # v35: "_" inside a word stays ("twofactor_gauthenticator", 28.10.2026);
+    # only a "_" that could start or end Markdown formatting is removed.
+    text = re.sub(r"[`*~|>#\[\]<]", "", text)
+    text = re.sub(r"(?<!\w)_+|_+(?!\w)", "", text)
     text = text.replace("@", "")
+    # v35: Unicode hyphens between letters or digits become "-", so CVE ids
+    # and versions are found by code ("CVE‑2026‑86950", 28.10.2026).
+    text = re.sub(r"(?<=\w)[\u2010\u2011\u2012](?=\w)", "-", text)
     text = re.sub(r"\s+", " ", text).strip()
     # v27: fixes that need no AI request: semicolons become sentence ends,
     # forbidden forms with a safe replacement are replaced (glossary.autofix).
@@ -536,16 +542,36 @@ def same_facts(old, new):
     return facts(old) == facts(new) and 0.6 <= len(new) / max(len(old), 1) <= 1.4
 
 
-def proofreaders(providers, environ):
+# v35: a temporary Gemini error (503, timeout) is retried once after this wait.
+GEMINI_RETRY_WAIT = 30
+
+
+def proofreaders(providers, environ, with_groq=True):
     """Correction models in order: Gemini (v30, if GEMINI_API_KEY is set),
-    then the Groq models. Each item: (name, function(system, user) -> text)."""
+    then the Groq models. Each item: (name, function(system, user) -> text).
+
+    v35: with_groq=False gives Gemini only, tried twice (a second round after
+    GEMINI_RETRY_WAIT seconds) – for the language correction, which the Groq
+    models made worse (28.10.2026: "starsze iPhone'y" → "starsze iPhone'ów",
+    "Exploity PoC pojawiły się" → "Exploitów PoC…", "uni-związany" →
+    "niezależny"; Gemini had been unavailable three times in three days).
+    """
     result = []
     gemini_key = environ.get("GEMINI_API_KEY", "").strip()
 
     if gemini_key:
-        for model in gemini_models(environ):
-            result.append((f"Gemini {model}", lambda system, user, opener, sleep, model=model:
-                           ask_gemini(model, gemini_key, system, user, opener)))
+        for round_number in range(1 if with_groq else 2):
+            for model in gemini_models(environ):
+                def ask(system, user, opener, sleep, model=model, retry=round_number > 0):
+                    if retry:
+                        sleep(GEMINI_RETRY_WAIT)
+                    return ask_gemini(model, gemini_key, system, user, opener)
+
+                label = f"Gemini {model}" + (" (ponowna próba)" if round_number else "")
+                result.append((label, ask))
+
+    if not with_groq:
+        return result
 
     for provider in providers:
         key = environ[provider["key_variable"]].strip()
@@ -593,7 +619,11 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
     model = ""
     changes = {}
 
-    for name, ask in proofreaders(providers, environ):
+    if not environ.get("GEMINI_API_KEY", "").strip():
+        print("KOREKTA: pominięta (brak GEMINI_API_KEY; korekta tylko przez Gemini od v35).")
+        return 0
+
+    for name, ask in proofreaders(providers, environ, with_groq=False):
         try:
             changes = {}
             corrected = parse_summaries(ask(system, user, opener, sleep), {item["id"] for item in items}, changes)
@@ -605,7 +635,7 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
             print(f"KOREKTA: {name} niedostępny – {type(error).__name__}: {str(error)[:120]}")
 
     if corrected is None:
-        print("KOREKTA: pominięta (streszczenia bez zmian).")
+        print("KOREKTA: pominięta – Gemini niedostępny, streszczenia bez zmian (bez korekty przez Groq od v35).")
         return 0
 
     changed = 0
@@ -678,7 +708,7 @@ Napisz po polsku krótką historię całego wydarzenia: 3–4 bardzo krótkie, p
 - co się wysypało i kogo dotyczy – zwykłymi słowami, z nazwą produktu, firmy lub grupy (numer CVE najwyżej jeden, nie na początku);
 - jak to szło – najważniejszy zwrot z datą (np. ataki przed ujawnieniem, publiczny exploit, awaryjne łatki) i, jeśli materiał to podaje, jak atakujący weszli: wektor i technika (np. SQL injection, skradzione klucze, phishing, łańcuch kilku luk);
 - co dzieje się teraz i czy sprawa eskaluje – stan na koniec okresu: czy ataki trwają, czy doszły nowe (botnety, kolejne luki, więcej ofiar), czy jest łatka. O eskalacji pisz tylko na podstawie konkretnego zwrotu z materiału, nigdy „może eskalować”;
-- jak to łatać – tylko jeśli materiał to podaje (wersja z poprawką, obejście).
+- jak to łatać – tylko jeśli materiał podaje konkret (wersja z poprawką, obejście), opisowo, nie trybem rozkazującym.
 Pomiń bez słowa element, o którym materiał nic nie mówi: nie dopisuj go z domysłów i nie pisz, że go brak („materiał nie podaje…”, „nie ma informacji o…”). Łatki i wersje dotyczą tylko luk w oprogramowaniu; przy wycieku danych czy włamaniu napisz zamiast tego, co wyciekło i co zrobić (np. wymienić klucze), jeśli materiał to podaje.
 Historia ma zostać w pamięci: wybierz z materiału jeden konkretny, obrazowy szczegół, który najlepiej pokazuje przebieg albo skalę (np. „ataki zaczęły się 4 dni przed ujawnieniem”, „miliony prób ataku”, „trzecia taka luka w cztery miesiące”). Szczegół musi być faktem z materiału, bez metafor i ozdobników.
 Nie dopisuj morału ani „lekcji” (np. „incydent pokazuje, jak ważne jest…”) ani tego, co można było wykryć, jeśli materiał tego nie mówi: wnioski wyciągnie czytelnik.

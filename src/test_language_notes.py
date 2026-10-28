@@ -142,16 +142,18 @@ class TestNotesInSummaries(unittest.TestCase):
         articles = [make_article("A")]
         articles[0]["summary"] = "CISA dodało do katalogu KEV dwóch podatności."
         articles[0]["summary_material"] = "A\nCISA added 2 vulnerabilities to KEV."
-        opener = ScriptedOpener([{1: "CISA dodała do katalogu KEV dwie podatności."}])
+        def opener(request, timeout):
+            content = json.dumps({"streszczenia": [{"id": 1, "tekst": "CISA dodała do katalogu KEV dwie podatności."}]})
+            return FakeResponse(json.dumps({"candidates": [{"content": {"parts": [{"text": content}]}}]}).encode())
 
-        proofread_summaries(articles, PROVIDERS, {"GROQ_API_KEY": "g"}, opener, lambda s: None,
-                            hints_source=lambda texts, opener: {})
+        proofread_summaries(articles, PROVIDERS, {"GROQ_API_KEY": "g", "GEMINI_API_KEY": "m"}, opener,
+                            lambda s: None, hints_source=lambda texts, opener: {})
 
         note = articles[0]["language"][-1]
         self.assertEqual(note["type"], "proofreading")
         self.assertEqual(note["before"], "CISA dodało do katalogu KEV dwóch podatności.")
         self.assertEqual(note["after"], "CISA dodała do katalogu KEV dwie podatności.")
-        self.assertEqual(note["model"], "Groq gpt-oss-120b")
+        self.assertTrue(note["model"].startswith("Gemini "))
 
 
 class TestArchiveAndLog(unittest.TestCase):

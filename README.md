@@ -12,7 +12,7 @@ The project runs with a budget of 0 PLN, using free service tiers only (GitHub A
 
 ## Project Status
 
-The digest has been running in production since October 2026 (version v34). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+The digest has been running in production since October 2026 (version v35). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Stage | Scope | Status |
 |---|---|---|
@@ -35,6 +35,7 @@ The digest has been running in production since October 2026 (version v34). Ever
 | 17 | Language log: corrections of summaries saved in the archive (v32) | completed; verified with unit tests and real errors from the logs |
 | 18 | Quality of summaries and tops: no closing formulas, labels only with support, tops merging by CVE, Polish leaders, clean-up and correction of top summaries (v33) | completed; verified on the test branch and a simulation on the archive |
 | 19 | Summaries that say why it matters and read easily: what – why it matters – what to do, context of earlier reports, CISA KEV for the AI, event summaries in the tops (v34) | completed; verified on the test branch (digest and weekly top) |
+| 20 | One vulnerability, one item: merging by CVE ids after the page texts and after the summaries; language correction by Gemini only; advice only when concrete (v35) | completed; checked on the digests of 27–28 October 2026 |
 
 ## Current Implementation
 
@@ -51,7 +52,7 @@ The digest has been running in production since October 2026 (version v34). Ever
 
 ### Events and markers
 
-- Merges articles about the same event into one item with "także:" links to the other sources. The rules: similar titles; a shared CVE id or an event name with digits (e.g. PHP2Shell), also within one source; a shared company or product name ("Quest Diagnostics", "Capcom") when the article texts show the word is a name. Platform names that appear in many different stories (Microsoft, Windows, Chrome, Python…) never merge on their own.
+- Merges articles about the same event into one item with "także:" links to the other sources. The rules: similar titles; a shared CVE id or an event name with digits (e.g. PHP2Shell), also within one source; a shared company or product name ("Quest Diagnostics", "Capcom") when the article texts show the word is a name. Platform names that appear in many different stories (Microsoft, Windows, Chrome, Python…) never merge on their own. Since v35 the selected articles are merged once more by their CVE ids after the article pages are fetched (many feeds give only a teaser without the CVE id) and again after the summaries, so one vulnerability is one item.
 - Shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section, also when only the summary (for lektura links also the linked page) shares a CVE id with such an event.
 - Marks with 🔥 articles about vulnerabilities from the CISA KEV catalog (confirmed exploitation in attacks). The marker is set by code, not by the AI: CVE ids from the title and the beginning of the article text are compared with the catalog downloaded on every run (from CISA, with CISA's GitHub mirror as a fallback). The tops check the saved CVE ids again against the current catalog. Without the catalog the digest is sent without markers.
 
@@ -61,7 +62,7 @@ The digest has been running in production since October 2026 (version v34). Ever
 - Material: the full feed text or description; when the feed gives fewer than 600 characters, the article text is fetched from its page (paragraphs without menus, ads and footer). Page text is only material for the AI and is never saved.
 - Terms follow the glossary `data/glosariusz_mirror.csv`, a mirror of the CyberSec Mozaika glossary. Simple forbidden forms are corrected by code without an AI request ("poprawka" → "łatka", "zdalne wykonanie kodu" → "RCE"); explanations in parentheses are added by code at the first occurrence of 6 chosen terms, in the case of the term ("przed exploitem (kodem wykorzystującym podatność)").
 - Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, the labels "zero-day" and "natychmiast" (urgent) when the article does not use them, closing formulas without content ("Zaleca się natychmiastową aktualizację."), summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
-- Proofreading: one request per digest to Google Gemini (`gemini-3.8-flash`, fallback `gemini-3.5-flash`), with grammar hints from LanguageTool; when Gemini is unavailable, the Groq models take over. A correction is accepted only when it keeps the numbers, CVE ids and length; every correction is logged as "przed" / "po".
+- Proofreading: one request per digest to Google Gemini (`gemini-3.8-flash`, fallback `gemini-3.5-flash`), with grammar hints from LanguageTool; since v35 only Gemini corrects (one more round after 30 s on a temporary error) – when it is unavailable, the summaries stay without correction, because the Groq models made the Polish worse. A correction is accepted only when it keeps the numbers, CVE ids and length; every correction is logged as "przed" / "po".
 - Language log (v32): every correction of a summary is saved with the article in the archive (field `language`): forbidden glossary forms with the entry id, calques from the style list, terms left uninflected, replacements made by code and changes made by the proofreading, each with its outcome (fixed by the AI, by code, still present, or summary dropped). The notes describe the AI output only; they change nothing and never write to the glossary.
 
 ### Delivery and tops
@@ -77,6 +78,12 @@ The digest has been running in production since October 2026 (version v34). Ever
 The main trigger is an external alarm clock: cron-job.org calls the GitHub API (workflow_dispatch with the `budzik` input) at 06:17 Polish time, Monday to Saturday, and starts the tops on Mondays (weekly) and on the 1st of the month (monthly) at 08:17. It uses a fine-grained PAT limited to this repository and the Actions permission (Read and write), stored only in cron-job.org; the token must be renewed before it expires (one year). GitHub's schedule stays as a backup (digest attempts at 06:17–09:17, tops at 08:17–11:17, `Europe/Warsaw`), because GitHub skips or delays many scheduled runs. The first completed alarm-clock or scheduled run sends the digest, later runs that day end without sending (marker `data/last_digest.json`). A manual run (leave `budzik` unchecked) is never blocked and also counts as today's digest. A concurrency group prevents overlapping runs.
 
 ## Latest Verified Results
+
+Version v35 (2026-10-28):
+
+- Unit tests: **398 passed**.
+- On the archive: Brotli (27 October, three items) and Apple CVE-2026-86950 (28 October, two items) each become one item; merges across all of October are correct. 10 of 110 October summaries had CVE ids with non-breaking hyphens that code could not see – now recognized.
+- The new filler rules flag only real filler on 107 summaries (no false hits); the preposition autofix ("we wtyczce", "ze wsparciem") changes only wrong forms.
 
 Version v33 (2026-10-26):
 
@@ -107,7 +114,7 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v35):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika (v36):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
 - Branch protection for `main`.
 
 - Experiment with the writing model: Google Gemini writes the daily summaries (Groq as fallback) and gets more article material; compared on regular weekday digests with the current setup.

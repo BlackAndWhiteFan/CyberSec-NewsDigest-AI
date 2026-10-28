@@ -186,6 +186,23 @@ AUTOFIX = [
     # a word repeated in parentheses right after itself is removed.
     (re.compile(r"(?<!\w)(\w+) \(\1\)"), lambda m: m.group(1), "powtórzenie w nawiasie"),
     (re.compile(r"(?<!\w)iPhoneie(?!\w)"), lambda m: "iPhonie", "odmiana"),
+    # v35: "we"/"ze" before a word starting with w/f (we) or s/z/ś/ź/ż/w (ze)
+    # followed by a consonant: "w wtyczce" → "we wtyczce" (28.10.2026),
+    # "z wsparciem" → "ze wsparciem" (27.10.2026). "w wersji", "z wykorzystaniem"
+    # (vowel after the first letter) stay.
+    # Only before lowercase words: names and acronyms keep "w"/"z" ("z SQL",
+    # "z SharePointem").
+    (re.compile(r"(?<!\w)([Ww]) (?=[wf][bcdfghjklłmnprstwzćńśźż])"),
+     lambda m: m.group(1) + "e ", "przyimek we"),
+    # The digraphs sz, rz, cz, dz count as one consonant: "z szybkiego" stays,
+    # "ze szkoły", "ze wsparciem", "ze zdjęcia" change.
+    (re.compile(r"(?<!\w)([Zz]) (?=(?:sz|rz|cz|dz)[bcdfghjklłmnprstwzćńśźż]|s(?!z)[bcdfghjklłmnprstwzćńśźż]"
+                r"|z(?!z)[bcdfghjklłmnprstwzćńśźż]|[śźżw][bcdfghjklłmnprstwzćńśźż])"),
+     lambda m: m.group(1) + "e ", "przyimek ze"),
+    # v35: "łata" is not the glossary form ("ponowne wprowadzenie łaty", 28.10.2026).
+    (re.compile(r"(?<!\w)([Łł])at(a|y|ę|ą|om|ami|ach)(?!\w)"),
+     lambda m: m.group(1) + {"a": "atka", "y": "atki", "ę": "atkę", "ą": "atką", "om": "atkom",
+                             "ami": "atkami", "ach": "atkach"}[m.group(2)], "łatka"),
 ]
 
 

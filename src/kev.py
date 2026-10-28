@@ -27,7 +27,14 @@ KEV_URLS = [
     "https://raw.githubusercontent.com/cisagov/kev-data/develop/known_exploited_vulnerabilities.json",
 ]
 FETCH_TIMEOUT = 30
-CVE_PATTERN = re.compile(r"CVE-\d{4}-\d{4,7}", re.IGNORECASE)
+# v35: also with the non-breaking or other Unicode hyphens the AI and some
+# pages use ("CVE‑2026‑86950"; 10 of 110 summaries of October 2026).
+HYPHENS = "-\u2010\u2011\u2012"
+CVE_PATTERN = re.compile(rf"CVE[{HYPHENS}]\d{{4}}[{HYPHENS}]\d{{4,7}}", re.IGNORECASE)
+
+
+def normalize_cve(cve):
+    return re.sub(rf"[{HYPHENS}]", "-", cve).upper()
 MARKER = "🔥 "
 KEV_NOTE = "-# 🔥 luka z katalogu CISA KEV – potwierdzone wykorzystywanie w atakach."
 
@@ -63,7 +70,7 @@ def find_cves(*texts):
     found = set()
 
     for text in texts:
-        found.update(cve.upper() for cve in CVE_PATTERN.findall(text or ""))
+        found.update(normalize_cve(cve) for cve in CVE_PATTERN.findall(text or ""))
 
     return sorted(found)
 

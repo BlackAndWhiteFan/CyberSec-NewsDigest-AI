@@ -57,6 +57,17 @@ GENERIC_PHRASES = [
     r"nie (został|została|zostało|zostały|zostali) (podan|ujawnion|wskazan|sprecyzowan|określon)\w*",
     # v32: "Aktualizacje … eliminują ryzyko ataków" (test 25.10.2026).
     r"eliminuj\w* (to |te |tę )?(ryzyk|zagrożeni)\w*",
+    # v35: advice without content (6 of 13 summaries on 28.10.2026: "Zainstaluj
+    # najnowsze wersje systemów, aby usunąć te luki", "Postępuj zgodnie z
+    # zaleceniami GMO", "Zaleca się aktualizację wtyczki po jej wydaniu",
+    # 27.10: "Należy zastosować udostępnione łatki").
+    r"(zainstaluj\w*|zaktualizuj\w*|zastosuj\w*|zastosowa\w*|należy|powin\w+|zaleca\w*|postępuj\w*)[^.]{0,60}?"
+    r"(najnowsz\w+ wersj\w*|udostępnion\w+ (łat|aktualiz|popraw)\w*|zgodnie z zalecen\w*|po (jej|ich) wydaniu|"
+    r"dostępn\w+ (łat|aktualiz)\w*|wszystki\w+ aktualizacj\w*)",
+    # v35: remarks about the article itself ("Artykuł opisuje serię zero-dayów…",
+    # "Brak dostępnych łatek w artykule", 28.10.2026).
+    r"artykuł\w* (opisuje|omawia|przedstawia|analizuje|wskazuje|podaje|mówi|dotyczy)",
+    r"w (tym )?artykule",
     # v34: a moral instead of a fact ("Ta historia pokazuje, że…", "lekcja").
     r"(ta |cała )?(historia|sprawa|incydent|przypadek) (pokazuje|uczy|przypomina)\w*",
     r"lekcj\w* (z tego|z tej|dla)",
@@ -113,7 +124,12 @@ UNINFLECTED = re.compile(
     re.IGNORECASE,
 )
 
-CVE = re.compile(r"CVE-\d{4}-\d{4,7}", re.IGNORECASE)
+# v35: Unicode hyphens too (see kev.CVE_PATTERN).
+CVE = re.compile(r"CVE[-\u2010\u2011\u2012]\d{4}[-\u2010\u2011\u2012]\d{4,7}", re.IGNORECASE)
+
+
+def normalize_cve(cve):
+    return re.sub(r"[\u2010\u2011\u2012]", "-", cve).upper()
 # "26 739" (Polish thousands separator) is one number.
 NUMBER = re.compile(r"\d{1,3}(?:[ \u00a0]\d{3})+(?![\d.,])|\d+(?:[.,]\d+)*")
 UNCHECKED_NUMBER_LIMIT = 12
@@ -164,7 +180,7 @@ EXPLOITED_SOURCE = re.compile(
     r"exploit(?:ed|ation|ing)|in the wild|wykorzyst\w*|CISA KEV|atak\w*|attack\w*", re.IGNORECASE
 )
 NO_PATCH = re.compile(
-    r"(?<!\w)(?:brak\w* łat\w*|bez łat\w*|niezałatan\w*|nie (?:ma|wydano|wydał\w*|jest dostępn\w*) (?:jeszcze )?(?:\w+ )?łat\w*)",
+    r"(?<!\w)(?:brak\w* (?:dostępn\w+ )?łat\w*|bez łat\w*|niezałatan\w*|nie (?:ma|wydano|wydał\w*|jest dostępn\w*) (?:jeszcze )?(?:\w+ )?łat\w*)",
     re.IGNORECASE,
 )
 # Clear statements that there is no patch.
@@ -249,11 +265,11 @@ def remove_unsupported_labels(text, source):
 def unsupported_facts(text, source, year=None):
     """Return CVE numbers and numbers above 12 that are not in the source."""
     problems = unsupported_labels(text, source)
-    source_cves = {cve.upper() for cve in CVE.findall(source)}
+    source_cves = {normalize_cve(cve) for cve in CVE.findall(source)}
 
     for cve in CVE.findall(text):
-        if cve.upper() not in source_cves:
-            problems.append(f"numer {cve.upper()} nie występuje w artykule – usuń go albo popraw")
+        if normalize_cve(cve) not in source_cves:
+            problems.append(f"numer {normalize_cve(cve)} nie występuje w artykule – usuń go albo popraw")
 
     year = date.today().year if year is None else year
     known = source_numbers(source)
@@ -439,8 +455,20 @@ MAX_SENTENCE_WORDS = 25
 MAX_CVE_IDS = 2
 
 
+IMPERATIVE_ADVICE = re.compile(
+    r"(?:^|(?<=[.!?]\s))(?:Zainstaluj|Zaktualizuj|Zastosuj|Wyłącz|Włącz|Sprawdź|Postępuj|Usuń|Zmień|Zresetuj)\b"
+)
+
+
 def readability_problems(text):
     problems = []
+
+    # v35: advice in the imperative reads like a list of orders (28.10.2026).
+    if IMPERATIVE_ADVICE.search(text):
+        problems.append(
+            "zalecenie w trybie rozkazującym – napisz je opisowo jako fakt "
+            "(np. „Poprawka jest w wersji 1.6.0.”) albo pomiń, jeśli nie ma konkretu"
+        )
 
     for sentence in split_sentences(text):
         words = len(re.findall(r"[\w-]+", CVE.sub("CVE", sentence)))
@@ -451,7 +479,7 @@ def readability_problems(text):
                 f"(najwyżej {MAX_SENTENCE_WORDS} słów): „{sentence[:60]}…”"
             )
 
-    cves = {cve.upper() for cve in CVE.findall(text)}
+    cves = {normalize_cve(cve) for cve in CVE.findall(text)}
 
     if len(cves) > MAX_CVE_IDS:
         problems.append(

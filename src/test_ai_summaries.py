@@ -393,10 +393,19 @@ class TestProofreading(unittest.TestCase):
         article["summary_material"] = "Quest Diagnostics breach\nPatient records of 2 labs exposed."
         return [article]
 
+    # v35: the language correction is done by Gemini only.
     def run_proofreading(self, articles, reply):
-        opener = ScriptedOpener([{1: reply}])
+        urls = []
+
+        def opener(request, timeout):
+            urls.append(request.full_url)
+            content = json.dumps({"streszczenia": [{"id": 1, "tekst": reply}]})
+            return FakeResponse(json.dumps({"candidates": [{"content": {"parts": [{"text": content}]}}]}).encode())
+
+        opener.urls = urls
         changed = ai_summaries.proofread_summaries(
-            articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g"}, opener, lambda s: None
+            articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g", "GEMINI_API_KEY": "m"}, opener,
+            lambda s: None, hints_source=lambda texts, opener: {},
         )
         return changed, opener
 
@@ -406,7 +415,7 @@ class TestProofreading(unittest.TestCase):
 
         self.assertEqual(changed, 1)
         self.assertEqual(articles[0]["summary"], "Ujawniono dane pacjentów z 2 laboratoriów.")
-        self.assertEqual(opener.requests[0]["model"], "openai/gpt-oss-120b")
+        self.assertIn("generativelanguage", opener.urls[0])
 
     def test_correction_that_changes_facts_is_rejected(self):
         articles = self.articles()
@@ -422,7 +431,8 @@ class TestProofreading(unittest.TestCase):
             raise urllib.error.HTTPError("https://api", 429, "Too Many Requests", {"Retry-After": "1"}, None)
 
         changed = ai_summaries.proofread_summaries(
-            articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g"}, opener, lambda s: None
+            articles, ai_summaries.PROVIDERS, {"GROQ_API_KEY": "g", "GEMINI_API_KEY": "m"}, opener, lambda s: None,
+            hints_source=lambda texts, opener: {},
         )
         self.assertEqual(changed, 0)
         self.assertEqual(articles[0]["summary"], "Ujawniono rekordy pacjentów z 2 laboratoriów.")

@@ -24,6 +24,97 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v35 --- 28.10.2026
+
+**Jedna luka – jedna pozycja; korekta tylko przez Gemini; zalecenia tylko
+konkretne.**
+
+Powód: prasówki z 27 i 28.10.2026 po v34 (ocena JW: „czytało się trochę
+trudno, kuleje polski, watę też pcha … trochę wstyd, czytają to moi
+mentorzy”). Problemy zebrane w obserwacji i sprawdzone w archiwum:
+
+- ta sama luka kilka razy: Brotli CVE-2026-111497 w trzech pozycjach
+  (27.10), Apple CVE-2026-86950 w dwóch (28.10) – drugi dzień z rzędu;
+- korekta językowa przez Groq (Gemini niedostępny trzeci raz w trzech
+  dniach) pogorszyła tekst: „starsze iPhone’y i iPad’y” → „starsze
+  iPhone’ów i iPad’ów”, „Exploity PoC pojawiły się” → „Exploitów PoC
+  pojawiły się”, „uni‑związany” → „niezależny” (zmiana sensu);
+- zalecenia w trybie rozkazującym w 6 z 13 streszczeń, często puste
+  („Zainstaluj najnowsze wersje systemów, aby usunąć te luki”,
+  „Postępuj zgodnie z zaleceniami GMO”, „Zaleca się aktualizację wtyczki
+  po jej wydaniu”) – skutek uboczny promptu v34 („3. zdanie: co
+  zrobić”);
+- uwagi o artykule („Artykuł opisuje…”, „Brak dostępnych łatek w
+  artykule”); „w wtyczce”, „z wsparciem”, „łaty”;
+- „twofactorgauthenticator” zamiast „twofactor_gauthenticator”;
+- „Bezpłatne e-dzienniki z lukami w przepisach” w „Podatnościach”,
+  felieton „This is Fine: What NetScaler Zero-Days Tell Us…” w
+  „Najważniejszych”.
+
+Zmiany:
+
+- **Łączenie po numerach CVE po pobraniu stron** (`src/event_grouping.py`,
+  `merge_by_cves`, `src/main.py`): łączenie wydarzeń działało przed
+  pobraniem stron artykułów, a wiele kanałów daje tylko zajawkę bez
+  numeru CVE. Po pobraniu stron i znacznikach KEV wybrane artykuły ze
+  wspólnym numerem CVE łączą się w jedną pozycję (prowadzi ta z wyższą
+  punktacją, przy remisie polska); drugie przejście po streszczeniach
+  bierze też numery CVE ze streszczeń (SecurityWeek podał CVE Apple
+  dalej niż w pierwszych 600 znakach strony). Log: „SCALENIE PO CVE (ze
+  stron / ze streszczeń): N”. Lektura nigdy nie jest łączona.
+- **Numery CVE z niełamliwym łącznikiem** (`src/kev.py`,
+  `src/summary_quality.py`, `src/ai_summaries.py`): AI często pisze
+  „CVE‑2026‑86950” ze znakiem U+2011; kod szukał tylko zwykłego „-”, więc
+  takich numerów nie widziały łączenie, KEV ani kontrola faktów (10 ze
+  110 streszczeń października). Rozpoznawane są wszystkie warianty, a
+  czyszczenie streszczenia zamienia je na „-”.
+- **Korekta językowa tylko przez Gemini** (`src/ai_summaries.py`): przy
+  chwilowym błędzie (503, przekroczony czas) jeszcze jedna runda po 30 s;
+  gdy Gemini jest niedostępny, streszczenia zostają bez korekty – bez
+  przejścia na Groq. Historie wydarzeń w zestawieniach (pisanie, nie
+  korekta) nadal mają Groq jako zapas.
+- **Zalecenia tylko konkretne** (prompt): trzecie zdanie opcjonalne,
+  tylko z konkretem (wersja z poprawką, obejście, co wyłączyć), opisowo
+  („Poprawka jest w wersji 6.2606.4246.”), nie trybem rozkazującym. W
+  kontroli: zalecenie bez konkretu („najnowsze wersje”, „udostępnione
+  łatki”, „zgodnie z zaleceniami”, „po jej wydaniu”) to ogólnik; tryb
+  rozkazujący na początku zdania – uwaga miękka (prośba o opis, bez
+  skracania).
+- **Uwagi o artykule** jako ogólnik: „artykuł opisuje / omawia /
+  przedstawia…”, „w artykule”; „brak dostępnych łatek” jak „brak łatki”.
+- **Autopoprawki** (`src/glossary.py`): „w”/„z” → „we”/„ze” przed
+  wyrazem pisanym małą literą, który zaczyna się zbitką spółgłosek
+  („we wtyczce”, „we wszystkich”, „we francuskich”, „ze wsparciem”, „ze
+  szkoły”); dwuznaki sz, rz, cz, dz liczą się jako jedna głoska („z
+  szybkiego” zostaje); nazwy i skróty bez zmian („z SQL”, „w
+  Wrocławiu”). „Łata / łaty / łatę…” → „łatka / łatki / łatkę…”.
+- **Podkreślnik w nazwach** zostaje („twofactor_gauthenticator”);
+  usuwany jest tylko „_”, który mógłby rozpocząć lub zakończyć
+  formatowanie Markdown.
+- **Selekcja** (`src/article_selection.py`): kara kontekstu dla „luk w
+  przepisach / prawie / ustawie”, „luki prawnej” oraz felietonów („tell
+  us”, „new normal”, „lessons from”). Felieton z wieloma słowami
+  kluczowymi (NetScaler: zero-day) po karze nadal przekracza próg – spada
+  w rankingu, ale może wejść, gdy są wolne miejsca.
+
+Sprawdzone na archiwum: łączenie po CVE we wszystkich dniach października
+łączy tylko pozycje o tym samym wydarzeniu (PHP2Shell, Brotli, Apple);
+nowe ogólniki na 107 streszczeniach oznaczają wyłącznie watę i formułki;
+autopoprawka przyimków zmieniła tylko błędne formy („z szybkiego” po
+poprawce zostaje); kara kontekstu trafia 3 tytuły ze 110, wszystkie
+słusznie. Stare testy korekty (przejście na Groq) zastąpione testami
+nowej zasady.
+
+Nowe i zmienione pliki: `src/event_grouping.py`, `src/main.py`,
+`src/kev.py`, `src/summary_quality.py`, `src/ai_summaries.py`,
+`src/glossary.py`, `src/article_selection.py`, `src/test_v35.py` (nowy),
+`src/test_ai_summaries.py`, `src/test_proofreading.py`,
+`src/test_language_notes.py`, README (PL/EN).
+
+Testy jednostkowe: 397, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v34 --- 26.10.2026
 
 **Streszczenia z sensem i łatwe w czytaniu: co się stało, dlaczego to
@@ -1877,6 +1968,99 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v35 --- 2026-10-28
+
+**One vulnerability – one item; correction by Gemini only; advice only
+when concrete.**
+
+Reason: the digests of 27 and 28 October 2026 after v34 (JW: "it read a
+bit hard, the Polish limps, it pushes filler too … a bit embarrassing,
+my mentors read it"). Problems collected during the observation and
+checked in the archive:
+
+- the same vulnerability several times: Brotli CVE-2026-111497 in three
+  items (27 October), Apple CVE-2026-86950 in two (28 October) – the
+  second day in a row;
+- the language correction by Groq (Gemini unavailable for the third time
+  in three days) made the text worse: "starsze iPhone’y i iPad’y" →
+  "starsze iPhone’ów i iPad’ów", "Exploity PoC pojawiły się" →
+  "Exploitów PoC pojawiły się", "uni‑związany" → "niezależny" (meaning
+  changed);
+- advice in the imperative in 6 of 13 summaries, often empty
+  ("Zainstaluj najnowsze wersje systemów, aby usunąć te luki", "Postępuj
+  zgodnie z zaleceniami GMO", "Zaleca się aktualizację wtyczki po jej
+  wydaniu") – a side effect of the v34 prompt ("sentence 3: what to
+  do");
+- remarks about the article ("Artykuł opisuje…", "Brak dostępnych łatek
+  w artykule"); "w wtyczce", "z wsparciem", "łaty";
+- "twofactorgauthenticator" instead of "twofactor_gauthenticator";
+- "Bezpłatne e-dzienniki z lukami w przepisach" in "Podatności", the
+  column "This is Fine: What NetScaler Zero-Days Tell Us…" in
+  "Najważniejsze".
+
+Changes:
+
+- **Merging by CVE ids after the page texts** (`src/event_grouping.py`,
+  `merge_by_cves`, `src/main.py`): event grouping ran before the article
+  pages were fetched, and many feeds give only a teaser without the CVE
+  id. After the pages and KEV markers, selected articles sharing a CVE
+  id become one item (the one with the higher score leads, a Polish one
+  on ties); a second pass after the summaries also uses CVE ids from the
+  summaries (SecurityWeek named the Apple CVE after the first 600
+  characters of its page). Log: "SCALENIE PO CVE (ze stron / ze
+  streszczeń): N". The roundup is never merged.
+- **CVE ids with a non-breaking hyphen** (`src/kev.py`,
+  `src/summary_quality.py`, `src/ai_summaries.py`): the AI often writes
+  "CVE‑2026‑86950" with U+2011; code looked only for a plain "-", so
+  merging, KEV and the fact check did not see such ids (10 of 110
+  October summaries). All variants are recognized, and cleaning a
+  summary turns them into "-".
+- **Language correction by Gemini only** (`src/ai_summaries.py`): one
+  more round after 30 s on a temporary error (503, timeout); when Gemini
+  is unavailable, the summaries stay uncorrected – no fallback to Groq.
+  Event stories in the tops (writing, not correcting) keep Groq as a
+  fallback.
+- **Advice only when concrete** (prompt): sentence 3 optional, only with
+  a concrete action (fixed version, workaround, what to disable),
+  descriptive ("Poprawka jest w wersji 6.2606.4246."), not imperative.
+  In the check: advice without content ("najnowsze wersje", "udostępnione
+  łatki", "zgodnie z zaleceniami", "po jej wydaniu") counts as filler;
+  the imperative at the start of a sentence is a soft problem (asked to
+  rephrase, never cut).
+- **Remarks about the article** count as filler: "artykuł opisuje /
+  omawia / przedstawia…", "w artykule"; "brak dostępnych łatek" like
+  "brak łatki".
+- **Autofix** (`src/glossary.py`): "w"/"z" → "we"/"ze" before a lowercase
+  word starting with a consonant cluster ("we wtyczce", "we wszystkich",
+  "we francuskich", "ze wsparciem", "ze szkoły"); the digraphs sz, rz,
+  cz, dz count as one sound ("z szybkiego" stays); names and acronyms
+  unchanged ("z SQL", "w Wrocławiu"). "Łata / łaty / łatę…" → "łatka /
+  łatki / łatkę…".
+- **Underscore in names** stays ("twofactor_gauthenticator"); only an
+  "_" that could start or end Markdown formatting is removed.
+- **Selection** (`src/article_selection.py`): context penalty for "luk w
+  przepisach / prawie / ustawie", "luki prawnej" and columns ("tell us",
+  "new normal", "lessons from"). A column with many keywords (NetScaler:
+  zero-day) still passes the threshold after the penalty – it ranks lower
+  but can enter when there are free places.
+
+Checked on the archive: CVE merging on all October days joins only items
+about the same event (PHP2Shell, Brotli, Apple); the new filler rules on
+107 summaries flag only filler and formulas; the preposition autofix
+changed only wrong forms ("z szybkiego" stays after the fix); the
+context penalty hits 3 of 110 titles, all rightly. The old correction
+tests (fallback to Groq) were replaced by tests of the new rule.
+
+New and changed files: `src/event_grouping.py`, `src/main.py`,
+`src/kev.py`, `src/summary_quality.py`, `src/ai_summaries.py`,
+`src/glossary.py`, `src/article_selection.py`, `src/test_v35.py` (new),
+`src/test_ai_summaries.py`, `src/test_proofreading.py`,
+`src/test_language_notes.py`, README (PL/EN).
+
+Unit tests: 397, passed.
 
 ------------------------------------------------------------------------
 

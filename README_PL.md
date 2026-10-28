@@ -12,7 +12,7 @@ Projekt działa przy budżecie 0 PLN, wyłącznie na bezpłatnych planach usług
 
 ## Aktualny stan projektu
 
-Prasówka działa produkcyjnie od października 2026 (wersja v34). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+Prasówka działa produkcyjnie od października 2026 (wersja v35). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Etap | Zakres | Stan |
 |---|---|---|
@@ -35,6 +35,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v34). Każda zmiana
 | 17 | Dziennik języka: poprawki streszczeń zapisywane w archiwum (v32) | zakończony; zweryfikowany testami jednostkowymi i prawdziwymi błędami z logów |
 | 18 | Jakość streszczeń i zestawień: bez formułek, określenia tylko z pokryciem w artykule, łączenie w zestawieniach po CVE, polscy liderzy, porządek i korekta streszczeń w zestawieniach (v33) | zakończony; zweryfikowany na gałęzi testowej i w symulacji na archiwum |
 | 19 | Streszczenia z sensem i łatwe w czytaniu: co – dlaczego ważne – co zrobić, kontekst wcześniejszych doniesień, CISA KEV dla AI, streszczenia wydarzeń w zestawieniach (v34) | zakończony; zweryfikowany na gałęzi testowej (prasówka i top 5) |
+| 20 | Jedna luka, jedna pozycja: łączenie po numerach CVE po pobraniu stron i po streszczeniach; korekta językowa tylko przez Gemini; zalecenia tylko konkretne (v35) | zakończony; sprawdzony na prasówkach z 27–28.10.2026 |
 
 ## Obecna implementacja
 
@@ -51,7 +52,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v34). Każda zmiana
 
 ### Wydarzenia i znaczniki
 
-- Łączy artykuły o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł. Reguły: podobne tytuły; wspólny numer CVE lub nazwa wydarzenia z cyframi (np. PHP2Shell), także w obrębie jednego serwisu; wspólna nazwa firmy lub produktu („Quest Diagnostics”, „Capcom”), gdy teksty artykułów pokazują, że to nazwa. Nazwy platform występujące w wielu różnych historiach (Microsoft, Windows, Chrome, Python…) same nie łączą.
+- Łączy artykuły o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł. Reguły: podobne tytuły; wspólny numer CVE lub nazwa wydarzenia z cyframi (np. PHP2Shell), także w obrębie jednego serwisu; wspólna nazwa firmy lub produktu („Quest Diagnostics”, „Capcom”), gdy teksty artykułów pokazują, że to nazwa. Nazwy platform występujące w wielu różnych historiach (Microsoft, Windows, Chrome, Python…) same nie łączą. Od v35 wybrane artykuły są łączone jeszcze raz po numerach CVE po pobraniu stron artykułów (wiele kanałów daje tylko zajawkę bez numeru CVE) i ponownie po streszczeniach, więc jedna luka to jedna pozycja.
 - Artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”, także wtedy, gdy wspólny numer CVE jest dopiero w streszczeniu (przy linkach z lektury także na stronie linku).
 - Oznacza 🔥 artykuły o lukach z katalogu CISA KEV (potwierdzone wykorzystywanie w atakach). Znacznik ustawia kod, nie AI: numery CVE z tytułu i początku tekstu artykułu są porównywane z katalogiem pobieranym przy każdym uruchomieniu (z CISA, zapasowo z lustra CISA na GitHubie). Zestawienia sprawdzają zapisane numery CVE jeszcze raz z aktualnym katalogiem. Bez katalogu prasówka idzie bez znaczników.
 
@@ -61,7 +62,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v34). Każda zmiana
 - Materiał: pełny tekst lub opis z kanału; gdy kanał daje mniej niż 600 znaków, tekst artykułu jest pobierany z jego strony (akapity bez menu, reklam i stopki). Tekst strony jest tylko materiałem dla AI i nigdzie nie jest zapisywany.
 - Terminy są zgodne ze słowniczkiem `data/glosariusz_mirror.csv` – mirrorem glosariusza CyberSec Mozaika. Proste formy zakazane poprawia kod bez zapytania do AI („poprawka” → „łatka”, „zdalne wykonanie kodu” → „RCE”); objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu 6 wybranych terminów, w tym samym przypadku co termin („przed exploitem (kodem wykorzystującym podatność)”).
 - Kontrola jakości (`src/summary_quality.py`): niezgodność ze słowniczkiem, ogólniki („co podkreśla wagę…”, „nie została podana”), względne określenia czasu, nieodmienione terminy po przyimku, liczby i numery CVE spoza materiału, określenia „zero-day” i „natychmiast”, gdy artykuł ich nie używa, formułki bez konkretu („Zaleca się natychmiastową aktualizację.”), streszczenia za długie, po angielsku albo powtarzające tylko tytuł oraz kalki z edytowalnej listy stylu `data/styl_unikaj.csv`. Streszczenie z problemem wraca do AI na jedną poprawkę; jeśli problem zostaje, kod usuwa błędne zdania. Streszczenie jest odrzucane tylko wtedy, gdy nie zostaje w nim żadne poprawne zdanie (albo nadal jest po angielsku).
-- Korekta językowa: jedno zapytanie na prasówkę do Google Gemini (`gemini-3.8-flash`, zapasowo `gemini-3.5-flash`) z podpowiedziami gramatycznymi z LanguageTool; gdy Gemini jest niedostępny, korektę przejmują modele Groq. Poprawka jest przyjmowana tylko wtedy, gdy zachowuje liczby, numery CVE i długość; każda trafia do logu jako „przed” / „po”.
+- Korekta językowa: jedno zapytanie na prasówkę do Google Gemini (`gemini-3.8-flash`, zapasowo `gemini-3.5-flash`) z podpowiedziami gramatycznymi z LanguageTool; od v35 poprawia wyłącznie Gemini (przy chwilowym błędzie jeszcze jedna próba po 30 s) – gdy jest niedostępny, streszczenia zostają bez korekty, bo modele Groq psuły polszczyznę. Poprawka jest przyjmowana tylko wtedy, gdy zachowuje liczby, numery CVE i długość; każda trafia do logu jako „przed” / „po”.
 - Dziennik języka (v32): każda poprawka streszczenia jest zapisywana razem z artykułem w archiwum (pole `language`): formy zakazane ze słowniczka z numerem hasła, kalki z listy stylu, nieodmienione terminy, zamiany zrobione przez kod i zmiany z korekty, każda z wynikiem (poprawiło AI, poprawił kod, forma została, streszczenie odrzucone). Notatki opisują tylko to, co napisało AI: niczego nie zmieniają i nigdy nie zapisują do glosariusza.
 
 ### Wysyłka i zestawienia
@@ -77,6 +78,12 @@ Prasówka działa produkcyjnie od października 2026 (wersja v34). Każda zmiana
 Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHuba (workflow_dispatch z polem `budzik`) o 6:17 czasu polskiego od poniedziałku do soboty, a zestawienia uruchamia w poniedziałek (tygodniowe) i 1. dnia miesiąca (miesięczne) o 8:17. Używa tokenu fine-grained PAT ograniczonego do tego repozytorium i uprawnienia Actions (Read and write), przechowywanego tylko w cron-job.org; token trzeba odnowić przed wygaśnięciem (po roku). Harmonogram GitHuba zostaje jako zapas (prasówka: próby 6:17–9:17, zestawienia: 8:17–11:17, `Europe/Warsaw`), bo GitHub pomija lub opóźnia wiele zaplanowanych uruchomień. Pierwsze zakończone uruchomienie z budzika albo harmonogramu wysyła prasówkę, a kolejne tego dnia kończą się bez wysyłki (znacznik `data/last_digest.json`). Uruchomienie ręczne (bez zaznaczania pola `budzik`) nigdy nie jest blokowane i również „zalicza dzień”. Grupa współbieżności zapobiega nakładaniu się uruchomień.
 
 ## Ostatnie zweryfikowane wyniki
+
+Wersja v35 (28.10.2026):
+
+- Testy jednostkowe: **397 zaliczonych**.
+- Na archiwum: Brotli (27.10, trzy pozycje) i Apple CVE-2026-86950 (28.10, dwie pozycje) stają się jedną pozycją; połączenia w całym październiku są trafne. 10 ze 110 październikowych streszczeń miało numery CVE z niełamliwymi łącznikami, których kod nie widział – teraz są rozpoznawane.
+- Nowe reguły ogólników oznaczają na 107 streszczeniach tylko prawdziwą watę (bez fałszywych trafień); autopoprawka przyimków („we wtyczce”, „ze wsparciem”) zmienia tylko błędne formy.
 
 Wersja v33 (26.10.2026):
 
@@ -107,7 +114,7 @@ Wcześniej: w teście v30 korekta Gemini poprawiła 6 z 6 streszczeń; w teście
 
 ## Plan rozwoju
 
-- **Most do CyberSec Mozaika (v35):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
+- **Most do CyberSec Mozaika (v36):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
 - Ochrona gałęzi `main`.
 
 - Eksperyment z modelem piszącym: Google Gemini pisze streszczenia dzienne (Groq jako zapas) i dostaje więcej materiału z artykułu; porównanie na zwykłych prasówkach dnia roboczego z obecnym układem.

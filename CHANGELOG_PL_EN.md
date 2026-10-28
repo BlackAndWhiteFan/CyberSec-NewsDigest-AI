@@ -97,6 +97,17 @@ Zmiany:
   kluczowymi (NetScaler: zero-day) po karze nadal przekracza próg – spada
   w rankingu, ale może wejść, gdy są wolne miejsca.
 
+Test na gałęzi `v35-jakosc` 28.10.2026: zielony, „SCALENIE PO CVE (ze
+stron): 0” i „(ze streszczeń): 0” (mało artykułów po porannej prasówce);
+korekta pominięta – `gemini-3.8-flash` dwa razy przekroczył czas (2 × 90
+s), `gemini-3.5-flash` dwa razy zwrócił 503; Groq nie ruszał tekstu.
+Uruchomienie trwało ponad 5 minut. Poprawka: limit czasu zapytania do
+Gemini 30 s zamiast 90 s (`src/gemini.py`) – działający Gemini odpowiada
+w kilka sekund; najgorszy przypadek czekania spada z ok. 6,5 do ok. 2
+minut. Wniosek dla eksperymentu z modelem piszącym: Gemini w darmowym
+planie bywa rano niedostępny (cztery dni z rzędu), więc model piszący
+musi mieć zapas.
+
 Sprawdzone na archiwum: łączenie po CVE we wszystkich dniach października
 łączy tylko pozycje o tym samym wydarzeniu (PHP2Shell, Brotli, Apple);
 nowe ogólniki na 107 streszczeniach oznaczają wyłącznie watę i formułki;
@@ -107,11 +118,11 @@ nowej zasady.
 
 Nowe i zmienione pliki: `src/event_grouping.py`, `src/main.py`,
 `src/kev.py`, `src/summary_quality.py`, `src/ai_summaries.py`,
-`src/glossary.py`, `src/article_selection.py`, `src/test_v35.py` (nowy),
+`src/glossary.py`, `src/article_selection.py`, `src/gemini.py`, `src/test_v35.py` (nowy),
 `src/test_ai_summaries.py`, `src/test_proofreading.py`,
 `src/test_language_notes.py`, README (PL/EN).
 
-Testy jednostkowe: 397, zakończone powodzeniem.
+Testy jednostkowe: 398, zakończone powodzeniem.
 
 ------------------------------------------------------------------------
 
@@ -2047,6 +2058,17 @@ Changes:
   zero-day) still passes the threshold after the penalty – it ranks lower
   but can enter when there are free places.
 
+Test on the `v35-jakosc` branch on 2026-10-28: green, "SCALENIE PO CVE
+(ze stron): 0" and "(ze streszczeń): 0" (few articles after the morning
+digest); correction skipped – `gemini-3.8-flash` timed out twice (2 × 90
+s), `gemini-3.5-flash` returned 503 twice; Groq did not touch the text.
+The run took over 5 minutes. Fix: Gemini request timeout 30 s instead of
+90 s (`src/gemini.py`) – a working Gemini answers in a few seconds; the
+worst-case waiting drops from about 6.5 to about 2 minutes. Lesson for
+the writing-model experiment: Gemini on the free tier is sometimes
+unavailable in the morning (four days in a row), so the writing model
+needs a fallback.
+
 Checked on the archive: CVE merging on all October days joins only items
 about the same event (PHP2Shell, Brotli, Apple); the new filler rules on
 107 summaries flag only filler and formulas; the preposition autofix
@@ -2056,11 +2078,11 @@ tests (fallback to Groq) were replaced by tests of the new rule.
 
 New and changed files: `src/event_grouping.py`, `src/main.py`,
 `src/kev.py`, `src/summary_quality.py`, `src/ai_summaries.py`,
-`src/glossary.py`, `src/article_selection.py`, `src/test_v35.py` (new),
+`src/glossary.py`, `src/article_selection.py`, `src/gemini.py`, `src/test_v35.py` (new),
 `src/test_ai_summaries.py`, `src/test_proofreading.py`,
 `src/test_language_notes.py`, README (PL/EN).
 
-Unit tests: 397, passed.
+Unit tests: 398, passed.
 
 ------------------------------------------------------------------------
 

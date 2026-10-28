@@ -81,7 +81,7 @@ The main trigger is an external alarm clock: cron-job.org calls the GitHub API (
 
 Version v35 (2026-10-28):
 
-- Unit tests: **397 passed**.
+- Unit tests: **398 passed**.
 - On the archive: Brotli (27 October, three items) and Apple CVE-2026-86950 (28 October, two items) each become one item; merges across all of October are correct. 10 of 110 October summaries had CVE ids with non-breaking hyphens that code could not see – now recognized.
 - The new filler rules flag only real filler on 107 summaries (no false hits); the preposition autofix ("we wtyczce", "ze wsparciem") changes only wrong forms.
 

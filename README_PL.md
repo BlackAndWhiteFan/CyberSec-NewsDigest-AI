@@ -81,7 +81,7 @@ Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHub
 
 Wersja v35 (28.10.2026):
 
-- Testy jednostkowe: **397 zaliczonych**.
+- Testy jednostkowe: **398 zaliczonych**.
 - Na archiwum: Brotli (27.10, trzy pozycje) i Apple CVE-2026-86950 (28.10, dwie pozycje) stają się jedną pozycją; połączenia w całym październiku są trafne. 10 ze 110 październikowych streszczeń miało numery CVE z niełamliwymi łącznikami, których kod nie widział – teraz są rozpoznawane.
 - Nowe reguły ogólników oznaczają na 107 streszczeniach tylko prawdziwą watę (bez fałszywych trafień); autopoprawka przyimków („we wtyczce”, „ze wsparciem”) zmienia tylko błędne formy.
 

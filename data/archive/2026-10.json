@@ -2279,5 +2279,472 @@
     "kev": [],
     "via": "",
     "language": []
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Poważna luka w BIND9 (CVE-2026-94300): atakujący może doprowadzić do utraty dostępu do usługi lub RCE.",
+    "link": "https://sekurak.pl/powazna-luka-w-bind9-cve-2026-94300-atakujacy-moze-doprowadzic-do-utraty-dostepu-do-uslugi-lub-rce/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "ISC poinformowało o krytycznej podatności w BIND9 (CVE-2026-94300) umożliwiającej uszkodzenie pamięci i RCE. Luka nie jest jeszcze wykorzystywana w atakach.",
+    "cves": [
+      "CVE-2026-94300"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Even after PHP2Shell, blast radius matters more than a CVSS score",
+    "link": "https://www.bleepingcomputer.com/news/security/even-after-php2shell-blast-radius-matters-more-than-a-cvss-score/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "PHP2Shell Attack Roots 25 Servers, Breaches U.S. Government-Affiliated Network",
+        "link": "https://thehackernews.com/2026/10/php2shell-attack-roots-25-servers.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "China-Linked Hackers Exploit PHP2Shell to Root Firewalls",
+        "link": "https://www.securityweek.com/china-linked-hackers-exploit-php2shell-to-root-firewalls/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Badania wykazały dwie podatności RCE w PHP (CVE-2026-109618 i CVE-2026-109619) oznaczone jako PHP2Shell, które były wykorzystywane przed publikacją łatki. CISA umieściła je w katalogu KEV. Łatka została wydana 21 października.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Volt Typhoon Used Covert Silent Train Network in Four Zero-Day Exploitation Campaigns",
+    "link": "https://thehackernews.com/2026/10/volt-typhoon-used-covert-silent-train.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Volt Typhoon hides zero-day attacks using 'Silent Train' framework",
+        "link": "https://www.bleepingcomputer.com/news/security/volt-typhoon-hides-zero-day-attacks-using-silent-train-framework/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Grupa szpiegowska Volt Typhoon używała sieci Silent Train do czterech kampanii wykorzystujących podatności zero-day, celując w infrastrukturę krytyczną i telekomunikację.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "eksploatację",
+        "form": "eksploatacj*",
+        "suggestion": "wykorzystanie (luki)",
+        "fixed_by": "code"
+      },
+      {
+        "type": "proofreading",
+        "before": "Grupa szpiegowska Volt Typhoon używała sieci Silent Train do czterech kampanii wykorzystujących zero-dayy, celując w infrastrukturę krytyczną i telekomunikację.",
+        "after": "Grupa szpiegowska Volt Typhoon używała sieci Silent Train do czterech kampanii wykorzystujących podatności zero-day, celując w infrastrukturę krytyczną i telekomunikację.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Hackers Target Critical Oracle E-Business Suite RCE Flaw Days After Security Patch",
+    "link": "https://thehackernews.com/2026/10/hackers-target-critical-oracle-e.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Hackers Start Probing Fresh Oracle EBS Vulnerability",
+        "link": "https://www.securityweek.com/hackers-start-probing-fresh-oracle-ebs-vulnerability/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Luka umożliwia nieautoryzowane wstrzyknięcie kodu SQL (SQL injection) i RCE po jej załataniu.",
+    "cves": [
+      "CVE-2026-101767"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "style",
+        "used": "eksploatacji",
+        "form": "eksploatacj*",
+        "suggestion": "wykorzystanie (luki)",
+        "fixed_by": "code"
+      },
+      {
+        "type": "proofreading",
+        "before": "Luka umożliwia nieautoryzowany SQL injection i RCE po jej załataniu.",
+        "after": "Luka umożliwia nieautoryzowane wstrzyknięcie kodu SQL (SQL injection) i RCE po jej załataniu.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "ShinyHunters-Exploited Oracle PeopleSoft Zero-Day Turns Out to Be Three Chained Flaws",
+    "link": "https://thehackernews.com/2026/10/shinyhunters-exploited-oracle.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "ShinyHunters wykorzystywało krytyczną podatność w Oracle PeopleSoft (CVE-2026-35273) składającą się z trzech powiązanych luk, co pozwalało na nieautoryzowane przejęcie serwera. Luka znajdowała się w katalogu KEV i była używana przed wydaniem łatki w czerwcu. Łatka została opublikowana 10 czerwca.",
+    "cves": [
+      "CVE-2026-35273"
+    ],
+    "kev": [
+      "CVE-2026-35273"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "ShinyHunters wykorzystywało krytyczną podatność w Oracle PeopleSoft (CVE-2026-35273) składającą się z trzech powiązanych luk, co pozwalało na nieautoryzowane przejęcie serwera. Luka była w katalogu KEV i była używana przed wydaniem łatki w czerwcu. Łatka została opublikowana 10 czerwca.",
+        "after": "ShinyHunters wykorzystywało krytyczną podatność w Oracle PeopleSoft (CVE-2026-35273) składającą się z trzech powiązanych luk, co pozwalało na nieautoryzowane przejęcie serwera. Luka znajdowała się w katalogu KEV i była używana przed wydaniem łatki w czerwcu. Łatka została opublikowana 10 czerwca.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Adobe Commerce PolyShell Attacks Breach Hundreds of Stores as Brotli Exploit Traffic Emerges",
+    "link": "https://thehackernews.com/2026/10/adobe-commerce-polyshell-attacks-breach.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "CISA Warns of Node2Shell Exploitation as Honeypots Log Attack Attempts",
+        "link": "https://www.securityweek.com/cisa-warns-of-node2shell-exploitation-as-honeypots-log-attack-attempts/",
+        "source": "securityweek.com"
+      },
+      {
+        "title": "CISA warns of hackers now exploiting critical Node2Shell flaw",
+        "link": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "CISA dodała dwie podatności dotyczące Adobe Commerce/Magento i biblioteki dekodera Brotli do katalogu KEV, wskazując na aktywne wykorzystanie. Atakujący wykorzystali CVE-2026-48356 (PolyShell) do włamania się do setek sklepów e-commerce i wstrzyknięcia loadera, a podatność Brotli (CVE-2026-111497) nie ma jeszcze szeroko dostępnej łatki.",
+    "cves": [
+      "CVE-2026-111497",
+      "CVE-2026-48356"
+    ],
+    "kev": [
+      "CVE-2026-111497",
+      "CVE-2026-48356"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CISA dodała dwie podatności dotyczące Adobe Commerce/Magento i biblioteki dekodera Brotli do katalogu KEV, wskazując na aktywne wykorzystanie. Atakujący wykorzystali CVE-2026-48356 (PolyShell) do włamania do setek sklepów e-commerce i wstrzyknięcia loadera, a podatność Brotli (CVE-2026-111497) nie ma jeszcze szeroko dostępnej łatki.",
+        "after": "CISA dodała dwie podatności dotyczące Adobe Commerce/Magento i biblioteki dekodera Brotli do katalogu KEV, wskazując na aktywne wykorzystanie. Atakujący wykorzystali CVE-2026-48356 (PolyShell) do włamania się do setek sklepów e-commerce i wstrzyknięcia loadera, a podatność Brotli (CVE-2026-111497) nie ma jeszcze szeroko dostępnej łatki.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Japoński Burger King: wyciek danych 11 mln użytkowników aplikacji",
+    "link": "https://sekurak.pl/japonski-burger-king-wyciek-danych-11-mln-uzytkownikow-aplikacji/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W Japonii doszło do wycieku danych ponad 11 mln użytkowników aplikacji Burger King, obejmującego imiona, nazwiska, adresy e-mail, numery telefonów i daty urodzenia. Atakujący uzyskali dostęp do tych danych, co może umożliwić kampanie phishingowe.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W Japonii doszło do wycieku danych ponad 11 mln użytkowników aplikacji Burger King, obejmującego imiona, nazwiska, e-maile, telefony i daty urodzenia. Atakujący uzyskali dostęp do tych danych, co może umożliwić kampanie phishingowe.",
+        "after": "W Japonii doszło do wycieku danych ponad 11 mln użytkowników aplikacji Burger King, obejmującego imiona, nazwiska, adresy e-mail, numery telefonów i daty urodzenia. Atakujący uzyskali dostęp do tych danych, co może umożliwić kampanie phishingowe.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Setki agentów AI zamiast kilku hakerów. Cyberataki wkraczają w nową erę",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/setki-agentow-ai-zamiast-kilku-hakerow-cyberataki-wkraczaja-w-nowa-ere",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Ekspert dr Christopher Porter wskazał, że agenci AI mogą zastąpić małe zespoły hakerów, umożliwiając jednoczesne działanie setek botnetów oraz przyspieszenie kradzieży danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Ekspert dr Christopher Porter wskazał, że agenci AI mogą zastąpić małe zespoły hakerów, umożliwiając jednoczesne działanie setek botnetów i przyspieszenie kradzieży danych.",
+        "after": "Ekspert dr Christopher Porter wskazał, że agenci AI mogą zastąpić małe zespoły hakerów, umożliwiając jednoczesne działanie setek botnetów oraz przyspieszenie kradzieży danych.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Kamery Dahua zhakowane. Sprawdź, czy ktoś Cię podgląda",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/kamery-dahua-zhakowane-sprawdz-czy-ktos-cie-podglada",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT-UA ostrzegł przed zhakowaniem kamer Dahua poprzez platformę Easy4IP, umożliwiającą zdalny dostęp i przejęcie obrazu. Atakujący odgadują przewidywalne numery seryjne i wykorzystują brute-force, przez co zagrożone jest każde urządzenie ze włączoną funkcją P2P.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "",
+        "rule": "przyimek ze",
+        "used": "z ",
+        "fixed": "ze "
+      },
+      {
+        "type": "proofreading",
+        "before": "CERT-UA ostrzegł przed zhakowaniem kamer Dahua poprzez platformę Easy4IP, umożliwiającą zdalny dostęp i przejęcie obrazu. Atakujący odgadują przewidywalne numery seryjne i wykorzystują brute-force, co zagrożeniem jest każde urządzenie ze włączoną funkcją p2p.",
+        "after": "CERT-UA ostrzegł przed zhakowaniem kamer Dahua poprzez platformę Easy4IP, umożliwiającą zdalny dostęp i przejęcie obrazu. Atakujący odgadują przewidywalne numery seryjne i wykorzystują brute-force, przez co zagrożone jest każde urządzenie ze włączoną funkcją P2P.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Sony ISP subsidiary data breach exposes 2.5 million customer records",
+    "link": "https://www.bleepingcomputer.com/news/security/sony-isp-subsidiary-data-breach-exposes-25-million-customer-records/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Sony Network Communications potwierdziło wyciek około 2,5 mln wpisów klientów, w tym adresów e-mail i haseł. Dane zostały ujawnione po nieautoryzowanym dostępie do bazy So-net w dniu 19 października. Zalecana jest zmiana haseł.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "rekordów",
+        "form": "rekordów",
+        "suggestion": "wpisów, danych",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Sony Network Communications potwierdziło wyciek około 2,5 mln wpisów klientów, w tym adresy e-mail i hasła. Dane zostały ujawnione po nieautoryzowanym dostępie do bazy So-net w dniu 19 października. Zalecenie to zmiana haseł.",
+        "after": "Sony Network Communications potwierdziło wyciek około 2,5 mln wpisów klientów, w tym adresów e-mail i haseł. Dane zostały ujawnione po nieautoryzowanym dostępie do bazy So-net w dniu 19 października. Zalecana jest zmiana haseł.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Nefilim and Hive ransomware affiliate gets 70 months in prison",
+    "link": "https://www.bleepingcomputer.com/news/security/nefilim-and-hive-ransomware-affiliate-gets-70-months-in-prison/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Ukrainian Hive and Nefilim Ransomware Affiliate Gets 70 Months in US Prison",
+        "link": "https://www.securityweek.com/ukrainian-hive-and-nefilim-ransomware-affiliate-gets-70-months-in-us-prison/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Ukrainiec Artem Stryzhak został skazany na 70 miesięcy więzienia za ataki ransomware Nefilim i Hive. Grupy te atakowały szpitale i firmy w latach 2018–2021, powodując straty w wysokości ponad 100 mln USD.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Ukrainiec Artem Stryzhak dostał wyrok 70 miesięcy więzienia za ataki ransomware Nefilim i Hive. Grupy te atakowały szpitale i firmy w latach 2018–2021, powodując straty ponad 100 mln USD.",
+        "after": "Ukrainiec Artem Stryzhak został skazany na 70 miesięcy więzienia za ataki ransomware Nefilim i Hive. Grupy te atakowały szpitale i firmy w latach 2018–2021, powodując straty w wysokości ponad 100 mln USD.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Japan Airlines warns of data breach as country grapples with multiple cyber incidents",
+    "link": "https://therecord.media/japan-airlines-warns-of-breach-country-grapples-with-incidents",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Linie Japan Airlines poinformowały o wycieku danych 92 000 klientów u dostawcy IT Amadeus. Przejęto imiona, kody rezerwacji oraz numery paszportów 2 000 osób. Wyciek nie wpłynął na operacje lotnicze ani dane kart kredytowych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Japan Airlines poinformował o wycieku danych 92 000 klientów przez dostawcę IT Amadeus. Przejęto imiona, kody rezerwacji oraz numery paszportów 2 000 osób. Wyciek nie wpłynął na operacje lotnicze ani dane kart kredytowych.",
+        "after": "Linie Japan Airlines poinformowały o wycieku danych 92 000 klientów u dostawcy IT Amadeus. Przejęto imiona, kody rezerwacji oraz numery paszportów 2 000 osób. Wyciek nie wpłynął na operacje lotnicze ani dane kart kredytowych.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Podatność w oprogramowaniu Wing FTP Server",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-105420/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska koordynował ujawnienie podatności CVE-2026-105420 w Wing FTP Server. Brak walidacji folderu bazowego pozwala administratorowi zapisywać pliki z uprawnieniami roota. Może to prowadzić do RCE.",
+    "cves": [
+      "CVE-2026-105420"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalnego wykonania kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "CERT Polska koordynował ujawnienie podatności CVE-2026-105420 w Wing FTP Server. Brak walidacji folderu bazowego pozwala administratorowi zapisywać pliki jako root. Może to prowadzić do RCE.",
+        "after": "CERT Polska koordynował ujawnienie podatności CVE-2026-105420 w Wing FTP Server. Brak walidacji folderu bazowego pozwala administratorowi zapisywać pliki z uprawnieniami roota. Może to prowadzić do RCE.",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "InfraTrust report warns of exploited flaws in critical network infrastructure",
+    "link": "https://www.bleepingcomputer.com/news/security/infratrust-report-warns-of-exploited-flaws-in-critical-network-infrastructure/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "InfraTrust ostrzega przed aktywnym wykorzystywaniem luk PHP2Shell w interfejsach zarządzania urządzeniami sieciowymi. Wiele z nich znajduje się w katalogu CISA KEV. Klienci nie mogą samodzielnie zainstalować łatek PHP w oprogramowaniu układowym (firmware).",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawek",
+        "fixed": "łatek"
+      },
+      {
+        "type": "proofreading",
+        "before": "InfraTrust ostrzega przed aktywnym wykorzystywaniem luk PHP2Shell w interfejsach zarządzania urządzeniami sieciowymi. Wiele z nich jest w katalogu CISA KEV. Klienci nie mogą samodzielnie zainstalować łatek PHP w firmware.",
+        "after": "InfraTrust ostrzega przed aktywnym wykorzystywaniem luk PHP2Shell w interfejsach zarządzania urządzeniami sieciowymi. Wiele z nich znajduje się w katalogu CISA KEV. Klienci nie mogą samodzielnie zainstalować łatek PHP w oprogramowaniu układowym (firmware).",
+        "model": "Gemini gemini-3.5-flash (ponowna próba)"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Chrome and Firefox Updates Patch Over 200 Vulnerabilities",
+    "link": "https://www.securityweek.com/chrome-and-firefox-updates-patch-over-200-vulnerabilities/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Google i Mozilla wydały aktualizacje Chrome 156 i Firefox 159, naprawiające ponad 200 podatności. W tym cztery krytyczne błędy w Chrome, w tym luka CVE-2026-118306. Firmy nie potwierdzają wykorzystania tych luk w atakach.",
+    "cves": [
+      "CVE-2026-118306"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
   }
 ]

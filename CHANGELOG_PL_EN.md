@@ -24,6 +24,55 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v36 --- 29.10.2026
+
+**Miękkie problemy nigdy nie tną streszczenia; bez urwanych fragmentów;
+mniej telegrafu; „z/ze” poprawnie; bez dopisanego phishingu.**
+
+Powód: prasówka z 29.10.2026 (JW: „nieco kulawo, choć trochę lepiej …
+rwane”). Korekta Gemini zadziałała (12 z 15, `gemini-3.5-flash` w
+ponownej próbie z v35). Problemy:
+
+- Oracle E-Business Suite: „Luka umożliwia … RCE po jej załataniu.” –
+  szkic miał tylko kalkę „eksploatację” (problem miękki), poprawka AI
+  dostała problem twardy, a kod przyciął poprawioną wersję, wycinając
+  pierwsze zdanie z nazwą produktu;
+- „ze włączoną funkcją” – błąd autopoprawki z v35 („ze” przed każdym
+  „w” ze spółgłoską);
+- tekst „rwany”: prompt v34 („krótkie, proste zdania, jedno zdanie –
+  jeden fakt”) i podział zdań powyżej 25 słów dały ciąg krótkich zdań
+  bez spójników, czasem równoważnik („W tym cztery krytyczne błędy…”);
+- dopisany skutek: „co może umożliwić kampanie phishingowe” (Burger
+  King; 27.10 „zwiększa ryzyko phishingu” przy Kopenhadze).
+
+Zmiany:
+
+- **Szkic z samymi miękkimi problemami zostaje** (`src/ai_summaries.py`),
+  gdy poprawka AI nie jest czysta – kod nie tnie poprawionej wersji.
+- **Bez pierwszego zdania – bez streszczenia**: jeśli naprawa przez kod
+  usunęłaby pierwsze zdanie (podmiot: produkt, firma, grupa), artykuł
+  idzie z samym tytułem. Log: „KONTROLA: streszczenie N odrzucone (kod
+  usunąłby pierwsze zdanie)”.
+- **„Ze” przed „w” tylko z głoską syczącą** (`src/glossary.py`): „ze
+  wsparciem”, „ze wszystkimi”, „ze względu”; „z włączoną”, „z wnukiem”
+  bez zmian.
+- **Płynniej** (prompt, `src/summary_quality.py`): zdania do ok. 25 słów,
+  powiązane fakty łączone spójnikami („bo”, „więc”, „ale”, „a”); każde
+  zdanie z orzeczeniem; prośba o podział dopiero powyżej 30 słów (było
+  25).
+- **Phishing i socjotechnika tylko z artykułu**: wzmianka bez pokrycia w
+  materiale wraca do poprawki (na archiwum: 2 dopowiedzenia złapane, 2
+  prawdziwe wzmianki przechodzą).
+
+Most do CyberSec Mozaika przesunięty na v37.
+
+Nowe i zmienione pliki: `src/ai_summaries.py`, `src/summary_quality.py`,
+`src/glossary.py`, `src/test_v36.py` (nowy), README (PL/EN).
+
+Testy jednostkowe: 404, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v35 --- 28.10.2026
 
 **Jedna luka – jedna pozycja; korekta tylko przez Gemini; zalecenia tylko
@@ -1979,6 +2028,57 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v36 --- 2026-10-29
+
+**Soft problems never cut a summary; no headless fragments; less
+telegraphic; "z/ze" right; no added phishing.**
+
+Reason: the digest of 2026-10-29 (JW: "still a bit lame, though a bit
+better … choppy"). The Gemini correction worked (12 of 15,
+`gemini-3.5-flash` in the v35 retry). Problems:
+
+- Oracle E-Business Suite: "Luka umożliwia … RCE po jej załataniu." – the
+  draft had only the calque "eksploatację" (a soft problem), the AI
+  correction got a hard problem, and code cut the corrected version,
+  removing the first sentence with the product name;
+- "ze włączoną funkcją" – an error of the v35 autofix ("ze" before every
+  "w" with a consonant);
+- choppy text: the v34 prompt ("short simple sentences, one sentence –
+  one fact") and splitting sentences over 25 words gave a row of short
+  sentences without conjunctions, sometimes a verbless fragment ("W tym
+  cztery krytyczne błędy…");
+- an added effect: "co może umożliwić kampanie phishingowe" (Burger King;
+  on 27 October "zwiększa ryzyko phishingu" for Copenhagen).
+
+Changes:
+
+- **A draft with only soft problems stays** (`src/ai_summaries.py`) when
+  the AI correction is not clean – code does not cut the corrected
+  version.
+- **No first sentence – no summary**: if the code repair would remove the
+  first sentence (the subject: product, company, group), the article
+  goes with its title only. Log: "KONTROLA: streszczenie N odrzucone (kod
+  usunąłby pierwsze zdanie)".
+- **"Ze" before "w" only with a sibilant** (`src/glossary.py`): "ze
+  wsparciem", "ze wszystkimi", "ze względu"; "z włączoną", "z wnukiem"
+  unchanged.
+- **Smoother** (prompt, `src/summary_quality.py`): sentences up to about
+  25 words, related facts joined with conjunctions ("bo", "więc", "ale",
+  "a"); every sentence has a verb; split requested only above 30 words
+  (was 25).
+- **Phishing and social engineering only from the article**: a mention
+  without support in the material goes back for correction (on the
+  archive: 2 additions caught, 2 real mentions pass).
+
+The bridge to CyberSec Mozaika moved to v37.
+
+New and changed files: `src/ai_summaries.py`, `src/summary_quality.py`,
+`src/glossary.py`, `src/test_v36.py` (new), README (PL/EN).
+
+Unit tests: 404, passed.
 
 ------------------------------------------------------------------------
 

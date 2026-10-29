@@ -722,7 +722,12 @@
     "https://therecord.media/japan-airlines-warns-of-breach-country-grapples-with-incidents",
     "https://therecord.media/noyb-sues-scale-ai-for-worker-surveillance",
     "https://therecord.media/north-korea-russia-sanctions",
-    "https://therecord.media/moldova-investigates-possible-foreign-involvement-cyberattacks"
+    "https://therecord.media/moldova-investigates-possible-foreign-involvement-cyberattacks",
+    "https://cyberdefence24.pl/biznes-i-finanse/polska-w-pulapce-big-techow-7-wnioskow-z-raportu-o-cyfrowej-suwerennosci",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/dezinformacja/wybory-a-dezinformacja-co-szykuja-rzad-i-nask",
+    "https://thehackernews.com/2026/10/china-linked-hackers-exploited-vmware.html",
+    "https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html",
+    "https://kapitanhack.pl/kiedy-klucz-prywatny-przestaje-byc-prywatny-czyli-jak-indyjski-urzad-certyfikacji-emudhra-stracil-zaufanie-przegladarek/"
   ],
   "published_links": [
     "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/",
@@ -968,6 +973,11 @@
     "https://www.securityweek.com/hackers-start-probing-fresh-oracle-ebs-vulnerability/",
     "https://www.securityweek.com/cisa-warns-of-node2shell-exploitation-as-honeypots-log-attack-attempts/",
     "https://www.bleepingcomputer.com/news/security/cisa-warns-of-hackers-now-exploiting-critical-node2shell-flaw/",
-    "https://www.securityweek.com/ukrainian-hive-and-nefilim-ransomware-affiliate-gets-70-months-in-us-prison/"
+    "https://www.securityweek.com/ukrainian-hive-and-nefilim-ransomware-affiliate-gets-70-months-in-us-prison/",
+    "https://thehackernews.com/2026/10/china-linked-hackers-exploited-vmware.html",
+    "https://thehackernews.com/2026/10/japans-gmo-offers-1-million-bounty-to.html",
+    "https://thehackernews.com/2026/10/tailscale-patches-ssh-flaws-that-could.html",
+    "https://www.bleepingcomputer.com/news/security/hackers-now-scanning-systems-for-recently-patched-oracle-flaw/",
+    "https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html"
   ]
 }

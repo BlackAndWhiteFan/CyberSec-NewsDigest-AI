@@ -2746,5 +2746,166 @@
     "kev": [],
     "via": "",
     "language": []
+  },
+  {
+    "date": "2026-10-29",
+    "title": "China-Linked Hackers Exploited VMware ESX Zero-Day to Reduce Audit Trail Visibility",
+    "link": "https://thehackernews.com/2026/10/china-linked-hackers-exploited-vmware.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Wykryto, że chiński zespół Warp Panda wykorzystał lukę zero-day CVE-2026-41709 w VMware ESX firmy Broadcom, co pozwalało administratorowi na ukrycie działań w logach. Luka znajduje się w katalogu CISA KEV i została załatana w nowszych wersjach produktu.",
+    "cves": [
+      "CVE-2026-41709"
+    ],
+    "kev": [
+      "CVE-2026-41709"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Wykryto, że chiński zespół Warp Panda wykorzystał zero-day CVE-2026-41709 w VMware ESX firmy Broadcom, umożliwiając adminowi ukrycie działań w logach. Luka jest wymieniona w katalogu CISA KEV i została załatana w nowszych wersjach produktu.",
+        "after": "Wykryto, że chiński zespół Warp Panda wykorzystał lukę zero-day CVE-2026-41709 w VMware ESX firmy Broadcom, co pozwalało administratorowi na ukrycie działań w logach. Luka znajduje się w katalogu CISA KEV i została załatana w nowszych wersjach produktu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Japan's GMO Offers $1 Million Bounty to Catch Hackers Behind FX Trading Cloud Breach",
+    "link": "https://thehackernews.com/2026/10/japans-gmo-offers-1-million-bounty-to.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma GMO Internet Group ogłosiła program nagród do 1 mln USD za informacje prowadzące do zatrzymania sprawców włamania i wymuszenia w usłudze Onamae.com Desktop Cloud.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "GMO Internet Group ogłosiło program nagród do 1 mln USD za informacje prowadzące do zatrzymania sprawców włamania i wymuszenia w usłudze Onamae.com Desktop Cloud.",
+        "after": "Firma GMO Internet Group ogłosiła program nagród do 1 mln USD za informacje prowadzące do zatrzymania sprawców włamania i wymuszenia w usłudze Onamae.com Desktop Cloud.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Tailscale Patches SSH Flaws That Could Let Hacked Devices Gain Root Access on Other Servers",
+    "link": "https://thehackernews.com/2026/10/tailscale-patches-ssh-flaws-that-could.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Tailscale wydało wersję 1.104.4, w której naprawiono dwa błędy we wbudowanym serwerze SSH. Mogły one pozwolić przejętemu urządzeniu na podwyższenie uprawnień do poziomu root na innych serwerach. Poprzednie luki opisano w raporcie Tailworm i dotyczyły one wersji 1.104.2 oraz headscale 0.29.5.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "",
+        "rule": "przyimek we",
+        "used": "w ",
+        "fixed": "we "
+      },
+      {
+        "type": "glossary",
+        "id": "H182",
+        "used": "podniesienie uprawnień",
+        "required": "podwyższenie uprawnień",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Tailscale wydało wersję 1.104.4, w której naprawiono dwa błędy we wbudowanym serwerze SSH, które mogły pozwolić przejętemu urządzeniu na podwyższenie uprawnień root na innych serwerach. Poprzednie luki były opisane w raporcie Tailworm i dotyczyły wersji 1.104.2 oraz headscale 0.29.5.",
+        "after": "Tailscale wydało wersję 1.104.4, w której naprawiono dwa błędy we wbudowanym serwerze SSH. Mogły one pozwolić przejętemu urządzeniu na podwyższenie uprawnień do poziomu root na innych serwerach. Poprzednie luki opisano w raporcie Tailworm i dotyczyły one wersji 1.104.2 oraz headscale 0.29.5.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Hackers now scanning systems for recently-patched Oracle flaw",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-now-scanning-systems-for-recently-patched-oracle-flaw/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Oracle E-Business Suite zawiera krytyczną podatność CVE-2026-101767, umożliwiającą ataki typu SQL injection bez uwierzytelnienia oraz RCE przez HTTP. Oracle wydało łatkę 20 października w ramach październikowej aktualizacji krytycznej, jednak obecnie obserwuje się skanowanie niezałatanych systemów.",
+    "cves": [
+      "CVE-2026-101767"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawkę",
+        "fixed": "łatkę"
+      },
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "Oracle E-Business Suite ma krytyczną podatność CVE-2026-101767, umożliwiającą nieautoryzowany SQL injection i RCE po dostępie HTTP. Oracle wydało łatkę w październikowej aktualizacji krytycznej 20 października, a obserwuje się skanowanie niezałatanych systemów.",
+        "after": "Oracle E-Business Suite zawiera krytyczną podatność CVE-2026-101767, umożliwiającą ataki typu SQL injection bez uwierzytelnienia oraz RCE przez HTTP. Oracle wydało łatkę 20 października w ramach październikowej aktualizacji krytycznej, jednak obecnie obserwuje się skanowanie niezałatanych systemów.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-29",
+    "title": "Attackers Exploit PHP2Shell Flaws in Internet-Exposed Palo Alto Networks Management Interfaces",
+    "link": "https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Palo Alto Networks poinformowało o aktywnym wykorzystywaniu podatności PHP2Shell CVE-2026-109618 i CVE-2026-109619, które pozwalają na RCE bez uwierzytelnienia w interfejsach zarządzania. Łatki zostały opublikowane 21 października w PHP 8.5.12, 8.4.27, 8.3.36 i 8.2.35.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Palo Alto Networks poinformowało o aktywnym wykorzystywaniu podatności PHP2Shell CVE-2026-109618 i CVE-2026-109619, które dają nieautoryzowane RCE w interfejsach zarządzania. Łatki zostały opublikowane 21 października w PHP 8.5.12, 8.4.27, 8.3.36 i 8.2.35.",
+        "after": "Palo Alto Networks poinformowało o aktywnym wykorzystywaniu podatności PHP2Shell CVE-2026-109618 i CVE-2026-109619, które pozwalają na RCE bez uwierzytelnienia w interfejsach zarządzania. Łatki zostały opublikowane 21 października w PHP 8.5.12, 8.4.27, 8.3.36 i 8.2.35.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ]
   }
 ]

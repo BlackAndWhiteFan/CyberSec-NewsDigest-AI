@@ -170,6 +170,8 @@ def is_unchecked_number(number, year):
 ZERO_DAY = re.compile(r"(?<!\w)(?:zero|0)[-\u2011‐ ]?day\w*|(?<!\w)dni\w* zerow\w*", re.IGNORECASE)
 ZERO_DAY_SOURCE = re.compile(r"(?:zero|0)[-\u2011‐ ]?days?|zeroday|dni\w* zerow\w*", re.IGNORECASE)
 URGENCY = re.compile(r"(?<!\w)natychmiast\w*", re.IGNORECASE)
+PHISHING = re.compile(r"(?<!\w)(?:phishing\w*|socjotechni\w*)", re.IGNORECASE)
+PHISHING_SOURCE = re.compile(r"phish\w*|social engineering|socjotechni\w*|smishing|vishing", re.IGNORECASE)
 # v34: the "why it matters" sentence must not dramatize: exploitation in
 # attacks and a missing patch only when the material says so.
 EXPLOITED = re.compile(
@@ -234,6 +236,13 @@ def unsupported_labels(text, source):
         problems.append(
             f"„{match.group(0)}” – artykuł nie mówi o pilności; usuń to słowo albo całe zalecenie"
         )
+
+    # v36: possible effects the AI adds on its own ("co może umożliwić
+    # kampanie phishingowe", 29.10.2026; "zwiększa ryzyko phishingu", 27.10).
+    match = PHISHING.search(text)
+
+    if match and not PHISHING_SOURCE.search(source):
+        problems.append(f"„{match.group(0)}” – artykuł nie pisze o phishingu ani socjotechnice; usuń to")
 
     match = EXPLOITED.search(text)
 
@@ -451,7 +460,9 @@ def empty_sentences(text):
 # v34: readable for a busy reader ("żeby mózg się nie pocił", JW): long
 # sentences and stacks of CVE ids go back for correction as soft problems,
 # which never cut or drop a summary.
-MAX_SENTENCE_WORDS = 25
+# v36: 30 instead of 25 – the split requests made the digest choppy
+# (JW, 29.10.2026: "rwane").
+MAX_SENTENCE_WORDS = 30
 MAX_CVE_IDS = 2
 
 

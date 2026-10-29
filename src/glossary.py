@@ -196,8 +196,10 @@ AUTOFIX = [
      lambda m: m.group(1) + "e ", "przyimek we"),
     # The digraphs sz, rz, cz, dz count as one consonant: "z szybkiego" stays,
     # "ze szkoły", "ze wsparciem", "ze zdjęcia" change.
+    # v36: before "w" only when a sibilant follows ("ze wsparciem", "ze
+    # wszystkimi", "ze względu"), not "z włączoną", "z wnukiem" (29.10.2026).
     (re.compile(r"(?<!\w)([Zz]) (?=(?:sz|rz|cz|dz)[bcdfghjklłmnprstwzćńśźż]|s(?!z)[bcdfghjklłmnprstwzćńśźż]"
-                r"|z(?!z)[bcdfghjklłmnprstwzćńśźż]|[śźżw][bcdfghjklłmnprstwzćńśźż])"),
+                r"|z(?!z)[bcdfghjklłmnprstwzćńśźż]|[śźż][bcdfghjklłmnprstwzćńśźż]|w(?:sz|rz|[szśźż]))"),
      lambda m: m.group(1) + "e ", "przyimek ze"),
     # v35: "łata" is not the glossary form ("ponowne wprowadzenie łaty", 28.10.2026).
     (re.compile(r"(?<!\w)([Łł])at(a|y|ę|ą|om|ami|ach)(?!\w)"),

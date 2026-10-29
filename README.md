@@ -12,7 +12,7 @@ The project runs with a budget of 0 PLN, using free service tiers only (GitHub A
 
 ## Project Status
 
-The digest has been running in production since October 2026 (version v35). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+The digest has been running in production since October 2026 (version v36). Every change is described, with its verification, in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Stage | Scope | Status |
 |---|---|---|
@@ -36,6 +36,7 @@ The digest has been running in production since October 2026 (version v35). Ever
 | 18 | Quality of summaries and tops: no closing formulas, labels only with support, tops merging by CVE, Polish leaders, clean-up and correction of top summaries (v33) | completed; verified on the test branch and a simulation on the archive |
 | 19 | Summaries that say why it matters and read easily: what – why it matters – what to do, context of earlier reports, CISA KEV for the AI, event summaries in the tops (v34) | completed; verified on the test branch (digest and weekly top) |
 | 20 | One vulnerability, one item: merging by CVE ids after the page texts and after the summaries; language correction by Gemini only; advice only when concrete (v35) | completed; checked on the digests of 27–28 October 2026 |
+| 21 | Soft problems never cut a summary, no headless fragments, smoother sentences, no added phishing (v36) | completed; checked on the digest of 29 October 2026 |
 
 ## Current Implementation
 
@@ -81,7 +82,7 @@ The main trigger is an external alarm clock: cron-job.org calls the GitHub API (
 
 Version v35 (2026-10-28):
 
-- Unit tests: **398 passed**.
+- Unit tests: **404 passed** (v36, 2026-10-29: soft problems never cut a summary, no headless fragments, smoother sentences, "z/ze" fixed, no added phishing).
 - On the archive: Brotli (27 October, three items) and Apple CVE-2026-86950 (28 October, two items) each become one item; merges across all of October are correct. 10 of 110 October summaries had CVE ids with non-breaking hyphens that code could not see – now recognized.
 - The new filler rules flag only real filler on 107 summaries (no false hits); the preposition autofix ("we wtyczce", "ze wsparciem") changes only wrong forms.
 
@@ -114,7 +115,7 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v36):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika (v37):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
 - Branch protection for `main`.
 
 - Experiment with the writing model: Google Gemini writes the daily summaries (Groq as fallback) and gets more article material; compared on regular weekday digests with the current setup.

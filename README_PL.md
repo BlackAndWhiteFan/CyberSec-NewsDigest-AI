@@ -12,7 +12,7 @@ Projekt działa przy budżecie 0 PLN, wyłącznie na bezpłatnych planach usług
 
 ## Aktualny stan projektu
 
-Prasówka działa produkcyjnie od października 2026 (wersja v35). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana jest opisana razem z weryfikacją w pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
 
 | Etap | Zakres | Stan |
 |---|---|---|
@@ -36,6 +36,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v35). Każda zmiana
 | 18 | Jakość streszczeń i zestawień: bez formułek, określenia tylko z pokryciem w artykule, łączenie w zestawieniach po CVE, polscy liderzy, porządek i korekta streszczeń w zestawieniach (v33) | zakończony; zweryfikowany na gałęzi testowej i w symulacji na archiwum |
 | 19 | Streszczenia z sensem i łatwe w czytaniu: co – dlaczego ważne – co zrobić, kontekst wcześniejszych doniesień, CISA KEV dla AI, streszczenia wydarzeń w zestawieniach (v34) | zakończony; zweryfikowany na gałęzi testowej (prasówka i top 5) |
 | 20 | Jedna luka, jedna pozycja: łączenie po numerach CVE po pobraniu stron i po streszczeniach; korekta językowa tylko przez Gemini; zalecenia tylko konkretne (v35) | zakończony; sprawdzony na prasówkach z 27–28.10.2026 |
+| 21 | Miękkie problemy nie tną streszczenia, bez urwanych fragmentów, płynniejsze zdania, bez dopisanego phishingu (v36) | zakończony; sprawdzony na prasówce z 29.10.2026 |
 
 ## Obecna implementacja
 
@@ -81,7 +82,7 @@ Głównym wyzwalaczem jest zewnętrzny budzik: cron-job.org wywołuje API GitHub
 
 Wersja v35 (28.10.2026):
 
-- Testy jednostkowe: **398 zaliczonych**.
+- Testy jednostkowe: **404 zaliczone** (v36, 29.10.2026: miękkie problemy nie tną streszczenia, bez urwanych fragmentów, płynniejsze zdania, poprawne „z/ze”, bez dopisanego phishingu).
 - Na archiwum: Brotli (27.10, trzy pozycje) i Apple CVE-2026-86950 (28.10, dwie pozycje) stają się jedną pozycją; połączenia w całym październiku są trafne. 10 ze 110 październikowych streszczeń miało numery CVE z niełamliwymi łącznikami, których kod nie widział – teraz są rozpoznawane.
 - Nowe reguły ogólników oznaczają na 107 streszczeniach tylko prawdziwą watę (bez fałszywych trafień); autopoprawka przyimków („we wtyczce”, „ze wsparciem”) zmienia tylko błędne formy.
 
@@ -114,7 +115,7 @@ Wcześniej: w teście v30 korekta Gemini poprawiła 6 z 6 streszczeń; w teście
 
 ## Plan rozwoju
 
-- **Most do CyberSec Mozaika (v36):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
+- **Most do CyberSec Mozaika (v37):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
 - Ochrona gałęzi `main`.
 
 - Eksperyment z modelem piszącym: Google Gemini pisze streszczenia dzienne (Groq jako zapas) i dostaje więcej materiału z artykułu; porównanie na zwykłych prasówkach dnia roboczego z obecnym układem.

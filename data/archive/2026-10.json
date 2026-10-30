@@ -2907,5 +2907,379 @@
         "model": "Gemini gemini-3.5-flash"
       }
     ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "New Cisco firewall zero-day exploited to crash SSL VPN devices",
+    "link": "https://www.bleepingcomputer.com/news/security/cisco-warns-of-firewall-zero-day-exploited-to-crash-ssl-vpn-devices/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Cisco Patches Actively Exploited ASA and FTD VPN Flaw That Can Crash Firewalls",
+        "link": "https://thehackernews.com/2026/10/cisco-patches-actively-exploited-asa.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Attackers Exploit Second Cisco Firewall VPN Zero-Day Since August",
+        "link": "https://www.securityweek.com/attackers-exploit-second-cisco-firewall-vpn-zero-day-since-august/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Cisco wydało aktualizacje łatające zero-day DoS w oprogramowaniu ASA i FTD, które atakujący wykorzystują do zdalnego wyłączania firewalli z włączonym SSL VPN (CVE-2026-76418). Luka jest aktywnie wykorzystywana w atakach, a Cisco zaleca zastosowanie łatek.",
+    "cves": [
+      "CVE-2026-76418"
+    ],
+    "kev": [
+      "CVE-2026-76418"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawek",
+        "fixed": "łatek"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Adobe, Veeam, Juniper Networks Patch Critical Vulnerabilities",
+    "link": "https://www.securityweek.com/adobe-veeam-juniper-networks-patch-critical-vulnerabilities/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Adobe Fixes 8 Critical Campaign Classic Flaws Allowing Code Execution and Security Bypass",
+        "link": "https://thehackernews.com/2026/10/adobe-fixes-8-critical-campaign-classic.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Adobe, Veeam i Juniper Networks opublikowały łatki dla ponad trzydziestu podatności, w tym krytycznych błędów umożliwiających wykonanie kodu i obejście autoryzacji. Firma nie zgłasza dowodów na ich wykorzystanie w praktyce.",
+    "cves": [
+      "CVE-2026-104351"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Cisco SD-WAN Zero-Day Exploitation Tied to Volt Typhoon’s ‘Silent Train’ Network",
+    "link": "https://www.securityweek.com/cisco-sd-wan-zero-day-exploitation-tied-to-volt-typhoons-silent-train-network/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Cisco zgłosiło krytyczną podatność SD-WAN (CVE-2026-20127) wykorzystywaną przez grupę powiązaną z Chinami i Volt Typhoon, umożliwiającą nieautoryzowany dostęp i przyznanie uprawnień administratora kontrolerom SD-WAN. Luka jest aktywnie wykorzystywana w kampanii.",
+    "cves": [
+      "CVE-2026-20127"
+    ],
+    "kev": [
+      "CVE-2026-20127"
+    ],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Limited reports of PHP bug exploitation emerge",
+    "link": "https://therecord.media/php2shell-successful-exploitation-reports-emerge",
+    "source": "therecord.media",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Firmy bezpieczeństwa odnotowały co najmniej sześć udanych wykorzystań podatności PHP (CVE-2026-109618 i CVE-2026-109619) znanej jako PHP2Shell, w tym incydent z serwerami rządu USA, oraz dwie inne luki, w tym CVE-2026-46300. Obie podatności znajdują się w katalogu KEV.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "eksploatacji",
+        "form": "eksploatacj*",
+        "suggestion": "wykorzystanie (luki)",
+        "fixed_by": "ai"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Haktywiści przeciwko Trumpowi. Wyciekły dane tysięcy funkcjonariuszy DHS",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/haktywisci-przeciwko-trumpowi-wyciekly-dane-tysiecy-funkcjonariuszy-dhs",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa haktywistyczna Department of Peace wyciekła dane tysięcy pracowników DHS, w tym ponad 21 tys. wpisów CBP i 6,6 tys. ICE, udostępniając je organizacji DDoSecrets. Zbiór zawiera imiona, adresy e-mail, numery telefonów i informacje o strukturze organizacyjnej.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "rekordów",
+        "form": "rekordów",
+        "suggestion": "wpisów, danych",
+        "fixed_by": "ai"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Zhakowano lodówki w amerykańskim wojsku? Żywność trafiła do kosza. Pentagon bada sprawę",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/zhakowano-lodowki-w-amerykanskim-wojsku-zywnosc-trafila-do-kosza-pentagon-bada-sprawe",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W sierpniu w co najmniej sześciu sklepach wojskowych w USA doszło do awarii lodówek, które podniosły temperaturę i zepsuły żywność. Pentagon traktuje incydent jako możliwy atak hakerski i prowadzi dochodzenie z udziałem Cyber Command oraz współpracuje z francuskimi służbami.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Hakerzy Łukaszenki szpiegują dla Rosji. „To eskalacja”",
+    "link": "https://cyberdefence24.pl/armia-i-sluzby/wojna-w-ukrainie/hakerzy-lukaszenki-szpieguja-dla-rosji-to-eskalacja",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "ESET wskazał, że grupa hakerska związana z reżimem Łukaszenki prowadzi kampanie szpiegowskie dla Rosji, w tym atak z użyciem tzw. wycieraczek na firmę transportową w maju. Działania te mają na celu pozyskanie danych wywiadowczych i są określane jako eskalacja.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Podatności w oprogramowaniu Zimbra Collaboration",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-66911/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska odkrył dwie podatności w Zimbra Collaboration: CVE-2026-66911 umożliwia Stored XSS w nagłówku MIME Content-Location, a CVE-2026-66912 pozwala na Stored XSS przez manipulację nagłówkiem From w Classic UI. Atakujący może wysłać spreparowaną wiadomość e-mail i wykonać kod JavaScript w przeglądarce ofiary, co umożliwia kradzież sesji.",
+    "cves": [
+      "CVE-2026-66911",
+      "CVE-2026-66912"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Binance probes potential $5.8 billion crypto-theft hack",
+    "link": "https://www.bleepingcomputer.com/news/security/binance-probes-potential-58-billion-crypto-theft-hack/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Binance Suffers Security Breach Affecting $6.3 Billion in Assets, Nearly $3 Billion Frozen",
+        "link": "https://thehackernews.com/2026/10/binance-suffers-security-breach.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Binance bada potencjalny wyciek cyfrowych aktywów o wartości do 5,8 mld USD, co mogłoby stać się największym hackiem w historii kryptowalut. W odpowiedzi wydawcy stablecoinów Tether i Circle zamroziły łącznie ponad 2,3 mld USD powiązane z incydentem.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Japan Airlines suffers third-party data breach exposing passenger info",
+    "link": "https://www.bleepingcomputer.com/news/security/japan-airlines-suffers-third-party-data-breach-exposing-passenger-info/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Japan Airlines potwierdził wyciek danych około 92 000 klientów w wyniku naruszenia systemu Amadeus między 10 august 2023 a 23 września 2026. Wyciek obejmował PNR, imiona, daty lotów oraz, dla 2 000 osób, dodatkowo e-maile, numery telefonów i paszportów, ale nie dotknął kart kredytowych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Polymarket halts trading after crypto-draining script breach, $2.5M traced",
+    "link": "https://www.bleepingcomputer.com/news/security/polymarket-halts-trading-after-crypto-draining-script-breach-25m-traced/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Polymarket wstrzymał handel po tym, jak hakerzy przejęli usługę trzeciej strony i rozprowadzili skrypt wyprowadzający kryptowaluty, co doprowadziło do utraty około 2,5 mln USD, które zostały zidentyfikowane w portfelu podejrzanego atakującego. Firma potwierdziła incydent, naprawiła problem i przywróciła platformę, a poszkodowanych użytkowników ma zrekompensować.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Podatności w oprogramowaniu Szafir",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-93570/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymał zgłoszenie o dwóch podatnościach w oprogramowaniu Szafir: CVE-2026-93570 (XXE) i CVE-2026-93571 (Path Traversal). Obie zostały naprawione w buildzie 708 wersji 2.0, a dodatkowo istnieją dwie inne luki, w tym brak weryfikacji certyfikatów, które nie zostały jeszcze załatwione.",
+    "cves": [
+      "CVE-2026-106036",
+      "CVE-2026-93570",
+      "CVE-2026-93571"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawka",
+        "fixed": "Łatka"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Linux Kernel TCP Flaw With 9.8 CVSS Score Affects Ubuntu, Red Hat and Other Distributions",
+    "link": "https://thehackernews.com/2026/10/linux-kernel-tcp-flaw-with-98-cvss.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "W jądrze Linux wykryto krytyczną podatność TCP (CVE-2026-98432) o ocenie CVSS 9.8, którą Anthropic wykorzystał w automatycznie wygenerowanym exploicie umożliwiającym zdalne uruchamianie poleceń jako root. Łatka została wprowadzona w głównym jądrze i backportowana do wszystkich utrzymywanych stabilnych gałęzi, a dystrybucje takie jak Debian, Oracle Linux, SUSE i Amazon Linux już udostępniły poprawione pakiety.",
+    "cves": [
+      "CVE-2026-98432"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawka",
+        "fixed": "Łatka"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Google's Gemini 4 Carbon Leads Benchmarks for Finding, Exploiting, and Patching Vulnerabilities",
+    "link": "https://thehackernews.com/2026/10/googles-gemini-4-carbon-leads.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "Google Touts Powerful Cybersecurity Capabilities in Gemini 4 Carbon Model",
+        "link": "https://www.securityweek.com/google-says-gemini-4-carbon-leads-in-finding-exploiting-and-fixing-vulnerabilities/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Google przedstawił model Gemini 4 Carbon, który według firmy osiąga najwyższe wyniki w benchmarkach wykrywania podatności (SEC-bench Pro 88,2 %), wykorzystania (ExploitGym 54,8 %) i łatania (CWE-bench 71,0 %). Model jest obecnie dostępny dla wybranej grupy obrońców, a dalsze udostępnienie ma nastąpić w kolejnych fazach.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "eksploatacji",
+        "form": "eksploatacj*",
+        "suggestion": "wykorzystanie (luki)",
+        "fixed_by": "ai"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-30",
+    "title": "Attacker Tried to Exploit Alpine Linux’s GitLab via CVSS 10.0 Flaw Its Ruby Left Open",
+    "link": "https://thehackernews.com/2026/10/attacker-tried-to-exploit-alpine-linuxs.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Alpine Linux odnotował próbę wykorzystania krytycznej podatności GitLab (CVE-2026-97229, CVSS 10.0) na własnym serwerze, co skłoniło projekt do odbudowy systemu i resetu haseł. Choć nie wykryto udanego ataku, wymagana jest aktualizacja Ruby do wersji 3.3.13, 3.4.12, 4.0.9 lub nowszej, a obrazy Alpine gitlab muszą być ponownie pobrane w wersji 19.3.6.",
+    "cves": [
+      "CVE-2026-97229"
+    ],
+    "kev": [
+      "CVE-2026-97229"
+    ],
+    "via": "",
+    "language": []
   }
 ]

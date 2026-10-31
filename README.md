@@ -8,7 +8,7 @@ An automated daily cybersecurity news digest in Polish, built with Python, GitHu
 
 CyberSec NewsDigest AI collects cybersecurity news from Polish and English RSS feeds, selects the relevant articles, merges reports about the same event, writes a concrete summary of each article in Polish and delivers a daily digest to Discord, together with a weekly top 5 and a monthly top 10.
 
-The project runs with a budget of 0 PLN, using free service tiers only (GitHub Actions, Groq, Google Gemini without billing, LanguageTool public API, cron-job.org).
+The project runs with a budget of 0 PLN, using free service tiers only (GitHub Actions, Groq, Google Gemini without billing, Mistral free plan, LanguageTool public API, cron-job.org).
 
 ## Project Status
 
@@ -37,6 +37,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 19 | Summaries that say why it matters and read easily: what – why it matters – what to do, context of earlier reports, CISA KEV for the AI, event summaries in the tops (v34) | completed; verified on the test branch (digest and weekly top) |
 | 20 | One vulnerability, one item: merging by CVE ids after the page texts and after the summaries; language correction by Gemini only; advice only when concrete (v35) | completed; checked on the digests of 27–28 October 2026 |
 | 21 | Soft problems never cut a summary, no headless fragments, smoother sentences, no added phishing (v36) | completed; checked on the digest of 29 October 2026 |
+| 22 | Language correction every day: chunks of 5 summaries, lighter Gemini models, Mistral as a fallback; no empty "other flaws" (v37a) | completed; verified by unit tests |
 
 ## Current Implementation
 
@@ -63,7 +64,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 - Material: the full feed text or description; when the feed gives fewer than 600 characters, the article text is fetched from its page (paragraphs without menus, ads and footer). Page text is only material for the AI and is never saved.
 - Terms follow the glossary `data/glosariusz_mirror.csv`, a mirror of the CyberSec Mozaika glossary. Simple forbidden forms are corrected by code without an AI request ("poprawka" → "łatka", "zdalne wykonanie kodu" → "RCE"); explanations in parentheses are added by code at the first occurrence of 6 chosen terms, in the case of the term ("przed exploitem (kodem wykorzystującym podatność)").
 - Quality check (`src/summary_quality.py`): glossary violations, filler phrases ("co podkreśla wagę…", "nie została podana"), relative time words, uninflected terms after a preposition, numbers and CVE ids not in the material, the labels "zero-day" and "natychmiast" (urgent) when the article does not use them, closing formulas without content ("Zaleca się natychmiastową aktualizację."), summaries that are too long, in English or only restate the title, and calques from the editable style list `data/styl_unikaj.csv`. A summary with a problem goes back to the AI for one correction; if a problem remains, code removes the faulty sentences. A summary is dropped only when no correct sentence is left (or it is still in English).
-- Proofreading: one request per digest to Google Gemini (`gemini-3.8-flash`, fallback `gemini-3.5-flash`), with grammar hints from LanguageTool; since v35 only Gemini corrects (one more round after 30 s on a temporary error) – when it is unavailable, the summaries stay without correction, because the Groq models made the Polish worse. A correction is accepted only when it keeps the numbers, CVE ids and length; every correction is logged as "przed" / "po".
+- Proofreading: since v37a in chunks of 5 summaries, with grammar hints from LanguageTool; Google Gemini first (`gemini-3.8-flash`, `gemini-3.5-flash`, then the lighter `-flash-lite`), and from the second round also Mistral (`mistral-large-latest`, free plan); up to three rounds with a 30 s and 60 s wait. No Groq since v35, because it made the Polish worse; when all models fail, the summaries stay without correction. A correction is accepted only when it keeps the numbers, CVE ids and length; every correction is logged as "przed" / "po".
 - Language log (v32): every correction of a summary is saved with the article in the archive (field `language`): forbidden glossary forms with the entry id, calques from the style list, terms left uninflected, replacements made by code and changes made by the proofreading, each with its outcome (fixed by the AI, by code, still present, or summary dropped). The notes describe the AI output only; they change nothing and never write to the glossary.
 
 ### Delivery and tops
@@ -115,7 +116,7 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v37):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika (v38):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
 - Branch protection for `main`.
 
 - Experiment with the writing model: Google Gemini writes the daily summaries (Groq as fallback) and gets more article material; compared on regular weekday digests with the current setup.
@@ -158,6 +159,7 @@ Code (`src/`):
 - `kev.py` — 🔥 marker: CISA KEV catalog and CVE ids.
 - `ai_summaries.py` — AI summaries (Groq), corrections and proofreading.
 - `gemini.py` — Google Gemini for proofreading.
+- `mistral.py` — Mistral, the last fallback of proofreading (v37a).
 - `languagetool.py` — grammar hints from LanguageTool.
 - `glossary.py` — glossary rules from the mirror: prompt entries, forbidden forms, autofix, explanations in parentheses.
 - `summary_quality.py` — quality and language checks of summaries, repair by code.
@@ -188,7 +190,8 @@ Repository secrets (Settings → Secrets and variables → Actions):
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook of the monthly top 10 channel.
 - `DISCORD_TEST_WEBHOOK_URL` — webhook of the test channel: runs from branches and failure alarms. Without it, branch runs send nothing.
 - `GROQ_API_KEY` — Groq API key for AI summaries (and, since v33, the fallback correction of top summaries). Without it, the digest is sent without summaries.
-- `GEMINI_API_KEY` — Google Gemini API key (free quota, no billing) for proofreading of the digest and the tops; optional. Without it, proofreading uses the Groq models. The optional repository variable `GEMINI_MODEL` (comma-separated) overrides the model names.
+- `GEMINI_API_KEY` — Google Gemini API key (free quota, no billing) for proofreading of the digest and the tops; optional. Without it, proofreading uses the Groq models. The optional repository variable `GEMINI_MODEL` (comma-separated) overrides the model names, and `GEMINI_LITE_MODEL` the names of the lighter models (v37a).
+- `MISTRAL_API_KEY` — Mistral API key (free plan, no card), the last fallback of the digest proofreading (v37a); optional. The optional variable `MISTRAL_MODEL` overrides the model.
 
 Each secret is passed only to the workflow step that needs it. The cron-job.org token is kept only in cron-job.org. Never commit API keys, webhook URLs, tokens or passwords to the repository.
 

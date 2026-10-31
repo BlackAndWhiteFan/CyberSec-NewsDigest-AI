@@ -471,6 +471,13 @@ IMPERATIVE_ADVICE = re.compile(
 )
 
 
+OTHER_FLAWS = re.compile(
+    r"\b(?:dwie|dwóch|trzy|trzech|cztery|czterech|kilka|kilku|\d+)\s+(?:inne|innych|dodatkowe|dodatkowych|"
+    r"pozostałe|pozostałych)\s+(?:luki|luk|podatności|błędy|błędów)\b",
+    re.I,
+)
+
+
 def readability_problems(text):
     problems = []
 
@@ -494,8 +501,16 @@ def readability_problems(text):
 
     if len(cves) > MAX_CVE_IDS:
         problems.append(
-            f"{len(cves)} numery CVE – zostaw najwyżej {MAX_CVE_IDS} najważniejsze, resztę opisz słowami "
-            "(np. „i dwie inne luki”)"
+            f"{len(cves)} numery CVE – zostaw najwyżej {MAX_CVE_IDS} najważniejsze; pozostałe luki nazwij "
+            "typem z artykułu (np. „i luka XXE”) albo pomiń"
+        )
+
+    # v37a: "oraz dwie inne luki" said nothing and came back in 5 summaries
+    # on 30–31.10.2026 (the hint above used to suggest it).
+    for match in OTHER_FLAWS.finditer(text):
+        problems.append(
+            f"pusta wzmianka „{match.group(0)}” – nazwij typ tych luk z artykułu "
+            "(np. „i brak weryfikacji certyfikatów”) albo ją pomiń"
         )
 
     return problems

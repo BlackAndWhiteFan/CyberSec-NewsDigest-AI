@@ -5,7 +5,7 @@ import urllib.error
 import urllib.parse
 
 import ai_summaries
-from gemini import GEMINI_MODELS, ask_gemini, gemini_models
+from gemini import GEMINI_MODELS, ask_gemini, gemini_models, proofreading_models
 from languagetool import grammar_hints
 
 
@@ -116,6 +116,7 @@ class TestProofreadingOrder(unittest.TestCase):
         self.assertIn("„dodało”: rodzaj", sent[0]["contents"][0]["parts"][0]["text"])
 
     # v35: no correction by Groq – it made Polish worse on 28.10.2026.
+    # v37a: Gemini main and lite models; Mistral only with its key.
     def test_gemini_unavailable_means_no_correction(self):
         articles = [article(WRONG)]
         urls = []
@@ -133,8 +134,9 @@ class TestProofreadingOrder(unittest.TestCase):
         self.assertEqual(changed, 0)
         self.assertEqual(articles[0]["summary"], WRONG)
         self.assertTrue(all("generativelanguage" in url for url in urls))
-        self.assertEqual(len(urls), 2 * len(GEMINI_MODELS))
-        self.assertIn(ai_summaries.GEMINI_RETRY_WAIT, waits)
+        # v37a: three rounds over the main and the lite models.
+        self.assertEqual(len(urls), 3 * len(proofreading_models({})))
+        self.assertEqual(waits, list(ai_summaries.PROOFREAD_RETRY_WAITS))
 
     def test_second_round_after_a_temporary_error(self):
         articles = [article(WRONG)]

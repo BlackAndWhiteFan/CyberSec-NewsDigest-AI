@@ -31,7 +31,8 @@ import urllib.error
 import urllib.request
 
 from article_selection import ROUNDUP_SUMMARY, is_roundup
-from gemini import ask_gemini, gemini_models
+from gemini import ask_gemini, gemini_models, proofreading_models
+from mistral import ask_mistral, mistral_model
 from languagetool import grammar_hints
 from glossary import autofix, convention_violations, is_acronym, prompt_glossary
 from language_notes import findings, log_line, settle, unique
@@ -105,7 +106,7 @@ CO MA BYĆ W STRESZCZENIU (v34):
 - Zalecenia (aktualizacja, obejście, wyłączenie usługi) podawaj tylko wtedy, gdy artykuł je wymienia; nie dopisuj własnych. Nie kończ streszczenia formułką „Zaleca się (natychmiastową) aktualizację” ani „Zaleca się zastosowanie łatki”: informacja o łatce już to mówi. Zalecenie pisz tylko konkretnie (wersja z poprawką, obejście, co wyłączyć).
 - Nie dodawaj określeń, których nie ma w artykule: „zero-day” tylko wtedy, gdy artykuł tak nazywa lukę; „natychmiast” tylko wtedy, gdy artykuł mówi o pilności.
 - Nie pisz, czego artykuł nie podaje (np. „raport nie podaje informacji o sprawcach”) – pomiń to.
-- Całe streszczenie ma najwyżej 420 znaków. Pisz krótkie zdania zakończone kropką; nie łącz zdań średnikami i unikaj ciągów imiesłowów. Wymień najwyżej 2 numery CVE i najwyżej 3 wersje.
+- Całe streszczenie ma najwyżej 420 znaków. Pisz krótkie zdania zakończone kropką; nie łącz zdań średnikami i unikaj ciągów imiesłowów. Wymień najwyżej 2 numery CVE i najwyżej 3 wersje. Pozostałe luki nazwij typem z artykułu (np. „i luka XXE”) albo pomiń; nie pisz pustych wzmianek typu „oraz dwie inne luki”.
 - „Aktywnie wykorzystywana”, „wykorzystywana w atakach” i „brak łatki” pisz tylko wtedy, gdy artykuł (albo pole „kev”) to mówi.
 - Jeśli materiał to tylko tytuł lub krótka zajawka, napisz 1 zdanie i nie dopowiadaj niczego.
 
@@ -605,11 +606,100 @@ def proofreaders(providers, environ, with_groq=True):
     return result
 
 
+# v37a: the correction goes in chunks of this many summaries. A short
+# answer fits in Gemini's 30 s even under load, and a lost chunk no longer
+# means a digest without any correction (30–31.10.2026: one request with
+# 15–17 summaries timed out every time).
+PROOFREAD_CHUNK = 5
+# Waits before the second and the third round.
+PROOFREAD_RETRY_WAITS = (GEMINI_RETRY_WAIT, 2 * GEMINI_RETRY_WAIT)
+
+
+def language_correctors(environ):
+    """Models of the language correction: [(name, ask, first round)].
+
+    Gemini main models, then the lite ones (v37a), from the first round;
+    Mistral (v37a, if MISTRAL_API_KEY is set) from the second round, so
+    Gemini, checked for months, gets the first chance.
+    """
+    result = []
+    gemini_key = environ.get("GEMINI_API_KEY", "").strip()
+    mistral_key = environ.get("MISTRAL_API_KEY", "").strip()
+
+    if gemini_key:
+        for model in proofreading_models(environ):
+            result.append((f"Gemini {model}",
+                           lambda system, user, opener, model=model: ask_gemini(model, gemini_key, system, user, opener),
+                           1))
+
+    if mistral_key:
+        model = mistral_model(environ)
+        result.append((f"Mistral {model}",
+                       lambda system, user, opener, model=model: ask_mistral(model, mistral_key, system, user, opener),
+                       2 if gemini_key else 1))
+
+    return result
+
+
+def correct_in_chunks(items, correctors, opener, sleep):
+    """Return ({id: text}, {id: notes}, {id: model}) for the chunks that a
+    model corrected. Up to three rounds; a model that fails is skipped for
+    the rest of its round (it is overloaded), and tried again in the next.
+    """
+    system = PROOFREAD_PROMPT.format()
+    pending = [items[start:start + PROOFREAD_CHUNK] for start in range(0, len(items), PROOFREAD_CHUNK)]
+    corrected, notes, models = {}, {}, {}
+
+    for round_number in range(1, len(PROOFREAD_RETRY_WAITS) + 2):
+        if not pending:
+            break
+
+        if round_number > 1:
+            wait = PROOFREAD_RETRY_WAITS[round_number - 2]
+            print(f"KOREKTA: runda {round_number} za {wait} s – bez korekty {len(pending)} porcji.")
+            sleep(wait)
+
+        down = set()
+        left = []
+
+        for chunk in pending:
+            ids = {item["id"] for item in chunk}
+            user = json.dumps({"streszczenia": chunk}, ensure_ascii=False)
+            label_ids = f"{min(ids)}–{max(ids)}"
+
+            for name, ask, first_round in correctors:
+                if round_number < first_round or name in down:
+                    continue
+
+                try:
+                    chunk_notes = {}
+                    answer = parse_summaries(ask(system, user, opener), ids, chunk_notes)
+                except Exception as error:
+                    # Only the model name and the error type/status are logged.
+                    print(f"KOREKTA: {name} niedostępny (streszczenia {label_ids}, runda {round_number}) – "
+                          f"{type(error).__name__}: {str(error)[:120]}")
+                    down.add(name)
+                    continue
+
+                print(f"KOREKTA: streszczenia {label_ids} – model {name}")
+                corrected.update(answer)
+                notes.update(chunk_notes)
+                models.update({number: name for number in answer})
+                break
+            else:
+                left.append(chunk)
+
+        pending = left
+
+    return corrected, notes, models
+
+
 def proofread_summaries(articles, providers, environ, opener=urllib.request.urlopen, sleep=time.sleep,
                         hints_source=grammar_hints):
-    """Language correction of all summaries in one request (v29, v30).
+    """Language correction of all summaries (v29, v30, v37a).
 
-    Gemini first (v30), then the Groq models. LanguageTool findings are
+    v37a: in chunks of PROOFREAD_CHUNK, Gemini (main and lite models), then
+    Mistral; no Groq (it made Polish worse, v35). LanguageTool findings are
     passed as hints. A corrected summary is used only when it keeps the
     numbers and CVE ids and passes all checks; otherwise the summary stays
     as it was. Every change is logged as "przed" and "po".
@@ -623,6 +713,12 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
     if not numbered:
         return 0
 
+    correctors = language_correctors(environ)
+
+    if not correctors:
+        print("KOREKTA: pominięta (brak GEMINI_API_KEY i MISTRAL_API_KEY).")
+        return 0
+
     hints = hints_source([article["summary"] for _, article in numbered], opener)
     items = []
 
@@ -634,30 +730,11 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
 
         items.append(item)
 
-    system = PROOFREAD_PROMPT.format()
-    user = json.dumps({"streszczenia": items}, ensure_ascii=False)
-    corrected = None
-    model = ""
-    changes = {}
+    corrected, changes, models = correct_in_chunks(items, correctors, opener, sleep)
+    missing = len(items) - len([item for item in items if item["id"] in models])
 
-    if not environ.get("GEMINI_API_KEY", "").strip():
-        print("KOREKTA: pominięta (brak GEMINI_API_KEY; korekta tylko przez Gemini od v35).")
-        return 0
-
-    for name, ask in proofreaders(providers, environ, with_groq=False):
-        try:
-            changes = {}
-            corrected = parse_summaries(ask(system, user, opener, sleep), {item["id"] for item in items}, changes)
-            model = name
-            print(f"KOREKTA: model {name}")
-            break
-        except Exception as error:
-            # Only the model name and the error type/status are logged.
-            print(f"KOREKTA: {name} niedostępny – {type(error).__name__}: {str(error)[:120]}")
-
-    if corrected is None:
-        print("KOREKTA: pominięta – Gemini niedostępny, streszczenia bez zmian (bez korekty przez Groq od v35).")
-        return 0
+    if missing:
+        print(f"KOREKTA: bez korekty {missing} z {len(items)} streszczeń – modele niedostępne.")
 
     changed = 0
 
@@ -678,7 +755,7 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
             article["summary"] = new
             # v32: the change is kept for the reports to Mozaika.
             article["language"] = unique(article.get("language", []) + changes.get(number, []) + [
-                {"type": "proofreading", "before": old, "after": new, "model": model}
+                {"type": "proofreading", "before": old, "after": new, "model": models[number]}
             ])
             changed += 1
             print(f"KOREKTA: streszczenie {number}\n  przed: {old}\n  po:    {new}")

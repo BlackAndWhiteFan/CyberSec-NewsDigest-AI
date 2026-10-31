@@ -26,7 +26,8 @@ przeanalizowane diffy.
 
 ## v37c --- 31.10.2026
 
-**Powód odmowy API w logu; dokładna nazwa modelu Mistral.**
+**Powód odmowy API w logu; Ministral jako model Mistrala; odczyt
+odpowiedzi Ministrala.**
 
 Powód: w testach zestawienia tygodniowego z 31.10.2026 Mistral odpowiadał
 „HTTP Error 403: Forbidden” – także dla `mistral-large-2512` z listy
@@ -39,9 +40,15 @@ Zmiany:
   (poza 404 i 429) log dostaje pierwsze 200 znaków odpowiedzi API, np.
   „KOREKTA: Mistral … niedostępny … | odpowiedź API: {…}”. Klucz nigdy nie
   trafia do logu.
-- **Domyślny model Mistral** (`src/mistral.py`): `mistral-large-2512` –
-  dokładna nazwa z listy darmowego poziomu (alias `mistral-large-latest`
-  na niej nie występuje); zmienna `MISTRAL_MODEL` dalej go podmienia.
+- **Domyślny model Mistral** (`src/mistral.py`): `ministral-14b-2512`.
+  Nowy log pokazał powód 403: `mistral-large-2512` jest na liście limitów,
+  ale nie w darmowym planie („This model is not available in your
+  subscription tier”); `mistral-medium-latest` ma 20 000 tokenów na
+  minutę, mniej niż jedno zapytanie z historiami (429). Ministral (937 500
+  tokenów na minutę) napisał pierwsze prawdziwe historie wydarzeń, np.
+  PHP2Shell od honeypota do Mirai, Arista „trzecia taka luka w cztery
+  miesiące” z późniejszego artykułu. Zmienna `MISTRAL_MODEL` dalej go
+  podmienia.
 - **Pusta odpowiedź to porażka** (`src/ai_summaries.py`): test z
   `ministral-14b-2512` – model odpowiedział, ale nie dało się z odpowiedzi
   odczytać ani jednej historii, a kod uznał ją za sukces i nie spróbował
@@ -2143,7 +2150,8 @@ and reviewed diffs.
 
 ## v37c --- 2026-10-31
 
-**The API's reason for a refusal in the log; exact Mistral model name.**
+**The API's reason for a refusal in the log; Ministral as the Mistral
+model; reading Ministral's answers.**
 
 Reason: in the weekly top tests of 31 October 2026 Mistral answered "HTTP
 Error 403: Forbidden" – also for `mistral-large-2512` from the free-tier
@@ -2156,9 +2164,14 @@ Changes:
   errors (except 404 and 429) the log gets the first 200 characters of
   the API response, e.g. "KOREKTA: Mistral … niedostępny … | odpowiedź
   API: {…}". The key never goes to the log.
-- **Default Mistral model** (`src/mistral.py`): `mistral-large-2512` – the
-  exact name from the free-tier list (the alias `mistral-large-latest` is
-  not on it); the variable `MISTRAL_MODEL` still overrides it.
+- **Default Mistral model** (`src/mistral.py`): `ministral-14b-2512`. The
+  new log showed the reason for the 403: `mistral-large-2512` is on the
+  limits list but not in the free tier ("This model is not available in
+  your subscription tier"); `mistral-medium-latest` has 20,000 tokens per
+  minute, less than one event-story request (429). Ministral (937,500
+  tokens per minute) wrote the first real event stories, e.g. PHP2Shell
+  from the honeypot to Mirai, Arista "the third such flaw in four months"
+  from a later article. The variable `MISTRAL_MODEL` still overrides it.
 - **An empty answer is a failure** (`src/ai_summaries.py`): test with
   `ministral-14b-2512` – the model answered, but not a single story could
   be read from the answer, and the code took it as a success and did not

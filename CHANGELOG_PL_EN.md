@@ -38,8 +38,11 @@ rundzie, potem Groq.
 Zmiany:
 
 - **Historie wydarzeń w porcjach i rundach** (`src/ai_summaries.py`):
-  Gemini (główne i lite), od drugiej rundy Mistral, a Groq jako ostatni
-  piszący – i tak pisze streszczenia dzienne, a każda historia przechodzi
+  Gemini główny, Mistral, Gemini lite, a od drugiej rundy Groq jako ostatni
+  piszący. Mistral przed lite, inaczej niż w korekcie: w teście z gałęzi
+  `gemini-3.5-flash-lite` napisał każdą historię jak streszczenie jednego
+  artykułu (PHP2Shell: 17 artykułów, nic po 22.10) – lite wystarcza do
+  korekty, nie do składania historii z wielu artykułów – i tak pisze streszczenia dzienne, a każda historia przechodzi
   kontrolę względem materiału wydarzenia. Log: „ZESTAWIENIE AI: 1–5 –
   model …”.
 - **Workflow tygodniowy i miesięczny** dostają `MISTRAL_API_KEY`,
@@ -50,7 +53,7 @@ Nowe i zmienione pliki: `src/ai_summaries.py`, `src/test_v37b.py`
 (nowy), `.github/workflows/weekly-top.yml`,
 `.github/workflows/monthly-top.yml`, README (PL/EN).
 
-Testy jednostkowe: 419, zakończone powodzeniem.
+Testy jednostkowe: 420, zakończone powodzeniem.
 
 ------------------------------------------------------------------------
 
@@ -2119,8 +2122,11 @@ then Groq.
 Changes:
 
 - **Event stories in chunks and rounds** (`src/ai_summaries.py`): Gemini
-  (main and lite), from the second round Mistral, and Groq as the last
-  writer – it writes the daily summaries anyway, and every story is
+  main, Mistral, Gemini lite, and from the second round Groq as the last
+  writer. Mistral before lite, unlike in the correction: in the branch test
+  `gemini-3.5-flash-lite` wrote every story like a summary of one article
+  (PHP2Shell: 17 articles, nothing after 22.10) – lite is enough for the
+  correction, not for putting a story together from many articles – it writes the daily summaries anyway, and every story is
   checked against the event material. Log: "ZESTAWIENIE AI: 1–5 – model
   …".
 - **Weekly and monthly workflows** get `MISTRAL_API_KEY`,
@@ -2131,7 +2137,7 @@ New and changed files: `src/ai_summaries.py`, `src/test_v37b.py` (new),
 `.github/workflows/weekly-top.yml`, `.github/workflows/monthly-top.yml`,
 README (PL/EN).
 
-Unit tests: 419, passed.
+Unit tests: 420, passed.
 
 ------------------------------------------------------------------------
 

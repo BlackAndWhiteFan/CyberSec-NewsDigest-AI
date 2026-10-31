@@ -284,13 +284,26 @@ def parse_summaries(content, expected_ids, notes=None):
     data = json.loads(match.group(0))
     summaries = {}
 
-    for item in data.get("streszczenia", []):
+    # v37c: ministral-14b answered on 31.10.2026, but nothing could be read;
+    # ids as text ("1") and the key of the request ("wydarzenia") are accepted.
+    entries = data.get("streszczenia") or data.get("wydarzenia") or [] if isinstance(data, dict) else []
+
+    for item in entries if isinstance(entries, list) else []:
         if not isinstance(item, dict):
             continue
 
         number = item.get("id")
+
+        try:
+            number = int(number)
+        except (TypeError, ValueError):
+            continue
+
         changes = []
-        text = clean_summary(item.get("tekst", ""), changes=changes)
+        # v37c: ministral-14b put the story in "historia" (31.10.2026).
+        raw = next((item[key] for key in ("tekst", "historia", "streszczenie")
+                    if isinstance(item.get(key), str) and item[key].strip()), "")
+        text = clean_summary(raw, changes=changes)
 
         if number in expected_ids and text and not is_meta_answer(text):
             summaries[number] = text
@@ -641,6 +654,22 @@ def language_correctors(environ):
     return result
 
 
+def error_detail(error):
+    """The API's own reason for a refusal (v37c), e.g. why Mistral gave 403
+    on 31.10.2026 although the model was on the free-tier list. Only for
+    HTTP 4xx except 404 and 429, whose reason is already clear."""
+    if not isinstance(error, urllib.error.HTTPError) or not 400 <= error.code < 500 or error.code in (404, 429):
+        return ""
+
+    try:
+        body = error.read().decode("utf-8", "replace")
+    except Exception:
+        return ""
+
+    body = re.sub(r"\s+", " ", body).strip()
+    return f" | odpowiedź API: {body[:200]}" if body else ""
+
+
 def event_writers(providers, environ, sleep=time.sleep):
     """Writers of the event stories (v37b): Gemini main models, Mistral, the
     lite Gemini models, then Groq (from the second round).
@@ -719,11 +748,19 @@ def correct_in_chunks(items, correctors, opener, sleep, system=None, key="stresz
 
                 try:
                     chunk_notes = {}
-                    answer = parse_summaries(ask(system, user, opener), ids, chunk_notes)
+                    content = ask(system, user, opener)
+                    answer = parse_summaries(content, ids, chunk_notes)
+
+                    # v37c: an answer with nothing usable is a failure, so
+                    # the next model gets the chunk (31.10.2026: ministral).
+                    if not answer:
+                        raise ValueError("odpowiedź bez użytecznych streszczeń, początek: "
+                                         + re.sub(r"\s+", " ", content or "")[:150])
                 except Exception as error:
-                    # Only the model name and the error type/status are logged.
+                    # Only the model name, the error type/status and the
+                    # API's own error message are logged (never the key).
                     print(f"{log}: {name} niedostępny ({label_ids}, runda {round_number}) – "
-                          f"{type(error).__name__}: {str(error)[:120]}")
+                          f"{type(error).__name__}: {str(error)[:200]}{error_detail(error)}")
                     down.add(name)
                     continue
 

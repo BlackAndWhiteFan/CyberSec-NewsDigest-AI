@@ -24,6 +24,46 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v37c --- 31.10.2026
+
+**Powód odmowy API w logu; Ministral jako model Mistrala; odczyt
+odpowiedzi Ministrala.**
+
+Powód: w testach zestawienia tygodniowego z 31.10.2026 Mistral odpowiadał
+„HTTP Error 403: Forbidden” – także dla `mistral-large-2512` z listy
+limitów darmowego poziomu, przy włączonej zgodzie na trenowanie i bez
+ograniczeń dostępu w organizacji. Log pokazywał tylko kod, bez powodu.
+
+Zmiany:
+
+- **Powód odmowy w logu** (`src/ai_summaries.py`): przy błędach HTTP 4xx
+  (poza 404 i 429) log dostaje pierwsze 200 znaków odpowiedzi API, np.
+  „KOREKTA: Mistral … niedostępny … | odpowiedź API: {…}”. Klucz nigdy nie
+  trafia do logu.
+- **Domyślny model Mistral** (`src/mistral.py`): `ministral-14b-2512`.
+  Nowy log pokazał powód 403: `mistral-large-2512` jest na liście limitów,
+  ale nie w darmowym planie („This model is not available in your
+  subscription tier”); `mistral-medium-latest` ma 20 000 tokenów na
+  minutę, mniej niż jedno zapytanie z historiami (429). Ministral (937 500
+  tokenów na minutę) napisał pierwsze prawdziwe historie wydarzeń, np.
+  PHP2Shell od honeypota do Mirai, Arista „trzecia taka luka w cztery
+  miesiące” z późniejszego artykułu. Zmienna `MISTRAL_MODEL` dalej go
+  podmienia.
+- **Pusta odpowiedź to porażka** (`src/ai_summaries.py`): test z
+  `ministral-14b-2512` – model odpowiedział, ale nie dało się z odpowiedzi
+  odczytać ani jednej historii, a kod uznał ją za sukces i nie spróbował
+  kolejnego modelu („ZESTAWIENIE AI: pominięte”). Teraz taka porcja
+  przechodzi do następnego modelu, log pokazuje początek odpowiedzi, a
+  odczyt przyjmuje identyfikatory jako tekst („1”), klucz „wydarzenia” oraz
+  pole „historia” zamiast „tekst” (tak odpowiada `ministral-14b-2512`).
+
+Nowe i zmienione pliki: `src/ai_summaries.py`, `src/mistral.py`,
+`src/test_v37c.py` (nowy), README (PL/EN).
+
+Testy jednostkowe: 427, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v37b --- 31.10.2026
 
 **Zestawienia na tym samym łańcuchu co prasówka.**
@@ -2105,6 +2145,45 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v37c --- 2026-10-31
+
+**The API's reason for a refusal in the log; Ministral as the Mistral
+model; reading Ministral's answers.**
+
+Reason: in the weekly top tests of 31 October 2026 Mistral answered "HTTP
+Error 403: Forbidden" – also for `mistral-large-2512` from the free-tier
+limits list, with the training consent on and no access restrictions in
+the organization. The log showed only the code, without a reason.
+
+Changes:
+
+- **Reason for a refusal in the log** (`src/ai_summaries.py`): on HTTP 4xx
+  errors (except 404 and 429) the log gets the first 200 characters of
+  the API response, e.g. "KOREKTA: Mistral … niedostępny … | odpowiedź
+  API: {…}". The key never goes to the log.
+- **Default Mistral model** (`src/mistral.py`): `ministral-14b-2512`. The
+  new log showed the reason for the 403: `mistral-large-2512` is on the
+  limits list but not in the free tier ("This model is not available in
+  your subscription tier"); `mistral-medium-latest` has 20,000 tokens per
+  minute, less than one event-story request (429). Ministral (937,500
+  tokens per minute) wrote the first real event stories, e.g. PHP2Shell
+  from the honeypot to Mirai, Arista "the third such flaw in four months"
+  from a later article. The variable `MISTRAL_MODEL` still overrides it.
+- **An empty answer is a failure** (`src/ai_summaries.py`): test with
+  `ministral-14b-2512` – the model answered, but not a single story could
+  be read from the answer, and the code took it as a success and did not
+  try the next model ("ZESTAWIENIE AI: pominięte"). Now such a chunk goes
+  to the next model, the log shows the start of the answer, and reading
+  accepts ids as text ("1"), the key "wydarzenia" and the field "historia"
+  instead of "tekst" (the way `ministral-14b-2512` answers).
+
+New and changed files: `src/ai_summaries.py`, `src/mistral.py`,
+`src/test_v37c.py` (new), README (PL/EN).
+
+Unit tests: 427, passed.
 
 ------------------------------------------------------------------------
 

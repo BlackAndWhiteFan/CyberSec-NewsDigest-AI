@@ -42,11 +42,17 @@ Zmiany:
 - **Domyślny model Mistral** (`src/mistral.py`): `mistral-large-2512` –
   dokładna nazwa z listy darmowego poziomu (alias `mistral-large-latest`
   na niej nie występuje); zmienna `MISTRAL_MODEL` dalej go podmienia.
+- **Pusta odpowiedź to porażka** (`src/ai_summaries.py`): test z
+  `ministral-14b-2512` – model odpowiedział, ale nie dało się z odpowiedzi
+  odczytać ani jednej historii, a kod uznał ją za sukces i nie spróbował
+  kolejnego modelu („ZESTAWIENIE AI: pominięte”). Teraz taka porcja
+  przechodzi do następnego modelu, log pokazuje początek odpowiedzi, a
+  odczyt przyjmuje identyfikatory jako tekst („1”) i klucz „wydarzenia”.
 
 Nowe i zmienione pliki: `src/ai_summaries.py`, `src/mistral.py`,
 `src/test_v37c.py` (nowy), README (PL/EN).
 
-Testy jednostkowe: 424, zakończone powodzeniem.
+Testy jednostkowe: 426, zakończone powodzeniem.
 
 ------------------------------------------------------------------------
 
@@ -2152,11 +2158,17 @@ Changes:
 - **Default Mistral model** (`src/mistral.py`): `mistral-large-2512` – the
   exact name from the free-tier list (the alias `mistral-large-latest` is
   not on it); the variable `MISTRAL_MODEL` still overrides it.
+- **An empty answer is a failure** (`src/ai_summaries.py`): test with
+  `ministral-14b-2512` – the model answered, but not a single story could
+  be read from the answer, and the code took it as a success and did not
+  try the next model ("ZESTAWIENIE AI: pominięte"). Now such a chunk goes
+  to the next model, the log shows the start of the answer, and reading
+  accepts ids as text ("1") and the key "wydarzenia".
 
 New and changed files: `src/ai_summaries.py`, `src/mistral.py`,
 `src/test_v37c.py` (new), README (PL/EN).
 
-Unit tests: 424, passed.
+Unit tests: 426, passed.
 
 ------------------------------------------------------------------------
 

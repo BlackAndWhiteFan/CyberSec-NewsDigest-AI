@@ -75,6 +75,21 @@ class TestEventStories(unittest.TestCase):
         self.assertIn("generativelanguage", urls[0])
 
 
+    def test_mistral_before_lite_for_stories(self):
+        urls = []
+
+        def opener(request, timeout):
+            urls.append(request.full_url)
+            if "generativelanguage" in request.full_url and "lite" not in request.full_url:
+                raise urllib.error.HTTPError(request.full_url, 503, "Service Unavailable", {}, None)
+            return reply(request, STORY)
+
+        env = {"GEMINI_API_KEY": "m", "MISTRAL_API_KEY": "s"}
+        self.assertEqual(summarize_events([event()], env, opener, lambda s: None), 1)
+        self.assertEqual(urls[-1], MISTRAL_URL)
+        self.assertFalse(any("lite" in url for url in urls))
+
+
 class TestTopCorrection(unittest.TestCase):
     def test_mistral_only_is_enough(self):
         events = [{"title": "A", "link": "https://a.pl/1", "summary": "CISA dodało lukę do KEV.",

@@ -642,8 +642,34 @@ def language_correctors(environ):
 
 
 def event_writers(providers, environ, sleep=time.sleep):
-    """Writers of the event stories (v37b): the correction models, then Groq."""
-    result = language_correctors(environ)
+    """Writers of the event stories (v37b): Gemini main models, Mistral, the
+    lite Gemini models, then Groq (from the second round).
+
+    Mistral comes before lite, unlike in the correction: a story is written
+    from many articles, and on the weekly test of 31.10.2026
+    gemini-3.5-flash-lite wrote every story like a summary of one article
+    (PHP2Shell: 17 articles, nothing after 22.10). Lite is good enough for
+    the correction of commas and endings.
+    """
+    gemini_key = environ.get("GEMINI_API_KEY", "").strip()
+    mistral_key = environ.get("MISTRAL_API_KEY", "").strip()
+    main = gemini_models(environ) if gemini_key else []
+    lite = [model for model in proofreading_models(environ) if model not in main] if gemini_key else []
+    result = []
+
+    def gemini(model):
+        return (f"Gemini {model}",
+                lambda system, user, opener, model=model: ask_gemini(model, gemini_key, system, user, opener), 1)
+
+    result.extend(gemini(model) for model in main)
+
+    if mistral_key:
+        model = mistral_model(environ)
+        result.append((f"Mistral {model}",
+                       lambda system, user, opener, model=model: ask_mistral(model, mistral_key, system, user, opener),
+                       1))
+
+    result.extend(gemini(model) for model in lite)
     first_round = 2 if result else 1
 
     for provider in providers:

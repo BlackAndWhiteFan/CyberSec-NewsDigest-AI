@@ -15,7 +15,9 @@ import urllib.request
 
 
 MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
-MISTRAL_MODEL = "mistral-large-latest"
+# v37c: the exact name from the free-tier list (31.10.2026); the alias
+# mistral-large-latest is not on it. 250 000 tokens per minute.
+MISTRAL_MODEL = "mistral-large-2512"
 REQUEST_TIMEOUT = 60
 
 

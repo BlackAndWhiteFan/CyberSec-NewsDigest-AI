@@ -641,6 +641,22 @@ def language_correctors(environ):
     return result
 
 
+def error_detail(error):
+    """The API's own reason for a refusal (v37c), e.g. why Mistral gave 403
+    on 31.10.2026 although the model was on the free-tier list. Only for
+    HTTP 4xx except 404 and 429, whose reason is already clear."""
+    if not isinstance(error, urllib.error.HTTPError) or not 400 <= error.code < 500 or error.code in (404, 429):
+        return ""
+
+    try:
+        body = error.read().decode("utf-8", "replace")
+    except Exception:
+        return ""
+
+    body = re.sub(r"\s+", " ", body).strip()
+    return f" | odpowiedź API: {body[:200]}" if body else ""
+
+
 def event_writers(providers, environ, sleep=time.sleep):
     """Writers of the event stories (v37b): Gemini main models, Mistral, the
     lite Gemini models, then Groq (from the second round).
@@ -721,9 +737,10 @@ def correct_in_chunks(items, correctors, opener, sleep, system=None, key="stresz
                     chunk_notes = {}
                     answer = parse_summaries(ask(system, user, opener), ids, chunk_notes)
                 except Exception as error:
-                    # Only the model name and the error type/status are logged.
+                    # Only the model name, the error type/status and the
+                    # API's own error message are logged (never the key).
                     print(f"{log}: {name} niedostępny ({label_ids}, runda {round_number}) – "
-                          f"{type(error).__name__}: {str(error)[:120]}")
+                          f"{type(error).__name__}: {str(error)[:120]}{error_detail(error)}")
                     down.add(name)
                     continue
 

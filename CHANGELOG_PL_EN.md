@@ -24,6 +24,32 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v37c --- 31.10.2026
+
+**Powód odmowy API w logu; dokładna nazwa modelu Mistral.**
+
+Powód: w testach zestawienia tygodniowego z 31.10.2026 Mistral odpowiadał
+„HTTP Error 403: Forbidden” – także dla `mistral-large-2512` z listy
+limitów darmowego poziomu, przy włączonej zgodzie na trenowanie i bez
+ograniczeń dostępu w organizacji. Log pokazywał tylko kod, bez powodu.
+
+Zmiany:
+
+- **Powód odmowy w logu** (`src/ai_summaries.py`): przy błędach HTTP 4xx
+  (poza 404 i 429) log dostaje pierwsze 200 znaków odpowiedzi API, np.
+  „KOREKTA: Mistral … niedostępny … | odpowiedź API: {…}”. Klucz nigdy nie
+  trafia do logu.
+- **Domyślny model Mistral** (`src/mistral.py`): `mistral-large-2512` –
+  dokładna nazwa z listy darmowego poziomu (alias `mistral-large-latest`
+  na niej nie występuje); zmienna `MISTRAL_MODEL` dalej go podmienia.
+
+Nowe i zmienione pliki: `src/ai_summaries.py`, `src/mistral.py`,
+`src/test_v37c.py` (nowy), README (PL/EN).
+
+Testy jednostkowe: 424, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v37b --- 31.10.2026
 
 **Zestawienia na tym samym łańcuchu co prasówka.**
@@ -2105,6 +2131,32 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v37c --- 2026-10-31
+
+**The API's reason for a refusal in the log; exact Mistral model name.**
+
+Reason: in the weekly top tests of 31 October 2026 Mistral answered "HTTP
+Error 403: Forbidden" – also for `mistral-large-2512` from the free-tier
+limits list, with the training consent on and no access restrictions in
+the organization. The log showed only the code, without a reason.
+
+Changes:
+
+- **Reason for a refusal in the log** (`src/ai_summaries.py`): on HTTP 4xx
+  errors (except 404 and 429) the log gets the first 200 characters of
+  the API response, e.g. "KOREKTA: Mistral … niedostępny … | odpowiedź
+  API: {…}". The key never goes to the log.
+- **Default Mistral model** (`src/mistral.py`): `mistral-large-2512` – the
+  exact name from the free-tier list (the alias `mistral-large-latest` is
+  not on it); the variable `MISTRAL_MODEL` still overrides it.
+
+New and changed files: `src/ai_summaries.py`, `src/mistral.py`,
+`src/test_v37c.py` (new), README (PL/EN).
+
+Unit tests: 424, passed.
 
 ------------------------------------------------------------------------
 

@@ -641,12 +641,32 @@ def language_correctors(environ):
     return result
 
 
-def correct_in_chunks(items, correctors, opener, sleep):
+def event_writers(providers, environ, sleep=time.sleep):
+    """Writers of the event stories (v37b): the correction models, then Groq."""
+    result = language_correctors(environ)
+    first_round = 2 if result else 1
+
+    for provider in providers:
+        key = environ[provider["key_variable"]].strip()
+        result.append((provider["name"],
+                       lambda system, user, opener, provider=provider, key=key: ask_provider(provider, key, [
+                           {"role": "system", "content": system},
+                           {"role": "user", "content": user},
+                       ], opener, sleep),
+                       first_round))
+
+    return result
+
+
+def correct_in_chunks(items, correctors, opener, sleep, system=None, key="streszczenia", log="KOREKTA"):
     """Return ({id: text}, {id: notes}, {id: model}) for the chunks that a
     model corrected. Up to three rounds; a model that fails is skipped for
     the rest of its round (it is overloaded), and tried again in the next.
+
+    v37b: also for the event stories of the tops (system, key "wydarzenia",
+    log "ZESTAWIENIE AI").
     """
-    system = PROOFREAD_PROMPT.format()
+    system = PROOFREAD_PROMPT.format() if system is None else system
     pending = [items[start:start + PROOFREAD_CHUNK] for start in range(0, len(items), PROOFREAD_CHUNK)]
     corrected, notes, models = {}, {}, {}
 
@@ -656,7 +676,7 @@ def correct_in_chunks(items, correctors, opener, sleep):
 
         if round_number > 1:
             wait = PROOFREAD_RETRY_WAITS[round_number - 2]
-            print(f"KOREKTA: runda {round_number} za {wait} s – bez korekty {len(pending)} porcji.")
+            print(f"{log}: runda {round_number} za {wait} s – bez odpowiedzi {len(pending)} porcji.")
             sleep(wait)
 
         down = set()
@@ -664,7 +684,7 @@ def correct_in_chunks(items, correctors, opener, sleep):
 
         for chunk in pending:
             ids = {item["id"] for item in chunk}
-            user = json.dumps({"streszczenia": chunk}, ensure_ascii=False)
+            user = json.dumps({key: chunk}, ensure_ascii=False)
             label_ids = f"{min(ids)}–{max(ids)}"
 
             for name, ask, first_round in correctors:
@@ -676,12 +696,12 @@ def correct_in_chunks(items, correctors, opener, sleep):
                     answer = parse_summaries(ask(system, user, opener), ids, chunk_notes)
                 except Exception as error:
                     # Only the model name and the error type/status are logged.
-                    print(f"KOREKTA: {name} niedostępny (streszczenia {label_ids}, runda {round_number}) – "
+                    print(f"{log}: {name} niedostępny ({label_ids}, runda {round_number}) – "
                           f"{type(error).__name__}: {str(error)[:120]}")
                     down.add(name)
                     continue
 
-                print(f"KOREKTA: streszczenia {label_ids} – model {name}")
+                print(f"{log}: {label_ids} – model {name}")
                 corrected.update(answer)
                 notes.update(chunk_notes)
                 models.update({number: name for number in answer})
@@ -848,7 +868,7 @@ def summarize_events(events, environ=None, opener=urllib.request.urlopen, sleep=
 
     providers = [provider for provider in PROVIDERS if environ.get(provider["key_variable"], "").strip()]
 
-    if not providers and not environ.get("GEMINI_API_KEY", "").strip():
+    if not providers and not language_correctors(environ):
         print("ZESTAWIENIE AI: pominięte (brak kluczy API).")
         return 0
 
@@ -864,18 +884,14 @@ def summarize_events(events, environ=None, opener=urllib.request.urlopen, sleep=
 
     texts = [event_material_text(event) for _, event in numbered]
     system = EVENT_PROMPT.format(glossary=prompt_glossary(texts))
-    user = json.dumps({"wydarzenia": items}, ensure_ascii=False)
-    written = None
+    # v37b: the same chain as the daily correction (chunks, Gemini main and
+    # lite, Mistral, three rounds); Groq stays as the last writer, because
+    # it writes the daily summaries anyway and every story is checked
+    # against the event material.
+    written, _, _ = correct_in_chunks(items, event_writers(providers, environ, sleep), opener, sleep,
+                                      system=system, key="wydarzenia", log="ZESTAWIENIE AI")
 
-    for name, ask in proofreaders(providers, environ):
-        try:
-            written = parse_summaries(ask(system, user, opener, sleep), {number for number, _ in numbered})
-            print(f"ZESTAWIENIE AI: model {name}")
-            break
-        except Exception as error:
-            print(f"ZESTAWIENIE AI: {name} niedostępny – {type(error).__name__}: {str(error)[:120]}")
-
-    if written is None:
+    if not written:
         print("ZESTAWIENIE AI: pominięte (streszczenia bez zmian).")
         return 0
 
@@ -906,14 +922,15 @@ def summarize_events(events, environ=None, opener=urllib.request.urlopen, sleep=
 
 
 def proofread_top(events, environ=None, opener=urllib.request.urlopen, sleep=time.sleep):
-    """One language correction of the top summaries (v33): Gemini, then Groq.
+    """Language correction of the top summaries (v33); since v37a the same
+    chain as the digest (chunks, Gemini main and lite, Mistral, no Groq).
 
     Never raises; without keys the summaries stay as they are.
     """
     environ = os.environ if environ is None else environ
     providers = [provider for provider in PROVIDERS if environ.get(provider["key_variable"], "").strip()]
 
-    if not providers and not environ.get("GEMINI_API_KEY", "").strip():
+    if not language_correctors(environ):
         print("KOREKTA: pominięta (brak kluczy API).")
         return 0
 

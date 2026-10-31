@@ -24,6 +24,50 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v37a --- 31.10.2026
+
+**Korekta językowa codziennie: porcje, Gemini lite, Mistral; bez pustych
+„dwóch innych luk”.**
+
+Powód: prasówki z 30 i 31.10.2026 wyszły bez korekty (JW: „wolałbym
+jednak powtarzalność korekty językowej”). Logi: oba modele Gemini
+niedostępne w obu rundach – przekroczenie czasu i 503, ani jednego 429,
+czyli przeciążenie po stronie Google, a nie wyczerpany limit. Bez
+korekty przeszły m.in. „grupa wyciekła dane”, „10 august 2023”, „nie
+zostały załatwione”. Do tego „oraz dwie inne luki” w 5 streszczeniach –
+pusta wzmianka, którą podsuwała sama prośba o ograniczenie numerów CVE.
+
+Zmiany:
+
+- **Korekta w porcjach po 5 streszczeń** (`src/ai_summaries.py`): krótka
+  odpowiedź mieści się w 30 s także przy obciążeniu, a utracona porcja
+  nie zabiera korekty pozostałym.
+- **Lżejsze modele Gemini** (`src/gemini.py`): `gemini-3.8-flash-lite`,
+  `gemini-3.5-flash-lite` po modelach głównych; osobna pula mocy.
+  Zmienna repozytorium `GEMINI_LITE_MODEL` podmienia nazwy.
+- **Mistral jako ostatni zapas** (`src/mistral.py`, nowy): darmowy plan
+  bez karty, sekret `MISTRAL_API_KEY`, model `mistral-large-latest`
+  (zmienna `MISTRAL_MODEL`). Wchodzi od drugiej rundy – Gemini ma
+  pierwszeństwo. Bez Groq, jak od v35.
+- **Trzy rundy z rosnącą przerwą** (30 s, 60 s); model, który zawiódł, jest
+  pomijany do końca rundy, żeby nie czekać na niego przy każdej porcji.
+  Log: „KOREKTA: streszczenia 1–5 – model …”, „KOREKTA: runda 2 za 30 s”,
+  „KOREKTA: bez korekty N z M streszczeń”.
+- **Bez „oraz dwie inne luki”** (prompt, `src/summary_quality.py`):
+  nadmiarowe luki model nazywa typem z artykułu albo pomija; pusta
+  wzmianka wraca do poprawki jako problem miękki.
+
+Most do CyberSec Mozaika przesunięty na v38.
+
+Nowe i zmienione pliki: `src/ai_summaries.py`, `src/gemini.py`,
+`src/mistral.py` (nowy), `src/summary_quality.py`,
+`src/test_proofreading.py`, `src/test_v37a.py` (nowy),
+`.github/workflows/daily-digest.yml`, README (PL/EN).
+
+Testy jednostkowe: 415, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v36 --- 29.10.2026
 
 **Miękkie problemy nigdy nie tną streszczenia; bez urwanych fragmentów;
@@ -2028,6 +2072,51 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v37a --- 2026-10-31
+
+**Language correction every day: chunks, Gemini lite, Mistral; no empty
+"two other flaws".**
+
+Reason: the digests of 30 and 31 October 2026 went out without
+correction (JW: "I would rather have a correction that runs every
+day"). Logs: both Gemini models unavailable in both rounds – timeouts
+and 503, not a single 429, so overload on Google's side, not a used-up
+quota. Without correction, "grupa wyciekła dane", "10 august 2023" and
+"nie zostały załatwione" got through. Also "oraz dwie inne luki" ("and
+two other flaws") in 5 summaries – an empty mention suggested by the
+request to limit CVE ids itself.
+
+Changes:
+
+- **Correction in chunks of 5 summaries** (`src/ai_summaries.py`): a short
+  answer fits in 30 s even under load, and a lost chunk does not take the
+  correction away from the others.
+- **Lighter Gemini models** (`src/gemini.py`): `gemini-3.8-flash-lite`,
+  `gemini-3.5-flash-lite` after the main models; separate capacity. The
+  repository variable `GEMINI_LITE_MODEL` overrides the names.
+- **Mistral as the last fallback** (`src/mistral.py`, new): free plan
+  without a card, secret `MISTRAL_API_KEY`, model `mistral-large-latest`
+  (variable `MISTRAL_MODEL`). It joins from the second round – Gemini goes
+  first. No Groq, as since v35.
+- **Three rounds with a growing wait** (30 s, 60 s); a model that failed is
+  skipped for the rest of the round, so the run does not wait for it on
+  every chunk. Log: "KOREKTA: streszczenia 1–5 – model …", "KOREKTA:
+  runda 2 za 30 s", "KOREKTA: bez korekty N z M streszczeń".
+- **No "and two other flaws"** (prompt, `src/summary_quality.py`): extra
+  flaws are named by their type from the article or left out; an empty
+  mention goes back for correction as a soft problem.
+
+The bridge to CyberSec Mozaika moves to v38.
+
+New and changed files: `src/ai_summaries.py`, `src/gemini.py`,
+`src/mistral.py` (new), `src/summary_quality.py`,
+`src/test_proofreading.py`, `src/test_v37a.py` (new),
+`.github/workflows/daily-digest.yml`, README (PL/EN).
+
+Unit tests: 415, passed.
 
 ------------------------------------------------------------------------
 

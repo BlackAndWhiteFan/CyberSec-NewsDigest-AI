@@ -8,7 +8,7 @@ Automatyczna codzienna prasówka o cyberbezpieczeństwie po polsku, tworzona w P
 
 CyberSec NewsDigest AI pobiera wiadomości o cyberbezpieczeństwie z polskich i angielskich kanałów RSS, wybiera istotne artykuły, łączy doniesienia o tym samym wydarzeniu, pisze do każdego artykułu konkretne streszczenie po polsku i dostarcza codzienną prasówkę na Discorda, a do tego tygodniowe top 5 i miesięczne top 10.
 
-Projekt działa przy budżecie 0 PLN, wyłącznie na bezpłatnych planach usług (GitHub Actions, Groq, Google Gemini bez płatności, publiczne API LanguageTool, cron-job.org).
+Projekt działa przy budżecie 0 PLN, wyłącznie na bezpłatnych planach usług (GitHub Actions, Groq, Google Gemini bez płatności, Mistral (plan darmowy), publiczne API LanguageTool, cron-job.org).
 
 ## Aktualny stan projektu
 
@@ -37,6 +37,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 19 | Streszczenia z sensem i łatwe w czytaniu: co – dlaczego ważne – co zrobić, kontekst wcześniejszych doniesień, CISA KEV dla AI, streszczenia wydarzeń w zestawieniach (v34) | zakończony; zweryfikowany na gałęzi testowej (prasówka i top 5) |
 | 20 | Jedna luka, jedna pozycja: łączenie po numerach CVE po pobraniu stron i po streszczeniach; korekta językowa tylko przez Gemini; zalecenia tylko konkretne (v35) | zakończony; sprawdzony na prasówkach z 27–28.10.2026 |
 | 21 | Miękkie problemy nie tną streszczenia, bez urwanych fragmentów, płynniejsze zdania, bez dopisanego phishingu (v36) | zakończony; sprawdzony na prasówce z 29.10.2026 |
+| 22 | Korekta językowa codziennie: porcje po 5 streszczeń, lżejsze modele Gemini, Mistral jako zapas; bez pustych „innych luk” (v37a) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -63,7 +64,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 - Materiał: pełny tekst lub opis z kanału; gdy kanał daje mniej niż 600 znaków, tekst artykułu jest pobierany z jego strony (akapity bez menu, reklam i stopki). Tekst strony jest tylko materiałem dla AI i nigdzie nie jest zapisywany.
 - Terminy są zgodne ze słowniczkiem `data/glosariusz_mirror.csv` – mirrorem glosariusza CyberSec Mozaika. Proste formy zakazane poprawia kod bez zapytania do AI („poprawka” → „łatka”, „zdalne wykonanie kodu” → „RCE”); objaśnienia w nawiasach dopisuje kod przy pierwszym wystąpieniu 6 wybranych terminów, w tym samym przypadku co termin („przed exploitem (kodem wykorzystującym podatność)”).
 - Kontrola jakości (`src/summary_quality.py`): niezgodność ze słowniczkiem, ogólniki („co podkreśla wagę…”, „nie została podana”), względne określenia czasu, nieodmienione terminy po przyimku, liczby i numery CVE spoza materiału, określenia „zero-day” i „natychmiast”, gdy artykuł ich nie używa, formułki bez konkretu („Zaleca się natychmiastową aktualizację.”), streszczenia za długie, po angielsku albo powtarzające tylko tytuł oraz kalki z edytowalnej listy stylu `data/styl_unikaj.csv`. Streszczenie z problemem wraca do AI na jedną poprawkę; jeśli problem zostaje, kod usuwa błędne zdania. Streszczenie jest odrzucane tylko wtedy, gdy nie zostaje w nim żadne poprawne zdanie (albo nadal jest po angielsku).
-- Korekta językowa: jedno zapytanie na prasówkę do Google Gemini (`gemini-3.8-flash`, zapasowo `gemini-3.5-flash`) z podpowiedziami gramatycznymi z LanguageTool; od v35 poprawia wyłącznie Gemini (przy chwilowym błędzie jeszcze jedna próba po 30 s) – gdy jest niedostępny, streszczenia zostają bez korekty, bo modele Groq psuły polszczyznę. Poprawka jest przyjmowana tylko wtedy, gdy zachowuje liczby, numery CVE i długość; każda trafia do logu jako „przed” / „po”.
+- Korekta językowa: od v37a w porcjach po 5 streszczeń, z podpowiedziami gramatycznymi z LanguageTool; kolejno Google Gemini (`gemini-3.8-flash`, `gemini-3.5-flash`, potem lżejsze `-flash-lite`), a od drugiej rundy także Mistral (`mistral-large-latest`, darmowy plan); do trzech rund z przerwą 30 s i 60 s. Bez Groq od v35, bo psuł polszczyznę; gdy wszystkie modele zawiodą, streszczenia zostają bez korekty. Poprawka jest przyjmowana tylko wtedy, gdy zachowuje liczby, numery CVE i długość; każda trafia do logu jako „przed” / „po”.
 - Dziennik języka (v32): każda poprawka streszczenia jest zapisywana razem z artykułem w archiwum (pole `language`): formy zakazane ze słowniczka z numerem hasła, kalki z listy stylu, nieodmienione terminy, zamiany zrobione przez kod i zmiany z korekty, każda z wynikiem (poprawiło AI, poprawił kod, forma została, streszczenie odrzucone). Notatki opisują tylko to, co napisało AI: niczego nie zmieniają i nigdy nie zapisują do glosariusza.
 
 ### Wysyłka i zestawienia
@@ -115,7 +116,7 @@ Wcześniej: w teście v30 korekta Gemini poprawiła 6 z 6 streszczeń; w teście
 
 ## Plan rozwoju
 
-- **Most do CyberSec Mozaika (v37):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
+- **Most do CyberSec Mozaika (v38):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
 - Ochrona gałęzi `main`.
 
 - Eksperyment z modelem piszącym: Google Gemini pisze streszczenia dzienne (Groq jako zapas) i dostaje więcej materiału z artykułu; porównanie na zwykłych prasówkach dnia roboczego z obecnym układem.
@@ -158,6 +159,7 @@ Kod (`src/`):
 - `kev.py` — znacznik 🔥: katalog CISA KEV i numery CVE.
 - `ai_summaries.py` — streszczenia AI (Groq), poprawki i korekta językowa.
 - `gemini.py` — Google Gemini do korekty językowej.
+- `mistral.py` — Mistral, ostatni zapas korekty językowej (v37a).
 - `languagetool.py` — podpowiedzi gramatyczne z LanguageTool.
 - `glossary.py` — reguły słowniczka z mirrora: hasła do promptu, formy zakazane, autopoprawki, objaśnienia w nawiasach.
 - `summary_quality.py` — kontrola jakości i języka streszczeń, naprawa przez kod.
@@ -188,7 +190,8 @@ Sekrety repozytorium (Settings → Secrets and variables → Actions):
 - `DISCORD_MONTHLY_WEBHOOK_URL` — webhook kanału miesięcznego top 10.
 - `DISCORD_TEST_WEBHOOK_URL` — webhook kanału testowego: uruchomienia z gałęzi i alarmy o błędach. Bez niego uruchomienia z gałęzi niczego nie wysyłają.
 - `GROQ_API_KEY` — klucz API Groq do streszczeń AI (od v33 także do zapasowej korekty streszczeń w zestawieniach). Bez niego prasówka idzie bez streszczeń.
-- `GEMINI_API_KEY` — klucz API Google Gemini (darmowy limit, bez płatności) do korekty językowej prasówki i zestawień; opcjonalny. Bez niego korektę robią modele Groq. Opcjonalna zmienna repozytorium `GEMINI_MODEL` (nazwy po przecinku) podmienia nazwy modeli.
+- `GEMINI_API_KEY` — klucz API Google Gemini (darmowy limit, bez płatności) do korekty językowej prasówki i zestawień; opcjonalny. Bez niego korektę robią modele Groq. Opcjonalna zmienna repozytorium `GEMINI_MODEL` (nazwy po przecinku) podmienia nazwy modeli, a `GEMINI_LITE_MODEL` – nazwy lżejszych modeli (v37a).
+- `MISTRAL_API_KEY` — klucz API Mistral (darmowy plan, bez karty) – ostatni zapas korekty językowej prasówki (v37a); opcjonalny. Opcjonalna zmienna `MISTRAL_MODEL` podmienia model.
 
 Każdy sekret trafia tylko do kroku workflow, który go potrzebuje. Token budzika jest przechowywany wyłącznie w cron-job.org. Nigdy nie zapisuj w repozytorium kluczy API, adresów webhooków, tokenów ani haseł.
 

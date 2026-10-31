@@ -46,10 +46,15 @@ jobs:
           # Runs on branches other than main go to the test channel only.
           DISCORD_TEST_WEBHOOK_URL: ${{ secrets.DISCORD_TEST_WEBHOOK_URL }}
           WEEK: ${{ inputs.week }}
-          # v33: one language correction of the top summaries (Gemini, then Groq).
+          # v33: language correction of the top summaries; v37b: Gemini, lite, Mistral.
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          # v37b: the same correction chain as the digest – lite Gemini
+          # models and Mistral (free plan), the last fallback.
+          GEMINI_LITE_MODEL: ${{ vars.GEMINI_LITE_MODEL }}
+          MISTRAL_API_KEY: ${{ secrets.MISTRAL_API_KEY }}
+          MISTRAL_MODEL: ${{ vars.MISTRAL_MODEL }}
           # "budzik" for the external alarm clock (cron-job.org, v24), otherwise
           # the event name; src/top_guard.py treats "budzik" like a scheduled run.
           TRIGGER: ${{ inputs.budzik && 'budzik' || github.event_name }}

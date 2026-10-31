@@ -284,11 +284,21 @@ def parse_summaries(content, expected_ids, notes=None):
     data = json.loads(match.group(0))
     summaries = {}
 
-    for item in data.get("streszczenia", []):
+    # v37c: ministral-14b answered on 31.10.2026, but nothing could be read;
+    # ids as text ("1") and the key of the request ("wydarzenia") are accepted.
+    entries = data.get("streszczenia") or data.get("wydarzenia") or [] if isinstance(data, dict) else []
+
+    for item in entries if isinstance(entries, list) else []:
         if not isinstance(item, dict):
             continue
 
         number = item.get("id")
+
+        try:
+            number = int(number)
+        except (TypeError, ValueError):
+            continue
+
         changes = []
         text = clean_summary(item.get("tekst", ""), changes=changes)
 
@@ -735,12 +745,19 @@ def correct_in_chunks(items, correctors, opener, sleep, system=None, key="stresz
 
                 try:
                     chunk_notes = {}
-                    answer = parse_summaries(ask(system, user, opener), ids, chunk_notes)
+                    content = ask(system, user, opener)
+                    answer = parse_summaries(content, ids, chunk_notes)
+
+                    # v37c: an answer with nothing usable is a failure, so
+                    # the next model gets the chunk (31.10.2026: ministral).
+                    if not answer:
+                        raise ValueError("odpowiedź bez użytecznych streszczeń, początek: "
+                                         + re.sub(r"\s+", " ", content or "")[:150])
                 except Exception as error:
                     # Only the model name, the error type/status and the
                     # API's own error message are logged (never the key).
                     print(f"{log}: {name} niedostępny ({label_ids}, runda {round_number}) – "
-                          f"{type(error).__name__}: {str(error)[:120]}{error_detail(error)}")
+                          f"{type(error).__name__}: {str(error)[:200]}{error_detail(error)}")
                     down.add(name)
                     continue
 

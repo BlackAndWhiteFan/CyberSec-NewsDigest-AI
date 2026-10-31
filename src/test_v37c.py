@@ -34,3 +34,27 @@ class TestDefaultModel(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TestAnswerShapes(unittest.TestCase):
+    def test_text_ids_and_request_key_are_read(self):
+        from ai_summaries import parse_summaries
+        content = '{"wydarzenia": [{"id": "1", "tekst": "Luki PHP2Shell pozwalają przejąć serwer."}]}'
+        self.assertEqual(parse_summaries(content, {1}), {1: "Luki PHP2Shell pozwalają przejąć serwer."})
+
+    def test_empty_answer_goes_to_the_next_model(self):
+        import ai_summaries
+        calls = []
+
+        def first(system, user, opener):
+            calls.append("first")
+            return '{"cos": []}'
+
+        def second(system, user, opener):
+            calls.append("second")
+            return '{"streszczenia": [{"id": 1, "tekst": "Tekst."}]}'
+
+        corrected, _, models = ai_summaries.correct_in_chunks(
+            [{"id": 1, "tekst": "Tekst"}], [("A", first, 1), ("B", second, 1)], None, lambda s: None)
+        self.assertEqual(calls, ["first", "second"])
+        self.assertEqual(models, {1: "B"})

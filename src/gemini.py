@@ -27,12 +27,29 @@ GEMINI_MODELS = ["gemini-3.8-flash", "gemini-3.5-flash"]
 # 28.10.2026 gemini-3.8-flash timed out twice (2 × 90 s) and the branch digest
 # waited over 3.5 minutes for nothing before skipping the correction.
 REQUEST_TIMEOUT = 30
+# v37a: the lighter models have their own capacity and are often free when
+# the main ones are overloaded (30–31.10.2026: timeouts and 503 every
+# morning). A name that does not exist only costs one quick 404.
+GEMINI_LITE_MODELS = ["gemini-3.8-flash-lite", "gemini-3.5-flash-lite"]
 
 
 def gemini_models(environ=None):
     environ = os.environ if environ is None else environ
     configured = [name.strip() for name in environ.get("GEMINI_MODEL", "").split(",") if name.strip()]
     return configured or list(GEMINI_MODELS)
+
+
+def proofreading_models(environ=None):
+    """Main models, then the lite ones (repository variable GEMINI_LITE_MODEL)."""
+    environ = os.environ if environ is None else environ
+    lite = [name.strip() for name in environ.get("GEMINI_LITE_MODEL", "").split(",") if name.strip()]
+    result = []
+
+    for name in gemini_models(environ) + (lite or GEMINI_LITE_MODELS):
+        if name not in result:
+            result.append(name)
+
+    return result
 
 
 def ask_gemini(model, api_key, system, user, opener=urllib.request.urlopen):

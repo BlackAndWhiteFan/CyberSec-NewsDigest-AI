@@ -3281,5 +3281,382 @@
     ],
     "via": "",
     "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Zdalne wykonanie kodu w Linuksie. Krytyczna podatność w kernelu w obsłudze sieciowej (niedomyślne ustawienia).",
+    "link": "https://sekurak.pl/zdalne-wykonanie-kodu-w-linuksie-krytyczna-podatnosc-w-kernelu-w-obsludze-sieciowej-niedomyslne-ustawienia/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Critical Linux kernel flaw allows remote root attacks on MPTCP servers",
+        "link": "https://www.bleepingcomputer.com/news/security/critical-linux-kernel-flaw-allows-remote-root-attacks-on-mptcp-servers/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "W jądrze Linux wykryto krytyczną podatność CVE-2026-98432, której exploita opracował Anthropic i umożliwia zdalne uzyskanie uprawnień root przez sieć przy użyciu multipath TCP listener. Luka została załatana w głównym jądrze i we wszystkich utrzymywanych stabilnych gałęziach.",
+    "cves": [
+      "CVE-2026-98432"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Jak hakerzy wykorzystują PHP2Shell do uzyskania uprawnień administratora (root) na Firewallach",
+    "link": "https://kapitanhack.pl/jak-hakerzy-wykorzystuja-php2shell-do-uzyskania-uprawnien-administratora-root-na-firewallach/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Firma Dream poinformowała, że hakerzy wykorzystują łańcuch exploitów PHP2Shell-Fragnesia, łącząc luki CVE-2026-109618 i CVE-2026-109619 oraz dwie inne luki, aby uzyskać uprawnienia root na zaporach sieciowych producenta. Ataki przeprowadzono na 25 urządzeniach, a 24 z nich zostało przejętych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "CISA says max severity GitLab flaw now exploited in the wild",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-now-exploiting-max-severity-gitlab-flaw-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Max-Severity GitLab Vulnerability Exploited Against Alpine Linux",
+        "link": "https://www.securityweek.com/max-severity-gitlab-vulnerability-exploited-against-alpine-linux/",
+        "source": "securityweek.com"
+      },
+      {
+        "title": "CISA Adds Actively Exploited GitLab RCE and Cisco Firewall DoS Flaws to KEV",
+        "link": "https://thehackernews.com/2026/10/cisa-adds-actively-exploited-gitlab-rce.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "CISA potwierdziła aktywne wykorzystywanie krytycznej podatności GitLab CVE-2026-97229, umożliwiającej zdalne uruchomienie kodu przez spreparowane wyrażenie regularne w konfiguracji CI/CD. GitLab wydał łatki w wersjach CE/EE 19.4.2, 19.3.5 i 19.2.8.",
+    "cves": [
+      "CVE-2026-97229"
+    ],
+    "kev": [
+      "CVE-2026-97229"
+    ],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Drupal Commerce Core Vulnerability Exploited Against Online Stores",
+    "link": "https://www.securityweek.com/drupal-commerce-core-vulnerability-exploited-against-online-stores/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Hackers Actively Exploit Highly Critical Drupal Commerce Core Authorization Bypass Flaw",
+        "link": "https://thehackernews.com/2026/10/hackers-actively-exploit-highly.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Drupal ostrzega przed aktywnie wykorzystywaną podatnością CVE-2026-118539 w module Commerce Core, która pozwala nieuprawnionym użytkownikom ominąć kontrolę dostępu i potencjalnie narazić sklepy na straty finansowe. Moduł jest używany na ponad 42 000 witrynach.",
+    "cves": [
+      "CVE-2026-118539"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Ukradli ~24 miliardy PLN z Binance. Powód? Włamanie na laptopa devopsa.",
+    "link": "https://sekurak.pl/ukradli-24-miliardy-pln-z-binance-powod-wlamanie-na-laptopa-devopsa/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Binance poinformowało, że w wyniku włamania na laptopa devopsa wykradziono około 24 miliardy PLN w kryptowalutach, a część środków już zablokowano.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "RODO i KSC. Jak pogodzić obowiązki i odpowiedzialność? [OPINIA]",
+    "link": "https://cyberdefence24.pl/polityka-i-prawo/polska/rodo-i-ksc-jak-pogodzic-obowiazki-i-odpowiedzialnosc-opinia",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W cyberataku jednocześnie uruchamiają się dwa zegary – jeden z ustawy o KSC, drugi z RODO – i obowiązki wynikające z obu regulacji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Wielka kradzież kryptowalut. Wyprowadzono ponad 6 miliardów dolarów",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/wielka-kradziez-kryptowalut-wyprowadzono-ponad-6-miliardow-dolarow",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Binance padło ofiarą cyberataku, w którym hakerzy w 20 minut wytransferowali 6,3 mld USD z portfeli giełdy. Atak prawdopodobnie wykorzystał przejęty laptop inżyniera DevOps, co umożliwiło nieautoryzowane transakcje wypłat.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "skompromitowany",
+        "form": "skompromitowa*",
+        "suggestion": "przejęty, zaatakowany",
+        "fixed_by": "ai"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Atak na mołdawskie systemy. Incydent dotknął setek tysięcy osób",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/atak-na-moldawskie-systemy-incydent-dotknal-setek-tysiecy-osob",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Mołdawskie systemy państwowe zostały zaatakowane, a sprawcy wykorzystali podatności w kilku usługach, wspomagane sztuczną inteligencją, wykradając dane 750 tys. osób. Po wykryciu incydentu odłączono 30 z 82 usług cyfrowych, a kolejne próby ataku nie powiodły się.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Podatności w oprogramowaniu Request Tracker oraz RT for Incident Response",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-105454/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska odkrył dwie podatności typu Cross-Site Scripting w oprogramowaniu Request Tracker – CVE-2026-105454 i CVE-2026-105455 – które pozwalają nieupoważnionemu atakującemu wstrzykiwać skrypty w zgłoszeniach. Dodatkowo wykryto jeszcze dwie inne luki w RTIR. Problem został naprawiony w wersji 6.0.4. Wersja 5.0 nie jest podatna.",
+    "cves": [
+      "CVE-2026-105454",
+      "CVE-2026-105456"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Podatności w oprogramowaniu ARKETEAM Protectel",
+    "link": "https://cert.pl/posts/2026/10/CVE-2025-68391/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W oprogramowaniu ARKETEAM Protectel wykryto pięć podatności, w tym CVE-2025-68391 typu arbitrary file upload oraz CVE-2025-68392 umożliwiające podwyższenie uprawnień. Pozostałe luki CVE-2025-68393-68395 to SQL Injection, które mogą prowadzić do wykonania kodu i przejęcia kontroli nad systemem.",
+    "cves": [
+      "CVE-2025-68391",
+      "CVE-2025-68392",
+      "CVE-2025-68395"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "glossary",
+        "id": "H182",
+        "used": "eskalację uprawnień",
+        "required": "podwyższenie uprawnień",
+        "fixed_by": "ai"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Bulletproof Host Virtualine Loses Its Domain to FBI Seizure",
+    "link": "https://www.securityweek.com/bulletproof-host-virtualine-loses-its-domain-to-fbi-seizure/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "FBI przejęło domenę virtualine.net, należącą do rosyjskiego dostawcy usług bulletproof hosting Virtualine (znanego też jako Secury, Massgod, Spamhouse, Lanedo, Omegatech). Dostawca nadal hostuje nielegalne usługi, w tym phishing, spam i hack-for-hire, pomimo licznych żądań takedown od organów ścigania.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Florida warns that 4.9 million people had Social Security numbers leaked in financial aid site breach",
+    "link": "https://therecord.media/florida-warns-5-million-affected-financial-aid-site-breach",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Departament Edukacji Florydy poinformował o wycieku danych z portalu pomocy finansowej, w którym ujawniono nazwiska, adresy, numery telefonów, płcie, e-maile, numery ubezpieczenia społecznego i daty urodzenia prawie 5 mln osób. Incydent nie wpływa na przyznawanie pomocy ani na wypłaty stypendiów i pożyczek.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Podatności w oprogramowaniu Płatnik",
+    "link": "https://cert.pl/posts/2026/10/CVE-2026-110970/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymał zgłoszenie o trzech podatnościach w oprogramowaniu Płatnik, w tym CVE-2026-110970 i CVE-2026-110971, oraz dwie inne luki. Luka CVE-2026-110970 umożliwia atak Man-In-The-Middle przy pobieraniu aktualizacji przez HTTP, a CVE-2026-110971 pozwala na odszyfrowanie haseł. Wszystkie problemy zostały naprawione w metryce 242 wersji 10.02.002.",
+    "cves": [
+      "CVE-2026-110970",
+      "CVE-2026-110971",
+      "CVE-2026-110972"
+    ],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "SS7 and Diameter Attacks: How Signaling Flaws Expose Your Phone",
+    "link": "https://www.bleepingcomputer.com/news/security/ss7-and-diameter-attacks-how-signaling-flaws-expose-your-phone/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Ataki na protokoły sygnalizacyjne SS7 i Diameter umożliwiają śledzenie, przechwytywanie SMS-ów z kodami MFA i podszywanie się pod użytkownika.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
+  },
+  {
+    "date": "2026-10-31",
+    "title": "Microsoft finally fixes VPN issues caused by September updates",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-finally-fixes-vpn-issues-caused-by-september-updates/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft wydał aktualizację KB5127936, która naprawia awarie połączeń Always On VPN po zainstalowaniu wrześniowych aktualizacji zabezpieczeń Windows 11 2026. Łatka rozwiązuje problemy z automatycznym wyborem protokołu i błędem „port już używany”.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawka",
+        "fixed": "Łatka"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-31",
+    "title": "TeamViewer Flaw Lets Remote Computers Attack Users Who Connect to Control Them",
+    "link": "https://thehackernews.com/2026/10/teamviewer-flaw-lets-remote-computers.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "TeamViewer Flaw Could Let Malicious Hosts Take Over Support Technicians’ Machines",
+        "link": "https://www.securityweek.com/teamviewer-flaw-could-let-malicious-hosts-take-over-support-technicians-machines/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "TeamViewer naprawił lukę CVE-2026-111585, która pozwala zainfekowanemu hostowi w sesji zdalnej zaatakować komputer łączącego się jako viewer. Luka była wykorzystywana do awarii aplikacji i potencjalnego uruchomienia kodu na komputerze viewer, a łatka znajduje się w wersji 15.83.",
+    "cves": [
+      "CVE-2026-111585"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawka",
+        "fixed": "łatka"
+      }
+    ]
+  },
+  {
+    "date": "2026-10-31",
+    "title": "WordPress RCE Flaw Draws Nearly 63,000 Attack Attempts in Just 24 Hours",
+    "link": "https://thehackernews.com/2026/10/wordpress-rce-flaw-draws-nearly-63000.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "WordPress Core wersje 4.7-7.1.3 zawierał błąd umożliwiający nieautoryzowanym atakującym wykonanie kodu podczas rozpakowywania aktualizacji, co wywołało prawie 63 000 prób w ciągu 24 godzin. Łatka została udostępniona 28 października 2026 i eliminuje możliwość wykorzystania tego okna.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": []
   }
 ]

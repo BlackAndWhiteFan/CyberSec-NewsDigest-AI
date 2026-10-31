@@ -15,9 +15,12 @@ import urllib.request
 
 
 MISTRAL_URL = "https://api.mistral.ai/v1/chat/completions"
-# v37c: the exact name from the free-tier list (31.10.2026); the alias
-# mistral-large-latest is not on it. 250 000 tokens per minute.
-MISTRAL_MODEL = "mistral-large-2512"
+# v37c (tests of 31.10.2026): mistral-large-2512 is on the limits list but
+# not in the free tier ("tier_not_allowed"); mistral-medium-latest has only
+# 20 000 tokens per minute, less than one event-story request (429).
+# ministral-14b-2512 (937 500 tokens per minute) wrote the first real event
+# stories, e.g. PHP2Shell from the honeypot to Mirai.
+MISTRAL_MODEL = "ministral-14b-2512"
 REQUEST_TIMEOUT = 60
 
 

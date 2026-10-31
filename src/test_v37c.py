@@ -29,7 +29,7 @@ class TestErrorDetail(unittest.TestCase):
 
 class TestDefaultModel(unittest.TestCase):
     def test_exact_free_tier_name(self):
-        self.assertEqual(mistral_model({}), "mistral-large-2512")
+        self.assertEqual(mistral_model({}), "ministral-14b-2512")
 
 
 if __name__ == "__main__":

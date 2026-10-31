@@ -24,6 +24,36 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v37b --- 31.10.2026
+
+**Zestawienia na tym samym łańcuchu co prasówka.**
+
+Powód: przed pierwszym miesięcznym top 10 (1.11.2026) – konsekwencja
+projektowa po v37a. Korekta streszczeń w zestawieniach przeszła na nowy
+łańcuch już w v37a (`proofread_top` używa `proofread_summaries`), ale
+workflow zestawień nie dostawały sekretu Mistrala, a historie wydarzeń
+(`summarize_events`) szły starą drogą: jedno zapytanie, Gemini w jednej
+rundzie, potem Groq.
+
+Zmiany:
+
+- **Historie wydarzeń w porcjach i rundach** (`src/ai_summaries.py`):
+  Gemini (główne i lite), od drugiej rundy Mistral, a Groq jako ostatni
+  piszący – i tak pisze streszczenia dzienne, a każda historia przechodzi
+  kontrolę względem materiału wydarzenia. Log: „ZESTAWIENIE AI: 1–5 –
+  model …”.
+- **Workflow tygodniowy i miesięczny** dostają `MISTRAL_API_KEY`,
+  `GEMINI_LITE_MODEL` i `MISTRAL_MODEL`.
+- Korekta zestawień działa także z samym kluczem Mistrala.
+
+Nowe i zmienione pliki: `src/ai_summaries.py`, `src/test_v37b.py`
+(nowy), `.github/workflows/weekly-top.yml`,
+`.github/workflows/monthly-top.yml`, README (PL/EN).
+
+Testy jednostkowe: 419, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v37a --- 31.10.2026
 
 **Korekta językowa codziennie: porcje, Gemini lite, Mistral; bez pustych
@@ -2072,6 +2102,36 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v37b --- 2026-10-31
+
+**The tops use the same chain as the digest.**
+
+Reason: before the first monthly top 10 (1 November 2026) – design
+consistency after v37a. The correction of the top summaries already used
+the new chain in v37a (`proofread_top` calls `proofread_summaries`), but
+the top workflows did not get the Mistral secret, and the event stories
+(`summarize_events`) went the old way: one request, Gemini in one round,
+then Groq.
+
+Changes:
+
+- **Event stories in chunks and rounds** (`src/ai_summaries.py`): Gemini
+  (main and lite), from the second round Mistral, and Groq as the last
+  writer – it writes the daily summaries anyway, and every story is
+  checked against the event material. Log: "ZESTAWIENIE AI: 1–5 – model
+  …".
+- **Weekly and monthly workflows** get `MISTRAL_API_KEY`,
+  `GEMINI_LITE_MODEL` and `MISTRAL_MODEL`.
+- The correction of the tops also works with the Mistral key alone.
+
+New and changed files: `src/ai_summaries.py`, `src/test_v37b.py` (new),
+`.github/workflows/weekly-top.yml`, `.github/workflows/monthly-top.yml`,
+README (PL/EN).
+
+Unit tests: 419, passed.
 
 ------------------------------------------------------------------------
 

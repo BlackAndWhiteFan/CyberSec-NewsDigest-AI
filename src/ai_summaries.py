@@ -300,7 +300,10 @@ def parse_summaries(content, expected_ids, notes=None):
             continue
 
         changes = []
-        text = clean_summary(item.get("tekst", ""), changes=changes)
+        # v37c: ministral-14b put the story in "historia" (31.10.2026).
+        raw = next((item[key] for key in ("tekst", "historia", "streszczenie")
+                    if isinstance(item.get(key), str) and item[key].strip()), "")
+        text = clean_summary(raw, changes=changes)
 
         if number in expected_ids and text and not is_meta_answer(text):
             summaries[number] = text

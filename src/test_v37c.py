@@ -42,6 +42,11 @@ class TestAnswerShapes(unittest.TestCase):
         content = '{"wydarzenia": [{"id": "1", "tekst": "Luki PHP2Shell pozwalają przejąć serwer."}]}'
         self.assertEqual(parse_summaries(content, {1}), {1: "Luki PHP2Shell pozwalają przejąć serwer."})
 
+    def test_story_field_of_ministral(self):
+        from ai_summaries import parse_summaries
+        content = '{"wydarzenia": [{"id": 1, "tytuł": "PHP2Shell", "historia": "Dwie luki w PHP pozwalają przejąć serwer."}]}'
+        self.assertEqual(parse_summaries(content, {1}), {1: "Dwie luki w PHP pozwalają przejąć serwer."})
+
     def test_empty_answer_goes_to_the_next_model(self):
         import ai_summaries
         calls = []

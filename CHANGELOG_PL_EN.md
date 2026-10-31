@@ -47,12 +47,13 @@ Zmiany:
   odczytać ani jednej historii, a kod uznał ją za sukces i nie spróbował
   kolejnego modelu („ZESTAWIENIE AI: pominięte”). Teraz taka porcja
   przechodzi do następnego modelu, log pokazuje początek odpowiedzi, a
-  odczyt przyjmuje identyfikatory jako tekst („1”) i klucz „wydarzenia”.
+  odczyt przyjmuje identyfikatory jako tekst („1”), klucz „wydarzenia” oraz
+  pole „historia” zamiast „tekst” (tak odpowiada `ministral-14b-2512`).
 
 Nowe i zmienione pliki: `src/ai_summaries.py`, `src/mistral.py`,
 `src/test_v37c.py` (nowy), README (PL/EN).
 
-Testy jednostkowe: 426, zakończone powodzeniem.
+Testy jednostkowe: 427, zakończone powodzeniem.
 
 ------------------------------------------------------------------------
 
@@ -2163,12 +2164,13 @@ Changes:
   be read from the answer, and the code took it as a success and did not
   try the next model ("ZESTAWIENIE AI: pominięte"). Now such a chunk goes
   to the next model, the log shows the start of the answer, and reading
-  accepts ids as text ("1") and the key "wydarzenia".
+  accepts ids as text ("1"), the key "wydarzenia" and the field "historia"
+  instead of "tekst" (the way `ministral-14b-2512` answers).
 
 New and changed files: `src/ai_summaries.py`, `src/mistral.py`,
 `src/test_v37c.py` (new), README (PL/EN).
 
-Unit tests: 426, passed.
+Unit tests: 427, passed.
 
 ------------------------------------------------------------------------
 

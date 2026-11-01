@@ -20,7 +20,8 @@ on:
     - cron: "17 8-11 * * 1"
       timezone: "Europe/Warsaw"
 
-# Writes only the marker data/last_top.json (which periods were sent).
+# Writes the marker data/last_top.json (which periods were sent) and,
+# since v38, the delivered top to data/tops/<period>.json.
 permissions:
   contents: write
 
@@ -28,6 +29,10 @@ permissions:
 concurrency:
   group: top-reports
   cancel-in-progress: false
+
+# v38: Python output goes to the log line by line, not at the end of the step.
+env:
+  PYTHONUNBUFFERED: "1"
 
 jobs:
   weekly-top:
@@ -62,7 +67,7 @@ jobs:
 
       - name: Persist top marker
         run: |
-          git add data/last_top.json 2>/dev/null || true
+          git add data/last_top.json data/tops 2>/dev/null || true
           if git diff --cached --quiet; then
             echo "Top marker has not changed."
           else

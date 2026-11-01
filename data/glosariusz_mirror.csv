@@ -1,729 +1,743 @@
-﻿# Mirror glosariusza CyberSec Mozaika – źródło: glosariusz_cybersec84_secplus.xlsx
-id;termin_en;haslo;forma;nawias;regula;unikaj;objasnienie
-H001;adware;adware;adware;;;;"Program doklejany do innego oprogramowania, zwykle wyświetlający niechciane reklamy i zbierający dane o aktywności; zazwyczaj nie niszczy danych."
-H002;bloatware;bloatware;bloatware;;;;Niepotrzebne, preinstalowane oprogramowanie, które zajmuje zasoby i może zawierać podatności.
-H003;logic bomb;bomba logiczna;bomba logiczna;;;;"Złośliwy kod uśpiony do chwili spełnienia warunku (data, usunięcie konta pracownika itp.); często zostawiany przez insidera."
-H004;botnet;botnet;botnet;sieć zainfekowanych urządzeń;bez tłumaczenia;;"Sieć zainfekowanych urządzeń sterowana przez napastnika; używana m.in."
-H005;crypto drainer;drainer kryptowalut;drainer kryptowalut;;;;"Złośliwy kontrakt lub program przelewający kryptowaluty z portfela ofiary; w opisanym przypadku ukryty w „poradniku” budowy bota do handlu."
-H006;dropper;dropper;dropper;;;;złośliwe oprogramowanie, którego głównym zadaniem jest ukrycie, dostarczenie i zainstalowanie innego wirusa lub trojana na urządzeniu ofiary.
-H007;campaign;kampania;kampania;;;;Skoordynowana seria ataków lub dystrybucji malware.
-H008;keylogger;keylogger;keylogger;;;;"Narzędzie rejestrujące naciśnięcia klawiszy; może działać przez malware lub rozszerzenie, a jak opisano w SBT, także „słuchając” dźwięku klawiatury."
-H009;cryptominer;koparka kryptowalut;koparka kryptowalut;;;;Pasożytuje na mocy obliczeniowej ofiary.
-H010;loader;loader;loader;;;;Pobiera i uruchamia kolejne malware.
-H011;MaaS;MaaS (malware jako usługa);MaaS;;;;Wynajem gotowych narzędzi przestępcom.
-H012;spyware;spyware (oprogramowanie szpiegujące);spyware;;;oprogramowa\w+ szpiegując\w*;"Śledzi użytkownika; także rządowe."
-H013;toll fraud;toll fraud (oszustwo na płatne usługi);toll fraud;;;;Ukryte zapisywanie ofiary na płatne usługi przez złośliwą aplikację.
-H014;PPI;PPI (płatność za instalację);PPI;;;;Płaci się za każdą zainfekowaną maszynę.
-H015;ransomware;ransomware;ransomware;program żądający okupu;bez tłumaczenia;;Szyfruje dane i żąda okupu.
-H016;worm;robak;robak;;;;Rozprzestrzenia się samodzielnie.
-H017;rootkit;rootkit;rootkit;;;;Ukrywa się głęboko w systemie.
-H018;scareware;scareware;scareware;;;;Fałszywe ostrzeżenia o „infekcji”, które mają skłonić do zapłaty lub zainstalowania złośliwego programu.
-H019;infostealer;infostealer (stealer);infostealer;program kradnący dane;bez tłumaczenia;;Kradnie hasła, ciasteczka, dane portfeli.
-H020;fileless malware;fileless malware (szkodnik bezplikowy);fileless malware;;;;"Złośliwy kod działający tylko w pamięci i narzędziach systemu (PowerShell, rejestr), bez zapisywania pliku na dysku; trudniejszy do wykrycia antywirusem."
-H021;trojan;trojan;trojan;;;;Udaje legalny program.
-H022;RAT;RAT (trojan zdalnego dostępu);RAT;;;;Daje napastnikowi zdalną kontrolę nad maszyną.
-H023;backdoor;backdoor (tylna furtka);backdoor;;;tyln\w+ (?:furt\w+|drzwi);"Ukryty dostęp do systemu; bywa też wbudowany w sprzęt."
-H024;multi-stage infection chain;wieloetapowa infekcja;wieloetapowa infekcja;;;;Łańcuch kolejnych kroków instalacji malware.
-H025;virus;wirus;wirus;;;;Złośliwy kod, który rozprzestrzenia się, doklejając się do plików lub programów, i wymaga działania użytkownika (np.
-H026;obfuscation;obfuskacja (zaciemnianie kodu);obfuskacja;;;;Utrudnia analizę i wykrycie.
-H027;malicious package (npm);złośliwa paczka;złośliwa paczka;;;;Podrobiony lub zatruty pakiet w repozytorium kodu.
-H028;malware;malware (złośliwe oprogramowanie);malware;;;złośliw\w+ oprogramowa\w+;"Ogólna nazwa programów szkodliwych; W Security+ także „malicious code” – złośliwy kod w skryptach i aplikacjach."
-H029;malicious browser extension;złośliwe rozszerzenie przeglądarki;złośliwe rozszerzenie przeglądarki;;;;Wtyczka kradnąca dane lub przekierowująca ruch (np.
-H030;watering hole attack;watering hole (atak przy wodopoju);watering hole;;;;Zainfekowanie strony często odwiedzanej przez wybraną grupę (np.
-H031;ClickFix;ClickFix;ClickFix;;;;Ofiara sama uruchamia „naprawcze” polecenie.
-H032;investment scam;fałszywa inwestycja;fałszywa inwestycja;;;;Oszustwo wabiące „okazyjną” inwestycją w sieci.
-H033;urgent-transfer scam;fałszywa prośba o szybki przelew;fałszywa prośba o szybki przelew;;;;Wiadomość naciskająca na szybkie wykonanie przelewu na wskazane konto.
-H034;scam call center;fałszywe call center;fałszywe call center;;;;"Oszukańcze centra dzwoniące do ofiar; ukraińska SBU wspólnie z policją zamknęła 94 takie ośrodki."
-H035;QR-code phishing (quishing);quishing (fałszywy kod QR);quishing;;;;Oszustwo z fałszywymi kodami QR, np.
-H036;fake consultant scam;fałszywy konsultant;fałszywy konsultant;;;;Oszust podszywający się pod konsultanta (np.
-H037;fake online shop;fałszywy sklep internetowy;fałszywy sklep internetowy;;;;Sklep-atrapa wyłudzający pieniądze lub dane płatnicze.
-H038;malicious attachment;fałszywy załącznik;fałszywy załącznik;;;;Załącznik w mailu udający zwykły dokument, a w rzeczywistości złośliwy.
-H039;pretexting;pretexting (historyjka, legendowanie);pretexting;;;;Sztuka kłamstwa w socjotechnice: historyjka typu „jestem technikiem IT”, żeby ofiara sama oddała hasło.
-H040;scam;oszustwo;oszustwo;;;;Potocznie każde wyłudzenie.
-H041;BEC;BEC (oszustwo na e-mail firmowy);BEC;;;;Fałszywy lub przejęty mail w firmie, np.
-H042;phishing;phishing;phishing;;;;Wyłudzanie danych przez podszywanie się pod zaufany podmiot.
-H043;vishing;vishing (phishing głosowy);vishing;;;;Wyłudzanie przez telefon.
-H044;device code phishing;device code phishing (phishing kodami urządzeń);device code phishing;;;;Nadużycie logowania kodem wpisywanym na innym urządzeniu.
-H045;AiTM phishing;phishing typu AiTM;phishing typu AiTM;;;;"Phishing, w którym napastnik pośredniczy między ofiarą a usługą i przechwytuje sesję; opisano kampanię prowadzącą do BEC."
-H046;spear phishing;spear phishing (phishing ukierunkowany);spear phishing;;;;Phishing przygotowany pod konkretną osobę lub firmę, z użyciem informacji o niej (np.
-H047;web bug (tracking pixel);piksel śledzący;piksel śledzący;;;;Niewidoczny obrazek w wiadomości lub na stronie, który zdradza nadawcy, że wiadomość otwarto (adres IP, czas, program).
-H048;shoulder surfing;shoulder surfing (podglądanie przez ramię);shoulder surfing;;;;"Podglądanie ekranu lub klawiatury (z bliska albo przez kamerę), żeby poznać hasło czy PIN; ochroną są m.in."
-H049;spoofing / impersonation;spoofing (podszywanie się);spoofing;;;;Udawanie zaufanej osoby lub marki.
-H050;brand impersonation;podszywanie się pod markę;podszywanie się pod markę;;;;Fałszywe strony, profile i wiadomości udające znaną firmę (bank, kurier, sklep), często promowane reklamami.
-H051;BitB;BitB (przeglądarka w przeglądarce);BitB;;;;Fałszywe okno logowania rysowane wewnątrz strony.
-H052;dumpster diving;dumpster diving (przeszukiwanie śmieci);dumpster diving;;;;"Szukanie w wyrzuconych dokumentach i nośnikach informacji przydatnych do ataku; ochroną jest niszczenie dokumentów i nośników."
-H053;lure;przynęta;przynęta;;;;Element zwabiający ofiarę.
-H054;smishing;smishing;smishing;;;;Phishing przez SMS lub komunikatory, np.
-H055;social engineering;socjotechnika;socjotechnika;;;;Manipulacja człowiekiem zamiast atak na system.
-H056;spam;spam;spam;;;;"Niechciane masowe wiadomości; bywają nośnikiem phishingu i złośliwych załączników."
-H057;typosquatting (URL hijacking);typosquatting (domeny z literówką);typosquatting;;;;Rejestrowanie domen z literówkami w nazwach znanych serwisów (np.
-H058;tailgating (piggybacking);tailgating (wejście „na doczepkę”);tailgating;;;;"Wejście do strefy chronionej tuż za uprawnioną osobą, bez własnej karty; ochroną jest m.in."
-H059;threat vectors (message-based, image-based, file-based, voice call, removable device);wektory zagrożeń: wiadomości, obrazy, pliki, połączenia głosowe, nośniki;wektory zagrożeń: wiadomości, obrazy, pliki, połączenia głosowe, nośniki;;;;Drogi, którymi atak dociera do ofiary: wiadomości (e-mail, SMS, MMS, komunikatory), obrazy (np.
-H060;whaling;whaling;whaling;;;;Phishing ukierunkowany na kadrę kierowniczą („grube ryby”), często połączony z oszustwem BEC.
-H061;SIM swapping;SIM swapping (zamiana karty SIM);SIM swapping;;;;"Przejęcie numeru telefonu ofiary przez przeniesienie go na kartę SIM napastnika; pozwala m.in."
-H062;malvertising;malvertising (złośliwe reklamy);malvertising;;;;Rozpowszechnianie malware lub wyłudzanie danych przez fałszywe reklamy (np.
-H063;supply chain attack;atak na łańcuch dostaw;atak na łańcuch dostaw;;;;Uderzenie przez dostawcę lub zależność w oprogramowaniu.
-H064;XXE;XXE (atak przez zewnętrzne encje XML);XXE;;;;Plik XML zawiera odwołanie do zewnętrznego zasobu, a źle skonfigurowany czytnik XML posłusznie go wczytuje – np.
-H065;arbitrary file read;arbitrary file read (dowolny odczyt plików);arbitrary file read;;;;"Luka pozwalająca odczytać dowolne pliki serwera; „pre-auth” oznacza bez logowania."
-H066;CSRF;CSRF (fałszowanie żądań między witrynami);CSRF;;;;Złośliwa strona sprawia, że przeglądarka zalogowanego użytkownika wysyła do innego serwisu polecenie, np.
-H067;SSRF;SSRF (fałszowanie żądań po stronie serwera);SSRF;;;;Napastnik zmusza serwer, żeby w jego imieniu połączył się z adresem, do którego sam nie ma dostępu, np.
-H068;insecure deserialization;niebezpieczna deserializacja;niebezpieczna deserializacja;;;;Przetwarzanie niezaufanych danych na obiekty, co może prowadzić do wykonania kodu.
-H069;unrestricted file upload;nieograniczone wgrywanie plików;nieograniczone wgrywanie plików;;;;Aplikacja pozwala wgrać plik dowolnego typu, np.
-H070;Broken Access Control;Broken Access Control (nieprawidłowa kontrola dostępu);Broken Access Control;;;;"Niewłaściwa weryfikacja uprawnień użytkownika, przez którą można uzyskać dostęp do funkcji i danych, które powinny być niedostępne; zwykle wynika z braku autoryzacji po stronie serwera."
-H071;IDOR;IDOR (niezabezpieczone odwołanie do obiektu);IDOR;;;;Błąd, w którym zmiana identyfikatora w żądaniu (np.
-H072;open redirect;open redirect (otwarte przekierowanie);open redirect;;;;Podatność pozwalająca przekierować użytkownika z zaufanej strony na adres wskazany przez atakującego.
-H073;typosquatting (packages);typosquatting paczek (podszywanie się nazwą paczki);typosquatting paczek;;;;Publikowanie złośliwych paczek o nazwach łudząco podobnych do popularnych (literówka, myślnik zamiast podkreślnika), licząc na pomyłkę programisty przy instalacji.
-H074;dependency confusion;dependency confusion (pomylenie zależności);dependency confusion;;;;Firma korzysta z wewnętrznej paczki o jakiejś nazwie, a napastnik publikuje w publicznym repozytorium paczkę o tej samej nazwie i wyższym numerze wersji.
-H075;directory (path) traversal;path traversal (przechodzenie po katalogach);path traversal;;;;Użycie sekwencji typu ../ do wyjścia poza wskazany katalog i dostępu do plików.
-H076;clickjacking;clickjacking (przechwytywanie kliknięć);clickjacking;;;;Napastnik osadza prawdziwą stronę w niewidocznej ramce i podsuwa pod nią przycisk-przynętę.
-H077;maintainer takeover;maintainer takeover (przejęcie projektu przez opiekuna);maintainer takeover;;;;Napastnik przejmuje konto opiekuna projektu open source albo latami zdobywa zaufanie, żeby sam zostać opiekunem – a potem publikuje złośliwe wersje.
-H078;HTTP request smuggling;HTTP request smuggling (przemycanie żądań HTTP);HTTP request smuggling;;;;Serwer pośredniczący i serwer docelowy różnie odczytują, gdzie kończy się jedno żądanie, a zaczyna drugie.
-H079;ASCII smuggling;ASCII smuggling (przemyt ASCII);ASCII smuggling;;;;Niewidoczne znaki Unicode omijające filtry.
-H080;buffer overflow;przepełnienie bufora;przepełnienie bufora;;;;"Program dostaje więcej danych, niż przewidziano miejsca w pamięci (buforze); nadmiar nadpisuje sąsiednie obszary, a jeśli jest precyzyjny, może zmusić procesor do wykonania cudzego kodu."
-H081;race condition;race condition (sytuacja wyścigu);race condition;;;;Błąd, który pojawia się, gdy dwie operacje dzieją się jednocześnie, a program zakłada, że będą po kolei.
-H082;file inclusion;file inclusion (włączanie plików);file inclusion;;;;Podatność aplikacji webowej polegająca na włączeniu do niej pliku wskazanego przez atakującego (lokalnego lub zdalnego).
-H083;DLL injection;DLL injection (wstrzyknięcie biblioteki DLL);DLL injection;;;;Złośliwe oprogramowanie (malware) wymusza na już uruchomionym, bezpiecznym procesie (np.
-H084;log injection;log injection (wstrzyknięcie do logów);log injection;;;;Napastnik przemyca do zapisywanego tekstu znaki, które fałszują wpisy w logach (np.
-H085;memory injection (process injection);process injection (wstrzyknięcie do pamięci procesu);process injection;;;;Umieszczenie złośliwego kodu w pamięci działającego procesu, żeby działał w jego imieniu i z jego uprawnieniami (wariant: wstrzyknięcie DLL).
-H086;command injection;command injection (wstrzyknięcie poleceń systemowych);command injection;;;;Wykonanie poleceń systemu operacyjnego podsuniętych przez atakującego za pośrednictwem podatnej aplikacji.
-H087;prompt injection;prompt injection (wstrzyknięcie promptu);prompt injection;;;;Podsuwanie modelowi AI własnych instrukcji.
-H088;SQL injection;SQL injection (wstrzyknięcie SQL);SQL injection;;;;Podsuwanie poleceń bazie danych przez formularz lub parametr.
-H089;XSS;XSS;XSS;;;;Wstrzyknięcie skryptu do strony.
-H090;RCE;RCE (zdalne wykonanie kodu);RCE;;;zdaln\w+ wykonani\w+ kodu | remote code execution;Określenie „pre-auth” oznacza atak bez logowania.
-H091;malicious update;złośliwa aktualizacja;złośliwa aktualizacja;;;;Aktualizacja z ukrytym złośliwym kodem, dostarczona kanałem producenta (np.
-H092;active attack;atak aktywny;atak aktywny;;;;Atak, który zmienia stan systemu lub danych, w odróżnieniu od ataku pasywnego (np.
-H093;zero-click attack;zero-click (atak bez klikania);zero-click;;;;"Atak, w którym ofiara nie musi klikać linku ani załącznika; wystarczy np."
-H094;brute force attack;brute force (atak siłowy);brute force;;;;Zgadywanie haseł lub kluczy przez systematyczne próby.
-H095;DDoS;atak DDoS;atak DDoS;;;;Zalew ruchu blokujący usługę.
-H096;deauthentication attack / RF jamming;atak deautentykacyjny / zagłuszanie radiowe;atak deautentykacyjny / zagłuszanie radiowe;;;;Odłączanie urządzeń od Wi-Fi fałszywymi ramkami zarządzającymi albo zagłuszanie sygnału radiowego – ataki DoS na sieć bezprzewodową.
-H097;DoS;atak DoS;atak DoS;;;;Unieruchomienie usługi lub urządzenia.
-H098;environmental attacks;ataki środowiskowe;ataki środowiskowe;;;;Atak na otoczenie systemów: wyłączenie zasilania, klimatyzacji i wentylacji (HVAC), uruchomienie systemu gaśniczego.
-H099;character encoding attacks;ataki z użyciem kodowania znaków;ataki z użyciem kodowania znaków;;;;Przemycanie złośliwych danych w nietypowym kodowaniu (np.
-H100;side-channel attack;atak kanałem bocznym;atak kanałem bocznym;;;;"Wnioskowanie o danych z niezamierzonych wycieków informacji z działania systemu (czas, pobór mocy, emisje elektromagnetyczne i akustyczne; w artykule NBZ: odbicia fal Wi-Fi)."
-H101;kinetic attack;atak kinetyczny;atak kinetyczny;;;;Fizyczny atak na infrastrukturę (np.
-H102;blended attack;atak kombinowany;atak kombinowany;;;;Atak łączący jednocześnie kilka metod i środków.
-H103;KRACK;atak KRACK;atak KRACK;;;;Atak na WPA2 polegający na ponownym instalowaniu kluczy szyfrujących.
-H104;downgrade attack;downgrade attack (atak obniżenia wersji);downgrade attack;;;;Wymuszenie użycia starszego, słabszego protokołu lub szyfru (np.
-H105;identity-based attack;atak oparty na tożsamości;atak oparty na tożsamości;;;;Napastnik loguje się lub przejmuje konta zamiast wgrywać malware (np.
-H106;passive attack;atak pasywny;atak pasywny;;;;"Atak bez zmiany danych i systemu – podsłuch, analiza ruchu; trudny do wykrycia (por."
-H107;replay attack;replay attack (atak powtórzeniowy);replay attack;;;;Ponowne wysłanie przechwyconych, poprawnych danych (np.
-H108;dictionary attack;atak słownikowy;atak słownikowy;;;;Zgadywanie hasła z listy popularnych haseł i słów (często z wycieków) zamiast sprawdzania wszystkich kombinacji.
-H109;Smurf attack;atak smurf;atak smurf;;;;Starszy atak DoS: wysłanie pakietów ICMP echo (ping) na adres rozgłoszeniowy sieci ze sfałszowanym adresem ofiary – wszystkie hosty odpowiadają ofierze.
-H110;on-path attack (man-in-the-middle, MitM);man-in-the-middle / on-path (człowiek pośrodku);man-in-the-middle / on-path;;;;Napastnik ustawia się między stronami komunikacji i podsłuchuje lub zmienia ruch (np.
-H111;birthday attack / hash collision;atak urodzinowy / kolizja skrótu;atak urodzinowy / kolizja skrótu;;;;Kolizja – dwa różne dane dają ten sam skrót.
-H112;DDoS-for-hire (booter/stresser);DDoS-for-hire (DDoS na zlecenie);DDoS-for-hire;;;;Usługa wynajmu ataków.
-H113;DNS rebinding;DNS rebinding;DNS rebinding;;;;Atak na usługi w sieci lokalnej z Internetu przez manipulację odpowiedziami DNS.
-H114;exfiltration;eksfiltracja, wykradanie danych;eksfiltracja, wykradanie danych;;;;Wynoszenie skradzionych danych z sieci ofiary do infrastruktury napastnika, np.
-H115;IP spoofing;IP spoofing (fałszowanie adresu IP);IP spoofing;;;;Podawanie fałszywego adresu źródłowego w pakietach IP, np.
-H116;MAC address spoofing;MAC spoofing (fałszowanie adresu MAC);MAC spoofing;;;;Podanie cudzego adresu MAC karty sieciowej, żeby obejść filtrowanie MAC, podszyć się pod urządzenie lub ominąć kontrolę dostępu do sieci.
-H117;Google dorking;Google dorking (operatory wyszukiwania);Google dorking;;;;Wyszukiwanie z operatorami (np.
-H118;RFID cloning;klonowanie RFID;klonowanie RFID;;;;Skopiowanie identyfikatora z karty dostępu (zbliżeniowej) i użycie kopii do wejścia do budynku.
-H119;payload;payload (ładunek);payload;;;;Gotowy kod lub skrypt (do wklejenia, np.
-H120;cyber kill chain;cyber kill chain (łańcuch cyberataku);cyber kill chain;;;;"Model kolejnych etapów ataku; Kapitan Hack prowadzi kampanię „Cyber Killchain”."
-H121;tampering;tampering (manipulacja, nieuprawniona zmiana);tampering;;;;"Celowa, nieuprawniona zmiana danych, oprogramowania lub sprzętu; chronią przed nią sumy kontrolne, podpisy cyfrowe, plomby i czujniki otwarcia obudowy."
-H122;route table manipulation / BGP hijacking;BGP hijacking (manipulacja tablicą routingu);BGP hijacking;;;;"Wprowadzanie fałszywych tras, żeby przekierować ruch przez sieć napastnika lub go zablokować; w internecie – ogłoszenie cudzych prefiksów w BGP."
-H123;compromise;naruszenie, kompromitacja (systemu);naruszenie, kompromitacja;;;;"Ujawnienie, zmiana lub utrata kontroli nad systemem albo danymi; „skompromitowany system” to system przejęty przez napastnika."
-H124;Nmap;Nmap;Nmap;;;;Darmowy skaner sieci: wykrywa hosty, otwarte porty, usługi i systemy.
-H125;acoustic keystroke recovery;odtwarzanie tekstu z dźwięku klawiatury;odtwarzanie tekstu z dźwięku klawiatury;;;;Atak kanałem bocznym: wnioskowanie o naciskanych klawiszach z nagrania dźwięku.
-H126;reverse shell;reverse shell (odwrócona powłoka);reverse shell;;;;„Święty Graal” hakera: przejęty serwer sam łączy się z komputerem atakującego i daje mu pełną władzę nad terminalem ofiary.
-H127;vertical / horizontal privilege escalation;pionowa i pozioma eskalacja uprawnień;pionowa i pozioma eskalacja uprawnień;;;;Pionowa: zwykły użytkownik wykonuje operacje administratora.
-H128;eavesdropping / tapping;podsłuch (podsłuch łącza);podsłuch;;;;Przechwytywanie transmisji: podsłuch kabla lub światłowodu, odbiór sygnału radiowego, nasłuch ruchu w sieci.
-H129;domain hijacking;przejęcie domeny;przejęcie domeny;;;;Przejęcie kontroli nad rejestracją domeny (np.
-H130;account takeover;przejęcie konta;przejęcie konta;;;;"Uzyskanie kontroli nad cudzym kontem (skrzynka pocztowa, media społecznościowe, strona); CERT Polska ma osobne ścieżki postępowania."
-H131;dangling DNS / subdomain takeover;subdomain takeover (przejęcie subdomeny, wiszący DNS);subdomain takeover;;;;Wykorzystanie porzuconych rekordów DNS do przejęcia subdomeny organizacji.
-H132;VLAN hopping;VLAN hopping (przeskakiwanie między VLAN-ami);VLAN hopping;;;;Uzyskanie dostępu do ruchu innego VLAN-u przez podszycie się pod przełącznik (switch spoofing) albo podwójne tagowanie ramek.
-H133;active / passive reconnaissance;rekonesans aktywny / pasywny (rozpoznanie);rekonesans aktywny / pasywny;;;;Pasywne – zbieranie informacji bez kontaktu z celem (OSINT, DNS, media społecznościowe).
-H134;password spraying;password spraying (rozpylanie haseł);password spraying;;;;Odwrotność zgadywania hasła do jednego konta: napastnik próbuje kilku popularnych haseł na bardzo wielu kontach naraz, żeby nie uruchomić blokady po nieudanych próbach.
-H135;lateral movement;lateral movement (ruch boczny, pivot);lateral movement;;;;Po zdobyciu pierwszego przyczółka napastnik przemieszcza się po sieci z jednego zainfekowanego urządzenia na kolejne, szukając zasobów o wyższym uprzywilejowaniu.
-H136;port scanning;skanowanie portów;skanowanie portów;;;;Sprawdzanie, które porty hosta są otwarte i jakie usługi na nich działają (np.
-H137;skimming / forced entry;skimming i wejście siłowe;skimming i wejście siłowe;;;;"Skimming – kopiowanie danych karty płatniczej lub dostępowej nakładką na czytnik; wejście siłowe – fizyczne wyważenie drzwi, okna, zamka."
-H138;SSL stripping;SSL stripping (usuwanie szyfrowania);SSL stripping;;;;Atak on-path, w którym napastnik zamienia połączenie HTTPS ofiary na HTTP i odczytuje dane w jawnej postaci.
-H139;tradecraft;tradecraft (warsztat napastnika);tradecraft;;;;Typowe metody i nawyki grupy.
-H140;credential stuffing;credential stuffing (wypychanie danych logowania);credential stuffing;;;;Automatyczne próby logowania parami login-hasło wykradzionymi z innych serwisów.
-H141;DNS / NTP/ ICMP amplification;DNS / NTP / ICMP amplification (wzmocniony DDoS);DNS / NTP / ICMP amplification;;;;Wykorzystanie serwerów DNS (albo NTP, ICMP) do zwielokrotnienia siły ataku DDoS - sfałszowane zapytania np.
-H142;electromagnetic interference (EMI);zakłócenia elektromagnetyczne;zakłócenia elektromagnetyczne;;;;"Zakłócenia sygnału przez pole elektromagnetyczne (celowe lub przypadkowe); utrata danych lub dostępności."
-H143;SYN flood;SYN flood (zalewanie pakietami SYN);SYN flood;;;;Atak DoS: wysyłanie masy żądań SYN (często z fałszywych adresów) bez dokończenia połączenia, żeby wyczerpać pulę półotwartych połączeń serwera.
-H144;UDP flood;UDP flood (zalewanie pakietami UDP);UDP flood;;;;"Atak DoS: zasypanie celu dużą liczbą pakietów UDP na losowe porty; serwer marnuje zasoby na odpowiedzi ICMP „port nieosiągalny”."
-H145;switch flooding / MAC flooding;MAC flooding (zalewanie przełącznika);MAC flooding;;;;"Zasypanie przełącznika fałszywymi adresami MAC, aż przepełni się jego tablica; przełącznik zaczyna wtedy rozsyłać ruch na wszystkie porty i napastnik może go podsłuchać."
-H146;ARP poisoning (ARP spoofing);ARP spoofing / ARP poisoning (zatruwanie ARP);ARP spoofing / ARP poisoning;;;;Wysyłanie w sieci lokalnej fałszywych odpowiedzi ARP, żeby ruch ofiary szedł przez komputer napastnika (atak on-path).
-H147;DNS cache poisoning / DNS spoofing;DNS spoofing / cache poisoning (zatruwanie pamięci DNS);DNS spoofing / cache poisoning;;;;Podsuwanie fałszywych wpisów do pamięci DNS, by kierować ofiary na inne adresy IP.
-H148;Living off the Land (LotL);Living off the Land, LotL (atak narzędziami zastanymi w systemie);Living off the Land;;;;Technika polegająca na niewgrywaniu własnych narzędzi: napastnik używa tylko tego, co zastał w systemie (np.
-H149;misconfiguration;błędna konfiguracja;błędna konfiguracja;;;;Ustawienia, które otwierają drogę atakowi: publiczny zasobnik w chmurze, domyślne hasła, zbędne usługi, zbyt szerokie uprawnienia, wyłączone logowanie.
-H150;CVE;CVE;CVE;;;;Publiczny numer identyfikacyjny podatności.
-H151;CVSS;CVSS;CVSS;;;;Skala groźności podatności 0–10.
-H152;PoC;PoC (dowód słuszności koncepcji);PoC;;;dow[oó]d\w* koncepcji;Minimalny, demonstracyjny kod badacza bezpieczeństwa, który dowodzi, że podatność istnieje i da się ją wykorzystać w praktyce.
-H153;exploit (kit);exploit, zestaw exploitów;exploit;kod wykorzystujący podatność;nie spolszczaj;eksploit\w*;Kod wykorzystujący lukę.
-H154;CISA KEV;CISA KEV (katalog luk wykorzystywanych w atakach);CISA KEV;;;;Prowadzona przez amerykańską agencję CISA lista luk, o których wiadomo, że są wykorzystywane w prawdziwych atakach.
-H155;CWE;CWE (katalog typów słabości);CWE;;;;Prowadzony przez MITRE katalog typów błędów w oprogramowaniu i sprzęcie.
-H156;EOL / EOSL;EOL / EOSL (koniec wsparcia producenta);EOL / EOSL;;;;"EOL – producent kończy sprzedaż; EOSL – kończy też wydawanie poprawek."
-H157;NVD;NVD (krajowa baza podatności USA);NVD;;;;Prowadzona przez NIST baza, która uzupełnia rekordy CVE o ocenę CVSS, typ słabości (CWE) i listę podatnych produktów.
-H158;CWE Top 25;CWE Top 25 (25 najgroźniejszych słabości);CWE Top 25;;;;Coroczne zestawienie MITRE i CISA 25 typów słabości, które najczęściej prowadzą do groźnych luk, liczone na podstawie rzeczywistych danych CVE.
-H159;zero-day;zero-day, 0-day (luka dnia zerowego);zero-day;;;(?:podatnoś|luk)\w* dnia zerowego;Wykorzystywana, zanim producent wydał poprawkę.
-H160;actively exploited vulnerability;luka aktywnie wykorzystywana;luka aktywnie wykorzystywana;;;;"Podatność wykorzystywana w rzeczywistych atakach; ostrzeżenia o takich lukach publikuje m.in."
-H161;n-day;luka n-day;luka n-day;;;;Znana i załatana, ale ofiary jeszcze nie wdrożyły poprawki.
-H162;patch gap;patch gap (luka we wdrażaniu poprawek);patch gap;;;;Czas między publikacją poprawki a jej instalacją.
-H163;rogue devices / unmanaged systems;rogue devices (nieautoryzowane i niezarządzane urządzenia);rogue devices;;;;Urządzenia podłączone bez zgody (np.
-H164;vulnerability;podatność, luka;podatność;;"nie dopisuj „(luka)” w nawiasie; słowa „luka” możesz używać zamiennie";\(luk\w*\);Słabość w kodzie lub konfiguracji, którą można wykorzystać.
-H165;resource reuse;ponowne użycie zasobów (wirtualizacja);ponowne użycie zasobów;;;;Pamięć lub dysk przydzielone wcześniej innej maszynie wirtualnej nie zostały wyczyszczone, więc nowa maszyna może odczytać cudze dane.
-H166;patch;poprawka, łatka;łatka;;;poprawk\w*|poprawce|poprawek | (?:s|za)?patch(?:uj|ow)\w*;Patch Tuesday = comiesięczny cykl poprawek Microsoftu.
-H167;public repositories / public object storage;publiczne repozytoria i publiczne zasobniki danych;publiczne repozytoria i publiczne zasobniki danych;;;;Kod i dane wystawione publicznie przez pomyłkę: repozytorium z sekretami (hasła, klucze), zasobnik w chmurze (np.
-H168;shadow IT;shadow IT;shadow IT;;;;"Sprzęt, oprogramowanie i usługi chmurowe używane w firmie bez wiedzy i zgody działu IT; poza kontrolą, łataniem i monitoringiem."
-H169;EPSS;EPSS (wskaźnik prawdopodobieństwa wykorzystania luki);EPSS;;;;Model organizacji FIRST szacujący, jak prawdopodobne jest wykorzystanie danej luki w ciągu najbliższych 30 dni.
-H170;Active Directory;Active Directory;Active Directory;;;;Usługa katalogowa Windows w firmach.
-H171;NTLM relay attack;NTLM relay (atak przekaźnikowy NTLM);NTLM relay;;;;"Przekazywanie cudzego uwierzytelnienia NTLM do innej usługi; jeden z najprostszych sposobów naruszenia hostów domenowych."
-H172;authorization;autoryzacja;autoryzacja;;;;"Zezwolenie dla użytkownika, procesu lub urządzenia na wykonywanie określonych czynności; następuje po uwierzytelnieniu."
-H173;biometrics;biometria;biometria;;;;Uwierzytelnianie na podstawie cech ciała lub zachowania („coś, czym jesteś”): odcisk palca, twarz, głos, tęczówka.
-H174;Protected Actions;Protected Actions (chronione akcje w Entra ID);Protected Actions;;;;Funkcja Microsoft Entra ID zabezpieczająca wrażliwe operacje administracyjne dodatkową weryfikacją.
-H175;session cookie;ciasteczko sesyjne;ciasteczko sesyjne;;;;Jego kradzież = przejęcie sesji (session hijacking).
-H176;authentication factors (something you know / have / are, somewhere you are);czynniki uwierzytelniania;czynniki uwierzytelniania;;;;Coś, co wiesz (hasło, PIN), coś, co masz (telefon, token), coś, czym jesteś (biometria), gdzie jesteś (lokalizacja).
-H177;dMSA;dMSA (delegowane konto zarządzane);dMSA;;;;"Typ konta serwisowego w Windows Server 2025; opisano podatność umożliwiającą przejęcie domeny."
-H178;DMARC;DMARC;DMARC;;;;"Reguły oparte na SPF i DKIM, wskazujące serwerowi odbiorcy, co zrobić z wiadomością niespełniającą weryfikacji (none / quarantine / reject); bierze pod uwagę pole From widoczne dla użytkownika."
-H179;password best practices (length, complexity, reuse, expiration, age);dobre praktyki dotyczące haseł;dobre praktyki dotyczące haseł;;;;"Długość (najważniejsza), złożoność, zakaz ponownego użycia, zasady wygasania i minimalnego wieku hasła; obecne zalecenia NIST stawiają na długość i listy zakazanych haseł zamiast częstych zmian."
-H180;deny by default;domyślna odmowa dostępu;domyślna odmowa dostępu;;;;Zasada, że dostęp jest zabroniony, dopóki nie zostanie jawnie przyznany.
-H181;default passwords;domyślne hasła;domyślne hasła;;;;Fabryczne, niezmienione.
-H182;privilege escalation;podwyższenie (eskalacja) uprawnień;podwyższenie uprawnień;eskalacja;;eskalacj\w* uprawnień | podniesieni\w* uprawnień;Zdobycie wyższych uprawnień, np.
-H183;federation;federacja tożsamości;federacja tożsamości;;;;Zaufanie między organizacjami, dzięki któremu użytkownik loguje się kontem z jednej z nich (np.
-H184;cookie security flags (HttpOnly, Secure, SameSite);flagi ochronne ciasteczek;flagi ochronne ciasteczek;;;;"Ustawienia ciasteczek, które utrudniają ich kradzież i nadużycie: HttpOnly – niedostępne dla skryptów na stronie; Secure – wysyłane tylko szyfrowanym połączeniem; SameSite – ograniczają wysyłanie przy żądaniach z innych stron."
-H185;recovery (seed) phrase;seed phrase (fraza odzyskiwania portfela);seed phrase;;;;"Zestaw słów pozwalający odzyskać portfel kryptowalutowy; kradziony w kampaniach z fałszywymi reklamami."
-H186;Kerberoasting;Kerberoasting;Kerberoasting;;;;Żądanie biletów usługowych do kont z SPN i łamanie ich offline, by odzyskać hasła kont serwisowych.
-H187;hardware security key;klucz sprzętowy;klucz sprzętowy;;;;Fizyczne urządzenie do silnego uwierzytelniania, np.
-H188;passkeys;passkeys (klucze dostępu);passkeys;;;;Logowanie bez hasła, oparte na kryptografii.
-H189;root;konto root;konto root;;;;Konto administratora w systemach Linux/Unix.
-H190;service account;konto serwisowe;konto serwisowe;;;;"Konto używane przez aplikacje i zautomatyzowane procesy; w AD ważny cel ataków."
-H191;access control (AC);kontrola dostępu;kontrola dostępu;;;;Proces przyznawania lub odmawiania dostępu do informacji, usług i obiektów fizycznych oraz zbiór reguł, według których to się odbywa.
-H192;ABAC;ABAC (kontrola dostępu oparta na atrybutach);ABAC;;;;Decyzja o dostępie na podstawie wielu atrybutów: użytkownika, zasobu, lokalizacji, czasu, urządzenia.
-H193;RBAC / rule-based access control;RBAC / rule-based (kontrola dostępu oparta na rolach / regułach);RBAC / rule-based;;;;RBAC – uprawnienia przypisane do ról (np.
-H194;domain controller (DC);kontroler domeny;kontroler domeny;;;;"Serwer AD uwierzytelniający użytkowników; luki na kontrolerach są zwykle groźniejsze niż na zwykłych hostach."
-H195;ACL;ACL (lista kontroli dostępu);ACL;;;;Lista wskazująca, kto ma prawo dostępu do danego obiektu i jakie działania może na nim wykonywać.
-H196;LSASS;LSASS;LSASS;;;;Proces Windows odpowiedzialny m.in.
-H197;password manager;menedżer haseł;menedżer haseł;;;;Program przechowujący hasła w zaszyfrowanym sejfie i generujący długie, unikalne hasła do każdego serwisu.
-H198;Microsoft Entra;Microsoft Entra;Microsoft Entra;;;;Platforma tożsamości Microsoftu (dawniej Azure AD).
-H199;IGA;IGA (nadzór nad tożsamościami);IGA;;;;Zarządzanie cyklem życia tożsamości, uprawnieniami i ich przeglądami.
-H200;privilege creep;privilege creep (narastanie uprawnień);privilege creep;;;;"Stopniowe gromadzenie uprawnień przez użytkownika przy zmianach stanowisk, bez odbierania starych; sprzeczne z zasadą najmniejszych uprawnień."
-H201;session fixation;session fixation (narzucenie sesji);session fixation;;;;Napastnik podsuwa ofierze znany sobie identyfikator sesji, a aplikacja nie zmienia go po zalogowaniu.
-H202;OAuth 2.0;OAuth 2.0;OAuth 2.0;;;;Standard delegowania dostępu.
-H203;MAC;MAC (obowiązkowa kontrola dostępu);MAC;;;;Dostęp wynika z etykiet poufności nadanych przez administratora (np.
-H204;OIDC;OpenID Connect;OpenID Connect;;;;Warstwa uwierzytelniania zbudowana na OAuth 2.0 („zaloguj się przez Google/Microsoft”): OAuth daje autoryzację, OIDC dodaje informację, kim jest użytkownik.
-H205;SSO;SSO (pojedyncze logowanie);SSO;;;;Jedno logowanie daje dostęp do wielu aplikacji.
-H206;unmanaged / stale credentials;stale credentials (porzucone poświadczenia);stale credentials;;;;"Konta i klucze, których nikt nie używa ani nie pilnuje (byli pracownicy, stare konta serwisowe, klucze API w skryptach); łatwy cel przejęcia."
-H207;credentials;poświadczenia (dane logowania);poświadczenia;dane logowania;;kredencja\w*;Login, hasło, tokeny.
-H208;identity proofing;potwierdzanie tożsamości;potwierdzanie tożsamości;;;;Sprawdzenie, czy osoba jest tym, za kogo się podaje, zanim dostanie konto lub reset hasła (dokument, wideoweryfikacja, pytania).
-H209;authentication protocols (PAP, CHAP, MS-CHAP, LEAP, PEAP);protokoły uwierzytelniania: PAP, CHAP, MS-CHAP, EAP (LEAP, PEAP);protokoły uwierzytelniania: PAP, CHAP, MS-CHAP, EAP;;;;"PAP przesyła hasło jawnym tekstem; CHAP i MS-CHAP używają wyzwania i odpowiedzi; LEAP (przestarzały) i PEAP to odmiany EAP – PEAP chroni wymianę tunelem TLS."
-H210;Kerberos;protokół Kerberos;protokół Kerberos;;;;Protokół uwierzytelniania w domenach Windows oparty na biletach wydawanych przez centrum dystrybucji kluczy (KDC).
-H211;LDAP / LDAPS;protokół LDAP;protokół LDAP;;;;Protokół dostępu do usług katalogowych (np.
-H212;password storage;przechowywanie haseł;przechowywanie haseł;;;;Sposób bezpiecznego zapisywania haseł w systemie (np.
-H213;RADIUS;RADIUS;RADIUS;;;;Protokół centralnego uwierzytelniania (AAA) w sieciach: Wi-Fi z 802.1X, VPN, urządzenia sieciowe.
-H214;account types (user, privileged, service, third-party, emergency access);rodzaje kont;rodzaje kont;;;;Konta zwykłych użytkowników, uprzywilejowane (globalne i lokalne), serwisowe, kont stron trzecich oraz awaryjne (break-glass) – używane tylko w sytuacji kryzysowej i ściśle monitorowane.
-H215;SoD;SoD (rozdzielenie obowiązków);SoD;;;;Zasada, że jedna osoba nie powinna mieć dwóch uprawnień, które razem pozwalają na nadużycie (np.
-H216;SAML;SAML;SAML;;;;"Standard XML do przekazywania potwierdzeń uwierzytelnienia między dostawcą tożsamości (IdP) a aplikacją; podstawa wielu firmowych SSO."
-H217;secrets;sekrety;sekrety;;;;Klucze API, hasła, tokeny zapisane w plikach i skryptach.
-H218;SPF;SPF;SPF;;;;"Mechanizm, w którym właściciel domeny wskazuje adresy IP serwerów uprawnionych do wysyłki poczty; sam nie chroni przed podszywaniem się pod widoczny adres nadawcy."
-H219;Silver Ticket / Pass-the-Ticket;Silver Ticket, Pass-the-Ticket (srebrny bilet);Silver Ticket;;;;Fałszowanie biletów usługowych (TGS) lub użycie skradzionego biletu, by uwierzytelnić się bez hasła.
-H220;TACACS+;TACACS+;TACACS+;;;;"Protokół AAA (Cisco) używany głównie do kontroli dostępu administratorów do urządzeń sieciowych; szyfruje cały pakiet (RADIUS – tylko hasło)."
-H221;token;token;token;;;;Cyfrowa „przepustka” po zalogowaniu.
-H222;hard / soft authentication token (HOTP, TOTP);token sprzętowy / programowy (HOTP, TOTP);token sprzętowy / programowy;;;;Generator jednorazowych kodów: urządzenie (token sprzętowy) lub aplikacja (programowy).
-H223;non-human identities (NHI);NHI (tożsamości nieludzkie);NHI;;;;"Tożsamości aplikacji, kont serwisowych, botów i agentów; OWASP opublikował pierwszą listę Top 10 zagrożeń dla NHI."
-H224;adaptive identity;tożsamość adaptacyjna;tożsamość adaptacyjna;;;;Uwierzytelnianie dopasowane do ryzyka: system bierze pod uwagę lokalizację, urządzenie, porę i zachowanie, a w razie wątpliwości żąda dodatkowego potwierdzenia.
-H225;service principal;service principal (tożsamość aplikacji);service principal;;;;"Tożsamość aplikacji lub usługi w Azure/Microsoft Entra; przejęta pozwala uzyskać dostęp do zasobów."
-H226;AD persistence;trwałość w Active Directory;trwałość w Active Directory;;;;Techniki utrzymywania niewykrywalnego dostępu w AD, także bez uruchamiania złośliwego kodu.
-H227;just-in-time permissions / password vaulting / ephemeral credentials;uprawnienia just-in-time, sejf haseł, poświadczenia efemeryczne;uprawnienia just-in-time, sejf haseł, poświadczenia efemeryczne;;;;Narzędzia PAM: uprawnienia administratora nadawane tylko na czas zadania, hasła kont uprzywilejowanych przechowywane i rotowane w sejfie, poświadczenia tymczasowe wygasające po użyciu.
-H228;AD CS;AD CS (usługi certyfikatów AD);AD CS;;;;"Wydawanie i unieważnianie certyfikatów w AD; błędna konfiguracja może doprowadzić do kompromitacji całej domeny."
-H229;802.1X / EAP;802.1X / EAP (uwierzytelnianie dostępu do sieci);802.1X / EAP;;;;"802.1X dopuszcza urządzenie do sieci dopiero po uwierzytelnieniu (zwykle przez RADIUS); EAP to rama dla różnych metod uwierzytelniania."
-H230;bidirectional (mutual) authentication;uwierzytelnianie dwukierunkowe (wzajemne);uwierzytelnianie dwukierunkowe;;;;Obie strony połączenia uwierzytelniają się nawzajem, np.
-H231;out-of-band authentication;uwierzytelnianie poza kanałem;uwierzytelnianie poza kanałem;;;;Potwierdzenie tożsamości innym kanałem niż główne logowanie, np.
-H232;MFA / 2FA;MFA / 2FA (uwierzytelnianie wieloskładnikowe);MFA;;;uwierzytelniani\w* wieloskładnikow\w*;Hasło plus drugi składnik.
-H233;AAA;AAA (uwierzytelnienie, autoryzacja, rozliczalność);AAA;;;;Trzy filary kontroli dostępu: kim jest podmiot, co mu wolno i co zrobił.
-H234;authentication;uwierzytelnienie, ustalanie tożsamości;uwierzytelnienie, ustalanie tożsamości;;;;Sprawdzenie tożsamości użytkownika, procesu lub urządzenia albo źródła i integralności danych.
-H235;DAC;DAC (uznaniowa kontrola dostępu);DAC;;;;Właściciel zasobu sam decyduje, komu nadać dostęp (np.
-H236;onboarding / offboarding;onboarding / offboarding (wdrożenie / odejście pracownika);onboarding / offboarding;;;;"Nadanie kont i uprawnień nowej osobie oraz ich odebranie (i zwrot sprzętu) po odejściu; zaniedbany offboarding zostawia aktywne konta."
-H237;FAR / FRR;FAR / FRR (wskaźnik fałszywej akceptacji / odrzucenia);FAR / FRR;;;;"W biometrii: FAR – jak często system wpuszcza niewłaściwą osobę; FRR – jak często odrzuca właściwą."
-H238;authentication coercion;wymuszanie uwierzytelnienia;wymuszanie uwierzytelnienia;;;;Techniki zmuszające system Windows do uwierzytelnienia się w usłudze napastnika (często wstęp do NTLM relay).
-H239;hardcoded password;hardcoded password (hasło zapisane na stałe w kodzie);hardcoded password;;;;Hasło wpisane na stałe w kod lub firmware.
-H240;PAM;PAM (zarządzanie dostępem uprzywilejowanym);PAM;;;;Kontrola kont administratorskich.
-H241;session management;zarządzanie sesją;zarządzanie sesją;;;;Sposób tworzenia, utrzymywania i unieważniania sesji użytkownika w aplikacji.
-H242;IAM;IAM (zarządzanie tożsamością i dostępem);IAM;;;;Procesy i narzędzia decydujące, kto i do czego ma dostęp.
-H243;least privilege;zasada najmniejszych uprawnień;zasada najmniejszych uprawnień;;;;Przyznawanie tylko takich uprawnień, jakie są potrzebne do wykonania zadania.
-H244;need-to-know;zasada potrzeby wiedzy;zasada potrzeby wiedzy;;;;Dostęp do informacji tylko wtedy, gdy jest potrzebny do wykonania zadania – nawet dla osób z wystarczającym poziomem uprawnień.
-H245;Golden Ticket;Golden Ticket (złoty bilet);Golden Ticket;;;;"Sfałszowany bilet TGT (przy znajomości skrótu hasła konta KRBTGT), dający dostęp jako dowolne konto w AD; „całkowita kompromitacja domeny”."
-H246;log aggregation;agregacja logów;agregacja logów;;;;Zbieranie logów z wielu źródeł w jednym miejscu (zwykle w SIEM) w celu korelacji, alertowania i archiwizacji.
-H247;alert;alert (alarm);alert;;;;Powiadomienie o zdarzeniu, które ma lub może mieć negatywne skutki dla organizacji.
-H248;UBA / UEBA;UEBA (analityka zachowań użytkowników);UEBA;;;;Wykrywanie anomalii przez porównanie działań użytkowników i urządzeń z ich typowym zachowaniem (pory, ilość danych, miejsca logowania).
-H249;DFIR;DFIR (analiza powłamaniowa i reagowanie);DFIR;;;;Śledztwo i reagowanie na incydent.
-H250;antivirus (AV) / anti-malware;antywirus / ochrona przed złośliwym oprogramowaniem;antywirus / ochrona przed złośliwym oprogramowaniem;;;;"Oprogramowanie wykrywające złośliwy kod sygnaturami i heurystyką; dziś zwykle część EDR."
-H251;forensic artifact;artefakt śledczy;artefakt śledczy;;;;Ślad w systemie przydatny w analizie incydentu (np.
-H252;guardrails;guardrails (barierki ochronne w automatyzacji);guardrails;;;;Automatyczna kontrola zmian i danych wprowadzanych do systemu, która blokuje działania niezgodne z zasadami.
-H253;security benchmarks / SCAP;benchmarki bezpieczeństwa / SCAP;benchmarki bezpieczeństwa / SCAP;;;;Gotowe wytyczne bezpiecznej konfiguracji (np.
-H254;BIMI;BIMI;BIMI;;;;"Standard wyświetlania logo marki przy wiadomości w skrzynce odbiorcy; działa tylko przy wdrożonym DMARC, więc pomaga rozpoznać prawdziwe wiadomości."
-H255;account lockout;blokada konta;blokada konta;;;;"Automatyczne zablokowanie konta po kilku nieudanych logowaniach; nagła seria blokad to wskaźnik ataku na hasła."
-H256;missing logs / out-of-cycle logging;brakujące logi / logowanie poza cyklem;brakujące logi / logowanie poza cyklem;;;;Luka w logach (np.
-H257;secure email gateway (SEG);secure email gateway, SEG (bramka pocztowa);secure email gateway;;;;System filtrujący pocztę przed dotarciem do skrzynek: antyspam, antywirus, sandbox załączników, przepisywanie linków, kontrola SPF/DKIM/DMARC.
-H258;CASB;CASB (broker bezpieczeństwa dostępu do chmury);CASB;;;;Pośrednik między użytkownikami a usługami chmurowymi: widoczność (shadow IT), zgodność z politykami, DLP, ochrona przed zagrożeniami.
-H259;SOC;SOC (centrum operacji bezpieczeństwa);SOC;;;;Zespół i procesy monitorujące zdarzenia bezpieczeństwa oraz reagujące na incydenty.
-H260;ISAC;ISAC (centrum wymiany i analizy informacji);ISAC;;;;Branżowa organizacja wymiany informacji o zagrożeniach (np.
-H261;certificate of destruction;certyfikat zniszczenia;certyfikat zniszczenia;;;;Dokument od firmy zewnętrznej potwierdzający, że przekazane nośniki zostały zniszczone.
-H262;ISCM;ISCM (ciągłe monitorowanie bezpieczeństwa);ISCM;;;;Stałe śledzenie stanu zabezpieczeń, podatności i zagrożeń, żeby na bieżąco podejmować decyzje dotyczące ryzyka.
-H263;asset lifecycle (acquisition/procurement, assignment/accounting, monitoring/tracking, disposal/decommissioning);cykl życia zasobu: zakup, przypisanie, śledzenie, wycofanie;cykl życia zasobu: zakup, przypisanie, śledzenie, wycofanie;;;;Zarządzanie sprzętem, oprogramowaniem i danymi od zakupu przez przypisanie właściciela i klasyfikacji, inwentaryzację i śledzenie, po bezpieczne wycofanie (oczyszczenie, zniszczenie, certyfikat, retencja).
-H264;time-to-exploit;time-to-exploit (czas do exploita);time-to-exploit;;;;"Czas od ujawnienia podatności do pojawienia się publicznego exploita (w analizie Dragos dla systemów ICS/OT z lat 2010–2021 mediana do pierwszego publicznego exploita wynosiła 24 dni; nowsze raporty z 2026 r."
-H265;sensitive data in logs;dane wrażliwe w logach;dane wrażliwe w logach;;;;Hasła, tokeny, numery kart czy dane osobowe trafiają do plików z logami, do których dostęp ma dużo więcej osób i systemów niż do samej bazy.
-H266;implicit deny;implicit deny (domyślna odmowa w regułach zapory);implicit deny;;;;Ostatnia, niewidoczna reguła zapory: wszystko, co nie pasuje do żadnej reguły zezwalającej, jest blokowane.
-H267;MSP;MSP (dostawca usług zarządzanych);MSP;;;;"Firma zewnętrzna administrująca IT klienta; ma szeroki dostęp do wielu firm naraz, dlatego bywa celem ataków na łańcuch dostaw (np."
-H268;MSSP;MSSP (dostawca zarządzanych usług bezpieczeństwa);MSSP;;;;Firma zewnętrzna świadcząca usługi bezpieczeństwa: SOC jako usługa, monitoring SIEM, zarządzanie zaporami.
-H269;audit log;dziennik audytu;dziennik audytu;;;;Uporządkowany zapis ze znacznikami czasu: kto i co zrobił w systemie.
-H270;EDR;EDR;EDR;;;;"Oprogramowanie monitorujące stacje i serwery, wykrywające zagrożenia i reagujące na nie; napastnicy próbują je wyłączać, także na poziomie jądra."
-H271;exposure, attack surface;ekspozycja, powierzchnia ataku;ekspozycja, powierzchnia ataku;;;;Wszystko, co widać i można zaatakować z internetu.
-H272;incident response lifecycle;etapy reagowania na incydent;etapy reagowania na incydent;;;;Przygotowanie → wykrycie i analiza → powstrzymanie, usunięcie zagrożenia i odtworzenie → wnioski po incydencie (lessons learned).
-H273;false positive;false positive (fałszywy alarm);false positive;;;;System (np.
-H274;web filtering (URL / DNS filtering);filtrowanie treści (URL, DNS);filtrowanie treści;;;;Blokowanie dostępu do szkodliwych lub niedozwolonych stron po adresie, kategorii albo odpowiedzi DNS.
-H275;physical destruction / degaussing;fizyczne niszczenie nośników / demagnetyzacja;fizyczne niszczenie nośników / demagnetyzacja;;;;Trwałe usunięcie danych: zniszczenie nośnika (niszczarka, spalenie) albo silne pole magnetyczne (degaussing) – to drugie nie działa na dyskach SSD.
-H276;honeypot;honeypot (garniec miodu);honeypot;;;;Pułapka na hakera: celowo niezabezpieczony serwer lub system-atrapa, który ma przyciągnąć uwagę cyberprzestępcy.
-H277;digital forensics;informatyka śledcza;informatyka śledcza;;;;Zabezpieczanie i analiza śladów cyfrowych.
-H278;other indicators (blocked content, resource consumption, resource inaccessibility, published/documented);inne wskaźniki: blokada treści, zużycie i niedostępność zasobów, publikacje;inne wskaźniki: blokada treści, zużycie i niedostępność zasobów, publikacje;;;;Wskaźniki złośliwej aktywności z Security+: zablokowana treść (np.
-H279;data sources (vulnerability scans, automated reports, dashboards, packet captures);inne źródła danych: skany, raporty, pulpity;inne źródła danych: skany, raporty, pulpity;;;;Poza logami: wyniki skanów podatności, raporty automatyczne, pulpity (dashboardy) w SIEM, przechwycony ruch sieciowy.
-H280;asset inventory;inwentaryzacja zasobów;inwentaryzacja zasobów;;;;"Ewidencja urządzeń i usług w organizacji; podstawa zarządzania podatnościami."
-H281;crisis communication;komunikacja kryzysowa;komunikacja kryzysowa;;;;"Sposób informowania interesariuszy podczas incydentu; CERT Polska publikuje przewodnik."
-H282;NAC / posture assessment;NAC (kontrola dostępu do sieci, ocena stanu);NAC;;;;"Sprawdzanie urządzenia przed wpuszczeniem do sieci (aktualizacje, antywirus, szyfrowanie); niespełniające wymagań trafia np."
-H283;forensic copy (forensic image);kopia śledcza (binarna);kopia śledcza;;;;"Wierna kopia nośnika bit po bicie, łącznie z obszarami nieprzydzielonymi; zgodność z oryginałem potwierdza się skrótem (hash)."
-H284;backup;kopia zapasowa;kopia zapasowa;;;;"Kopia danych do odtworzenia po awarii lub ataku; ważna także wobec zniszczeń fizycznych."
-H285;automation benefits & considerations;korzyści i ryzyka automatyzacji;korzyści i ryzyka automatyzacji;;;;Korzyści: oszczędność czasu, egzekwowanie konfiguracji bazowych, standardowa infrastruktura, bezpieczne skalowanie, krótszy czas reakcji, odciążenie zespołu (workforce multiplier).
-H286;quarantine;kwarantanna;kwarantanna;;;;Odizolowanie podejrzanego pliku lub urządzenia (np.
-H287;chain of custody;łańcuch dowodowy;łańcuch dowodowy;;;;Dokumentowanie, kto i kiedy miał w rękach dowód cyfrowy, by można go było użyć w sądzie.
-H288;FIM;FIM (monitorowanie integralności plików);FIM;;;;Wykrywanie nieautoryzowanych zmian w ważnych plikach systemowych i konfiguracyjnych (porównanie skrótów).
-H289;negotiation (incident response);negocjacje z napastnikiem;negocjacje z napastnikiem;;;;"Etap obsługi incydentu ransomware: kontakt z przestępcami, zwykle przez wyspecjalizowaną firmę, w porozumieniu z prawnikami i ubezpieczycielem; uwaga na sankcje i przepisy."
-H290;NetFlow / SNMP;NetFlow / SNMP;NetFlow / SNMP;;;;"NetFlow zbiera statystyki ruchu (kto, z kim, ile); SNMP służy do monitorowania urządzeń sieciowych (pułapki – trap)."
-H291;impossible travel;impossible travel (niemożliwa podróż);impossible travel;;;;Logowania tego samego konta z miejsc tak odległych, że w tym czasie nie dałoby się ich przebyć – sygnał przejęcia konta.
-H292;removable media;nośniki wymienne;nośniki wymienne;;;;"Pendrive’y, dyski zewnętrzne, karty pamięci – częsta droga infekcji i wycieku danych; ogranicza się je polityką i blokadą portów USB."
-H293;risk assessment;ocena ryzyka;ocena ryzyka;;;;Ustalanie zagrożeń, prawdopodobieństwa i skutków, aby dobrać właściwe zabezpieczenia.
-H294;behavioural protection;ochrona behawioralna;ochrona behawioralna;;;;Wykrywanie oszustw przez analizę zachowania użytkownika w bankowości elektronicznej.
-H295;rate limiting;rate limiting (ograniczanie liczby żądań);rate limiting;;;;Limit żądań na czas od jednego źródła (np.
-H296;maintenance window;okno serwisowe;okno serwisowe;;;;"Ustalony czas, w którym wolno aktualizować lub wyłączać systemy; w środowiskach OT bywa rzadkie."
-H297;operational security (OPSEC) / situational awareness;OPSEC i świadomość sytuacyjna;OPSEC i świadomość sytuacyjna;;;;"Ochrona informacji przez codzienne zachowania (nie publikować szczegółów pracy, uważać na otoczenie) i czujność na nietypowe sytuacje; temat szkoleń użytkowników."
-H298;fallback;fallback (plan B, wyjście awaryjne);fallback;;;;To funkcja lub system zastępczy.
-H299;playbook;playbook (scenariusz reagowania);playbook;;;;Opisany krok po kroku sposób postępowania w danym typie zdarzenia (np.
-H300;DKIM;podpis DKIM;podpis DKIM;;;;"Podpis kryptograficzny wiadomości weryfikowany kluczem publicznym z DNS; utrudnia podszywanie się i ingerencję w treść, ale sam nie wskazuje, co zrobić z niezgodnym podpisem (do tego służy DMARC)."
-H301;threat hunting;threat hunting (polowanie na zagrożenia);threat hunting;;;;Proaktywne przeszukiwanie środowiska w poszukiwaniu śladów napastnika, zanim zadziała jakikolwiek alert.
-H302;notification / external reporting;powiadamianie i zgłaszanie incydentu;powiadamianie i zgłaszanie incydentu;;;;"Informowanie interesariuszy, klientów, organów ścigania i regulatorów; zgłoszenia obowiązkowe wynikają z przepisów (w Polsce m.in."
-H303;money laundering;pranie pieniędzy;pranie pieniędzy;;;;"Ukrywanie nielegalnego pochodzenia środków; banki śledzą przepływy i szukają „słupów”."
-H304;Prefetch;Prefetch;Prefetch;;;;"Mechanizm Windows zapisujący informacje o uruchamianych programach; cenny artefakt w analizie powłamaniowej."
-H305;precursor / indicator;prekursor / wskaźnik;prekursor / wskaźnik;;;;Wg NIST SP 800-61: prekursor zapowiada, że atak może nastąpić (np.
-H306;packet capture (Wireshark);packet capture, PCAP (przechwytywanie pakietów);packet capture;;;;Zapisanie surowego ruchu sieciowego do analizy, np.
-H307;incident response (IR);reagowanie na incydenty;reagowanie na incydenty;;;;Gaszenie pożarów: mitygujemy skutki wtargnięcia, zabezpieczamy dowody i przywracamy działanie firmy.
-H308;SIGMA rules;reguły SIGMA;reguły SIGMA;;;;Uniwersalny, oparty na zrozumiałym dla ludzi formacie YAML sposób opisu reguł i detekcji w cyberbezpieczeństwie.
-H309;domain reputation;reputacja domeny;reputacja domeny;;;;Ocena zaufania do domeny nadawcy przez systemy poczty.
-H310;"security training types and delivery (initial, ongoing, targeted, corrective; LMS)";rodzaje i formy szkoleń z bezpieczeństwa;rodzaje i formy szkoleń z bezpieczeństwa;;;;"Szkolenia wstępne, cykliczne, ukierunkowane i naprawcze; prowadzone przez platformę e-learningową (LMS), portale samoobsługowe, indywidualnie lub grupowo; mierzone metrykami, raportami i oceną ryzyka zachowań pracowników."
-H311;device placement / security zones / connectivity;rozmieszczenie urządzeń i strefy bezpieczeństwa;rozmieszczenie urządzeń i strefy bezpieczeństwa;;;;Gdzie postawić zaporę, IPS, czujnik czy serwer i jak podzielić sieć na strefy o różnym poziomie zaufania (internet, DMZ, sieć wewnętrzna, strefa serwerów).
-H312;TI;threat intelligence, TI (rozpoznanie zagrożeń);threat intelligence, TI;;;;Wiedza o napastnikach i ich metodach.
-H313;anomalous behavior recognition;rozpoznawanie nietypowych zachowań;rozpoznawanie nietypowych zachowań;;;;Uczenie pracowników rozpoznawania sygnałów ataku lub ryzykownych działań (np.
-H314;VM sprawl;VM sprawl (rozrost porzuconych maszyn wirtualnych);VM sprawl;;;;Niekontrolowany wzrost liczby zapomnianych maszyn wirtualnych, które stają się łatwym celem.
-H315;concurrent session usage;równoczesne sesje;równoczesne sesje;;;;To samo konto używane jednocześnie z kilku miejsc lub urządzeń – możliwy sygnał kradzieży sesji lub poświadczeń.
-H316;SELinux / Group Policy;SELinux / zasady grupy;SELinux / zasady grupy;;;;Mechanizmy centralnego wymuszania ustawień bezpieczeństwa: SELinux (obowiązkowa kontrola dostępu w Linuksie), Group Policy (zasady w Windows / Active Directory).
-H317;network segmentation;segmentacja sieci;segmentacja sieci;;;;Podział sieci na odizolowane segmenty ograniczający rozprzestrzenianie się ataku.
-H318;C2 / C&C;serwer C2;serwer C2;;;;Steruje zainfekowanymi maszynami.
-H319;proxy (forward / reverse);proxy (serwer pośredniczący);proxy;;;;Pośrednik w ruchu: forward proxy dla użytkowników wychodzących do internetu (filtrowanie, cache), reverse proxy przed serwerami (ochrona, równoważenie).
-H320;jump server (jump box);jump server, jump box (serwer przesiadkowy);jump server;;;;Mocno zabezpieczony serwer, przez który administratorzy łączą się z systemami w chronionej strefie sieci.
-H321;honeynet, honeyfile, honeytoken;honeynet, honeyfile, honeytoken (sieć, plik i token-pułapka);honeynet;;;;Rozwinięcie honeypota: cała fałszywa sieć, plik-przynęta (np.
-H322;VPN;sieć VPN;sieć VPN;;;;Szyfrowany tunel do sieci firmowej.
-H323;scanning, enumeration;skanowanie, enumeracja;skanowanie, enumeracja;;;;Wyszukiwanie celów i zasobów w sieci.
-H324;vulnerability disclosure;skoordynowane ujawnianie podatności (CVD);skoordynowane ujawnianie podatności;;;;"Proces zgłaszania podatności producentowi z udziałem koordynatora; w Polsce koordynatorem i „zaufanym pośrednikiem” jest CERT Polska (CSIRT NASK), a wpisy CVE publikuje zwykle po 90 dniach od przekazania szczegółów producentowi."
-H325;money mule;słup;słup;;;;Osoba, której konto służy do przepuszczania nielegalnych środków.
-H326;SOAR;SOAR;SOAR;;;;Platforma automatyzująca reakcje SOC: wykonuje playbooki (np.
-H327;SSH;SSH (zdalne logowanie);SSH;;;;Szyfrowany protokół zdalnego logowania do serwerów.
-H328;attack signature;sygnatura ataku;sygnatura ataku;;;;Charakterystyczny wzorzec (np.
-H329;phishing simulation (campaign);symulacja phishingu;symulacja phishingu;;;;Wysyłanie pracownikom kontrolowanych, fałszywych wiadomości phishingowych, by sprawdzić i ćwiczyć ich czujność.
-H330;syslog;syslog;syslog;;;;Standardowy protokół i format przesyłania logów z urządzeń sieciowych i systemów Linux/Unix do centralnego serwera lub SIEM.
-H331;IDS / IPS;IDS / IPS (system wykrywania / zapobiegania włamaniom);IDS / IPS;;;;"IDS wykrywa podejrzany ruch i alarmuje; IPS stoi w linii ruchu i może go od razu zablokować."
-H332;HIPS / host-based firewall;HIPS / host-based firewall (zapora na hoście);HIPS / host-based firewall;;;;Ochrona uruchomiona na samym komputerze: wykrywa i blokuje podejrzane działania oraz filtruje ruch danego urządzenia.
-H333;SIEM;SIEM (system zarządzania informacjami i zdarzeniami bezpieczeństwa);SIEM;;;;Aplikacja zbierająca dane bezpieczeństwa z wielu komponentów systemu i prezentująca je jako użyteczne informacje w jednym interfejsie.
-H334;audit trail;ścieżka audytu;ścieżka audytu;;;;Odtworzony ciąg działań danego podmiotu w określonym czasie, np.
-H335;log-parsing techniques;techniki parsowania logów;techniki parsowania logów;;;;Wydobywanie informacji z logów: wyszukiwanie wzorców (grep, wyrażenia regularne), zapytania w SIEM (KQL, SPL), normalizacja pól, filtrowanie i agregacja.
-H336;"active vs. passive; inline vs. tap/monitor";tryb pracy urządzenia: aktywny / pasywny, inline / podsłuch;tryb pracy urządzenia: aktywny / pasywny, inline / podsłuch;;;;Urządzenie inline (aktywne, np.
-H337;takedown / disruption;takedown (unieszkodliwienie infrastruktury);takedown;;;rozbici\w* infrastruktury;Przejęcie domen, zablokowanie usługi przestępczej.
-H338;edge device;urządzenie brzegowe;urządzenie brzegowe;;;;Firewall, VPN, router na granicy sieci.
-H339;baselining;baselining (ustalanie poziomu bazowego);baselining;;;;Obserwacja typowego wykorzystania zasobów, żeby łatwiej wychwytywać odchylenia od normy.
-H340;hardening;hardening (utwardzanie konfiguracji);hardening;;;;Ograniczanie funkcji i zaostrzanie konfiguracji systemów oraz kanałów dostępu, by zmniejszyć powierzchnię ataku.
-H341;IOC;IOC (wskaźnik włamania);IOC;;;;Np.
-H342;decommissioning;wycofanie z eksploatacji;wycofanie z eksploatacji;;;;Bezpieczne wyłączenie urządzenia lub systemu z użytku, z usunięciem danych z nośników.
-H343;STIX / TAXII / AIS;wymiana informacji o zagrożeniach: STIX, TAXII, AIS;wymiana informacji o zagrożeniach: STIX, TAXII, AIS;;;;"STIX – format opisu zagrożeń i IoC; TAXII – protokół ich przesyłania; AIS – amerykański (CISA) program automatycznej wymiany wskaźników."
-H344;false negative;false negative (wynik fałszywie negatywny);false negative;;;;Atak, którego system nie wykrył – groźniejszy od fałszywego alarmu, bo nikt nie reaguje.
-H345;XDR;XDR;XDR;;;;Rozwinięcie EDR: korelacja danych z punktów końcowych, sieci, poczty i chmury w jednym narzędziu.
-H346;DRM / anti-tamper;DRM / anti-tamper (zabezpieczenie antykopiowe);DRM / anti-tamper;;;;Ochrona gier i treści przed kopiowaniem.
-H347;agent-based vs. agentless;z agentem / bezagentowo;z agentem / bezagentowo;;;;"Narzędzie z agentem instaluje program na urządzeniu (więcej danych, ale trzeba nim zarządzać); bezagentowe zbiera dane zdalnie (np."
-H348;DLP;DLP (zapobieganie wyciekom danych);DLP;;;;Narzędzia wykrywające i blokujące wysyłanie wrażliwych danych poza firmę (poczta, USB, chmura).
-H349;WAF;WAF (zapora aplikacji webowych);WAF;;;;Zapora analizująca ruch HTTP do aplikacji webowych i blokująca ataki takie jak SQL injection czy XSS.
-H350;NGFW;NGFW (zapora nowej generacji);NGFW;;;;Zapora działająca w warstwie aplikacji: rozpoznaje aplikacje, łączy filtrowanie z IPS, filtrowaniem URL i inspekcją TLS.
-H351;firewall;firewall (zapora sieciowa);firewall;;;;Filtruje ruch między sieciami.
-H352;stateful / stateless firewall;zapora stanowa / bezstanowa;zapora stanowa / bezstanowa;;;;"Bezstanowa ocenia każdy pakiet osobno według reguł; stanowa śledzi stan połączeń i przepuszcza odpowiedzi w ramach nawiązanej sesji."
-H353;KQL;zapytania KQL;zapytania KQL;;;;Zapytania analityczne zapisane w języku Kusto, które służą do automatycznego wykrywania zagrożeń, anomalii i podejrzanych zachowań w czasie rzeczywistym, w dużych zestawach danych oraz logach systemowych.
-H354;IPAM;IPAM (zarządzanie adresacją IP);IPAM;;;;"System ewidencji i przydziału adresów IP oraz DNS/DHCP; pomaga wykryć nieznane urządzenia i zinwentaryzować sieć."
-H355;out-of-band management;out-of-band management (zarządzanie poza pasmem);out-of-band management;;;;Osobny, odizolowany kanał do administrowania urządzeniami (oddzielna sieć zarządzania, konsola szeregowa, iDRAC/iLO), niezależny od sieci produkcyjnej.
-H356;CSPM;CSPM (zarządzanie stanem bezpieczeństwa chmury);CSPM;;;;Narzędzia stale sprawdzające konfigurację środowisk chmurowych pod kątem błędów i zgodności (np.
-H357;automation use cases;zastosowania automatyzacji;zastosowania automatyzacji;;;;Zakładanie kont i zasobów (provisioning), barierki ochronne, grupy zabezpieczeń, tworzenie i eskalacja zgłoszeń, włączanie i wyłączanie usług i dostępów, ciągła integracja i testy (CI/CD), integracje przez API.
-H358;RMM;RMM (narzędzia zdalnego zarządzania);RMM;;;;Legalne narzędzia nadużywane po włamaniu.
-H359;event / security incident;zdarzenie / incydent bezpieczeństwa;zdarzenie / incydent bezpieczeństwa;;;;Zdarzenie – każde zaobserwowane wystąpienie w systemie (np.
-H360;alert fatigue;alert fatigue (zmęczenie alarmami);alert fatigue;;;;Stan, w którym zespół dostaje tyle alarmów (w dużej części fałszywych), że przestaje na nie reagować – i przegapia te prawdziwe.
-H361;UTM;UTM (zunifikowane zarządzanie zagrożeniami);UTM;;;;Jedno urządzenie łączące wiele funkcji: zapora, IPS, antywirus, filtrowanie treści, VPN (typowe w małych firmach).
-H362;log data sources;źródła logów w dochodzeniu;źródła logów w dochodzeniu;;;;Logi zapory, aplikacji, punktów końcowych, systemowe logi bezpieczeństwa (np.
-H363;attribution;atrybucja;atrybucja;;;;Wskazanie „to oni”: udowodnienie, kto stoi za cyberatakiem.
-H364;white hat;white hat (biały kapelusz);white hat;;;;"Etyczny haker; działa za zgodą właściciela systemu."
-H365;IAB;IAB (broker dostępu początkowego);IAB;;;broker\w* pierwszego dostępu;Sprzedaje dostępy do sieci firm.
-H366;threat actor attributes (internal/external, resources/funding, sophistication);cechy aktorów zagrożeń;cechy aktorów zagrożeń;;;;Security+ opisuje aktorów trzema cechami: wewnętrzny lub zewnętrzny, zasoby i finansowanie, poziom zaawansowania i możliwości.
-H367;cracker;cracker;cracker;;;;Łamie zabezpieczenia programów.
-H368;black hat;black hat (czarny kapelusz);black hat;;;;Cyberprzestępca, haker – „czarny charakter”.
-H369;dark web;dark web;dark web;;;;Część internetu dostępna tylko przez sieci anonimizujące (np.
-H370;hybrid warfare;działania hybrydowe;działania hybrydowe;;;;Sabotaż, dezinformacja i ataki cyfrowe razem.
-H371;state-aligned;grupa powiązana z państwem;powiązani z państwem;;;;Działa na rzecz lub z aprobatą państwa.
-H372;threat actor;threat actor (grupa, sprawcy);sprawcy;;albo „grupa” lub „cyberprzestępcy”, jeśli pasuje do kontekstu;aktor\w* zagroże\w*;Kto stoi za atakiem.
-H373;hacktivist;haktywista;haktywista;;;;Napastnik działający z pobudek ideologicznych lub politycznych: DDoS, podmiany stron (defacement), wycieki danych.
-H374;other threat actors (terrorist, competitor, accidental/unintentional);inni aktorzy zagrożeń: terrorysta, konkurent, sprawca nieumyślny;inni aktorzy zagrożeń: terrorysta, konkurent, sprawca nieumyślny;;;;W V8 dochodzą: terroryści (cel – strach i zniszczenie), konkurencja (szpiegostwo gospodarcze) oraz sprawcy nieumyślni – pracownicy, którzy szkodzą przez pomyłkę.
-H375;Diamond Model of Intrusion Analysis;model diamentowy analizy włamań;model diamentowy analizy włamań;;;;Model opisujący każde zdarzenie ataku czterema powiązanymi elementami: przeciwnik, infrastruktura, zdolności (narzędzia) i ofiara.
-H376;threat actor motivations;motywacje napastników;motywacje napastników;;;;Eksfiltracja danych, szpiegostwo, zakłócenie usług, szantaż, zysk finansowy, przekonania filozoficzne lub polityczne, pobudki etyczne, zemsta, chęć wywołania chaosu, wojna.
-H377;unskilled attacker (script kiddie);script kiddie (napastnik bez umiejętności);script kiddie;;;;"Osoba bez wiedzy technicznej, która używa gotowych narzędzi i skryptów; ataki są głośne i mało wyrafinowane."
-H378;threat actor naming;oznaczenia grup (Storm-…, UTA…);oznaczenia grup;;;;Robocze nazwy do czasu trwałej atrybucji.
-H379;organized crime;przestępczość zorganizowana;przestępczość zorganizowana;;;;"Grupy przestępcze działające dla zysku: ransomware, oszustwa finansowe, kradzież danych; często z podziałem ról (brokerzy dostępu, operatorzy, negocjatorzy)."
-H380;access market;rynek dostępów;rynek dostępów;;;;Forum handlu dostępami.
-H381;Tor / .onion;sieć Tor, adresy .onion;sieć Tor, adresy .onion;;;;"Anonimowa sieć; adresy .onion tylko przez Tora."
-H382;leak site;leak site (strona z wyciekami);leak site;;;;Serwis grupy publikujący skradzione dane.
-H383;grey hat;grey hat (szary kapelusz);grey hat;;;;Haker działający na granicy prawa: włamuje się bez pozwolenia, by poinformować firmę o błędzie (czasem chce za to pieniądze).
-H384;TTP (MITRE ATT&CK);TTP (taktyki, techniki i procedury);TTP;;;;Sposób działania napastnika: taktyki (cele, np.
-H385;APT;APT (zaawansowane trwałe zagrożenie);APT;;;;Długotrwałe kampanie, często państwowe.
-H386;threat;zagrożenie;zagrożenie;;;;Potencjalna przyczyna szkody: zdarzenie lub działanie (celowe albo przypadkowe), które może wykorzystać podatność.
-H387;adversarial threat;zagrożenie agresywne (celowe);zagrożenie agresywne;;;;"Zagrożenie ze strony osób lub grup celowo działających na szkodę organizacji; może pochodzić z zewnątrz albo od wewnątrz, np."
-H388;insider threat;insider threat (zagrożenie wewnętrzne);insider threat;;;;Zagrożenie ze strony osoby z dostępem do organizacji (pracownik, podwykonawca), działającej celowo lub nieświadomie.
-H389;data controller / data processor;administrator danych / podmiot przetwarzający;administrator danych / podmiot przetwarzający;;;;"Administrator decyduje o celach i sposobach przetwarzania danych osobowych; podmiot przetwarzający przetwarza je w jego imieniu (terminy z RODO)."
-H390;ENISA;ENISA (Agencja UE ds. Cyberbezpieczeństwa);ENISA;;;;Publikuje raporty o cyberzagrożeniach w Europie.
-H391;CRA;CRA (akt o cyberodporności);CRA;;;;Wymogi bezpieczeństwa dla produktów.
-H392;AI Act;AI Act (akt o sztucznej inteligencji);AI Act;;;;Unijne prawo o AI, m.in.
-H393;DSA;DSA (akt o usługach cyfrowych);DSA;;;;Regulacje dla platform, m.in.
-H394;RCB alert;Alert RCB;Alert RCB;;;;Polski system ostrzegania ludności (m.in.
-H395;legal hold;legal hold (blokada usuwania danych);legal hold;;;;Obowiązek zachowania danych, które mogą być potrzebne w postępowaniu prawnym, i wstrzymania ich usuwania.
-H396;Chat Control;Chat Control;Chat Control;;;;"Potoczna nazwa unijnych propozycji skanowania prywatnych wiadomości w imię bezpieczeństwa dzieci; krytykowana m.in."
-H397;cyber warfare;cyberwojna;cyberwojna;;;;Konflikt prowadzony w cyberprzestrzeni, np.
-H398;external considerations (regulatory, legal, industry, local/regional, national, global);czynniki zewnętrzne ładu bezpieczeństwa;czynniki zewnętrzne ładu bezpieczeństwa;;;;Wymagania spoza firmy, które kształtują zasady bezpieczeństwa: przepisy i regulatorzy, prawo, normy branżowe, poziom lokalny, krajowy i globalny.
-H399;personal data;dane osobowe;dane osobowe;;;;Dane identyfikujące osobę.
-H400;disinformation;dezinformacja;dezinformacja;;;;"Celowe rozpowszechnianie fałszywych informacji; osobny dział CyberDefence24."
-H401;NIS2;dyrektywa NIS2;dyrektywa NIS2;;;;Unijne wymogi cyberbezpieczeństwa dla podmiotów kluczowych i ważnych.
-H402;e-discovery;e-discovery;e-discovery;;;;Wyszukiwanie i przekazywanie danych elektronicznych (ESI) na potrzeby postępowania sądowego.
-H403;HIPAA;HIPAA;HIPAA;;;;Amerykańskie prawo dotyczące ochrony danych medycznych.
-H404;critical infrastructure;infrastruktura krytyczna;infrastruktura krytyczna;;;;Systemy niezbędne dla funkcjonowania państwa (np.
-H405;CPO;inspektor ochrony danych (wg NSC);inspektor ochrony danych;;;;Osoba kierownicza odpowiedzialna za ochronę danych i prywatności w organizacji.
-H406;criminal-law exemption for researchers (Art. 269c);kontratyp z art. 269c k.k.;kontratyp z art. 269c k.k.;;;;"Przepis określający, kiedy nieuprawnione testowanie nie podlega karze; badacz musi niezwłocznie powiadomić dysponenta systemu."
-H407;KSC;Krajowy System Cyberbezpieczeństwa;Krajowy System Cyberbezpieczeństwa;;;;"Polski system; KSC2 = nowelizacja wdrażająca NIS2."
-H408;post-quantum cryptography (PQC);kryptografia postkwantowa;kryptografia postkwantowa;;;;Algorytmy odporne na ataki komputerów kwantowych.
-H409;LCC;Lokalne Centra Cyberbezpieczeństwa;Lokalne Centra Cyberbezpieczeństwa;;;;Element systemu KSC omawiany w opinii CyberDefence24 („bez nich KSC będzie papierkiem”).
-H410;due diligence / due care;należyta staranność / należyta dbałość;należyta staranność / należyta dbałość;;;;Due diligence – sprawdzenie ryzyk przed decyzją (np.
-H411;data breach;naruszenie ochrony danych, wyciek;wyciek danych;;„naruszenie ochrony danych”, gdy mowa o aspektach prawnych (RODO);;Nieuprawnione pozyskanie lub ujawnienie danych.
-H412;NASK;NASK;NASK;;;;Instytut badawczy, m.in.
-H413;unauthorised transaction;nieautoryzowana transakcja;nieautoryzowana transakcja;;;;Płatność bez zgody klienta.
-H414;DPIA / PIA;DPIA / PIA (ocena skutków dla ochrony danych);DPIA / PIA;;;;"Analiza ryzyka dla osób, których dane dotyczą, przed rozpoczęciem przetwarzania; w RODO (art."
-H415;influence operations;operacje wpływu;operacje wpływu;;;;"Skoordynowane działania kształtujące opinie i decyzje; artykuły o rosyjskim „aparacie wpływu” i „ofensywie informacyjnej”."
-H416;OWASP Top 10;OWASP Top 10;OWASP Top 10;;;;"Lista dziesięciu najważniejszych kategorii zagrożeń dla aplikacji webowych, aktualizowana co kilka lat na podstawie danych z testów; ostatnia edycja: 2025."
-H417;PESEL;PESEL;PESEL;;;;Polski numer identyfikacyjny obywatela.
-H418;essential / important entity;podmiot kluczowy / ważny;podmiot kluczowy / ważny;;;;"Kategorie organizacji objęte NIS2; rejestr: Wykaz Podmiotów Kluczowych i Ważnych."
-H419;critical entity;podmiot krytyczny;podmiot krytyczny;;;;Organizacja uznana za krytyczną dla państwa lub gospodarki, objęta szczególnymi wymogami ochrony, także w łańcuchu dostaw.
-H420;CNA (CVE Numbering Authority);podmiot nadający numery CVE (CNA);podmiot nadający numery CVE;;;;"Organizacja uprawniona do nadawania numerów CVE; CERT Polska jest CNA (od 1 sierpnia 2023 r."
-H421;privacy rights (opt-in/opt-out, data correction, processing restriction/prevention);prawa osób w zakresie prywatności;prawa osób w zakresie prywatności;;;;Zgoda na przetwarzanie (opt-in) lub możliwość rezygnacji (opt-out), prawo do sprostowania danych, ograniczenia i sprzeciwu wobec przetwarzania, prawo do bycia zapomnianym.
-H422;right to be forgotten / data subject;prawo do bycia zapomnianym / podmiot danych;prawo do bycia zapomnianym / podmiot danych;;;;"Podmiot danych to osoba, której dane dotyczą; ma m.in."
-H423;NIST CSF;NIST CSF (ramy cyberbezpieczeństwa NIST);NIST CSF;;;;"Ramy NIST pomagające organizacjom każdej wielkości zarządzać ryzykiem cyberbezpieczeństwa; wersja 2.0 (2024) ma sześć funkcji: Govern, Identify, Protect, Detect, Respond, Recover."
-H424;compliance reporting / consequences of non-compliance;raportowanie zgodności i skutki niezgodności;raportowanie zgodności i skutki niezgodności;;;;"Raporty zgodności wewnętrzne i zewnętrzne; skutki niezgodności: grzywny, sankcje, utrata reputacji, utrata licencji, konsekwencje umowne."
-H425;GDPR;RODO;RODO;;;;Ochrona danych osobowych w UE.
-H426;SOX / GLBA;SOX / GLBA;SOX / GLBA;;;;"Amerykańskie ustawy: SOX – rzetelność sprawozdań finansowych spółek giełdowych; GLBA – ochrona danych klientów instytucji finansowych."
-H427;PCI DSS;standard PCI DSS;standard PCI DSS;;;;Standard ochrony danych kart płatniczych.
-H428;data sovereignty;suwerenność danych;suwerenność danych;;;;Zasada, że dane podlegają prawu kraju, w którym są przechowywane (np.
-H429;compliance training (data handling, AML/CTF, anti-bribery);szkolenia z zakresu zgodności: AML/CTF, przeciwdziałanie korupcji;szkolenia z zakresu zgodności: AML/CTF, przeciwdziałanie korupcji;;;;Szkolenia wymagane przepisami: postępowanie z danymi, przeciwdziałanie praniu pieniędzy i finansowaniu terroryzmu, przeciwdziałanie korupcji.
-H430;trade secret / intellectual property (IP);tajemnica przedsiębiorstwa / własność intelektualna;tajemnica przedsiębiorstwa / własność intelektualna;;;;Poufne informacje dające firmie przewagę (receptury, kod, procesy) oraz prawnie chronione wytwory (patenty, znaki, prawa autorskie).
-H431;NDA;NDA (umowa o zachowaniu poufności);NDA;;;;Umowa zobowiązująca strony do nieujawniania poufnych informacji (jedno-, dwu- lub wielostronna).
-H432;DPA (PL);UODO;UODO;;;;Krajowy organ nadzorczy.
-H433;UOKiK;UOKiK;UOKiK;;;;Urząd m.in.
-H434;CERT;CERT (zespół reagowania);CERT;;;;Np.
-H435;CSIRT;CSIRT (zespół reagowania na incydenty);CSIRT;;;;CERT Polska realizuje zadania CSIRT NASK, jednego z trzech zespołów na poziomie krajowym w KSC (obok CSIRT GOV i CSIRT MON).
-H436;AI agent;agent AI;agent AI;;;;Model wykonujący zadania samodzielnie, także w atakach.
-H437;AI capabilities in security operations (agentic, chatbot, predictive analysis, AI-augmented baselines);AI w operacjach bezpieczeństwa;AI w operacjach bezpieczeństwa;;;;Zastosowania AI w SOC: agenci wykonujący zadania, asystenci-chatboty, analiza predykcyjna, wyznaczanie normalnego zachowania (baseline) z pomocą AI.
-H438;evasion attack (AI);atak unikowy na model AI;atak unikowy na model AI;;;;Takie przygotowanie danych wejściowych (np.
-H439;deepfake;deepfake;deepfake;;;;Podrobione nagranie, obraz lub głos.
-H440;deepnude;deepnude;deepnude;;;;"Aplikacje AI generujące fałszywe nagie obrazy prawdziwych osób; szkoły mają uczyć o tym zagrożeniu."
-H441;LLM;LLM (duży model językowy);LLM;;;;Np.
-H442;ghostjacking;ghostjacking;ghostjacking;;;;Atak odwracający zachowanie agenta AI.
-H443;AI hallucinations;halucynacje AI;halucynacje AI;;;;Odpowiedzi modelu, które brzmią wiarygodnie, ale są nieprawdziwe (np.
-H444;AI jailbreaking;jailbreak modelu AI;jailbreak modelu AI;;;;Obejście zabezpieczeń modelu językowego specjalnie skonstruowanym poleceniem, żeby wygenerował treści lub wykonał działania, których nie powinien.
-H445;LLMjacking;LLMjacking;LLMjacking;;;;Nadużywanie skradzionych poświadczeń do usług LLM na koszt ofiary.
-H446;model manipulation / data poisoning;manipulacja modelem i zatruwanie danych;manipulacja modelem i zatruwanie danych;;;;Ataki na model AI: celowe zmienianie jego działania albo wprowadzanie złośliwych danych do zbioru treningowego, żeby model dawał błędne lub korzystne dla napastnika wyniki.
-H447;MCP;protokół MCP;protokół MCP;;;;"Protokół łączący modele AI z narzędziami i danymi; wg SBT tworzy luki w nadzorze bezpieczeństwa AI."
-H448;shadow AI;shadow AI;shadow AI;;;;Używanie narzędzi AI w organizacji poza wiedzą i kontrolą działu IT.
-H449;AI bias / explainability / privacy / ethical considerations;stronniczość, wyjaśnialność, prywatność i etyka AI;stronniczość, wyjaśnialność, prywatność i etyka AI;;;;Ryzyka nietechniczne AI: stronnicze wyniki, brak możliwości wyjaśnienia decyzji modelu, przetwarzanie danych osobowych i kwestie etyczne (np.
-H450;AI data loss;wyciek danych przez AI;wyciek danych przez AI;;;;Ujawnienie poufnych danych przez narzędzia AI: wklejanie danych firmowych do publicznych czatów, wyciąganie danych treningowych z modelu, odpowiedzi zdradzające cudze informacje.
-H451;SCA;SCA (analiza składu oprogramowania);SCA;;;;Narzędzia, które sprawdzają, z jakich cudzych bibliotek korzysta aplikacja, i porównują je z bazami znanych podatności i licencji.
-H452;serverless;serverless (architektura bezserwerowa);serverless;;;;Model, w którym kod uruchamia się na żądanie u dostawcy chmury, bez zarządzania serwerami przez klienta (np.
-H453;Secure Boot;Secure Boot (bezpieczny rozruch);Secure Boot;;;;"Funkcja UEFI, która uruchamia tylko podpisany cyfrowo program rozruchowy i system; chroni przed bootkitami."
-H454;public / private / hybrid cloud;chmura publiczna / prywatna / hybrydowa;chmura publiczna / prywatna / hybrydowa;;;;"Publiczna – infrastruktura dostawcy współdzielona przez wielu klientów; prywatna – dla jednej organizacji; hybrydowa – połączenie obu (lub kilku dostawców)."
-H455;SDLC;SDLC (cykl życia oprogramowania);SDLC;;;;"Etapy tworzenia oprogramowania (planowanie, projekt, kod, testy, wdrożenie, utrzymanie); w modelu Agile lub kaskadowym."
-H456;DAST;DAST (dynamiczne testowanie bezpieczeństwa);DAST;;;;Automatyczne testowanie działającej aplikacji z zewnątrz, tak jak robiłby to napastnik: wysyłanie spreparowanych żądań i obserwowanie reakcji.
-H457;host / guest;host / gość;host / gość;;;;System fizyczny i system w maszynie wirtualnej.
-H458;hypervisor;hypervisor;hypervisor;;;;Oprogramowanie zarządzające maszynami wirtualnymi.
-H459;IaC;IaC (infrastruktura jako kod);IaC;;;;Definiowanie serwerów, sieci i usług w plikach konfiguracyjnych (np.
-H460;IaaS;IaaS (infrastruktura jako usługa);IaaS;;;;Klient dostaje infrastrukturę chmury i sam instaluje systemy operacyjne i aplikacje, ale nie zarządza sprzętem.
-H461;sideloading;sideloading (instalacja spoza sklepu);sideloading;;;;"Instalowanie aplikacji z pominięciem oficjalnego sklepu; częsta droga infekcji telefonów."
-H462;API;API (interfejs programowania aplikacji);API;;;;Zestaw reguł opisujących, jak programy komunikują się ze sobą.
-H463;jailbreaking / rooting;jailbreak / rootowanie;jailbreak / rootowanie;;;;"Obejście zabezpieczeń telefonu (iOS – jailbreak, Android – rooting), żeby uzyskać pełne uprawnienia; wyłącza też część ochrony systemu."
-H464;kernel;jądro systemu;jądro systemu;;;;Rdzeń systemu operacyjnego.
-H465;fuzzing;fuzzing (testowanie zniekształconymi danymi);fuzzing;;;;Automatyczne testowanie oprogramowania przez podawanie mu losowych lub celowo zniekształconych danych wejściowych, aby wykryć błędy i luki bezpieczeństwa (masowe „karmienie” programu złymi danymi).
-H466;output encoding;kodowanie danych wyjściowych;kodowanie danych wyjściowych;;;;Zamiana znaków specjalnych (np.
-H467;containerization;konteneryzacja;konteneryzacja;;;;Uruchamianie aplikacji w izolowanych kontenerach (np.
-H468;KVM;KVM;KVM;;;;Podsystem wirtualizacji w jądrze Linuxa.
-H469;"on-premises; centralized vs. decentralized";lokalnie (on-premises) / scentralizowane vs zdecentralizowane;lokalnie (on-premises) / scentralizowane vs zdecentralizowane;;;;"Infrastruktura we własnej serwerowni (pełna kontrola i odpowiedzialność) w odróżnieniu od chmury; architektura scentralizowana (jedno miejsce zarządzania) lub zdecentralizowana (rozproszona)."
-H470;microservices;mikrousługi;mikrousługi;;;;"Aplikacja zbudowana z wielu małych, niezależnych usług komunikujących się przez API; łatwiej je skalować i aktualizować."
-H471;shared responsibility model (responsibility matrix);model współdzielonej odpowiedzialności;model współdzielonej odpowiedzialności;;;;"Podział obowiązków bezpieczeństwa między dostawcę chmury a klienta; zależy od modelu (IaaS, PaaS, SaaS)."
-H472;COM object;obiekt COM (Windows);obiekt COM;;;;"Mechanizm Windows; „wiszący” wpis w rejestrze może prowadzić do przejęcia uprawnień SYSTEM (Google Project Zero)."
-H473;sandbox, sandbox escape;sandbox, sandbox escape (piaskownica, ucieczka z piaskownicy);sandbox;;;;Izolowane środowisko uruchamiania kodu i wyjście z niego.
-H474;PaaS;PaaS (platforma jako usługa);PaaS;;;;Klient wdraża własne aplikacje na platformie dostawcy, nie zarządzając serwerami, siecią ani systemem operacyjnym.
-H475;one-click vulnerability;podatność typu one-click;podatność typu one-click;;;;Wystarczy kliknięcie spreparowanego linku.
-H476;PowerShell;PowerShell;PowerShell;;;;"Powłoka i język skryptowy Windows; używany przez adminów i napastników."
-H477;Bash;powłoka Bash;powłoka Bash;;;;"Powłoka poleceń (Bourne Again SHell), domyślna w systemie GNU i wielu dystrybucjach Linuksa; często używana w skryptach ataku i obrony."
-H478;shell;powłoka systemowa;powłoka systemowa;;;;Program do sterowania systemem poleceniami tekstowymi (np.
-H479;edge computing;edge computing (przetwarzanie na brzegu sieci);edge computing;;;;"Przetwarzanie danych blisko miejsca ich powstania (urządzenia IoT, lokalne bramy) zamiast w centralnej chmurze; mniejsze opóźnienia."
-H480;cloud computing;przetwarzanie w chmurze;przetwarzanie w chmurze;;;;Dostęp na żądanie przez sieć do współdzielonych zasobów.
-H481;fog computing;fog computing (przetwarzanie we mgle);fog computing;;;;Warstwa obliczeniowa między chmurą a urządzeniami końcowymi (np.
-H482;sanitization;sanityzacja danych;sanityzacja danych;;;;Oczyszczanie treści (np.
-H483;SAST;SAST (statyczna analiza bezpieczeństwa kodu);SAST;;;;Automatyczne czytanie kodu źródłowego (bez uruchamiania go) w poszukiwaniu niebezpiecznych wzorców, np.
-H484;legacy systems / applications;systemy legacy (przestarzałe systemy i aplikacje);systemy legacy;;;;"Stare systemy, które nadal działają, bo są potrzebne biznesowo, ale trudno je zaktualizować lub wymienić; często bez wsparcia producenta."
-H485;debug mode in production;tryb debugowania na produkcji;tryb debugowania na produkcji;;;;Pozostawienie włączonych narzędzi i trybów przeznaczonych dla programistów w wersji dostępnej dla klientów.
-H486;VM escape;VM escape (ucieczka z maszyny wirtualnej);VM escape;;;;Wyjście z maszyny gościa i dostęp do hosta.
-H487;input validation;walidacja danych wejściowych;walidacja danych wejściowych;;;;"Sprawdzanie, czy dane od użytkownika mają oczekiwany typ, długość i format, zanim aplikacja je przetworzy; podstawowa obrona przed wstrzyknięciami."
-H488;VDI / VDE / VPC;wirtualne pulpity i prywatna chmura: VDI, VDE, VPC;wirtualne pulpity i prywatna chmura: VDI, VDE, VPC;;;;"VDI/VDE – pulpity uruchamiane na serwerach i udostępniane zdalnie; VPC – odizolowana sieć prywatna w chmurze publicznej."
-H489;parameterized queries (prepared statements);zapytania parametryzowane;zapytania parametryzowane;;;;Sposób wysyłania zapytań do bazy danych, w którym polecenie i dane od użytkownika podaje się osobno – jak formularz z polami, a nie dopisywanie tekstu do polecenia.
-H490;verbose error messages;zbyt szczegółowe komunikaty błędów;zbyt szczegółowe komunikaty błędów;;;;Komunikaty błędów pokazujące użytkownikowi szczegóły wnętrza aplikacji: fragmenty kodu, zapytania do bazy, wersje oprogramowania, ścieżki na serwerze.
-H491;site survey / heat map;site survey / heat map (badanie radiowe i mapa pokrycia);site survey / heat map;;;;"Przed instalacją Wi-Fi bada się zasięg, zakłócenia i obce sieci; mapa pokrycia (heat map) pokazuje siłę sygnału w pomieszczeniach."
-H492;secure protocols and ports;bezpieczne protokoły i porty;bezpieczne protokoły i porty;;;;Wybór protokołu, portu i sposobu transportu: SSH/SFTP 22, HTTPS 443, LDAPS 636, IMAPS 993, POP3S 995, SMTPS 465 lub 587 (STARTTLS), FTPS 989/990, SNMPv3 161/162, DNS przez TLS/HTTPS, SRTP dla głosu.
-H493;BIOS / UEFI / MBR;BIOS / UEFI / MBR;BIOS / UEFI / MBR;;;;Oprogramowanie rozruchowe komputera (BIOS, nowsze UEFI z Secure Boot) i główny rekord rozruchowy dysku (MBR) – cel bootkitów.
-H494;Diameter;Diameter;Diameter;;;;Protokół AAA (uwierzytelnianie, autoryzacja, rozliczanie) używany m.in.
-H495;DoH;DoH (DNS przez HTTPS);DoH;;;;Protokół wysyłania zapytań DNS i odbierania odpowiedzi przez HTTPS.
-H496;DNSSEC;DNSSEC;DNSSEC;;;;Rozszerzenia DNS, które podpisują cyfrowo odpowiedzi i pozwalają wykryć ich sfałszowanie (np.
-H497;FTPS / SFTP;FTPS / SFTP;FTPS / SFTP;;;;Bezpieczne przesyłanie plików: FTPS to FTP szyfrowany TLS, SFTP – przesyłanie plików wewnątrz połączenia SSH.
-H498;IMAPS / POP3S;IMAPS / POP3S;IMAPS / POP3S;;;;Szyfrowane (TLS) wersje protokołów odbierania poczty: IMAPS (port 993) i POP3S (port 995).
-H499;IoT;IoT (internet rzeczy);IoT;;;;Urządzenia z dostępem do sieci (kamery, smartwatche, fotoradary), często słabo zabezpieczone.
-H500;IPsec;IPsec;IPsec;;;;"Zestaw protokołów szyfrujących i uwierzytelniających ruch w warstwie IP (AH, ESP; tryb tunelowy i transportowy); podstawa wielu VPN."
-H501;air gap;air gap (izolacja fizyczna);air gap;;;;"Fizyczne odcięcie systemu od innych sieci, w tym internetu; stosowane m.in."
-H502;mobile connection methods (cellular, Wi-Fi, Bluetooth);łączność urządzeń mobilnych: komórkowa, Wi-Fi, Bluetooth;łączność urządzeń mobilnych: komórkowa, Wi-Fi, Bluetooth;;;;"Sposoby łączenia urządzeń mobilnych i ich ryzyka: sieć komórkowa, Wi-Fi, Bluetooth, NFC, USB OTG; każde wymaga osobnych zasad (szyfrowanie, parowanie, blokady)."
-H503;microsegmentation;mikrosegmentacja;mikrosegmentacja;;;;"Bardzo drobny podział sieci, nawet do pojedynczych serwerów lub aplikacji, z regułami ruchu między nimi; ogranicza ruch boczny, typowa dla Zero Trust."
-H504;OSI model;model OSI;model OSI;;;;Siedmiowarstwowy model komunikacji sieciowej: 1 fizyczna, 2 łącza danych, 3 sieciowa, 4 transportowa, 5 sesji, 6 prezentacji, 7 aplikacji.
-H505;TCP/IP model;model TCP/IP;model TCP/IP;;;;Praktyczny model internetu z czterema warstwami: dostępu do sieci (OSI 1–2), internetu (3), transportowa (4) i aplikacji (5–7).
-H506;TPM;moduł TPM;moduł TPM;;;;Układ sprzętowy (kryptoprocesor), który generuje i przechowuje klucze kryptograficzne oraz wspiera uwierzytelnianie urządzenia i weryfikację integralności rozruchu.
-H507;unsecure networks (wireless, wired, Bluetooth);niezabezpieczone sieci: bezprzewodowe, przewodowe, Bluetooth;niezabezpieczone sieci: bezprzewodowe, przewodowe, Bluetooth;;;;Sieci bez szyfrowania lub kontroli dostępu: otwarte Wi-Fi, gniazda sieciowe w dostępnych miejscach bez 802.1X, Bluetooth (podsłuch, nieautoryzowane parowanie).
-H508;SDP;SDP (obwód definiowany programowo);SDP;;;;Aplikacje ukryte za bramą, która otwiera połączenie dopiero po uwierzytelnieniu użytkownika i sprawdzeniu urządzenia – praktyczna realizacja Zero Trust.
-H509;SaaS;SaaS (oprogramowanie jako usługa);SaaS;;;;"Aplikacja świadczona jako usługa w chmurze; legalny kanał SaaS może posłużyć do wyprowadzania danych."
-H510;COPE;COPE (urządzenie firmowe do użytku także prywatnego);COPE;;;;"Służbowy telefon lub tablet, którego pracownik może używać także prywatnie; alternatywa dla BYOD."
-H511;OT / ICS;OT / ICS;OT / ICS;;;;"Systemy sterujące procesami fizycznymi (przemysł, energetyka); łatanie jest tu trudniejsze niż w IT."
-H512;captive portal;captive portal (portal uwierzytelniania);captive portal;;;;Strona logowania do sieci Wi-Fi wyświetlana zaraz po połączeniu, zanim otworzy się jakakolwiek inna strona.
-H513;industrial protocols;protokoły przemysłowe;protokoły przemysłowe;;;;Protokoły komunikacji w systemach automatyki przemysłowej (OT/ICS).
-H514;VPN tunneling protocols (L2TP, PPTP, GRE, IKE);protokoły tunelowania VPN: L2TP, PPTP, GRE, IKE;protokoły tunelowania VPN: L2TP, PPTP, GRE, IKE;;;;"PPTP – przestarzały, niebezpieczny; L2TP zwykle z IPsec; GRE – tunel bez szyfrowania; IKE – uzgadnianie kluczy w IPsec."
-H515;Wi-Fi protocols (WEP, WPA/TKIP, WPA2/CCMP, WPS);protokoły Wi-Fi: WEP, WPA/TKIP, WPA2/CCMP, WPS;protokoły Wi-Fi: WEP, WPA/TKIP, WPA2/CCMP, WPS;;;;"Starsze i obecne zabezpieczenia Wi-Fi: WEP (złamany), WPA z TKIP (przestarzały), WPA2 z CCMP (AES), WPA3; WPS – uproszczone parowanie PIN-em, podatne na atak siłowy – lepiej wyłączyć."
-H516;NTP;protokół czasu (NTP);protokół czasu;;;;Protokół synchronizacji czasu urządzeń w sieci.
-H517;SMB;protokół SMB;protokół SMB;;;;"Protokół udostępniania plików w sieciach Windows; w opisanych atakach używany do szyfrowania danych „z boku”."
-H518;private APN;prywatny APN;prywatny APN;;;;"Dedykowany punkt dostępu do sieci komórkowej; w raporcie CERT Polska z incydentu w sektorze energii opisany jako dotąd nieobserwowany wektor ataku."
-H519;bandwidth;przepustowość;przepustowość;;;;Przepustowość łącza – ilość danych, jaką można przesłać w określonym czasie (np.
-H520;BYOD;BYOD (przynieś własne urządzenie);BYOD;;;;Praca na prywatnym sprzęcie pracownika zamiast na służbowym.
-H521;asymmetric routing;routing asymetryczny;routing asymetryczny;;;;Ruch w jedną stronę płynie inną ścieżką niż w drugą.
-H522;load balancer;load balancer (równoważenie obciążenia);load balancer;;;;"Urządzenie rozdzielające ruch między wiele serwerów; zwiększa dostępność i wydajność (tryb aktywny-aktywny lub aktywny-pasywny)."
-H523;SASE;SASE;SASE;;;;Model łączący funkcje sieci (SD-WAN) i bezpieczeństwa (zapora, proxy, Zero Trust) w usłudze chmurowej, blisko użytkownika.
-H524;SD-WAN;SD-WAN;SD-WAN;;;;Programowo zarządzana sieć rozległa łącząca oddziały i chmurę przez różne łącza (np.
-H525;SDN;SDN (sieć definiowana programowo);SDN;;;;Oddzielenie płaszczyzny sterowania od płaszczyzny danych: siecią zarządza się centralnie z poziomu oprogramowania.
-H526;DNS sinkhole;sinkhole DNS;sinkhole DNS;;;;Mechanizm kierujący ruch z domen złośliwych na kontrolowany adres, np.
-H527;SS7;SS7;SS7;;;;Stary protokół sygnalizacyjny sieci telekomunikacyjnych, nadużywany m.in.
-H528;PLC;sterownik PLC;sterownik PLC;;;;"Sterownik sterujący procesem przemysłowym; CERT Polska ma osobne opracowanie o bezpieczeństwie PLC."
-H529;DMZ / screened subnet;DMZ (strefa zdemilitaryzowana, podsieć ekranowana);DMZ;;;;Wydzielony segment sieci na usługi dostępne z internetu (WWW, poczta), oddzielony zaporą od sieci wewnętrznej.
-H530;DNS;DNS (system nazw domenowych);DNS;;;;"„Książka telefoniczna” Internetu: zamienia nazwy domen na adresy IP; krytyczna usługa i częsty cel ataków."
-H531;RTOS;RTOS (system operacyjny czasu rzeczywistego);RTOS;;;;System, który musi reagować w ściśle określonym czasie (np.
-H532;embedded system;system wbudowany;system wbudowany;;;;Komputer z jednym, określonym zadaniem wbudowany w urządzenie (np.
-H533;telework;telepraca, praca zdalna;telepraca, praca zdalna;;;;"Praca poza siedzibą organizacji ze zdalnym dostępem do jej zasobów; wymaga zabezpieczenia urządzeń i łączności."
-H534;NAT;NAT (translacja adresów sieciowych);NAT;;;;"Zamiana adresów prywatnych na publiczne na styku sieci; ukrywa strukturę sieci wewnętrznej, ale sama nie jest zabezpieczeniem."
-H535;TCP three-way handshake;TCP three-way handshake (trójetapowe uzgadnianie TCP);TCP three-way handshake;;;;Nawiązanie połączenia TCP: klient wysyła SYN, serwer odpowiada SYN-ACK, klient potwierdza ACK.
-H536;tunneling;tunelowanie;tunelowanie;;;;Przesyłanie jednego protokołu wewnątrz innego (np.
-H537;VLAN;VLAN (wirtualna sieć lokalna);VLAN;;;;Logiczny podział jednego przełącznika na odrębne sieci – podstawowa forma segmentacji.
-H538;CYOD;CYOD (wybierz własne urządzenie);CYOD;;;;"Model, w którym pracownik wybiera urządzenie służbowe z listy zatwierdzonej przez firmę; urządzenie należy do firmy."
-H539;WPA2;zabezpieczenia Wi-Fi WPA2;zabezpieczenia Wi-Fi WPA2;;;;Standard zabezpieczeń sieci Wi-Fi.
-H540;WPA3;zabezpieczenia Wi-Fi WPA3;zabezpieczenia Wi-Fi WPA3;;;;"Następca WPA2: uzgadnianie klucza SAE odporne na łamanie hasła offline i silniejsze szyfrowanie (w trybie Personal obowiązkowe CCMP, w trybie Enterprise 192-bit – GCMP-256; Messer i CompTIA upraszczają to do „WPA3 = GCMP”)."
-H541;MAM;MAM (zarządzanie aplikacjami mobilnymi);MAM;;;;Zarządzanie i ochrona samych aplikacji i danych firmowych na telefonie, bez przejmowania kontroli nad całym urządzeniem (jak w MDM).
-H542;MDM;MDM (zarządzanie urządzeniami mobilnymi);MDM;;;;Narzędzia do zdalnego zarządzania i zabezpieczania telefonów firmowych.
-H543;RDP;RDP (zdalny pulpit);RDP;;;;"Protokół zdalnego pulpitu Windows; przykład podatności: BlueKeep (CVE-2019-0708)."
-H544;AES;AES;AES;;;;Standardowy symetryczny szyfr blokowy (klucze 128, 192 lub 256 bitów), następca DES.
-H545;encryption algorithms (3DES, AES-256, IDEA, RC4);algorytmy szyfrujące: 3DES, AES-256, IDEA, RC4;algorytmy szyfrujące: 3DES, AES-256, IDEA, RC4;;;;Symetryczne algorytmy z listy akronimów Security+: 3DES i RC4 są przestarzałe, IDEA historyczny, AES-256 to obecny standard.
-H546;data compression manipulation (CRIME / BREACH);ataki na kompresję (CRIME, BREACH);ataki na kompresję;;;;"Ataki wykorzystujące to, że rozmiar skompresowanej, zaszyfrowanej wiadomości zdradza informacje o treści; pozwalały odgadywać np."
-H547;secure enclave;bezpieczna enklawa;bezpieczna enklawa;;;;Odizolowany sprzętowo obszar procesora do przetwarzania najbardziej wrażliwych danych (np.
-H548;improper certificate validation;błędna walidacja certyfikatu;błędna walidacja certyfikatu;;;;Program nie sprawdza porządnie certyfikatu serwera (kto go wystawił, dla jakiej domeny, czy jest ważny).
-H549;self-signed / third-party certificate;certyfikat samopodpisany / wystawiony przez stronę trzecią;certyfikat samopodpisany / wystawiony przez stronę trzecią;;;;Samopodpisany – wystawiony i podpisany przez samego właściciela (przeglądarki mu nie ufają, dobry do testów i sieci wewnętrznej).
-H550;wildcard certificate;certyfikat wildcard (wieloznaczny);certyfikat wildcard;;;;Certyfikat ważny dla wszystkich subdomen danej domeny (np.
-H551;data management life cycle;cykl życia danych;cykl życia danych;;;;Etapy: tworzenie, zarządzanie (klasyfikacja, etykiety, ochrona), udostępnianie, przechowywanie (retencja) i usunięcie.
-H552;clearing;czyszczenie danych;czyszczenie danych;;;;"Usunięcie danych tak, by nie dało się ich odtworzyć zwykłymi narzędziami systemu; metodami laboratoryjnymi nadal może się to udać."
-H553;PII / PHI;PII / PHI (dane osobowe / dane o zdrowiu);PII / PHI;;;;"PII – dane pozwalające zidentyfikować osobę (imię, PESEL, adres); PHI – dane o zdrowiu (amerykański termin z HIPAA)."
-H554;deidentification / data transpose;deidentyfikacja: anonimizacja, pseudonimizacja, transpozycja;deidentyfikacja: anonimizacja, pseudonimizacja, transpozycja;;;;Usuwanie lub zamiana danych identyfikujących osobę: anonimizacja (nieodwracalna), pseudonimizacja (odwracalna z kluczem), przestawianie danych (transpose).
-H555;key escrow;key escrow (depozyt kluczy);key escrow;;;;Przechowywanie kopii kluczy prywatnych u zaufanej strony trzeciej, żeby dało się odzyskać zaszyfrowane dane.
-H556;Diffie-Hellman (DHE, ECDHE) / PFS;Diffie-Hellman / doskonała poufność przekazywania;Diffie-Hellman / doskonała poufność przekazywania;;;;Uzgadnianie wspólnego klucza przez niezabezpieczony kanał.
-H557;PKI components (RA, OID, SAN, PKCS, P12, SCEP);elementy PKI: RA, OID, SAN, PKCS, P12, SCEP;elementy PKI: RA, OID, SAN, PKCS, P12, SCEP;;;;"Urząd rejestracji (RA) weryfikuje wnioskodawców; OID – identyfikator obiektu w certyfikacie; SAN – dodatkowe nazwy domen w certyfikacie; PKCS – standardy kryptograficzne (np."
-H558;hash function;funkcja skrótu (hash);funkcja skrótu;;;;"Funkcja przekształcająca dane dowolnej długości w skrót o stałej długości; jednokierunkowa, więc nie jest szyfrowaniem."
-H559;duress password;hasło alarmowe (przymusu);hasło alarmowe;;;;Hasło, które zamiast odblokować urządzenie, uruchamia awaryjne skasowanie danych.
-H560;HMAC;HMAC;HMAC;;;;Kod uwierzytelniający wiadomość: skrót liczony z treści i tajnego klucza.
-H561;HTTPS / TLS;HTTPS/TLS;HTTPS/TLS;;;;Szyfrowanie ruchu WWW, zaprojektowane tak, by zapobiegać podsłuchowi, modyfikacji i fałszowaniu wiadomości.
-H562;PKI;PKI (infrastruktura klucza publicznego);PKI;;;;Zasady, role, systemy i procedury do wydawania, przechowywania i unieważniania certyfikatów cyfrowych i kluczy.
-H563;surveillance;inwigilacja;inwigilacja;;;;Śledzenie ludzi lub ich urządzeń, np.
-H564;data classification;klasyfikacja danych;klasyfikacja danych;;;;Podział danych według wrażliwości (np.
-H565;cryptographic key;klucz kryptograficzny;klucz kryptograficzny;;;;Wartość sterująca algorytmem szyfrującym.
-H566;session key;klucz sesyjny;klucz sesyjny;;;;Tymczasowy klucz symetryczny używany tylko w jednej sesji komunikacji, zwykle uzgadniany za pomocą kryptografii asymetrycznej.
-H567;cryptography, cryptanalysis;kryptografia, kryptoanaliza;kryptografia, kryptoanaliza;;;;Tworzenie szyfrów i analiza (łamanie) szyfrów.
-H568;ECC;ECC (kryptografia krzywych eliptycznych);ECC;;;;Kryptografia asymetryczna oparta na krzywych eliptycznych: bezpieczeństwo porównywalne z RSA przy dużo krótszych kluczach (ważne w telefonach i IoT).
-H569;CRL;CRL (lista unieważnionych certyfikatów);CRL;;;;Publikowana przez CA lista certyfikatów unieważnionych przed datą wygaśnięcia (np.
-H570;blockchain (open public ledger);blockchain (łańcuch bloków, otwarty rejestr publiczny);blockchain;;;;"Rozproszony rejestr transakcji, w którym każdy blok zawiera skrót poprzedniego; zmiana wpisu jest od razu wykrywana."
-H571;data masking;maskowanie danych;maskowanie danych;;;;Ukrycie części danych przy wyświetlaniu, np.
-H572;metadata;metadane;metadane;;;;Dane o danych (np.
-H573;immutability;niezmienność (danych);niezmienność;;;;Cecha zapisu, którego po utworzeniu nie da się zmienić niezauważenie (np.
-H574;DEP / ASLR;ochrona pamięci: DEP, ASLR;ochrona pamięci: DEP, ASLR;;;;Mechanizmy systemu utrudniające wykorzystanie błędów pamięci: DEP blokuje wykonywanie kodu z obszarów danych, ASLR losuje adresy w pamięci.
-H575;purge;oczyszczanie nośnika (purge);oczyszczanie nośnika;;;;Wg NIST SP 800-88 poziom między wyczyszczeniem (clear) a zniszczeniem (destroy): danych nie da się odzyskać nawet w laboratorium (np.
-H576;fingerprinting;fingerprinting (odcisk urządzenia);fingerprinting;;;;"Rozpoznawanie urządzenia lub użytkownika po zestawie cech technicznych; słowo pada też przy znakowaniu tekstów AI."
-H577;geographic restrictions / geofencing;ograniczenia geograficzne / geofencing;ograniczenia geograficzne / geofencing;;;;Zezwalanie lub blokowanie dostępu w zależności od lokalizacji użytkownika (GPS, adres IP, Wi-Fi).
-H578;OpenPGP, S/MIME;OpenPGP, S/MIME;OpenPGP;;;;Dwa standardy szyfrowania i podpisywania poczty e-mail.
-H579;FDE;FDE (pełne szyfrowanie dysku);FDE;;;;Szyfrowanie całego dysku (np.
-H580;digital signature;podpis cyfrowy;podpis cyfrowy;;;;"Skrót wiadomości zaszyfrowany kluczem prywatnym nadawcy; odbiorca sprawdza go kluczem publicznym."
-H581;code signing;podpisywanie kodu;podpisywanie kodu;;;;Cyfrowy podpis dołączany do programu lub aktualizacji, który pozwala sprawdzić, kto go wydał i czy nikt go po drodze nie zmienił.
-H582;encryption levels (full-disk, partition, volume, file, database, record);poziomy szyfrowania: dysk, partycja, wolumen, plik, baza danych, rekord;poziomy szyfrowania: dysk, partycja, wolumen, plik, baza danych, rekord;;;;Szyfrować można cały dysk (FDE, także dyski samoszyfrujące SED), partycję, wolumen, pojedyncze pliki (np.
-H583;data remanence;pozostałość danych (remanencja);pozostałość danych;;;;Dane, które zostają na nośniku po zwykłym usunięciu lub sformatowaniu i dają się odzyskać.
-H584;OCSP;protokół OCSP;protokół OCSP;;;;Sprawdzanie w czasie rzeczywistym, czy certyfikat jest ważny – szybsza alternatywa dla pobierania całej CRL (wariant: OCSP stapling).
-H585;primitives (in cryptographic algorithms);prymitywy (w algorytmach kryptograficznych);prymitywy;;;;Prymityw to podstawowy interfejs, blok kodu lub podstawowa funkcjonalność, którą można wdrożyć i ponownie wykorzystać w szerszych systemach lub interfejsach.
-H586;predictable randomness (weak PRNG);przewidywalne liczby losowe;przewidywalne liczby losowe;;;;Generator „losowych” liczb daje wartości, które da się odgadnąć.
-H587;key stretching;key stretching (rozciąganie klucza);key stretching;;;;Wielokrotne haszowanie hasła (np.
-H588;RSA;RSA;RSA;;;;"Najpopularniejszy algorytm asymetryczny; jego bezpieczeństwo opiera się na trudności rozkładu dużych liczb na czynniki pierwsze."
-H589;salt;sól kryptograficzna;sól kryptograficzna;;;;Losowy dodatek doklejany do hasła przed obliczeniem skrótu, inny dla każdego użytkownika.
-H590;HSM;HSM (sprzętowy moduł bezpieczeństwa);HSM;;;;Wyspecjalizowane urządzenie do bezpiecznego generowania i przechowywania kluczy oraz wykonywania operacji kryptograficznych.
-H591;data at rest / in transit / in use;stany danych: w spoczynku, w przesyle, w użyciu;stany danych: w spoczynku, w przesyle, w użyciu;;;;"W spoczynku – zapisane na dysku; w przesyle – przesyłane siecią; w użyciu – przetwarzane w pamięci."
-H592;steganography;steganografia;steganografia;;;;Ukrywanie informacji w innych danych, np.
-H593;KMS;KMS (system zarządzania kluczami);KMS;;;;Centralne zarządzanie cyklem życia kluczy: tworzenie, rotacja, wygaszanie, kontrola dostępu (np.
-H594;encryption;szyfrowanie;szyfrowanie;;;;Przekształcanie danych w postać nieczytelną bez klucza.
-H595;asymmetric encryption (public-key cryptography);szyfrowanie asymetryczne (kryptografia klucza publicznego);szyfrowanie asymetryczne;;;;Szyfrowanie parą powiązanych kluczy: publicznym (szyfrowanie, weryfikacja podpisu) i prywatnym (odszyfrowanie, składanie podpisu).
-H596;end-to-end encryption (E2EE);szyfrowanie end-to-end;szyfrowanie end-to-end;;;;"Wiadomość szyfrowana na urządzeniu nadawcy i odszyfrowywana dopiero u odbiorcy; dostawca usługi nie zna treści (np."
-H597;symmetric encryption;szyfrowanie symetryczne;szyfrowanie symetryczne;;;;Szyfrowanie, w którym ten sam tajny klucz służy do szyfrowania i odszyfrowania.
-H598;tokenization;tokenizacja;tokenizacja;;;;Zastąpienie wrażliwej wartości (np.
-H599;GCM / GCMP;tryb GCM;tryb GCM;;;;Tryb pracy szyfru blokowego (np.
-H600;block cipher modes (ECB, CBC, CFB, GCM);tryby pracy szyfrów blokowych: ECB, CBC, CFB, GCM;tryby pracy szyfrów blokowych: ECB, CBC, CFB, GCM;;;;Sposób szyfrowania kolejnych bloków: ECB (słaby – identyczne bloki dają identyczny szyfrogram), CBC i CFB (wiążą bloki, wymagają wektora IV), GCM (dodatkowo zapewnia integralność).
-H601;data types (regulated, legal, financial, human- and non-human-readable);typy danych: regulowane, prawne, finansowe, czytelne dla człowieka i maszyny;typy danych: regulowane, prawne, finansowe, czytelne dla człowieka i maszyny;;;;Security+ rozróżnia m.in.
-H602;CA;CA (urząd certyfikacji);CA;;;;Zaufana strona, która wydaje i podpisuje certyfikaty cyfrowe, potwierdzając, że klucz publiczny należy do danej tożsamości (np.
-H603;CSR;CSR (wniosek o podpisanie certyfikatu);CSR;;;;Plik z kluczem publicznym i danymi identyfikacyjnymi wysyłany do CA w celu wystawienia certyfikatu.
-H604;key exchange (in-band / out-of-band);wymiana kluczy (w paśmie / poza pasmem);wymiana kluczy;;;;Sposób przekazania klucza drugiej stronie: w tym samym kanale co dane (zwykle chroniony kryptografią asymetryczną) albo innym kanałem (telefon, osobiście).
-H605;PESEL reservation;zastrzeżenie numeru PESEL;zastrzeżenie numeru PESEL;;;;"Usługa utrudniająca zaciąganie zobowiązań na dany PESEL; polecana po wyciekach."
-H606;watermarking;znak wodny w treściach AI;znak wodny w treściach AI;;;;Niewidoczne dla człowieka znaczniki w tekście, obrazach i kodzie generowanym przez AI.
-H607;root of trust;root of trust (źródło zaufania);root of trust;;;;Element, któremu ufa się bez dalszej weryfikacji i na którym opiera się cały łańcuch zaufania – np.
-H608;gap analysis;gap analysis (analiza luk);gap analysis;;;;Porównanie obecnego stanu zabezpieczeń ze stanem docelowym (np.
-H609;blameless post-mortem;blameless post-mortem (analiza poawaryjna bez szukania winnych);blameless post-mortem;;;;Kultura analizowania wpadek: gdy produkcja leży, nie pyta się „kto wpisał złe chown?”, tylko szuka dziury w procesie, która na to pozwoliła.
-H610;root cause analysis (RCA);RCA (analiza przyczyny źródłowej);RCA;;;;Szukanie pierwotnego powodu problemu, a nie tylko jego objawu.
-H611;BIA;BIA (analiza wpływu na działalność);BIA;;;;Analiza funkcji i zależności systemu, która ustala priorytety odtwarzania po poważnym zakłóceniu.
-H612;risk appetite / risk tolerance;apetyt na ryzyko / tolerancja ryzyka;apetyt na ryzyko / tolerancja ryzyka;;;;"Apetyt – ile ryzyka organizacja chce przyjąć, by osiągać cele; tolerancja – dopuszczalne odchylenie od tego poziomu."
-H613;Zero Trust Architecture (ZTA);Zero Trust (architektura zerowego zaufania);Zero Trust;;;;"Zamiast „ufaj, ale sprawdzaj” – „nigdy nie ufaj, zawsze weryfikuj”: zakładamy, że sieć wewnętrzna jest już zainfekowana; każdy użytkownik, urządzenie i operacja są stale autoryzowane i szyfrowane."
-H614;internal / external audit, attestation;audyt wewnętrzny / zewnętrzny, poświadczenie;audyt wewnętrzny / zewnętrzny, poświadczenie;;;;"Audyt wewnętrzny prowadzi własny zespół, zewnętrzny – niezależna firma; poświadczenie (attestation) to formalne potwierdzenie zgodności."
-H615;authenticity;autentyczność;autentyczność;;;;Pewność, że wiadomość, transmisja lub jej nadawca są prawdziwi i dają się zweryfikować.
-H616;security by design;security by design (bezpieczeństwo wbudowane);security by design;;;;Fundament, a nie nakładka na gotową aplikację: mechanizmy obronne planuje się, zanim powstanie pierwsza linijka kodu.
-H617;fail closed / fail open;fail closed / fail open (bezpieczna / niebezpieczna awaria);fail closed / fail open;;;;Co robi system, gdy coś pójdzie nie tak.
-H618;sensors (infrared, pressure, microwave, ultrasonic);czujniki: podczerwień, nacisk, mikrofale, ultradźwięki;czujniki: podczerwień, nacisk, mikrofale, ultradźwięki;;;;Czujniki ruchu i obecności w ochronie fizycznej: podczerwień (ciepło), nacisk (np.
-H619;DevSecOps;DevSecOps;DevSecOps;;;;Włączanie bezpieczeństwa w cały cykl tworzenia i utrzymania oprogramowania.
-H620;technical debt;dług technologiczny;dług technologiczny;;;;Robienie czegoś „na szybko i na brudno” (np.
-H621;RTO;RTO (docelowy czas odtworzenia);RTO;;;;Maksymalny czas, w jakim system musi wrócić do działania po awarii.
-H622;RPO;RPO (docelowy punkt odtworzenia);RPO;;;;Maksymalna akceptowalna utrata danych, mierzona czasem – np.
-H623;availability;dostępność;dostępność;;;;"Zapewnienie terminowego i niezawodnego dostępu do informacji; jeden z elementów triady CIA."
-H624;idempotency;idempotentność, powtarzalność;idempotentność, powtarzalność;;;;Wielokrotne zastosowanie procedury daje ten sam wynik co jednokrotne (np.
-H625;SLSA (build integrity);SLSA (integralność procesu budowania);SLSA;;;;Zestaw poziomów i praktyk zapewniających, że gotowy program powstał dokładnie z tego kodu, z którego miał powstać, w zabezpieczonym procesie budowania – i że da się to udowodnić.
-H626;security categorization;kategoryzacja bezpieczeństwa;kategoryzacja bezpieczeństwa;;;;"Przypisanie informacji i systemowi poziomu wpływu (niski, umiarkowany, wysoki) na poufność, integralność i dostępność; punkt wyjścia do doboru zabezpieczeń."
-H627;KRI;KRI (kluczowy wskaźnik ryzyka);KRI;;;;Miernik, który z wyprzedzeniem sygnalizuje rosnące ryzyko (np.
-H628;change control board (CAB);CAB (komitet ds. zmian);CAB;;;;Zespół, który ocenia ryzyko i zatwierdza planowane zmiany w systemach, zanim zostaną wdrożone.
-H629;two-person control (no-lone zone);kontrola dwóch osób;kontrola dwóch osób;;;;Krytyczne działania (np.
-H630;version control;kontrola wersji;kontrola wersji;;;;Rejestrowanie kolejnych wersji kodu, konfiguracji czy dokumentów (np.
-H631;architecture considerations;kryteria wyboru architektury;kryteria wyboru architektury;;;;Co porównuje się, wybierając model architektury: dostępność, odporność, koszt, responsywność, skalowalność, łatwość wdrożenia i odtworzenia, przeniesienie ryzyka, dostępność łatek i niemożność łatania, zasilanie, moc obliczeniowa.
-H632;allow list / deny list;allow list / deny list (lista dozwolonych / zabronionych);allow list / deny list;;;;"Allow list – uruchamiać lub przepuszczać tylko to, co wymieniono; deny list – blokować to, co wymieniono, a resztę przepuszczać."
-H633;MTD;MTD (maksymalny dopuszczalny czas przestoju);MTD;;;;"Najdłuższy czas, przez jaki proces biznesowy może nie działać bez nieakceptowalnych skutków; RTO musi być od niego krótszy."
-H634;audit data gathering (sampling, questionnaires, interviews, assertion);metody zbierania dowodów w audycie;metody zbierania dowodów w audycie;;;;Próbkowanie, kwestionariusze i ankiety, wywiady, oświadczenia (asercje) badanych oraz źródła referencyjne (MITRE ATT&CK, Cyber Kill Chain, model diamentowy).
-H635;snapshot / replication / journaling;migawka / replikacja / dziennikowanie;migawka / replikacja / dziennikowanie;;;;Migawka – zapis stanu (np.
-H636;threat modeling;modelowanie zagrożeń;modelowanie zagrożeń;;;;Systematyczne zastanawianie się przed budową systemu: co chronimy, kto może chcieć to zaatakować, jak i co wtedy zrobimy.
-H637;fail forward;fail forward (naprawa „do przodu”);fail forward;;;;"Zamiast wycofywać nieudaną zmianę (backout), szybko wdraża się poprawkę, która naprawia problem; wymaga dojrzałych testów i automatyzacji."
-H638;non-repudiation;niezaprzeczalność;niezaprzeczalność;;;;"Pewność, że nadawca nie wyprze się wysłania wiadomości lub wykonania działania; zapewnia ją m.in."
-H639;immutable infrastructure;immutable infrastructure (niezmienna infrastruktura);immutable infrastructure;;;;Zamiast naprawiać i aktualizować zepsuty serwer, zabija się go i stawia nowy, idealny obraz (klasyka w Dockerze i Kubernetesie).
-H640;ISO/IEC 27001;norma ISO 27001;norma ISO 27001;;;;Międzynarodowa norma systemu zarządzania bezpieczeństwem informacji.
-H641;defense in depth;obrona w głąb (defense in depth);obrona w głąb;;;;Bezpieczeństwo nie kończy się na jednym firewallu: budujesz warstwy (sieć, system, uprawnienia np.
-H642;qualitative / quantitative risk assessment;ocena ryzyka jakościowa / ilościowa;ocena ryzyka jakościowa / ilościowa;;;;"Jakościowa – opisowa skala (niskie, średnie, wysokie); ilościowa – wartości liczbowe i pieniężne (SLE, ALE)."
-H643;vendor assessment, selection and monitoring (TPRM);ocena, wybór i monitorowanie dostawców;ocena, wybór i monitorowanie dostawców;;;;Sprawdzanie dostawców: testy penetracyjne, prawo do audytu, dowody audytów wewnętrznych, niezależne oceny, analiza łańcucha dostaw, należyta staranność, konflikt interesów, kwestionariusze, stały monitoring, zasady prowadzenia testów.
-H644;DR;DR (odtwarzanie po awarii);DR;;;;Procesy i zasoby (np.
-H645;threat scope reduction;ograniczanie zakresu zagrożenia;ograniczanie zakresu zagrożenia;;;;Zawężanie tego, do czego ma dostęp użytkownik lub system (najmniejsze uprawnienia, mikrosegmentacja), żeby ewentualny atak miał jak najmniejszy zasięg.
-H646;vendor limitations / constraints;ograniczenia we współpracy z dostawcami;ograniczenia we współpracy z dostawcami;;;;Czynniki ograniczające: braki kadrowe i zasobów, środowisko, przepisy, jurysdykcja, zwrot z inwestycji (ROI), uzależnienie od dostawcy (vendor lock-in), mechanizmy zapewnienia jakości.
-H647;hot / warm / cold site;hot / warm / cold site (ośrodek zapasowy);hot / warm / cold site;;;;"Gorący – kopia centrum danych gotowa od razu; ciepły – częściowo wyposażony; zimny – pusty budynek, do którego trzeba wszystko przywieźć."
-H648;BCP;BCP (plan ciągłości działania);BCP;;;;Przygotowany zawczasu zestaw instrukcji, jak prowadzić działalność podczas poważnego zakłócenia i jak wrócić do normalnego stanu.
-H649;contingency planning;planowanie awaryjne;planowanie awaryjne;;;;Przygotowanie procedur i zasobów do odtworzenia systemów po awarii lub incydencie.
-H650;COOP;COOP (planowanie ciągłości działań operacyjnych);COOP;;;;Plan utrzymania kluczowych funkcji organizacji w czasie awarii lub ataku, także metodami zastępczymi (np.
-H651;capacity planning;planowanie pojemności;planowanie pojemności;;;;Dopasowanie zasobów (ludzi, sprzętu, infrastruktury) do przewidywanego zapotrzebowania, by uniknąć przeciążenia lub marnotrawstwa.
-H652;backout plan;backout plan (plan wycofania zmiany);backout plan;;;;Przygotowany z góry sposób powrotu do poprzedniego stanu, jeśli zmiana się nie uda (np.
-H653;control plane / data plane (Zero Trust);płaszczyzna sterowania / płaszczyzna danych (Zero Trust);płaszczyzna sterowania / płaszczyzna danych;;;;"Płaszczyzna sterowania decyduje o dostępie (silnik polityki, administrator polityki, kontrola dostępu oparta na politykach); płaszczyzna danych go realizuje (podmiot/system, punkt egzekwowania polityki, strefy domniemanego zaufania – implicit trust zones)."
-H654;SPOF;SPOF (pojedynczy punkt awarii);SPOF;;;;"Element, którego awaria zatrzymuje cały system; eliminuje się go redundancją."
-H655;clean desk policy;polityka czystego biurka;polityka czystego biurka;;;;Zasada, że po pracy na biurku nie zostają dokumenty, nośniki ani zapisane hasła, a ekran jest zablokowany.
-H656;policies / standards / procedures / guidelines;polityka, standard, procedura, wytyczne;polityka, standard, procedura, wytyczne;;;;"Polityka – cele i zasady (co i dlaczego); standard – obowiązkowe wymagania (np."
-H657;MOU / MOA;porozumienie (MOU / MOA);porozumienie;;;;"MOU – list intencyjny, zwykle niewiążący; MOA – bardziej szczegółowe porozumienie o współpracy."
-H658;right-to-audit clause / rules of engagement;prawo do audytu / zasady testów;prawo do audytu / zasady testów;;;;Klauzula pozwalająca audytować dostawcę oraz uzgodnione zasady testów penetracyjnych (zakres, terminy, dozwolone techniki).
-H659;RMF;RMF (ramy zarządzania ryzykiem);RMF;;;;Proces NIST łączący bezpieczeństwo i ochronę prywatności z całym cyklem życia systemu: od kategoryzacji, przez dobór i wdrożenie zabezpieczeń, po ich ocenę, autoryzację i monitorowanie.
-H660;redundancy;redundancja (nadmiarowość);redundancja;;;;"Posiadanie większej ilości zasobów, niż potrzeba do normalnej pracy; zapasowe elementy przejmują zadania, gdy główny ulegnie awarii, a system działa dalej bez przerw i utraty danych."
-H661;risk register;rejestr ryzyka;rejestr ryzyka;;;;Lista zidentyfikowanych ryzyk z oceną, właścicielem i planowanymi działaniami.
-H662;data retention;retencja danych;retencja danych;;;;Zasady, jak długo przechowuje się dane (z powodów prawnych lub biznesowych) i kiedy należy je usunąć.
-H663;full / incremental / differential backup;rodzaje kopii zapasowych: pełna, przyrostowa, różnicowa;rodzaje kopii zapasowych: pełna, przyrostowa, różnicowa;;;;Pełna – kopiuje wszystko.
-H664;executive roles (CIO, CTO, CSO, CISO, ISSO);role kierownicze: CIO, CTO, CSO, CISO, ISSO;role kierownicze: CIO, CTO, CSO, CISO, ISSO;;;;CIO – dyrektor ds.
-H665;configuration drift;configuration drift (rozjeżdżanie się konfiguracji);configuration drift;;;;Dwa identyczne serwery z czasem zaczynają się różnić, bo admini „poklikali” coś na jednym, a zapomnieli o drugim.
-H666;accountability;rozliczalność;rozliczalność;;;;Możliwość jednoznacznego ustalenia, kto, kiedy i na jakich obiektach wykonał dane działanie.
-H667;geographic dispersion;rozproszenie geograficzne;rozproszenie geograficzne;;;;Umieszczanie ośrodków i kopii danych w odległych lokalizacjach, by jedna katastrofa (powódź, awaria regionu) nie wyłączyła wszystkiego.
-H668;platform diversity / multi-cloud;multi-cloud (różnorodność platform, wiele chmur);multi-cloud;;;;Korzystanie z różnych systemów, producentów lub dostawców chmury, żeby jedna podatność lub awaria nie dotknęła całej infrastruktury.
-H669;residual risk;ryzyko resztkowe (szczątkowe);ryzyko resztkowe;;;;"Ryzyko, które zostaje po wdrożeniu zabezpieczeń; organizacja świadomie je akceptuje albo dalej ogranicza."
-H670;policy engine / PDP / PEP;PDP / PEP (silnik polityki, punkt decyzji, punkt egzekwowania);PDP / PEP;;;;Elementy architektury Zero Trust: silnik polityki ocenia żądanie dostępu, punkt decyzji wydaje werdykt, punkt egzekwowania wpuszcza lub blokuje ruch.
-H671;scalability;skalowalność;skalowalność;;;;Zdolność systemu, oprogramowania lub firmy do obsługi rosnącego obciążenia bez proporcjonalnego wzrostu kosztów.
-H672;SLE / ARO / ALE;SLE (oczekiwana pojedyncza strata) / ARO (roczna częstotliwość występowania) / ALE (oczekiwana roczna strata);SLE (oczekiwana pojedyncza strata) / ARO (roczna częstotliwość występowania) / ALE;;;;"SLE = wartość zasobu (AV) × współczynnik narażenia (EF); ALE = SLE × ARO (ile razy w roku)."
-H673;bollards;słupki ochronne;słupki ochronne;;;;Niskie, wytrzymałe słupki lub barierki, które nie pozwalają pojazdom wjechać w budynek czy wejście, a ludzi kierują do kontrolowanych przejść.
-H674;SBOM;SBOM (spis składników oprogramowania);SBOM;;;;„Lista składników” aplikacji: z jakich bibliotek i w jakich wersjach się składa.
-H675;SOP;SOP (standardowa procedura operacyjna);SOP;;;;"Szczegółowa instrukcja wykonywania powtarzalnej czynności; w Security+ przykład zabezpieczenia operacyjnego i dyrektywnego."
-H676;risk transfer / acceptance / avoidance / mitigation;strategie postępowania z ryzykiem;strategie postępowania z ryzykiem;;;;Przeniesienie (np.
-H677;governance structures;struktury ładu;struktury ładu;;;;Kto podejmuje decyzje o bezpieczeństwie: zarząd, komitety, model scentralizowany lub zdecentralizowany.
-H678;access control vestibule (mantrap);śluza kontroli dostępu;śluza kontroli dostępu;;;;"Pomieszczenie z dwojgiem drzwi, przez które przechodzi się pojedynczo; drugie drzwi otwierają się dopiero po zamknięciu pierwszych."
-H679;MTBF;MTBF (średni czas między awariami);MTBF;;;;Średni czas pracy urządzenia lub systemu między kolejnymi awariami – miara niezawodności.
-H680;MTTR;MTTR (średni czas naprawy);MTTR;;;;Średni czas potrzebny na naprawę i przywrócenie systemu po awarii.
-H681;white box / gray box testing;testowanie białej / szarej skrzynki;testowanie białej / szarej skrzynki;;;;"Biała skrzynka – tester zna system (kod, dokumentację); szara – zna część informacji."
-H682;functional / behavioral testing;testy funkcjonalne i behawioralne;testy funkcjonalne i behawioralne;;;;W audycie i ocenie: sprawdzanie, czy zabezpieczenie działa zgodnie z założeniem (funkcjonalne), oraz jak zachowują się ludzie i systemy w realnych warunkach (behawioralne).
-H683;recovery testing / tabletop exercise;testy odtwarzania / ćwiczenia sztabowe;testy odtwarzania / ćwiczenia sztabowe;;;;Sprawdzanie planów awaryjnych: dyskusja „przy stole” krok po kroku, symulacja, test przełączenia awaryjnego (failover) albo praca równoległa.
-H684;CIA triad;triada CIA;triada CIA;;;;Trzy cele bezpieczeństwa informacji: poufność, integralność i dostępność.
-H685;cybersecurity insurance;ubezpieczenie od ryzyk cybernetycznych;ubezpieczenie od ryzyk cybernetycznych;;;;Polisa pokrywająca część strat po incydencie (np.
-H686;SLA;SLA (umowa o poziomie usług);SLA;;;;Umowa z dostawcą określająca wymagany poziom usługi (dostępność, czas reakcji) i kary za jego niedotrzymanie.
-H687;BPA;BPA (umowa partnerska);BPA;;;;Umowa regulująca współpracę partnerów biznesowych: podział zysków, obowiązków i odpowiedzialności.
-H688;MSA / SOW;MSA / SOW (umowa ramowa / opis prac);MSA / SOW;;;;"MSA ustala ogólne warunki współpracy; SOW (lub WO) opisuje konkretny zakres prac, terminy i rezultaty."
-H689;data owner / data custodian (steward);właściciel / opiekun danych;właściciel / opiekun danych;;;;"Właściciel odpowiada za dane (zwykle kierownik biznesowy); opiekun dba o nie na co dzień – kopie, uprawnienia, jakość, etykiety."
-H690;high availability (HA) / clustering;wysoka dostępność / klastrowanie;wysoka dostępność / klastrowanie;;;;"Systemy działające równolegle tak, by awaria jednego nie przerywała usługi; klaster to kilka serwerów pracujących jak jeden."
-H691;security control baseline;zabezpieczenia bazowe;zabezpieczenia bazowe;;;;Minimalny zestaw zabezpieczeń przypisany do systemu według jego kategorii bezpieczeństwa.
-H692;physical security (fencing, video surveillance, security guard, access badge, lighting);zabezpieczenia fizyczne: ogrodzenie, monitoring, ochrona, identyfikatory, oświetlenie;zabezpieczenia fizyczne: ogrodzenie, monitoring, ochrona, identyfikatory, oświetlenie;;;;"Fizyczne środki ochrony obiektu: ogrodzenie, monitoring wizyjny (CCTV, kamery obrotowe PTZ), pracownicy ochrony, identyfikatory i karty dostępu, oświetlenie; uzupełniają je słupki, śluzy i czujniki."
-H693;security controls;zabezpieczenia (środki kontroli);zabezpieczenia;;;;Środki ograniczające ryzyko.
-H694;compensating control;zabezpieczenie kompensujące;zabezpieczenie kompensujące;;;;Środek zastępczy, gdy właściwego zabezpieczenia nie da się wdrożyć (np.
-H695;assume breach;assume breach (zakładamy naruszenie);assume breach;;;;Zamiast budować „idealną twierdzę”, przekierowujemy zasoby na szybkie wykrywanie, izolację (polowanie na zagrożenia) i odzyskanie sprawności.
-H696;RFI / RFP / RFQ / EOI;zapytania do dostawców: RFI, RFP, RFQ, EOI;zapytania do dostawców: RFI, RFP, RFQ, EOI;;;;Etapy wyboru dostawcy: prośba o informacje, zapytanie ofertowe (propozycja rozwiązania), zapytanie o cenę, wyrażenie zainteresowania.
-H697;security-focused configuration management;zarządzanie konfiguracją ukierunkowane na bezpieczeństwo;zarządzanie konfiguracją ukierunkowane na bezpieczeństwo;;;;Zarządzanie konfiguracją systemów z naciskiem na bezpieczne ustawienia i kontrolę zmian.
-H698;C-SCRM;C-SCRM (zarządzanie ryzykiem w łańcuchu dostaw);C-SCRM;;;;Identyfikacja, ocena i ograniczanie ryzyka związanego z dostawcami produktów i usług IT/OT na wszystkich poziomach organizacji.
-H699;change management;zarządzanie zmianą;zarządzanie zmianą;;;;Formalny proces zmian: wniosek, analiza wpływu, zatwierdzenie (właściciel, interesariusze, komitet ds.
-H700;AUP;AUP (zasady dopuszczalnego użytkowania);AUP;;;;Dokument określający, co pracownikowi wolno, a czego nie, przy korzystaniu ze sprzętu i sieci firmy.
-H701;UPS / generator;UPS / generator (zasilanie awaryjne);UPS / generator;;;;"UPS podtrzymuje zasilanie na krótko (minuty) i chroni przed spadkami napięcia; generator zapewnia prąd przy dłuższej awarii."
-H702;offensive / defensive / integrated testing (red, blue, purple team);zespoły red / blue / purple;zespoły red / blue / purple;;;;Testy ofensywne (red team atakuje), defensywne (blue team broni i wykrywa), zintegrowane (purple team – obie strony współpracują i od razu poprawiają wykrywanie).
-H703;compliance;zgodność;zgodność;;;;Spełnianie wymagań norm i prawa (np.
-H704;security audit;audyt bezpieczeństwa;audyt bezpieczeństwa;;;;Przegląd zabezpieczeń organizacji.
-H705;web security (websec);bezpieczeństwo aplikacji webowych;bezpieczeństwo aplikacji webowych;;;;Ochrona stron i aplikacji internetowych.
-H706;OSINT;OSINT (biały wywiad);OSINT;;;;Analiza informacji jawnych.
-H707;CompTIA Security+;certyfikat CompTIA Security+;certyfikat CompTIA Security+;;;;Międzynarodowy certyfikat z podstaw cyberbezpieczeństwa.
-H708;LPI Security Essentials;certyfikat LPI Security Essentials;certyfikat LPI Security Essentials;;;;"Certyfikat z podstaw bezpieczeństwa (egzamin 020-100); SBT prowadzi do niego bezpłatny kurs."
-H709;CTF;CTF;CTF;;;;Zawody w łamaniu zabezpieczeń.
-H710;DEF CON;DEF CON;DEF CON;;;;Duża konferencja hakerska w Las Vegas.
-H711;bug bounty;bug bounty (program nagród za błędy);bug bounty;;;;Nagrody za zgłaszanie znalezionych luk.
-H712;security awareness;świadomość bezpieczeństwa;świadomość bezpieczeństwa;;;;Szkolenia użytkowników.
-H713;black box testing, basic testing;testowanie czarnej skrzynki, podstawowe testy;testowanie czarnej skrzynki, podstawowe testy;;;;Testy prowadzone bez wiedzy o wewnętrznej budowie badanego systemu.
-H714;penetration testing (pentest);testy penetracyjne;testy penetracyjne;;;;Autoryzowany atak w celu znalezienia luk.
-H715;DLL hijacking;DLL hijacking (porwanie biblioteki DLL);DLL hijacking;;;;• Na czym polega: Windows szuka wymaganych bibliotek DLL w określonej kolejności (tzw.
-H716;reflective DLL injection;reflective DLL injection (refleksyjne wstrzykiwanie DLL);reflective DLL injection;;;;• Na czym polega: Zaawansowana technika polegająca na załadowaniu biblioteki DLL z pamięci RAM, a nie z dysku twardego.
-H717;TCP flags;flagi TCP (SYN, ACK, FIN, RST, PSH, URG);flagi TCP;;;;Bity w nagłówku segmentu TCP, które sterują połączeniem.
-H718;TCP flag scans (SYN, FIN, NULL, Xmas);skany po flagach TCP: SYN, FIN, NULL, Xmas;skany po flagach TCP: SYN, FIN, NULL, Xmas;;;;Techniki skanowania portów wykorzystujące flagi TCP.
-H719;severity vs priority (alert triage);krytyczność a priorytet alertu (severity vs priority);krytyczność a priorytet alertu;;;;Dwa różne wymiary w triage alertu.
-H720;TLP;TLP (Traffic Light Protocol);TLP;;;;Prosty system oznaczania, komu wolno przekazać dalej otrzymaną informację o zagrożeniu.
-H721;compiler hardening flags;flagi utwardzające kompilację (stack canary, PIE, RELRO, NX, FORTIFY);flagi utwardzające kompilację;;;;Opcje kompilatora i konsolidatora (GCC, Clang), które wbudowują w program zabezpieczenia przeciw błędom pamięci.
-H722;HTTP security headers;nagłówki bezpieczeństwa HTTP (HSTS, CSP, X-Frame-Options);nagłówki bezpieczeństwa HTTP;;;;Nagłówki odpowiedzi serwera, którymi „flaguje” on przeglądarce, jak ma się zachować.
-H723;wiper;wiper (program niszczący dane);wiper;;;;Złośliwe oprogramowanie, które trwale niszczy lub usuwa dane (nadpisuje pliki, dyski, sektor rozruchowy), zamiast żądać okupu.
-H724;security advisory;komunikat bezpieczeństwa (security advisory);komunikat bezpieczeństwa;;;;Oficjalna informacja producenta lub zespołu CERT o podatności: których produktów i wersji dotyczy, jak jest groźna (np.
-H725;authentication bypass;obejście uwierzytelniania (authentication bypass);obejście uwierzytelniania;;;;Podatność, która pozwala uzyskać dostęp do systemu lub funkcji bez poprawnego uwierzytelnienia, np.
-H726;DLL side-loading;DLL sideloading (podsunięcie biblioteki DLL);DLL sideloading;;;;Podsunięcie złośliwej biblioteki DLL legalnemu, podpisanemu programowi.
-H371-sponsored;state-sponsored;;opłacani przez państwo;;odmieniaj zgodnie z kontekstem;sponsorowan\w* przez państwo;Wariant z kolumny „Terminologia PL” hasła H371.
+﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v90 · 2026-10-29 · CC BY-NC-ND 4.0 · © Jan Wolski.
+id;termin_en;forma;nawias;regula;unikaj
+H001;adware;adware;;;
+H002;bloatware;bloatware;;;
+H003;logic bomb;bomba logiczna;;;
+H004;botnet;botnet;sieć zainfekowanych urządzeń;bez tłumaczenia;
+H005;crypto drainer;drainer kryptowalut;;;
+H006;dropper;dropper;;;
+H007;campaign;kampania;;;
+H008;keylogger;keylogger;;;
+H009;cryptominer;koparka kryptowalut;;;
+H010;loader;loader;;;
+H011;MaaS;MaaS;;;
+H012;spyware;spyware;;;oprogramowa\w+ szpiegując\w*
+H013;toll fraud;toll fraud;;;
+H014;PPI;PPI;;;
+H015;ransomware;ransomware;program żądający okupu;bez tłumaczenia;
+H016;worm;robak;;;
+H017;rootkit;rootkit;;;
+H018;scareware;scareware;;;
+H019;infostealer;infostealer;program kradnący dane;bez tłumaczenia;
+H020;fileless malware;fileless malware;;;
+H021;trojan;trojan;;;
+H022;RAT;RAT;;;
+H023;backdoor;backdoor;;;tyln\w+ (?:furt\w+|drzwi)
+H024;multi-stage infection chain;wieloetapowa infekcja;;;
+H025;virus;wirus;;;
+H026;obfuscation;obfuskacja;;;
+H027;malicious package (npm);złośliwa paczka;;;
+H028;malware;malware;;;złośliw\w+ oprogramowa\w+
+H029;malicious browser extension;złośliwe rozszerzenie przeglądarki;;;
+H030;watering hole attack;watering hole;;;
+H031;ClickFix;ClickFix;;;
+H032;investment scam;fałszywa inwestycja;;;
+H033;urgent-transfer scam;fałszywa prośba o szybki przelew;;;
+H034;scam call center;fałszywe call center;;;
+H035;QR-code phishing (quishing);quishing;;;
+H036;fake consultant scam;fałszywy konsultant;;;
+H037;fake online shop;fałszywy sklep internetowy;;;
+H038;malicious attachment;fałszywy załącznik;;;
+H039;pretexting;pretexting;;;
+H040;scam;oszustwo;;;
+H041;BEC;BEC;;;
+H042;phishing;phishing;;;
+H043;vishing;vishing;;;
+H044;device code phishing;device code phishing;;;
+H045;AiTM phishing;phishing typu AiTM;;;
+H046;spear phishing;spear phishing;;;
+H047;web bug (tracking pixel);piksel śledzący;;;
+H048;shoulder surfing;shoulder surfing;;;
+H049;spoofing / impersonation;spoofing;;;
+H050;brand impersonation;podszywanie się pod markę;;;
+H051;BitB;BitB;;;
+H052;dumpster diving;dumpster diving;;;
+H053;lure;przynęta;;;
+H054;smishing;smishing;;;
+H055;social engineering;socjotechnika;;;
+H056;spam;spam;;;
+H057;typosquatting (URL hijacking);typosquatting;;;
+H058;tailgating (piggybacking);tailgating;;;
+H059;threat vectors (message-based, image-based, file-based, voice call, removable device);wektory zagrożeń: wiadomości, obrazy, pliki, połączenia głosowe, nośniki;;;
+H060;whaling;whaling;;;
+H061;SIM swapping;SIM swapping;;;
+H062;malvertising;malvertising;;;
+H063;supply chain attack;atak na łańcuch dostaw;;;
+H064;XXE;XXE;;;
+H065;arbitrary file read;arbitrary file read;;;
+H066;CSRF;CSRF;;;
+H067;SSRF;SSRF;;;
+H068;insecure deserialization;niebezpieczna deserializacja;;;
+H069;unrestricted file upload;nieograniczone wgrywanie plików;;;
+H070;Broken Access Control;Broken Access Control;;;
+H071;IDOR;IDOR;;;
+H072;open redirect;open redirect;;;
+H073;typosquatting (packages);typosquatting paczek;;;
+H074;dependency confusion;dependency confusion;;;
+H075;directory (path) traversal;path traversal;;;
+H076;clickjacking;clickjacking;;;
+H077;maintainer takeover;maintainer takeover;;;
+H078;HTTP request smuggling;HTTP request smuggling;;;
+H079;ASCII smuggling;ASCII smuggling;;;
+H080;buffer overflow;przepełnienie bufora;;;
+H081;race condition;race condition;;;
+H082;file inclusion;file inclusion;;;
+H083;DLL injection;DLL injection;;;
+H084;log injection;log injection;;;
+H085;memory injection (process injection);process injection;;;
+H086;command injection;command injection;;;
+H087;prompt injection;prompt injection;;;
+H088;SQL injection;SQL injection;;;
+H089;XSS;XSS;;;
+H090;RCE;RCE;;;zdaln\w+ wykonani\w+ kodu | remote code execution
+H091;malicious update;złośliwa aktualizacja;;;
+H092;active attack;atak aktywny;;;
+H093;zero-click attack;zero-click;;;
+H094;brute force attack;brute force;;;
+H095;DDoS;atak DDoS;;;
+H096;deauthentication attack / RF jamming;atak deautentykacyjny / zagłuszanie radiowe;;;
+H097;DoS;atak DoS;;;
+H098;environmental attacks;ataki środowiskowe;;;
+H099;character encoding attacks;ataki z użyciem kodowania znaków;;;
+H100;side-channel attack;atak kanałem bocznym;;;
+H101;kinetic attack;atak kinetyczny;;;
+H102;blended attack;atak kombinowany;;;
+H103;KRACK;atak KRACK;;;
+H104;downgrade attack;downgrade attack;;;
+H105;identity-based attack;atak oparty na tożsamości;;;
+H106;passive attack;atak pasywny;;;
+H107;replay attack;replay attack;;;
+H108;dictionary attack;atak słownikowy;;;
+H109;Smurf attack;atak smurf;;;
+H110;on-path attack (man-in-the-middle, MitM);man-in-the-middle / on-path;;;
+H111;birthday attack / hash collision;atak urodzinowy / kolizja skrótu;;;
+H112;DDoS-for-hire (booter/stresser);DDoS-for-hire;;;
+H113;DNS rebinding;DNS rebinding;;;
+H114;exfiltration;eksfiltracja, wykradanie danych;;;
+H115;IP spoofing;IP spoofing;;;
+H116;MAC address spoofing;MAC spoofing;;;
+H117;Google dorking;Google dorking;;;
+H118;RFID cloning;klonowanie RFID;;;
+H119;payload;payload;;;
+H120;cyber kill chain;cyber kill chain;;;
+H121;tampering;tampering;;;
+H122;route table manipulation / BGP hijacking;BGP hijacking;;;
+H123;compromise;naruszenie, kompromitacja;;;
+H124;Nmap;Nmap;;;
+H125;acoustic keystroke recovery;odtwarzanie tekstu z dźwięku klawiatury;;;
+H126;reverse shell;reverse shell;;;
+H127;vertical / horizontal privilege escalation;pionowa i pozioma eskalacja uprawnień;;;
+H128;eavesdropping / tapping;podsłuch;;;
+H129;domain hijacking;przejęcie domeny;;;
+H130;account takeover;przejęcie konta;;;
+H131;dangling DNS / subdomain takeover;subdomain takeover;;;
+H132;VLAN hopping;VLAN hopping;;;
+H133;active / passive reconnaissance;rekonesans aktywny / pasywny;;;
+H134;password spraying;password spraying;;;
+H135;lateral movement;lateral movement;;;
+H136;port scanning;skanowanie portów;;;
+H137;skimming / forced entry;skimming i wejście siłowe;;;
+H138;SSL stripping;SSL stripping;;;
+H139;tradecraft;tradecraft;;;
+H140;credential stuffing;credential stuffing;;;
+H141;DNS / NTP/ ICMP amplification;DNS / NTP / ICMP amplification;;;
+H142;electromagnetic interference (EMI);zakłócenia elektromagnetyczne;;;
+H143;SYN flood;SYN flood;;;
+H144;UDP flood;UDP flood;;;
+H145;switch flooding / MAC flooding;MAC flooding;;;
+H146;ARP poisoning (ARP spoofing);ARP spoofing / ARP poisoning;;;
+H147;DNS cache poisoning / DNS spoofing;DNS spoofing / cache poisoning;;;
+H148;Living off the Land (LotL);Living off the Land;;;
+H149;misconfiguration;błędna konfiguracja;;;
+H150;CVE;CVE;;;
+H151;CVSS;CVSS;;;
+H152;PoC;PoC;;;dow[oó]d\w* koncepcji
+H153;exploit (kit);exploit;kod wykorzystujący podatność;nie spolszczaj;eksploit\w*
+H154;CISA KEV;CISA KEV;;;
+H155;CWE;CWE;;;
+H156;EOL / EOSL;EOL / EOSL;;;
+H157;NVD;NVD;;;
+H158;CWE Top 25;CWE Top 25;;;
+H159;zero-day;zero-day;;;(?:podatnoś|luk)\w* dnia zerowego
+H160;actively exploited vulnerability;luka aktywnie wykorzystywana;;;
+H161;n-day;luka n-day;;;
+H162;patch gap;patch gap;;;
+H163;rogue devices / unmanaged systems;rogue devices;;;
+H164;vulnerability;podatność;;"nie dopisuj „(luka)” w nawiasie; słowa „luka” możesz używać zamiennie";\(luk\w*\)
+H165;resource reuse;ponowne użycie zasobów;;;
+H166;patch;łatka;;;poprawk\w*|poprawce|poprawek | (?:s|za)?patch(?:uj|ow)\w*
+H167;public repositories / public object storage;publiczne repozytoria i publiczne zasobniki danych;;;
+H168;shadow IT;shadow IT;;;
+H169;EPSS;EPSS;;;
+H170;Active Directory;Active Directory;;;
+H171;NTLM relay attack;NTLM relay;;;
+H172;authorization;autoryzacja;;;
+H173;biometrics;biometria;;;
+H174;Protected Actions;Protected Actions;;;
+H175;session cookie;ciasteczko sesyjne;;;
+H176;authentication factors (something you know / have / are, somewhere you are);czynniki uwierzytelniania;;;
+H177;dMSA;dMSA;;;
+H178;DMARC;DMARC;;;
+H179;password best practices (length, complexity, reuse, expiration, age);dobre praktyki dotyczące haseł;;;
+H180;deny by default;domyślna odmowa dostępu;;;
+H181;default passwords;domyślne hasła;;;
+H182;privilege escalation;podwyższenie uprawnień;eskalacja;;eskalacj\w* uprawnień | podniesieni\w* uprawnień
+H183;federation;federacja tożsamości;;;
+H184;cookie security flags (HttpOnly, Secure, SameSite);flagi ochronne ciasteczek;;;
+H185;recovery (seed) phrase;seed phrase;;;
+H186;Kerberoasting;Kerberoasting;;;
+H187;hardware security key;klucz sprzętowy;;;
+H188;passkeys;passkeys;;;
+H189;root;konto root;;;
+H190;service account;konto serwisowe;;;
+H191;access control (AC);kontrola dostępu;;;
+H192;ABAC;ABAC;;;
+H193;RBAC / rule-based access control;RBAC / rule-based;;;
+H194;domain controller (DC);kontroler domeny;;;
+H195;ACL;ACL;;;
+H196;LSASS;LSASS;;;
+H197;password manager;menedżer haseł;;;
+H198;Microsoft Entra;Microsoft Entra;;;
+H199;IGA;IGA;;;
+H200;privilege creep;privilege creep;;;
+H201;session fixation;session fixation;;;
+H202;OAuth 2.0;OAuth 2.0;;;
+H203;MAC;MAC;;;
+H204;OIDC;OpenID Connect;;;
+H205;SSO;SSO;;;
+H206;unmanaged / stale credentials;stale credentials;;;
+H207;credentials;poświadczenia;dane logowania;;kredencja\w*
+H208;identity proofing;potwierdzanie tożsamości;;;
+H209;authentication protocols (PAP, CHAP, MS-CHAP, LEAP, PEAP);protokoły uwierzytelniania: PAP, CHAP, MS-CHAP, EAP;;;
+H210;Kerberos;protokół Kerberos;;;
+H211;LDAP / LDAPS;protokół LDAP;;;
+H212;password storage;przechowywanie haseł;;;
+H213;RADIUS;RADIUS;;;
+H214;account types (user, privileged, service, third-party, emergency access);rodzaje kont;;;
+H215;SoD;SoD;;;
+H216;SAML;SAML;;;
+H217;secrets;sekrety;;;
+H218;SPF;SPF;;;
+H219;Silver Ticket / Pass-the-Ticket;Silver Ticket;;;
+H220;TACACS+;TACACS+;;;
+H221;token;token;;;
+H222;hard / soft authentication token (HOTP, TOTP);token sprzętowy / programowy;;;
+H223;non-human identities (NHI);NHI;;;
+H224;adaptive identity;tożsamość adaptacyjna;;;
+H225;service principal;service principal;;;
+H226;AD persistence;trwałość w Active Directory;;;
+H227;just-in-time permissions / password vaulting / ephemeral credentials;uprawnienia just-in-time, sejf haseł, poświadczenia efemeryczne;;;
+H228;AD CS;AD CS;;;
+H229;802.1X / EAP;802.1X / EAP;;;
+H230;bidirectional (mutual) authentication;uwierzytelnianie dwukierunkowe;;;
+H231;out-of-band authentication;uwierzytelnianie poza kanałem;;;
+H232;MFA / 2FA;MFA;;;uwierzytelniani\w* wieloskładnikow\w*
+H233;AAA;AAA;;;
+H234;authentication;uwierzytelnienie, ustalanie tożsamości;;;
+H235;DAC;DAC;;;
+H236;onboarding / offboarding;onboarding / offboarding;;;
+H237;FAR / FRR;FAR / FRR;;;
+H238;authentication coercion;wymuszanie uwierzytelnienia;;;
+H239;hardcoded password;hardcoded password;;;
+H240;PAM;PAM;;;
+H241;session management;zarządzanie sesją;;;
+H242;IAM;IAM;;;
+H243;least privilege;zasada najmniejszych uprawnień;;;
+H244;need-to-know;zasada potrzeby wiedzy;;;
+H245;Golden Ticket;Golden Ticket;;;
+H246;log aggregation;agregacja logów;;;
+H247;alert;alert;;;
+H248;UBA / UEBA;UEBA;;;
+H249;DFIR;DFIR;;;
+H250;antivirus (AV) / anti-malware;antywirus / ochrona przed złośliwym oprogramowaniem;;;
+H251;forensic artifact;artefakt śledczy;;;
+H252;guardrails;guardrails;;;
+H253;security benchmarks / SCAP;benchmarki bezpieczeństwa / SCAP;;;
+H254;BIMI;BIMI;;;
+H255;account lockout;blokada konta;;;
+H256;missing logs / out-of-cycle logging;brakujące logi / logowanie poza cyklem;;;
+H257;secure email gateway (SEG);secure email gateway;;;
+H258;CASB;CASB;;;
+H259;SOC;SOC;;;
+H260;ISAC;ISAC;;;
+H261;certificate of destruction;certyfikat zniszczenia;;;
+H262;ISCM;ISCM;;;
+H263;asset lifecycle (acquisition/procurement, assignment/accounting, monitoring/tracking, disposal/decommissioning);cykl życia zasobu: zakup, przypisanie, śledzenie, wycofanie;;;
+H264;time-to-exploit;time-to-exploit;;;
+H265;sensitive data in logs;dane wrażliwe w logach;;;
+H266;implicit deny;implicit deny;;;
+H267;MSP;MSP;;;
+H268;MSSP;MSSP;;;
+H269;audit log;dziennik audytu;;;
+H270;EDR;EDR;;;
+H271;exposure, attack surface;ekspozycja, powierzchnia ataku;;;
+H272;incident response lifecycle;etapy reagowania na incydent;;;
+H273;false positive;false positive;;;
+H274;web filtering (URL / DNS filtering);filtrowanie treści;;;
+H275;physical destruction / degaussing;fizyczne niszczenie nośników / demagnetyzacja;;;
+H276;honeypot;honeypot;;;
+H277;digital forensics;informatyka śledcza;;;
+H278;other indicators (blocked content, resource consumption, resource inaccessibility, published/documented);inne wskaźniki: blokada treści, zużycie i niedostępność zasobów, publikacje;;;
+H279;data sources (vulnerability scans, automated reports, dashboards, packet captures);inne źródła danych: skany, raporty, pulpity;;;
+H280;asset inventory;inwentaryzacja zasobów;;;
+H281;crisis communication;komunikacja kryzysowa;;;
+H282;NAC / posture assessment;NAC;;;
+H283;forensic copy (forensic image);kopia śledcza;;;
+H284;backup;kopia zapasowa;;;
+H285;automation benefits & considerations;korzyści i ryzyka automatyzacji;;;
+H286;quarantine;kwarantanna;;;
+H287;chain of custody;łańcuch dowodowy;;;
+H288;FIM;FIM;;;
+H289;negotiation (incident response);negocjacje z napastnikiem;;;
+H290;NetFlow / SNMP;NetFlow / SNMP;;;
+H291;impossible travel;impossible travel;;;
+H292;removable media;nośniki wymienne;;;
+H293;risk assessment;ocena ryzyka;;;
+H294;behavioural protection;ochrona behawioralna;;;
+H295;rate limiting;rate limiting;;;
+H296;maintenance window;okno serwisowe;;;
+H297;operational security (OPSEC) / situational awareness;OPSEC i świadomość sytuacyjna;;;
+H298;fallback;fallback;;;
+H299;playbook;playbook;;;
+H300;DKIM;podpis DKIM;;;
+H301;threat hunting;threat hunting;;;
+H302;notification / external reporting;powiadamianie i zgłaszanie incydentu;;;
+H303;money laundering;pranie pieniędzy;;;
+H304;Prefetch;Prefetch;;;
+H305;precursor / indicator;prekursor / wskaźnik;;;
+H306;packet capture (Wireshark);packet capture;;;
+H307;incident response (IR);reagowanie na incydenty;;;
+H308;SIGMA rules;reguły SIGMA;;;
+H309;domain reputation;reputacja domeny;;;
+H310;"security training types and delivery (initial, ongoing, targeted, corrective; LMS)";rodzaje i formy szkoleń z bezpieczeństwa;;;
+H311;device placement / security zones / connectivity;rozmieszczenie urządzeń i strefy bezpieczeństwa;;;
+H312;TI;threat intelligence, TI;;;
+H313;anomalous behavior recognition;rozpoznawanie nietypowych zachowań;;;
+H314;VM sprawl;VM sprawl;;;
+H315;concurrent session usage;równoczesne sesje;;;
+H316;SELinux / Group Policy;SELinux / zasady grupy;;;
+H317;network segmentation;segmentacja sieci;;;
+H318;C2 / C&C;serwer C2;;;
+H319;proxy (forward / reverse);proxy;;;
+H320;jump server (jump box);jump server;;;
+H321;honeynet, honeyfile, honeytoken;honeynet;;;
+H322;VPN;sieć VPN;;;
+H323;scanning, enumeration;skanowanie, enumeracja;;;
+H324;vulnerability disclosure;skoordynowane ujawnianie podatności;;;
+H325;money mule;słup;;;
+H326;SOAR;SOAR;;;
+H327;SSH;SSH;;;
+H328;attack signature;sygnatura ataku;;;
+H329;phishing simulation (campaign);symulacja phishingu;;;
+H330;syslog;syslog;;;
+H331;IDS / IPS;IDS / IPS;;;
+H332;HIPS / host-based firewall;HIPS / host-based firewall;;;
+H333;SIEM;SIEM;;;
+H334;audit trail;ścieżka audytu;;;
+H335;log-parsing techniques;techniki parsowania logów;;;
+H336;"active vs. passive; inline vs. tap/monitor";tryb pracy urządzenia: aktywny / pasywny, inline / podsłuch;;;
+H337;takedown / disruption;takedown;;;rozbici\w* infrastruktury
+H338;edge device;urządzenie brzegowe;;;
+H339;baselining;baselining;;;
+H340;hardening;hardening;;;
+H341;IOC;IOC;;;
+H342;decommissioning;wycofanie z eksploatacji;;;
+H343;STIX / TAXII / AIS;wymiana informacji o zagrożeniach: STIX, TAXII, AIS;;;
+H344;false negative;false negative;;;
+H345;XDR;XDR;;;
+H346;DRM / anti-tamper;DRM / anti-tamper;;;
+H347;agent-based vs. agentless;z agentem / bezagentowo;;;
+H348;DLP;DLP;;;
+H349;WAF;WAF;;;
+H350;NGFW;NGFW;;;
+H351;firewall;firewall;;;
+H352;stateful / stateless firewall;zapora stanowa / bezstanowa;;;
+H353;KQL;zapytania KQL;;;
+H354;IPAM;IPAM;;;
+H355;out-of-band management;out-of-band management;;;
+H356;CSPM;CSPM;;;
+H357;automation use cases;zastosowania automatyzacji;;;
+H358;RMM;RMM;;;
+H359;event / security incident;zdarzenie / incydent bezpieczeństwa;;;
+H360;alert fatigue;alert fatigue;;;
+H361;UTM;UTM;;;
+H362;log data sources;źródła logów w dochodzeniu;;;
+H363;attribution;atrybucja;;;
+H364;white hat;white hat;;;
+H365;IAB;IAB;;;broker\w* pierwszego dostępu
+H366;threat actor attributes (internal/external, resources/funding, sophistication);cechy aktorów zagrożeń;;;
+H367;cracker;cracker;;;
+H368;black hat;black hat;;;
+H369;dark web;dark web;;;
+H370;hybrid warfare;działania hybrydowe;;;
+H371;state-aligned;powiązani z państwem;;;
+H372;threat actor;sprawcy;;albo „grupa” lub „cyberprzestępcy”, jeśli pasuje do kontekstu;aktor\w* zagroże\w*
+H373;hacktivist;haktywista;;;
+H374;other threat actors (terrorist, competitor, accidental/unintentional);inni aktorzy zagrożeń: terrorysta, konkurent, sprawca nieumyślny;;;
+H375;Diamond Model of Intrusion Analysis;model diamentowy analizy włamań;;;
+H376;threat actor motivations;motywacje napastników;;;
+H377;unskilled attacker (script kiddie);script kiddie;;;
+H378;threat actor naming;oznaczenia grup;;;
+H379;organized crime;przestępczość zorganizowana;;;
+H380;access market;rynek dostępów;;;
+H381;Tor / .onion;sieć Tor, adresy .onion;;;
+H382;leak site;leak site;;;
+H383;grey hat;grey hat;;;
+H384;TTP (MITRE ATT&CK);TTP;;;
+H385;APT;APT;;;
+H386;threat;zagrożenie;;;
+H387;adversarial threat;zagrożenie agresywne;;;
+H388;insider threat;insider threat;;;
+H389;data controller / data processor;administrator danych / podmiot przetwarzający;;;
+H390;ENISA;ENISA;;;
+H391;CRA;CRA;;;
+H392;AI Act;AI Act;;;
+H393;DSA;DSA;;;
+H394;RCB alert;Alert RCB;;;
+H395;legal hold;legal hold;;;
+H396;Chat Control;Chat Control;;;
+H397;cyber warfare;cyberwojna;;;
+H398;external considerations (regulatory, legal, industry, local/regional, national, global);czynniki zewnętrzne ładu bezpieczeństwa;;;
+H399;personal data;dane osobowe;;;
+H400;disinformation;dezinformacja;;;
+H401;NIS2;dyrektywa NIS2;;;
+H402;e-discovery;e-discovery;;;
+H403;HIPAA;HIPAA;;;
+H404;critical infrastructure;infrastruktura krytyczna;;;
+H405;CPO;inspektor ochrony danych;;;
+H406;criminal-law exemption for researchers (Art. 269c);kontratyp z art. 269c k.k.;;;
+H407;KSC;Krajowy System Cyberbezpieczeństwa;;;
+H408;post-quantum cryptography (PQC);kryptografia postkwantowa;;;
+H409;LCC;Lokalne Centra Cyberbezpieczeństwa;;;
+H410;due diligence / due care;należyta staranność / należyta dbałość;;;
+H411;data breach;wyciek danych;;„naruszenie ochrony danych”, gdy mowa o aspektach prawnych (RODO);
+H412;NASK;NASK;;;
+H413;unauthorised transaction;nieautoryzowana transakcja;;;
+H414;DPIA / PIA;DPIA / PIA;;;
+H415;influence operations;operacje wpływu;;;
+H416;OWASP Top 10;OWASP Top 10;;;
+H417;PESEL;PESEL;;;
+H418;essential / important entity;podmiot kluczowy / ważny;;;
+H419;critical entity;podmiot krytyczny;;;
+H420;CNA (CVE Numbering Authority);podmiot nadający numery CVE;;;
+H421;privacy rights (opt-in/opt-out, data correction, processing restriction/prevention);prawa osób w zakresie prywatności;;;
+H422;right to be forgotten / data subject;prawo do bycia zapomnianym / podmiot danych;;;
+H423;NIST CSF;NIST CSF;;;
+H424;compliance reporting / consequences of non-compliance;raportowanie zgodności i skutki niezgodności;;;
+H425;GDPR;RODO;;;
+H426;SOX / GLBA;SOX / GLBA;;;
+H427;PCI DSS;standard PCI DSS;;;
+H428;data sovereignty;suwerenność danych;;;
+H429;compliance training (data handling, AML/CTF, anti-bribery);szkolenia z zakresu zgodności: AML/CTF, przeciwdziałanie korupcji;;;
+H430;trade secret / intellectual property (IP);tajemnica przedsiębiorstwa / własność intelektualna;;;
+H431;NDA;NDA;;;
+H432;DPA (PL);UODO;;;
+H433;UOKiK;UOKiK;;;
+H434;CERT;CERT;;;
+H435;CSIRT;CSIRT;;;
+H436;AI agent;agent AI;;;
+H437;AI capabilities in security operations (agentic, chatbot, predictive analysis, AI-augmented baselines);AI w operacjach bezpieczeństwa;;;
+H438;evasion attack (AI);atak unikowy na model AI;;;
+H439;deepfake;deepfake;;;
+H440;deepnude;deepnude;;;
+H441;LLM;LLM;;;
+H442;ghostjacking;ghostjacking;;;
+H443;AI hallucinations;halucynacje AI;;;
+H444;AI jailbreaking;jailbreak modelu AI;;;
+H445;LLMjacking;LLMjacking;;;
+H446;model manipulation / data poisoning;manipulacja modelem i zatruwanie danych;;;
+H447;MCP;protokół MCP;;;
+H448;shadow AI;shadow AI;;;
+H449;AI bias / explainability / privacy / ethical considerations;stronniczość, wyjaśnialność, prywatność i etyka AI;;;
+H450;AI data loss;wyciek danych przez AI;;;
+H451;SCA;SCA;;;
+H452;serverless;serverless;;;
+H453;Secure Boot;Secure Boot;;;
+H454;public / private / hybrid cloud;chmura publiczna / prywatna / hybrydowa;;;
+H455;SDLC;SDLC;;;
+H456;DAST;DAST;;;
+H457;host / guest;host / gość;;;
+H458;hypervisor;hypervisor;;;
+H459;IaC;IaC;;;
+H460;IaaS;IaaS;;;
+H461;sideloading;sideloading;;;
+H462;API;API;;;
+H463;jailbreaking / rooting;jailbreak / rootowanie;;;
+H464;kernel;jądro systemu;;;
+H465;fuzzing;fuzzing;;;
+H466;output encoding;kodowanie danych wyjściowych;;;
+H467;containerization;konteneryzacja;;;
+H468;KVM;KVM;;;
+H469;"on-premises; centralized vs. decentralized";lokalnie (on-premises) / scentralizowane vs zdecentralizowane;;;
+H470;microservices;mikrousługi;;;
+H471;shared responsibility model (responsibility matrix);model współdzielonej odpowiedzialności;;;
+H472;COM object;obiekt COM;;;
+H473;sandbox, sandbox escape;sandbox;;;
+H474;PaaS;PaaS;;;
+H475;one-click vulnerability;podatność typu one-click;;;
+H476;PowerShell;PowerShell;;;
+H477;Bash;powłoka Bash;;;
+H478;shell;powłoka systemowa;;;
+H479;edge computing;edge computing;;;
+H480;cloud computing;przetwarzanie w chmurze;;;
+H481;fog computing;fog computing;;;
+H482;sanitization;sanityzacja danych;;;
+H483;SAST;SAST;;;
+H484;legacy systems / applications;systemy legacy;;;
+H485;debug mode in production;tryb debugowania na produkcji;;;
+H486;VM escape;VM escape;;;
+H487;input validation;walidacja danych wejściowych;;;
+H488;VDI / VDE / VPC;wirtualne pulpity i prywatna chmura: VDI, VDE, VPC;;;
+H489;parameterized queries (prepared statements);zapytania parametryzowane;;;
+H490;verbose error messages;zbyt szczegółowe komunikaty błędów;;;
+H491;site survey / heat map;site survey / heat map;;;
+H492;secure protocols and ports;bezpieczne protokoły i porty;;;
+H493;BIOS / UEFI / MBR;BIOS / UEFI / MBR;;;
+H494;Diameter;Diameter;;;
+H495;DoH;DoH;;;
+H496;DNSSEC;DNSSEC;;;
+H497;FTPS / SFTP;FTPS / SFTP;;;
+H498;IMAPS / POP3S;IMAPS / POP3S;;;
+H499;IoT;IoT;;;
+H500;IPsec;IPsec;;;
+H501;air gap;air gap;;;
+H502;mobile connection methods (cellular, Wi-Fi, Bluetooth);łączność urządzeń mobilnych: komórkowa, Wi-Fi, Bluetooth;;;
+H503;microsegmentation;mikrosegmentacja;;;
+H504;OSI model;model OSI;;;
+H505;TCP/IP model;model TCP/IP;;;
+H506;TPM;moduł TPM;;;
+H507;unsecure networks (wireless, wired, Bluetooth);niezabezpieczone sieci: bezprzewodowe, przewodowe, Bluetooth;;;
+H508;SDP;SDP;;;
+H509;SaaS;SaaS;;;
+H510;COPE;COPE;;;
+H511;OT / ICS;OT / ICS;;;
+H512;captive portal;captive portal;;;
+H513;industrial protocols;protokoły przemysłowe;;;
+H514;VPN tunneling protocols (L2TP, PPTP, GRE, IKE);protokoły tunelowania VPN: L2TP, PPTP, GRE, IKE;;;
+H515;Wi-Fi protocols (WEP, WPA/TKIP, WPA2/CCMP, WPS);protokoły Wi-Fi: WEP, WPA/TKIP, WPA2/CCMP, WPS;;;
+H516;NTP;protokół czasu;;;
+H517;SMB;protokół SMB;;;
+H518;private APN;prywatny APN;;;
+H519;bandwidth;przepustowość;;;
+H520;BYOD;BYOD;;;
+H521;asymmetric routing;routing asymetryczny;;;
+H522;load balancer;load balancer;;;
+H523;SASE;SASE;;;
+H524;SD-WAN;SD-WAN;;;
+H525;SDN;SDN;;;
+H526;DNS sinkhole;sinkhole DNS;;;
+H527;SS7;SS7;;;
+H528;PLC;sterownik PLC;;;
+H529;DMZ / screened subnet;DMZ;;;
+H530;DNS;DNS;;;
+H531;RTOS;RTOS;;;
+H532;embedded system;system wbudowany;;;
+H533;telework;telepraca, praca zdalna;;;
+H534;NAT;NAT;;;
+H535;TCP three-way handshake;TCP three-way handshake;;;
+H536;tunneling;tunelowanie;;;
+H537;VLAN;VLAN;;;
+H538;CYOD;CYOD;;;
+H539;WPA2;zabezpieczenia Wi-Fi WPA2;;;
+H540;WPA3;zabezpieczenia Wi-Fi WPA3;;;
+H541;MAM;MAM;;;
+H542;MDM;MDM;;;
+H543;RDP;RDP;;;
+H544;AES;AES;;;
+H545;encryption algorithms (3DES, AES-256, IDEA, RC4);algorytmy szyfrujące: 3DES, AES-256, IDEA, RC4;;;
+H546;data compression manipulation (CRIME / BREACH);ataki na kompresję;;;
+H547;secure enclave;bezpieczna enklawa;;;
+H548;improper certificate validation;błędna walidacja certyfikatu;;;
+H549;self-signed / third-party certificate;certyfikat samopodpisany / wystawiony przez stronę trzecią;;;
+H550;wildcard certificate;certyfikat wildcard;;;
+H551;data management life cycle;cykl życia danych;;;
+H552;clearing;czyszczenie danych;;;
+H553;PII / PHI;PII / PHI;;;
+H554;deidentification / data transpose;deidentyfikacja: anonimizacja, pseudonimizacja, transpozycja;;;
+H555;key escrow;key escrow;;;
+H556;Diffie-Hellman (DHE, ECDHE) / PFS;Diffie-Hellman / doskonała poufność przekazywania;;;
+H557;PKI components (RA, OID, SAN, PKCS, P12, SCEP);elementy PKI: RA, OID, SAN, PKCS, P12, SCEP;;;
+H558;hash function;funkcja skrótu;;;
+H559;duress password;hasło alarmowe;;;
+H560;HMAC;HMAC;;;
+H561;HTTPS / TLS;HTTPS/TLS;;;
+H562;PKI;PKI;;;
+H563;surveillance;inwigilacja;;;
+H564;data classification;klasyfikacja danych;;;
+H565;cryptographic key;klucz kryptograficzny;;;
+H566;session key;klucz sesyjny;;;
+H567;cryptography, cryptanalysis;kryptografia, kryptoanaliza;;;
+H568;ECC;ECC;;;
+H569;CRL;CRL;;;
+H570;blockchain (open public ledger);blockchain;;;
+H571;data masking;maskowanie danych;;;
+H572;metadata;metadane;;;
+H573;immutability;niezmienność;;;
+H574;DEP / ASLR;ochrona pamięci: DEP, ASLR;;;
+H575;purge;oczyszczanie nośnika;;;
+H576;fingerprinting;fingerprinting;;;
+H577;geographic restrictions / geofencing;ograniczenia geograficzne / geofencing;;;
+H578;OpenPGP, S/MIME;OpenPGP;;;
+H579;FDE;FDE;;;
+H580;digital signature;podpis cyfrowy;;;
+H581;code signing;podpisywanie kodu;;;
+H582;encryption levels (full-disk, partition, volume, file, database, record);poziomy szyfrowania: dysk, partycja, wolumen, plik, baza danych, rekord;;;
+H583;data remanence;pozostałość danych;;;
+H584;OCSP;protokół OCSP;;;
+H585;primitives (in cryptographic algorithms);prymitywy;;;
+H586;predictable randomness (weak PRNG);przewidywalne liczby losowe;;;
+H587;key stretching;key stretching;;;
+H588;RSA;RSA;;;
+H589;salt;sól kryptograficzna;;;
+H590;HSM;HSM;;;
+H591;data at rest / in transit / in use;stany danych: w spoczynku, w przesyle, w użyciu;;;
+H592;steganography;steganografia;;;
+H593;KMS;KMS;;;
+H594;encryption;szyfrowanie;;;
+H595;asymmetric encryption (public-key cryptography);szyfrowanie asymetryczne;;;
+H596;end-to-end encryption (E2EE);szyfrowanie end-to-end;;;
+H597;symmetric encryption;szyfrowanie symetryczne;;;
+H598;tokenization;tokenizacja;;;
+H599;GCM / GCMP;tryb GCM;;;
+H600;block cipher modes (ECB, CBC, CFB, GCM);tryby pracy szyfrów blokowych: ECB, CBC, CFB, GCM;;;
+H601;data types (regulated, legal, financial, human- and non-human-readable);typy danych: regulowane, prawne, finansowe, czytelne dla człowieka i maszyny;;;
+H602;CA;CA;;;
+H603;CSR;CSR;;;
+H604;key exchange (in-band / out-of-band);wymiana kluczy;;;
+H605;PESEL reservation;zastrzeżenie numeru PESEL;;;
+H606;watermarking;znak wodny w treściach AI;;;
+H607;root of trust;root of trust;;;
+H608;gap analysis;gap analysis;;;
+H609;blameless post-mortem;blameless post-mortem;;;
+H610;root cause analysis (RCA);RCA;;;
+H611;BIA;BIA;;;
+H612;risk appetite / risk tolerance;apetyt na ryzyko / tolerancja ryzyka;;;
+H613;Zero Trust Architecture (ZTA);Zero Trust;;;
+H614;internal / external audit, attestation;audyt wewnętrzny / zewnętrzny, poświadczenie;;;
+H615;authenticity;autentyczność;;;
+H616;security by design;security by design;;;
+H617;fail closed / fail open;fail closed / fail open;;;
+H618;sensors (infrared, pressure, microwave, ultrasonic);czujniki: podczerwień, nacisk, mikrofale, ultradźwięki;;;
+H619;DevSecOps;DevSecOps;;;
+H620;technical debt;dług technologiczny;;;
+H621;RTO;RTO;;;
+H622;RPO;RPO;;;
+H623;availability;dostępność;;;
+H624;idempotency;idempotentność, powtarzalność;;;
+H625;SLSA (build integrity);SLSA;;;
+H626;security categorization;kategoryzacja bezpieczeństwa;;;
+H627;KRI;KRI;;;
+H628;change control board (CAB);CAB;;;
+H629;two-person control (no-lone zone);kontrola dwóch osób;;;
+H630;version control;kontrola wersji;;;
+H631;architecture considerations;kryteria wyboru architektury;;;
+H632;allow list / deny list;allow list / deny list;;;
+H633;MTD;MTD;;;
+H634;audit data gathering (sampling, questionnaires, interviews, assertion);metody zbierania dowodów w audycie;;;
+H635;snapshot / replication / journaling;migawka / replikacja / dziennikowanie;;;
+H636;threat modeling;modelowanie zagrożeń;;;
+H637;fail forward;fail forward;;;
+H638;non-repudiation;niezaprzeczalność;;;
+H639;immutable infrastructure;immutable infrastructure;;;
+H640;ISO/IEC 27001;norma ISO 27001;;;
+H641;defense in depth;obrona w głąb;;;
+H642;qualitative / quantitative risk assessment;ocena ryzyka jakościowa / ilościowa;;;
+H643;vendor assessment, selection and monitoring (TPRM);ocena, wybór i monitorowanie dostawców;;;
+H644;DR;DR;;;
+H645;threat scope reduction;ograniczanie zakresu zagrożenia;;;
+H646;vendor limitations / constraints;ograniczenia we współpracy z dostawcami;;;
+H647;hot / warm / cold site;hot / warm / cold site;;;
+H648;BCP;BCP;;;
+H649;contingency planning;planowanie awaryjne;;;
+H650;COOP;COOP;;;
+H651;capacity planning;planowanie pojemności;;;
+H652;backout plan;backout plan;;;
+H653;control plane / data plane (Zero Trust);płaszczyzna sterowania / płaszczyzna danych;;;
+H654;SPOF;SPOF;;;
+H655;clean desk policy;polityka czystego biurka;;;
+H656;policies / standards / procedures / guidelines;polityka, standard, procedura, wytyczne;;;
+H657;MOU / MOA;porozumienie;;;
+H658;right-to-audit clause / rules of engagement;prawo do audytu / zasady testów;;;
+H659;RMF;RMF;;;
+H660;redundancy;redundancja;;;
+H661;risk register;rejestr ryzyka;;;
+H662;data retention;retencja danych;;;
+H663;full / incremental / differential backup;rodzaje kopii zapasowych: pełna, przyrostowa, różnicowa;;;
+H664;executive roles (CIO, CTO, CSO, CISO, ISSO);role kierownicze: CIO, CTO, CSO, CISO, ISSO;;;
+H665;configuration drift;configuration drift;;;
+H666;accountability;rozliczalność;;;
+H667;geographic dispersion;rozproszenie geograficzne;;;
+H668;platform diversity / multi-cloud;multi-cloud;;;
+H669;residual risk;ryzyko resztkowe;;;
+H670;policy engine / PDP / PEP;PDP / PEP;;;
+H671;scalability;skalowalność;;;
+H672;SLE / ARO / ALE;SLE (oczekiwana pojedyncza strata) / ARO (roczna częstotliwość występowania) / ALE;;;
+H673;bollards;słupki ochronne;;;
+H674;SBOM;SBOM;;;
+H675;SOP;SOP;;;
+H676;risk transfer / acceptance / avoidance / mitigation;strategie postępowania z ryzykiem;;;
+H677;governance structures;struktury ładu;;;
+H678;access control vestibule (mantrap);śluza kontroli dostępu;;;
+H679;MTBF;MTBF;;;
+H680;MTTR;MTTR;;;
+H681;white box / gray box testing;testowanie białej / szarej skrzynki;;;
+H682;functional / behavioral testing;testy funkcjonalne i behawioralne;;;
+H683;recovery testing / tabletop exercise;testy odtwarzania / ćwiczenia sztabowe;;;
+H684;CIA triad;triada CIA;;;
+H685;cybersecurity insurance;ubezpieczenie od ryzyk cybernetycznych;;;
+H686;SLA;SLA;;;
+H687;BPA;BPA;;;
+H688;MSA / SOW;MSA / SOW;;;
+H689;data owner / data custodian (steward);właściciel / opiekun danych;;;
+H690;high availability (HA) / clustering;wysoka dostępność / klastrowanie;;;
+H691;security control baseline;zabezpieczenia bazowe;;;
+H692;physical security (fencing, video surveillance, security guard, access badge, lighting);zabezpieczenia fizyczne: ogrodzenie, monitoring, ochrona, identyfikatory, oświetlenie;;;
+H693;security controls;zabezpieczenia;;;
+H694;compensating control;zabezpieczenie kompensujące;;;
+H695;assume breach;assume breach;;;
+H696;RFI / RFP / RFQ / EOI;zapytania do dostawców: RFI, RFP, RFQ, EOI;;;
+H697;security-focused configuration management;zarządzanie konfiguracją ukierunkowane na bezpieczeństwo;;;
+H698;C-SCRM;C-SCRM;;;
+H699;change management;zarządzanie zmianą;;;
+H700;AUP;AUP;;;
+H701;UPS / generator;UPS / generator;;;
+H702;offensive / defensive / integrated testing (red, blue, purple team);zespoły red / blue / purple;;;
+H703;compliance;zgodność;;;
+H704;security audit;audyt bezpieczeństwa;;;
+H705;web security (websec);bezpieczeństwo aplikacji webowych;;;
+H706;OSINT;OSINT;;;
+H707;CompTIA Security+;certyfikat CompTIA Security+;;;
+H708;LPI Security Essentials;certyfikat LPI Security Essentials;;;
+H709;CTF;CTF;;;
+H710;DEF CON;DEF CON;;;
+H711;bug bounty;bug bounty;;;
+H712;security awareness;świadomość bezpieczeństwa;;;
+H713;black box testing, basic testing;testowanie czarnej skrzynki, podstawowe testy;;;
+H714;penetration testing (pentest);testy penetracyjne;;;
+H715;DLL hijacking;DLL hijacking;;;
+H716;reflective DLL injection;reflective DLL injection;;;
+H717;TCP flags;flagi TCP;;;
+H718;TCP flag scans (SYN, FIN, NULL, Xmas);skany po flagach TCP: SYN, FIN, NULL, Xmas;;;
+H719;severity vs priority (alert triage);krytyczność a priorytet alertu;;;
+H720;TLP;TLP;;;
+H721;compiler hardening flags;flagi utwardzające kompilację;;;
+H722;HTTP security headers;nagłówki bezpieczeństwa HTTP;;;
+H723;wiper;wiper;;;
+H724;security advisory;komunikat bezpieczeństwa;;;
+H725;authentication bypass;obejście uwierzytelniania;;;
+H726;DLL side-loading;DLL sideloading;;;
+H727;web shell;web shell;;;
+H728;scheduled task;zadanie zaplanowane;;;
+H729;Registry Run key;klucz autostartu w rejestrze;;;
+H730;malicious Windows service;złośliwa usługa systemowa;;;
+H731;Active Directory enumeration;enumeracja Active Directory;;;
+H732;port forwarding / pivoting;przekierowanie portów / pivoting;;;
+H733;PsExec / SMB remote execution;PsExec;;;
+H734;pass the hash;pass-the-hash;;;
+H735;packer / crypter;pakowanie i zaciemnianie malware;;;
+H736;WMI execution;wykonanie przez WMI;;;
+H737;malicious document macro;złośliwe makro w dokumencie;;;
+H738;DNS exfiltration;eksfiltracja przez DNS;;;
+H739;access token manipulation;kradzież / podszycie tokenu dostępu;;;
+H740;DCSync;DCSync;;;
+H371-sponsored;state-sponsored;opłacani przez państwo;;odmieniaj zgodnie z kontekstem;sponsorowan\w* przez państwo

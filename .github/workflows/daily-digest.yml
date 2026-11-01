@@ -28,6 +28,10 @@ concurrency:
   group: daily-digest
   cancel-in-progress: false
 
+# v38: Python output goes to the log line by line, not at the end of the step.
+env:
+  PYTHONUNBUFFERED: "1"
+
 jobs:
   test:
     runs-on: ubuntu-latest

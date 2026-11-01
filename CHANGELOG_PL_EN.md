@@ -24,6 +24,56 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v38 --- 01.11.2026
+
+**Dane dla mostu do CyberSec Mozaika: hasła w archiwum, zapis zestawień,
+test kontraktu; mirror v90; eksporter w repo mostu.**
+
+Powód: ustalenia z Prasówką–Mozaiką (Listy 1–11 w `cybersec-most`) i
+próbny raport mostu z 1.11.2026. Raport (`bridge_report.py` w prywatnym
+repo `cybersec-most`) czyta dane Prasówki, nie jej kod. Brakowało mu
+dwóch rzeczy: informacji, które hasła wystąpiły w artykule (streszczenia
+są odmienione, więc szukanie form po stronie mostu byłoby zawodne), i
+zestawień, które dotąd istniały tylko na Discordzie.
+
+Zmiany:
+
+- **Pole `terms` w archiwum** (`src/article_archive.py`, `src/glossary.py`):
+  ID haseł z mirrora (H###) znalezionych w tytule i streszczeniu, tym
+  samym dopasowaniem co słowniczek w prompcie.
+- **Zapis zestawień** (`src/monthly_top.py`, `src/weekly_top.py`):
+  wysłane top 5 i top 10 trafiają do `data/tops/RRRR-Www.json` i
+  `RRRR-MM.json` (pozycja, tytuł, link, streszczenie, model historii,
+  liczba artykułów i serwisów, KEV, CVE, linki). Plik powstaje razem ze
+  znacznikiem, więc nie przy testach z gałęzi. Log: „ZAPIS ZESTAWIENIA”.
+- **Test kontraktu danych** (`src/test_v38.py`): pola rekordu archiwum,
+  pola notatek języka według typu, wartości `fixed_by`, 6 kolumn i
+  nagłówek mirrora.
+- **Test miejsca plików:** w `src/` tylko kod, w katalogu głównym bez
+  plików `.py`/`.csv`/`.json`. 1.11 mirror v90 trafił do `src/`,
+  Prasówka czytała dalej v84, a wszystkie testy przechodziły.
+- **Eksporter mirrora usunięty** (`tools/eksport_mirrora.py`): mieszka
+  teraz w `cybersec-most` razem z `OVERRIDES`, bo czyta prywatny
+  plik-matkę.
+- **Log na bieżąco:** `PYTHONUNBUFFERED=1` w workflow prasówki i
+  zestawień (31.10 krok wyglądał na zawieszony, bo log pojawiał się
+  dopiero na końcu).
+- **Licencja słowniczka** w obu README (CC BY-NC-ND 4.0, © Jan Wolski).
+
+Drobna poprawka z 1.11 (osobno, przed v38): mirror odświeżony do
+pliku-matki v90 – 740 haseł (14 nowych haseł UKC, H727–H740), 6 kolumn
+używanych w runtime, nagłówek z wersją i datą ISO oraz atrybucją CC.
+
+Nowe i zmienione pliki: `src/article_archive.py`, `src/glossary.py`,
+`src/monthly_top.py`, `src/weekly_top.py`, `src/ai_summaries.py`,
+`src/test_v38.py` (nowy), `tools/eksport_mirrora.py` (usunięty),
+`.github/workflows/daily-digest.yml`, `weekly-top.yml`,
+`monthly-top.yml`, README (PL/EN).
+
+Testy jednostkowe: 436, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v37c --- 31.10.2026
 
 **Powód odmowy API w logu; Ministral jako model Mistrala; odczyt
@@ -2145,6 +2195,59 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v38 --- 2026-11-01
+
+**Data for the bridge to CyberSec Mozaika: glossary entries in the
+archive, saved tops, data contract test; mirror v90; exporter in the
+bridge repository.**
+
+Reason: the agreements between the digest and Mozaika (Letters 1–11 in
+`cybersec-most`) and the trial bridge report of 1 November 2026. The
+report (`bridge_report.py` in the private repository `cybersec-most`)
+reads the digest's data, not its code. It lacked two things: which
+glossary entries an article contains (summaries are inflected, so
+matching forms on the bridge side would be unreliable), and the tops,
+which until now existed only on Discord.
+
+Changes:
+
+- **`terms` field in the archive** (`src/article_archive.py`,
+  `src/glossary.py`): IDs of mirror entries (H###) found in the title and
+  summary, with the same matching as the prompt glossary.
+- **Saved tops** (`src/monthly_top.py`, `src/weekly_top.py`): delivered
+  top 5 and top 10 go to `data/tops/YYYY-Www.json` and `YYYY-MM.json`
+  (rank, title, link, summary, story model, numbers of articles and
+  sources, KEV, CVE ids, links). The file is written together with the
+  marker, so not on branch test runs. Log: "ZAPIS ZESTAWIENIA".
+- **Data contract test** (`src/test_v38.py`): archive record fields,
+  language note fields by type, `fixed_by` values, the six mirror
+  columns and the mirror header.
+- **File placement test:** only code in `src/`, no `.py`/`.csv`/`.json`
+  files in the root. On 1 November the v90 mirror landed in `src/`, the
+  digest kept reading v84, and every test passed.
+- **Mirror exporter removed** (`tools/eksport_mirrora.py`): it now lives
+  in `cybersec-most` with `OVERRIDES`, because it reads the private
+  mother workbook.
+- **Live log:** `PYTHONUNBUFFERED=1` in the digest and top workflows (on
+  31 October the step looked stuck, because the log appeared only at the
+  end).
+- **Glossary licence** in both READMEs (CC BY-NC-ND 4.0, © Jan Wolski).
+
+Small change of 1 November (separately, before v38): mirror refreshed to
+mother workbook v90 – 740 entries (14 new UKC entries, H727–H740), the
+six runtime columns, a header with the version, ISO date and CC
+attribution.
+
+New and changed files: `src/article_archive.py`, `src/glossary.py`,
+`src/monthly_top.py`, `src/weekly_top.py`, `src/ai_summaries.py`,
+`src/test_v38.py` (new), `tools/eksport_mirrora.py` (removed),
+`.github/workflows/daily-digest.yml`, `weekly-top.yml`,
+`monthly-top.yml`, README (PL/EN).
+
+Unit tests: 436, passed.
 
 ------------------------------------------------------------------------
 

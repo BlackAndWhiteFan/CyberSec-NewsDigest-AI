@@ -15,9 +15,11 @@ Run: python src/monthly_top.py            (previous month)
      MONTH=2026-10 python src/monthly_top.py  (a chosen month)
 """
 
+import json
 import os
 import re
 from datetime import datetime
+from pathlib import Path
 
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from article_selection import is_excluded, is_roundup
@@ -242,6 +244,9 @@ def summarize_event(event):
         "summary": summary,
         "tidy_notes": notes,
         "kev": kev,
+        # v38: kept in data/tops/ for the bridge to CyberSec Mozaika.
+        "cves": sorted(set().union(*(set(record.get("cves", [])) for record in event))),
+        "links": [record.get("link", "") for record in event if record.get("link")],
         "material": event_material(event),
     }
 
@@ -356,6 +361,8 @@ def build_top_lines(month, records, limit=TOP_LIMIT, polish=None):
     if polish:
         polish(events)
 
+    LAST_EVENTS[:] = events
+
     for number, event in enumerate(events, start=1):
         lines.append(format_event_line(number, event))
 
@@ -379,6 +386,27 @@ def log_tidy(events):
 def kev_note(events):
     """The 🔥 legend, when any event is marked (v28)."""
     return ["", KEV_NOTE] if any(event.get("kev") for event in events) else []
+
+
+# v38: the events of the last built top, saved with the marker to
+# data/tops/<period>.json (until then a top existed only on Discord).
+# The folder sits next to the marker (data/last_top.json).
+LAST_EVENTS = []
+TOP_FIELDS = ["title", "link", "summary", "story_model", "articles", "sources", "first_date", "kev", "cves", "links"]
+
+
+def save_top(kind, period, events, tops_dir):
+    """Write the delivered top: one record per event, with its rank."""
+    tops_dir = Path(tops_dir)
+    tops_dir.mkdir(parents=True, exist_ok=True)
+    records = [
+        {"period": period, "kind": kind, "rank": rank, **{field: event.get(field, "") for field in TOP_FIELDS}}
+        for rank, event in enumerate(events, start=1)
+    ]
+    path = tops_dir / f"{period}.json"
+    path.write_text(json.dumps(records, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print(f"ZAPIS ZESTAWIENIA: {path.name}, wydarzenia: {len(records)}")
+    return path
 
 
 def deliver(kind, period, lines, real_variable, marker_path=top_guard.MARKER_PATH, complete=True):
@@ -415,6 +443,11 @@ def deliver(kind, period, lines, real_variable, marker_path=top_guard.MARKER_PAT
         print("Okres jeszcze trwa – podgląd bez zapisu w znaczniku.")
     else:
         top_guard.mark_sent(kind, period, marker_path)
+
+        if lines and LAST_EVENTS:
+            # Next to the marker: data/tops/ in the repository, a temporary
+            # folder in the tests.
+            save_top(kind, period, LAST_EVENTS, Path(marker_path).parent / "tops")
 
 
 def run(month=None, archive_dir=ARCHIVE_DIR, marker_path=top_guard.MARKER_PATH, today=None,

@@ -2,7 +2,8 @@
 CyberSec Mozaika glossary (data/glosariusz_mirror.csv).
 
 The digest never reads the Mozaika mother workbook; the mirror is exported
-from it manually (tools/eksport_mirrora.py) and committed to this repository.
+from it manually (eksport_mirrora.py in the private bridge repository
+cybersec-most since v38) and committed to this repository.
 Since v32 every forbidden form found or replaced is kept as a language note
 with the entry id (see ai_summaries.py), for the reports to Mozaika.
 
@@ -284,6 +285,17 @@ def search_keys(entry):
 
 KEY_PATTERNS = [(entry, [term_pattern(key) for key in search_keys(entry)]) for entry in ENTRIES]
 CORE_ENTRIES = [entry for entry in ENTRIES if entry["regula"] or entry["unikaj"]]
+
+
+def matched_ids(text):
+    """IDs of the mirror entries whose terms appear in the text (v38).
+
+    The same matching as for the prompt glossary; archived with each
+    article ("terms"), so the bridge to CyberSec Mozaika counts entries
+    without matching inflected Polish forms itself.
+    """
+    return sorted({entry["id"] for entry, patterns in KEY_PATTERNS
+                   if any(pattern.search(text or "") for pattern in patterns)})
 
 
 def relevant_entries(texts, limit=PROMPT_EXTRA_LIMIT):

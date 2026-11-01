@@ -39,6 +39,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 21 | Miękkie problemy nie tną streszczenia, bez urwanych fragmentów, płynniejsze zdania, bez dopisanego phishingu (v36) | zakończony; sprawdzony na prasówce z 29.10.2026 |
 | 22 | Korekta językowa codziennie: porcje po 5 streszczeń, lżejsze modele Gemini, Mistral jako zapas; bez pustych „innych luk” (v37a) | zakończony; zweryfikowany testami jednostkowymi |
 | 23 | Zestawienia na tym samym łańcuchu co prasówka: historie wydarzeń w porcjach, Mistral przed Groq (v37b) | zakończony; zweryfikowany testami jednostkowymi |
+| 24 | Dane dla mostu do CyberSec Mozaika: hasła w archiwum (`terms`), zapis zestawień w `data/tops/`, test kontraktu danych i miejsca plików, mirror v90, eksporter przeniesiony do `cybersec-most` (v38) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -117,7 +118,7 @@ Wcześniej: w teście v30 korekta Gemini poprawiła 6 z 6 streszczeń; w teście
 
 ## Plan rozwoju
 
-- **Most do CyberSec Mozaika (v38):** cotygodniowy raport z propozycjami nowych terminów do glosariusza, żywymi przykładami dla istniejących haseł i najczęstszymi formami zakazanymi (z dziennika języka z v32). Raport tylko proponuje; skoroszyt matka Mozaiki pozostaje jedynym źródłem prawdy, a prasówka nigdy do niego nie zapisuje.
+- **Most do CyberSec Mozaika:** cotygodniowy raport (`bridge_report.py` w prywatnym repo `cybersec-most`) z propozycjami dla pliku-matki: formy łamane, kalki, żywe przykłady, rozbieżności konwencji. Prasówka od v38 dostarcza dane (pole `terms` w archiwum, zestawienia w `data/tops/`) i pilnuje ich kształtu testem kontraktu; raport tylko proponuje, a plik-matka Mozaiki pozostaje jedynym źródłem prawdy.
 - Ochrona gałęzi `main`.
 
 - Eksperyment z modelem piszącym: Google Gemini pisze streszczenia dzienne (Groq jako zapas) i dostaje więcej materiału z artykułu; porównanie na zwykłych prasówkach dnia roboczego z obecnym układem.
@@ -178,9 +179,9 @@ Dane i narzędzia:
 - `data/seen_articles.json` — historia linków napotkanych i opublikowanych.
 - `data/archive/RRRR-MM.json` — miesięczne archiwum dostarczonych artykułów.
 - `data/last_digest.json`, `data/last_top.json` — znaczniki ostatniej prasówki i zestawień.
-- `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (ze skoroszytu matki v84).
+- `data/tops/RRRR-Www.json`, `data/tops/RRRR-MM.json` — wysłane zestawienia tygodniowe i miesięczne z historiami wydarzeń (od v38; materiał dla mostu do CyberSec Mozaika).
+- `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (plik-matka v90, 6 kolumn). Eksportuje go prywatne repozytorium mostu `cybersec-most` (od v38; wcześniej `tools/eksport_mirrora.py` w tym repo).
 - `data/styl_unikaj.csv` — lista stylu: kalki i anglicyzmy z propozycjami, edytowana ręcznie (`*` = dowolna końcówka).
-- `tools/eksport_mirrora.py` — ręczny eksport mirrora ze skoroszytu matki Mozaiki (`python tools/eksport_mirrora.py <skoroszyt.xlsx>`, wymaga openpyxl).
 
 ## Konfiguracja i sekrety
 
@@ -209,3 +210,7 @@ Każdy workflow uruchamia testy przed swoim głównym krokiem. Zmiany powstają 
 ## Dokumentacja
 
 Dokumentacja jest prowadzona po angielsku i po polsku; każda zmiana techniczna trafia do obu wersji README i do pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+
+## Licencja słowniczka
+
+Plik `data/glosariusz_mirror.csv` (formy, objaśnienia w nawiasach i reguły) pochodzi z glosariusza CyberSec Mozaika: treści na licencji CC BY-NC-ND 4.0, © 2026 Jan Wolski.

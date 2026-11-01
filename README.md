@@ -39,6 +39,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 21 | Soft problems never cut a summary, no headless fragments, smoother sentences, no added phishing (v36) | completed; checked on the digest of 29 October 2026 |
 | 22 | Language correction every day: chunks of 5 summaries, lighter Gemini models, Mistral as a fallback; no empty "other flaws" (v37a) | completed; verified by unit tests |
 | 23 | The tops on the same chain as the digest: event stories in chunks, Mistral before Groq (v37b) | completed; verified by unit tests |
+| 24 | Data for the bridge to CyberSec Mozaika: glossary entries in the archive (`terms`), tops saved in `data/tops/`, data contract and file placement tests, mirror v90, exporter moved to `cybersec-most` (v38) | completed; verified by unit tests |
 
 ## Current Implementation
 
@@ -117,7 +118,7 @@ Earlier: the v30 test fixed 6 of 6 summaries in the Gemini proofreading; the v28
 
 ## Roadmap
 
-- **Bridge to CyberSec Mozaika (v38):** a weekly report proposing new glossary terms, live examples for existing entries and the most frequent forbidden forms (from the language log of v32). The report only proposes; the Mozaika mother workbook stays the single source of truth, and the digest never writes to it.
+- **Bridge to CyberSec Mozaika:** a weekly report (`bridge_report.py` in the private repository `cybersec-most`) with proposals for the mother workbook: most broken forms, calques, live examples, convention differences. Since v38 the digest provides the data (a `terms` field in the archive, tops in `data/tops/`) and guards its shape with a contract test; the report only proposes, and the Mozaika mother workbook stays the single source of truth.
 - Branch protection for `main`.
 
 - Experiment with the writing model: Google Gemini writes the daily summaries (Groq as fallback) and gets more article material; compared on regular weekday digests with the current setup.
@@ -178,9 +179,9 @@ Data and tools:
 - `data/seen_articles.json` — history of seen and published links.
 - `data/archive/YYYY-MM.json` — monthly archive of delivered articles.
 - `data/last_digest.json`, `data/last_top.json` — markers of the last digest and tops.
-- `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (from mother workbook v84).
+- `data/tops/YYYY-Www.json`, `data/tops/YYYY-MM.json` — delivered weekly and monthly tops with their event stories (since v38; material for the bridge to CyberSec Mozaika).
+- `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (mother workbook v90, six columns). Exported by the private bridge repository `cybersec-most` (since v38; before that by `tools/eksport_mirrora.py` in this repository).
 - `data/styl_unikaj.csv` — style list: calques and anglicisms with suggestions, edited by hand (`*` = any ending).
-- `tools/eksport_mirrora.py` — manual export of the mirror from the Mozaika mother workbook (`python tools/eksport_mirrora.py <workbook.xlsx>`, requires openpyxl).
 
 ## Configuration and Secrets
 
@@ -209,3 +210,7 @@ Every workflow runs the tests before its main step. Changes are made on a branch
 ## Documentation
 
 The documentation is kept in English and Polish; every technical change is reflected in both README versions and in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+
+## Glossary licence
+
+The file `data/glosariusz_mirror.csv` (forms, explanations in parentheses and rules) comes from the CyberSec Mozaika glossary: content licensed under CC BY-NC-ND 4.0, © 2026 Jan Wolski.

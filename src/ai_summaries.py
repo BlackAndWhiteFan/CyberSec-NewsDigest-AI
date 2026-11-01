@@ -951,7 +951,7 @@ def summarize_events(events, environ=None, opener=urllib.request.urlopen, sleep=
     # lite, Mistral, three rounds); Groq stays as the last writer, because
     # it writes the daily summaries anyway and every story is checked
     # against the event material.
-    written, _, _ = correct_in_chunks(items, event_writers(providers, environ, sleep), opener, sleep,
+    written, _, story_models = correct_in_chunks(items, event_writers(providers, environ, sleep), opener, sleep,
                                       system=system, key="wydarzenia", log="ZESTAWIENIE AI")
 
     if not written:
@@ -978,6 +978,8 @@ def summarize_events(events, environ=None, opener=urllib.request.urlopen, sleep=
 
         print(f"ZESTAWIENIE AI: wydarzenie {number}\n  przed: {event.get('summary', '')}\n  po:    {text}")
         event["summary"] = text
+        # v38: kept in data/tops/ – which model wrote the story.
+        event["story_model"] = story_models.get(number, "")
         used += 1
 
     print(f"ZESTAWIENIE AI: streszczenia wydarzeń {used} z {len(numbered)}")

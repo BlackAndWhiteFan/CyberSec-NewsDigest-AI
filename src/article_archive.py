@@ -57,7 +57,16 @@ def build_record(article, date_text):
         # v32: language notes (language_notes.py) – what was corrected in the
         # AI summary; material for the reports to CyberSec Mozaika.
         "language": article.get("language", []),
+        # v38: IDs of glossary entries (H###) found in the title and summary,
+        # for the weekly report of the bridge to CyberSec Mozaika.
+        "terms": article_terms(article),
     }
+
+
+def article_terms(article):
+    from glossary import matched_ids
+
+    return matched_ids(f"{article.get('title', '')}\n{article.get('summary', '')}")
 
 
 def load_archive(path):

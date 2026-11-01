@@ -15,6 +15,7 @@ from datetime import date, datetime, timedelta
 
 from article_archive import ARCHIVE_DIR, TIMEZONE, load_archive
 from kev import load_kev, refresh_records
+import monthly_top
 from monthly_top import deliver, format_event_line, kev_note, log_tidy, polish_events, rank_events
 import top_guard
 
@@ -87,6 +88,9 @@ def build_week_lines(monday, records, limit=TOP_LIMIT, polish=None):
 
     if polish:
         polish(events)
+
+    # v38: saved to data/tops/ together with the marker (see monthly_top.deliver).
+    monthly_top.LAST_EVENTS[:] = events
 
     for number, event in enumerate(events, start=1):
         lines.append(format_event_line(number, event))

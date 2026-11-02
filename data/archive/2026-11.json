@@ -1,0 +1,327 @@
+[
+  {
+    "date": "2026-11-02",
+    "title": "Routery dziesięciu marek na liście aktywnie wykorzystywanych podatności",
+    "link": "https://myipscan.net/routers/",
+    "source": "myipscan.net",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "CISA opublikowała listę 62 podatności w routerach dziesięciu marek, które są aktywnie wykorzystywane w atakach. Wśród 1501 modeli 19 to urządzenia końcowe, a dla 15 z nich nie ma dostępnej łatki.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [],
+    "terms": []
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Android vs iPhone: który jest bezpieczniejszy? CVE, zero-daye, ceny exploitów i czas łatania w liczbach",
+    "link": "https://my127001.pl/android-vs-iphone-ktory-jest-bezpieczniejszy-cve-zero-daye-ceny-exploitow-i-czas-latania-w-liczbach-2026",
+    "source": "my127001.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Analiza porównuje bezpieczeństwo i ceny exploitów iPhone’a i Androida, podając liczby z rynku zero-day oraz tempo łatania. Dane pokazują, że iPhone nie jest jednoznacznie bezpieczniejszy, a rynek exploitów jest dynamiczny.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [],
+    "terms": [
+      "H150",
+      "H159"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Volt Typhoon używa Silent Train do ukrywania włamań do amerykańskich sieci",
+    "link": "https://www.zetter-zeroday.com/silent-train-volt-typhoons-sophisticated-infection-chain-into-us-targets-exposed/",
+    "source": "zetter-zeroday.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Badacze Lumen Technologies ujawnili, że chińska grupa Volt Typhoon używa sieci Silent Train do ukrywania włamań do amerykańskich sieci infrastruktury krytycznej. Raport opisuje techniki kradzieży poświadczeń i utrzymywania trwałości w systemach.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Badacze Lumen Technologies ujawnili, że grupa chińska Volt Typhoon używa sieci Silent Train do ukrywania włamań do amerykańskich sieci krytycznej infrastruktury. Raport opisuje techniki kradzieży poświadczeń i utrzymywania trwałości w systemach.",
+        "after": "Badacze Lumen Technologies ujawnili, że chińska grupa Volt Typhoon używa sieci Silent Train do ukrywania włamań do amerykańskich sieci infrastruktury krytycznej. Raport opisuje techniki kradzieży poświadczeń i utrzymywania trwałości w systemach.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": []
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Northflank security breach leads to abuse of customers' AI API keys",
+    "link": "https://www.bleepingcomputer.com/news/security/northflank-security-breach-leads-to-abuse-of-customers-ai-api-keys/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma Northflank poinformowała o incydencie, w którym wykradnięto i nieuprawnienie wykorzystano klucze API AI klientów platformy. Firma zaleciła rotację wszystkich zmiennych środowiskowych i kluczy po wykryciu wycieku.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Northflank poinformował o incydencie, w którym wykradnięto i niewłaściwie użyto kluczy API AI klientów platformy. Firma zaleciła rotację wszystkich zmiennych środowiskowych i kluczy po wykryciu wycieku.",
+        "after": "Firma Northflank poinformowała o incydencie, w którym wykradnięto i nieuprawnienie wykorzystano klucze API AI klientów platformy. Firma zaleciła rotację wszystkich zmiennych środowiskowych i kluczy po wykryciu wycieku.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H462"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Chainalysis discloses data breach from \"offensive agentic techniques\"",
+    "link": "https://www.bleepingcomputer.com/news/security/chainalysis-discloses-data-breach-from-offensive-agentic-techniques/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma Chainalysis ujawniła incydent, w którym atakujący uzyskali dostęp do wewnętrznych systemów i narzędzi, wykradając dane klientów, takie jak imiona, adresy e-mail i identyfikatory użytkowników. Firma pracuje nad naprawą podatności i wzmocnieniem zabezpieczeń.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Chainalysis ujawnił incydent, w którym atakujący uzyskali dostęp do wewnętrznych systemów i narzędzi, wykradając dane klientów takie jak imiona, adresy e-mail i identyfikatory użytkowników. Firma pracuje nad naprawą podatności i wzmocnieniem zabezpieczeń.",
+        "after": "Firma Chainalysis ujawniła incydent, w którym atakujący uzyskali dostęp do wewnętrznych systemów i narzędzi, wykradając dane klientów, takie jak imiona, adresy e-mail i identyfikatory użytkowników. Firma pracuje nad naprawą podatności i wzmocnieniem zabezpieczeń.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411",
+      "H702"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Chainalysis Confirms Intrusion Into Internal Tools and Exposure of Customer Identity Data",
+    "link": "https://thehackernews.com/2026/10/chainalysis-confirms-intrusion-into.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma Chainalysis potwierdziła, że zewnętrzny podmiot uzyskał nieautoryzowany dostęp do wewnętrznych narzędzi i niepoufnych danych klientów, takich jak identyfikatory, imiona i adresy e-mail. Firma zaznaczyła, że nie doszło do przejęcia treści dochodzeń, poświadczeń ani tokenów sesji, a w odpowiedzi wzmacnia zabezpieczenia.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Chainalysis potwierdziło, że zewnętrzny podmiot uzyskał nieautoryzowany dostęp do wewnętrznych narzędzi i niepoufnych danych klientów, takich jak identyfikatory, imiona i adresy e-mail. Firma zaznaczyła, że nie doszło do przejęcia treści dochodzeń, poświadczeń ani tokenów sesji, a w odpowiedzi wzmacnia zabezpieczenia.",
+        "after": "Firma Chainalysis potwierdziła, że zewnętrzny podmiot uzyskał nieautoryzowany dostęp do wewnętrznych narzędzi i niepoufnych danych klientów, takich jak identyfikatory, imiona i adresy e-mail. Firma zaznaczyła, że nie doszło do przejęcia treści dochodzeń, poświadczeń ani tokenów sesji, a w odpowiedzi wzmacnia zabezpieczenia.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H271",
+      "H614",
+      "H693"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Alpine Linux rebuilds GitLab after attempted RCE attack",
+    "link": "https://www.bleepingcomputer.com/news/security/alpine-linux-rebuilds-gitlab-after-attempted-rce-attack/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Zespół Alpine Linux odbudował serwer GitLab po próbach wykorzystania krytycznej podatności CVE-2026-97229 o najwyższym stopniu krytyczności, znajdującej się w katalogu KEV. Projekt zalecił aktualizację Ruby do wersji 3.3.13, 3.4.12, 4.0.9 lub nowszej oraz ponowne pobranie obrazów Alpine GitLab w wersji 19.3.6.",
+    "cves": [
+      "CVE-2026-97229"
+    ],
+    "kev": [
+      "CVE-2026-97229"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Alpine Linux odbudował serwer GitLab po próbach wykorzystania krytycznej podatności CVE-2026-97229, klasyfikowanej jako maksymalna powaga i znajdującej się w katalogu KEV. Projekt zalecił aktualizację Ruby do wersji 3.3.13, 3.4.12, 4.0.9 lub nowszej oraz ponowne pobranie obrazów Alpine GitLab w wersji 19.3.6.",
+        "after": "Zespół Alpine Linux odbudował serwer GitLab po próbach wykorzystania krytycznej podatności CVE-2026-97229 o najwyższym stopniu krytyczności, znajdującej się w katalogu KEV. Projekt zalecił aktualizację Ruby do wersji 3.3.13, 3.4.12, 4.0.9 lub nowszej oraz ponowne pobranie obrazów Alpine GitLab w wersji 19.3.6.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "title": "New Android SMS of Death exploit can remotely crash unpatched phones",
+    "link": "https://www.bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Badacz ujawnił PoC exploitu „SMS of Death” (CVE-2026-58882), który umożliwia zdalne wywołanie awarii telefonu z systemem Android poprzez specjalnie spreparowaną wiadomość SMS bez interakcji użytkownika. Google wydało łatkę w październikowych aktualizacjach Androida 14–17, natomiast urządzenia z Androidem 12–13 pozostają podatne.",
+    "cves": [
+      "CVE-2026-58882"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Badacz ujawnił PoC exploitu „SMS of Death” (CVE-2026-58882), który umożliwia zdalne wywołanie awarii telefonu Android poprzez specjalnie spreparowaną wiadomość SMS bez interakcji użytkownika. Google wydało łatkę w październikowych aktualizacjach Android 14-17, natomiast urządzenia z Android 12-13 pozostają podatne.",
+        "after": "Badacz ujawnił PoC exploitu „SMS of Death” (CVE-2026-58882), który umożliwia zdalne wywołanie awarii telefonu z systemem Android poprzez specjalnie spreparowaną wiadomość SMS bez interakcji użytkownika. Google wydało łatkę w październikowych aktualizacjach Androida 14–17, natomiast urządzenia z Androidem 12–13 pozostają podatne.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H152",
+      "H153"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Attackers Chain Three Ivanti Connect Secure Flaws to Gain Unauthenticated Root Access",
+    "link": "https://thehackernews.com/2026/10/attackers-chain-three-ivanti-connect.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CISA dodała do katalogu KEV dwie podatności w Ivanti Connect Secure, które są aktywnie wykorzystywane w łańcuchu ataku obejmującym obejście uwierzytelniania (CVE-2026-104935) i RCE. Łatki dla podatności LPE (CVE-2026-111357) i drugiej luki są już dostępne w najnowszych wersjach.",
+    "cves": [
+      "CVE-2026-104935",
+      "CVE-2026-111357"
+    ],
+    "kev": [
+      "CVE-2026-104935",
+      "CVE-2026-111357"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawkami",
+        "fixed": "łatkami"
+      },
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawki",
+        "fixed": "Łatki"
+      },
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H189",
+      "H725"
+    ]
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Northstar Security Exits Stealth With $7M to Expose Toxic Risk Combinations",
+    "link": "https://www.securityweek.com/northstar-security-exits-stealth-with-7m-to-expose-toxic-risk-combinations/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Northstar Security opuściło tryb stealth, pozyskując 7 mln USD seed funding na rozwój AI-agentów budujących Security Context Graph, łączących dane z ponad 70 produktów bezpieczeństwa i IT.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": []
+  },
+  {
+    "date": "2026-11-02",
+    "title": "Fresh WordPress Vulnerability in Attackers’ Crosshairs",
+    "link": "https://www.securityweek.com/fresh-wordpress-vulnerability-in-attackers-crosshairs/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "W wersji WordPress 7.1.4 naprawiono podatność o wysokim stopniu zagrożenia w procesie aktualizacji, umożliwiającą RCE bez uwierzytelnienia. Firma Defiant zauważyła, że atakujący już aktywnie próbują wykorzystać lukę, a pierwsze dopasowanie reguły firewalla nastąpiło dziewięć minut po wdrożeniu. Łatka wprowadza losowanie katalogu stagingowego, indeks ochronny i blokadę niebezpiecznej promocji konfiguracji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawka",
+        "fixed": "Łatka"
+      },
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "WordPress 7.1.4 naprawił wysokiej wagi podatność w procesie aktualizacji, umożliwiającą RCE bez uwierzytelnienia. Defiant zauważył, że sprawcy już aktywnie próbują wykorzystać lukę, a pierwsze dopasowanie reguły firewall nastąpiło dziewięć minut po wdrożeniu. Łatka wprowadza losowanie katalogu stagingowego, indeks ochronny i blokadę niebezpiecznej promocji konfiguracji.",
+        "after": "W wersji WordPress 7.1.4 naprawiono podatność o wysokim stopniu zagrożenia w procesie aktualizacji, umożliwiającą RCE bez uwierzytelnienia. Firma Defiant zauważyła, że atakujący już aktywnie próbują wykorzystać lukę, a pierwsze dopasowanie reguły firewalla nastąpiło dziewięć minut po wdrożeniu. Łatka wprowadza losowanie katalogu stagingowego, indeks ochronny i blokadę niebezpiecznej promocji konfiguracji.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H164",
+      "H166"
+    ]
+  }
+]

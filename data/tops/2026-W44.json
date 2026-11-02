@@ -1,0 +1,124 @@
+[
+  {
+    "period": "2026-W44",
+    "kind": "week",
+    "rank": 1,
+    "title": "Jak hakerzy wykorzystują PHP2Shell do uzyskania uprawnień administratora (root) na Firewallach",
+    "link": "https://kapitanhack.pl/jak-hakerzy-wykorzystuja-php2shell-do-uzyskania-uprawnien-administratora-root-na-firewallach/",
+    "summary": "Podatności RCE określane jako PHP2Shell (m.in. CVE-2026-109618) umożliwiają zdobycie uprawnień roota na zaporach sieciowych i serwerach PHP. Ataki ruszyły 17 października przed wydaniem łatek, a sprawcy połączyli luki w łańcuch exploitów i przejęli 24 z 25 atakowanych urządzeń. CISA dodała luki do katalogu KEV w związku z powszechnym skanowaniem oraz udanymi włamaniami. Łatki opublikowano 21 października między innymi w wersjach PHP 8.5.12 i 8.4.27.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 14,
+    "sources": 7,
+    "first_date": "2026-10-26",
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-46300"
+    ],
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "links": [
+      "https://kapitanhack.pl/jak-hakerzy-wykorzystuja-php2shell-do-uzyskania-uprawnien-administratora-root-na-firewallach/",
+      "https://www.bleepingcomputer.com/news/security/php2shell-security-flaws-now-sucessfully-exploited-in-the-wild/",
+      "https://www.bleepingcomputer.com/news/security/cisa-confirms-php2shell-vulnerabilities-now-exploited-in-attacks/",
+      "https://www.bleepingcomputer.com/news/security/even-after-php2shell-blast-radius-matters-more-than-a-cvss-score/",
+      "https://therecord.media/php2shell-successful-exploitation-reports-emerge",
+      "https://www.securityweek.com/industrial-vendors-check-products-for-php2shell-vulnerabilities/",
+      "https://thehackernews.com/2026/10/attackers-exploit-php2shell-flaws-in.html"
+    ]
+  },
+  {
+    "period": "2026-W44",
+    "kind": "week",
+    "rank": 2,
+    "title": "Adobe Commerce PolyShell Attacks Breach Hundreds of Stores as Brotli Exploit Traffic Emerges",
+    "link": "https://thehackernews.com/2026/10/adobe-commerce-polyshell-attacks-breach.html",
+    "summary": "Podatność zero-day CVE-2026-111497 w dekoderze Brotli powoduje przepełnienie bufora i RCE w Node.js, PHP oraz .NET. Sprawcy użyli jej oraz luki PolyShell, aby włamać się do setek sklepów e-commerce i wstrzyknąć złośliwy loader. CISA dodała obie luki do katalogu KEV z uwagi na trwające ataki. Microsoft udostępnił awaryjne łatki dla .NET 27 października, zaś dla PHP wydano poprawione pakiety dla systemu Windows.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 7,
+    "sources": 3,
+    "first_date": "2026-10-26",
+    "kev": [
+      "CVE-2026-111497",
+      "CVE-2026-48356"
+    ],
+    "cves": [
+      "CVE-2026-111497",
+      "CVE-2026-48356"
+    ],
+    "links": [
+      "https://thehackernews.com/2026/10/adobe-commerce-polyshell-attacks-breach.html",
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-releases-emergency-net-patches-for-critical-brotli-flaw/",
+      "https://thehackernews.com/2026/10/brotli-decoder-flaw-behind-nodejs-rce.html",
+      "https://www.bleepingcomputer.com/news/security/critical-http2shell-brotli-vulnerability-triggers-emergency-patches/",
+      "https://thehackernews.com/2026/10/php-issues-second-windows-security.html"
+    ]
+  },
+  {
+    "period": "2026-W44",
+    "kind": "week",
+    "rank": 3,
+    "title": "Zdalne wykonanie kodu w Linuksie. Krytyczna podatność w kernelu w obsłudze sieciowej (niedomyślne ustawienia).",
+    "link": "https://sekurak.pl/zdalne-wykonanie-kodu-w-linuksie-krytyczna-podatnosc-w-kernelu-w-obsludze-sieciowej-niedomyslne-ustawienia/",
+    "summary": "Krytyczna podatność CVE-2026-98432 w jądrze Linux umożliwia zdalne uzyskanie uprawnień roota przez sieć na serwerach z obsługą Multipath TCP. Firma Anthropic opracowała automatycznie wygenerowany exploit dowodzący możliwości RCE. Luka została niezwłocznie naprawiona w głównym wydaniu jądra oraz przeniesiona do gałęzi stabilnych. Dystrybucje takie jak Debian, Red Hat i Ubuntu udostępniły już poprawione pakiety.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 4,
+    "sources": 4,
+    "first_date": "2026-10-26",
+    "kev": [],
+    "cves": [
+      "CVE-2026-98432"
+    ],
+    "links": [
+      "https://sekurak.pl/zdalne-wykonanie-kodu-w-linuksie-krytyczna-podatnosc-w-kernelu-w-obsludze-sieciowej-niedomyslne-ustawienia/",
+      "https://thephp.foundation/blog/2026/10/21/todays-php-security-release-and-how-were-strengthening-php-security/",
+      "https://thehackernews.com/2026/10/linux-kernel-tcp-flaw-with-98-cvss.html"
+    ]
+  },
+  {
+    "period": "2026-W44",
+    "kind": "week",
+    "rank": 4,
+    "title": "CISA says max severity GitLab flaw now exploited in the wild",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-now-exploiting-max-severity-gitlab-flaw-in-attacks/",
+    "summary": "Krytyczna luka CVE-2026-97229 o ocenie CVSS 10.0 w usłudze GitLab umożliwia RCE poprzez spreparowane wyrażenie regularne w konfiguracji CI/CD. Nieudana próba ataku na serwer projektu Alpine Linux zmusiła twórców do odbudowy systemu i resetu haseł. 31 października CISA potwierdziła aktywne wykorzystywanie podatności w sieci i dodała ją do katalogu KEV. GitLab wydał łatki w wersjach 19.4.2, 19.3.5 oraz 19.2.8.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 4,
+    "sources": 3,
+    "first_date": "2026-10-30",
+    "kev": [
+      "CVE-2026-97229"
+    ],
+    "cves": [
+      "CVE-2026-97229"
+    ],
+    "links": [
+      "https://www.bleepingcomputer.com/news/security/hackers-now-exploiting-max-severity-gitlab-flaw-in-attacks/",
+      "https://thehackernews.com/2026/10/attacker-tried-to-exploit-alpine-linuxs.html"
+    ]
+  },
+  {
+    "period": "2026-W44",
+    "kind": "week",
+    "rank": 5,
+    "title": "Apple backports CoreGraphics zero-day patches to older iPhones",
+    "link": "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/",
+    "summary": "Podatność zero-day CVE-2026-86950 w składniku CoreGraphics firmy Apple umożliwia RCE poprzez zapis poza granicami bufora. Luka była wykorzystywana w ukierunkowanych atakach jeszcze przed wydaniem łatek. Apple naprawiło 286 podatności w nowej wersji systemu oraz wydało aktualizację iOS 18.7.11 ze wsteczną łatką dla starszych urządzeń. Aktualizacje udostępniono dla modeli iPhone XS, XR, iPad 7 oraz nowszych.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 3,
+    "sources": 3,
+    "first_date": "2026-10-28",
+    "kev": [
+      "CVE-2026-86950"
+    ],
+    "cves": [
+      "CVE-2026-86950"
+    ],
+    "links": [
+      "https://www.bleepingcomputer.com/news/apple/apple-backports-coregraphics-zero-day-patches-to-older-iphones/",
+      "https://www.securityweek.com/ios-macos-27-2-patch-286-bugs-fix-for-exploited-flaw-backported-to-ios-18/"
+    ]
+  }
+]

@@ -796,6 +796,12 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
     if not numbered:
         return 0
 
+    # v39: which model corrected each summary ("" = no correction), kept
+    # in the archive, so the bridge to CyberSec Mozaika prefers corrected
+    # sentences as live examples (Letters 13–14).
+    for _, article in numbered:
+        article["proofread"] = ""
+
     correctors = language_correctors(environ)
 
     if not correctors:
@@ -814,6 +820,9 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
         items.append(item)
 
     corrected, changes, models = correct_in_chunks(items, correctors, opener, sleep)
+
+    for number, article in numbered:
+        article["proofread"] = models.get(number, "")
     missing = len(items) - len([item for item in items if item["id"] in models])
 
     if missing:

@@ -24,6 +24,42 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v39 --- 02.11.2026
+
+**Straż dwóch ostatnich linii danych dla mostu i pole `proofread`.**
+
+Powód: analiza grafu „Linie styku” w Kartonie Mostu (List 13). Raport
+mostu (`bridge_report.py` w repo `cybersec-most`) czyta z Prasówki cztery
+pliki, a test kontraktu z v38 pilnował tylko dwóch: archiwum i mirrora.
+Zestawienia (`data/tops/`, dla przęsła P4 · Żywe przykłady) i lista kalk
+(`data/styl_unikaj.csv`, dla przęsła P3 · Kalki) nie miały strażnika. Do
+tego most chce przy wyborze żywych przykładów preferować zdania, które
+przeszły korektę językową (List 14).
+
+Pierwsze zestawienie zapisane przez v38 (`data/tops/2026-W44.json`,
+2.11.2026) posłużyło jako prawdziwy materiał do testu.
+
+Zmiany:
+
+- **Test kontraktu zestawień** (`src/test_v39.py`): każdy plik w
+  `data/tops/` – lista z kolejnymi pozycjami od 1, wszystkie pola,
+  `kind` (`week`/`month`) zgodny z formatem okresu, okres zgodny z nazwą
+  pliku, typy liczb i list.
+- **Test formatu listy kalk:** nagłówek dokładnie `forma;zamiast`,
+  separator `;`, komentarze `#`, gwiazdka tylko na końcu słowa – tak, jak
+  plik czyta raport mostu.
+- **Pole `proofread`** (`src/ai_summaries.py`, `src/article_archive.py`):
+  nazwa modelu, który sprawdzał streszczenie w korekcie językowej, albo
+  pusty tekst, gdy korekty nie było (np. Gemini i Mistral niedostępne).
+  Rekordy sprzed v39 nie mają tego pola – most odróżnia oba przypadki.
+
+Nowe i zmienione pliki: `src/ai_summaries.py`, `src/article_archive.py`,
+`src/test_v39.py` (nowy), README (PL/EN).
+
+Testy jednostkowe: 443, zakończone powodzeniem.
+
+------------------------------------------------------------------------
+
 ## v38 --- 01.11.2026
 
 **Dane dla mostu do CyberSec Mozaika: hasła w archiwum, zapis zestawień,
@@ -2195,6 +2231,44 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v39 --- 2026-11-02
+
+**Guards for the last two data lines read by the bridge, and the
+`proofread` field.**
+
+Reason: the analysis of the "Linie styku" graph in the bridge carton
+(Letter 13). The bridge report (`bridge_report.py` in `cybersec-most`)
+reads four digest files, and the v38 contract test guarded only two: the
+archive and the mirror. The tops (`data/tops/`, for the span P4 · Live
+examples) and the style list (`data/styl_unikaj.csv`, for P3 · Calques)
+had no guard. The bridge also wants to prefer sentences that passed the
+language correction when choosing live examples (Letter 14).
+
+The first top saved by v38 (`data/tops/2026-W44.json`, 2 November 2026)
+served as real test material.
+
+Changes:
+
+- **Tops contract test** (`src/test_v39.py`): every file in `data/tops/` –
+  a list with consecutive ranks from 1, all fields, `kind` (`week`/`month`)
+  matching the period format, period matching the file name, number and
+  list types.
+- **Style list format test:** header exactly `forma;zamiast`, separator
+  `;`, `#` comments, a star only at the end of a word – the way the bridge
+  report reads the file.
+- **`proofread` field** (`src/ai_summaries.py`, `src/article_archive.py`):
+  the name of the model that checked the summary in the language
+  correction, or empty text when there was no correction (e.g. Gemini and
+  Mistral unavailable). Records from before v39 have no such field – the
+  bridge tells the two cases apart.
+
+New and changed files: `src/ai_summaries.py`, `src/article_archive.py`,
+`src/test_v39.py` (new), README (PL/EN).
+
+Unit tests: 443, passed.
 
 ------------------------------------------------------------------------
 

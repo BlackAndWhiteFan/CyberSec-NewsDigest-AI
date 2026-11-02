@@ -60,6 +60,9 @@ def build_record(article, date_text):
         # v38: IDs of glossary entries (H###) found in the title and summary,
         # for the weekly report of the bridge to CyberSec Mozaika.
         "terms": article_terms(article),
+        # v39: the model of the language correction, "" when there was none
+        # (records before v39 have no such field).
+        "proofread": article.get("proofread", ""),
     }
 
 

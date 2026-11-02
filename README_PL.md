@@ -40,6 +40,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 22 | Korekta językowa codziennie: porcje po 5 streszczeń, lżejsze modele Gemini, Mistral jako zapas; bez pustych „innych luk” (v37a) | zakończony; zweryfikowany testami jednostkowymi |
 | 23 | Zestawienia na tym samym łańcuchu co prasówka: historie wydarzeń w porcjach, Mistral przed Groq (v37b) | zakończony; zweryfikowany testami jednostkowymi |
 | 24 | Dane dla mostu do CyberSec Mozaika: hasła w archiwum (`terms`), zapis zestawień w `data/tops/`, test kontraktu danych i miejsca plików, mirror v90, eksporter przeniesiony do `cybersec-most` (v38) | zakończony; zweryfikowany testami jednostkowymi |
+| 25 | Straż danych dla mostu: test kontraktu zestawień (`data/tops/`) i listy kalk, pole `proofread` w archiwum (v39) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -177,7 +178,7 @@ Kod (`src/`):
 Dane i narzędzia:
 
 - `data/seen_articles.json` — historia linków napotkanych i opublikowanych.
-- `data/archive/RRRR-MM.json` — miesięczne archiwum dostarczonych artykułów.
+- `data/archive/RRRR-MM.json` — miesięczne archiwum dostarczonych artykułów; od v38 z hasłami glosariusza (`terms`), od v39 z modelem korekty językowej (`proofread`, pusty tekst = bez korekty).
 - `data/last_digest.json`, `data/last_top.json` — znaczniki ostatniej prasówki i zestawień.
 - `data/tops/RRRR-Www.json`, `data/tops/RRRR-MM.json` — wysłane zestawienia tygodniowe i miesięczne z historiami wydarzeń (od v38; materiał dla mostu do CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (plik-matka v90, 6 kolumn). Eksportuje go prywatne repozytorium mostu `cybersec-most` (od v38; wcześniej `tools/eksport_mirrora.py` w tym repo).

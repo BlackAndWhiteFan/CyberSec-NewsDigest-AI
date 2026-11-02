@@ -40,6 +40,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 22 | Language correction every day: chunks of 5 summaries, lighter Gemini models, Mistral as a fallback; no empty "other flaws" (v37a) | completed; verified by unit tests |
 | 23 | The tops on the same chain as the digest: event stories in chunks, Mistral before Groq (v37b) | completed; verified by unit tests |
 | 24 | Data for the bridge to CyberSec Mozaika: glossary entries in the archive (`terms`), tops saved in `data/tops/`, data contract and file placement tests, mirror v90, exporter moved to `cybersec-most` (v38) | completed; verified by unit tests |
+| 25 | Data guards for the bridge: contract tests for the tops (`data/tops/`) and the style list, `proofread` field in the archive (v39) | completed; verified by unit tests |
 
 ## Current Implementation
 
@@ -177,7 +178,7 @@ Code (`src/`):
 Data and tools:
 
 - `data/seen_articles.json` — history of seen and published links.
-- `data/archive/YYYY-MM.json` — monthly archive of delivered articles.
+- `data/archive/YYYY-MM.json` — monthly archive of delivered articles; since v38 with glossary entries (`terms`), since v39 with the language correction model (`proofread`, empty text = no correction).
 - `data/last_digest.json`, `data/last_top.json` — markers of the last digest and tops.
 - `data/tops/YYYY-Www.json`, `data/tops/YYYY-MM.json` — delivered weekly and monthly tops with their event stories (since v38; material for the bridge to CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (mother workbook v90, six columns). Exported by the private bridge repository `cybersec-most` (since v38; before that by `tools/eksport_mirrora.py` in this repository).

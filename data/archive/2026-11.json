@@ -323,5 +323,526 @@
       "H164",
       "H166"
     ]
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Over 1,000 GitLab servers vulnerable to ongoing RCE attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/over-1-000-gitlab-servers-vulnerable-to-code-execution-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Ponad 1 000 wystawionych w Internecie serwerów GitLab pozostaje niezałatanych wobec luki CVE-2026-97229, której aktywne wykorzystanie w atakach RCE zostało wpisane do katalogu KEV CISA. Firma wydała łatki w wersjach 19.4.2, 19.3.5 i 19.2.8, a CISA nakazała zabezpieczenie serwerów do niedzieli.",
+    "cves": [
+      "CVE-2026-97229"
+    ],
+    "kev": [
+      "CVE-2026-97229"
+    ],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H090",
+      "H150"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Ivanti patches two more Connect Secure zero-days chained in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/ivanti-patches-two-more-connect-secure-zero-days-chained-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Ivanti Patches Two More Zero-Days Exploited in Connect Secure Attack Chain",
+        "link": "https://www.securityweek.com/ivanti-patches-two-more-zero-days-exploited-in-connect-secure-attack-chain/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Firma Ivanti wydała łatki na dwie podatności w Connect Secure (CVE-2026-111357 i CVE-2026-118527), które były łączone w atakach służących do obejścia uwierzytelniania i są aktywnie wykorzystywane. Łatki są dostępne w najnowszych wersjach produktu.",
+    "cves": [
+      "CVE-2026-104935",
+      "CVE-2026-111357",
+      "CVE-2026-118527"
+    ],
+    "kev": [
+      "CVE-2026-104935",
+      "CVE-2026-111357",
+      "CVE-2026-118527"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Ivanti wydało łatki na dwie podatności Connect Secure (CVE-2026-111357 i CVE-2026-118527), które były łączone w atakach z obejściem uwierzytelniania i są aktywnie wykorzystywane. Łatki są dostępne w najnowszych wersjach produktu.",
+        "after": "Firma Ivanti wydała łatki na dwie podatności w Connect Secure (CVE-2026-111357 i CVE-2026-118527), które były łączone w atakach służących do obejścia uwierzytelniania i są aktywnie wykorzystywane. Łatki są dostępne w najnowszych wersjach produktu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Seria ataków hakerskich na lodówki w sklepach. Żywność do wyrzucenia",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/seria-atakow-hakerskich-na-lodowki-w-sklepach-zywnosc-do-wyrzucenia",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W Belgii hakerzy przejęli kontrolę nad lodówkami w około 40 sklepach Delhaize oraz w sieciach Carrefour, Intermarche i Spar, ustawiając temperaturę na 40 °C, co zmusiło sklepy do wyrzucenia produktów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W Belgii hakerzy przejęli kontrolę nad lodówkami w około 40 sklepach Delhaize oraz w sieciach Carrefour, Intermarche i Spar, ustawiając temperaturę na 40 °C i zmuszając do wyrzucenia produktów.",
+        "after": "W Belgii hakerzy przejęli kontrolę nad lodówkami w około 40 sklepach Delhaize oraz w sieciach Carrefour, Intermarche i Spar, ustawiając temperaturę na 40 °C, co zmusiło sklepy do wyrzucenia produktów.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Białoruscy partyzanci zhakowali rosyjski urząd statystyczny. Zdobyli niejawne dane",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/bialoruscy-partyzanci-zhakowali-rosyjski-urzad-statystyczny-zdobyli-niejawne-dane",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Białoruscy cyberpartyzanci wraz z grupą Silent Crow przeprowadzili atak na rosyjski urząd statystyczny Rosstat, niszcząc serwery i bazy danych oraz wykradając około 10 TB niejawnych danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Białoruskie cyberpartyzanci z grupą Silent Crow przeprowadzili atak na rosyjski urząd statystyczny Rosstat, niszcząc serwery i bazy danych oraz wykradli około 10 TB niejawnych danych.",
+        "after": "Białoruscy cyberpartyzanci wraz z grupą Silent Crow przeprowadzili atak na rosyjski urząd statystyczny Rosstat, niszcząc serwery i bazy danych oraz wykradając około 10 TB niejawnych danych.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Oprogramowanie szpiegowskie w telefonach ministrów i członków Bundestagu",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/oprogramowanie-szpiegowskie-w-telefonach-ministrow-i-czlonkow-bundestagu",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Od 29 października Apple ostrzega niemieckich polityków używających iPhone’ów przed zagrożeniem spyware, po tym jak wykryto oprogramowanie szpiegowskie na telefonach członków rządu i Bundestagu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Apple ostrzegło od 29 października użytkowników iPhone’ów niemieckich polityków o zagrożeniu spyware, po wykryciu oprogramowania szpiegowskiego na telefonach członków rządu i Bundestagu.",
+        "after": "Od 29 października Apple ostrzega niemieckich polityków używających iPhone’ów przed zagrożeniem spyware, po tym jak wykryto oprogramowanie szpiegowskie na telefonach członków rządu i Bundestagu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H012"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Alerty o ataku nuklearnym w Rosji. „Masowy cyberatak”",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/alerty-o-ataku-nuklearnym-w-rosji-masowy-cyberatak",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W Rosji rozesłano fałszywe alerty o zagrożeniu nuklearnym po zhakowaniu ukraińskiej aplikacji wysyłającej ostrzeżenia. Rozsyłane informacje zawierały komunikat o rzekomych głowicach nuklearnych w dronach P1-Suns i nakaz zaopatrzenia się w jedzenie na trzy tygodnie, co może wywołać panikę w społeczeństwie.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W Rosji rozesłano fałszywe alerty o zagrożeniu nuklearnym po zhakowaniu ukraińskiej aplikacji wysyłającej ostrzeżenia. Rozsyłane informacje zawierały hasło o rzekomych głowicach nuklearnych w dronach P1-Suns i nakaz zaopatrzenia się w jedzenie na trzy tygodnie, co może wywołać panikę w społeczeństwie.",
+        "after": "W Rosji rozesłano fałszywe alerty o zagrożeniu nuklearnym po zhakowaniu ukraińskiej aplikacji wysyłającej ostrzeżenia. Rozsyłane informacje zawierały komunikat o rzekomych głowicach nuklearnych w dronach P1-Suns i nakaz zaopatrzenia się w jedzenie na trzy tygodnie, co może wywołać panikę w społeczeństwie.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Your Mobile Carrier Stores Your Call Logs for Years",
+    "link": "https://www.bleepingcomputer.com/news/security/your-mobile-carrier-stores-your-call-logs-for-years/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "AT&T utraciło w kwietniu 2024 roku logi połączeń telefonicznych 109 milionów klientów, obejmujące numery, liczbę połączeń, czasy trwania i dane lokalizacji z okresu maj–październik 2022 oraz styczeń 2023, czyli dane sprzed około dwóch lat.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "AT&T utraciło w kwietniu 2024 rok komunikacyjne logi telefoniczne 109 milionów klientów, obejmujące numery, liczbę połączeń, czasy trwania i dane lokalizacji z okresu maj-październik 2022 oraz styczeń 2023, czyli danych sprzed około dwóch lat.",
+        "after": "AT&T utraciło w kwietniu 2024 roku logi połączeń telefonicznych 109 milionów klientów, obejmujące numery, liczbę połączeń, czasy trwania i dane lokalizacji z okresu maj–październik 2022 oraz styczeń 2023, czyli dane sprzed około dwóch lat.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Synology warns of C3RB3R ransomware attacks targeting NAS devices",
+    "link": "https://www.bleepingcomputer.com/news/security/synology-warns-customers-of-ongoing-c3rb3r-ransomware-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Synology ostrzegło przed atakami ransomware C3RB3R wymierzonymi w urządzenia NAS z nieaktualnym oprogramowaniem DSM. Ataki wykorzystują podatność CVE-2024-10441 umożliwiającą wykonanie dowolnego kodu oraz lukę CVE-2024-50629 pozwalającą na odczyt plików, które zostały załatane w grudniu 2024. Firma zaleca natychmiastową aktualizację DSM i blokadę dostępu do interfejsu webowego z internetu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Synology ostrzegło przed atakami ransomware C3RB3R wymierzonymi w urządzenia NAS z nieaktualnym oprogramowaniem DSM. Ataki wykorzystują podatność CVE-2024-10441 umożliwiającą wykonanie dowolnego kodu oraz lukę CVE-2024-50629 pozwalającą na odczyt plików, które zostały załatane w grudniu 2024. Firma zaleca natychmiastową aktualizację DSM i blokadę dostępu do interfejsu webowego z Internetu.",
+        "after": "Synology ostrzegło przed atakami ransomware C3RB3R wymierzonymi w urządzenia NAS z nieaktualnym oprogramowaniem DSM. Ataki wykorzystują podatność CVE-2024-10441 umożliwiającą wykonanie dowolnego kodu oraz lukę CVE-2024-50629 pozwalającą na odczyt plików, które zostały załatane w grudniu 2024. Firma zaleca natychmiastową aktualizację DSM i blokadę dostępu do interfejsu webowego z internetu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H150",
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Florida Student Aid Website Hack Puts Data of 4.9 Million People at Risk",
+    "link": "https://www.securityweek.com/florida-student-aid-website-hack-puts-data-of-4-9-million-people-at-risk/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Departament Edukacji Florydy potwierdził włamanie na portal pomocy finansowej, które mogło narazić na wyciek dane osobowe około 4,9 mln osób. Incydent nie wpływa na przyznawanie ani wypłaty pomocy.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Departament Edukacji Florydy potwierdził włamanie na portal pomocy finansowej, które mogło narazić dane osobowe około 4,9 mln osób. Incydent nie wpływa na przyznawanie ani wypłaty pomocy.",
+        "after": "Departament Edukacji Florydy potwierdził włamanie na portal pomocy finansowej, które mogło narazić na wyciek dane osobowe około 4,9 mln osób. Incydent nie wpływa na przyznawanie ani wypłaty pomocy.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H399"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Revolve Data Breach Impacts at Least 180,000 People",
+    "link": "https://www.securityweek.com/revolve-data-breach-impacts-at-least-180000-people/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Revolve ogłosiło wyciek danych osobowych i danych kart płatniczych co najmniej 180 000 klientów w wyniku nieautoryzowanego dostępu, do którego doszło 11 września.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "rekordy",
+        "form": "rekordy",
+        "suggestion": "wpisy, dane (np. „dane pacjentów”, „1,8 mln wpisów”)",
+        "fixed_by": "code"
+      },
+      {
+        "type": "proofreading",
+        "before": "Revolve ogłosiło wyciek danych osobowych i kart płatniczych co najmniej 180 000 klientów po nieautoryzowanym dostępie 11 września.",
+        "after": "Revolve ogłosiło wyciek danych osobowych i danych kart płatniczych co najmniej 180 000 klientów w wyniku nieautoryzowanego dostępu, do którego doszło 11 września.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Chainalysis Discloses Data Breach Following AI-Driven Cyberattack",
+    "link": "https://www.securityweek.com/chainalysis-discloses-data-breach-following-ai-driven-cyberattack/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Chainalysis poinformowało o ataku z wykorzystaniem AI, w wyniku którego wyciekły niepoufne dane klientów: identyfikatory, imiona, adresy e-mail i role organizacyjne. Atak nie doprowadził do przejęcia haseł, poświadczeń ani innych kluczy dostępowych. Firma zaleca zwracanie uwagi na nieoczekiwane żądania uwierzytelnienia i włączenie MFA.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Chainalysis poinformowało o AI-napadzie, w wyniku którego wyciekły niepoufne dane klientów: identyfikatory, imiona, adresy e-mail i role organizacyjne. Atak nie doprowadził do przejęcia haseł, poświadczeń ani innych sekretów. Firma zaleca obserwowanie nieoczekiwanych żądań uwierzytelnienia i włączenie MFA.",
+        "after": "Chainalysis poinformowało o ataku z wykorzystaniem AI, w wyniku którego wyciekły niepoufne dane klientów: identyfikatory, imiona, adresy e-mail i role organizacyjne. Atak nie doprowadził do przejęcia haseł, poświadczeń ani innych kluczy dostępowych. Firma zaleca zwracanie uwagi na nieoczekiwane żądania uwierzytelnienia i włączenie MFA.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H232",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Michigan State cyber incident claimed by ransomware gang behind recent hospital attack",
+    "link": "https://therecord.media/michigan-state-university-byod-gang-cyber-incident",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Michigan State University otrzymało żądania okupu od grupy ransomware BYOD, która twierdzi, że wykradła dane 1,3 mln studentów i pracowników, co wymusiło reset haseł. Śledztwo nie wykazało przełamania centralnej usługi Active Directory ani dostępu do innych danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Michigan State University otrzymało roszczenia grupy ransomware BYOD, która twierdzi, że wykradła dane 1,3 mln studentów i pracowników oraz wymusiła reset haseł. Śledztwo nie wykazało przełamania centralnego Active Directory ani dostępu do innych danych.",
+        "after": "Michigan State University otrzymało żądania okupu od grupy ransomware BYOD, która twierdzi, że wykradła dane 1,3 mln studentów i pracowników, co wymusiło reset haseł. Śledztwo nie wykazało przełamania centralnej usługi Active Directory ani dostępu do innych danych.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H133",
+      "H170",
+      "H520"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Dwie trzecie podatności w IoT dotyczy telewizorów, gniazdek i dysków sieciowych",
+    "link": "https://www.netgear.com/hub/network/security/iot-security-report-2026/",
+    "source": "netgear.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Raport IoT Security Landscape 2026 wskazuje, że dwie trzecie wykrytych podatności w urządzeniach IoT dotyczy telewizorów, gniazdek i dysków sieciowych, a większość producentów przestaje wydawać aktualizacje po 2-4 latach użytkowania.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Raport IoT Security Landscape 2026 wskazuje, że dwie trzecie wykrytych podatności w IoT dotyczy telewizorów, gniazdek i dysków sieciowych, a większość producentów przestaje wydawać aktualizacje po 2-4 latach użytkowania.",
+        "after": "Raport IoT Security Landscape 2026 wskazuje, że dwie trzecie wykrytych podatności w urządzeniach IoT dotyczy telewizorów, gniazdek i dysków sieciowych, a większość producentów przestaje wydawać aktualizacje po 2-4 latach użytkowania.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H499"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Broccoli2shell: co warto wiedzieć o krytycznej luce w dekoderze Brotli",
+    "link": "https://www.wiz.io/blog/cve-2026-111497-brotli-rce-node-js",
+    "source": "wiz.io",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Krytyczna podatność Brotli CVE-2026-111497 (Broccoli2Shell) umożliwia nieautoryzowanemu atakującemu wywołanie uszkodzenia pamięci, wyciek danych lub RCE. Luka została dodana do katalogu KEV, co oznacza jej aktywne wykorzystywanie, a łatka nie jest jeszcze szeroko dostępna.",
+    "cves": [
+      "CVE-2026-111497"
+    ],
+    "kev": [
+      "CVE-2026-111497"
+    ],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Krytyczna podatność Brotli CVE-2026-111497 (Broccoli2Shell) umożliwia nieautoryzowanemu atakującemu wywołanie korupcji pamięci, wyciek danych lub RCE. Luka jest wymieniona w katalogu KEV, co oznacza aktywne wykorzystywanie, a łatka nie jest jeszcze szeroko dostępna.",
+        "after": "Krytyczna podatność Brotli CVE-2026-111497 (Broccoli2Shell) umożliwia nieautoryzowanemu atakującemu wywołanie uszkodzenia pamięci, wyciek danych lub RCE. Luka została dodana do katalogu KEV, co oznacza jej aktywne wykorzystywanie, a łatka nie jest jeszcze szeroko dostępna.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H164",
+      "H166",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Analiza ataku na Microsoft 365 przez ConnectWise z użyciem agentów AI",
+    "link": "https://www.huntress.com/blog/connectwise-attack-ai",
+    "source": "huntress.com",
+    "categories": [],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół Storm-0940 użył frameworku ARTEX, otwartego wieloagentowego systemu AI, do wykorzystania skradzionych poświadczeń ConnectWise i szybkiego logowania się do tenantów Microsoft 365. Incydent nie wiąże się z publicznie znanymi exploitami ani łatkami.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół Storm-0940 użył frameworka ARTEX, otwartego wielo-agentowego systemu AI, do nadużycia skradzionych poświadczeń ConnectWise i szybkiego logowania się do najemców Microsoft 365. Incydent nie wiąże się z publicznie znanymi exploitami ani łatkami.",
+        "after": "Zespół Storm-0940 użył frameworku ARTEX, otwartego wieloagentowego systemu AI, do wykorzystania skradzionych poświadczeń ConnectWise i szybkiego logowania się do tenantów Microsoft 365. Incydent nie wiąże się z publicznie znanymi exploitami ani łatkami.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "Critical Langflow Flaws Could Let Unauthenticated Attackers Run Code on Servers",
+    "link": "https://thehackernews.com/2026/11/critical-langflow-flaws-could-let.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Langflow, otwartoźródłowe narzędzie do budowania agentów AI, ma dwie krytyczne podatności umożliwiające obejście uwierzytelniania i RCE. Luki dotyczą wersji od 1.0.0 do 1.12.8 i zostały dodane do katalogu CISA KEV. Exploit jest dostępny w pakiecie Metasploit (CVE-2026-93680), a jedynym rozwiązaniem jest aktualizacja do wersji 1.13.0.",
+    "cves": [
+      "CVE-2026-9198"
+    ],
+    "kev": [
+      "CVE-2026-9198"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "autofix",
+        "id": "H153",
+        "rule": "exploit",
+        "used": "Eksploit",
+        "fixed": "Exploit"
+      },
+      {
+        "type": "proofreading",
+        "before": "Langflow, otwarto-źródłowe narzędzie do budowania agentów AI, ma dwie krytyczne podatności umożliwiające obejście uwierzytelniania i RCE. Luki dotyczą wersji od 1.0.0 do 1.12.8 i są wymienione w katalogu CISA KEV. Exploit jest dostępny w Metasploit (CVE-2026-93680) i jedynym rozwiązaniem jest aktualizacja do wersji 1.13.0.",
+        "after": "Langflow, otwartoźródłowe narzędzie do budowania agentów AI, ma dwie krytyczne podatności umożliwiające obejście uwierzytelniania i RCE. Luki dotyczą wersji od 1.0.0 do 1.12.8 i zostały dodane do katalogu CISA KEV. Exploit jest dostępny w pakiecie Metasploit (CVE-2026-93680), a jedynym rozwiązaniem jest aktualizacja do wersji 1.13.0.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H153",
+      "H154",
+      "H725"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-03",
+    "title": "UK faces ‘unprecedented rise’ in cyberattacks in coming months, warns cyber chief",
+    "link": "https://therecord.media/uk-ncsc-predicts-rise-cyberattacks-coming-months",
+    "source": "therecord.media",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Brytyjski NCSC ostrzega przed „bezprecedensowym wzrostem” liczby cyberincydentów w najbliższych miesiącach, podkreślając, że tolerowane dotąd podatności mogą być wykorzystywane na niespotykaną skalę. Agencja wskazuje, że do 2028 roku prawdopodobne jest użycie ransomware opartego na AI przeciwko infrastrukturze krytycznej kraju.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Brytyjski NCSC ostrzega przed „bezprecedensowym wzrostem” liczby incydentów cybernetycznych w najbliższych miesiącach, podkreślając, że tolerowane dotąd podatności mogą być wykorzystywane na niespotykaną skalę. Agencja wskazuje, że do 2028 roku prawdopodobne jest użycie ransomware napędzanego AI przeciwko krytycznej infrastrukturze kraju.",
+        "after": "Brytyjski NCSC ostrzega przed „bezprecedensowym wzrostem” liczby cyberincydentów w najbliższych miesiącach, podkreślając, że tolerowane dotąd podatności mogą być wykorzystywane na niespotykaną skalę. Agencja wskazuje, że do 2028 roku prawdopodobne jest użycie ransomware opartego na AI przeciwko infrastrukturze krytycznej kraju.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

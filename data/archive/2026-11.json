@@ -844,5 +844,551 @@
       "H015"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Znajdź luki w polskich systemach i zgarnij pieniądze. W puli milion złotych",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/znajdz-luki-w-polskich-systemach-i-zgarnij-pieniadze-w-puli-milion-zlotych",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 6,
+    "related": [],
+    "continuation": false,
+    "summary": "Polski program Bug Bounty dla serwisów publicznych uruchomiły NASK i CERT Polska, oferując do 20 tys. zł za zgłoszenie krytycznej podatności. Program ma pulę 1 mln zł i zachęca łowców do zgłaszania słabych punktów, zanim zostaną wykorzystane przez cyberprzestępców.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Polski program Bug Bounty dla serwisów publicznych uruchomił NASK i CERT Polska, oferując do 20 tys. zł za zgłoszenie krytycznej podatności. Program ma pulę 1 mln zł i zachęca łowców do zgłaszania słabych punktów, zanim zostaną wykorzystane przez cyberprzestępców.",
+        "after": "Polski program Bug Bounty dla serwisów publicznych uruchomiły NASK i CERT Polska, oferując do 20 tys. zł za zgłoszenie krytycznej podatności. Program ma pulę 1 mln zł i zachęca łowców do zgłaszania słabych punktów, zanim zostaną wykorzystane przez cyberprzestępców.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H412",
+      "H434",
+      "H711"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Synology NAS Devices Targeted in Ransomware Attacks Exploiting Patched DSM Flaw",
+    "link": "https://thehackernews.com/2026/11/synology-nas-devices-targeted-in.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Synology ostrzegło, że grupa threat actor wykorzystuje dwie podatności – CVE-2024-10441 (RCE) i CVE-2024-50629 (odczyt plików) – w nieaktualnych wersjach DSM, mimo że zostały załatane w grudniu 2024 roku. Ataki ransomware C3RB3R szyfrują pliki z rozszerzeniem .L0CK3D i wiążą się z żądaniem okupu. Firma zaleca natychmiastową aktualizację DSM oraz zablokowanie dostępu do interfejsu webowego z internetu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Synology ostrzegło, że grupa threat actor wykorzystuje dwie podatności – CVE-2024-10441 (RCE) i CVE-2024-50629 (odczyt plików) – w nieaktualnych wersjach DSM, mimo że zostały załatane w grudniu 2024. Ataki ransomware C3RB3R szyfrują pliki z rozszerzeniem .L0CK3D i wymagają wymuszenia okupu. Firma zaleca natychmiastową aktualizację DSM oraz zablokowanie dostępu do interfejsu webowego z Internetu.",
+        "after": "Synology ostrzegło, że grupa threat actor wykorzystuje dwie podatności – CVE-2024-10441 (RCE) i CVE-2024-50629 (odczyt plików) – w nieaktualnych wersjach DSM, mimo że zostały załatane w grudniu 2024 roku. Ataki ransomware C3RB3R szyfrują pliki z rozszerzeniem .L0CK3D i wiążą się z żądaniem okupu. Firma zaleca natychmiastową aktualizację DSM oraz zablokowanie dostępu do interfejsu webowego z internetu.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H090",
+      "H150",
+      "H372",
+      "H386"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Frontline Education Data Breach Impacts Over 1.3 Million",
+    "link": "https://www.securityweek.com/frontline-education-data-breach-impacts-over-1-3-million/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Frontline Education poinformowało ponad 1,3 mln osób o wycieku danych osobowych po wykorzystaniu podatności w oprogramowaniu podwykonawcy, co doprowadziło do kradzieży m.in. nazwisk, numerów PESEL i dokumentów tożsamości. Incydent został zawieszony do 15 august, a firma wprowadziła dodatkowe środki ochrony.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H411",
+      "H417"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Zhakuj te rządowe systemy, to jeszcze Ci za to zapłacą",
+    "link": "https://niebezpiecznik.pl/post/zhakuj-rzadowe-systemy-to-ci-zaplaca/",
+    "source": "niebezpiecznik.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "Polski program bug bounty uruchomił CERT Polska z pulą 1 mln zł, przy maksymalnej nagrodzie 20 tys. zł za krytyczną podatność w wybranych rządowych systemach. Warunkiem udziału jest pełnoletniość, polska rezydencja podatkowa, posiadanie numeru PESEL oraz logowanie przez login.gov.pl.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Polski program bug bounty uruchomił CERT Polska z pulą 1 mln zł, przy maksymalnej nagrodzie 20 tys. zł za krytyczną podatność w wybranych rządowych systemach. Warunkiem udziału jest pełnoletniość, polska rezydencja podatkowa i posiadanie PESEL oraz logowanie przez login.gov.pl.",
+        "after": "Polski program bug bounty uruchomił CERT Polska z pulą 1 mln zł, przy maksymalnej nagrodzie 20 tys. zł za krytyczną podatność w wybranych rządowych systemach. Warunkiem udziału jest pełnoletniość, polska rezydencja podatkowa, posiadanie numeru PESEL oraz logowanie przez login.gov.pl.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H164",
+      "H417",
+      "H434",
+      "H711"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Duży wyciek danych medycznych z Medyc. Sprawdź, czy Cię dotyczy",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/duzy-wyciek-danych-medycznych-z-medyc-sprawdz-czy-cie-dotyczy",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "W wyniku wycieku danych medycznych z Medyc ujawniono numery PESEL i inne informacje pacjentów, co stanowi drugi duży incydent po wycieku MyDr obejmującym ponad 18 mln osób. Obywatele mogą sprawdzić, czy ich PESEL znajduje się w bazie, na portalu Bezpieczne Dane.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W wyniku wycieku danych medycznych z Medyc ujawniono PESEL i inne informacje pacjentów, co stanowi drugi duży incydent po wycieku MyDr obejmującym ponad 18 mln osób. Obywatele mogą sprawdzić, czy ich PESEL znajduje się w bazie na portalu Bezpieczne Dane.",
+        "after": "W wyniku wycieku danych medycznych z Medyc ujawniono numery PESEL i inne informacje pacjentów, co stanowi drugi duży incydent po wycieku MyDr obejmującym ponad 18 mln osób. Obywatele mogą sprawdzić, czy ich PESEL znajduje się w bazie, na portalu Bezpieczne Dane.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H411",
+      "H417"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Wiadomo już jak włamali się do Binance (i wykradli ponad 6 miliardów USD)",
+    "link": "https://sekurak.pl/wiadomo-juz-jak-wlamali-sie-do-binance-i-wykradli-ponad-6-miliardow-usd/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Binance ujawniło, że atakujący pozyskali dostęp do kont pracowników IT po zainfekowaniu ich komputerów malware pobranym z fałszywej reklamy Google. Dzięki temu uzyskano kontrolę nad infrastrukturą i dokonano kradzieży ponad 6 miliardów USD.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "glossary",
+        "id": "H028",
+        "used": "złośliwym oprogramowaniem",
+        "required": "malware",
+        "fixed_by": "ai"
+      }
+    ],
+    "terms": [
+      "H028"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Rusza program hackowania systemów rządowych. Do 20 000zł za zgłoszenie podatności; 1 000 000zł w puli nagród.",
+    "link": "https://sekurak.pl/rusza-program-hackowania-systemow-rzadowych-do-20-000zl-za-zgloszenie-podatnosci-1-000-000zl-w-puli-nagrod/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska uruchomił program bug bounty, w którym za zgłoszenie podatności można otrzymać wynagrodzenie zależne od krytyczności.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H434",
+      "H711"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Startuje polska platforma bug bounty pod opieką CERT Polska",
+    "link": "https://zaufanatrzeciastrona.pl/post/startuje-polska-platforma-bug-bounty-pod-opieka-cert-polska/",
+    "source": "zaufanatrzeciastrona.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Polska platforma bug bounty hack.cert.pl, zarządzana przez CERT Polska, umożliwia zgłaszanie podatności w wybranych serwisach publicznych z nagrodami do 20 000 zł i budżetem 1 mln zł.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H434",
+      "H711"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Możesz legalnie „hakować” rządowe serwisy. Nawet 20 tys. złotych nagrody",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/mozesz-legalnie-hakowac-rzadowe-serwisy-nawet-20-tys-zlotych-nagrody",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "NASK wystartował z platformą Bug Bounty dla serwisów publicznych, oferując łącznie milion złotych nagród za zgłoszone podatności.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H412",
+      "H711"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Cyberatak sparaliżował rosyjską sieć handlową. Sklepy zamknięte",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-sparalizowal-rosyjska-siec-handlowa-sklepy-zamkniete",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Rosyjska sieć handlowa Poryadok została sparaliżowana cyberatakiem, który wyłączył stronę, aplikację i systemy lojalnościowe.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "CERT Polska uruchamia program bug bounty dla administracji publicznej",
+    "link": "https://cert.pl/posts/2026/11/bug-bounty/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska uruchomił program bug bounty dla administracji publicznej na własnej platformie hack.cert.pl. Program oferuje nagrody od kilkuset do 20 tys. zł za zgłoszone podatności i prowadzony jest w wewnętrznej infrastrukturze bez pośredników.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H434",
+      "H711"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "WorkOS says attacker used ARTEX AI to breach internal sales app",
+    "link": "https://www.bleepingcomputer.com/news/security/workos-says-attacker-used-artex-ai-to-breach-internal-sales-app/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "WorkOS potwierdził wyciek danych po nieautoryzowanym dostępie do wewnętrznej aplikacji sprzedażowej 30 paź 2026. Atakujący użył frameworku do ofensywnego AI w celu automatyzacji rozpoznania i prób wykorzystania luk, ale nie uzyskano dostępu do danych aplikacji ani usług produkcyjnych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "glossary",
+        "id": "H153",
+        "used": "eksploitu",
+        "required": "exploit",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "WorkOS potwierdził wyciek danych po nieautoryzowanym dostępie do wewnętrznej aplikacji sprzedażowej 30 paź 2026. Atakujący użył AI-offensive framework do automatyzacji rozpoznania i prób exploit, ale nie uzyskano dostępu do danych aplikacji ani usług produkcyjnych.",
+        "after": "WorkOS potwierdził wyciek danych po nieautoryzowanym dostępie do wewnętrznej aplikacji sprzedażowej 30 paź 2026. Atakujący użył frameworku do ofensywnego AI w celu automatyzacji rozpoznania i prób wykorzystania luk, ale nie uzyskano dostępu do danych aplikacji ani usług produkcyjnych.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H411",
+      "H614"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "UK school estate hit by 3AM ransomware in suspected AI-assisted attack",
+    "link": "https://www.bleepingcomputer.com/news/security/uk-school-estate-hit-by-3am-ransomware-in-suspected-ai-assisted-attack/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Szkoła w Wielkiej Brytanii padła ofiarą ransomware 3AM, które zaszyfrowało ok. 37 z 50 maszyn z niezarządzanego hosta. Badacze Bitdefender wskazują na użycie wygenerowanych przez AI poleceń oraz modyfikowanego narzędzia PowerShell do kradzieży poświadczeń i instalacji backdoorów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Szkoła w Wielkiej Brytanii padła ofiarą ransomware 3AM, które zaszyfrowało ok. 37 z 50 maszyn z niezarządzanego hosta. Badacze Bitdefender wskazują na użycie AI-generowanych poleceń oraz modyfikowanego narzędzia PowerShell do kradzieży poświadczeń i instalacji backdoorów.",
+        "after": "Szkoła w Wielkiej Brytanii padła ofiarą ransomware 3AM, które zaszyfrowało ok. 37 z 50 maszyn z niezarządzanego hosta. Badacze Bitdefender wskazują na użycie wygenerowanych przez AI poleceń oraz modyfikowanego narzędzia PowerShell do kradzieży poświadczeń i instalacji backdoorów.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H476"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Harvard University data breach exposed info of 851,000 accounts",
+    "link": "https://www.bleepingcomputer.com/news/security/harvard-university-data-breach-exposed-info-of-851-000-accounts/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Harvard University ujawnił wyciek danych z systemów Alumni Affairs i Development, w wyniku którego ujawniono informacje o ponad 851 000 adresach e-mail i danych kontaktowych. Atak przypisuje się grupie ShinyHunters, która opublikowała 1,1 GB archiwum dokumentów na dark webie po odmowie zapłaty okupu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Chainstack Reports Production Systems Breach Exposing Customer Data and Password Hashes",
+    "link": "https://thehackernews.com/2026/11/chainstack-reports-production-systems.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Chainstack poinformował o naruszeniu, w którym atakujący uzyskał dostęp do części środowiska produkcyjnego i bazy danych z danymi klientów oraz hashami haseł. Incydent został wykryty 31 paź 2026 i dostęp został odcięty tego samego dnia. Firma zaleca rotację poświadczeń węzłów, regenerację kluczy API i zmianę haseł.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Binance Reveals How Fake Job Interviews and AI Tool Abuse Led to $6.43 Billion Theft",
+    "link": "https://thehackernews.com/2026/11/binance-reveals-how-fake-job-interviews.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Binance poinformowało o kradzieży 6,43 mld USD po kampanii wykorzystującej fałszywe rozmowy rekrutacyjne i zainfekowany instalator Homebrew, która dotknęła dwóch inżynierów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "The 4 Elements of Exposure Prioritization and How to Operationalize Them",
+    "link": "https://thehackernews.com/2026/11/the-4-elements-of-exposure.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Raport Gartnera opisuje cztery elementy priorytetyzacji ekspozycji i wskazuje, że jedynie poniżej 10% podatności jest wykorzystywanych, co powoduje nieefektywne wydatkowanie zasobów na ich naprawę.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Raport Gartner opisuje cztery elementy priorytetyzacji ekspozycji i wskazuje, że jedynie poniżej 10 % podatności jest wykorzystywanych, co powoduje nieefektywne wydatkowanie zasobów na ich naprawę.",
+        "after": "Raport Gartnera opisuje cztery elementy priorytetyzacji ekspozycji i wskazuje, że jedynie poniżej 10% podatności jest wykorzystywanych, co powoduje nieefektywne wydatkowanie zasobów na ich naprawę.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H271"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "British businesses caught in Europe-wide supermarket fridge attacks",
+    "link": "https://therecord.media/british-businesses-caught-in-europe-wide-supermarket-fridge-attacks",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Trzy brytyjskie firmy mięsne zostały zaatakowane poprzez podatne kontrolery Copeland XWEB, które umożliwiły rozmrożenie lodówek i zepsucie towaru. Dostawca potwierdził, że wydano zalecane łatki i protokoły zabezpieczeń dla zagrożonych produktów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "proofreading",
+        "before": "Trzy brytyjskie firmy mięsne zostały zaatakowane poprzez podatne kontrolery Copeland XWEB, które umożliwiły defrostowanie lodówek i zepsucie towaru. Dostawca potwierdził, że wydano zalecane łatki i protokoły zabezpieczeń dla zagrożonych produktów.",
+        "after": "Trzy brytyjskie firmy mięsne zostały zaatakowane poprzez podatne kontrolery Copeland XWEB, które umożliwiły rozmrożenie lodówek i zepsucie towaru. Dostawca potwierdził, że wydano zalecane łatki i protokoły zabezpieczeń dla zagrożonych produktów.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Barracuda warns of critical flaws allowing root access to devices",
+    "link": "https://www.bleepingcomputer.com/news/security/barracuda-warns-of-critical-flaws-allowing-root-access-to-devices/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "Barracuda Flaws Could Be Chained to Bypass Authorization and Gain Root Access",
+        "link": "https://thehackernews.com/2026/11/barracuda-flaws-could-be-chained-to.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Barracuda Networks ostrzegła przed krytycznymi podatnościami CVE-2026-116606 i CVE-2026-111560, które mogą pozwolić atakującemu na wykonanie poleceń jako root po uzyskaniu dostępu do interfejsu administracyjnego. Firma wydała łatki i zaleca aktualizację firmware oraz ograniczenie dostępu do sieci wewnętrznej.",
+    "cves": [
+      "CVE-2026-111560",
+      "CVE-2026-116606"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H150",
+      "H189"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-04",
+    "title": "Android’s November 2026 Updates Patch Over 200 Vulnerabilities",
+    "link": "https://www.securityweek.com/androids-november-2026-updates-patch-over-200-vulnerabilities/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Google wydało aktualizacje Androida z listopada 2026 roku, które naprawiają ponad 200 podatności, w tym krytyczną CVE-2026-58868 umożliwiającą RCE bez interakcji użytkownika. Łatki są dostępne w poziomach łatek 2026-11-01 i 2026-11-05.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "Google wydało aktualizacje Androida z listopada 2026, które naprawiają ponad 200 podatności, w tym krytyczną CVE-2026-58868 umożliwiającą RCE bez interakcji użytkownika. Łatki są dostępne w poziomach patch 2026-11-01 i 2026-11-05.",
+        "after": "Google wydało aktualizacje Androida z listopada 2026 roku, które naprawiają ponad 200 podatności, w tym krytyczną CVE-2026-58868 umożliwiającą RCE bez interakcji użytkownika. Łatki są dostępne w poziomach łatek 2026-11-01 i 2026-11-05.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
   }
 ]

@@ -1390,5 +1390,540 @@
       "H166"
     ],
     "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Atak hakerski na rządowy system. Możliwy wyciek danych tysięcy osób",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/atak-hakerski-na-rzadowy-system-mozliwy-wyciek-danych-tysiecy-osob",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Atak hakerski naruszył system obsługi programów (SOP) Ministerstwa Kultury, którego ok. 24 tys. użytkowników może dotyczyć wyciek danych. W odpowiedzi resort wyłączył moduł SOP Programy, zablokował dostęp i rozpoczął prace nad załataniem podatności.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Atak hakerski naruszył system obsługi programów (SOP) Ministerstwa Kultury, którego ok. 24 tys. użytkowników może mieć wyciek danych. W odpowiedzi resort wyłączył moduł SOP Programy, zablokował dostęp i rozpoczął prace nad załataniem podatności.",
+        "after": "Atak hakerski naruszył system obsługi programów (SOP) Ministerstwa Kultury, którego ok. 24 tys. użytkowników może dotyczyć wyciek danych. W odpowiedzi resort wyłączył moduł SOP Programy, zablokował dostęp i rozpoczął prace nad załataniem podatności.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H411",
+      "H675"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Jedna luka może pozwolić na przejęcie kontroli nad całą domeną. Microsoft łata krytyczną podatność Active Directory",
+    "link": "https://kapitanhack.pl/jedna-luka-moze-pozwolic-na-przejecie-kontroli-nad-cala-domena-microsoft-lata-krytyczna-podatnosc-active-directory/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft wydał aktualizację z 13 października 2026 r., łatając krytyczną podatność CVE-2026-70229 w usłudze Active Directory Domain Services. Luka umożliwiała RCE i została sklasyfikowana jako podatność o wysokim ryzyku wykorzystania.",
+    "cves": [
+      "CVE-2026-70229"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "Microsoft wydał aktualizację z 13 października 2026 r., łatając krytyczną podatność CVE-2026-70229 w usłudze Active Directory Domain Services. Luka umożliwiała RCE i została sklasyfikowana jako wysokie ryzyko wykorzystania.",
+        "after": "Microsoft wydał aktualizację z 13 października 2026 r., łatając krytyczną podatność CVE-2026-70229 w usłudze Active Directory Domain Services. Luka umożliwiała RCE i została sklasyfikowana jako podatność o wysokim ryzyku wykorzystania.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H133",
+      "H150",
+      "H164",
+      "H170"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Zyxel fixes zero-day exploited to hack nearly 1,000 network switches",
+    "link": "https://www.bleepingcomputer.com/news/security/zyxel-fixes-zero-day-exploited-to-hack-nearly-1-000-network-switches/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Zyxel opublikował łatki 22 października i 3 listopada 2026 r., usuwając zero-day CVE-2026-107441 w przełącznikach GS1900. Atak grupy Kapibala, obserwowany od sierpnia 2026 r., przejął prawie 1 000 urządzeń i wykradł konfiguracje oraz poświadczenia.",
+    "cves": [
+      "CVE-2026-107441"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H159",
+      "H207"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "CISA flags WordPress RCE flaw as actively exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/cisa-flags-wordpress-rce-flaw-as-actively-exploited-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "CISA Confirms Hackers Exploiting WordPress Core Flaw During Software Upgrades",
+        "link": "https://thehackernews.com/2026/11/cisa-confirms-hackers-exploiting.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "CISA umieściła w katalogu KEV podatność WordPress Core CVE-2026-119977, aktywnie wykorzystywaną w atakach na agencje federalne. Producent wydał WordPress 7.1.4 z łatką, zalecając natychmiastowe aktualizacje.",
+    "cves": [
+      "CVE-2026-119977"
+    ],
+    "kev": [
+      "CVE-2026-119977"
+    ],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H090",
+      "H150",
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Polskie przychodnie informują o cyberatakach. Wyciekły dane",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/polskie-przychodnie-informuja-o-cyberatakach-wyciekly-dane",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "W kilku polskich przychodniach doszło do nieuprawnionego dostępu do systemu MedicalData, co spowodowało wyciek danych osobowych i medycznych pacjentów. Liczba osób, których dotyczy incydent, nie została ustalona, a w komunikacie zaznaczono brak potwierdzenia skopiowania pełnej bazy danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Incydent bezpieczeństwa Rank Math PRO – złośliwy kod w wersji 3.0.123",
+    "link": "https://sekurak.pl/incydent-bezpieczenstwa-rank-math-pro-zlosliwy-kod-w-wersji-3-0-123/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Wtyczka Rank Math PRO w wersji 3.0.123 zawierała malware, które mogło trafić do ograniczonej liczby użytkowników pobierających tę wersję. Zidentyfikowano złośliwy kod we wtyczce, co może prowadzić do nieautoryzowanego dostępu lub instalacji backdoora.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Wtyczka Rank Math PRO w wersji 3.0.123 zawierała malware, które mogło trafić do ograniczonej liczby użytkowników pobierających tę wersję. Zidentyfikowano złośliwy kod w kodzie wtyczki, co może prowadzić do nieautoryzowanego dostępu lub instalacji backdoora.",
+        "after": "Wtyczka Rank Math PRO w wersji 3.0.123 zawierała malware, które mogło trafić do ograniczonej liczby użytkowników pobierających tę wersję. Zidentyfikowano złośliwy kod we wtyczce, co może prowadzić do nieautoryzowanego dostępu lub instalacji backdoora.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H028"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Hakerzy zaatakowali zamrażarki przechowujące krew",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/hakerzy-zaatakowali-zamrazarki-przechowujace-krew",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Nieznani sprawcy zmienili temperaturę w zamrażarkach firmy Coolworld, używanych przez francuską służbę krwiodawstwa, podnosząc ją z -30 °C do 110 °C w nocy z 1 na 2 listopada. Działanie to mogło uszkodzić przechowywane osocze, ale szybkie wykrycie zapobiegło zakłóceniom w transfuzjach.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Nieznani sprawcy zmienili temperaturę w zamrażarkach firmy Coolworld używanych przez francuską służbę krwiodawstwa, podnosząc ją z -30 °C do 110 °C w nocy z 1 na 2 listopada. Działanie mogło uszkodzić przechowywane osocze, ale szybkie wykrycie zapobiegło zakłóceniom w transfuzjach.",
+        "after": "Nieznani sprawcy zmienili temperaturę w zamrażarkach firmy Coolworld, używanych przez francuską służbę krwiodawstwa, podnosząc ją z -30 °C do 110 °C w nocy z 1 na 2 listopada. Działanie to mogło uszkodzić przechowywane osocze, ale szybkie wykrycie zapobiegło zakłóceniom w transfuzjach.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H372"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Odliczanie do poważnego incydentu. NCSC ostrzega przed cyberatakami z użyciem AI",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/odliczanie-do-powaznego-incydentu-ncsc-ostrzega-przed-cyberatakami-z-uzyciem-ai",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "NCSC opublikowała raport z 3 listopada, w którym ostrzega przed rosnącym wykorzystaniem sztucznej inteligencji przez cyberprzestępców, zwłaszcza w atakach ransomware na infrastrukturę krytyczną. Agencja prognozuje, że do 2028 r. ransomware wspierane przez AI będzie wysoce prawdopodobne, co zwiększy skalę i skuteczność ataków.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "NCSC opublikowało raport z 3 listopada, w którym ostrzega przed rosnącym wykorzystaniem sztucznej inteligencji przez cyberprzestępców, zwłaszcza w atakach ransomware na infrastrukturę krytyczną. Agencja prognozuje, że do 2028 r. AI-wspierane ransomware będzie wysoce prawdopodobne, co zwiększy skalę i skuteczność ataków.",
+        "after": "NCSC opublikowała raport z 3 listopada, w którym ostrzega przed rosnącym wykorzystaniem sztucznej inteligencji przez cyberprzestępców, zwłaszcza w atakach ransomware na infrastrukturę krytyczną. Agencja prognozuje, że do 2028 r. ransomware wspierane przez AI będzie wysoce prawdopodobne, co zwiększy skalę i skuteczność ataków.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "DreamHost confirms data breach exposed FTP logins and webmail sessions",
+    "link": "https://www.bleepingcomputer.com/news/security/dreamhost-confirms-data-breach-exposed-ftp-logins-and-webmail-sessions/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "DreamHost potwierdził wyciek danych po tym, jak nieautoryzowany podmiot wykorzystał podatność w platformie File Manager i uzyskiwał dostęp do nazw użytkowników oraz haseł FTP/SFTP od sierpnia do 23 października 2026 r. Atak nie objął danych płatności, a firma zablokowała dostęp i załatała wykorzystaną podatność.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "DreamHost potwierdziło wyciek danych po tym, jak nieautoryzowany podmiot wykorzystał podatność w platformie File Manager i uzyskał dostęp do nazw użytkowników i haseł FTP/SFTP od sierpnia do 23 października 2026. Atak nie dotknął danych płatności, a firma zablokowała dostęp i załatała wykorzystaną podatność.",
+        "after": "DreamHost potwierdził wyciek danych po tym, jak nieautoryzowany podmiot wykorzystał podatność w platformie File Manager i uzyskiwał dostęp do nazw użytkowników oraz haseł FTP/SFTP od sierpnia do 23 października 2026 r. Atak nie objął danych płatności, a firma zablokowała dostęp i załatała wykorzystaną podatność.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H164",
+      "H411",
+      "H497"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "NIKKE PC game launcher hacked to spread remote access, data-stealing malware",
+    "link": "https://www.bleepingcomputer.com/news/security/nikke-pc-game-launcher-hacked-to-spread-remote-access-data-stealing-malware/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W launcherze gry Goddess of Victory: NIKKE wstrzyknięto złośliwy skrypt JavaScript, który kradnie poświadczenia i dane portfeli kryptowalutowych. Łatkę wydano 4 listopada 2026 r. o 02:30 UTC+9. Incydent stanowił atak na łańcuch dostaw, a aktualizacja usuwa zmodyfikowane pliki skryptów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawkę",
+        "fixed": "Łatkę"
+      },
+      {
+        "type": "proofreading",
+        "before": "W launcherze gry Goddess of Victory: NIKKE wstrzyknięto złośliwy JavaScript, który kradnie poświadczenia i dane portfeli kryptowalutowych, a naprawa została wydana 4 listopada 2026 o 02:30 UTC+9. Incydent to atak łańcucha dostaw, a aktualizacja usuwa zmodyfikowane pliki skryptów.",
+        "after": "W launcherze gry Goddess of Victory: NIKKE wstrzyknięto złośliwy skrypt JavaScript, który kradnie poświadczenia i dane portfeli kryptowalutowych. Łatkę wydano 4 listopada 2026 r. o 02:30 UTC+9. Incydent stanowił atak na łańcuch dostaw, a aktualizacja usuwa zmodyfikowane pliki skryptów.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H028",
+      "H063",
+      "H207"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "AI-Linked Breaches Mount as WorkOS, Northflank, Trigger.dev Disclose Hacks",
+    "link": "https://www.securityweek.com/ai-linked-breaches-mount-as-workos-northflank-trigger-dev-disclose-hacks/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "W ciągu ostatniego miesiąca co najmniej tuzin platform deweloperskich AI, m.in. WorkOS, Northflank i Trigger.dev, został zaatakowany. Atakujący szukali tokenów AI, wykorzystując agenty AI do przyspieszenia włamań. Początkowy dostęp uzyskano przez przejęte poświadczenia, zależności firm trzecich i exploity.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "skompromitowane",
+        "form": "skompromitowa*",
+        "suggestion": "przejęty, zaatakowany",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "W ciągu ostatniego miesiąca co najmniej tuzin platform deweloperskich AI, m.in. WorkOS, Northflank i Trigger.dev, został zaatakowany. Atakujący szukali tokenów AI, wykorzystując AI-agenty do przyspieszenia włamań. Początkowy dostęp uzyskano przez przejęte poświadczenia, zależności trzecich i exploity.",
+        "after": "W ciągu ostatniego miesiąca co najmniej tuzin platform deweloperskich AI, m.in. WorkOS, Northflank i Trigger.dev, został zaatakowany. Atakujący szukali tokenów AI, wykorzystując agenty AI do przyspieszenia włamań. Początkowy dostęp uzyskano przez przejęte poświadczenia, zależności firm trzecich i exploity.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H207"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "More Asian airlines announce data breaches after attack on Spanish IT provider Amadeus",
+    "link": "https://therecord.media/asian-airlines-announce-data-breach-it-provider-incident",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Japońskie, chińskie i inne linie lotnicze w Azji zgłosiły wycieki danych po ataku na hiszpańskiego dostawcę Amadeus. Wykryto podatność w środowisku wyświetlania rezerwacji, jednak nie wykorzystano jej do ataku ransomware. Amadeus naprawił lukę i wzmocnił monitoring.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Japońskie, chińskie i inne linie lotnicze w Azji zgłosiły wycieki danych po ataku na hiszpańskiego dostawcę Amadeus. Wykryto podatność w środowisku wyświetlania rezerwacji, nie wykorzystano jej do ransomware. Amadeus naprawił lukę i wzmocnił monitoring.",
+        "after": "Japońskie, chińskie i inne linie lotnicze w Azji zgłosiły wycieki danych po ataku na hiszpańskiego dostawcę Amadeus. Wykryto podatność w środowisku wyświetlania rezerwacji, jednak nie wykorzystano jej do ataku ransomware. Amadeus naprawił lukę i wzmocnił monitoring.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Luka w popularnym ChatGPT: wystarczyło kliknąć w link do udostępnionej konwersacji, aby stracić kontrolę nad kontem",
+    "link": "https://sekurak.pl/luka-w-popularnym-chatgpt-wystarczylo-kliknac-w-link-do-udostepnionej-konwersacji-aby-stracic-kontrole-nad-kontem/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Badacze Parameter odkryli w ChatGPT możliwość wykonania złośliwego kodu po kliknięciu w link do współdzielonej konwersacji. OpenAI sklasyfikowało podatność jako P1 i opublikowało łatkę w ciągu 8 dni. Użytkownicy nie muszą podejmować działań.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawkę",
+        "fixed": "łatkę"
+      },
+      {
+        "type": "proofreading",
+        "before": "Badacze Parameter odkryli w ChatGPT możliwość wykonania złośliwego kodu po kliknięciu w link do współdzielonej konwersacji. OpenAI sklasyfikowało podatność jako P1, opublikowało łatkę w ciągu 8 dni. Użytkownicy nie muszą podejmować działań.",
+        "after": "Badacze Parameter odkryli w ChatGPT możliwość wykonania złośliwego kodu po kliknięciu w link do współdzielonej konwersacji. OpenAI sklasyfikowało podatność jako P1 i opublikowało łatkę w ciągu 8 dni. Użytkownicy nie muszą podejmować działań.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "OpenAI AI Pipeline Generates 948 Linux Root Escalation Exploits in 30-Hour Run",
+    "link": "https://thehackernews.com/2026/11/openai-ai-pipeline-generates-948-linux.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "OpenAI przedstawiło pipeline, który w 30 godzin stworzył 948 exploitów podwyższenia uprawnień w Linuksie. System odtworzył 1 724 podatności i wygenerował PoC, co kosztowało 1,2 mln USD i pokazuje przyspieszenie tworzenia exploitów przez AI.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "OpenAI przedstawiło pipeline, który w 30 godzin stworzył 948 exploitów podwyższenia uprawnień w Linuksie. System odtworzył 1 724 podatności i wydał PoC, kosztując 1,2 mln USD, co pokazuje przyspieszenie tworzenia exploitów przez AI.",
+        "after": "OpenAI przedstawiło pipeline, który w 30 godzin stworzył 948 exploitów podwyższenia uprawnień w Linuksie. System odtworzył 1 724 podatności i wygenerował PoC, co kosztowało 1,2 mln USD i pokazuje przyspieszenie tworzenia exploitów przez AI.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H152",
+      "H189"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "SonicWall Won't Patch EoL GMS Flaws That Could Expose Files, Alter Database Records",
+    "link": "https://thehackernews.com/2026/11/sonicwall-wont-patch-eol-gms-flaws-that.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "SonicWall ostrzegł o dwóch podatnościach w wycofanym produkcie GMS w wersji 9.5.2 i starszych, które nie będą łatane. Produkt osiągnął status EoL, więc zaleca się migrację do NSM. Wcześniejsza luka CVE-2026-102255 jest aktywnie wykorzystywana.",
+    "cves": [
+      "CVE-2026-109593"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "SonicWall ostrzegł o dwóch podatnościach w wycofanym produkcie GMS 9.5.2 i starszych, które nie będą łatyfikowane. Produkt jest EoL, więc zaleca się migrację do NSM. Wcześniejsza luka CVE-2026-102255 jest aktywnie wykorzystywana.",
+        "after": "SonicWall ostrzegł o dwóch podatnościach w wycofanym produkcie GMS w wersji 9.5.2 i starszych, które nie będą łatane. Produkt osiągnął status EoL, więc zaleca się migrację do NSM. Wcześniejsza luka CVE-2026-102255 jest aktywnie wykorzystywana.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "APT29-Linked Hackers Hijack Web Analytics Script to Deliver iOS and Android Exploits",
+    "link": "https://thehackernews.com/2026/11/apt29-linked-hackers-hijack-web.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "APT29 przeprowadziło kampanię typu watering hole, w której zainfekowano serwis analityki internetowej Plerdy SEO Tracker i wstrzyknęło złośliwy JavaScript na strony branżowe, partii politycznej oraz witryny wojskowej. Skrypt zbiera atrybuty przeglądarki i urządzenia, a następnie uruchamia łańcuch N-day exploitów dla systemów iOS lub Android, dostarczając payloady kradnące ciasteczka, hasła do sieci Wi-Fi oraz dane mobilne.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "APT29 przeprowadziło kampanię watering hole, w której zainfekowano serwis analityki internetowej Plerdy SEO Tracker i wstrzyknięto złośliwy JavaScript do stron branżowych, partii politycznej i witryny wojskowej. Skrypt zbiera atrybuty przeglądarki i urządzenia, a następnie uruchamia łańcuch N-day exploitów dla iOS lub Android, dostarczając payloady kradnące ciasteczka, hasła Wi-Fi i dane mobilne.",
+        "after": "APT29 przeprowadziło kampanię typu watering hole, w której zainfekowano serwis analityki internetowej Plerdy SEO Tracker i wstrzyknęło złośliwy JavaScript na strony branżowe, partii politycznej oraz witryny wojskowej. Skrypt zbiera atrybuty przeglądarki i urządzenia, a następnie uruchamia łańcuch N-day exploitów dla systemów iOS lub Android, dostarczając payloady kradnące ciasteczka, hasła do sieci Wi-Fi oraz dane mobilne.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H030",
+      "H161"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-05",
+    "title": "Google Issues Patches for Critical Android Flaw That Could Allow RCE Without User Interaction",
+    "link": "https://thehackernews.com/2026/11/google-patches-critical-android-flaw.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Google opublikowało łatkę na krytyczną podatność w Androidzie (CVE-2026-58868), umożliwiającą zdalne uruchomienie kodu bez interakcji użytkownika w wersjach 14–17. Atak nie został zgłoszony w katalogu CISA KEV i nie odnotowano jego wykorzystania. Łatka jest dostępna od poziomu aktualizacji z dnia 2026-11-01.",
+    "cves": [
+      "CVE-2026-58868"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Google wydało łatkę na krytyczną podatność Android CVE-2026-58868, pozwalającą na zdalne uruchomienie kodu bez interakcji użytkownika w wersjach 14-17. Atak nie był zgłoszony w katalogu CISA KEV i nie odnotowano jego wykorzystania. Łatka jest dostępna w poziomach łatek od 2026-11-01.",
+        "after": "Google opublikowało łatkę na krytyczną podatność w Androidzie (CVE-2026-58868), umożliwiającą zdalne uruchomienie kodu bez interakcji użytkownika w wersjach 14–17. Atak nie został zgłoszony w katalogu CISA KEV i nie odnotowano jego wykorzystania. Łatka jest dostępna od poziomu aktualizacji z dnia 2026-11-01.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H154",
+      "H164",
+      "H166"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
   }
 ]

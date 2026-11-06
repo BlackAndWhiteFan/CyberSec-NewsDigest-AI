@@ -1925,5 +1925,477 @@
       "H166"
     ],
     "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Korzystacie z OpenSSH na hostach z musl libc? Lepiej patchujcie i wyłączcie PasswordAuthentication",
+    "link": "https://sekurak.pl/korzystacie-z-openssh-na-hostach-z-musl-libc-lepiej-patchujcie-i-wylaczcie-passwordauthentication/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Twórcy OpenSSH wydali łatkę (5 listopada 2026 r.) dla wersji portable, która łagodzi krytyczną podatność umożliwiającą obejście uwierzytelniania hasłem na serwerach z systemem Linux, biblioteką musl libc i wyłączonym PAM. Luka może umożliwić atakującemu z dostępem do SSH zalogowanie się bez poprawnego hasła, w tym na konto root.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "OpenSSH wydało łatkę (5 listopada 2026) dla wersji portable, łagodzącą krytyczną podatność umożliwiającą obejście uwierzytelniania hasłem na serwerach Linux z musl libc i wyłączonym PAM. Luka może pozwolić atakującemu z dostępem do SSH zalogować się bez poprawnego hasła, w tym na konto root.",
+        "after": "Twórcy OpenSSH wydali łatkę (5 listopada 2026 r.) dla wersji portable, która łagodzi krytyczną podatność umożliwiającą obejście uwierzytelniania hasłem na serwerach z systemem Linux, biblioteką musl libc i wyłączonym PAM. Luka może umożliwić atakującemu z dostępem do SSH zalogowanie się bez poprawnego hasła, w tym na konto root.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H164",
+      "H189",
+      "H240",
+      "H327",
+      "H725"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Zdalne cyberataki na chłodnie w Europie eskalują w niebezpieczną stronę. Zaatakowany bank krwi we Francji.",
+    "link": "https://sekurak.pl/zdalne-cyberataki-na-chlodnie-w-europie-eskaluja-w-niebezpieczna-strone-zaatakowany-bank-krwi-we-francji/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "We Francji podniesiono temperaturę w trzech bankach krwi do 110 °C, co wskazuje na zdalny cyberatak na systemy chłodnicze. Incydent został wykryty, a krew przeniesiono do lodówek odłączonych od sieci.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "We Francji podniesiono temperatury w trzech bankach krwi do 110 °C, co wskazuje na zdalny cyberatak na systemy chłodnicze. Incydent został wykryty i krew przeniesiono do offline-owych lodówek.",
+        "after": "We Francji podniesiono temperaturę w trzech bankach krwi do 110 °C, co wskazuje na zdalny cyberatak na systemy chłodnicze. Incydent został wykryty, a krew przeniesiono do lodówek odłączonych od sieci.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "5 Active Cyber Threats That Put US Enterprises at Risk in October 2026",
+    "link": "https://thehackernews.com/2026/11/5-active-cyber-threats-that-put-us.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół ANY.RUN wykrył aktywny zestaw phishingowy SkyW4lker, który wykorzystuje oficjalny proces uwierzytelniania device-code Microsoftu, aby przejmować konta korporacyjne bez kradzieży haseł ani obejścia MFA. Analizy w środowisku sandbox od czerwca do października 2026 r. wykazały 618 przypadków, głównie w USA.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół ANY.RUN wykrył aktywny zestaw phishingowy SkyW4lker, który wykorzystuje legalny proces uwierzytelniania device-code Microsoftu, by przejąć konta korporacyjne bez kradzieży haseł ani obejścia MFA. Analizy sandboxowe od czerwca do października 2026 wykazały 618 przypadków, głównie w USA.",
+        "after": "Zespół ANY.RUN wykrył aktywny zestaw phishingowy SkyW4lker, który wykorzystuje oficjalny proces uwierzytelniania device-code Microsoftu, aby przejmować konta korporacyjne bez kradzieży haseł ani obejścia MFA. Analizy w środowisku sandbox od czerwca do października 2026 r. wykazały 618 przypadków, głównie w USA.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H133",
+      "H232",
+      "H473"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Zyxel GS1900 Patch Fails to Block Zero-Day Exploit Allowing Root Command Execution",
+    "link": "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Zyxel Switch Hacks Blamed on Patched Flaw Actually Exploited a Zero-Day",
+        "link": "https://www.securityweek.com/zyxel-switch-hacks-blamed-on-patched-flaw-actually-exploited-a-zero-day/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Firma Zyxel poinformowała o nowym oprogramowaniu układowym Patch 3 (23 października 2026 r.) dla modeli GS1900. Zamyka ono podatność zero-day CVE-2026-107441, która umożliwia wykonanie poleceń z uprawnieniami root przez interfejs webowy bez logowania. Exploit był już publicznie wykorzystywany. Wcześniejsza łatka Patch 2 nie chroni przed tą podatnością.",
+    "cves": [
+      "CVE-2026-107441",
+      "CVE-2026-7273"
+    ],
+    "kev": [
+      "CVE-2026-7273"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zyxel poinformował o nowym firmware Patch 3 (23 października 2026) dla modeli GS1900, który zamyka zero-day CVE-2026-107441 umożliwiający wykonanie poleceń root przez interfejs web bez logowania. Exploit był już publicznie wykorzystywany. Wcześniejsza łatka Patch 2 nie chroni przed tą podatnością.",
+        "after": "Firma Zyxel poinformowała o nowym oprogramowaniu układowym Patch 3 (23 października 2026 r.) dla modeli GS1900. Zamyka ono podatność zero-day CVE-2026-107441, która umożliwia wykonanie poleceń z uprawnieniami root przez interfejs webowy bez logowania. Exploit był już publicznie wykorzystywany. Wcześniejsza łatka Patch 2 nie chroni przed tą podatnością.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H153",
+      "H159",
+      "H164",
+      "H166",
+      "H189"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Cyberataki na lodówki w Europie. Ryzyko rośnie wraz z uzależnieniem technologicznym",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberataki-na-lodowki-w-europie-ryzyko-rosnie-wraz-z-uzaleznieniem-technologicznym",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "W Europie nasiliły się cyberataki na urządzenia chłodnicze – dotknęły one lodówek w sklepach w Belgii, Holandii, Szwecji, Estonii i Irlandii oraz zamrażarek francuskiej służby krwiodawstwa. W Polsce incydent ten potwierdził CERT Polska.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W Europie nasiliły się cyberataki na urządzenia chłodnicze, obejmując lodówki w sklepach w Belgii, Holandii, Szwecji, Estonii, Irlandii oraz zamrażarki francuskiej służby krwiodawstwa. W Polsce incydent potwierdził CERT Polska.",
+        "after": "W Europie nasiliły się cyberataki na urządzenia chłodnicze – dotknęły one lodówek w sklepach w Belgii, Holandii, Szwecji, Estonii i Irlandii oraz zamrażarek francuskiej służby krwiodawstwa. W Polsce incydent ten potwierdził CERT Polska.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Cyberatak na norweskie MSZ. Dane tysięcy osób zagrożone",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-norweskie-msz-dane-tysiecy-osob-zagrozone",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Hakerzy włamali się do systemu dotacyjnego norweskiego MSZ i agencji Norad, przejmując dane ponad 20 tys. osób i ponad 12 tys. organizacji. W ataku wykorzystano kilkadziesiąt kont użytkowników, a agencja wyłączyła portal i powiadomiła służby, określając skutki jako poważne.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Hakerzy włamali się do systemu dotacyjnego norweskiego MSZ i agencji Norad, przejmując dane ponad 20 tys. osób i ponad 12 tys. organizacji. Atak wykorzystał kilkadziesiąt kont użytkowników, a agencja wyłączyła portal i powiadomiła służby, określając skutki jako poważne.",
+        "after": "Hakerzy włamali się do systemu dotacyjnego norweskiego MSZ i agencji Norad, przejmując dane ponad 20 tys. osób i ponad 12 tys. organizacji. W ataku wykorzystano kilkadziesiąt kont użytkowników, a agencja wyłączyła portal i powiadomiła służby, określając skutki jako poważne.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Proxy, obliczenia i adware. Microsoft opisuje nietypową kampanię fałszywych instalatorów",
+    "link": "https://kapitanhack.pl/proxy-obliczenia-i-adware-microsoft-opisuje-nietypowa-kampanie-falszywych-instalatorow/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół Microsoft Threat Intelligence opisał kampanię fałszywych instalatorów popularnych programów, której szczegóły ukazały się 3 listopada. Instalatory pobierane z nieoficjalnych źródeł uruchamiały w tle dodatkowe komponenty, które wykorzystywały zasoby komputera ofiary.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Microsoft Threat Intelligence opisało kampanię fałszywych instalatorów popularnych programów, której szczegóły ukazały się 3 listopada. Instalatory pobierane z nieoficjalnych źródeł uruchamiały w tle dodatkowe komponenty, które wykorzystywały zasoby komputera ofiary.",
+        "after": "Zespół Microsoft Threat Intelligence opisał kampanię fałszywych instalatorów popularnych programów, której szczegóły ukazały się 3 listopada. Instalatory pobierane z nieoficjalnych źródeł uruchamiały w tle dodatkowe komponenty, które wykorzystywały zasoby komputera ofiary.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H001",
+      "H319",
+      "H386"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "DigiCert data breach exposes customer information, identity documents",
+    "link": "https://www.bleepingcomputer.com/news/security/digicert-data-breach-exposes-customer-information-identity-documents/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "DigiCert poinformował o wycieku danych po migracji serwera, która nieumyślnie udostępniła wewnętrzny system w internecie, umożliwiając dostęp do imion i nazwisk, służbowych adresów e-mail, numerów telefonów i dokumentów tożsamości. Incydent dotyczy niewielkiej części archiwalnych danych klientów, a firma rozpoczęła powiadamianie poszkodowanych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "DigiCert poinformował o wycieku danych po migracji serwera, która nieumyślnie udostępniła wewnętrzny system internetowi, umożliwiając dostęp do nazw, służbowych adresów e-mail, telefonów i dokumentów tożsamości. Incydent dotyczy niewielkiej części archiwalnych danych klientów i firma rozpoczęła powiadamianie poszkodowanych.",
+        "after": "DigiCert poinformował o wycieku danych po migracji serwera, która nieumyślnie udostępniła wewnętrzny system w internecie, umożliwiając dostęp do imion i nazwisk, służbowych adresów e-mail, numerów telefonów i dokumentów tożsamości. Incydent dotyczy niewielkiej części archiwalnych danych klientów, a firma rozpoczęła powiadamianie poszkodowanych.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Cyberattack Hits French Blood Bank Site but No Blood Products Are Compromised",
+    "link": "https://www.securityweek.com/cyberattack-hits-french-blood-bank-site-but-no-blood-products-are-compromised/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W trzech francuskich magazynach krwi przeprowadzono cyberatak, który podniósł temperaturę w zamrażarkach do 110 °C, ale systemy monitorujące szybko wykryły incydent i zapobiegły uszkodzeniu produktów. Atak nie wpłynął na dostępność krwi ani na działanie placówek, które pozostały w pełni operacyjne.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Na trzech francuskich magazynach krwi przeprowadzono cyberatak, który podniósł temperatury w zamrażarkach do 110 °C, ale systemy monitorujące szybko wykryły incydent i zapobiegły uszkodzeniu produktów. Atak nie wpłynął na dostępność krwi ani na działanie placówek, które pozostały w pełni operacyjne.",
+        "after": "W trzech francuskich magazynach krwi przeprowadzono cyberatak, który podniósł temperaturę w zamrażarkach do 110 °C, ale systemy monitorujące szybko wykryły incydent i zapobiegły uszkodzeniu produktów. Atak nie wpłynął na dostępność krwi ani na działanie placówek, które pozostały w pełni operacyjne.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H623"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Queens Public Library says ransomware attack disrupted Wi-Fi, on-site computers",
+    "link": "https://therecord.media/queens-library-ransomware-causes-disruptions",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Queens Public Library w Nowym Jorku padła ofiarą ataku ransomware, który zaszyfrował systemy i wyłączył Wi-Fi, komputery oraz usługi cyfrowe w 66 filiach. Biblioteka utrzymuje otwarte placówki, ale usługi wirtualne i niektóre programy mogą być ograniczone, a incydent jest badany przez organy ścigania.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Queens Public Library w Nowym Jorku padła ofiarą ataku ransomware, który zaszyfrował systemy i wyłączył Wi-Fi, komputery oraz usługi cyfrowe w 66 filiach. Biblioteka utrzymuje otwarte placówki, ale wirtualne i niektóre programy mogą być ograniczone, a incydent jest badany przez organy ścigania.",
+        "after": "Queens Public Library w Nowym Jorku padła ofiarą ataku ransomware, który zaszyfrował systemy i wyłączył Wi-Fi, komputery oraz usługi cyfrowe w 66 filiach. Biblioteka utrzymuje otwarte placówki, ale usługi wirtualne i niektóre programy mogą być ograniczone, a incydent jest badany przez organy ścigania.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H454"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "OpenSSH flaw lets attackers log into password-disabled Linux accounts",
+    "link": "https://www.bleepingcomputer.com/news/security/openssh-flaw-lets-attackers-log-into-password-disabled-linux-accounts/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Odkryto lukę w OpenSSH działającym na systemach z biblioteką musl, m.in. Alpine Linux, umożliwiającą logowanie się do kont z wyłączonym hasłem przez podanie nadmiernie długiego hasła. Luka jest powiązana z łatką CVE-2016-6210 i jest aktywnie wykorzystywana.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawką",
+        "fixed": "łatką"
+      },
+      {
+        "type": "proofreading",
+        "before": "Odkryto lukę w OpenSSH działającą na systemach z biblioteką musl, m.in. Alpine Linux, umożliwiającą logowanie się do kont z wyłączonym hasłem przez podanie nadmiernie długiego hasła. Luka jest powiązana z łatką CVE-2016-6210 i jest wykorzystywana.",
+        "after": "Odkryto lukę w OpenSSH działającym na systemach z biblioteką musl, m.in. Alpine Linux, umożliwiającą logowanie się do kont z wyłączonym hasłem przez podanie nadmiernie długiego hasła. Luka jest powiązana z łatką CVE-2016-6210 i jest aktywnie wykorzystywana.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H150"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Researchers Bypass ChatGPT Lockdown Mode to Exfiltrate Chats Without User Interaction",
+    "link": "https://thehackernews.com/2026/11/researchers-bypass-chatgpt-lockdown.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Badacze wykazali możliwość obejścia trybu Lockdown w ChatGPT, co pozwala na wykradanie rozmów bez interakcji użytkownika. Podatność została załatana w najnowszej aktualizacji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Is Your Exposure Management Platform Leaving You Exposed? Five Tests to Find Out",
+    "link": "https://thehackernews.com/2026/11/is-your-exposure-management-platform.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Raport przedstawia pięć testów oceniających zdolność platformy zarządzania ekspozycją do łączenia danych z różnych narzędzi i dostarczania priorytetów oraz dowodów ochrony. Brak pełnych informacji może wydłużać reakcję zespołów SOC.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H259",
+      "H271"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "AI Agents Got Root on Linux via 948 Kernel Flaws in OpenAI Research",
+    "link": "https://www.securityweek.com/ai-agents-got-root-on-linux-via-948-kernel-flaws-in-openai-research/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "OpenAI przedstawiło, że autonomiczny pipeline AI wygenerował 948 unikalnych podatności w jądrze Linux i 1 169 działających exploitów LPE, ale nie wskazuje na bezpośrednie zagrożenie dla użytkowników.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "unikalnych",
+        "form": "unikaln*",
+        "suggestion": "różny, albo bez przymiotnika (np. „75 podatności”)",
+        "fixed_by": "remains"
+      }
+    ],
+    "terms": [
+      "H189",
+      "H386",
+      "H464"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Cisco, WatchGuard Release Patches; SonicWall Won’t Fix GMS Flaws",
+    "link": "https://www.securityweek.com/cisco-watchguard-release-patches-sonicwall-wont-fix-gms-flaws/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": true,
+    "summary": "Cisco i WatchGuard wydały łatki na szereg kryzycznych podatności, w tym CVE-2026-98432 w jądrze Linux oraz CVE-2026-121639, CVE-2026-121638, CVE-2026-121637 i CVE-2026-121640 w AuthPoint Authentication Gateway. Cisco opublikowało również łatki dla CVE-2026-76506 w UCS Central oraz aktualizację dotyczącą Node2Shell, czyli luki w bibliotece Brotli, wpływającej na 19 produktów Cisco.",
+    "cves": [
+      "CVE-2026-98432"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "proofreading",
+        "before": "Cisco i WatchGuard wydały łatki na szereg krytycznych podatności, w tym CVE-2026-98432 w jądrze Linux oraz CVE-2026-121639, CVE-2026-121638, CVE-2026-121637 i CVE-2026-121640 w AuthPoint Authentication Gateway. Cisco opublikował również łatki dla CVE-2026-76506 w UCS Central oraz aktualizację dotyczącą Node2Shell, czyli luki w bibliotece Brotli, wpływającej na 19 produktów Cisco.",
+        "after": "Cisco i WatchGuard wydały łatki na szereg kryzycznych podatności, w tym CVE-2026-98432 w jądrze Linux oraz CVE-2026-121639, CVE-2026-121638, CVE-2026-121637 i CVE-2026-121640 w AuthPoint Authentication Gateway. Cisco opublikowało również łatki dla CVE-2026-76506 w UCS Central oraz aktualizację dotyczącą Node2Shell, czyli luki w bibliotece Brotli, wpływającej na 19 produktów Cisco.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H234"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-06",
+    "title": "Social media giants sue California to overturn law shielding kids 15 and under from compulsive use",
+    "link": "https://therecord.media/social-media-giants-sue-california-over-social-media-law",
+    "source": "therecord.media",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Meta, TikTok i Google wystąpiły w sądzie federalnym w Kalifornii, aby zablokować wejście w życie ustawy Assembly Bill 1709. Ustawa ma od 1 stycznia chronić dzieci do 15 lat przed uzależniającymi funkcjami platform społecznościowych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash-lite"
   }
 ]

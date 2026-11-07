@@ -24,6 +24,49 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v46 · Szlif --- 07.11.2026
+
+**Reguły języka Prasówki w promptach, kontrola gramatyki Morfeuszem 2 i
+uzus branżowy zamiast purystyki.**
+
+Powód: przegląd prasówek z 31.10–7.11.2026 i decyzja JW, że język
+branży wygrywa z purystyką („wystawiony”, „w buildzie” zostają).
+
+Zmiany:
+
+- **Reguły języka Prasówki** (`data/reguly_jezyka.md`, nowy): żywy
+  dokument zasad, który edytuje JW. Linie z sekcji „Nakazy dla modeli”
+  trafiają wprost do promptów: modelu piszącego, korekty i historii
+  wydarzeń (`src/language_rules.py`, nowy). Na start 10 nakazów, m.in.
+  „grupa”, nie „zespół” przy grupach przestępczych; jeden rodzaj nazwy
+  firmy; odmiana nazw produktów; „bez uwierzytelnienia” zamiast
+  „nieautoryzowany”; CVSS z przecinkiem. Dokument opisuje też, gdzie leżą
+  pozostałe reguły (glosariusz, kalki, uzus, autopoprawki).
+- **Gramatyka z Morfeuszem 2** (`src/polish_words.py`), problemy miękkie
+  i uwagi dla korekty:
+  - liczebnik z rzeczownikiem: „dwa luki” → „dwie luki”, „dwie błędy” →
+    „dwa błędy”;
+  - nazwa po „w/o/przy/po” w mianowniku: „w Linux” → „w Linuksie”, „w
+    Siemens” → „w Siemensie” (nazwy nieodmienne i nieznane zostają);
+  - jedna firma w dwóch rodzajach w jednym streszczeniu („Chainalysis
+    ogłosiło… Chainalysis ujawnił”).
+  Na archiwum od 19.10: 1 trafienie („w Siemens”), bez fałszywych.
+- **Autopoprawka CVSS**: „CVSS 8.1” → „CVSS 8,1”; wersje programów
+  zostają z kropkami.
+- **„Build” to uzus branżowy**: 4 wiersze „buildy…” usunięte z listy
+  kalk, „build*” dopisany do `data/slowa_angielskie_ok.csv`.
+- **Karton Prasówki** odświeżony do v46. **Testy**: `src/test_v46.py`;
+  razem 487.
+
+Nowe i zmienione pliki: `data/reguly_jezyka.md` (nowy),
+`src/language_rules.py` (nowy), `src/polish_words.py`,
+`src/summary_quality.py`, `src/ai_summaries.py`, `src/glossary.py`,
+`data/styl_unikaj.csv`, `data/slowa_angielskie_ok.csv`,
+`src/test_v46.py` (nowy), `src/test_quality_v33.py`, `docs/karton.html`,
+README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v45 · Mniej, a lepiej --- 07.11.2026
 
 **Prasówka dzienna ma najwyżej 10 pozycji i nie bierze tekstów
@@ -2455,6 +2498,49 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v46 · Polish polish --- 2026-11-07
+
+**The Prasówka language rules in the prompts, grammar checks with
+Morfeusz 2 and industry usage over purism.**
+
+Reason: review of the digests of 31 Oct–7 Nov 2026 and JW's decision
+that industry usage beats purism ("wystawiony", "w buildzie" stay).
+
+Changes:
+
+- **Prasówka language rules** (`data/reguly_jezyka.md`, new): a living
+  document edited by JW. Lines of the section "Nakazy dla modeli" go
+  word for word to the prompts of the writing model, the correction and
+  the event stories (`src/language_rules.py`, new). 10 rules to start,
+  e.g. "grupa", not "zespół", for criminal groups; one gender per company
+  name; declining product names; "bez uwierzytelnienia" instead of
+  "nieautoryzowany"; CVSS with a decimal comma. The document also says
+  where the other rules live (glossary, calques, usage, autofixes).
+- **Grammar with Morfeusz 2** (`src/polish_words.py`), soft problems and
+  hints for the correction:
+  - numeral and noun: "dwa luki" → "dwie luki", "dwie błędy" → "dwa
+    błędy";
+  - a name after "w/o/przy/po" in the nominative: "w Linux" → "w
+    Linuksie", "w Siemens" → "w Siemensie" (indeclinable and unknown
+    names stay);
+  - one company in two genders in one summary ("Chainalysis ogłosiło…
+    Chainalysis ujawnił").
+  On the archive since 19 Oct: 1 hit ("w Siemens"), none false.
+- **CVSS autofix**: "CVSS 8.1" → "CVSS 8,1"; program versions keep dots.
+- **"Build" is industry usage**: 4 rows "buildy…" removed from the calque
+  list, "build*" added to `data/slowa_angielskie_ok.csv`.
+- **Karton Prasówki** refreshed to v46. **Tests**: `src/test_v46.py`; 487
+  in total.
+
+New and changed files: `data/reguly_jezyka.md` (new),
+`src/language_rules.py` (new), `src/polish_words.py`,
+`src/summary_quality.py`, `src/ai_summaries.py`, `src/glossary.py`,
+`data/styl_unikaj.csv`, `data/slowa_angielskie_ok.csv`,
+`src/test_v46.py` (new), `src/test_quality_v33.py`, `docs/karton.html`,
+README (PL/EN).
 
 ------------------------------------------------------------------------
 

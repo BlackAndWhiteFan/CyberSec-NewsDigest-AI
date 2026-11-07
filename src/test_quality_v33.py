@@ -150,7 +150,8 @@ class TestStyleV33(unittest.TestCase):
     def test_new_calques(self):
         problems = quality_problems("Panele systemu AI-hackingowego Cairn. Przygotowano 46 buildów szyfrujących.")
         self.assertTrue(has(problems, "kalka „AI-hackingowego”"))
-        self.assertTrue(has(problems, "kalka „buildów”"))
+        # v46 (JW, 7.11.2026): "build" is industry usage, no longer a calque.
+        self.assertFalse(has(problems, "kalka „buildów”"))
 
     def test_product_name_is_not_a_calque(self):
         self.assertFalse(has(quality_problems("Atakujący użyli narzędzia Build Tools."), "kalka"))

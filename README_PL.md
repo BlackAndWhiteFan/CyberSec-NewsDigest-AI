@@ -47,6 +47,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 29 | Słownik kalek: 29 nowych wierszy listy kalk zaakceptowanych przez JW, polskie nazwy miesięcy w datach (v43) | zakończony; zweryfikowany testami jednostkowymi |
 | 30 | Bez echa: jedna sprawa, jedna pozycja – łączenie po nazwach firm, wersjach produktów i kwotach w streszczeniach (v44) | zakończony; zweryfikowany testami jednostkowymi |
 | 31 | Mniej, a lepiej: najwyżej 10 pozycji w prasówce dziennej, bez tekstów sponsorowanych (v45) | zakończony; zweryfikowany testami jednostkowymi |
+| 32 | Szlif: dokument reguł języka w promptach, gramatyka z Morfeuszem 2, uzus branżowy ponad purystyką (v46) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -190,6 +191,7 @@ Dane i narzędzia:
 - `data/tops/RRRR-Www.json`, `data/tops/RRRR-MM.json` — wysłane zestawienia tygodniowe i miesięczne z historiami wydarzeń (od v38; materiał dla mostu do CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (plik-matka v92, 6 kolumn). Eksportuje go prywatne repozytorium mostu `cybersec-most` (od v38; wcześniej `tools/eksport_mirrora.py` w tym repo).
 - `data/styl_unikaj.csv` — lista stylu: kalki i anglicyzmy z propozycjami, edytowana ręcznie (`*` = dowolna końcówka).
+- `data/reguly_jezyka.md` — Reguły języka Prasówki, edytowane przez JW: sekcja „Nakazy dla modeli” trafia do promptów (od v46).
 - `data/slowa_angielskie_ok.csv` — angielskie słowa, które mogą zostać w streszczeniach bez przekładu, edytowane ręcznie (`*` = dowolna końcówka; od v42).
 - `docs/karton.html` — Karton Prasówki, interaktywna mapa prasówki, ze znacznikami wersji czytanymi przez Raport Mostu (od v41).
 

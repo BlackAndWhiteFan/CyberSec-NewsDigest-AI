@@ -136,25 +136,14 @@ class TestLekturaContinuation(unittest.TestCase):
 
 
 class TestRansomwareExplanation(unittest.TestCase):
-    # Branch test of 26.10.2026: "Negocjatorzy ransomware (program żądający okupu)".
-    def test_not_after_people_or_groups(self):
+    # v40 (Letter 18): "ransomware" has no explanation any more, so the v33
+    # cases (test 26.10.2026) must come out unchanged.
+    def test_no_explanation_after_people_verbs_or_alone(self):
         from glossary import apply_glossary
-        used = set()
-        text = apply_glossary("Negocjatorzy ransomware pomagali grupie. Zespół wykrył ransomware w sieci.", used)
-        self.assertEqual(text, "Negocjatorzy ransomware pomagali grupie. "
-                               "Zespół wykrył ransomware (program żądający okupu) w sieci.")
-
-    def test_skipped_term_can_be_explained_in_a_later_summary(self):
-        from glossary import apply_glossary
-        used = set()
-        self.assertEqual(apply_glossary("Grupy ransomware INC i The Gentlemen.", used),
-                         "Grupy ransomware INC i The Gentlemen.")
-        self.assertIn("(program żądający okupu)", apply_glossary("Atak ransomware na szpital.", used))
-
-    def test_genitive_after_verb(self):
-        from glossary import apply_glossary
-        self.assertEqual(apply_glossary("Grupa użyła ransomware do szyfrowania.", set()),
-                         "Grupa użyła ransomware (programu żądającego okupu) do szyfrowania.")
+        for text in ("Negocjatorzy ransomware pomagali grupie. Zespół wykrył ransomware w sieci.",
+                     "Grupa użyła ransomware do szyfrowania.", "Atak ransomware na szpital."):
+            with self.subTest(text=text):
+                self.assertEqual(apply_glossary(text, set()), text)
 
 
 class TestStyleV33(unittest.TestCase):

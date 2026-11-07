@@ -29,14 +29,11 @@ class TestMirror(unittest.TestCase):
         self.assertTrue(all(item["forma"] for item in ENTRIES))
 
     def test_only_chosen_entries_have_explanations(self):
-        """Option B (20.10.2026): parentheses only where JW decided."""
+        """Option B (20.10.2026): parentheses only where JW decided.
+        v40 (Letter 18, decision of 2.11.2026): only H182 and H207 remain."""
         expected = {
-            "H153": ("exploit", "kod wykorzystujący podatność"),
             "H182": ("podwyższenie uprawnień", "eskalacja"),
             "H207": ("poświadczenia", "dane logowania"),
-            "H015": ("ransomware", "program żądający okupu"),
-            "H019": ("infostealer", "program kradnący dane"),
-            "H004": ("botnet", "sieć zainfekowanych urządzeń"),
         }
         with_explanation = {item["id"] for item in ENTRIES if item["nawias"]}
 
@@ -46,7 +43,8 @@ class TestMirror(unittest.TestCase):
                 self.assertEqual((entry(entry_id)["forma"], entry(entry_id)["nawias"]), (forma, nawias))
 
     def test_english_first_entries_keep_english_form_without_explanation(self):
-        for entry_id, forma in {"H028": "malware", "H090": "RCE", "H152": "PoC",
+        for entry_id, forma in {"H153": "exploit", "H004": "botnet", "H015": "ransomware",
+                                "H019": "infostealer", "H028": "malware", "H090": "RCE", "H152": "PoC",
                                 "H023": "backdoor", "H365": "IAB", "H726": "DLL sideloading"}.items():
             with self.subTest(entry_id=entry_id):
                 self.assertEqual((entry(entry_id)["forma"], entry(entry_id)["nawias"]), (forma, ""))
@@ -59,9 +57,9 @@ class TestMirror(unittest.TestCase):
 class TestExplanations(unittest.TestCase):
     def test_chosen_entries_get_explanation(self):
         cases = {
-            "Atak ransomware sparaliżował szpital.":
-                "Atak ransomware (program żądający okupu) sparaliżował szpital.",
-            "Grupa użyła exploita.": "Grupa użyła exploita (kodu wykorzystującego podatność).",
+            "Wykradziono poświadczenia.": "Wykradziono poświadczenia (dane logowania).",
+            "Luka umożliwia podwyższenie uprawnień.":
+                "Luka umożliwia podwyższenie (eskalację) uprawnień.",
         }
 
         for text, expected in cases.items():
@@ -73,6 +71,12 @@ class TestExplanations(unittest.TestCase):
             "Rozsyłano malware, luka daje RCE, badacze opublikowali PoC i backdoor w NATO przez NAT; "
             "producent wydał łatkę, a grupa opłacana przez państwo zaatakowała."
         )
+        self.assertEqual(gloss(text), text)
+
+    def test_terms_without_explanation_since_v40(self):
+        # Letter 18: exploit, botnet, ransomware, infostealer and wiper stay bare.
+        text = ("Grupa użyła exploita i ransomware, przejęła botnet, rozsyłała infostealera "
+                "i uruchomiła wiper.")
         self.assertEqual(gloss(text), text)
 
     def test_explanation_agrees_with_case(self):
@@ -88,51 +92,29 @@ class TestExplanations(unittest.TestCase):
             with self.subTest(text=text):
                 self.assertEqual(gloss(text), expected)
 
-    def test_english_terms_get_explanation_in_the_same_case(self):
-        # v27: "przed exploit (kod wykorzystujący podatność)" seen 22.10.2026.
-        cases = {
-            "Eksperci ostrzegają przed exploitem.":
-                "Eksperci ostrzegają przed exploitem (kodem wykorzystującym podatność).",
-            "Badacze opublikowali exploita.":
-                "Badacze opublikowali exploita (kod wykorzystujący podatność).",
-            "Nie wykryto exploita w sieci.":
-                "Nie wykryto exploita (kodu wykorzystującego podatność) w sieci.",
-            "Kilka exploitów krąży w sieci.":
-                "Kilka exploitów (kodów wykorzystujących podatność) krąży w sieci.",
-            "W exploicie ukryto błąd.": "W exploicie (kodzie wykorzystującym podatność) ukryto błąd.",
-            "Członkowie botnetu zatrzymani.": "Członkowie botnetu (sieci zainfekowanych urządzeń) zatrzymani.",
-            "Policja przejęła botnet.": "Policja przejęła botnet (sieć zainfekowanych urządzeń).",
-            "Ochrona przed infostealerami.": "Ochrona przed infostealerami (programami kradnącymi dane).",
-            "Do infostealera dodano moduł.": "Do infostealera (programu kradnącego dane) dodano moduł.",
-        }
-
-        for text, expected in cases.items():
-            with self.subTest(text=text):
-                self.assertEqual(gloss(text), expected)
-
     def test_term_explained_once_per_digest(self):
         used = set()
-        first = apply_glossary("Atak ransomware na szpital.", used)
-        second = apply_glossary("Kolejny atak ransomware na urząd.", used)
+        first = apply_glossary("Wykradziono poświadczenia.", used)
+        second = apply_glossary("Znów wykradziono poświadczenia.", used)
 
-        self.assertIn("(program żądający okupu)", first)
-        self.assertEqual(second, "Kolejny atak ransomware na urząd.")
+        self.assertIn("(dane logowania)", first)
+        self.assertEqual(second, "Znów wykradziono poświadczenia.")
 
     def test_existing_parenthesis_counts_as_explained(self):
         used = set()
-        text = "Botnet (sieć urządzeń) się rozrasta."
+        text = "Wykradziono poświadczenia (loginy i hasła)."
 
         self.assertEqual(apply_glossary(text, used), text)
-        self.assertIn("H004", used)
+        self.assertIn("H207", used)
 
     def test_term_inside_parentheses_gets_no_nested_explanation(self):
-        text = "Przejęto sieć urządzeń (botnet) w trzech krajach."
-        self.assertNotIn("(botnet (", gloss(text))
+        text = "Przejęto dane logowania (poświadczenia) w trzech krajach."
+        self.assertNotIn("(poświadczenia (", gloss(text))
 
     def test_term_after_parentheses_is_still_explained(self):
         used = set()
-        apply_glossary("Przejęto sieć urządzeń (botnet).", used)
-        self.assertIn("botnet (sieć zainfekowanych", apply_glossary("Policja rozbiła botnet.", used))
+        apply_glossary("Przejęto dane logowania (poświadczenia).", used)
+        self.assertIn("poświadczenia (dane logowania)", apply_glossary("Wykradziono poświadczenia.", used))
 
     def test_mfa_has_no_explanation(self):
         self.assertEqual(gloss("Firma wymaga MFA."), "Firma wymaga MFA.")

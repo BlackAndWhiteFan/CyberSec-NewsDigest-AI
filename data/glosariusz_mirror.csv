@@ -1,9 +1,9 @@
-﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v90 · 2026-10-29 · CC BY-NC-ND 4.0 · © Jan Wolski.
+﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v92 · 2026-11-03 · CC BY-NC-ND 4.0 · © Jan Wolski.
 id;termin_en;forma;nawias;regula;unikaj
 H001;adware;adware;;;
 H002;bloatware;bloatware;;;
 H003;logic bomb;bomba logiczna;;;
-H004;botnet;botnet;sieć zainfekowanych urządzeń;bez tłumaczenia;
+H004;botnet;botnet;;bez tłumaczenia;
 H005;crypto drainer;drainer kryptowalut;;;
 H006;dropper;dropper;;;
 H007;campaign;kampania;;;
@@ -14,11 +14,11 @@ H011;MaaS;MaaS;;;
 H012;spyware;spyware;;;oprogramowa\w+ szpiegując\w*
 H013;toll fraud;toll fraud;;;
 H014;PPI;PPI;;;
-H015;ransomware;ransomware;program żądający okupu;bez tłumaczenia;
+H015;ransomware;ransomware;;bez tłumaczenia;
 H016;worm;robak;;;
 H017;rootkit;rootkit;;;
 H018;scareware;scareware;;;
-H019;infostealer;infostealer;program kradnący dane;bez tłumaczenia;
+H019;infostealer;infostealer;;bez tłumaczenia;
 H020;fileless malware;fileless malware;;;
 H021;trojan;trojan;;;
 H022;RAT;RAT;;;
@@ -152,7 +152,7 @@ H149;misconfiguration;błędna konfiguracja;;;
 H150;CVE;CVE;;;
 H151;CVSS;CVSS;;;
 H152;PoC;PoC;;;dow[oó]d\w* koncepcji
-H153;exploit (kit);exploit;kod wykorzystujący podatność;nie spolszczaj;eksploit\w*
+H153;exploit (kit);exploit;;nie spolszczaj;eksploit\w*
 H154;CISA KEV;CISA KEV;;;
 H155;CWE;CWE;;;
 H156;EOL / EOSL;EOL / EOSL;;;

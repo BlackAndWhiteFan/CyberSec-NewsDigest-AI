@@ -176,15 +176,15 @@ class TestSummaries(unittest.TestCase):
         self.assertEqual(summary_line, "> Krótkie streszczenie.")
 
     def test_glossary_explains_term_once_per_digest_and_note_is_added(self):
-        first = make_article("Ransomware attack hits hospital", "https://example.com/1")
-        second = make_article("Ransomware gang leaks data", "https://example.com/2")
-        first["summary"] = "Atak ransomware sparaliżował szpital."
-        second["summary"] = "Grupa ransomware opublikowała dane."
+        first = make_article("Credentials stolen from hospital", "https://example.com/1")
+        second = make_article("Gang leaks credentials", "https://example.com/2")
+        first["summary"] = "Wykradziono poświadczenia pracowników szpitala."
+        second["summary"] = "Grupa opublikowała poświadczenia klientów."
 
         text = "\n".join(build_digest_messages([first, second], 10, 6, "19.10.2026"))
 
-        self.assertEqual(text.count("(program żądający okupu)"), 1)
-        self.assertIn("Atak ransomware (program żądający okupu)", text)
+        self.assertEqual(text.count("(dane logowania)"), 1)
+        self.assertIn("Wykradziono poświadczenia (dane logowania)", text)
         self.assertTrue(text.endswith(AI_NOTE))
 
     def test_no_note_without_summaries(self):

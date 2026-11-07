@@ -43,6 +43,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 25 | Straż danych dla mostu: test kontraktu zestawień (`data/tops/`) i listy kalk, pole `proofread` w archiwum (v39) | zakończony; zweryfikowany testami jednostkowymi |
 | 26 | Objaśnienia w nawiasach tylko przy „podwyższeniu uprawnień” i „poświadczeniach”: mirror v92 po decyzji autora z mostu (v40) | zakończony; zweryfikowany testami jednostkowymi |
 | 27 | Karton Prasówki w repo (`docs/karton.html`) ze strażnikiem wersji (v41) | zakończony; zweryfikowany testami jednostkowymi |
+| 28 | Czysta polszczyzna: Morfeusz 2 łapie angielskie słowa bez przekładu i literówki z korekty; Gemini lite na końcu kolejki korekty (v42) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -168,6 +169,7 @@ Kod (`src/`):
 - `languagetool.py` — podpowiedzi gramatyczne z LanguageTool.
 - `glossary.py` — reguły słowniczka z mirrora: hasła do promptu, formy zakazane, autopoprawki, objaśnienia w nawiasach.
 - `summary_quality.py` — kontrola jakości i języka streszczeń, naprawa przez kod.
+- `polish_words.py` — kontrola słów Morfeuszem 2: angielskie słowa bez przekładu i słowa wymyślone przez korektę (od v42).
 - `language_notes.py` — dziennik języka: poprawki streszczeń jako notatki do archiwum.
 - `discord_output.py` — formatowanie prasówki, podział na wiadomości, wysyłka.
 - `article_archive.py` — miesięczne archiwum.
@@ -185,6 +187,7 @@ Dane i narzędzia:
 - `data/tops/RRRR-Www.json`, `data/tops/RRRR-MM.json` — wysłane zestawienia tygodniowe i miesięczne z historiami wydarzeń (od v38; materiał dla mostu do CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (plik-matka v92, 6 kolumn). Eksportuje go prywatne repozytorium mostu `cybersec-most` (od v38; wcześniej `tools/eksport_mirrora.py` w tym repo).
 - `data/styl_unikaj.csv` — lista stylu: kalki i anglicyzmy z propozycjami, edytowana ręcznie (`*` = dowolna końcówka).
+- `data/slowa_angielskie_ok.csv` — angielskie słowa, które mogą zostać w streszczeniach bez przekładu, edytowane ręcznie (`*` = dowolna końcówka; od v42).
 - `docs/karton.html` — Karton Prasówki, interaktywna mapa prasówki, ze znacznikami wersji czytanymi przez Raport Mostu (od v41).
 
 ## Konfiguracja i sekrety
@@ -209,7 +212,7 @@ Testy jednostkowe uruchamia się z katalogu głównego repozytorium:
 python -m unittest discover -s src -p "test_*.py"
 ```
 
-Każdy workflow uruchamia testy przed swoim głównym krokiem. Zmiany powstają na gałęzi, są testowane na kanale testowym, opisywane w changelogu (PL/EN) i scalane przez Squash and merge.
+Kontrola słów potrzebuje Morfeusza 2 (`pip install morfeusz2`; workflow instalują go same, od v42); bez niego jest pomijana. Każdy workflow uruchamia testy przed swoim głównym krokiem. Zmiany powstają na gałęzi, są testowane na kanale testowym, opisywane w changelogu (PL/EN) i scalane przez Squash and merge.
 
 ## Dokumentacja
 

@@ -43,6 +43,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 25 | Data guards for the bridge: contract tests for the tops (`data/tops/`) and the style list, `proofread` field in the archive (v39) | completed; verified by unit tests |
 | 26 | Explanations in parentheses only for "podwyższenie uprawnień" and "poświadczenia": mirror v92 after the author's decision from the bridge (v40) | completed; verified by unit tests |
 | 27 | Karton Prasówki in the repository (`docs/karton.html`) with a version guard (v41) | completed; verified by unit tests |
+| 28 | Clean Polish: Morfeusz 2 catches untranslated English words and typos from the correction; Gemini lite last in the correction queue (v42) | completed; verified by unit tests |
 
 ## Current Implementation
 
@@ -168,6 +169,7 @@ Code (`src/`):
 - `languagetool.py` — grammar hints from LanguageTool.
 - `glossary.py` — glossary rules from the mirror: prompt entries, forbidden forms, autofix, explanations in parentheses.
 - `summary_quality.py` — quality and language checks of summaries, repair by code.
+- `polish_words.py` — Morfeusz 2 word checks: untranslated English words and words invented by the language correction (since v42).
 - `language_notes.py` — language log: corrections of summaries as notes for the archive.
 - `discord_output.py` — digest formatting, message splitting, delivery.
 - `article_archive.py` — monthly archive.
@@ -185,6 +187,7 @@ Data and tools:
 - `data/tops/YYYY-Www.json`, `data/tops/YYYY-MM.json` — delivered weekly and monthly tops with their event stories (since v38; material for the bridge to CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (mother workbook v92, six columns). Exported by the private bridge repository `cybersec-most` (since v38; before that by `tools/eksport_mirrora.py` in this repository).
 - `data/styl_unikaj.csv` — style list: calques and anglicisms with suggestions, edited by hand (`*` = any ending).
+- `data/slowa_angielskie_ok.csv` — English words that may stay untranslated in summaries, edited by hand (`*` = any ending; since v42).
 - `docs/karton.html` — Karton Prasówki, the interactive map of the digest, with version markers read by the bridge report (since v41).
 
 ## Configuration and Secrets
@@ -209,7 +212,7 @@ Run the unit tests from the repository root:
 python -m unittest discover -s src -p "test_*.py"
 ```
 
-Every workflow runs the tests before its main step. Changes are made on a branch, tested on the test channel, described in the changelog (PL/EN) and merged with Squash and merge.
+The word checks need Morfeusz 2 (`pip install morfeusz2`; the workflows install it, since v42); without it they are skipped. Every workflow runs the tests before its main step. Changes are made on a branch, tested on the test channel, described in the changelog (PL/EN) and merged with Squash and merge.
 
 ## Documentation
 

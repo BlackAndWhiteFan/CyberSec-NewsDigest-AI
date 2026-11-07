@@ -24,6 +24,38 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v41 · Karton na straży --- 07.11.2026
+
+**Karton Prasówki w repo ze strażnikiem wersji.**
+
+Powód: zasada 9 ekosystemu „Karton zawsze aktualny” (Listy 24–25).
+Każda zmiana w repo aktualizuje swój Karton w tej samej rundzie, a
+rozjazd Kartonu ze stanem repo ma zapalać test na czerwono. Karton
+Prasówki był dotąd tylko artefaktem i pokazywał stan z v37c.
+
+Zmiany:
+
+- **Karton Prasówki** w `docs/karton.html`, odświeżony do v41: dane dla
+  Mostu (v38–v39), mirror glosariusza (Mozaika → Prasówka) v92 i dwa
+  nawiasy (v40), układ repo, liczby, oś wersji. Nazwy według Słownika
+  nazw z README Mostu (§0).
+- **Znaczniki wersji** w Kartonie: `<meta name="prasowka-wersja">` i
+  `<meta name="plik-matka-wersja">`. Czyta je też Raport Mostu
+  (Prasówka → Mozaika).
+- **Strażnik Kartonu** (`src/test_v41.py`): znacznik wersji Prasówki
+  zgodny z najnowszym wpisem w changelogu, znacznik pliku-matki zgodny z
+  nagłówkiem mirrora, widoczny stan na stronie zgodny ze znacznikami,
+  liczba testów na stronie zgodna z liczbą testów w repo. Test z gałęzi
+  zatrzymuje wersję, która nie odświeżyła Kartonu, zanim trafi do
+  `main`. Razem 446 testów.
+- **Reguła w README** (PL/EN): Karton aktualizowany w tej samej rundzie
+  co zmiana.
+
+Nowe i zmienione pliki: `docs/karton.html` (nowy), `src/test_v41.py`
+(nowy), README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v40 · Dwa nawiasy --- 07.11.2026
 
 **Objaśnienia w nawiasach tylko przy dwóch terminach (mirror v92).**
@@ -2268,6 +2300,38 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v41 · Karton on guard --- 2026-11-07
+
+**The Karton Prasówki in the repository, with a version guard.**
+
+Reason: ecosystem rule 9 "Karton always up to date" (Letters 24–25).
+Every change to a repository updates its Karton in the same round, and a
+Karton out of step with the repository must turn a test red. The Karton
+Prasówki was only an artifact so far and showed the v37c state.
+
+Changes:
+
+- **Karton Prasówki** in `docs/karton.html`, refreshed to v41: data for
+  the bridge (v38–v39), glossary mirror (Mozaika → Prasówka) v92 and the
+  two parentheses (v40), repository layout, numbers, version timeline.
+  Names follow the name dictionary in the Most README (§0).
+- **Version markers** in the Karton: `<meta name="prasowka-wersja">` and
+  `<meta name="plik-matka-wersja">`. The bridge report (Raport Mostu,
+  Prasówka → Mozaika) reads them too.
+- **Karton guard** (`src/test_v41.py`): the digest marker matches the
+  newest changelog entry, the mother workbook marker matches the mirror
+  header, the visible state matches the markers, and the test count on
+  the page matches the test suite. The branch test run stops a version
+  that did not refresh the Karton before it reaches `main`. 446 tests in
+  total.
+- **Rule in the READMEs** (PL/EN): the Karton is updated in the same
+  round as the change.
+
+New and changed files: `docs/karton.html` (new), `src/test_v41.py`
+(new), README (PL/EN).
 
 ------------------------------------------------------------------------
 

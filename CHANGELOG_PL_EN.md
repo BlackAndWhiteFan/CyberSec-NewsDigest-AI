@@ -24,6 +24,36 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v45 · Mniej, a lepiej --- 07.11.2026
+
+**Prasówka dzienna ma najwyżej 10 pozycji i nie bierze tekstów
+sponsorowanych.**
+
+Powód: prasówki z 31.10–7.11.2026 miały po 16–20 pozycji, w tym teksty
+sponsorowane i wiadomości biznesowe. Zestawienia tygodnia i miesiąca,
+krótkie i wybrane, czyta się lepiej; wydanie dzienne ma być ich
+miniaturą, a nie zrzutem z RSS.
+
+Zmiany (`src/article_selection.py`, `src/main.py`):
+
+- **14 kandydatów** do streszczenia (było 20), a po połączeniu duplikatów
+  (v35, v44) **najwyżej 10 pozycji**. Zostają te z najwyższą oceną:
+  słowa kluczowe, 🔥 KEV +3, numer CVE +1, inne źródła tej samej sprawy
+  +1 każde (do 3), polskie źródło +1. Kolejność w prasówce bez zmian.
+  Pominięte pozycje nie trafiają do historii ani archiwum. Log: `LIMIT
+  DNIA`.
+- **Teksty sponsorowane i biznesowe** odpadają po tytule: „tests to find
+  out”, „elements of”, „operationaliz…”, „leaving you exposed”, „cyber
+  threats that put”, „exits stealth”, „seed funding”, „series A/B”. Na
+  archiwum od 19.10 odpadają dokładnie 4 takie teksty z 2–6.11.
+- **Karton Prasówki** odświeżony do v45. **Testy**: `src/test_v45.py`;
+  razem 477.
+
+Zmienione pliki: `src/article_selection.py`, `src/main.py`,
+`src/test_v45.py` (nowy), `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v44 · Bez echa --- 07.11.2026
 
 **Jedna sprawa, jedna pozycja: łączenie po nazwach firm, wersjach
@@ -2425,6 +2455,36 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v45 · Less, but better --- 2026-11-07
+
+**The daily digest has at most 10 items and takes no sponsored
+content.**
+
+Reason: the digests of 31 Oct–7 Nov 2026 had 16–20 items each, including
+sponsored content and business news. The weekly and monthly tops, short
+and curated, read better; the daily digest should be their miniature, not
+an RSS dump.
+
+Changes (`src/article_selection.py`, `src/main.py`):
+
+- **14 candidates** are summarized (was 20), and after merging duplicates
+  (v35, v44) **at most 10 items** stay. The best ranked are kept: keyword
+  score, 🔥 KEV +3, a CVE id +1, other sources of the same story +1 each
+  (up to 3), a Polish source +1. The order in the digest is unchanged.
+  Dropped items are not recorded in the history or the archive. Log:
+  `LIMIT DNIA`.
+- **Sponsored and business titles** are excluded: "tests to find out",
+  "elements of", "operationaliz…", "leaving you exposed", "cyber threats
+  that put", "exits stealth", "seed funding", "series A/B". On the archive
+  since 19 Oct exactly 4 such texts of 2–6 Nov are excluded.
+- **Karton Prasówki** refreshed to v45. **Tests**: `src/test_v45.py`; 477
+  in total.
+
+Changed files: `src/article_selection.py`, `src/main.py`,
+`src/test_v45.py` (new), `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

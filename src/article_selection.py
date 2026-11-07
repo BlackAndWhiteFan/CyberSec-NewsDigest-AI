@@ -129,6 +129,20 @@ EXCLUDED_TITLE_KEYWORDS = (
     "threatsday",
     "weekly recap",
     "in other news",
+    # v45: vendor content and business news, not security events (The
+    # Hacker News, 4–6.11.2026: "The 4 Elements of Exposure Prioritization",
+    # "Is Your Exposure Management Platform Leaving You Exposed? Five Tests
+    # to Find Out", "5 Active Cyber Threats That Put US Enterprises at
+    # Risk"; SecurityWeek, 2.11: "Northstar Security Exits Stealth With $7M").
+    "tests to find out",
+    "elements of",
+    "operationaliz",
+    "leaving you exposed",
+    "cyber threats that put",
+    "exits stealth",
+    "seed funding",
+    "series a$",
+    "series b$",
 )
 
 # v29: "Weekendowa lektura" (Zaufana Trzecia Strona) stays in the digest
@@ -350,6 +364,38 @@ def relevant_articles(articles, min_score=MIN_PRIORITY_SCORE):
         for article in articles
         if not is_excluded(article) and prioritize_article(article) >= min_score
     ]
+
+
+# v45 · Less, but better: the daily digest has at most DAILY_ITEMS items.
+# CANDIDATES are summarized first, because merging duplicates after the
+# summaries (v35, v44) still shortens the list.
+DAILY_CANDIDATES = 14
+DAILY_ITEMS = 10
+
+
+def daily_rank(article):
+    """Rank for the final cut: keyword score, a vulnerability from the CISA
+    KEV catalog (+3), a CVE id (+1), other sources on the same story (+1
+    each, at most 3) and a Polish source (+1)."""
+    return (
+        prioritize_article(article)
+        + 3 * bool(article.get("kev"))
+        + bool(article.get("cves"))
+        + min(len(article.get("related", [])), 3)
+        + source_domain(article).endswith(".pl")
+    )
+
+
+def limit_daily(articles, limit=DAILY_ITEMS):
+    """Keep the `limit` best items in their original order (v45)."""
+    if len(articles) <= limit:
+        return articles
+
+    ranked = sorted(range(len(articles)), key=lambda index: daily_rank(articles[index]), reverse=True)
+    kept = sorted(ranked[:limit])
+    dropped = [articles[index]["title"] for index in sorted(ranked[limit:])]
+    print(f"LIMIT DNIA: {limit} z {len(articles)} pozycji; pominięte: " + " | ".join(title[:60] for title in dropped))
+    return [articles[index] for index in kept]
 
 
 def select_top_articles(articles, limit=20, min_score=MIN_PRIORITY_SCORE):

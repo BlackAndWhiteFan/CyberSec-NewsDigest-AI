@@ -24,6 +24,42 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v43 · Słownik kalek --- 07.11.2026
+
+**29 nowych wierszy listy kalk i daty z polskimi nazwami miesięcy.**
+
+Powód: przegląd polszczyzny w prasówkach z 19.10–7.11.2026. Lista kalk
+znała 39 form; kalki z tłumaczeń IT, których na niej nie było,
+przechodziły przez kontrolę. Wiersze zaakceptował JW 7.11.2026.
+
+Zmiany:
+
+- **Lista kalk** `data/styl_unikaj.csv` (39 → 68 wierszy):
+  - z prasówek: „nieautoryzowany atakujący” (*unauthenticated* to „bez
+    uwierzytelnienia”), „w poziomach łatek”, „wytransferować”, „threat
+    actor”, „dokonać wycieku / kradzieży”, „emergency”, „hashe / hashy /
+    hashami…” (odmiany wypisane osobno, żeby nie łapać „HashiCorp”);
+  - profilaktycznie: „aplikować / zaaplikować” (łatkę), „w dziczy”, „in
+    the wild”, „targetować”, „exploitować”, „zabezpieczenia
+    bezpieczeństwa”, „z sukcesem”, „adwersarz”, „atrybuować”, „egzekucja
+    kodu”, „security update”, „advisory”;
+  - „wystawiony (w internecie)” zostaje dozwolony: tak mówi branża.
+- **Autopoprawka dat** (`src/glossary.py`): angielskie i skrócone nazwy
+  miesięcy przy dniu zamienia kod („15 august” → „15 sierpnia”, „August
+  2, 2026” → „2 sierpnia 2026”, „30 paź 2026” → „30 października 2026”).
+  Każda zamiana trafia do dziennika języka jako autopoprawka „miesiąc po
+  polsku”.
+- **Karton Prasówki** odświeżony do v43. **Testy**: `src/test_v43.py`;
+  razem 464.
+
+Sprawdzenie na archiwum od 19.10: nowe wiersze dają 12 trafień, bez
+fałszywych.
+
+Zmienione pliki: `data/styl_unikaj.csv`, `src/glossary.py`,
+`src/test_v43.py` (nowy), `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v42 · Czysta polszczyzna --- 07.11.2026
 
 **Morfeusz 2 łapie angielskie słowa bez przekładu i słowa wymyślone przez
@@ -2350,6 +2386,42 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v43 · Calque dictionary --- 2026-11-07
+
+**29 new rows in the calque list and dates with Polish month names.**
+
+Reason: review of the Polish in the digests of 19 Oct–7 Nov 2026. The
+calque list knew 39 forms; calques from IT translations missing from it
+passed the checks. JW accepted the rows on 7 Nov 2026.
+
+Changes:
+
+- **Calque list** `data/styl_unikaj.csv` (39 → 68 rows):
+  - from the digests: "nieautoryzowany atakujący" (*unauthenticated* is
+    "bez uwierzytelnienia"), "w poziomach łatek", "wytransferować",
+    "threat actor", "dokonać wycieku / kradzieży", "emergency", "hashe /
+    hashy / hashami…" (forms listed one by one, so "HashiCorp" is not
+    caught);
+  - preventive: "aplikować / zaaplikować" (a patch), "w dziczy", "in the
+    wild", "targetować", "exploitować", "zabezpieczenia bezpieczeństwa",
+    "z sukcesem", "adwersarz", "atrybuować", "egzekucja kodu", "security
+    update", "advisory";
+  - "wystawiony (w internecie)" stays allowed: the industry says so.
+- **Date autofix** (`src/glossary.py`): English and shortened month names
+  next to a day are replaced by code ("15 august" → "15 sierpnia",
+  "August 2, 2026" → "2 sierpnia 2026", "30 paź 2026" → "30 października
+  2026"). Every change goes to the language log as the autofix "miesiąc po
+  polsku".
+- **Karton Prasówki** refreshed to v43. **Tests**: `src/test_v43.py`;
+  464 in total.
+
+Check on the archive since 19 Oct: the new rows give 12 hits, none false.
+
+Changed files: `data/styl_unikaj.csv`, `src/glossary.py`,
+`src/test_v43.py` (new), `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

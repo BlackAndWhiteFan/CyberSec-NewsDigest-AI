@@ -44,6 +44,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 26 | Objaśnienia w nawiasach tylko przy „podwyższeniu uprawnień” i „poświadczeniach”: mirror v92 po decyzji autora z mostu (v40) | zakończony; zweryfikowany testami jednostkowymi |
 | 27 | Karton Prasówki w repo (`docs/karton.html`) ze strażnikiem wersji (v41) | zakończony; zweryfikowany testami jednostkowymi |
 | 28 | Czysta polszczyzna: Morfeusz 2 łapie angielskie słowa bez przekładu i literówki z korekty; Gemini lite na końcu kolejki korekty (v42) | zakończony; zweryfikowany testami jednostkowymi |
+| 29 | Słownik kalek: 29 nowych wierszy listy kalk zaakceptowanych przez JW, polskie nazwy miesięcy w datach (v43) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 

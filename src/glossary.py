@@ -106,6 +106,24 @@ INFLECTED = {
 # summaries). Replacing them in code saves AI requests. "łatka" inflects
 # like "poprawka" (poprawce -> łatce), RCE does not inflect, and "eksploit"
 # forms map to the same "exploit" forms.
+# v43: month names in the Polish genitive ("15 sierpnia").
+GENITIVE_MONTHS = ["stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia",
+                   "września", "października", "listopada", "grudnia"]
+ENGLISH_MONTH_NAMES = ["january", "february", "march", "april", "may", "june", "july", "august",
+                       "september", "october", "november", "december"]
+SHORT_MONTH_NAMES = ["sty", "lut", "mar", "kwi", "maj", "cze", "lip", "sie", "wrz", "paź", "lis", "gru"]
+# "may" and "march" are also English words, so English names count only
+# next to a day number; the short Polish names only before a year.
+ENGLISH_MONTHS = "|".join(ENGLISH_MONTH_NAMES)
+SHORT_MONTHS = "(?:" + "|".join(SHORT_MONTH_NAMES) + r")(?= \d{4})"
+
+
+def month_genitive(name):
+    name = name.lower().rstrip(".")
+    names = ENGLISH_MONTH_NAMES if name in ENGLISH_MONTH_NAMES else SHORT_MONTH_NAMES
+    return GENITIVE_MONTHS[names.index(name)]
+
+
 AUTOFIX = [
     # (pattern, replacement, required glossary form or a label of the rule)
     (re.compile(r"(?<!\w)([Pp])opraw(ka|ki|kę|ką|ce|ek|kom|kami|kach)(?!\w)"),
@@ -139,6 +157,13 @@ AUTOFIX = [
     (re.compile(r"(?<!\w)([Łł])at(a|y|ę|ą|om|ami|ach)(?!\w)"),
      lambda m: m.group(1) + {"a": "atka", "y": "atki", "ę": "atkę", "ą": "atką", "om": "atkom",
                              "ami": "atkami", "ach": "atkach"}[m.group(2)], "łatka"),
+    # v43: dates with English or shortened month names ("do 15 august",
+    # "30 paź 2026", digests of 4–5.11.2026) get the Polish genitive.
+    (re.compile(rf"(?<!\w)(\d{{1,2}}) ({ENGLISH_MONTHS}|{SHORT_MONTHS})(?!\w)", re.IGNORECASE),
+     lambda m: f"{m.group(1)} {month_genitive(m.group(2))}", "miesiąc po polsku"),
+    (re.compile(rf"(?<!\w)({ENGLISH_MONTHS}) (\d{{1,2}})(?!\d)(?:,? (\d{{4}}))?", re.IGNORECASE),
+     lambda m: f"{m.group(2)} {month_genitive(m.group(1))}" + (f" {m.group(3)}" if m.group(3) else ""),
+     "miesiąc po polsku"),
 ]
 
 

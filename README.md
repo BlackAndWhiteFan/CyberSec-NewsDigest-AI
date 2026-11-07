@@ -44,6 +44,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 26 | Explanations in parentheses only for "podwyższenie uprawnień" and "poświadczenia": mirror v92 after the author's decision from the bridge (v40) | completed; verified by unit tests |
 | 27 | Karton Prasówki in the repository (`docs/karton.html`) with a version guard (v41) | completed; verified by unit tests |
 | 28 | Clean Polish: Morfeusz 2 catches untranslated English words and typos from the correction; Gemini lite last in the correction queue (v42) | completed; verified by unit tests |
+| 29 | Calque dictionary: 29 new rows in the calque list accepted by JW, Polish month names in dates (v43) | completed; verified by unit tests |
 
 ## Current Implementation
 

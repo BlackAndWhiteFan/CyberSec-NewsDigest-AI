@@ -134,8 +134,9 @@ class TestProofreadingOrder(unittest.TestCase):
         self.assertEqual(changed, 0)
         self.assertEqual(articles[0]["summary"], WRONG)
         self.assertTrue(all("generativelanguage" in url for url in urls))
-        # v37a: three rounds over the main and the lite models.
-        self.assertEqual(len(urls), 3 * len(proofreading_models({})))
+        # v37a: three rounds; v42: the lite models only from the second round.
+        main = [model for model in proofreading_models({}) if not model.endswith("lite")]
+        self.assertEqual(len(urls), 3 * len(proofreading_models({})) - (len(proofreading_models({})) - len(main)))
         self.assertEqual(waits, list(ai_summaries.PROOFREAD_RETRY_WAITS))
 
     def test_second_round_after_a_temporary_error(self):

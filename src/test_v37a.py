@@ -104,8 +104,9 @@ class TestFallbacks(unittest.TestCase):
 
         self.assertEqual(run(items, opener, {"GEMINI_API_KEY": "m"}), 10)
         main_calls = [url for url in urls if "lite" not in url]
-        # Each main model fails once, not once per chunk.
-        self.assertEqual(len(main_calls), 2)
+        # Each main model fails once per round, not once per chunk; v42: the
+        # lite models come in the second round, so the main ones fail twice.
+        self.assertEqual(len(main_calls), 4)
 
     def test_mistral_when_gemini_is_down(self):
         items = articles(3)

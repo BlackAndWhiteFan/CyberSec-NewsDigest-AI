@@ -27,6 +27,8 @@ import re
 from datetime import date
 from pathlib import Path
 
+from polish_words import english_problems
+
 
 GENERIC_PHRASES = [
     r"co podkreśla\w*",
@@ -572,6 +574,10 @@ def quality_problems(text, source=None, soft=True):
 
         if repeats_title(text, source.split("\n", 1)[0]):
             problems.append("streszczenie powtarza tytuł – dodaj konkret z tekstu artykułu (kto, ile, skutki)")
+
+        # v42: English words left untranslated (soft: asks for a fix).
+        if soft:
+            problems.extend(english_problems(text, source))
 
     return problems
 

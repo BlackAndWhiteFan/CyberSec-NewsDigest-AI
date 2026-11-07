@@ -2988,5 +2988,255 @@
     ],
     "terms": [],
     "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "Rosja werbuje przed wyborami. Cyberataki za kryptowaluty i propaganda z Wietnamu",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/dezinformacja/rosja-werbuje-przed-wyborami-cyberataki-za-kryptowaluty-i-propaganda-z-wietnamu",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma Golden Owl opracowała raport o rosyjskich operacjach wpływu, werbowaniu do cyberataków i kampaniach AI przed hiszpańskimi wyborami w 2026 roku, analizując tysiące wpisów na platformach społecznościowych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Golden Owl opracował raport o rosyjskich operacjach wpływu, werbowaniu do cyberataków i kampaniach AI przed hiszpańskimi wyborami 2026, analizując tysiące wpisów na platformach społecznościowych.",
+        "after": "Firma Golden Owl opracowała raport o rosyjskich operacjach wpływu, werbowaniu do cyberataków i kampaniach AI przed hiszpańskimi wyborami w 2026 roku, analizując tysiące wpisów na platformach społecznościowych.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "Hakerzy z Korei Północnej, fałszywa rekrutacja i AI. Jak doszło do ataku na Binance?",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/hakerzy-z-korei-polnocnej-falszywa-rekrutacja-i-ai-jak-doszlo-do-ataku-na-binance",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Binance straciło około 6,34 mld USD po ataku, w którym sprawcy wykorzystali zmodyfikowany instalator Homebrew oraz socjotechnikę i fałszywą rekrutację, aby uzyskać dostęp do kont inżynierów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H372"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "CTM360 Exposes Fake Gift Card Scams Exploiting Trusted Brands",
+    "link": "https://www.bleepingcomputer.com/news/security/ctm360-exposes-fake-gift-card-scams-exploiting-trusted-brands/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CTM360 wykryło ponad 1 000 incydentów fałszywych kampanii kart podarunkowych, które podszywają się pod znane marki i wykorzystują reklamy oraz „weryfikację człowieczeństwa” do zbierania danych i wymuszania subskrypcji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CTM360 wykryło ponad 1 000 incydentów fałszywych kampanii kart podarunkowych, które podszywają się pod znane marki i wykorzystują reklamy oraz „weryfikację człowieka” do zbierania danych i wymuszania subskrypcji.",
+        "after": "CTM360 wykryło ponad 1 000 incydentów fałszywych kampanii kart podarunkowych, które podszywają się pod znane marki i wykorzystują reklamy oraz „weryfikację człowieczeństwa” do zbierania danych i wymuszania subskrypcji.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "SonicWall warns of new SSL-VPN MFA bypass flaw exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "SonicWall Patches Exploited SonicOS Vulnerability That Weakens VPN Logins",
+        "link": "https://www.securityweek.com/sonicwall-patches-exploited-sonicos-bug-that-weakens-vpn-logins/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "SonicWall wydał aktualizacje naprawiające siedem podatności w firewallach SonicOS, w tym lukę CVE-2026-19868, umożliwiającą obejście uwierzytelniania SAML i MFA. Luka znajduje się w katalogu CISA KEV i była wykorzystywana w atakach.",
+    "cves": [
+      "CVE-2026-19868"
+    ],
+    "kev": [
+      "CVE-2026-19868"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "SonicWall wydał aktualizacje naprawiające siedem podatności w firewallach SonicOS, w tym CVE-2026-19868 umożliwiającą obejście uwierzytelniania SAML i MFA. Luka jest w katalogu CISA KEV i była wykorzystywana w atakach.",
+        "after": "SonicWall wydał aktualizacje naprawiające siedem podatności w firewallach SonicOS, w tym lukę CVE-2026-19868, umożliwiającą obejście uwierzytelniania SAML i MFA. Luka znajduje się w katalogu CISA KEV i była wykorzystywana w atakach.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H154",
+      "H216",
+      "H232",
+      "H322",
+      "H725"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "OpenAI's new GPT-6 Cyber AI finds 81 Firefox flaws, 948 Linux bugs",
+    "link": "https://www.bleepingcomputer.com/news/security/openais-new-gpt-6-cyber-ai-finds-81-firefox-flaws-948-linux-bugs/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "OpenAI przedstawiło model GPT-6 Cyber, który odkrył 81 wysokiego ryzyka podatności w Firefox oraz opracował exploity dla 948 luk podwyższenia uprawnień w jądrze Linux, ale model nie jest publicznie dostępny.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "Microsoft Paint RCE Fix Now Available, but Windows Update Won't Deliver It",
+    "link": "https://thehackernews.com/2026/11/microsoft-paint-rce-fix-now-available.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft udostępnił łatkę dla luki CVE-2026-83844 w Windows Paint, dostępną tylko przez aktualizację w Microsoft Store. Luka nie była wykorzystywana i nie ma publicznego exploitu. Microsoft ocenia ją jako ważną (CVSS 8.1). Łatka znajduje się w buildzie 11.2609.401.0.",
+    "cves": [
+      "CVE-2026-83844"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawkę",
+        "fixed": "łatkę"
+      },
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawka",
+        "fixed": "Łatka"
+      },
+      {
+        "type": "proofreading",
+        "before": "Microsoft udostępnił łatkę dla luki CVE-2026-83844 w Windows Paint, dostępna tylko przez aktualizację w Microsoft Store. Luka nie była wykorzystywana i nie ma publicznego exploitu. Microsoft ocenia ją jako ważną (CVSS 8.1). Łatka znajduje się w buildzie 11.2609.401.0.",
+        "after": "Microsoft udostępnił łatkę dla luki CVE-2026-83844 w Windows Paint, dostępną tylko przez aktualizację w Microsoft Store. Luka nie była wykorzystywana i nie ma publicznego exploitu. Microsoft ocenia ją jako ważną (CVSS 8.1). Łatka znajduje się w buildzie 11.2609.401.0.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H151",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "Malicious Browser Extensions Could Use Claude Dispatch to Run Code on Users' Computers",
+    "link": "https://thehackernews.com/2026/11/malicious-browser-extensions-could-use.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Przeanalizowano złośliwe rozszerzenia przeglądarki, które mogą wykorzystać funkcję Dispatch w Claude Desktop do uruchamiania kodu na komputerze użytkownika. Lukę nadal można wykorzystać – wymaga to jednoczesnego zalogowania się do claude.ai oraz włączonej funkcji Dispatch.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "proofreading",
+        "before": "Badane zostały złośliwe rozszerzenia przeglądarki, które mogą wykorzystać funkcję Dispatch w Claude Desktop do uruchamiania kodu na komputerze użytkownika. Luka jest nadal możliwa do wykorzystania i wymaga jednoczesnego zalogowania się do claude.ai oraz włączonego Dispatch.",
+        "after": "Przeanalizowano złośliwe rozszerzenia przeglądarki, które mogą wykorzystać funkcję Dispatch w Claude Desktop do uruchamiania kodu na komputerze użytkownika. Lukę nadal można wykorzystać – wymaga to jednoczesnego zalogowania się do claude.ai oraz włączonej funkcji Dispatch.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-07",
+    "title": "Hackers Exploit Patched Apple Flaw to Deliver Info-Stealing Malware, CISA Says",
+    "link": "https://thehackernews.com/2026/11/hackers-exploit-patched-apple-flaw-to.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CISA dodała do katalogu KEV podatność CVE-2024-27834, aktywnie wykorzystywaną przez grupę APT29. Apple załatało ją w maju 2024 roku w iOS 16.7.8, iPadOS 16.7.8, iOS 17.5, macOS Sonoma 14.5, tvOS 17.5, watchOS 10.5 i Safari 17.5.",
+    "cves": [
+      "CVE-2024-27834"
+    ],
+    "kev": [
+      "CVE-2024-27834"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CISA dodała do katalogu KEV podatność CVE-2024-27834, aktywnie wykorzystywaną przez grupę APT29. Apple załatała ją w maju 2024 w iOS 16.7.8, iPadOS 16.7.8, iOS 17.5, macOS Sonoma 14.5, tvOS 17.5, watchOS 10.5 i Safari 17.5.",
+        "after": "CISA dodała do katalogu KEV podatność CVE-2024-27834, aktywnie wykorzystywaną przez grupę APT29. Apple załatało ją w maju 2024 roku w iOS 16.7.8, iPadOS 16.7.8, iOS 17.5, macOS Sonoma 14.5, tvOS 17.5, watchOS 10.5 i Safari 17.5.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H028",
+      "H150",
+      "H153",
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

@@ -1,5 +1,5 @@
 {
   "date": "2026-11-07",
-  "trigger": "budzik",
-  "articles": 19
+  "trigger": "workflow_dispatch",
+  "articles": 8
 }

@@ -1126,7 +1126,14 @@
     "https://therecord.media/digicert-certificate-authority-reports-data-breach",
     "https://therecord.media/fbi-agent-pleads-guilty-to-stealing-from-nation-state-hackers",
     "https://therecord.media/ceo-spoofing-scammers-charged",
-    "https://therecord.media/eu-accuses-tiktok-of-rabbit-hole-DSA-violation"
+    "https://therecord.media/eu-accuses-tiktok-of-rabbit-hole-DSA-violation",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/dezinformacja/rosja-werbuje-przed-wyborami-cyberataki-za-kryptowaluty-i-propaganda-z-wietnamu",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/hakerzy-z-korei-polnocnej-falszywa-rekrutacja-i-ai-jak-doszlo-do-ataku-na-binance",
+    "https://cyberdefence24.pl/biznes-i-finanse/banka-ai-zaczyna-pekac-gieldowe-trzesienie-w-chinach-i-problemy-alphabetu",
+    "https://www.bleepingcomputer.com/news/security/hackers-pull-off-133-million-french-bank-heist-via-service-provider/",
+    "https://www.bleepingcomputer.com/news/security/ctm360-exposes-fake-gift-card-scams-exploiting-trusted-brands/",
+    "https://thehackernews.com/2026/11/claude-codes-dont-ask-again-file.html",
+    "https://www.securityweek.com/sonicwall-patches-exploited-sonicos-bug-that-weakens-vpn-logins/"
   ],
   "published_links": [
     "https://www.bleepingcomputer.com/news/security/palo-alto-networks-warns-of-pan-os-rce-flaw-exploited-in-attacks/",
@@ -1524,6 +1531,15 @@
     "https://thehackernews.com/2026/11/hackers-exploited-openssh-sshole-flaw.html",
     "https://thehackernews.com/2026/11/openai-launches-gpt-6-cyber-after-ai.html",
     "https://www.securityweek.com/openai-says-new-gpt-6-cyber-model-hunts-flaws-without-crossing-the-line/",
-    "https://therecord.media/digicert-certificate-authority-reports-data-breach"
+    "https://therecord.media/digicert-certificate-authority-reports-data-breach",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/dezinformacja/rosja-werbuje-przed-wyborami-cyberataki-za-kryptowaluty-i-propaganda-z-wietnamu",
+    "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/hakerzy-z-korei-polnocnej-falszywa-rekrutacja-i-ai-jak-doszlo-do-ataku-na-binance",
+    "https://www.bleepingcomputer.com/news/security/ctm360-exposes-fake-gift-card-scams-exploiting-trusted-brands/",
+    "https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/",
+    "https://www.bleepingcomputer.com/news/security/openais-new-gpt-6-cyber-ai-finds-81-firefox-flaws-948-linux-bugs/",
+    "https://thehackernews.com/2026/11/microsoft-paint-rce-fix-now-available.html",
+    "https://thehackernews.com/2026/11/malicious-browser-extensions-could-use.html",
+    "https://thehackernews.com/2026/11/hackers-exploit-patched-apple-flaw-to.html",
+    "https://www.securityweek.com/sonicwall-patches-exploited-sonicos-bug-that-weakens-vpn-logins/"
   ]
 }

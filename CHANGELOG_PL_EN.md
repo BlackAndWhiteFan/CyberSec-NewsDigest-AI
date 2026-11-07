@@ -24,6 +24,43 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v40 · Dwa nawiasy --- 07.11.2026
+
+**Objaśnienia w nawiasach tylko przy dwóch terminach (mirror v92).**
+
+Powód: pierwsza decyzja autora z przęsła P8 · Rozbieżności mostu
+(List 18, 2.11.2026). Od pliku-matki v92 objaśnienia H182 i H207 pochodzą
+z bloku językowego pliku-matki, a nie z wyjątków w kodzie mostu
+(Listy 21–22). Objaśnienie w nawiasie zostaje tylko tam, gdzie
+polski termin bywa niejasny: „podwyższenie (eskalacja) uprawnień” (H182)
+i „poświadczenia (dane logowania)” (H207). Exploit, botnet, ransomware i
+infostealer (H153, H004, H015, H019) są dla czytelnika prasówki
+zrozumiałe bez objaśnienia; wiper (H723) objaśnienia nie miał.
+
+Zmiany:
+
+- **Mirror v92** `data/glosariusz_mirror.csv` z eksportera mostu
+  (krok K5 runbooka: nowy mirror do Prasówki), zamiast dwóch osobnych
+  mirrorów (List 22): pusta kolumna `nawias` przy H004, H015, H019 i
+  H153, nagłówek `plik-matka v92 · 2026-11-03`.
+- **Kod objaśnień** (`src/glossary.py`): usunięte objaśnienia odmieniane
+  dla exploita, botnetu i infostealera, objaśnienie ransomware zależne
+  od przypadka i reguła pomijania „ransomware” po osobach i grupach
+  (v33). Tabele form exploita, botnetu i infostealera zostają jako
+  zestaw testowy dla form odmienionych planowanych w pliku-matce
+  (List 16, pkt 3a). Mechanizm objaśnień działa dalej z danych mirrora,
+  więc przywrócenie objaśnienia w pliku-matce nie wymaga zmian w kodzie
+  (poza odmianą zależną od przypadka).
+- **Testy:** przykłady objaśnień przeniesione na H182 i H207; nowy test,
+  że exploit, botnet, ransomware, infostealer i wiper zostają bez
+  nawiasu. Razem 441 testów.
+
+Zmienione pliki: `data/glosariusz_mirror.csv`, `src/glossary.py`,
+`src/test_glossary.py`, `src/test_quality_v33.py`,
+`src/test_discord_output.py`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v39 --- 02.11.2026
 
 **Straż dwóch ostatnich linii danych dla mostu i pole `proofread`.**
@@ -2231,6 +2268,44 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v40 · Two parentheses --- 2026-11-07
+
+**Explanations in parentheses for two terms only (mirror v92).**
+
+Reason: the author's first decision from the bridge span P8 ·
+Rozbieżności (Discrepancies) (Letter 18, 2 November 2026). Since mother workbook v92 the H182 and
+H207 explanations come from its language block, not from exceptions in
+the bridge code (Letters 21–22). An explanation
+in parentheses stays only where the Polish term may be unclear:
+"podwyższenie (eskalacja) uprawnień" (H182) and "poświadczenia (dane
+logowania)" (H207). Exploit, botnet, ransomware and infostealer (H153,
+H004, H015, H019) are clear to digest readers without one; wiper (H723)
+had none.
+
+Changes:
+
+- **Mirror v92** `data/glosariusz_mirror.csv` from the bridge exporter
+  (runbook step K5: new mirror to the digest), one mirror instead of two
+  (Letter 22): empty `nawias` column for H004, H015, H019 and H153,
+  header `plik-matka v92 · 2026-11-03`.
+- **Explanation code** (`src/glossary.py`): removed the inflected
+  explanations for exploit, botnet and infostealer, the case-dependent
+  explanation for ransomware and the rule skipping "ransomware" after
+  people and groups (v33). The exploit, botnet and infostealer form
+  tables stay as a test set for the inflected forms planned in the
+  mother workbook (Letter 16, point 3a). Explanations still come from
+  the mirror data, so restoring one in the mother workbook needs no code
+  change (except for case-dependent inflection).
+- **Tests:** explanation examples moved to H182 and H207; a new test
+  checks that exploit, botnet, ransomware, infostealer and wiper stay
+  without parentheses. 441 tests in total.
+
+Changed files: `data/glosariusz_mirror.csv`, `src/glossary.py`,
+`src/test_glossary.py`, `src/test_quality_v33.py`,
+`src/test_discord_output.py`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

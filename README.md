@@ -47,6 +47,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 29 | Calque dictionary: 29 new rows in the calque list accepted by JW, Polish month names in dates (v43) | completed; verified by unit tests |
 | 30 | No echo: one story, one item – merging by company names, product versions and amounts in the summaries (v44) | completed; verified by unit tests |
 | 31 | Less, but better: at most 10 items in the daily digest, no sponsored content (v45) | completed; verified by unit tests |
+| 32 | Polish polish: language rules document in the prompts, Morfeusz 2 grammar checks, industry usage over purism (v46) | completed; verified by unit tests |
 
 ## Current Implementation
 
@@ -190,6 +191,7 @@ Data and tools:
 - `data/tops/YYYY-Www.json`, `data/tops/YYYY-MM.json` — delivered weekly and monthly tops with their event stories (since v38; material for the bridge to CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (mother workbook v92, six columns). Exported by the private bridge repository `cybersec-most` (since v38; before that by `tools/eksport_mirrora.py` in this repository).
 - `data/styl_unikaj.csv` — style list: calques and anglicisms with suggestions, edited by hand (`*` = any ending).
+- `data/reguly_jezyka.md` — Prasówka language rules, edited by JW: the section "Nakazy dla modeli" goes to the prompts (since v46).
 - `data/slowa_angielskie_ok.csv` — English words that may stay untranslated in summaries, edited by hand (`*` = any ending; since v42).
 - `docs/karton.html` — Karton Prasówki, the interactive map of the digest, with version markers read by the bridge report (since v41).
 

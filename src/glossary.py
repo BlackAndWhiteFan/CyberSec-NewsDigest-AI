@@ -161,6 +161,10 @@ AUTOFIX = [
     # "30 paź 2026", digests of 4–5.11.2026) get the Polish genitive.
     (re.compile(rf"(?<!\w)(\d{{1,2}}) ({ENGLISH_MONTHS}|{SHORT_MONTHS})(?!\w)", re.IGNORECASE),
      lambda m: f"{m.group(1)} {month_genitive(m.group(2))}", "miesiąc po polsku"),
+    # v46: the CVSS score with a decimal comma ("CVSS 8.1" → "CVSS 8,1");
+    # program versions keep their dots.
+    (re.compile(r"(?<!\w)(CVSS(?:\s+v?[34]\.\d)?[:\s]+(?:score\s+|wynosi\s+|o wartości\s+)?)(\d{1,2})\.(\d)(?![\d.])"),
+     lambda m: f"{m.group(1)}{m.group(2)},{m.group(3)}", "przecinek dziesiętny"),
     (re.compile(rf"(?<!\w)({ENGLISH_MONTHS}) (\d{{1,2}})(?!\d)(?:,? (\d{{4}}))?", re.IGNORECASE),
      lambda m: f"{m.group(2)} {month_genitive(m.group(1))}" + (f" {m.group(3)}" if m.group(3) else ""),
      "miesiąc po polsku"),

@@ -27,7 +27,7 @@ import re
 from datetime import date
 from pathlib import Path
 
-from polish_words import english_problems
+from polish_words import english_problems, grammar_problems
 
 
 GENERIC_PHRASES = [
@@ -565,6 +565,8 @@ def quality_problems(text, source=None, soft=True):
     if soft:
         problems.extend(style_problems(text))
         problems.extend(readability_problems(text))
+        # v46: Morfeusz 2 grammar checks (numerals, product names, genders).
+        problems.extend(grammar_problems(text))
 
     if looks_english(text):
         problems.append("streszczenie nie jest po polsku – napisz je po polsku")

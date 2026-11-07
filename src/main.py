@@ -17,6 +17,8 @@ from article_selection import (
     is_roundup,
     prioritize_article,
     relevant_articles,
+    DAILY_CANDIDATES,
+    limit_daily,
     select_top_articles,
 )
 from discord_output import build_digest_messages, send_messages
@@ -254,7 +256,7 @@ def run():
         relevant_articles(eligible_articles),
         pool=eligible_articles,
     )
-    selected_articles = select_top_articles(grouped_articles, limit=20)
+    selected_articles = select_top_articles(grouped_articles, limit=DAILY_CANDIDATES)
 
     try:
         recent_records = load_recent(days=3)
@@ -331,6 +333,8 @@ def run():
     selected_articles = merge_by_cves(selected_articles, use_summaries=True)
     # v44: one story, one item – the same amounts in the summaries (bug bounty, 4.11.2026).
     selected_articles = merge_by_story(selected_articles)
+    # v45: at most DAILY_ITEMS items; the rest is not sent and not recorded.
+    selected_articles = limit_daily(selected_articles)
     mark_continuations_by_cve(selected_articles, recent_records)
 
     print()

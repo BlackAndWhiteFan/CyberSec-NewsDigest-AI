@@ -41,6 +41,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Install Morfeusz 2
+        # v42: Polish dictionary for the word checks (src/polish_words.py).
+        # Without it the checks are skipped, so a failed install never stops
+        # the run.
+        continue-on-error: true
+        run: python -m pip install --quiet morfeusz2==1.99.15 || python -m pip install --quiet --break-system-packages morfeusz2==1.99.15
+
       - name: Run unit tests
         run: python -m unittest discover -s src -p "test_*.py"
 

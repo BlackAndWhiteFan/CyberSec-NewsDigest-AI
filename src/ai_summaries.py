@@ -31,8 +31,9 @@ import urllib.error
 import urllib.request
 
 from article_selection import ROUNDUP_SUMMARY, is_roundup
-from gemini import ask_gemini, gemini_models, proofreading_models
+from gemini import GEMINI_LITE_MODELS, ask_gemini, gemini_models, proofreading_models
 from mistral import ask_mistral, mistral_model
+from polish_words import english_leftovers, invented_words
 from languagetool import grammar_hints
 from glossary import autofix, convention_violations, is_acronym, prompt_glossary
 from language_notes import findings, log_line, settle, unique
@@ -123,6 +124,8 @@ Pozostałe zasady:
 - Pisz rzeczowo, poprawną polszczyzną, bez wykrzykników, bez linków, bez formatowania Markdown.
 - Nie wstawiaj angielskich słów zamiast polskich (np. „awaryjne łatki”, a nie „emergency łatki”), chyba że to nazwa własna albo termin ze słowniczka.
 - Całe streszczenie pisz po polsku, także gdy artykuł jest po angielsku; nie przepisuj angielskich zdań.
+- Angielskie słowa spoza słowniczka przełóż albo opisz po polsku: „komputer łączącego się z nim użytkownika”, a nie „komputer viewer”; „sprawcy”, a nie „threat actor”; „finansowanie na start”, a nie „seed funding”. Miesiące pisz po polsku („15 sierpnia”).
+- Skrót spoza słowniczka wyjaśnij przy pierwszym użyciu: „podniesienie uprawnień lokalnych (LPE)”.
 - Unikaj kalk z angielskiego; zamiast nich pisz: {style}
 - Sprawdzaj odmianę i rodzaj (np. „dwie krytyczne luki”, „brak łatki”), nie twórz złożeń typu „AI-zarządzany” (pisz „zarządzany przez AI”).
 - Pisz prostymi zdaniami (do ok. 25 słów), ale tak, żeby tekst płynął: łącz powiązane fakty spójnikami („bo”, „więc”, „ale”, „a”, „dlatego”) zamiast stawiać obok siebie same krótkie zdania. Każde zdanie ma orzeczenie – bez równoważników („W tym cztery krytyczne błędy…”). Unikaj długich ciągów imiesłowów i wtrąceń.
@@ -563,7 +566,9 @@ Przeczytaj uważnie każde zdanie i popraw wyłącznie błędy językowe: gramat
 - składnia bezosobowa: „Publikuje się natychmiastowa łatka” → „Opublikowano łatkę”.
 - rekcja i uzgodnienie: „CISA dodało … dwóch podatności” → „CISA dodała … dwie podatności”;
 - sens: zdanie niejasne lub nielogiczne przeformułuj prościej, zachowując fakty (np. „Exploit CVE-2026-110447 umożliwia backdoor” → „Luka CVE-2026-110447 pozwala zainstalować backdoora”). Długie zdanie możesz podzielić na dwa.
-Przy niektórych streszczeniach są „uwagi” z automatycznego korektora LanguageTool: sprawdź je, popraw trafne, pomiń chybione.
+- angielskie słowa: przełóż je albo opisz po polsku („jako viewer” → „jako użytkownik łączący się z komputerem”, „grupa threat actor” → „sprawcy”), zostaw tylko nazwy własne i terminy wymienione niżej.
+Nie twórz nowych słów i sprawdzaj pisownię każdego słowa, które zmieniasz: poprawka z literówką („kryzycznych”, „Hakeri”) zostanie odrzucona.
+Przy niektórych streszczeniach są „uwagi” z automatycznego korektora LanguageTool i z kontroli słów: sprawdź je, popraw trafne, pomiń chybione.
 Nie zmieniaj faktów, liczb, dat, nazw, numerów CVE ani wersji. Nie dodawaj i nie usuwaj informacji. Nie zmieniaj terminów: exploit, RCE, PoC, zero-day, łatka, backdoor, malware, ransomware, MFA i nazw własnych.
 Jeśli streszczenie jest poprawne, zwróć je bez zmian.
 Odpowiedz wyłącznie obiektem JSON: {{"streszczenia": [{{"id": 1, "tekst": "..."}}]}}"""
@@ -631,26 +636,34 @@ PROOFREAD_RETRY_WAITS = (GEMINI_RETRY_WAIT, 2 * GEMINI_RETRY_WAIT)
 def language_correctors(environ):
     """Models of the language correction: [(name, ask, first round)].
 
-    Gemini main models, then the lite ones (v37a), from the first round;
-    Mistral (v37a, if MISTRAL_API_KEY is set) from the second round, so
-    Gemini, checked for months, gets the first chance.
+    Gemini main models from the first round; Mistral (v37a, if
+    MISTRAL_API_KEY is set) from the second round, so Gemini, checked for
+    months, gets the first chance. v42: the lite Gemini models come last,
+    from the second round, after Mistral – on 6–7.11.2026 lite invented
+    words ("kryzycznych", "Hakeri") and corrected almost half of the
+    summaries, as in the event stories (v37b).
     """
     result = []
     gemini_key = environ.get("GEMINI_API_KEY", "").strip()
     mistral_key = environ.get("MISTRAL_API_KEY", "").strip()
+    models = proofreading_models(environ) if gemini_key else []
+    lite = [model for model in models if model.endswith("lite") or model in GEMINI_LITE_MODELS]
+    main = [model for model in models if model not in lite]
 
-    if gemini_key:
-        for model in proofreading_models(environ):
-            result.append((f"Gemini {model}",
-                           lambda system, user, opener, model=model: ask_gemini(model, gemini_key, system, user, opener),
-                           1))
+    def gemini(model, first_round):
+        return (f"Gemini {model}",
+                lambda system, user, opener, model=model: ask_gemini(model, gemini_key, system, user, opener),
+                first_round)
+
+    result.extend(gemini(model, 1) for model in main)
 
     if mistral_key:
         model = mistral_model(environ)
         result.append((f"Mistral {model}",
                        lambda system, user, opener, model=model: ask_mistral(model, mistral_key, system, user, opener),
-                       2 if gemini_key else 1))
+                       2 if main else 1))
 
+    result.extend(gemini(model, 2 if main or mistral_key else 1) for model in lite)
     return result
 
 
@@ -809,6 +822,11 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
         return 0
 
     hints = hints_source([article["summary"] for _, article in numbered], opener)
+
+    # v42: English words left in a summary go to the corrector as hints.
+    for index, (_, article) in enumerate(numbered):
+        for word in english_leftovers(article["summary"], article.get("summary_material")):
+            hints.setdefault(index, []).append(f"„{word}”: angielskie słowo – przełóż je albo opisz po polsku")
     items = []
 
     for index, (number, article) in enumerate(numbered):
@@ -838,6 +856,14 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
             continue
 
         material = article.get("summary_material")
+
+        # v42: a correction that invents a word is rejected ("kryzycznych",
+        # "Hakeri": Gemini lite, 6–7.11.2026; the text before was right).
+        invented = invented_words(old, new, material or "")
+
+        if invented:
+            print(f"KOREKTA: streszczenie {number} – poprawka odrzucona (nieznane słowa: {', '.join(invented)}).")
+            continue
 
         if (
             same_facts(old, new)

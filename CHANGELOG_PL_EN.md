@@ -24,6 +24,56 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v42 · Czysta polszczyzna --- 07.11.2026
+
+**Morfeusz 2 łapie angielskie słowa bez przekładu i słowa wymyślone przez
+korektę; Gemini lite na końcu kolejki korekty.**
+
+Powód: przegląd prasówek z 31.10–7.11.2026. Angielskie słowa w
+streszczeniach („komputer łączącego się jako viewer”, „grupa threat
+actor”, „do 15 august”, „seed funding”, „pipeline”, „tenantów”), a korekta
+Gemini lite sama wprowadzała literówki („kryzycznych”, „Hakeri”; przed
+korektą tekst był poprawny). Lite poprawiał przy tym prawie połowę
+streszczeń (40 z 89 od 3.11).
+
+Zmiany:
+
+- **Kontrola słów** (`src/polish_words.py`, Morfeusz 2 ze słownikiem SGJP):
+  - **angielskie słowo bez przekładu**: pisane małą literą, nieznane
+    Morfeuszowi, spoza słowniczka i listy dozwolonych, obecne w angielskim
+    materiale artykułu. To problem miękki: streszczenie wraca do poprawki
+    z podpowiedzią, nigdy nie jest przez to cięte. Słowa trafiają też do
+    korekty jako uwagi;
+  - **słowo wymyślone przez korektę**: nowe słowo, którego Morfeusz nie
+    zna i którego nie tłumaczy żadna nazwa z tekstu przed korektą ani z
+    materiału. Taka poprawka jest odrzucana, zostaje tekst sprzed korekty.
+    Na archiwum od 19.10 odrzuciłaby 2 ze 115 poprawek: dokładnie
+    „kryzycznych” i „Hakeri”.
+- **Lista dozwolonych angielskich słów** `data/slowa_angielskie_ok.csv`
+  (edytuje JW): framework*, firmware*, devops*, musl, libc. Terminy ze
+  słowniczka Mozaiki są dozwolone automatycznie.
+- **Kolejność korekty**: Gemini główne → od 2. rundy Ministral →
+  Gemini lite (tak jak w historiach wydarzeń od v37b).
+- **Prompty**: model piszący przekłada angielskie słowa spoza słowniczka,
+  pisze miesiące po polsku i wyjaśnia skróty (LPE) przy pierwszym użyciu;
+  korektor nie tworzy nowych słów.
+- **Workflow**: krok instalacji `morfeusz2==1.99.15` przed testami. Bez
+  pakietu kontrola słów jest pomijana, a nieudana instalacja nie
+  zatrzymuje przebiegu.
+- **Karton Prasówki** odświeżony do v42. **Testy**: `src/test_v42.py`;
+  razem 460.
+
+Czego v42 nie łapie: kalek złożonych ze znanych polskich słów („w
+poziomach łatek”, „wystawionych w Internecie”). Te trafiają do listy kalk
+i do przęsła P3 · Kalki w Raporcie Mostu.
+
+Nowe i zmienione pliki: `src/polish_words.py` (nowy),
+`data/slowa_angielskie_ok.csv` (nowy), `src/test_v42.py` (nowy),
+`src/ai_summaries.py`, `src/summary_quality.py`, `src/test_proofreading.py`,
+`src/test_v37a.py`, cztery workflow, `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v41 · Karton na straży --- 07.11.2026
 
 **Karton Prasówki w repo ze strażnikiem wersji.**
@@ -2300,6 +2350,56 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v42 · Clean Polish --- 2026-11-07
+
+**Morfeusz 2 catches untranslated English words and words invented by the
+language correction; Gemini lite last in the correction queue.**
+
+Reason: review of the digests of 31 Oct–7 Nov 2026. English words in
+summaries ("komputer łączącego się jako viewer", "grupa threat actor",
+"do 15 august", "seed funding", "pipeline", "tenantów"), and the Gemini
+lite correction introduced typos itself ("kryzycznych", "Hakeri"; the
+text before the correction was right). Lite corrected almost half of the
+summaries (40 of 89 since 3 Nov).
+
+Changes:
+
+- **Word checks** (`src/polish_words.py`, Morfeusz 2 with the SGJP
+  dictionary):
+  - **untranslated English word**: lowercase, unknown to Morfeusz, not in
+    the glossary or the accepted list, present in the English material.
+    A soft problem: the summary goes back for a fix with a hint and is
+    never cut for it. The words also go to the correction as hints;
+  - **word invented by the correction**: a new word Morfeusz does not
+    know and no name in the text before the correction or in the
+    material explains. Such a correction is rejected and the text before
+    it stays. On the archive since 19 Oct it would reject 2 of 115
+    corrections: exactly "kryzycznych" and "Hakeri".
+- **Accepted English words** `data/slowa_angielskie_ok.csv` (edited by
+  JW): framework*, firmware*, devops*, musl, libc. Glossary terms are
+  accepted automatically.
+- **Correction order**: main Gemini → from round 2 Ministral → Gemini
+  lite (as in the event stories since v37b).
+- **Prompts**: the writing model translates English words outside the
+  glossary, writes months in Polish and explains acronyms (LPE) at first
+  use; the corrector creates no new words.
+- **Workflows**: a step installing `morfeusz2==1.99.15` before the tests.
+  Without the package the word checks are skipped, and a failed install
+  never stops the run.
+- **Karton Prasówki** refreshed to v42. **Tests**: `src/test_v42.py`;
+  460 in total.
+
+What v42 does not catch: calques made of known Polish words ("w
+poziomach łatek", "wystawionych w Internecie"). These go to the style
+list and to the bridge span P3 · Kalki (Calques) in the bridge report.
+
+New and changed files: `src/polish_words.py` (new),
+`data/slowa_angielskie_ok.csv` (new), `src/test_v42.py` (new),
+`src/ai_summaries.py`, `src/summary_quality.py`, `src/test_proofreading.py`,
+`src/test_v37a.py`, four workflows, `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

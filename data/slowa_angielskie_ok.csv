@@ -1,0 +1,11 @@
+# Angielskie słowa, które w streszczeniach mogą zostać bez przekładu (v42).
+# Kontrola słów (src/polish_words.py) nie zgłasza ich jako „angielskie słowo”.
+# Jedno słowo w linii, małymi literami; gwiazdka * na końcu = dowolna końcówka
+# (framework* = framework, frameworku, frameworka…). Terminy ze słowniczka
+# Mozaiki są dozwolone automatycznie i nie trzeba ich tu wpisywać.
+# Linie zaczynające się od # są komentarzami. Plik edytuje JW.
+framework*
+firmware*
+devops*
+musl
+libc

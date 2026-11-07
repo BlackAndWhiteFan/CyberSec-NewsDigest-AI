@@ -45,6 +45,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 27 | Karton Prasówki in the repository (`docs/karton.html`) with a version guard (v41) | completed; verified by unit tests |
 | 28 | Clean Polish: Morfeusz 2 catches untranslated English words and typos from the correction; Gemini lite last in the correction queue (v42) | completed; verified by unit tests |
 | 29 | Calque dictionary: 29 new rows in the calque list accepted by JW, Polish month names in dates (v43) | completed; verified by unit tests |
+| 30 | No echo: one story, one item – merging by company names, product versions and amounts in the summaries (v44) | completed; verified by unit tests |
 
 ## Current Implementation
 

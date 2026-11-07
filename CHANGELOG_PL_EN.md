@@ -24,6 +24,45 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v44 · Bez echa --- 07.11.2026
+
+**Jedna sprawa, jedna pozycja: łączenie po nazwach firm, wersjach
+produktów i kwotach w streszczeniach.**
+
+Powód: w 5 z 6 prasówek z 31.10–7.11.2026 ta sama sprawa szła w kilku
+pozycjach (Chainalysis 2.11 i 7.11, Binance 31.10 i 4.11, OpenSSH 6.11,
+GPT-6 Cyber 7.11 trzy razy, bug bounty CERT Polska 4.11 sześć razy z 20
+pozycji). Grupowanie łączyło tytuły po nazwie firmy tylko wtedy, gdy ta
+nazwa była rzadka w puli dnia (najwyżej 2 tytuły), a duże wydarzenie ma
+ją w wielu tytułach.
+
+Zmiany (`src/event_grouping.py`, `src/main.py`):
+
+- **Nazwa firmy lub produktu w obu tytułach** łączy pozycje także wtedy,
+  gdy jest w wielu tytułach dnia (do 8). Słowo musi wyglądać na nazwę
+  w tytule („OpenSSH”, „z Binance”) albo być nazwą w tekstach artykułów.
+  Nie liczą się wspólne platformy (Microsoft, Linux…), nazwy miejsc
+  („Japan Airlines” i „Japan's GMO”) ani początki słów („Chain” w
+  „Chainalysis”).
+- **Wersja produktu** („GPT-6”, „GPT 6”) łączy jak nazwa z cyframi
+  (PHP2Shell, v26).
+- **Te same kwoty w streszczeniach** (po napisaniu streszczeń): dwie
+  wspólne kwoty albo jedna kwota i jedna nazwa. „20 tys. zł”, „20 000 zł”
+  i „1 mln zł” to te same liczby. Lata i numery CVE się nie liczą. Log:
+  `SCALENIE PO TREŚCI`.
+- **Karton Prasówki** odświeżony do v44. **Testy**: `src/test_v44.py`;
+  razem 471.
+
+Sprawdzenie na archiwum od 19.10: nowe reguły łączą wszystkie znane
+powtórki (Chainalysis, Binance, OpenSSH, GPT-6, OpenCode, Quest
+Diagnostics, 5 z 6 artykułów o bug bounty) i nie łączą różnych spraw.
+Nie łączą tytułów bez wspólnej nazwy i kwot (banki krwi we Francji 6.11).
+
+Zmienione pliki: `src/event_grouping.py`, `src/main.py`,
+`src/test_v44.py` (nowy), `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v43 · Słownik kalek --- 07.11.2026
 
 **29 nowych wierszy listy kalk i daty z polskimi nazwami miesięcy.**
@@ -2386,6 +2425,45 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v44 · No echo --- 2026-11-07
+
+**One story, one item: merging by company names, product versions and
+amounts in the summaries.**
+
+Reason: in 5 of 6 digests of 31 Oct–7 Nov 2026 the same story went out
+as several items (Chainalysis on 2 and 7 Nov, Binance on 31 Oct and 4
+Nov, OpenSSH on 6 Nov, GPT-6 Cyber three times on 7 Nov, the CERT Polska
+bug bounty six times of 20 items on 4 Nov). Grouping merged titles by a
+company name only when the name was rare in the day's pool (at most 2
+titles), while a big event has it in many titles.
+
+Changes (`src/event_grouping.py`, `src/main.py`):
+
+- **A company or product name in both titles** merges items also when it
+  is in many titles of the day (up to 8). The word must look like a name
+  in a title ("OpenSSH", "z Binance") or be a name in the article texts.
+  Common platforms (Microsoft, Linux…), places ("Japan Airlines" and
+  "Japan's GMO") and word beginnings ("Chain" in "Chainalysis") never
+  count.
+- **A product version** ("GPT-6", "GPT 6") merges like a name with digits
+  (PHP2Shell, v26).
+- **The same amounts in the summaries** (after the summaries are written):
+  two shared amounts, or one amount and one name. "20 tys. zł", "20 000
+  zł" and "1 mln zł" are read as numbers; years and CVE ids do not count.
+  Log: `SCALENIE PO TREŚCI`.
+- **Karton Prasówki** refreshed to v44. **Tests**: `src/test_v44.py`; 471
+  in total.
+
+Check on the archive since 19 Oct: the new rules merge all known repeats
+(Chainalysis, Binance, OpenSSH, GPT-6, OpenCode, Quest Diagnostics, 5 of
+6 bug bounty articles) and merge no different stories. Titles without a
+shared name or amounts stay apart (French blood banks, 6 Nov).
+
+Changed files: `src/event_grouping.py`, `src/main.py`,
+`src/test_v44.py` (new), `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

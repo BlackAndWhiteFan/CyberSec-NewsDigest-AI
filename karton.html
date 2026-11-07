@@ -1,0 +1,465 @@
+<title>Karton Prasówki CyberSec</title>
+<!-- v41: Karton Prasówki w repo (docs/karton.html). Znaczniki wersji czyta strażnik src/test_v41.py
+     i Raport Mostu (Prasówka → Mozaika); zmieniaj je w tej samej rundzie co CHANGELOG i mirror. -->
+<meta name="prasowka-wersja" content="v42">
+<meta name="plik-matka-wersja" content="v92">
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Układ: karton prasówki — plan 1:1 przepływu od kanału RSS do Discorda, w tej samej konwencji co Karton Mozaiki; diagram + panel, pod spodem modele, rytm, oś wersji, braki */
+:root{
+  --bg:#E9ECEA; --grout:#DADFDC; --surface:#F7F8F6; --ink:#1C2321; --muted:#5A6561; --line:#C5CCC8;
+  --gold:#B8862A; --teal:#287A74; --lapis:#2D59A0; --olive:#5F7D33; --oxide:#AE422C; --stone:#7C766B; --plum:#7A4A92;
+  --tile-mix:16%;
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"Cascadia Mono",Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#131618; --grout:#1B1F21; --surface:#1D2224; --ink:#E6EBE8; --muted:#9BA6A1; --line:#323A3C;
+  --gold:#DDAA45; --teal:#4DB3A9; --lapis:#6E98E0; --olive:#94B85E; --oxide:#E27659; --stone:#ABA497; --plum:#B88AD2;
+  --tile-mix:22%; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#131618; --grout:#1B1F21; --surface:#1D2224; --ink:#E6EBE8; --muted:#9BA6A1; --line:#323A3C;
+  --gold:#DDAA45; --teal:#4DB3A9; --lapis:#6E98E0; --olive:#94B85E; --oxide:#E27659; --stone:#ABA497; --plum:#B88AD2;
+  --tile-mix:22%; color-scheme:dark }
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1400px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 64px;display:flex;flex-direction:column;gap:56px}
+@media (min-width:900px){.wrap{padding-left:max(40px,env(safe-area-inset-left,0px));padding-right:max(40px,env(safe-area-inset-right,0px))}}
+h1,h2,h3{font-family:var(--f-display);font-weight:700;text-wrap:balance;margin:0;letter-spacing:-.01em}
+h1{font-size:clamp(30px,4.6vw,52px);line-height:1.05}
+h2{font-size:clamp(20px,2.2vw,26px);line-height:1.2}
+h3{font-size:14px;font-weight:500;letter-spacing:.02em}
+p{margin:0}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.mono{font-family:var(--f-mono)}
+a{color:var(--lapis)}
+:focus-visible{outline:2px solid var(--lapis);outline-offset:2px}
+header{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:32px;align-items:end}
+header .lead{max-width:62ch;color:var(--muted);font-size:16px;margin-top:14px}
+header .lead b{color:var(--ink);font-weight:600}
+.stats{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-end}
+.stat{display:flex;flex-direction:column;padding:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:3px;min-width:0}
+.stat b{font-family:var(--f-display);font-size:18px;font-weight:500;font-variant-numeric:tabular-nums}
+.stat span{font-size:12px;color:var(--muted)}
+@media (max-width:860px){header{grid-template-columns:1fr}}
+.toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.lenses{display:flex;flex-wrap:wrap;gap:4px;background:var(--grout);padding:4px;border-radius:4px}
+.lens{font:500 13px var(--f-body);border:0;background:transparent;color:var(--muted);padding:7px 12px;border-radius:3px;cursor:pointer;display:flex;gap:7px;align-items:center}
+.lens[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 0 var(--line)}
+.lens i{width:16px;height:0;border-top:2px solid currentColor;display:inline-block}
+.lens[data-l="data"] i{border-color:var(--gold)}
+.lens[data-l="guard"] i{border-color:var(--oxide);border-top-style:dashed}
+.board{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+@media (max-width:1100px){.board{grid-template-columns:1fr}}
+.canvas{overflow-x:auto;background:var(--grout);border-radius:4px;border:1px solid var(--line)}
+.canvas svg{display:block;width:100%;min-width:980px;height:auto}
+.panel{position:sticky;top:calc(env(safe-area-inset-top,0px) + 12px);background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:18px;display:flex;flex-direction:column;gap:14px;min-width:0}
+@media (max-width:1100px){.panel{position:static}}
+.panel .kind{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:flex;gap:8px;align-items:center;color:var(--muted)}
+.panel .kind i{width:12px;height:12px;border-radius:2px;display:inline-block;background:var(--c,var(--stone))}
+.panel h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.panel .file{font-family:var(--f-mono);font-size:12px;color:var(--muted);word-break:break-all}
+.panel p{font-size:14px}
+.panel dl{margin:0;display:grid;gap:10px}
+.panel dt{font-family:var(--f-mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.panel dd{margin:0;display:flex;flex-wrap:wrap;gap:4px;font-size:13.5px}
+.chip{font:500 12px var(--f-body);border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:3px 8px;border-radius:2px;cursor:pointer;display:inline-flex;gap:6px;align-items:center}
+.chip i{width:8px;height:8px;border-radius:1px;background:var(--c,var(--stone))}
+.chip small{color:var(--muted);font-size:11px}
+.panel ul{margin:0;padding-left:18px;font-size:13.5px;display:grid;gap:4px}
+.warn{border-left:3px solid var(--oxide);padding:8px 10px;background:color-mix(in oklab,var(--oxide) 8%,var(--surface));font-size:13.5px;border-radius:0 3px 3px 0}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 12px;font-size:12.5px}
+.legend span{display:flex;gap:8px;align-items:center}
+.legend i{width:12px;height:12px;border-radius:2px;background:var(--c)}
+svg text{font-family:var(--f-body);fill:var(--ink)}
+.tile rect.body{fill:color-mix(in oklab,var(--c) var(--tile-mix),var(--surface));stroke:color-mix(in oklab,var(--c) 70%,var(--ink));stroke-width:1.2}
+.tile rect.cap{fill:var(--c)}
+.tile .t{font-family:var(--f-display);font-size:12.5px;font-weight:500}
+.tile .f{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
+.tile .l{font-size:10.8px;fill:var(--ink)}
+.tile{cursor:pointer;transition:opacity .18s}
+.tile:hover rect.body,.tile.sel rect.body{stroke-width:2.4}
+.tile.plan rect.body{stroke-dasharray:5 4;fill:var(--surface)}
+.dim .tile{opacity:.28}.dim .tile.hl{opacity:1}
+.edge{fill:none;stroke-width:1.6;transition:opacity .18s}
+.edge.data{stroke:var(--gold)}
+.edge.guard{stroke:var(--oxide);stroke-dasharray:6 4}
+.edge.off{display:none}
+.dim .edge{opacity:.08}.dim .edge.hl{opacity:1;stroke-width:2.4}
+.zone{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.12em;fill:var(--muted)}
+.band{fill:none;stroke:var(--oxide);stroke-width:1.2;stroke-dasharray:2 3}
+@media (prefers-reduced-motion:reduce){.tile,.edge{transition:none}}
+section{display:flex;flex-direction:column;gap:18px}
+section > .intro{max-width:70ch;color:var(--muted)}
+.rule{border-left:4px solid var(--gold);padding:14px 18px;background:var(--surface);border-radius:0 4px 4px 0;max-width:90ch}
+.rule b{font-family:var(--f-display);font-weight:500}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 14px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:500;background:var(--grout)}
+tr:last-child td{border-bottom:0}
+td code,li code,p code{font-family:var(--f-mono);font-size:12.5px;background:var(--grout);padding:1px 5px;border-radius:2px}
+.order{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
+.order span{font-family:var(--f-mono);font-size:12px;padding:2px 7px;border-radius:2px;background:color-mix(in oklab,var(--c) 16%,var(--surface));border:1px solid color-mix(in oklab,var(--c) 45%,var(--line))}
+.order em{font-style:normal;color:var(--muted)}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:4px}
+.steps li{background:var(--surface);border:1px solid var(--line);padding:14px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.steps .n{font-family:var(--f-display);font-size:22px;color:var(--gold);font-variant-numeric:tabular-nums}
+.steps b{font-weight:600}
+.steps p{font-size:13.5px;color:var(--muted);overflow-wrap:anywhere}
+.tl{display:flex;flex-wrap:wrap;gap:18px 22px;background:var(--grout);border:1px solid var(--line);border-radius:4px;padding:16px}
+.day{display:flex;flex-direction:column;gap:6px;min-width:0}
+.day .d{font-family:var(--f-mono);font-size:11px;color:var(--muted);letter-spacing:.06em}
+.day .tess{display:flex;flex-wrap:wrap;gap:3px;max-width:182px}
+.tess button{width:20px;height:20px;border:0;border-radius:2px;background:var(--c);cursor:pointer;padding:0}
+.tess button[aria-pressed="true"]{outline:2px solid var(--ink);outline-offset:1px}
+.tlcap{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:14px 16px;align-items:baseline}
+.tlcap .v{font-family:var(--f-display);font-size:22px}
+.tlcap .dt{font-family:var(--f-mono);font-size:12px;color:var(--muted)}
+.tlcap p{grid-column:2;font-size:14.5px}
+.tlleg{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted)}
+.tlleg span{display:flex;gap:6px;align-items:center}.tlleg i{width:11px;height:11px;border-radius:2px;background:var(--c)}
+.two{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:960px){.two{grid-template-columns:1fr}}
+.gaps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.gaps li{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
+.gaps li b{font-weight:600}
+.gaps li p{font-size:13.5px;color:var(--muted)}
+.gaps .tag{font-family:var(--f-mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase}
+pre.tree{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:16px;overflow-x:auto;font:12.5px/1.6 var(--f-mono);color:var(--ink)}
+pre.tree .c{color:var(--muted)}
+footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padding-top:14px}
+</style>
+
+<div class="wrap">
+
+<header>
+  <div>
+    <div class="eyebrow">Prasówka (CyberSec AI Daily News Digest) · stan na v42 · Czysta polszczyzna · 07.11.2026 · mirror plik-matka v92</div>
+    <h1>Karton Prasówki</h1>
+    <p class="lead">Rysunek 1:1 aplikacji, która codziennie rano zamienia kanały RSS w polską prasówkę dla analityków SOC na Discordzie. Widać tu, skąd przychodzą newsy, co wybiera <b>kod</b>, co pisze i poprawia <b>AI</b> i co pilnuje, żeby żaden tekst nie przeszedł bez kontroli.</p>
+  </div>
+  <div class="stats" aria-label="Projekt w liczbach">
+    <div class="stat"><b>11</b><span>kanałów RSS</span></div>
+    <div class="stat"><b>24</b><span>moduły w src/</span></div>
+    <div class="stat"><b>460</b><span>testów jednostkowych</span></div>
+    <div class="stat"><b>4</b><span>workflow</span></div>
+    <div class="stat"><b>3</b><span>wydania: dzień · tydzień · miesiąc</span></div>
+    <div class="stat"><b>44</b><span>wpisów changelogu</span></div>
+    <div class="stat"><b>0 zł</b><span>budżet</span></div>
+  </div>
+</header>
+
+<section aria-labelledby="h-map">
+  <div class="toolbar">
+    <h2 id="h-map">Plan przepływu</h2>
+    <div class="lenses" role="group" aria-label="Soczewka">
+      <button class="lens" data-l="data" aria-pressed="true"><i></i>Przepływ treści</button>
+      <button class="lens" data-l="guard" aria-pressed="false"><i></i>Kontrola</button>
+      <button class="lens" data-l="all" aria-pressed="false">Wszystko</button>
+    </div>
+  </div>
+  <div class="board">
+    <div class="canvas"><svg id="svg" viewBox="0 0 1300 790" role="img" aria-label="Diagram przepływu CyberSec-NewsDigest-AI"></svg></div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </div>
+</section>
+
+<div class="rule"><b>Zasada nadrzędna.</b> Kod wybiera i pilnuje, AI pisze i poprawia. Każde zdanie od modelu przechodzi kontrolę kodu: słowniczek zgodny z Mozaiką, liczby i numery CVE zgodne z artykułem, bez waty i bez etykiet, których artykuł nie daje. Korekta, która zmieniłaby fakty, jest odrzucana, a streszczenie zostaje takie, jakie było.</div>
+
+<section aria-labelledby="h-models">
+  <h2 id="h-models">Łańcuchy modeli</h2>
+  <p class="intro">Darmowe limity bywają przeciążone, zwłaszcza rano. Każde zadanie AI ma więc kolejkę modeli: gdy jeden nie odpowie albo zwróci coś bezużytecznego, porcja przechodzi do następnego. Od v37a korekta i historie idą w porcjach po 5 i do trzech rund (przerwy 30 s i 60 s).</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Zadanie</th><th>Kolejność modeli</th><th>Gdzie</th><th>Co je pilnuje</th></tr></thead>
+    <tbody>
+      <tr><td><b>Streszczenia dzienne</b></td><td><div class="order" style="--c:var(--plum)"><span>Groq gpt-oss-120b</span><em>→</em><span>Groq qwen3.8-27b</span></div></td><td>prasówka dzienna</td><td>kontrola jakości; streszczenie z problemami wraca do poprawki, potem kod je przycina albo pozycja idzie bez streszczenia</td></tr>
+      <tr><td><b>Korekta językowa</b></td><td><div class="order" style="--c:var(--plum)"><span>Gemini 3.8-flash</span><em>→</em><span>Gemini 3.5-flash</span><em>→ od 2. rundy</em><span>ministral-14b</span><em>→</em><span>Gemini 3.5-flash-lite</span></div></td><td>prasówka i oba zestawienia</td><td>poprawka przyjęta tylko z tymi samymi liczbami i CVE, bez nowych problemów i bez słów, których nie zna Morfeusz 2 (v42); lite na końcu od v42, bo wprowadzał literówki; Groq wyłączony od v35, bo psuł polszczyznę</td></tr>
+      <tr><td><b>Historie wydarzeń</b></td><td><div class="order" style="--c:var(--plum)"><span>Gemini 3.8-flash</span><em>→</em><span>Gemini 3.5-flash</span><em>→</em><span>ministral-14b</span><em>→</em><span>Gemini lite</span><em>→ od 2. rundy</em><span>Groq</span></div></td><td>top 5 tygodnia, top 10 miesiąca</td><td>kontrola względem materiału całego wydarzenia; Ministral przed lite, bo lite pisał historie jak streszczenie jednego artykułu</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section aria-labelledby="h-rhythm">
+  <h2 id="h-rhythm">Rytm jednej zmiany</h2>
+  <p class="intro">Każda wersja przechodzi tę samą drogę, przez przeglądarkę i GitHub. Test układu repo zatrzymuje przebieg, gdy plik trafi do złego folderu. Od v41 każda wersja aktualizuje też ten Karton w tej samej rundzie (zasada 9 ekosystemu); strażnik Kartonu zatrzymuje test, gdy Karton nie nadąża.</p>
+  <ol class="steps">
+    <li><span class="n">1</span><b>Gałąź</b><p>Nowa gałąź z <code>main</code> dla jednej wersji, np. <code>v42-czysta-polszczyzna</code>.</p></li>
+    <li><span class="n">2</span><b>Paczka</b><p>Pliki z paczki .zip wgrane do właściwych folderów: <code>src/</code>, <code>data/</code>, <code>docs/</code>, katalog główny, <code>.github/workflows/</code>.</p></li>
+    <li><span class="n">3</span><b>Commity</b><p>Osobno kod, dokumentacja i workflow. Tytuł i opis po angielsku, od razu.</p></li>
+    <li><span class="n">4</span><b>Test z gałęzi</b><p>Ręczny start workflow. Wynik idzie tylko na kanał testowy, bez zapisu w archiwum.</p></li>
+    <li><span class="n">5</span><b>Log i Discord</b><p>Linie <code>KOREKTA:</code>, <code>ZESTAWIENIE AI:</code>, <code>PORZĄDEK:</code> i sama prasówka.</p></li>
+    <li><span class="n">6</span><b>PR i scalenie</b><p>Squash and merge, potem usunięcie gałęzi.</p></li>
+    <li><span class="n">7</span><b>Obserwacja</b><p>Kolejne poranki. Poprawiamy to, co się powtarza, a nie pojedyncze zdania.</p></li>
+  </ol>
+</section>
+
+<section aria-labelledby="h-tl">
+  <h2 id="h-tl">Jak rosła prasówka</h2>
+  <p class="intro">Każdy kamyk to jeden wpis z <code>CHANGELOG_PL_EN.md</code>, ułożony według dnia. Kolor mówi, czego dotyczyła zmiana. Kliknij kamyk, żeby przeczytać nagłówek wpisu.</p>
+  <div class="tl" id="tl"></div>
+  <div class="tlleg" id="tlleg"></div>
+  <div class="tlcap" id="tlcap" aria-live="polite"></div>
+</section>
+
+<section aria-labelledby="h-next">
+  <h2 id="h-next">Braki i dalsza droga</h2>
+  <p class="intro">Znane problemy zebrane w obserwacji prasówek. Żaden nie blokuje Mostu (cybersec-most), bo Most czyta tylko Prasówka · dane dla Mostu: archiwum z dziennikiem języka, zestawienia i listę kalk.</p>
+  <div class="two">
+    <ul class="gaps">
+      <li><span class="tag" style="color:var(--olive)">zrobione v37a–v37c</span><b>Korekta niezależna od jednego modelu</b><p>Porcje, lżejszy Gemini i Ministral jako zapas; powód odmowy API w logu. 30 i 31.10 wyszły bez korekty, testy z 31.10 już ją miały.</p></li>
+      <li><span class="tag" style="color:var(--olive)">zrobione v38–v40</span><b>Prasówka · dane dla Mostu</b><p>Hasła w archiwum (<code>terms</code>), zestawienia w <code>data/tops/</code>, model korekty (<code>proofread</code>), testy kontraktu danych. Mirror glosariusza (Mozaika → Prasówka) v92: objaśnienia tylko przy „podwyższeniu (eskalacji) uprawnień” i „poświadczeniach (danych logowania)”. Raport Mostu (Prasówka → Mozaika) prowadzi Dyrygent na Moście: <a href="https://claude.ai/artifact/3WRVffEyyZwNRu4W31H5fF" target="_blank" rel="noopener">Karton Mostu</a>.</p></li>
+      <li><span class="tag" style="color:var(--olive)">zrobione v41</span><b>Karton w repo</b><p>Ten Karton leży w <code>docs/karton.html</code> ze znacznikami wersji Prasówki i pliku-matki. Test zapala się na czerwono, gdy znaczniki albo liczba testów nie zgadzają się z repo.</p></li>
+      <li><span class="tag" style="color:var(--olive)">zrobione v42</span><b>Czysta polszczyzna</b><p>Morfeusz 2 łapie angielskie słowa bez przekładu („viewer”, „threat actor”, „pipeline”) i słowa wymyślone przez korektor („kryzycznych”, „Hakeri”). Kalek ze znanych słów („poziomy łatek”) nie złapie; trafiają do listy kalk i do przęsła P3 · Kalki w Raporcie Mostu.</p></li>
+      <li><span class="tag" style="color:var(--oxide)">obserwacja</span><b>Duplikaty bez CVE</b><p>Binance (31.10) w dwóch pozycjach: inne tytuły, brak CVE. Kandydat: łączenie po rzadkiej wspólnej nazwie firmy.</p></li>
+      <li><span class="tag" style="color:var(--oxide)">obserwacja</span><b>Historie z wielu artykułów</b><p>Ministral potrafi wybrać z materiału inny szczegół („od 5.0” zamiast „7.x i 8.x”). Top 10 miesiąca (1.11) i top 5 tygodnia (2.11) miały historie od Gemini bez tego błędu; obserwacja trwa.</p></li>
+      <li><span class="tag" style="color:var(--oxide)">obserwacja</span><b>Język i precyzja</b><p>Słowa typu „zespół”, ogólniki zamiast wersji, długie sprawy powtarzające te same wersje dzień po dniu, lite jako łagodny korektor.</p></li>
+      <li><span class="tag" style="color:var(--stone)">później</span><b>Eksperyment z modelem piszącym</b><p>Streszczenia dzienne pisze Groq, a reszta tylko poprawia jego tekst. Porównanie z innym modelem na zwykłych prasówkach.</p></li>
+    </ul>
+<pre class="tree" aria-label="Układ repozytorium">CyberSec-NewsDigest-AI/
+├── README.md · README_PL.md
+├── CHANGELOG_PL_EN.md     <span class="c"># PL i EN, wpis na wersję</span>
+├── src/                   <span class="c"># 24 moduły + 37 plików testów</span>
+│   ├── main.py            <span class="c"># prasówka dzienna</span>
+│   ├── weekly_top.py · monthly_top.py
+│   ├── ai_summaries.py    <span class="c"># streszczenia, korekta, historie</span>
+│   ├── gemini.py · mistral.py
+│   ├── summary_quality.py · glossary.py
+│   ├── polish_words.py    <span class="c"># Morfeusz 2: angielskie i wymyślone słowa</span>
+│   └── test_*.py
+├── data/
+│   ├── archive/           <span class="c"># RRRR-MM.json + dziennik języka</span>
+│   ├── tops/              <span class="c"># zapisane zestawienia (v38)</span>
+│   ├── seen_articles.json
+│   ├── glosariusz_mirror.csv  <span class="c"># Mozaika → Prasówka, v92</span>
+│   ├── styl_unikaj.csv
+│   └── slowa_angielskie_ok.csv  <span class="c"># angielskie słowa dozwolone</span>
+├── docs/karton.html       <span class="c"># ten Karton (v41)</span>
+└── .github/workflows/     <span class="c"># daily, weekly, monthly, backfill</span></pre>
+  </div>
+</section>
+
+<footer>Karton odczytany z repozytorium <span class="mono">CyberSec-NewsDigest-AI</span> (main po v42): kod w <span class="mono">src/</span>, workflow, dane w <span class="mono">data/</span> i <span class="mono">CHANGELOG_PL_EN.md</span>. © 2026 Jan Wolski.</footer>
+</div>
+
+<script>
+const C={src:'--stone',code:'--teal',ai:'--plum',guard:'--oxide',out:'--lapis',file:'--olive',plan:'--gold'};
+const KIND={src:'Źródło zewnętrzne',code:'Kod: dobór',ai:'Model AI',guard:'Kontrola',out:'Kanał Discorda',file:'Dane w repozytorium',plan:'Poza repo Prasówki'};
+const N=[
+ {id:'rss_pl',k:'src',x:20,y:52,w:190,h:84,t:'Kanały PL',L:['Niebezpiecznik · Sekurak · Z3S','CyberDefence24 · CERT Polska','Kapitan Hack'],
+  r:'Sześć polskich serwisów. Polskie źródło wygrywa przy wyborze artykułu wiodącego w zestawieniach, a CERT Polska daje komunikaty o lukach w polskim oprogramowaniu (Szafir, Płatnik, Request Tracker).'},
+ {id:'rss_en',k:'src',x:20,y:152,w:190,h:70,t:'Kanały EN',L:['BleepingComputer · Hacker News','SecurityWeek · The Record · Krebs'],
+  r:'Pięć serwisów anglojęzycznych, zwykle najszybszych przy lukach i incydentach. Streszczenia z nich piszemy po polsku; zdanie przepisane po angielsku jest odrzucane.'},
+ {id:'pages',k:'src',x:20,y:238,w:190,h:56,t:'Strony artykułów',L:['pełna treść zamiast zajawki'],
+  r:'Kanał RSS daje zwykle tylko zajawkę. article_pages.py pobiera tekst ze strony, żeby AI miało fakty, a kontrola miała z czym porównać liczby i CVE.'},
+ {id:'kev_src',k:'src',x:20,y:310,w:190,h:56,t:'Katalog CISA KEV',L:['luki wykorzystywane w atakach'],
+  r:'Katalog CISA Known Exploited Vulnerabilities. Pozycja z luką z katalogu dostaje 🔥, a AI dostaje pole „kev”, więc może napisać, że luka jest wykorzystywana.'},
+ {id:'glos',k:'src',x:20,y:382,w:190,h:84,t:'Glosariusz Mozaiki',f:'data/glosariusz_mirror.csv',L:['mirror v92 (Mozaika → Prasówka)','eksport: Most (cybersec-most)'],
+  r:'Lustro słowniczka z CyberSec Mozaiki i lista kalk do unikania. Prompt dostaje tylko terminy, które występują w artykułach z danego dnia, a kontrola pilnuje form zakazanych. Od v40 objaśnienia w nawiasie tylko przy H182 i H207. Lista kalk styl_unikaj.csv leży obok.'},
+ {id:'seen',k:'file',x:20,y:482,w:190,h:70,t:'Historia wysłanych',f:'data/seen_articles.json',L:['bez powtórek z poprzednich dni'],
+  r:'Zapis linków, które już poszły. Dzięki niemu wczorajszy news nie wraca, a dalszy ciąg znanej sprawy dostaje znacznik kontynuacji.'},
+
+ {id:'select',k:'code',x:252,y:52,w:220,h:70,t:'Wybór i punktacja',f:'article_selection.py',L:['słowa kluczowe, próg trafności','bez felietonów i „luk w przepisach”'],
+  r:'Punktuje artykuły według słów kluczowych (luki, ataki, wycieki, KEV) i odsiewa teksty kontekstowe: komentarze, felietony, promocje, „luki w przepisach”. Limity źródeł pilnują, żeby jeden serwis nie zdominował prasówki.'},
+ {id:'group',k:'code',x:252,y:138,w:220,h:70,t:'Grupowanie wydarzeń',f:'event_grouping.py',L:['podobne tytuły, rzadkie nazwy','wspólne CVE: ze stron i streszczeń'],
+  r:'Łączy artykuły o tym samym wydarzeniu w jedną pozycję z powiązanymi linkami. Od v35 także po wspólnym numerze CVE, najpierw z treści stron, potem ze streszczeń. Nie łapie jeszcze duplikatów bez CVE i z różnymi tytułami (Binance, 31.10).'},
+ {id:'dedup',k:'code',x:252,y:224,w:220,h:62,t:'Powtórki i ciągi dalsze',f:'deduplication.py · article_history.py',L:['znacznik kontynuacji'],
+  r:'Sprawdza historię wysłanych linków i ostatnie prasówki. Artykuł o sprawie sprzed kilku dni dostaje znacznik kontynuacji, także po wspólnym CVE.'},
+ {id:'context',k:'code',x:252,y:302,w:220,h:62,t:'Kontekst 14 dni',f:'event_grouping.add_context',L:['co już było o tej sprawie'],
+  r:'Szuka w archiwum wcześniejszego doniesienia o tym samym wydarzeniu i daje je AI jako pole „kontekst”. Dzięki temu streszczenie mówi, co nowego, zamiast powtarzać początek sprawy.'},
+ {id:'kev',k:'code',x:252,y:380,w:220,h:56,t:'Znacznik KEV',f:'kev.py',L:['CVE z tekstu → katalog CISA'],
+  r:'Wyciąga numery CVE z tytułu, opisu i strony (także z nierozdzielającymi łącznikami) i porównuje z katalogiem KEV.'},
+
+ {id:'groq',k:'ai',x:516,y:52,w:220,h:84,t:'Streszczenia',f:'ai_summaries.py · Groq',L:['gpt-oss-120b → qwen3.8-27b','2–3 zdania: co, dlaczego ważne,','konkretna poprawka'],
+  r:'Groq pisze streszczenia po polsku w paczkach po 5 artykułów. Prompt: pierwsze zdanie mówi, co się stało i kogo dotyczy; drugie, czy luka jest wykorzystywana i czy jest łatka; trzecie tylko z konkretem z artykułu. Do tego słowniczek, kontekst i KEV.'},
+ {id:'quality',k:'guard',x:516,y:152,w:220,h:84,t:'Kontrola jakości',f:'summary_quality.py',L:['fakty, CVE, wata, etykiety','angielskie słowa (Morfeusz 2, v42)','„inne luki”, phishing bez pokrycia'],
+  r:'Sprawdza każde streszczenie z materiałem artykułu: liczby i CVE, ogólniki, puste zdania, „zero-day”, „natychmiast”, „brak łatki” i phishing tylko z pokryciem w artykule. Problemy twarde odsyłają do poprawki i mogą przyciąć tekst; miękkie (długie zdanie, kalka, od v42 angielskie słowo bez przekładu) tylko proszą o poprawkę. Angielskie słowo to takie, którego nie zna słownik Morfeusz 2, nie ma go w słowniczku ani na liście data/slowa_angielskie_ok.csv, a jest w angielskim artykule.'},
+ {id:'autofix',k:'guard',x:516,y:252,w:220,h:62,t:'Autopoprawka',f:'glossary.py',L:['słowniczek, „w/we”, „z/ze”, „łatka”'],
+  r:'Poprawki, które kod robi sam, bez AI: formy ze słowniczka, przyimki z uwzględnieniem dwuznaków, „łata” na „łatka”, powtórzone słowa. Każda zamiana trafia do dziennika języka.'},
+ {id:'lt',k:'guard',x:516,y:330,w:220,h:56,t:'LanguageTool',f:'languagetool.py',L:['podpowiedzi gramatyczne dla korekty'],
+  r:'Publiczne API LanguageTool znajduje błędy gramatyczne. Nie poprawia samo: jego uwagi idą jako podpowiedzi do modelu korekty.'},
+ {id:'proof',k:'ai',x:516,y:402,w:220,h:84,t:'Korekta językowa',f:'proofread_summaries',L:['porcje po 5 · do 3 rund','Gemini → Ministral → lite','bez zmiany faktów i bez nowych słów'],
+  r:'Od v37a w porcjach po 5 streszczeń: krótka odpowiedź mieści się w 30 s, a utracona porcja nie zabiera korekty reszcie. Model, który zawiódł, jest pomijany do końca rundy. Poprawka jest przyjmowana tylko z tymi samymi liczbami i CVE i bez nowych problemów. Od v42 Morfeusz 2 sprawdza każde słowo, które dopisał korektor: nieznane słowo („kryzycznych”, „Hakeri”) odrzuca poprawkę, a lite idzie na koniec kolejki, za Ministralem.'},
+ {id:'notes',k:'code',x:516,y:502,w:220,h:56,t:'Dziennik języka',f:'language_notes.py',L:['każda poprawka z wynikiem'],
+  r:'Od v32 każda zmiana w streszczeniu jest zapisywana z artykułem w archiwum (pole „language”): forma zakazana z numerem hasła, kalka, autopoprawka, zmiana z korekty. To materiał dla mostu do Mozaiki.'},
+
+ {id:'tops',k:'code',x:780,y:52,w:200,h:84,t:'Wybór wydarzeń',f:'weekly_top.py · monthly_top.py',L:['łączenie po CVE i nazwach','lider: punkty, polskie źródło,','liczba artykułów'],
+  r:'Z archiwum tygodnia lub miesiąca składa wydarzenia: łączy rekordy ze wspólnym CVE albo nazwą wydarzenia, pomija przeglądy, wybiera rekord wiodący. Kolejność: liczba artykułów, serwisów, punkty.'},
+ {id:'tidy',k:'guard',x:780,y:152,w:200,h:62,t:'Porządek',f:'tidy_summary · log PORZĄDEK',L:['stare streszczenia z archiwum'],
+  r:'Czyści streszczenia sprzed nowszych kontroli: „RCE (RCE)”, wielka litera, „jutro”, wata. Streszczenie po angielsku albo powtarzające tytuł zastępuje streszczeniem kolejnego artykułu.'},
+ {id:'story',k:'ai',x:780,y:230,w:200,h:84,t:'Historie wydarzeń',f:'summarize_events',L:['Gemini → Ministral → lite → Groq','co pękło, jak szło, co teraz,','jak łatać'],
+  r:'Jedna historia na wydarzenie, napisana ze streszczeń wszystkich jego artykułów. Użyta tylko wtedy, gdy przejdzie kontrolę względem materiału. 31.10 Ministral napisał pierwsze prawdziwe historie: PHP2Shell od honeypota do Mirai.'},
+ {id:'tproof',k:'ai',x:780,y:330,w:200,h:62,t:'Korekta zestawień',f:'proofread_top',L:['ten sam łańcuch co prasówka'],
+  r:'Od v37a i v37b zestawienia mają tę samą korektę co prasówka dzienna: porcje, Gemini, lite, Ministral, bez Groq.'},
+
+ {id:'daily',k:'out',x:1020,y:52,w:260,h:70,t:'Prasówka dzienna',f:'discord_output.py',L:['rano, z budzika cron-job.org','🔥 KEV · ↪ kontynuacja'],
+  r:'Wiadomość na Discordzie z pozycjami, linkami, powiązanymi artykułami i streszczeniami. Uruchomienie z innej gałęzi niż main idzie tylko na kanał testowy.'},
+ {id:'weekly',k:'out',x:1020,y:138,w:260,h:56,t:'Top 5 tygodnia',f:'#top-tygodnia · poniedziałek',L:[],
+  r:'Pięć najważniejszych wydarzeń poprzedniego tygodnia. Znacznik data/last_top.json pilnuje, żeby zestawienie poszło tylko raz.'},
+ {id:'monthly',k:'out',x:1020,y:210,w:260,h:56,t:'Top 10 miesiąca',f:'1. dnia miesiąca · pierwsze: 1.11',L:[],
+  r:'Dziesięć najważniejszych wydarzeń poprzedniego miesiąca, z historiami wydarzeń. Pierwsze na nowym łańcuchu modeli idzie 1.11.2026.'},
+ {id:'archive',k:'file',x:1020,y:282,w:260,h:70,t:'Archiwum',f:'data/archive/RRRR-MM.json',L:['streszczenia, CVE, KEV, powiązane','dziennik języka (pole language)'],
+  r:'Każda wysłana pozycja z pełnym zapisem. Archiwum zasila kontekst 14 dni i zestawienia, a od v38 ma hasła (terms), a od v39 model korekty (proofread). Wysłane zestawienia lądują w data/tops/. Oba czyta Most.'},
+ {id:'mozaika',k:'plan',x:1020,y:368,w:260,h:70,t:'Most (cybersec-most)',f:'Prasówka · dane dla Mostu',L:['archiwum · data/tops/ · kalki','Raport Mostu w poniedziałek'],
+  r:'Osobne repo prowadzone przez Dyrygenta na Moście. Czyta tylko dane Prasówki, nigdy kod, i co poniedziałek robi Raport Mostu (Prasówka → Mozaika) z propozycjami dla pliku-matki. W drugą stronę płynie mirror glosariusza (Mozaika → Prasówka). Prasówka nigdy nie zapisuje do pliku-matki.'},
+
+ {id:'tests',k:'guard',x:20,y:640,w:290,h:96,t:'Testy jednostkowe',f:'460 testów · przed każdym przebiegiem',L:['test_repo_layout: plik .py poza src/','kontrakt danych dla Mostu (v38–v39)','strażnik Kartonu (v41) · Morfeusz (v42)'],
+  r:'Każdy workflow zaczyna od testów; czerwony test zatrzymuje wysyłkę. Test układu repo złapał 31.10 trzy razy pliki wgrane do katalogu głównego.'},
+ {id:'guards',k:'guard',x:330,y:640,w:290,h:96,t:'Strażnicy uruchomień',f:'run_guard.py · top_guard.py',L:['prasówka raz dziennie','zestawienie raz na tydzień / miesiąc','budzik traktowany jak harmonogram'],
+  r:'Pilnują, żeby podwójny start (harmonogram GitHub i budzik z cron-job.org) nie wysłał prasówki dwa razy.'},
+ {id:'alert',k:'guard',x:640,y:640,w:290,h:96,t:'Alarm o błędzie',f:'kanał testowy na Discordzie',L:['nazwa gałęzi i link do logu','powód odmowy API w logu (v37c)'],
+  r:'Nieudany workflow wysyła na kanał testowy wiadomość z gałęzią i linkiem do logu. Od v37c log pokazuje też powód odmowy API, np. „model niedostępny w tym planie”.'},
+ {id:'secrets',k:'guard',x:950,y:640,w:330,h:96,t:'Sekrety',f:'GitHub Secrets · bez billingu',L:['GROQ · GEMINI · MISTRAL_API_KEY','webhooki Discorda','klucze nigdy w logu ani w URL'],
+  r:'Klucze są tylko w sekretach repozytorium. Gemini dostaje klucz w nagłówku, Mistral i Groq w nagłówku Authorization. Wszystko na darmowych planach.'}
+];
+const E=[
+ ['rss_pl','select','data'],['rss_en','select','data'],['select','group','data'],['group','dedup','data'],['dedup','context','data'],['seen','dedup','data'],
+ ['pages','kev','data'],['kev_src','kev','data'],['context','groq','data'],['kev','groq','data'],['pages','groq','data'],['glos','groq','data'],
+ ['groq','quality','data'],['quality','autofix','data'],['autofix','lt','data'],['lt','proof','data'],['proof','notes','data'],
+ ['proof','daily','data'],['notes','archive','data'],['proof','archive','data'],
+ ['archive','tops','data'],['tops','tidy','data'],['tidy','story','data'],['story','tproof','data'],['tproof','weekly','data'],['tproof','monthly','data'],
+ ['archive','mozaika','data'],['archive','context','data'],
+ ['quality','groq','guard','poprawka'],['glos','quality','guard'],['quality','proof','guard','fakty'],['quality','story','guard','materiał'],['quality','tproof','guard'],
+ ['tests','group','guard'],['guards','daily','guard'],['alert','daily','guard']
+];
+const byId=Object.fromEntries(N.map(n=>[n.id,n]));
+const NS='http://www.w3.org/2000/svg';
+const svg=document.getElementById('svg');
+const mk=(tag,attrs,parent)=>{const e=document.createElementNS(NS,tag);for(const k in attrs)e.setAttribute(k,attrs[k]);if(parent)parent.appendChild(e);return e;};
+const col=n=>`var(${C[n.k]})`;
+const defs=mk('defs',{},svg);
+const pat=mk('pattern',{id:'tess',width:14,height:14,patternUnits:'userSpaceOnUse'},defs);
+mk('rect',{x:1,y:1,width:12,height:12,rx:1.5,style:'fill:var(--bg)'},pat);
+['data','guard'].forEach(t=>{const m=mk('marker',{id:'ar-'+t,viewBox:'0 0 10 10',refX:9,refY:5,markerWidth:7,markerHeight:7,orient:'auto-start-reverse'},defs);
+  mk('path',{d:'M0,1 L10,5 L0,9 z',style:`fill:var(${t==='data'?'--gold':'--oxide'})`},m);});
+mk('rect',{x:0,y:0,width:1300,height:790,fill:'url(#tess)',opacity:.55},svg);
+[['ŹRÓDŁA',20],['DOBÓR · KOD',252],['STRESZCZENIA I JĘZYK',516],['ZESTAWIENIA',780],['WYJŚCIA',1020]].forEach(([t,x])=>mk('text',{x,y:34,class:'zone'},svg).textContent=t);
+mk('text',{x:20,y:622,class:'zone'},svg).textContent='STRAŻ · KAŻDY PRZEBIEG';
+mk('rect',{x:8,y:604,width:1284,height:146,rx:4,class:'band'},svg);
+const edgeG=mk('g',{},svg), tileG=mk('g',{},svg);
+
+function side(a,b){
+  if(b.x>=a.x+a.w-2) return ['R','L'];
+  if(b.x+b.w<=a.x+2) return ['L','R'];
+  const gap=b.y-(a.y+a.h);
+  if(gap>=0 && gap<30) return ['B','T'];
+  if(gap<0 && a.y-(b.y+b.h)>=0 && a.y-(b.y+b.h)<30) return ['T','B'];
+  return ['R','R'];
+}
+const ends={};
+const EE=E.map(([s,t,type,flag],i)=>{const a=byId[s],b=byId[t];
+  let sd=side(a,b);
+  if(type==='guard'&&s==='quality'&&t==='groq') sd=['L','L'];
+  if(s==='tests'||s==='guards'||s==='alert') sd=['T','B'];
+  const o={i,s,t,type,flag,a,b,sd};
+  (ends[s+sd[0]]=ends[s+sd[0]]||[]).push({o,end:0,other:b});(ends[t+sd[1]]=ends[t+sd[1]]||[]).push({o,end:1,other:a});
+  return o;});
+for(const key in ends){const L=ends[key];const n=byId[key.slice(0,-1)],sd=key.slice(-1);
+  L.sort((p,q)=>(sd==='T'||sd==='B')?(p.other.x-q.other.x):((p.other.y+p.other.h/2)-(q.other.y+q.other.h/2)));
+  const len=(sd==='T'||sd==='B')?n.w:n.h, span=Math.min(len*0.6,(L.length-1)*12);
+  L.forEach((p,j)=>{const off=L.length===1?0:-span/2+span*j/(L.length-1);
+    let pt; if(sd==='R')pt=[n.x+n.w,n.y+n.h/2+off]; else if(sd==='L')pt=[n.x,n.y+n.h/2+off]; else if(sd==='T')pt=[n.x+n.w/2+off,n.y]; else pt=[n.x+n.w/2+off,n.y+n.h];
+    p.o[p.end?'p1':'p0']=pt;});}
+function pathFor(o){
+  const [x0,y0]=o.p0,[x1,y1]=o.p1,[s0,s1]=o.sd;
+  if(s0==='R'&&s1==='L'){const dx=Math.max(30,(x1-x0)/2);return `M${x0},${y0} C${x0+dx},${y0} ${x1-dx},${y1} ${x1},${y1}`;}
+  if(s0==='L'&&s1==='R'){const dx=Math.max(30,(x0-x1)/2);return `M${x0},${y0} C${x0-dx},${y0} ${x1+dx},${y1} ${x1},${y1}`;}
+  if((s0==='B'&&s1==='T')||(s0==='T'&&s1==='B')){const my=(y0+y1)/2;return `M${x0},${y0} C${x0},${my} ${x1},${my} ${x1},${y1}`;}
+  if(s0==='R'&&s1==='R'){const bx=Math.max(x0,x1)+18+Math.abs(y1-y0)*0.06;return `M${x0},${y0} C${bx},${y0} ${bx},${y1} ${x1},${y1}`;}
+  if(s0==='L'&&s1==='L'){const bx=Math.min(x0,x1)-14-Math.abs(y1-y0)*0.07;return `M${x0},${y0} C${bx},${y0} ${bx},${y1} ${x1},${y1}`;}
+}
+EE.forEach(o=>{o.el=mk('path',{d:pathFor(o),class:'edge '+o.type,'marker-end':`url(#ar-${o.type})`},edgeG);});
+N.forEach(n=>{
+  const g=mk('g',{class:'tile '+n.k,tabindex:0,role:'button','aria-label':n.t,style:`--c:${col(n)}`},tileG);
+  mk('rect',{class:'body',x:n.x,y:n.y,width:n.w,height:n.h,rx:n.k==='file'?12:3},g);
+  if(n.k!=='plan'&&n.k!=='file') mk('rect',{class:'cap',x:n.x,y:n.y,width:5,height:n.h,rx:1},g);
+  const px=n.x+13; let y=n.y+18;
+  mk('text',{x:px,y,class:'t'},g).textContent=n.t;
+  if(n.f){y+=14;mk('text',{x:px,y,class:'f'},g).textContent=n.f;}
+  (n.L||[]).forEach(l=>{y+=14;mk('text',{x:px,y,class:'l'},g).textContent=l;});
+  n.el=g;
+  g.addEventListener('click',e=>{e.stopPropagation();select(n.id);});
+  g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(n.id);}});
+  g.addEventListener('mouseenter',()=>focusOn(n.id)); g.addEventListener('mouseleave',()=>focusOn(sel));
+});
+svg.addEventListener('click',()=>select(null));
+let lens='data', sel=null;
+try{const s=localStorage.getItem('karton-prasowki-lens');if(s)lens=s;}catch(e){}
+function applyLens(){
+  EE.forEach(o=>{const on=lens==='all'||o.type===lens||(sel&&(o.s===sel||o.t===sel));o.el.classList.toggle('off',!on);});
+  document.querySelectorAll('.lens').forEach(b=>b.setAttribute('aria-pressed',b.dataset.l===lens));
+}
+document.querySelectorAll('.lens').forEach(b=>b.addEventListener('click',()=>{lens=b.dataset.l;try{localStorage.setItem('karton-prasowki-lens',lens)}catch(e){};applyLens();}));
+function focusOn(id){
+  svg.classList.toggle('dim',!!id);
+  const near=new Set(id?[id]:[]);
+  EE.forEach(o=>{const hit=id&&(o.s===id||o.t===id);o.el.classList.toggle('hl',!!hit);if(hit){near.add(o.s);near.add(o.t);}});
+  N.forEach(n=>n.el.classList.toggle('hl',near.has(n.id)));
+}
+function select(id){sel=id;N.forEach(n=>n.el.classList.toggle('sel',n.id===id));focusOn(id);applyLens();renderPanel(id);}
+const panel=document.getElementById('panel');
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const chip=(id,extra='')=>{const n=byId[id];return `<button class="chip" data-go="${id}" style="--c:${col(n)}"><i></i>${esc(n.t)}${extra?` <small>${esc(extra)}</small>`:''}</button>`;};
+function renderPanel(id){
+  if(!id){
+    panel.innerHTML=`<div class="kind">Jak czytać</div>
+      <h3>Kliknij dowolny kafelek</h3>
+      <p>Zobaczysz, co robi, skąd bierze dane, co zasila i co go pilnuje. Soczewki nad planem przełączają rodzaj połączeń.</p>
+      <div class="legend">
+        <span style="--c:var(--stone)"><i></i>źródło zewnętrzne</span>
+        <span style="--c:var(--teal)"><i></i>kod: dobór</span>
+        <span style="--c:var(--plum)"><i></i>model AI</span>
+        <span style="--c:var(--oxide)"><i></i>kontrola</span>
+        <span style="--c:var(--lapis)"><i></i>kanał Discorda</span>
+        <span style="--c:var(--olive)"><i></i>dane w repo</span>
+      </div>
+      <dl>
+        <div><dt>Przepływ treści</dt><dd>od kanału RSS do wiadomości; strzałka wskazuje kierunek</dd></div>
+        <div><dt>Kontrola</dt><dd>co sprawdza tekst AI i co pilnuje przebiegu</dd></div>
+      </dl>
+      <p class="warn">Fioletowe kafelki to jedyne miejsca, w których pisze AI. Każdy z nich ma czerwoną strzałkę kontroli.</p>`;
+    return;
+  }
+  const n=byId[id];
+  const inn=EE.filter(o=>o.t===id&&o.type==='data').map(o=>chip(o.s));
+  const out=EE.filter(o=>o.s===id&&o.type==='data').map(o=>chip(o.t));
+  const gIn=EE.filter(o=>o.t===id&&o.type==='guard').map(o=>chip(o.s,o.flag||''));
+  const gOut=EE.filter(o=>o.s===id&&o.type==='guard').map(o=>chip(o.t,o.flag||''));
+  panel.innerHTML=`<div class="kind" style="--c:${col(n)}"><i></i>${KIND[n.k]}</div>
+    <h3>${esc(n.t)}</h3>${n.f?`<div class="file">${esc(n.f)}</div>`:''}
+    <p>${esc(n.r)}</p>
+    <dl>
+      ${inn.length?`<div><dt>Bierze z</dt><dd>${inn.join('')}</dd></div>`:''}
+      ${out.length?`<div><dt>Zasila</dt><dd>${out.join('')}</dd></div>`:''}
+      ${gIn.length?`<div><dt>Pilnuje go</dt><dd>${gIn.join('')}</dd></div>`:''}
+      ${gOut.length?`<div><dt>Pilnuje</dt><dd>${gOut.join('')}</dd></div>`:''}
+    </dl>`;
+  panel.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>select(b.dataset.go)));
+}
+applyLens(); renderPanel(null);
+
+const TL=[{"v": "v1", "d": "08.10.2026", "h": "Początkowy szkielet projektu."}, {"v": "v2", "d": "08.10.2026", "h": "Uruchamianie skryptu i testów przez GitHub Actions."}, {"v": "v3", "d": "08.10.2026", "h": "Obsługa sześciu źródeł oraz formatów RSS i Atom."}, {"v": "v4", "d": "09.10.2026", "h": "Pierwsza deduplikacja artykułów i agregowanie informacji o źródłach."}, {"v": "v5", "d": "10.10.2026", "h": "Wydzielenie deduplikacji do osobnego modułu i uruchamianie testów w CI."}, {"v": "v6", "d": "10.10.2026", "h": "Walidacja wpisów RSS, opisy artykułów i dokładniejsze podsumowanie przetwarzania."}, {"v": "v7", "d": "10.10.2026", "h": "Trwała historia linków między uruchomieniami GitHub Actions."}, {"v": "v8", "d": "10.10.2026", "h": "Regułowa kategoryzacja artykułów i punktacja priorytetów."}, {"v": "v9", "d": "11.10.2026", "h": "Wybór TOP 20 artykułów według priorytetu."}, {"v": "v10", "d": "11.10.2026", "h": "Rozdzielenie historii wykrytych i opublikowanych artykułów oraz filtrowanie artykułów wcześniej opublikowanych."}, {"v": "v11", "d": "15.10.2026", "h": "Wydzielenie głównego przepływu do funkcji `run()` i potwierdzenie pełnego przebiegu etapu 3."}, {"v": "v12", "d": "15.10.2026", "h": "Dostarczanie prasówki na Discorda (bez AI) i zapis opublikowanych linków."}, {"v": "v13", "d": "17.10.2026", "h": "Poprawa jakości selekcji: polskie słowa kluczowe, próg trafności, limity źródeł i filtr promocji."}, {"v": "v14", "d": "18.10.2026", "h": "Automatyczny harmonogram prasówki: 6:17 czasu polskiego, od poniedziałku do soboty."}, {"v": "v15", "d": "18.10.2026", "h": "Miesięczne archiwum dostarczonych artykułów i odporniejszy zapis danych."}, {"v": "v16", "d": "19.10.2026", "h": "Wykrywanie tego samego wydarzenia opisanego przez różne serwisy i sekcja „Ciąg dalszy”."}, {"v": "v17", "d": "19.10.2026", "h": "Miesięczne zestawienie 10 najważniejszych wydarzeń na osobnym kanale Discorda."}, {"v": "v18", "d": "19.10.2026", "h": "Streszczenia AI po polsku z obowiązkowym słowniczkiem zgodnym z glosariuszem CyberSec Mozaika."}, {"v": "v19", "d": "20.10.2026", "h": "Niezawodny poranny start: cztery próby z harmonogramu i strażnik „jedna prasówka dziennie”."}, {"v": "v20", "d": "20.10.2026", "h": "Kanał testowy dla uruchomień z gałęzi: test nie trafia na kanał główny i niczego nie zapisuje."}, {"v": "v21", "d": "20.10.2026", "h": "Mirror glosariusza z matki Mozaiki v84 i objaśnienia w nawiasach tylko przy 7 wybranych terminach."}, {"v": "v22", "d": "20.10.2026", "h": "Tygodniowe top 5, jednorazowa wysyłka zestawień tygodniowych i miesięcznych oraz streszczenia AI w zestawieniach."}, {"v": "v23", "d": "21.10.2026", "h": "Jednorazowe uzupełnienie streszczeń AI w archiwum dla artykułów zarchiwizowanych przed v22."}, {"v": "v24", "d": "22.10.2026", "h": "Zewnętrzny budzik (cron-job.org) jako główny wyzwalacz prasówki i zestawień; MFA bez nawiasu."}, {"v": "v25", "d": "22.10.2026", "h": "Ostrzejsze streszczenia AI: konkrety zamiast ogólników, kontrola faktów i czasu, poprawna wielka litera."}, {"v": "v26", "d": "22.10.2026", "h": "Pięć nowych źródeł, filtr wieku artykułów i lepsze łączenie tego samego wydarzenia."}, {"v": "v27", "d": "22.10.2026", "h": "Odmiana terminów i objaśnień oraz pełna treść artykułów ze stron."}, {"v": "v28", "d": "23.10.2026", "h": "🔥 przy lukach z katalogu CISA KEV."}, {"v": "v29", "d": "25.10.2026", "h": "Zaostrzona kontrola językowa streszczeń, ochrona przed limitem zapytań, przeglądy zbiorcze i precyzyjniejszy 🔥."}, {"v": "v30", "d": "25.10.2026", "h": "„Polacy nie gęsi”: korekta językowa Gemini, podpowiedzi LanguageTool, prostsze zdania."}, {"v": "v31", "d": "25.10.2026", "h": "Rozbiór „Weekendowej lektury” na linki, łączenie tematów po nazwach firm, alarm przy błędzie workflow."}, {"v": "v32", "d": "25.10.2026", "h": "Dziennik języka: poprawki językowe streszczeń zapisywane w archiwum."}, {"v": "v33", "d": "26.10.2026", "h": "Jakość streszczeń i zestawień po prasówce i pierwszym automatycznym top 5 z 26.10.2026."}, {"v": "v34", "d": "26.10.2026", "h": "Streszczenia z sensem i łatwe w czytaniu: co się stało, dlaczego to ważne, co zrobić; streszczenia całych wydarzeń w zestawieniach."}, {"v": "v35", "d": "28.10.2026", "h": "Jedna luka – jedna pozycja; korekta tylko przez Gemini; zalecenia tylko konkretne."}, {"v": "v36", "d": "29.10.2026", "h": "Miękkie problemy nigdy nie tną streszczenia; bez urwanych fragmentów; mniej telegrafu; „z/ze” poprawnie; bez dopisanego phishingu."}, {"v": "v37a", "d": "31.10.2026", "h": "Korekta językowa codziennie: porcje, Gemini lite, Mistral; bez pustych „dwóch innych luk”."}, {"v": "v37b", "d": "31.10.2026", "h": "Zestawienia na tym samym łańcuchu co prasówka."}, {"v": "v37c", "d": "31.10.2026", "h": "Powód odmowy API w logu; Ministral jako model Mistrala; odczyt odpowiedzi Ministrala."}, {"v": "v38", "d": "01.11.2026", "h": "Dane dla mostu do Mozaiki: hasła w archiwum, zapis zestawień, test kontraktu."}, {"v": "v39", "d": "02.11.2026", "h": "Straż dwóch ostatnich linii danych dla mostu i pole proofread."}, {"v": "v40", "d": "07.11.2026", "h": "Dwa nawiasy: mirror v92, objaśnienia tylko przy dwóch terminach."}, {"v": "v41", "d": "07.11.2026", "h": "Karton na straży: Karton Prasówki w repo ze strażnikiem wersji."}, {"v": "v42", "d": "07.11.2026", "h": "Czysta polszczyzna: Morfeusz 2 łapie angielskie słowa i literówki z korekty; lite na końcu kolejki."}];
+const CAT=[
+ ['zestawienia','--lapis',/zestawie|top |top$|tygodni|miesię/i],
+ ['język i słowniczek','--plum',/język|korekt|polszczy|słownicz|styl|odmian|kalk|Gemini|Mistral|Ministral/i],
+ ['streszczenia AI','--teal',/streszcz|AI|Groq|model|prompt|wat/i],
+ ['dobór i łączenie','--gold',/źród|RSS|Atom|selekc|wybór|łącz|duplik|CVE|KEV|grup|kontekst|lektur/i],
+ ['infrastruktura','--stone',/./]
+];
+const cat=h=>CAT.find(c=>c[2].test(h));
+const tl=document.getElementById('tl'),cap=document.getElementById('tlcap');
+const days=[];TL.forEach(e=>{let d=days.find(x=>x.d===e.d);if(!d){d={d:e.d,items:[]};days.push(d);}d.items.push(e);});
+const show=(e,btn)=>{tl.querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',b===btn));
+  cap.innerHTML=`<span class="v">${esc(e.v)}</span><span class="dt">${esc(e.d)} · ${esc(cat(e.h)[0])}</span><p>${esc(e.h).replace(/`([^`]+)`/g,'<code>$1</code>')}</p>`;};
+days.forEach(d=>{const w=document.createElement('div');w.className='day';w.innerHTML=`<span class="d">${d.d.slice(0,5)}</span>`;
+  const t=document.createElement('div');t.className='tess';
+  d.items.forEach(e=>{const b=document.createElement('button');b.style.setProperty('--c',`var(${cat(e.h)[1]})`);b.title=e.v;b.setAttribute('aria-label',`${e.v}: ${e.h}`);b.setAttribute('aria-pressed','false');
+    b.addEventListener('click',()=>show(e,b));t.appendChild(b);});
+  w.appendChild(t);tl.appendChild(w);});
+document.getElementById('tlleg').innerHTML=CAT.map(c=>`<span style="--c:var(${c[1]})"><i></i>${c[0]}</span>`).join('');
+const btns=tl.querySelectorAll('button');show(TL[TL.length-1],btns[btns.length-1]);
+</script>

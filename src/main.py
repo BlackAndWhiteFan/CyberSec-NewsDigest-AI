@@ -25,7 +25,7 @@ from article_pages import add_page_texts
 from kev import VIA_LEAD_CHARS, find_cves, load_kev, mark_kev
 from roundup_parts import VIA_LEKTURA, extract_parts
 from article_archive import append_to_archive, load_recent
-from event_grouping import CONTEXT_DAYS, add_context, group_events, mark_continuations, merge_by_cves
+from event_grouping import CONTEXT_DAYS, add_context, group_events, mark_continuations, merge_by_cves, merge_by_story
 from run_guard import mark_done, should_skip
 import test_mode
 
@@ -329,6 +329,8 @@ def run():
     # link has none; PHP2Shell, test 25.10.2026).
     # v35: second pass with CVE ids from the summaries (Apple, 28.10.2026).
     selected_articles = merge_by_cves(selected_articles, use_summaries=True)
+    # v44: one story, one item – the same amounts in the summaries (bug bounty, 4.11.2026).
+    selected_articles = merge_by_story(selected_articles)
     mark_continuations_by_cve(selected_articles, recent_records)
 
     print()

@@ -77,10 +77,22 @@ def title_cves(title):
     return set(CVE_PATTERN.findall(title.casefold()))
 
 
+# v44: product names written as capitals, a hyphen or a space and a number
+# ("GPT-6", "GPT 6": three articles on 7.11.2026 shown separately).
+PRODUCT_VERSION = re.compile(r"(?<![\w-])([A-Z]{3,})[- ](\d{1,2})(?![\w.,])")
+NOT_PRODUCT_VERSION = frozenset({"aes", "sha", "rsa", "cve", "top", "ios", "tls", "ssl", "php", "usb", "nis"})
+
+
 def title_event_names(title):
     """Names with letters and digits, e.g. "php2shell" (CVE ids excluded)."""
     names = EVENT_NAME_PATTERN.findall(CVE_PATTERN.sub(" ", title.casefold()))
-    return {name for name in names if not NOT_EVENT_NAME.match(name)}
+    names = {name for name in names if not NOT_EVENT_NAME.match(name)}
+    names |= {
+        f"{letters.lower()}{number}"
+        for letters, number in PRODUCT_VERSION.findall(CVE_PATTERN.sub(" ", title))
+        if letters.lower() not in NOT_PRODUCT_VERSION
+    }
+    return names
 
 
 def strong_match(title_a, title_b):
@@ -242,6 +254,59 @@ def shared_rare_name(title_a, title_b, frequency, rare_limit, names=frozenset())
     )
 
 
+# v44: places are names, but not of one event ("Japan Airlines" and
+# "Japan's GMO", 29.10.2026).
+PLACE_NAMES = frozenset(
+    """
+    japan japonia china chiny chin russia rosja rosji ukraine ukraina ukrainy
+    europe europa europie europy poland polska polski usa america ameryka
+    iran israel izrael korea north south india indie brazil germany niemcy
+    france francja francji britain british brytyjski london california
+    florida texas
+    """.split()
+)
+FREQUENT_NAME_LIMIT = 8
+
+
+def shared_frequent_name(title_a, title_b, frequency, names=frozenset()):
+    """v44: one company or product named in both titles, even when it is in
+    many titles of the day.
+
+    A big event appears in many titles, so its name is not "rare" and the
+    rarity rules miss it: Chainalysis (2.11 and 7.11.2026), Binance (31.10,
+    4.11) and OpenSSH (6.11) each went out twice. The word must look like a
+    name in a title (capital inside "OpenSSH", capital in the middle of a
+    sentence-case title "z Binance"), or be a name in the article texts and
+    capitalized in both titles. Common platforms (COMMON_NAMES), places and
+    words in more than FREQUENT_NAME_LIMIT titles never count.
+    """
+    words_a = title_words(title_a)
+    words_b = title_words(title_b)
+    capitalized_a = {word.casefold() for word in re.findall(r"\w+", title_a) if word[0].isupper()}
+    capitalized_b = {word.casefold() for word in re.findall(r"\w+", title_b) if word[0].isupper()}
+
+    for stem in words_a.keys() & words_b.keys():
+        word_a, name_a = words_a[stem]
+        word_b, name_b = words_b[stem]
+
+        if (
+            frequency.get(stem, 2) > FREQUENT_NAME_LIMIT
+            or max(len(word_a), len(word_b)) < 5
+            or abs(len(word_a) - len(word_b)) > NAME_ENDING_LENGTH
+            or not same_name(word_a, word_b)
+            or word_a in PLACE_NAMES
+            or word_b in PLACE_NAMES
+        ):
+            continue
+
+        in_texts = (word_a in names or word_b in names) and word_a in capitalized_a and word_b in capitalized_b
+
+        if name_a or name_b or in_texts:
+            return True
+
+    return False
+
+
 def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare_limit=2, names=frozenset()):
     """Return True when two titles most likely describe the same event.
 
@@ -262,6 +327,9 @@ def same_event(title_a, title_b, frequency, threshold=SIMILARITY_THRESHOLD, rare
         return True
 
     if shared_rare_name(title_a, title_b, frequency, rare_limit, names):
+        return True
+
+    if shared_frequent_name(title_a, title_b, frequency, names):
         return True
 
     # One name found only in these titles. The two words may differ only by
@@ -427,6 +495,106 @@ def merge_by_cves(articles, use_summaries=False):
 
     stage = "ze streszczeń" if use_summaries else "ze stron"
     print(f"SCALENIE PO CVE ({stage}): {len(articles) - len(merged)} artykułów dołączonych do innych pozycji")
+    return merged
+
+
+# v44: the same amounts of money or people in two summaries. The six
+# articles about the CERT Polska bug bounty (4.11.2026) had different titles
+# without a shared name, but the same "20 tys. zł" and "1 mln zł".
+AMOUNT = re.compile(
+    r"(\d{1,3}(?:[ \u00a0]\d{3})+|\d+(?:[.,]\d+)?)\s*(tys\.?|mln|mld|milion\w*|miliard\w*|million|billion)?"
+    r"|(?<!\w)(milion|miliard)\w*",
+    re.IGNORECASE,
+)
+MIN_AMOUNT = 1000
+
+
+def amounts(text):
+    """Numbers of at least MIN_AMOUNT, with "tys.", "mln", "mld" applied;
+    years and CVE ids do not count."""
+    text = re.sub(r"CVE-\d{4}-\d+", " ", text or "", flags=re.IGNORECASE)
+    found = set()
+
+    for match in AMOUNT.finditer(text):
+        if match.group(3):
+            found.add(10 ** 6 if match.group(3).lower().startswith("milion") else 10 ** 9)
+            continue
+
+        number = float(re.sub(r"[ \u00a0]", "", match.group(1)).replace(",", "."))
+        unit = (match.group(2) or "").lower()
+
+        if unit.startswith("tys"):
+            number *= 1000
+        elif unit.startswith(("mln", "milion", "million")):
+            number *= 10 ** 6
+        elif unit.startswith(("mld", "miliard", "billion")):
+            number *= 10 ** 9
+        elif 1900 <= number <= 2100:
+            continue
+
+        if number >= MIN_AMOUNT:
+            found.add(round(number))
+
+    return found
+
+
+def summary_names(text):
+    """Capitalized words in the middle of a sentence ("platforma CERT
+    Polska", "program Bug Bounty")."""
+    found = set()
+
+    for match in re.finditer(r"(?<=[^.!?:\s] )([A-ZĄĆĘŁŃÓŚŹŻ][\w-]{4,})", text or ""):
+        word = match.group(1)
+
+        if usable_name(word) and word.casefold() not in PLACE_NAMES:
+            found.add(word.casefold()[:STEM_LENGTH])
+
+    return found
+
+
+def same_story(article_a, article_b):
+    """v44: two summaries tell the same story when they share two amounts,
+    or one amount and one name (checked on the archive since 19.10.2026:
+    only the bug bounty articles of 4.11 match)."""
+    def text(article):
+        return f"{article.get('title', '')}. {article.get('summary', '')}"
+
+    shared = amounts(text(article_a)) & amounts(text(article_b))
+
+    if len(shared) >= 2:
+        return True
+
+    return bool(shared) and bool(summary_names(article_a.get("summary", "")) & summary_names(article_b.get("summary", "")))
+
+
+def merge_by_story(articles):
+    """v44: merge selected articles whose summaries tell the same story
+    (after the AI summaries), like merge_by_cves."""
+    merged = []
+
+    for article in articles:
+        target = next(
+            (item for item in merged if not is_roundup(item) and not is_roundup(article) and same_story(item, article)),
+            None,
+        )
+
+        if target is None:
+            merged.append(article)
+            continue
+
+        if representative_key(article) > representative_key(target):
+            position = merged.index(target)
+            article, target = target, article
+            merged[position] = target
+
+        target["related"] = list(target.get("related", [])) + [
+            {key: value for key, value in article.items() if key != "related"}
+        ] + list(article.get("related", []))
+        target["cves"] = sorted(set(target.get("cves", [])) | set(article.get("cves", [])))
+        target["kev"] = sorted(set(target.get("kev", [])) | set(article.get("kev", [])))
+        target["continuation"] = bool(target.get("continuation") or article.get("continuation"))
+
+    print(f"SCALENIE PO TREŚCI: {len(articles) - len(merged)} artykułów dołączonych do innych pozycji")
     return merged
 
 

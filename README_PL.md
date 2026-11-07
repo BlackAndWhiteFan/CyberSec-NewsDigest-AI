@@ -42,6 +42,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 24 | Dane dla mostu do CyberSec Mozaika: hasła w archiwum (`terms`), zapis zestawień w `data/tops/`, test kontraktu danych i miejsca plików, mirror v90, eksporter przeniesiony do `cybersec-most` (v38) | zakończony; zweryfikowany testami jednostkowymi |
 | 25 | Straż danych dla mostu: test kontraktu zestawień (`data/tops/`) i listy kalk, pole `proofread` w archiwum (v39) | zakończony; zweryfikowany testami jednostkowymi |
 | 26 | Objaśnienia w nawiasach tylko przy „podwyższeniu uprawnień” i „poświadczeniach”: mirror v92 po decyzji autora z mostu (v40) | zakończony; zweryfikowany testami jednostkowymi |
+| 27 | Karton Prasówki w repo (`docs/karton.html`) ze strażnikiem wersji (v41) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -184,6 +185,7 @@ Dane i narzędzia:
 - `data/tops/RRRR-Www.json`, `data/tops/RRRR-MM.json` — wysłane zestawienia tygodniowe i miesięczne z historiami wydarzeń (od v38; materiał dla mostu do CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (plik-matka v92, 6 kolumn). Eksportuje go prywatne repozytorium mostu `cybersec-most` (od v38; wcześniej `tools/eksport_mirrora.py` w tym repo).
 - `data/styl_unikaj.csv` — lista stylu: kalki i anglicyzmy z propozycjami, edytowana ręcznie (`*` = dowolna końcówka).
+- `docs/karton.html` — Karton Prasówki, interaktywna mapa prasówki, ze znacznikami wersji czytanymi przez Raport Mostu (od v41).
 
 ## Konfiguracja i sekrety
 
@@ -212,6 +214,8 @@ Każdy workflow uruchamia testy przed swoim głównym krokiem. Zmiany powstają 
 ## Dokumentacja
 
 Dokumentacja jest prowadzona po angielsku i po polsku; każda zmiana techniczna trafia do obu wersji README i do pliku [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+
+**Karton Prasówki** (`docs/karton.html`) to interaktywna mapa prasówki. Od v41 każda wersja aktualizuje go w tej samej rundzie (zasada 9 ekosystemu „Karton zawsze aktualny”): znaczniki `prasowka-wersja` i `plik-matka-wersja`, widoczny stan i liczbę testów. `src/test_v41.py` zapala się na czerwono, gdy Karton nie zgadza się z changelogiem, mirrorem albo liczbą testów.
 
 ## Licencja słowniczka
 

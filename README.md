@@ -42,6 +42,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 24 | Data for the bridge to CyberSec Mozaika: glossary entries in the archive (`terms`), tops saved in `data/tops/`, data contract and file placement tests, mirror v90, exporter moved to `cybersec-most` (v38) | completed; verified by unit tests |
 | 25 | Data guards for the bridge: contract tests for the tops (`data/tops/`) and the style list, `proofread` field in the archive (v39) | completed; verified by unit tests |
 | 26 | Explanations in parentheses only for "podwyższenie uprawnień" and "poświadczenia": mirror v92 after the author's decision from the bridge (v40) | completed; verified by unit tests |
+| 27 | Karton Prasówki in the repository (`docs/karton.html`) with a version guard (v41) | completed; verified by unit tests |
 
 ## Current Implementation
 
@@ -184,6 +185,7 @@ Data and tools:
 - `data/tops/YYYY-Www.json`, `data/tops/YYYY-MM.json` — delivered weekly and monthly tops with their event stories (since v38; material for the bridge to CyberSec Mozaika).
 - `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (mother workbook v92, six columns). Exported by the private bridge repository `cybersec-most` (since v38; before that by `tools/eksport_mirrora.py` in this repository).
 - `data/styl_unikaj.csv` — style list: calques and anglicisms with suggestions, edited by hand (`*` = any ending).
+- `docs/karton.html` — Karton Prasówki, the interactive map of the digest, with version markers read by the bridge report (since v41).
 
 ## Configuration and Secrets
 
@@ -212,6 +214,8 @@ Every workflow runs the tests before its main step. Changes are made on a branch
 ## Documentation
 
 The documentation is kept in English and Polish; every technical change is reflected in both README versions and in [CHANGELOG_PL_EN.md](CHANGELOG_PL_EN.md).
+
+**Karton Prasówki** (`docs/karton.html`) is the interactive map of the digest. Since v41 every version updates it in the same round (ecosystem rule 9 "Karton always up to date"): the markers `prasowka-wersja` and `plik-matka-wersja`, the visible state and the test count. `src/test_v41.py` turns red when the Karton is out of step with the changelog, the mirror or the test suite.
 
 ## Glossary licence
 

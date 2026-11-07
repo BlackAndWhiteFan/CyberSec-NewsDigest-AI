@@ -46,6 +46,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 28 | Czysta polszczyzna: Morfeusz 2 łapie angielskie słowa bez przekładu i literówki z korekty; Gemini lite na końcu kolejki korekty (v42) | zakończony; zweryfikowany testami jednostkowymi |
 | 29 | Słownik kalek: 29 nowych wierszy listy kalk zaakceptowanych przez JW, polskie nazwy miesięcy w datach (v43) | zakończony; zweryfikowany testami jednostkowymi |
 | 30 | Bez echa: jedna sprawa, jedna pozycja – łączenie po nazwach firm, wersjach produktów i kwotach w streszczeniach (v44) | zakończony; zweryfikowany testami jednostkowymi |
+| 31 | Mniej, a lepiej: najwyżej 10 pozycji w prasówce dziennej, bez tekstów sponsorowanych (v45) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -57,7 +58,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 - Kategoryzuje artykuły jako najważniejsze wiadomości, podatności i wiadomości związane z Polską na podstawie angielskich i polskich słów kluczowych zapisanych jako rdzenie (polskie rdzenie sprawdzone z formami wygenerowanymi przez analizator morfologiczny Morfeusz 2).
 - Przydziela punkty (najważniejsze +3, podatności +2, Polska +1) i odejmuje 2 punkty tytułom w kontekście wydarzeń, raportów lub poradników (konferencje, eksperci, poradniki, kary regulacyjne).
 - Wyklucza tytuły promocyjne (webinary, szkolenia, e-booki, rabaty, treści sponsorowane) i angielskie przeglądy (ThreatsDay, Weekly Recap, In Other News), których tematy trafiają do prasówki osobno.
-- Wybiera maksymalnie 20 artykułów z wynikiem co najmniej 2, więc prasówka może być krótsza niż 20 pozycji. Każde źródło ma limit 4 artykułów (Niebezpiecznik 2, SecurityWeek i The Record 3); limity są ustawiane w `src/article_selection.py`.
+- Streszcza do 14 kandydatów z wynikiem co najmniej 2, a po połączeniu duplikatów wysyła najwyżej 10 pozycji (v45: wyżej stoją KEV, numery CVE, inne źródła tej samej sprawy i polskie źródła). Każde źródło ma limit 4 artykułów (Niebezpiecznik 2, SecurityWeek i The Record 3); limity są ustawiane w `src/article_selection.py`.
 - Rozbiera „Weekendową lekturę” (Zaufana Trzecia Strona) na pojedyncze linki: każdy link do innego serwisu staje się kandydatem do prasówki z komentarzem ZTS jako opisem i przechodzi tę samą punktację. Pytajnik w tytule linku oznacza publicystykę (−2), linki do publikacji badawczych (Unit 42, Securelist, ESET, Mandiant, Microsoft Security Blog, Talos, CERT Polska i inne) dostają +2, a linki do wideo, czatów i mediów społecznościowych są pomijane. Najwyżej 3 takie linki w prasówce, podpisane „via Zaufana Trzecia Strona”.
 
 ### Wydarzenia i znaczniki
@@ -137,7 +138,7 @@ Planowane funkcje nie są uznawane za wdrożone, dopóki nie zostaną opracowane
 2. Walidacja wpisów, usunięcie powtórzonych linków, rozebranie „Weekendowej lektury” na linki.
 3. Aktualizacja historii i wykluczenie linków już opublikowanych.
 4. Kategoryzacja, punktacja, wykluczenie promocji i przeglądów.
-5. Wybór do 20 artykułów w limitach źródeł; łączenie artykułów o tym samym wydarzeniu; oznaczenie ciągów dalszych z ostatnich 3 dni.
+5. Wybór do 14 kandydatów w limitach źródeł (po połączeniu najwyżej 10 pozycji, v45); łączenie artykułów o tym samym wydarzeniu; oznaczenie ciągów dalszych z ostatnich 3 dni.
 6. Pobranie stron artykułów, gdy tekst z kanału jest za krótki; oznaczenie luk z CISA KEV.
 7. Streszczenia AI, ich kontrola, poprawki i korekta językowa; zapis notatek językowych.
 8. Sformatowanie i wysłanie prasówki na Discorda.

@@ -189,7 +189,7 @@ Dane i narzędzia:
 - `data/archive/RRRR-MM.json` — miesięczne archiwum dostarczonych artykułów; od v38 z hasłami glosariusza (`terms`), od v39 z modelem korekty językowej (`proofread`, pusty tekst = bez korekty).
 - `data/last_digest.json`, `data/last_top.json` — znaczniki ostatniej prasówki i zestawień.
 - `data/tops/RRRR-Www.json`, `data/tops/RRRR-MM.json` — wysłane zestawienia tygodniowe i miesięczne z historiami wydarzeń (od v38; materiał dla mostu do CyberSec Mozaika).
-- `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (plik-matka v92, 6 kolumn). Eksportuje go prywatne repozytorium mostu `cybersec-most` (od v38; wcześniej `tools/eksport_mirrora.py` w tym repo).
+- `data/glosariusz_mirror.csv` — mirror glosariusza CyberSec Mozaika (plik-matka v93, 6 kolumn). Eksportuje go prywatne repozytorium mostu `cybersec-most` (od v38; wcześniej `tools/eksport_mirrora.py` w tym repo).
 - `data/styl_unikaj.csv` — lista stylu: kalki i anglicyzmy z propozycjami, edytowana ręcznie (`*` = dowolna końcówka).
 - `data/reguly_jezyka.md` — Reguły języka Prasówki, edytowane przez JW: sekcja „Nakazy dla modeli” trafia do promptów (od v46).
 - `data/slowa_angielskie_ok.csv` — angielskie słowa, które mogą zostać w streszczeniach bez przekładu, edytowane ręcznie (`*` = dowolna końcówka; od v42).

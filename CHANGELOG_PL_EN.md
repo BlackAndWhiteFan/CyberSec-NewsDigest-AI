@@ -58,6 +58,11 @@ Zmiany:
 - **Karton Prasówki** odświeżony do v46. **Testy**: `src/test_v46.py`;
   razem 487.
 
+**Dopisek 08.11.2026 (krok K5: nowy mirror do Prasówki):** mirror
+glosariusza (Mozaika → Prasówka) v93 (`plik-matka v93 · 2026-11-07`).
+Treść bez zmian względem v92, zmienił się tylko nagłówek; Karton
+Prasówki i README pokazują v93.
+
 Nowe i zmienione pliki: `data/reguly_jezyka.md` (nowy),
 `src/language_rules.py` (nowy), `src/polish_words.py`,
 `src/summary_quality.py`, `src/ai_summaries.py`, `src/glossary.py`,
@@ -2534,6 +2539,11 @@ Changes:
   list, "build*" added to `data/slowa_angielskie_ok.csv`.
 - **Karton Prasówki** refreshed to v46. **Tests**: `src/test_v46.py`; 487
   in total.
+
+**Addendum 2026-11-08 (runbook step K5: new mirror to the digest):**
+glossary mirror (Mozaika → Prasówka) v93 (`plik-matka v93 ·
+2026-11-07`). Content unchanged from v92, only the header changed; the
+Karton Prasówki and the READMEs show v93.
 
 New and changed files: `data/reguly_jezyka.md` (new),
 `src/language_rules.py` (new), `src/polish_words.py`,

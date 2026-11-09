@@ -3238,5 +3238,117 @@
       "H164"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-09",
+    "title": "Cybersecurity Black Week: tydzień luk i ataków wymagających różnych reakcji",
+    "link": "https://www.welivesecurity.com/en/business-security/lessons-cybersecurity-black-week/",
+    "source": "welivesecurity.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "W ciągu siedmiu dni przed 25 października 2026 wykryto krytyczną lukę w PHP, wycieki raportów jądra Linuksa oraz inne zagrożenia, w tym uszkodzoną wersję LiteLLM i poważną podatność w GitLabie. Luka PHP była wykorzystywana w łańcuchu exploitów PHP2Shell-Fragnesia, co doprowadziło do przejęcia 24 z 25 zapór sieciowych producenta.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "style",
+        "used": "kompromitację",
+        "form": "kompromitacj*",
+        "suggestion": "włamanie, przejęcie",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "W ciągu siedmiu dni przed 25 października 2026 wykryto krytyczną lukę w PHP, wycieki raportów jądra Linux oraz inne zagrożenia, w tym uszkodzoną wersję LiteLLM i poważną podatność w GitLabie. Luka PHP była wykorzystywana w łańcuchu exploitów PHP2Shell-Fragnesia, co doprowadziło do przejęcia 24 z 25 zapór sieciowych producenta.",
+        "after": "W ciągu siedmiu dni przed 25 października 2026 wykryto krytyczną lukę w PHP, wycieki raportów jądra Linuksa oraz inne zagrożenia, w tym uszkodzoną wersję LiteLLM i poważną podatność w GitLabie. Luka PHP była wykorzystywana w łańcuchu exploitów PHP2Shell-Fragnesia, co doprowadziło do przejęcia 24 z 25 zapór sieciowych producenta.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-09",
+    "title": "Wyciek danych pasażerów wielu linii lotniczych z systemu Amadeus",
+    "link": "https://cert.orange.pl/aktualnosci/wyciek-danych-amadeus-dane-pazazerow-linii-lotniczych-ujawnione/",
+    "source": "cert.orange.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Wyciek danych z systemu Amadeus ujawnił informacje o rezerwacjach pasażerów m.in. Japan Airlines, ANA, Cathay Pacific i Singapore Airlines, w tym nazwiska, numery rezerwacji i szczegóły podróży. Dostęp uzyskano bez uwierzytelnienia w środowisku dostawcy, a infrastruktura IT przewoźników nie została naruszona.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-09",
+    "title": "Hybrydowy atak na europejskie szkoły, łączący ransomware i agenta AI",
+    "link": "https://www.bitdefender.com/en-us/blog/businessinsights/3am-ransomware-hybrid-ai-attack",
+    "source": "bitdefender.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa ransomware 3AM przeprowadziła hybrydowy atak na europejskie szkoły w Wielkiej Brytanii, łącząc działanie człowieka przy klawiaturze z agentem AI analizującym wyniki i modyfikującym komendy. Atak wykorzystał wbudowane narzędzia Windows, takie jak PowerShell, WMI i reg, co umożliwiło rozprzestrzenienie się po domenie.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [],
+    "terms": [
+      "H015",
+      "H476"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-09",
+    "title": "Iris Ohyama data cloud breach exposes info of 7.7 million customers",
+    "link": "https://www.bleepingcomputer.com/news/security/iris-ohyama-data-cloud-breach-exposes-info-of-77-million-customers/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Japoński producent Iris Ohyama potwierdził nieautoryzowany dostęp do zewnętrznego serwisu chmurowego, w wyniku którego mogły zostać ujawnione dane osobowe około 7,7 mln osób. Incydent dotyczy danych przechowywanych w chmurze, w tym 5,8 mln członków i 1,9 mln osób niebędących członkami, a nie systemów wewnętrznych firmy.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Japoński producent Iris Ohyama potwierdził nieautoryzowany dostęp do zewnętrznego serwisu chmurowego, w wyniku którego mogło zostać ujawnione dane osobowe około 7,7 mln osób. Incydent dotyczy danych przechowywanych w chmurze, w tym do 5,8 mln członków i 1,9 mln nie-członków, a nie systemów wewnętrznych firmy.",
+        "after": "Japoński producent Iris Ohyama potwierdził nieautoryzowany dostęp do zewnętrznego serwisu chmurowego, w wyniku którego mogły zostać ujawnione dane osobowe około 7,7 mln osób. Incydent dotyczy danych przechowywanych w chmurze, w tym 5,8 mln członków i 1,9 mln osób niebędących członkami, a nie systemów wewnętrznych firmy.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H399"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

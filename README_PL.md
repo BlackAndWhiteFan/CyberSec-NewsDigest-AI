@@ -48,6 +48,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 30 | Bez echa: jedna sprawa, jedna pozycja – łączenie po nazwach firm, wersjach produktów i kwotach w streszczeniach (v44) | zakończony; zweryfikowany testami jednostkowymi |
 | 31 | Mniej, a lepiej: najwyżej 10 pozycji w prasówce dziennej, bez tekstów sponsorowanych (v45) | zakończony; zweryfikowany testami jednostkowymi |
 | 32 | Szlif: dokument reguł języka w promptach, gramatyka z Morfeuszem 2, uzus branżowy ponad purystyką (v46) | zakończony; zweryfikowany testami jednostkowymi |
+| 33 | Osobne sprawy: w zestawieniach nazwa firmy nie łączy wydarzeń z różnymi CVE (v47) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 

@@ -24,6 +24,32 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v47 · Osobne sprawy --- 09.11.2026
+
+**W zestawieniach tygodnia i miesiąca sama nazwa firmy nie łączy
+wydarzeń z różnymi numerami CVE.**
+
+Powód: top 5 tygodnia 45 (9.11.2026) skleił obejście MFA w SonicWall
+SSL-VPN (CVE-2026-19868) z osobną sprawą starego SonicWall GMS, którego
+producent nie załata (CVE-2026-109593). Historia sugerowała, że to ta
+sama luka. Grupowanie zestawień łączyło tytuły po nazwie firmy, a w
+tygodniu ta sama firma ma często dwie różne sprawy.
+
+Zmiany (`src/monthly_top.py`):
+
+- **Różne CVE rozdzielają:** gdy rekord i wydarzenie mają numery CVE i
+  żaden się nie powtarza, podobny tytuł ani wspólna nazwa nie wystarczą.
+  Wspólny numer CVE i nazwa z cyframi (PHP2Shell) łączą jak dotąd.
+- Na archiwum od 19.10 zmiana rozdziela tylko trzy sprawy SonicWall z
+  tygodnia 45; pozostałe wydarzenia bez zmian.
+- **Karton Prasówki** odświeżony do v47. **Testy**: `src/test_v47.py`;
+  razem 490.
+
+Zmienione pliki: `src/monthly_top.py`, `src/test_v47.py` (nowy),
+`docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v46 · Szlif --- 07.11.2026
 
 **Reguły języka Prasówki w promptach, kontrola gramatyki Morfeuszem 2 i
@@ -2503,6 +2529,33 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v47 · Separate stories --- 2026-11-09
+
+**In the weekly and monthly tops a company name alone no longer joins
+events with different CVE ids.**
+
+Reason: the top 5 of week 45 (9 Nov 2026) joined the SonicWall SSL-VPN
+MFA bypass (CVE-2026-19868) with a separate story about old SonicWall
+GMS that will not be patched (CVE-2026-109593). The story suggested one
+flaw. Grouping of the tops merged titles by a company name, while one
+company often has two different stories in a week.
+
+Changes (`src/monthly_top.py`):
+
+- **Different CVEs keep events apart:** when a record and an event both
+  have CVE ids and none is shared, a similar title or a shared name is
+  not enough. A shared CVE id or a name with digits (PHP2Shell) still
+  joins.
+- On the archive since 19 Oct the change splits only the three SonicWall
+  stories of week 45; other events are unchanged.
+- **Karton Prasówki** refreshed to v47. **Tests**: `src/test_v47.py`; 490
+  in total.
+
+Changed files: `src/monthly_top.py`, `src/test_v47.py` (new),
+`docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

@@ -48,6 +48,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 30 | No echo: one story, one item – merging by company names, product versions and amounts in the summaries (v44) | completed; verified by unit tests |
 | 31 | Less, but better: at most 10 items in the daily digest, no sponsored content (v45) | completed; verified by unit tests |
 | 32 | Polish polish: language rules document in the prompts, Morfeusz 2 grammar checks, industry usage over purism (v46) | completed; verified by unit tests |
+| 33 | Separate stories: in the weekly and monthly tops a company name does not join events with different CVE ids (v47) | completed; verified by unit tests |
 
 ## Current Implementation
 

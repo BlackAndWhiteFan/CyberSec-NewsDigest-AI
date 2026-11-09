@@ -105,6 +105,16 @@ def strongly_linked(record, event):
     )
 
 
+def different_cves(record, event):
+    """v47: both sides have CVE ids and none is shared – then a shared
+    company name in the titles is not enough. Top 5 of week 45 (9.11.2026)
+    joined the SonicWall SSL-VPN MFA bypass (CVE-2026-19868) with a
+    separate story about SonicWall GMS flaws that will not be patched."""
+    record_cves = set(record.get("cves", []))
+    event_cves = {cve for member in event for cve in member.get("cves", [])}
+    return bool(record_cves) and bool(event_cves) and record_cves.isdisjoint(event_cves)
+
+
 def group_month(records):
     """Group archive records of one month into events.
 
@@ -140,7 +150,7 @@ def group_month(records):
             same_source = record.get("source") in {member.get("source") for member in event}
             threshold = float("inf") if same_source else SIMILARITY_THRESHOLD
 
-            if strongly_linked(record, event) or same_event(
+            if strongly_linked(record, event) or not different_cves(record, event) and same_event(
                 event[0].get("title", ""),
                 record.get("title", ""),
                 frequency,

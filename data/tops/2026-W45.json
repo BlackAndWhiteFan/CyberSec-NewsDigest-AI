@@ -1,0 +1,122 @@
+[
+  {
+    "period": "2026-W45",
+    "kind": "week",
+    "rank": 1,
+    "title": "Nadchodzący model OpenAI – GPT 6 Cyber starł na miazgę jądro Linux, a dokładniej…",
+    "link": "https://sekurak.pl/nadchodzacy-model-openai-gpt-6-cyber-starl-na-miazge-jadro-linux-a-dokladniej/",
+    "summary": "Firma OpenAI zaprezentowała model sztucznej inteligencji GPT-6 Cyber służący do wyszukiwania i naprawiania podatności. Model wykrył 81 nowych luk wysokiego ryzyka w Firefoksie oraz przygotował exploity dla 948 luk w jądrze Linuksa. Odkrył też krytyczny błąd CVE-2026-111497 w bibliotece Brotli. Luka w Brotli trafiła do katalogu CISA KEV, co oznacza jej aktywne wykorzystywanie, a łatka nie jest jeszcze szeroko dostępna.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 5,
+    "sources": 5,
+    "first_date": "2026-11-03",
+    "kev": [
+      "CVE-2026-111497"
+    ],
+    "cves": [
+      "CVE-2026-111497"
+    ],
+    "links": [
+      "https://sekurak.pl/nadchodzacy-model-openai-gpt-6-cyber-starl-na-miazge-jadro-linux-a-dokladniej/",
+      "https://www.wiz.io/blog/cve-2026-111497-brotli-rce-node-js",
+      "https://thehackernews.com/2026/11/openai-launches-gpt-6-cyber-after-ai.html",
+      "https://www.securityweek.com/openai-says-new-gpt-6-cyber-model-hunts-flaws-without-crossing-the-line/",
+      "https://www.bleepingcomputer.com/news/security/openais-new-gpt-6-cyber-ai-finds-81-firefox-flaws-948-linux-bugs/"
+    ]
+  },
+  {
+    "period": "2026-W45",
+    "kind": "week",
+    "rank": 2,
+    "title": "SonicWall warns of new SSL-VPN MFA bypass flaw exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/",
+    "summary": "W zaporach sieciowych z systemem SonicOS firmy SonicWall wykryto podatność CVE-2026-19868. Błąd umożliwia obejście uwierzytelniania SAML oraz MFA i był aktywnie wykorzystywany w atakach. Luka trafiła do katalogu CISA KEV. Producent wydał aktualizacje SonicOS naprawiające ten błąd, jednak wycofane oprogramowanie GMS nie otrzyma łatki i zalecana jest migracja do NSM.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 4,
+    "sources": 3,
+    "first_date": "2026-11-05",
+    "kev": [
+      "CVE-2026-19868"
+    ],
+    "cves": [
+      "CVE-2026-109593",
+      "CVE-2026-19868",
+      "CVE-2026-98432"
+    ],
+    "links": [
+      "https://www.bleepingcomputer.com/news/security/sonicwall-warns-of-new-ssl-vpn-mfa-bypass-flaw-exploited-in-attacks/",
+      "https://thehackernews.com/2026/11/sonicwall-wont-patch-eol-gms-flaws-that.html",
+      "https://www.securityweek.com/cisco-watchguard-release-patches-sonicwall-wont-fix-gms-flaws/"
+    ]
+  },
+  {
+    "period": "2026-W45",
+    "kind": "week",
+    "rank": 3,
+    "title": "Ivanti patches two more Connect Secure zero-days chained in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/ivanti-patches-two-more-connect-secure-zero-days-chained-in-attacks/",
+    "summary": "W produkcie Ivanti Connect Secure wykryto luki zero-day umożliwiające niezalogowanemu atakującemu uzyskanie dostępu do konta roota. Cyberprzestępcy łączyli w atakach luki CVE-2026-111357 oraz CVE-2026-118527, aby obejść uwierzytelnienie i wykonać kod. Podatności trafiły do katalogu CISA KEV. Firma Ivanti wydała łatki usuwające luki w najnowszych wersjach oprogramowania.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 3,
+    "sources": 3,
+    "first_date": "2026-11-02",
+    "kev": [
+      "CVE-2026-104935",
+      "CVE-2026-111357",
+      "CVE-2026-118527"
+    ],
+    "cves": [
+      "CVE-2026-104935",
+      "CVE-2026-111357",
+      "CVE-2026-118527"
+    ],
+    "links": [
+      "https://www.bleepingcomputer.com/news/security/ivanti-patches-two-more-connect-secure-zero-days-chained-in-attacks/",
+      "https://thehackernews.com/2026/10/attackers-chain-three-ivanti-connect.html"
+    ]
+  },
+  {
+    "period": "2026-W45",
+    "kind": "week",
+    "rank": 4,
+    "title": "Zyxel GS1900 Patch Fails to Block Zero-Day Exploit Allowing Root Command Execution",
+    "link": "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html",
+    "summary": "Grupa Kapibala wykorzystała podatność zero-day CVE-2026-107441 w przełącznikach Zyxel GS1900 i przejęła prawie 1000 urządzeń. Ataki trwały od sierpnia 2026 roku i umożliwiały wykonanie poleceń z uprawnieniami roota bez logowania. Udostępniona wcześniej łatka Patch 2 nie zatrzymała ataków. Zyxel wydał poprawione oprogramowanie układowe Patch 3, które naprawia błąd.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 3,
+    "sources": 3,
+    "first_date": "2026-11-05",
+    "kev": [
+      "CVE-2026-7273"
+    ],
+    "cves": [
+      "CVE-2026-107441",
+      "CVE-2026-7273"
+    ],
+    "links": [
+      "https://thehackernews.com/2026/11/zyxel-gs1900-patch-fails-to-block-zero.html",
+      "https://www.bleepingcomputer.com/news/security/zyxel-fixes-zero-day-exploited-to-hack-nearly-1-000-network-switches/"
+    ]
+  },
+  {
+    "period": "2026-W45",
+    "kind": "week",
+    "rank": 5,
+    "title": "Korzystacie z OpenSSH na hostach z musl libc? Lepiej patchujcie i wyłączcie PasswordAuthentication",
+    "link": "https://sekurak.pl/korzystacie-z-openssh-na-hostach-z-musl-libc-lepiej-patchujcie-i-wylaczcie-passwordauthentication/",
+    "summary": "W oprogramowaniu OpenSSH na systemach z biblioteką musl libc odkryto lukę CVE-2026-123158. Błąd pozwala na logowanie do kont bez wyznaczonego hasła, w tym na konto roota, poprzez podanie nadmiernie długiego hasła. Hakerzy zaatakowali pułapkę sieciową zaledwie kilka godzin po ujawnieniu informacji. Lukę naprawiono w wersji OpenSSH 10.6p2.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 3,
+    "sources": 3,
+    "first_date": "2026-11-06",
+    "kev": [],
+    "cves": [
+      "CVE-2026-123158"
+    ],
+    "links": [
+      "https://sekurak.pl/korzystacie-z-openssh-na-hostach-z-musl-libc-lepiej-patchujcie-i-wylaczcie-passwordauthentication/",
+      "https://www.bleepingcomputer.com/news/security/openssh-flaw-lets-attackers-log-into-password-disabled-linux-accounts/",
+      "https://thehackernews.com/2026/11/hackers-exploited-openssh-sshole-flaw.html"
+    ]
+  }
+]

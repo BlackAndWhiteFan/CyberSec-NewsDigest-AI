@@ -3350,5 +3350,344 @@
       "H399"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Krytyczna luka w Telegramie na Androida pozwalała przejąć pełną kontrolę nad telefonem ofiary",
+    "link": "https://sekurak.pl/krytyczna-luka-w-telegramie-na-androida-pozwalala-przejac-pelna-kontrole-nad-telefonem-ofiary/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Trzy łańcuchy exploitów powiązane z grupą APT29 atakują iOS i Androida",
+        "link": "https://www.sekoia.com/blog/poisoned-source-apt29-watering-holes-targets-mobile-devices-with-n-day-exploits",
+        "source": "sekoia.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Badacze z NebuSec odkryli krytyczną lukę w aplikacji Telegram na Androidzie, która po odebraniu połączenia głosowego od atakującego mogła pozwolić na przejęcie pełnej kontroli nad telefonem ofiary. W połączeniu z dwoma innymi błędami luka umożliwiała atakującemu wydostanie się poza aplikację.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Badacze z NebuSec odkryli krytyczną lukę w aplikacji Telegram na Androidzie, która po odebraniu połączenia głosowego od atakującego mogła przejąć pełną kontrolę nad telefonem ofiary. W połączeniu z dwoma innymi błędami luka umożliwiała wydostanie się atakującego poza aplikację.",
+        "after": "Badacze z NebuSec odkryli krytyczną lukę w aplikacji Telegram na Androidzie, która po odebraniu połączenia głosowego od atakującego mogła pozwolić na przejęcie pełnej kontroli nad telefonem ofiary. W połączeniu z dwoma innymi błędami luka umożliwiała atakującemu wydostanie się poza aplikację.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "N-able takes cloud platform offline after 30+ \"zero-days\" published",
+    "link": "https://www.bleepingcomputer.com/news/security/n-able-takes-cloud-platform-offline-after-30-plus-zero-days-published/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma N-able wyłączyła platformę N-central po ujawnieniu ponad 30 domniemanych zero-day, w tym niezalogowanego obejścia uwierzytelnienia, wycieku poświadczeń, XSS, XXE i RCE. Badacze wskazują, że najpoważniejszy łańcuch exploitów wykorzystuje niezalogowaną podatność XXE do przejęcia sesji i wykonania poleceń jako użytkownik.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Firma N-able wyłączyła platformę N-central po ujawnieniu ponad 30 domniemanych zero-day, w tym nieautoryzowanego obejścia uwierzytelnienia, wycieku poświadczeń, XSS, XXE i RCE. Badacze wskazują, że najpoważniejszy łańcuch exploitów wykorzystuje nieautoryzowaną podatność XXE do przejęcia sesji i wykonania poleceń jako użytkownik nable.",
+        "after": "Firma N-able wyłączyła platformę N-central po ujawnieniu ponad 30 domniemanych zero-day, w tym niezalogowanego obejścia uwierzytelnienia, wycieku poświadczeń, XSS, XXE i RCE. Badacze wskazują, że najpoważniejszy łańcuch exploitów wykorzystuje niezalogowaną podatność XXE do przejęcia sesji i wykonania poleceń jako użytkownik.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H064",
+      "H089",
+      "H090",
+      "H159",
+      "H164"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Hackers exploit SSHole OpenSSH flaw to breach Linux systems",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Bunt maszyn. O 10-letniej luce w OpenSSH i nie tylko",
+        "link": "https://nfsec.pl/security/6737",
+        "source": "nfsec.pl"
+      },
+      {
+        "title": "Dlaczego luka w OpenSSH dawała dostęp do roota bez logowania w systemach Alpine Linux i OpenWRT",
+        "link": "https://sshhole.com/",
+        "source": "sshhole.com"
+      },
+      {
+        "title": "Hackers Exploiting ‘SSHole’ Authentication Bypass in OpenSSH",
+        "link": "https://www.securityweek.com/hackers-exploiting-sshole-authentication-bypass-in-openssh/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Badacze zgłosili aktywne wykorzystywanie luki SSHole (CVE-2026-123158) w OpenSSH, umożliwiającej obejście uwierzytelnienia, kradzież poświadczeń i uzyskanie uprawnień root. Luka znajduje się w katalogu CISA KEV, a exploit pojawił się 5 listopada. Łatka została udostępniona w wersji OpenSSH 10.6p2.",
+    "cves": [
+      "CVE-2026-123158"
+    ],
+    "kev": [
+      "CVE-2026-123158"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Badacze zgłosili aktywne wykorzystywanie luki SSHole (CVE-2026-123158) w OpenSSH, umożliwiającej obejście uwierzytelnienia, kradzież poświadczeń i uzyskanie uprawnień root. Luka jest w katalogu CISA KEV i exploit pojawił się 5 listopada. Łatka została udostępniona w OpenSSH 10.6p2.",
+        "after": "Badacze zgłosili aktywne wykorzystywanie luki SSHole (CVE-2026-123158) w OpenSSH, umożliwiającej obejście uwierzytelnienia, kradzież poświadczeń i uzyskanie uprawnień root. Luka znajduje się w katalogu CISA KEV, a exploit pojawił się 5 listopada. Łatka została udostępniona w wersji OpenSSH 10.6p2.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H153",
+      "H154",
+      "H166",
+      "H189"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Hackers Exploit Qubole's Trusted AWS Access to Breach Customer Accounts and Steal Data",
+    "link": "https://thehackernews.com/2026/11/hackers-exploit-quboles-trusted-aws.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół Wiz wykrył, że sprawcy przejęli dostęp do kont AWS kilku klientów Qubole, wykorzystując zaufane role IAM i kradnąc sekrety oraz dane. Atak miał miejsce w połowie października i dotyczy wszystkich organizacji, które połączyły Qubole z AWS, nawet jeśli nie korzystają już z tej integracji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół Wiz wykrył, że sprawcy przejęli dostęp do kont AWS kilku klientów Qubole, wykorzystując zaufane role IAM i kradnąc sekrety oraz dane. Atak miał miejsce w połowie października i dotyczy wszystkich organizacji, które połączyły Qubole z AWS, nawet jeśli nie używają już tej integracji.",
+        "after": "Zespół Wiz wykrył, że sprawcy przejęli dostęp do kont AWS kilku klientów Qubole, wykorzystując zaufane role IAM i kradnąc sekrety oraz dane. Atak miał miejsce w połowie października i dotyczy wszystkich organizacji, które połączyły Qubole z AWS, nawet jeśli nie korzystają już z tej integracji.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H153",
+      "H217",
+      "H242",
+      "H372"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Alleged AI-aided cyberattack exploits assistant interface to breach German web host",
+    "link": "https://therecord.media/cyberattack-germany-ai-mittwald",
+    "source": "therecord.media",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Mittwald CM Service poinformowało o naruszeniu, w którym hakerzy wykorzystali lukę w serwerze MCP, umożliwiającą połączenie asystentów AI z platformą mStudio, co doprowadziło do przejęcia 56 projektów klientów. Firma nie podała numeru CVE ani dostępnej łatki.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Mittwald CM Service poinformowało o naruszeniu, w którym hakerzy wykorzystali lukę w serwerze MCP umożliwiającą połączenie asystentów AI z platformą mStudio, co doprowadziło do przejęcia 56 projektów klientów. Firma nie podała numeru CVE ani dostępnej łatki.",
+        "after": "Mittwald CM Service poinformowało o naruszeniu, w którym hakerzy wykorzystali lukę w serwerze MCP, umożliwiającą połączenie asystentów AI z platformą mStudio, co doprowadziło do przejęcia 56 projektów klientów. Firma nie podała numeru CVE ani dostępnej łatki.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H447",
+      "H457"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Ilu rosyjskich żołnierzy zginęło na Ukrainie? Hakerzy ujawnili tajne dane",
+    "link": "https://cyberdefence24.pl/armia-i-sluzby/wojna-w-ukrainie/ilu-rosyjskich-zolnierzy-zginelo-na-ukrainie-hakerzy-ujawnili-tajne-dane",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Białoruscy Cyberpartyzanci we współpracy z Silent Crow przeprowadzili atak na rosyjski Rosstat, ujawniając pliki z danymi o 450 100 zgonach w latach 2022-2026.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Podatności w oprogramowaniu WidzialniCMS",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-110468/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska koordynował ujawnienie podatności w oprogramowaniu WidzialniCMS, w tym luk CVE-2026-110468 i CVE-2026-110469, które umożliwiają wykonanie kodu na odległość (RCE). Artykuł wymienia również podatność na odbijany atak XSS oraz ominięcie zabezpieczeń przed atakami brute-force.",
+    "cves": [
+      "CVE-2026-110468",
+      "CVE-2026-110469",
+      "CVE-2026-112204",
+      "CVE-2026-112205"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "CERT Polska koordynował ujawnienie podatności w oprogramowaniu WidzialniCMS, w tym luk CVE-2026-110468 i CVE-2026-110469 pozwalających na RCE. Artykuł wymienia również podatność na Reflected XSS oraz ominięcie zabezpieczeń przed atakami bruteforce.",
+        "after": "CERT Polska koordynował ujawnienie podatności w oprogramowaniu WidzialniCMS, w tym luk CVE-2026-110468 i CVE-2026-110469, które umożliwiają wykonanie kodu na odległość (RCE). Artykuł wymienia również podatność na odbijany atak XSS oraz ominięcie zabezpieczeń przed atakami brute-force.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H089",
+      "H090",
+      "H150",
+      "H164",
+      "H434"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Ewolucja ransomware'u Qilin: analiza zmian w kodzie wprowadzonych w 2026 r.",
+    "link": "https://www.seqrite.com/blog/the-evolution-of-qilin-agenda-a-comparative-reverse-engineering-analysis-of-qilin-agenda-ransomware-across-2026/",
+    "source": "seqrite.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa twórców ransomware Qilin w 2026 roku wprowadziła zmiany w kodzie, w tym automatyczne skanowanie Active Directory oraz rozprzestrzenianie się na platformy VMware ESXi.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół twórców ransomware Qilin w 2026 r. wprowadził zmiany w kodzie, w tym automatyczne skanowanie Active Directory i rozprzestrzenianie na platformy VMware ESXi.",
+        "after": "Grupa twórców ransomware Qilin w 2026 roku wprowadziła zmiany w kodzie, w tym automatyczne skanowanie Active Directory oraz rozprzestrzenianie się na platformy VMware ESXi.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H133",
+      "H170"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Vanderbilt University hit in BYOD ransomware attack, data theft claimed",
+    "link": "https://www.bleepingcomputer.com/news/security/vanderbilt-university-hit-in-byod-ransomware-attack-data-theft-claimed/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Vanderbilt University potwierdziło atak ransomware przeprowadzony przez grupę BYOD, który może zaszyfrowywać bazy danych i wykradać wrażliwe informacje. Użytkownicy zostali poproszeni o wyłączenie urządzeń, odłączenie się od sieci Wi-Fi i kontakt z działem IT.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Vanderbilt University potwierdziło atak ransomware grupy BYOD, który może zaszyfrować bazy danych i wykradać wrażliwe informacje. Użytkownicy zostali poproszeni o wyłączenie urządzeń, odłączenie od Wi-Fi i kontakt z działem IT.",
+        "after": "Vanderbilt University potwierdziło atak ransomware przeprowadzony przez grupę BYOD, który może zaszyfrowywać bazy danych i wykradać wrażliwe informacje. Użytkownicy zostali poproszeni o wyłączenie urządzeń, odłączenie się od sieci Wi-Fi i kontakt z działem IT.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H520"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-10",
+    "title": "Amplifon Americas Data Breach Impacts 1.3 Million",
+    "link": "https://www.securityweek.com/amplifon-americas-data-breach-impacts-1-3-million/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Data breach at hearing aid giant Amplifon impacts thousands",
+        "link": "https://therecord.media/amplifon-hearing-aid-company-data-breach",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": true,
+    "summary": "Amplifon Americas, amerykańska jednostka włoskiego dostawcy aparatów słuchowych, zgłosiła wyciek danych ponad 1,3 mln osób po włamaniu do wewnętrznych systemów w styczniu 2026 roku.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Amplifon Americas, amerykańska jednostka włoskiego dostawcy słuchu, zgłosiła wyciek danych ponad 1,3 mln osób po włamaniu do wewnętrznych systemów w styczniu 2026.",
+        "after": "Amplifon Americas, amerykańska jednostka włoskiego dostawcy aparatów słuchowych, zgłosiła wyciek danych ponad 1,3 mln osób po włamaniu do wewnętrznych systemów w styczniu 2026 roku.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
   }
 ]

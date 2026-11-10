@@ -41,11 +41,15 @@ Zmiany (`src/event_grouping.py`):
   „macOS” nie są nazwą wydarzenia, także w regule nazw z wielu tytułów
   (v44).
 - Na archiwum od 19.10 zmiana nie rozdziela żadnej innej pary.
+- **Reguły języka Prasówki** (`data/reguly_jezyka.md`, zatwierdził JW):
+  „niezalogowany” tylko o osobie („podatność XXE dostępna bez
+  logowania”, nie „niezalogowana podatność”) i liczba przy zero-day
+  („30 luk zero-day”). Oba nakazy z prasówki z 10.11.
 - **Karton Prasówki** odświeżony do v48. **Testy**: `src/test_v48.py`;
   razem 492.
 
 Zmienione pliki: `src/event_grouping.py`, `src/test_v48.py` (nowy),
-`docs/karton.html`, README (PL/EN).
+`data/reguly_jezyka.md`, `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 
@@ -2573,11 +2577,15 @@ Changes (`src/event_grouping.py`):
   "iPad", "macOS" are not event names, also in the frequent name rule
   (v44).
 - On the archive since 19 Oct the change splits no other pair.
+- **Prasówka language rules** (`data/reguly_jezyka.md`, approved by JW):
+  "niezalogowany" only about a person ("podatność XXE dostępna bez
+  logowania", not "niezalogowana podatność") and the number with
+  zero-day ("30 luk zero-day"). Both from the digest of 10 Nov.
 - **Karton Prasówki** refreshed to v48. **Tests**: `src/test_v48.py`; 492
   in total.
 
 Changed files: `src/event_grouping.py`, `src/test_v48.py` (new),
-`docs/karton.html`, README (PL/EN).
+`data/reguly_jezyka.md`, `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

@@ -40,7 +40,6 @@ class TestCalqueDictionary(unittest.TestCase):
             "Synology ostrzegło, że grupa threat actor wykorzystuje luki.": "threat actor*",
             "Grupa dokonała wycieku danych.": "dokona* wycieku",
             "PHP wydał emergency łatki.": "emergency",
-            "Wyciekły hashe haseł.": "hashe",
         }
         for text, form in cases.items():
             with self.subTest(text=text):

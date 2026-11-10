@@ -24,6 +24,32 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v49 · Hashe --- 10.11.2026
+
+**„Hash” to uzus branżowy: przy pierwszym wystąpieniu „hashe (skróty
+haseł)”, dalej „hashe”.**
+
+Powód: decyzja JW z 10.11.2026 – branża mówi „hash”, a v43 wpisała jego
+odmiany na listę kalk („hashe” → „skróty”). Zgodnie z zasadą nadrzędną
+Reguł języka Prasówki język branży wygrywa z purystyką.
+
+Zmiany:
+
+- **Lista kalk** `data/styl_unikaj.csv`: usunięte 7 wierszy „hash, hasha,
+  hashe, hashy, hashów, hashami, hashach” (64 → 57).
+- **Uzus branżowy** `data/slowa_angielskie_ok.csv`: dopisany „hash*”.
+- **Reguły języka Prasówki** (`data/reguly_jezyka.md`): nakaz „hashe
+  (skróty haseł)” przy pierwszym wystąpieniu, dalej „hashe”; pisownia
+  „hash, hasha, hashe”, nie „hasz, hasze”.
+- **Karton Prasówki** odświeżony do v49. **Testy**: `src/test_v49.py`,
+  `src/test_v43.py` bez przykładu „hashe”; razem 495.
+
+Zmienione pliki: `data/styl_unikaj.csv`, `data/slowa_angielskie_ok.csv`,
+`data/reguly_jezyka.md`, `src/test_v49.py` (nowy), `src/test_v43.py`,
+`docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v48 · Wspólne platformy --- 10.11.2026
 
 **Odmienione nazwy platform nie łączą różnych spraw.**
@@ -2558,6 +2584,33 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v49 · Hashes --- 2026-11-10
+
+**"Hash" is industry usage: "hashe (skróty haseł)" at the first mention,
+"hashe" later.**
+
+Reason: JW's decision of 10 Nov 2026 – the industry says "hash", while
+v43 put its forms on the calque list ("hashe" → "skróty"). Following the
+main principle of the Prasówka language rules, industry usage beats
+purism.
+
+Changes:
+
+- **Calque list** `data/styl_unikaj.csv`: the 7 rows "hash, hasha, hashe,
+  hashy, hashów, hashami, hashach" removed (64 → 57).
+- **Industry usage** `data/slowa_angielskie_ok.csv`: "hash*" added.
+- **Prasówka language rules** (`data/reguly_jezyka.md`): "hashe (skróty
+  haseł)" at the first mention, "hashe" later; spelling "hash, hasha,
+  hashe", not "hasz, hasze".
+- **Karton Prasówki** refreshed to v49. **Tests**: `src/test_v49.py`,
+  `src/test_v43.py` without the "hashe" example; 495 in total.
+
+Changed files: `data/styl_unikaj.csv`, `data/slowa_angielskie_ok.csv`,
+`data/reguly_jezyka.md`, `src/test_v49.py` (new), `src/test_v43.py`,
+`docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

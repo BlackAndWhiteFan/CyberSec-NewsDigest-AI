@@ -49,6 +49,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 31 | Less, but better: at most 10 items in the daily digest, no sponsored content (v45) | completed; verified by unit tests |
 | 32 | Polish polish: language rules document in the prompts, Morfeusz 2 grammar checks, industry usage over purism (v46) | completed; verified by unit tests |
 | 33 | Separate stories: in the weekly and monthly tops a company name does not join events with different CVE ids (v47) | completed; verified by unit tests |
+| 34 | Common platforms: inflected platform names ("Androida") no longer join different stories (v48) | completed; verified by unit tests |
 
 ## Current Implementation
 

@@ -85,6 +85,11 @@ Zmienione pliki: `data/styl_unikaj.csv`, `data/slowa_angielskie_ok.csv`,
 `data/reguly_jezyka.md`, `src/test_v49.py` (nowy), `src/test_v43.py`,
 `docs/karton.html`, README (PL/EN).
 
+**Dopisek 10.11.2026 (Słownik nazw):** pełna nazwa Prasówki to
+„Prasówka (CyberSec AI News Digest)”, bez „Daily” (Słownik nazw w
+README Mostu, §0; List 31). Poprawione w Kartonie Prasówki, w Regułach
+języka Prasówki i w strażniku Kartonu (`src/test_v41.py`).
+
 ------------------------------------------------------------------------
 
 ## v48 · Wspólne platformy --- 10.11.2026
@@ -2685,6 +2690,11 @@ Changes:
 Changed files: `data/styl_unikaj.csv`, `data/slowa_angielskie_ok.csv`,
 `data/reguly_jezyka.md`, `src/test_v49.py` (new), `src/test_v43.py`,
 `docs/karton.html`, README (PL/EN).
+
+**Addendum 2026-11-10 (name dictionary):** the full name of the digest is
+"Prasówka (CyberSec AI News Digest)", without "Daily" (name dictionary in
+the Most README, §0; Letter 31). Fixed in the Karton Prasówki, the
+Prasówka language rules and the Karton guard (`src/test_v41.py`).
 
 ------------------------------------------------------------------------
 

@@ -24,6 +24,35 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v48 · Wspólne platformy --- 10.11.2026
+
+**Odmienione nazwy platform nie łączą różnych spraw.**
+
+Powód: w prasówce z 10.11.2026 luka w Telegramie „na Androida” dostała
+jako powiązany artykuł kampanię APT29, która „atakuje iOS i Androida”.
+Lista wspólnych platform (Microsoft, Android, Linux…) wykluczała tylko
+formę podstawową, a reguła nazw z v44 brała formę „Androida” za nazwę
+wydarzenia.
+
+Zmiany (`src/event_grouping.py`):
+
+- Nazwa platformy z polską końcówką (do 3 liter: „Androida”,
+  „Androidzie”, „Windowsa”, „Microsoftu”) i „Linuksa”, „iPhone”, „iPad”,
+  „macOS” nie są nazwą wydarzenia, także w regule nazw z wielu tytułów
+  (v44).
+- Na archiwum od 19.10 zmiana nie rozdziela żadnej innej pary.
+- **Reguły języka Prasówki** (`data/reguly_jezyka.md`, zatwierdził JW):
+  „niezalogowany” tylko o osobie („podatność XXE dostępna bez
+  logowania”, nie „niezalogowana podatność”) i liczba przy zero-day
+  („30 luk zero-day”). Oba nakazy z prasówki z 10.11.
+- **Karton Prasówki** odświeżony do v48. **Testy**: `src/test_v48.py`;
+  razem 492.
+
+Zmienione pliki: `src/event_grouping.py`, `src/test_v48.py` (nowy),
+`data/reguly_jezyka.md`, `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v47 · Osobne sprawy --- 09.11.2026
 
 **W zestawieniach tygodnia i miesiąca sama nazwa firmy nie łączy
@@ -2529,6 +2558,34 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v48 · Common platforms --- 2026-11-10
+
+**Inflected platform names no longer join different stories.**
+
+Reason: in the digest of 10 Nov 2026 a Telegram flaw "na Androida" got an
+APT29 campaign that "atakuje iOS i Androida" as a related article. The
+list of common platforms (Microsoft, Android, Linux…) excluded only the
+base form, and the name rule of v44 took "Androida" for an event name.
+
+Changes (`src/event_grouping.py`):
+
+- A platform name with a Polish ending (up to 3 letters: "Androida",
+  "Androidzie", "Windowsa", "Microsoftu") and "Linuksa", "iPhone",
+  "iPad", "macOS" are not event names, also in the frequent name rule
+  (v44).
+- On the archive since 19 Oct the change splits no other pair.
+- **Prasówka language rules** (`data/reguly_jezyka.md`, approved by JW):
+  "niezalogowany" only about a person ("podatność XXE dostępna bez
+  logowania", not "niezalogowana podatność") and the number with
+  zero-day ("30 luk zero-day"). Both from the digest of 10 Nov.
+- **Karton Prasówki** refreshed to v48. **Tests**: `src/test_v48.py`; 492
+  in total.
+
+Changed files: `src/event_grouping.py`, `src/test_v48.py` (new),
+`data/reguly_jezyka.md`, `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

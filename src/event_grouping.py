@@ -199,12 +199,26 @@ COMMON_NAMES = frozenset(
 CAPITALIZED = re.compile(r"[A-ZĄĆĘŁŃÓŚŹŻ][\w-]*")
 
 
+# v48: Polish endings on common platform names ("Androida", "Windowsa",
+# "Microsoftu") – on 10.11.2026 a Telegram flaw "na Androida" joined an
+# APT29 campaign against "iOS i Androida".
+COMMON_STEMS = COMMON_NAMES | {"linuks", "iphone", "ipad", "macos"}
+
+
+def common_platform(lower):
+    return lower in COMMON_STEMS or any(
+        lower.startswith(name) and len(lower) - len(name) <= NAME_ENDING_LENGTH
+        for name in COMMON_STEMS
+        if len(name) >= 5
+    )
+
+
 def usable_name(word):
     lower = word.casefold()
     return not (
         len(lower) < 4
         or lower in STOPWORDS
-        or lower in COMMON_NAMES
+        or common_platform(lower)
         or lower[:STEM_LENGTH] in GENERIC_STEMS
         or NOT_EVENT_NAME.match(lower)
         or lower.isdigit()
@@ -296,6 +310,8 @@ def shared_frequent_name(title_a, title_b, frequency, names=frozenset()):
             or not same_name(word_a, word_b)
             or word_a in PLACE_NAMES
             or word_b in PLACE_NAMES
+            or not usable_name(word_a)
+            or not usable_name(word_b)
         ):
             continue
 

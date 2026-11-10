@@ -57,7 +57,7 @@ class TestKartonMarkers(unittest.TestCase):
         state = visible_state()
         self.assertIn(f"stan na {meta('prasowka-wersja')} ", state)
         self.assertIn(f"plik-matka {meta('plik-matka-wersja')}", state)
-        self.assertIn("Prasówka (CyberSec AI Daily News Digest)", state)
+        self.assertIn("Prasówka (CyberSec AI News Digest)", state)
 
 
 class TestKartonNumbers(unittest.TestCase):

@@ -36,8 +36,10 @@ promptów. Pisz krótko, z przykładem „błąd → poprawnie”.
 - Zamiast ogólników o naprawie podaj wersję: „Lukę usunięto w wersji 10.02.002”, a nie „Problem został naprawiony w metryce 242 wersji…”.
 - Liczebnik uzgadniaj z rodzajem: „dwie luki”, „dwie podatności”, „dwa błędy”.
 - Wartość CVSS pisz z przecinkiem: „CVSS 8,1” (wersje programów zostają z kropkami: „16.7.8”).
-- *Unauthenticated* to „bez uwierzytelnienia” lub „niezalogowany”, nie „nieautoryzowany”: „luka pozwala atakującemu bez uwierzytelnienia wykonać kod”.
+- *Unauthenticated* to „bez uwierzytelnienia” lub „niezalogowany”, nie „nieautoryzowany”: „luka pozwala atakującemu bez uwierzytelnienia wykonać kod”. „Niezalogowany” piszemy tylko o osobie (atakujący, użytkownik); o luce lub ataku: „podatność XXE dostępna bez logowania”, „obejście uwierzytelniania bez logowania”, a nie „niezalogowana podatność” ani „niezalogowane obejście”.
+- Liczba przy zero-day: „30 luk zero-day”, „dwie luki zero-day”, a nie „30 zero-day” ani „30 zero-dayów”.
 
 ## Historia zmian reguł
 
 - v46 (07.11.2026): pierwsza wersja dokumentu; nakazy z przeglądu prasówek 31.10–7.11; „build” przeniesiony z zakazów do uzusu branżowego.
+- v48 (10.11.2026): „niezalogowany” tylko o osobie (prasówka z 10.11: „niezalogowana podatność XXE”); liczba przy zero-day.

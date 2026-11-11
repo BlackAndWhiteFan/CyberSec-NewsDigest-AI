@@ -3689,5 +3689,344 @@
       "H411"
     ],
     "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Railway breach leads to $740,000 in fraudulent AI charges",
+    "link": "https://www.bleepingcomputer.com/news/apple/railway-breach-leads-to-740-000-in-fraudulent-ai-charges/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Railway ujawniło, że hakerzy wykorzystali nieznaną podatność w infrastrukturze budowania, aby uzyskać wewnętrzny token i wykraść zaszyfrowane zmienne środowiskowe z maksymalnie 100 000 przestrzeni roboczych. Atak rozpoczął się 20 października, trwał ponad 26 godzin i wygenerował około 740 000 USD nieautoryzowanych opłat za korzystanie z AI.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Railway ujawniło, że hakerzy wykorzystali nieznaną podatność w infrastrukturze budowania, aby uzyskać wewnętrzny token i wykradać zaszyfrowane zmienne środowiskowe z maksymalnie 100 000 przestrzeni roboczych. Atak rozpoczął się 20 października, trwał ponad 26 godzin i wygenerował około 740 000 USD nielegalnych opłat za AI.",
+        "after": "Railway ujawniło, że hakerzy wykorzystali nieznaną podatność w infrastrukturze budowania, aby uzyskać wewnętrzny token i wykraść zaszyfrowane zmienne środowiskowe z maksymalnie 100 000 przestrzeni roboczych. Atak rozpoczął się 20 października, trwał ponad 26 godzin i wygenerował około 740 000 USD nieautoryzowanych opłat za korzystanie z AI.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H164",
+      "H221"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Hackers exploit trusted AWS access to breach multiple cloud environments",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-exploit-trusted-aws-access-to-breach-multiple-cloud-environments/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Zespół badawczy wykrył, że sprawcy przejęli dwa konta IAM platformy Qubole i przy użyciu zaufanych ról IAM uzyskali dostęp do wielu kont AWS klientów, wykradając dane. Atak miał miejsce w połowie października i dotyczy organizacji, które udzieliły Qubole dostępu do swoich zasobów w chmurze.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół badawczy wykrył, że sprawcy przejęli dwa konta IAM platformy Qubole i przy użyciu zaufanych ról IAM uzyskali dostęp do wielu kont AWS klientów, wykradając dane. Atak miał miejsce w połowie października i dotyczy organizacji, które udostępniły Qubole dostęp do swoich zasobów w chmurze.",
+        "after": "Zespół badawczy wykrył, że sprawcy przejęli dwa konta IAM platformy Qubole i przy użyciu zaufanych ról IAM uzyskali dostęp do wielu kont AWS klientów, wykradając dane. Atak miał miejsce w połowie października i dotyczy organizacji, które udzieliły Qubole dostępu do swoich zasobów w chmurze.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H153",
+      "H242",
+      "H372"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Microsoft November 2026 Patch Tuesday fixes 1,235 flaws, Outlook zero-day",
+    "link": "https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Exploited Outlook Zero-Day Among 1,094 Flaws Patched by Microsoft",
+        "link": "https://www.securityweek.com/exploited-outlook-zero-day-among-1094-flaws-patched-by-microsoft/",
+        "source": "securityweek.com"
+      },
+      {
+        "title": "Microsoft’s Patch Tuesday surpasses 1,000 bugs for second month in a row",
+        "link": "https://therecord.media/patch-tuesday-microsoft-1000-bugs-again",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": false,
+    "summary": "Microsoft w ramach listopadowego Patch Tuesday naprawił rekordową liczbę 1 235 podatności, w tym aktywnie wykorzystywaną lukę zero-day w Outlooku. Łatka obejmuje Outlooka i została udostępniona w aktualizacji zabezpieczeń.",
+    "cves": [
+      "CVE-2026-124194"
+    ],
+    "kev": [
+      "CVE-2026-124194"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Microsoft w ramach listopadowego Patch Tuesday naprawił rekordową liczbę 1 235 podatności, w tym aktywnie wykorzystywaną zero-day w Outlooku. Łatka obejmuje Outlook i została udostępniona w aktualizacji zabezpieczeń.",
+        "after": "Microsoft w ramach listopadowego Patch Tuesday naprawił rekordową liczbę 1 235 podatności, w tym aktywnie wykorzystywaną lukę zero-day w Outlooku. Łatka obejmuje Outlooka i została udostępniona w aktualizacji zabezpieczeń.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H159",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Critical Xen Orchestra auth bypass flaw exploited to hijack VM servers",
+    "link": "https://www.bleepingcomputer.com/news/security/critical-xen-orchestra-auth-bypass-flaw-exploited-to-hijack-vm-servers/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Hackers Exploit Critical Xen Orchestra Auth Bypass Flaw to Gain Admin Access",
+        "link": "https://thehackernews.com/2026/11/hackers-exploit-critical-xen-orchestra.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Vates poinformowało o krytycznej podatności VSA-2026-062 w Xen Orchestra, umożliwiającej obejście uwierzytelniania przy użyciu specjalnie spreparowanego ciasteczka i przejęcie uprawnień administratora hostów XCP-ng. Luka jest aktywnie wykorzystywana w atakach.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H725"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Google Issues Chrome Security Update for Eighth Actively Exploited Zero-Day of 2026",
+    "link": "https://thehackernews.com/2026/11/google-issues-chrome-security-update.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Google patches eighth Chrome zero-day exploited in attacks this year",
+        "link": "https://www.bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Google wydało aktualizację Chrome 157.0.8103.50, naprawiającą dziewięć podatności, w tym aktywnie wykorzystywaną lukę zero-day CVE-2026-125350, będącą błędem użycia zwolnionej pamięci w komponencie XML. Exploit jest wykorzystywany w rzeczywistych atakach, a łatka jest już dostępna dla użytkowników.",
+    "cves": [
+      "CVE-2026-125350"
+    ],
+    "kev": [
+      "CVE-2026-125350"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawka",
+        "fixed": "łatka"
+      },
+      {
+        "type": "autofix",
+        "id": "H153",
+        "rule": "exploit",
+        "used": "Eksploit",
+        "fixed": "Exploit"
+      },
+      {
+        "type": "proofreading",
+        "before": "Google wydało aktualizację Chrome 157.0.8103.50, naprawiającą dziewięć podatności, w tym aktywnie wykorzystywaną zero-day CVE-2026-125350, będącą błędem użycia zwolnionej pamięci w komponencie XML. Exploit istnieje w rzeczywistych atakach, a łatka jest już dostępna dla użytkowników.",
+        "after": "Google wydało aktualizację Chrome 157.0.8103.50, naprawiającą dziewięć podatności, w tym aktywnie wykorzystywaną lukę zero-day CVE-2026-125350, będącą błędem użycia zwolnionej pamięci w komponencie XML. Exploit jest wykorzystywany w rzeczywistych atakach, a łatka jest już dostępna dla użytkowników.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H153",
+      "H159",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "SGLang RCE Exploit Breaches NEAR AI, Steals Data From 18 Agents and About 100 Users",
+    "link": "https://thehackernews.com/2026/11/sglang-rce-exploit-breaches-near-ai.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Atakujący wykorzystał lukę RCE w otwartym silniku inferencyjnym SGLang i uzyskał dostęp do serwera NEAR AI, w tym do trybu poufnego działającego w TEE. Dzięki temu pobrał dane kont około 100 użytkowników oraz informacje z 18 agentów AI, a także ujawnił dwa klucze API. Dostęp do trybu poufnego został zamknięty po wykryciu incydentu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H090",
+      "H153",
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "N-able Takes N-central Cloud Offline After Researcher Discloses 33 Zero-Days with PoC Exploits",
+    "link": "https://thehackernews.com/2026/11/n-able-takes-hosted-n-central-offline.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "N-able Takes N-central Offline as Researcher Drops Over 30 Zero-Days",
+        "link": "https://www.securityweek.com/n-able-takes-n-central-offline-as-researcher-drops-over-30-zero-days/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "N-able wyłączyło środowisko N-central Hosted po ujawnieniu ponad 30 podatności, w tym zero-dayów RCE, XSS, XXE i wycieku poświadczeń, które mogły dać nieautoryzowany dostęp administracyjny. Firma nie odnotowała aktywnego wykorzystywania, ale pracuje nad hot-fixem. Środowisko N-central Hosted jest niedostępne, a usługi Ecoverse pozostają online.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H064",
+      "H089",
+      "H090",
+      "H152",
+      "H647"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Microsoft Fixes Nearly 1,100 Security Vulnerabilities",
+    "link": "https://krebsonsecurity.com/2026/11/microsoft-fixes-nearly-1100-security-vulnerabilities/",
+    "source": "krebsonsecurity.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": ""
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Cyberatak na system ePUAP. „Infrastruktura jest bezpieczna”",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-system-epuap-infrastruktura-jest-bezpieczna",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Wicepremier Krzysztof Gawkowski poinformował o udaremnionym ataku na system ePUAP, który zespoły bezpieczeństwa zatrzymały i utrzymały stabilność infrastruktury COI. System jest obecnie częściowo niedostępny, trwają prace nad przywróceniem pełnej funkcjonalności.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Wicepremier Krzysztof Gawkowski poinformował o udaremnionym ataku na system ePUAP, którego zespoły bezpieczeństwa zatrzymały i utrzymały stabilność infrastruktury COI. System jest obecnie częściowo niedostępny, trwają prace przy przywracaniu pełnej funkcjonalności.",
+        "after": "Wicepremier Krzysztof Gawkowski poinformował o udaremnionym ataku na system ePUAP, który zespoły bezpieczeństwa zatrzymały i utrzymały stabilność infrastruktury COI. System jest obecnie częściowo niedostępny, trwają prace nad przywróceniem pełnej funkcjonalności.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-11",
+    "title": "Fireworks AI Confirms Wider Breach Affecting Customer Datasets, Model Weights and Notion AI Chats",
+    "link": "https://thehackernews.com/2026/11/fireworks-ai-breach-widens-to-expose.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Fireworks AI discloses new breach after cloud provider hack",
+        "link": "https://www.bleepingcomputer.com/news/security/fireworks-ai-discloses-new-breach-after-cloud-provider-hack/",
+        "source": "bleepingcomputer.com"
+      },
+      {
+        "title": "AI company Fireworks says hackers stole data, billing info during October breaches",
+        "link": "https://therecord.media/ai-company-fireworks-says-hackers-stole-data-in-oct-attacks",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": false,
+    "summary": "Fireworks AI ujawniło, że nieuprawniony podmiot uzyskał dostęp do wewnętrznych poświadczeń, co pozwoliło na przechwycenie zmiennych środowiskowych, w tym kluczy API i tokenów, w ograniczonej liczbie kont. Atakujący dotarli do środowiska rozwojowego przez nieokreślonego dostawcę chmury, a incydent został wykryty 6 października 2026. Firma unieważniła skompromitowane poświadczenia i wymieniła tokeny serwisowe.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "skompromitowane",
+        "form": "skompromitowa*",
+        "suggestion": "przejęty, zaatakowany",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "Fireworks AI ujawniło, że nieautoryzowany podmiot uzyskał dostęp do wewnętrznych poświadczeń, co pozwoliło na przechwycenie zmiennych środowiskowych, w tym kluczy API i tokenów, w ograniczonej liczbie kont. Atakujący dotarli do środowiska rozwojowego przez nieokreślonego dostawcę chmury, a incydent został wykryty 6 października 2026. Firma zrevoke’owała skompromitowane poświadczenia i obróciła tokeny serwisowe.",
+        "after": "Fireworks AI ujawniło, że nieuprawniony podmiot uzyskał dostęp do wewnętrznych poświadczeń, co pozwoliło na przechwycenie zmiennych środowiskowych, w tym kluczy API i tokenów, w ograniczonej liczbie kont. Atakujący dotarli do środowiska rozwojowego przez nieokreślonego dostawcę chmury, a incydent został wykryty 6 października 2026. Firma unieważniła skompromitowane poświadczenia i wymieniła tokeny serwisowe.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H207",
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
   }
 ]

@@ -24,6 +24,43 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v50 · Jeden wtorek --- 12.11.2026
+
+**Patch Tuesday Microsoftu jako jedna pozycja, „ciąg dalszy” z 7 dni,
+pozycja bez streszczenia na końcu kolejki.**
+
+Powód: prasówki z 11–12.11.2026.
+
+- 11.11 listopadowy Patch Tuesday poszedł dwa razy (BleepingComputer
+  „fixes 1,235 flaws” i Krebs „Fixes Nearly 1,100 Security
+  Vulnerabilities”): różne liczby, wspólna tylko nazwa „Microsoft”, która
+  nie łączy. Pozycja od Krebsa poszła przy tym bez streszczenia, bo
+  kontrola faktów je odrzuciła.
+- 12.11 artykuł kapitanhack.pl o GPT-6 Cyber (wydarzenie z 5.11, w
+  prasówce 7.11) poszedł jako nowa pozycja: „ciąg dalszy” sprawdzał tylko
+  3 ostatnie dni.
+- „33 zero-dayów” mimo nakazu z v48.
+
+Zmiany:
+
+- **Patch Tuesday** (`src/event_grouping.py`): tytuły z „Patch Tuesday”
+  albo „Microsoft … fixes/patches N … flaws/vulnerabilities” to to samo
+  wydarzenie, jak przy wspólnym CVE. Inne wiadomości o Microsofcie bez
+  zmian. W archiwum od 19.10 reguła łapie tylko trzy tytuły z 11.11.
+- **„Ciąg dalszy”** sprawdza 7 dni zamiast 3 (`CONTINUATION_DAYS`).
+- **Limit dnia** (v45): pozycja bez streszczenia ma ocenę −3, więc przy
+  nadmiarze kandydatów odpada pierwsza.
+- **Lista kalk**: „zero-dayów”, „zero-daye” → „luk zero-day”, „luki
+  zero-day” (wsparcie nakazu z v48).
+- **Karton Prasówki** odświeżony do v50. **Testy**: `src/test_v50.py`;
+  razem 500.
+
+Zmienione pliki: `src/event_grouping.py`, `src/main.py`,
+`src/article_selection.py`, `data/styl_unikaj.csv`, `src/test_v50.py`
+(nowy), `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v49 · Hashe --- 10.11.2026
 
 **„Hash” to uzus branżowy: przy pierwszym wystąpieniu „hashe (skróty
@@ -2584,6 +2621,43 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v50 · One Tuesday --- 2026-11-12
+
+**Microsoft's Patch Tuesday as one item, continuations from 7 days, an
+item without a summary last in the queue.**
+
+Reason: the digests of 11–12 Nov 2026.
+
+- On 11 Nov the November Patch Tuesday went out twice (BleepingComputer
+  "fixes 1,235 flaws" and Krebs "Fixes Nearly 1,100 Security
+  Vulnerabilities"): different numbers, only the shared name "Microsoft",
+  which does not join. The Krebs item also went without a summary, which
+  the fact check had rejected.
+- On 12 Nov a kapitanhack.pl article about GPT-6 Cyber (event of 5 Nov,
+  in the digest of 7 Nov) went out as new: continuations looked back only
+  3 days.
+- "33 zero-dayów" despite the rule of v48.
+
+Changes:
+
+- **Patch Tuesday** (`src/event_grouping.py`): titles with "Patch
+  Tuesday" or "Microsoft … fixes/patches N … flaws/vulnerabilities" are
+  the same event, like a shared CVE. Other Microsoft news unchanged. In
+  the archive since 19 Oct the rule matches only three titles of 11 Nov.
+- **Continuations** look back 7 days instead of 3 (`CONTINUATION_DAYS`).
+- **Daily limit** (v45): an item without a summary gets −3, so it is the
+  first to go when there are too many candidates.
+- **Calque list**: "zero-dayów", "zero-daye" → "luk zero-day", "luki
+  zero-day" (backing the rule of v48).
+- **Karton Prasówki** refreshed to v50. **Tests**: `src/test_v50.py`; 500
+  in total.
+
+Changed files: `src/event_grouping.py`, `src/main.py`,
+`src/article_selection.py`, `data/styl_unikaj.csv`, `src/test_v50.py`
+(new), `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

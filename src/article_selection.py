@@ -141,6 +141,10 @@ EXCLUDED_TITLE_KEYWORDS = (
     "cyber threats that put",
     "exits stealth",
     "seed funding",
+    # v51: Microsoft's fixes for bugs of its own updates, not security
+    # ("fixes audio issues caused by September security updates", 12.11;
+    # "fixes VPN issues caused by September updates", 31.10.2026).
+    "issues caused by",
     "series a$",
     "series b$",
 )

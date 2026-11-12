@@ -4028,5 +4028,372 @@
       "H462"
     ],
     "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "N-able releases security hotfixes for zero-day vulnerabilities",
+    "link": "https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Firma N-able wydała łatki bezpieczeństwa dla platformy N-central RMM po ujawnieniu w weekend luk zero-day, co zmusiło ją do wyłączenia środowisk hostowanych w regionach obu Ameryk, Europy i APAC. Łatki usuwają niektóre z ujawnionych luk zero-day i zostały udostępnione w wersji N-central 2026.4 HF2.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawki",
+        "fixed": "Łatki"
+      },
+      {
+        "type": "proofreading",
+        "before": "N-able wydało łatki bezpieczeństwa dla platformy N-central RMM po ujawnieniu w weekend zero-dayów, co zmusiło firmę do wyłączenia środowisk hostowanych w regionach Ameryk, Europy i APAC. Łatki obejmują niektóre z wyciekłych zero-dayów i zostały udostępnione w wersji N-central 2026.4 HF2.",
+        "after": "Firma N-able wydała łatki bezpieczeństwa dla platformy N-central RMM po ujawnieniu w weekend luk zero-day, co zmusiło ją do wyłączenia środowisk hostowanych w regionach obu Ameryk, Europy i APAC. Łatki usuwają niektóre z ujawnionych luk zero-day i zostały udostępnione w wersji N-central 2026.4 HF2.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H159",
+      "H358"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "CISA flags Cisco BroadWorks flaw as actively exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/cisa-flags-cisco-broadworks-flaw-as-actively-exploited-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Cisco BroadWorks and Openwave Flaws Actively Exploited Despite Available Patches",
+        "link": "https://thehackernews.com/2026/11/cisco-broadworks-and-openwave-flaws.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Threat Actors Exploit Openwave, Cisco BroadWorks Vulnerabilities",
+        "link": "https://www.securityweek.com/threat-actors-exploit-openwave-cisco-broadworks-vulnerabilities/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "CISA ostrzegła, że luka CVE-2026-20320 w Cisco BroadWorks, polegająca na niewłaściwym parsowaniu XML (XXE), jest aktywnie wykorzystywana i została dodana do katalogu KEV. Firma Cisco wydała łatkę w sierpniu, a agencja nakazała zabezpieczenie systemów do 24 listopada.",
+    "cves": [
+      "CVE-2026-111793",
+      "CVE-2026-20320"
+    ],
+    "kev": [
+      "CVE-2026-111793",
+      "CVE-2026-20320"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CISA ostrzegła, że luka CVE-2026-20320 w Cisco BroadWorks, polegająca na niewłaściwym parsowaniu XML (XXE), jest aktywnie wykorzystywana i znajduje się w katalogu KEV. Cisco wydało łatkę w sierpniu, a agencja nakazała zabezpieczenie systemów do 24 listopada.",
+        "after": "CISA ostrzegła, że luka CVE-2026-20320 w Cisco BroadWorks, polegająca na niewłaściwym parsowaniu XML (XXE), jest aktywnie wykorzystywana i została dodana do katalogu KEV. Firma Cisco wydała łatkę w sierpniu, a agencja nakazała zabezpieczenie systemów do 24 listopada.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H064",
+      "H150"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Baker Tilly notifies clients of data breach at third-party provider",
+    "link": "https://www.bleepingcomputer.com/news/security/baker-tilly-notifies-clients-of-data-breach-at-third-party-provider/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Baker Tilly poinformowało klientów o wycieku danych osobowych, w tym numerów SSN i adresów, dotyczących 10 456 osób w Teksasie, po incydencie na platformie dostawcy usług trzecich.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Active ScreenConnect attacks breach MSPs, impact dozens of organizations",
+    "link": "https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "ScreenConnect Attacks Target at Least 288 Endpoints Across 48 Organizations With Rogue Clients",
+        "link": "https://thehackernews.com/2026/11/screenconnect-attacks-target-at-least.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Firma Huntress wykryła kampanię malware wykorzystującą środowiska ScreenConnect do instalacji nieuprawnionych klientów zdalnego dostępu, co dotknęło 6 dostawców MSP i ponad 286 punktów końcowych w 47 organizacjach.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Huntress wykryło kampanię malware wykorzystującą środowiska ScreenConnect do instalacji nieautoryzowanych klientów zdalnego dostępu, co dotknęło 6 MSP i ponad 286 punktów końcowych w 47 organizacjach.",
+        "after": "Firma Huntress wykryła kampanię malware wykorzystującą środowiska ScreenConnect do instalacji nieuprawnionych klientów zdalnego dostępu, co dotknęło 6 dostawców MSP i ponad 286 punktów końcowych w 47 organizacjach.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H028",
+      "H133",
+      "H267"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Railway Says Stolen Customer AI Keys Led to $740,000 in Estimated Unauthorized Usage Charges",
+    "link": "https://thehackernews.com/2026/11/railway-says-stolen-customer-ai-keys.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Firma Railway ujawniła, że hakerzy przełamali szyfrowanie zmiennych środowiskowych i skradli klucze AI, co spowodowało nieuprawnione wydatki w wysokości 740 000 USD. Wszystkie skradzione tokeny i klucze zostały zresetowane, a klienci zostali poinformowani.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Railway ujawniło, że hakerzy przełamali szyfrowanie zmiennych środowiskowych i skradli klucze AI, co spowodowało nieautoryzowane wydatki w wysokości 740 000 USD. Wszystkie skradzione tokeny i klucze zostały zresetowane, a klienci zostali poinformowani.",
+        "after": "Firma Railway ujawniła, że hakerzy przełamali szyfrowanie zmiennych środowiskowych i skradli klucze AI, co spowodowało nieuprawnione wydatki w wysokości 740 000 USD. Wszystkie skradzione tokeny i klucze zostały zresetowane, a klienci zostali poinformowani.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H594"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Who Runs the Ransomware Group Qilin?",
+    "link": "https://krebsonsecurity.com/2026/11/who-runs-the-ransomware-group-qilin/",
+    "source": "krebsonsecurity.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Raport NCC Group opisuje grupę ransomware Qilin jako najaktywniejszy program afiliacyjny, który w ciągu trzech miesięcy zaatakował co najmniej 365 organizacji. Analiza wskazuje, że administratorem jest 36-letni mężczyzna z Sankt Petersburga, co może pomóc w profilowaniu zagrożenia.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Raport NCC Group opisuje grupę ransomware Qilin jako najaktywniejszy program afiliacyjny, który w ciągu trzech miesięcy zaatakował co najmniej 365 organizacji. Analiza wskazuje, że administratorem jest 36-letni mężczyzna ze Sankt-Petersburga, co może pomóc w profilowaniu zagrożenia.",
+        "after": "Raport NCC Group opisuje grupę ransomware Qilin jako najaktywniejszy program afiliacyjny, który w ciągu trzech miesięcy zaatakował co najmniej 365 organizacji. Analiza wskazuje, że administratorem jest 36-letni mężczyzna z Sankt Petersburga, co może pomóc w profilowaniu zagrożenia.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "GPT-6 Cyber odkrywa setki luk i tworzy exploity. OpenAI ogranicza dostęp do nowego modelu",
+    "link": "https://kapitanhack.pl/gpt-6-cyber-odkrywa-setki-luk-i-tworzy-exploity-openai-ogranicza-dostep-do-nowego-modelu/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "OpenAI zaprezentowało model GPT-6 Cyber 5 listopada 2026 r., przeznaczony do badania bezpieczeństwa i tworzenia exploitów. Model wykrył 81 nieznanych podatności wysokiego ryzyka w Firefoksie oraz opracował 948 działających exploitów dla jądra Linuksa.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "OpenAI zaprezentowało model GPT-6 Cyber 5 listopada 2026 r., przeznaczony do badania bezpieczeństwa i tworzenia exploitów. Model wykrył 81 nieznaną podatność wysokiego ryzyka w przeglądarce Firefox oraz opracował 948 działających exploitów dla jądra Linux.",
+        "after": "OpenAI zaprezentowało model GPT-6 Cyber 5 listopada 2026 r., przeznaczony do badania bezpieczeństwa i tworzenia exploitów. Model wykrył 81 nieznanych podatności wysokiego ryzyka w Firefoksie oraz opracował 948 działających exploitów dla jądra Linuksa.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Critical Zoom Workplace Flaw Could Allow Unauthenticated Remote Privilege Escalation",
+    "link": "https://thehackernews.com/2026/11/critical-zoom-workplace-flaw-could.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "Asus, Zoom Release Security Patches",
+        "link": "https://www.securityweek.com/asus-zoom-release-security-patches/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Zoom wydało aktualizacje naprawiające dwie luki w Zoom Workplace dla Windows (CVE-2026-108187 i CVE-2026-108186), które mogły umożliwić zdalne podwyższenie uprawnień bez uwierzytelnienia. Łatki są dostępne w wersjach 7.1.5 i 7.1.8.",
+    "cves": [
+      "CVE-2026-108186",
+      "CVE-2026-108187"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawek",
+        "fixed": "łatek"
+      },
+      {
+        "type": "glossary",
+        "id": "H182",
+        "used": "eskalację uprawnień",
+        "required": "podwyższenie uprawnień",
+        "fixed_by": "ai"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H182"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Hackers Target Qlik Sense Servers With Reverse Shells, Stage ActiveMQ and Veeam Exploits",
+    "link": "https://thehackernews.com/2026/11/hackers-target-qlik-sense-servers-with.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Cynet wykryło w październiku 2026 r. próby uruchomienia reverse shell PowerShell na serwerach Qlik Sense z wykorzystaniem nieznanej podatności.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Cynet wykryło w październiku 2026 r. próby uruchomienia reverse shell PowerShell na serwerach Qlik Sense, wykorzystując nieznaną podatność.",
+        "after": "Cynet wykryło w październiku 2026 r. próby uruchomienia reverse shell PowerShell na serwerach Qlik Sense z wykorzystaniem nieznanej podatności.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H126",
+      "H476",
+      "H478"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-12",
+    "title": "Citrix, Ivanti Patch Critical and High-Severity Vulnerabilities",
+    "link": "https://www.securityweek.com/citrix-ivanti-patch-critical-and-high-severity-vulnerabilities/",
+    "source": "securityweek.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Firmy Citrix i Ivanti wydały łatki dla 19 podatności, w tym krytyczne luki CVE-2026-121683 w Cloud Services Application i CVE-2026-121653 w Endpoint Managerze. CVE-2026-121683 pozwala atakującemu bez uwierzytelnienia dodawać i usuwać certyfikaty, a CVE-2026-121653 to błąd typu SQL injection umożliwiający RCE, ale nie odnotowano ich wykorzystania w rzeczywistych atakach. Lukę w CSA usunięto w wersji 5.0.8.1.",
+    "cves": [
+      "CVE-2026-121683"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "Poprawka",
+        "fixed": "Łatka"
+      },
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "style",
+        "used": "nieautoryzowanym atakującym",
+        "form": "nieautoryzowan* atakując*",
+        "suggestion": "atakujący bez uwierzytelnienia, niezalogowany atakujący",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Citrix i Ivanti wydały łatki dla 19 podatności, w tym krytyczne CVE-2026-121683 w Cloud Services Application i CVE-2026-121653 w Endpoint Manager. CVE-2026-121683 pozwala atakującemu bez uwierzytelnienia dodawać i usuwać certyfikaty, a CVE-2026-121653 to SQL injection umożliwiający RCE, ale nie odnotowano ich wykorzystania w rzeczywistych atakach. Łatka dla CSA jest w wersji 5.0.8.1.",
+        "after": "Firmy Citrix i Ivanti wydały łatki dla 19 podatności, w tym krytyczne luki CVE-2026-121683 w Cloud Services Application i CVE-2026-121653 w Endpoint Managerze. CVE-2026-121683 pozwala atakującemu bez uwierzytelnienia dodawać i usuwać certyfikaty, a CVE-2026-121653 to błąd typu SQL injection umożliwiający RCE, ale nie odnotowano ich wykorzystania w rzeczywistych atakach. Lukę w CSA usunięto w wersji 5.0.8.1.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H088",
+      "H090",
+      "H150",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

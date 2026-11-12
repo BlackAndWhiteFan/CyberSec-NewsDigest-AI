@@ -51,6 +51,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 33 | Separate stories: in the weekly and monthly tops a company name does not join events with different CVE ids (v47) | completed; verified by unit tests |
 | 34 | Common platforms: inflected platform names ("Androida") no longer join different stories (v48) | completed; verified by unit tests |
 | 35 | Hashes: "hash" is industry usage, "hashe (skróty haseł)" at the first mention (v49) | completed; verified by unit tests |
+| 36 | One Tuesday: Patch Tuesday as one item, continuations from 7 days, items without a summary last in the daily limit (v50) | completed; verified by unit tests |
 
 ## Current Implementation
 
@@ -68,7 +69,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 ### Events and markers
 
 - Merges articles about the same event into one item with "także:" links to the other sources. The rules: similar titles; a shared CVE id or an event name with digits (e.g. PHP2Shell), also within one source; a shared company or product name ("Quest Diagnostics", "Capcom") when the article texts show the word is a name. Platform names that appear in many different stories (Microsoft, Windows, Chrome, Python…) never merge on their own. Since v35 the selected articles are merged once more by their CVE ids after the article pages are fetched (many feeds give only a teaser without the CVE id) and again after the summaries, so one vulnerability is one item.
-- Shows articles about events delivered in the last 3 days in a separate "🔁 Ciąg dalszy" section, also when only the summary (for lektura links also the linked page) shares a CVE id with such an event.
+- Shows articles about events delivered in the last 7 days (v50; 3 before) in a separate "🔁 Ciąg dalszy" section, also when only the summary (for lektura links also the linked page) shares a CVE id with such an event.
 - Marks with 🔥 articles about vulnerabilities from the CISA KEV catalog (confirmed exploitation in attacks). The marker is set by code, not by the AI: CVE ids from the title and the beginning of the article text are compared with the catalog downloaded on every run (from CISA, with CISA's GitHub mirror as a fallback). The tops check the saved CVE ids again against the current catalog. Without the catalog the digest is sent without markers.
 
 ### AI summaries in Polish
@@ -142,7 +143,7 @@ Planned features are not considered implemented until they have been developed a
 2. Validate entries, remove duplicate links, split "Weekendowa lektura" into links.
 3. Update the history and exclude links already published.
 4. Categorize, score, exclude promotional titles and roundups.
-5. Select up to 14 candidates within source limits (at most 10 items after merging, v45); merge articles about the same event; mark follow-ups of the last 3 days.
+5. Select up to 14 candidates within source limits (at most 10 items after merging, v45); merge articles about the same event; mark follow-ups of the last 7 days (v50).
 6. Fetch article pages when the feed text is too short; mark CISA KEV vulnerabilities.
 7. Write AI summaries, check and correct them, proofread them; keep the language notes.
 8. Format and deliver the digest to Discord.

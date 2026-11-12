@@ -1,6 +1,6 @@
 # Reguły języka Prasówki
 
-Żywy dokument zasad polszczyzny Prasówki (CyberSec AI Daily News Digest),
+Żywy dokument zasad polszczyzny Prasówki (CyberSec AI News Digest),
 opracowany przez JW z Claude (od v46, 07.11.2026). Rośnie razem z
 glosariuszem Mozaiki (CyberSec Mozaika) i obserwacją kolejnych prasówek.
 

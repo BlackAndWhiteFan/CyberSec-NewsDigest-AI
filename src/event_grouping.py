@@ -95,11 +95,29 @@ def title_event_names(title):
     return names
 
 
+# v50: Microsoft's monthly security update has many titles ("November
+# 2026 Patch Tuesday fixes 1,235 flaws", "Microsoft Fixes Nearly 1,100
+# Security Vulnerabilities", 11.11.2026), with different numbers and no
+# shared CVE or rare name.
+PATCH_TUESDAY = re.compile(r"patch tuesday|wtorek z łatkami|wtorkowe łatki", re.IGNORECASE)
+MICROSOFT_FIXES = re.compile(
+    r"microsoft\W.*\b(?:fix\w*|patch\w*|łat\w*|napraw\w*)\b.*?\b\d[\d,. ]*\s*"
+    r"(?:\w+\s+)?(?:flaws|vulnerabilities|bugs|security|luk\w*|podatnoś\w*|błęd\w*)",
+    re.IGNORECASE,
+)
+
+
+def is_patch_tuesday(title):
+    return bool(PATCH_TUESDAY.search(title) or MICROSOFT_FIXES.search(title))
+
+
 def strong_match(title_a, title_b):
-    """True when two titles share a CVE id or an event name with digits."""
+    """True when two titles share a CVE id or an event name with digits, or
+    both report Microsoft's monthly security update (v50)."""
     return bool(
         title_cves(title_a) & title_cves(title_b)
         or title_event_names(title_a) & title_event_names(title_b)
+        or is_patch_tuesday(title_a) and is_patch_tuesday(title_b)
     )
 
 
@@ -615,6 +633,7 @@ def merge_by_story(articles):
 
 
 CONTEXT_DAYS = 14
+CONTINUATION_DAYS = 7
 
 
 def add_context(articles, records, pool_titles=()):

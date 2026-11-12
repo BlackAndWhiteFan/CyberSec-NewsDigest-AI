@@ -51,6 +51,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 33 | Osobne sprawy: w zestawieniach nazwa firmy nie łączy wydarzeń z różnymi CVE (v47) | zakończony; zweryfikowany testami jednostkowymi |
 | 34 | Wspólne platformy: odmienione nazwy platform („Androida”) nie łączą różnych spraw (v48) | zakończony; zweryfikowany testami jednostkowymi |
 | 35 | Hashe: „hash” to uzus branżowy, przy pierwszym wystąpieniu „hashe (skróty haseł)” (v49) | zakończony; zweryfikowany testami jednostkowymi |
+| 36 | Jeden wtorek: Patch Tuesday jako jedna pozycja, ciąg dalszy z 7 dni, pozycja bez streszczenia na końcu limitu (v50) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 
@@ -68,7 +69,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 ### Wydarzenia i znaczniki
 
 - Łączy artykuły o tym samym wydarzeniu w jedną pozycję z dopiskiem „także:” i linkami do pozostałych źródeł. Reguły: podobne tytuły; wspólny numer CVE lub nazwa wydarzenia z cyframi (np. PHP2Shell), także w obrębie jednego serwisu; wspólna nazwa firmy lub produktu („Quest Diagnostics”, „Capcom”), gdy teksty artykułów pokazują, że to nazwa. Nazwy platform występujące w wielu różnych historiach (Microsoft, Windows, Chrome, Python…) same nie łączą. Od v35 wybrane artykuły są łączone jeszcze raz po numerach CVE po pobraniu stron artykułów (wiele kanałów daje tylko zajawkę bez numeru CVE) i ponownie po streszczeniach, więc jedna luka to jedna pozycja.
-- Artykuły o wydarzeniach dostarczonych w ciągu ostatnich 3 dni pokazuje w osobnej sekcji „🔁 Ciąg dalszy”, także wtedy, gdy wspólny numer CVE jest dopiero w streszczeniu (przy linkach z lektury także na stronie linku).
+- Artykuły o wydarzeniach dostarczonych w ciągu ostatnich 7 dni (od v50; wcześniej 3) pokazuje w osobnej sekcji „🔁 Ciąg dalszy”, także wtedy, gdy wspólny numer CVE jest dopiero w streszczeniu (przy linkach z lektury także na stronie linku).
 - Oznacza 🔥 artykuły o lukach z katalogu CISA KEV (potwierdzone wykorzystywanie w atakach). Znacznik ustawia kod, nie AI: numery CVE z tytułu i początku tekstu artykułu są porównywane z katalogiem pobieranym przy każdym uruchomieniu (z CISA, zapasowo z lustra CISA na GitHubie). Zestawienia sprawdzają zapisane numery CVE jeszcze raz z aktualnym katalogiem. Bez katalogu prasówka idzie bez znaczników.
 
 ### Streszczenia AI po polsku
@@ -142,7 +143,7 @@ Planowane funkcje nie są uznawane za wdrożone, dopóki nie zostaną opracowane
 2. Walidacja wpisów, usunięcie powtórzonych linków, rozebranie „Weekendowej lektury” na linki.
 3. Aktualizacja historii i wykluczenie linków już opublikowanych.
 4. Kategoryzacja, punktacja, wykluczenie promocji i przeglądów.
-5. Wybór do 14 kandydatów w limitach źródeł (po połączeniu najwyżej 10 pozycji, v45); łączenie artykułów o tym samym wydarzeniu; oznaczenie ciągów dalszych z ostatnich 3 dni.
+5. Wybór do 14 kandydatów w limitach źródeł (po połączeniu najwyżej 10 pozycji, v45); łączenie artykułów o tym samym wydarzeniu; oznaczenie ciągów dalszych z ostatnich 7 dni (v50).
 6. Pobranie stron artykułów, gdy tekst z kanału jest za krótki; oznaczenie luk z CISA KEV.
 7. Streszczenia AI, ich kontrola, poprawki i korekta językowa; zapis notatek językowych.
 8. Sformatowanie i wysłanie prasówki na Discorda.

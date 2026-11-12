@@ -383,6 +383,9 @@ def daily_rank(article):
         + bool(article.get("cves"))
         + min(len(article.get("related", [])), 3)
         + source_domain(article).endswith(".pl")
+        # v50: an item whose summary failed the checks goes last (Krebs on
+        # Patch Tuesday, 11.11.2026, went out without a summary).
+        - 3 * (not (article.get("summary") or "").strip())
     )
 
 

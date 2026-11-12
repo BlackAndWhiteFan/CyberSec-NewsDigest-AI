@@ -29,6 +29,7 @@ class TestBaselessPatchSentences(unittest.TestCase):
 class TestSelectionAndRules(unittest.TestCase):
     def test_update_bug_fixes_are_excluded(self):
         self.assertTrue(is_excluded({"title": "Microsoft fixes audio issues caused by September security updates"}))
+        self.assertTrue(is_excluded({"title": "Microsoft fixes Exchange sign-ins broken by Windows Server updates"}))
         self.assertFalse(is_excluded({"title": "Microsoft patches Outlook zero-day exploited in attacks"}))
 
     def test_hash_rule_inflects_both_parts(self):

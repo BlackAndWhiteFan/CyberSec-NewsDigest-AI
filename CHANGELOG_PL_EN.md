@@ -46,7 +46,8 @@ Zmiany:
   gdy artykuł nie wspomina o łatce, aktualizacji ani CVE, to problem
   miękki („usuń je”).
 - **Dobór** (`src/article_selection.py`): tytuły z „issues caused by”
-  odpadają. W archiwum od 19.10 łapie to tylko 31.10 (VPN).
+  i „broken by” odpadają (Exchange 12.11). W archiwum od 19.10 łapie to
+  tylko 31.10 (VPN).
 - **Reguły języka Prasówki**: przy „hashe (skróty haseł)” odmieniaj oba
   człony („wyciek hashy (skrótów haseł)”).
 - **Karton Prasówki** odświeżony do v51. **Testy**: `src/test_v51.py`;
@@ -2685,8 +2686,8 @@ Changes:
   or CVE when the article mentions no patch, update or CVE is a soft
   problem ("remove it").
 - **Selection** (`src/article_selection.py`): titles with "issues caused
-  by" are excluded. In the archive since 19 Oct this matches only 31 Oct
-  (VPN).
+  by" and "broken by" are excluded (Exchange on 12 Nov). In the archive
+  since 19 Oct this matches only 31 Oct (VPN).
 - **Prasówka language rules**: with "hashe (skróty haseł)" inflect both
   parts ("wyciek hashy (skrótów haseł)").
 - **Karton Prasówki** refreshed to v51. **Tests**: `src/test_v51.py`; 505

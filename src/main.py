@@ -27,7 +27,7 @@ from article_pages import add_page_texts
 from kev import VIA_LEAD_CHARS, find_cves, load_kev, mark_kev
 from roundup_parts import VIA_LEKTURA, extract_parts
 from article_archive import append_to_archive, load_recent
-from event_grouping import CONTEXT_DAYS, add_context, group_events, mark_continuations, merge_by_cves, merge_by_story
+from event_grouping import CONTEXT_DAYS, CONTINUATION_DAYS, add_context, group_events, mark_continuations, merge_by_cves, merge_by_story
 from run_guard import mark_done, should_skip
 import test_mode
 
@@ -259,7 +259,9 @@ def run():
     selected_articles = select_top_articles(grouped_articles, limit=DAILY_CANDIDATES)
 
     try:
-        recent_records = load_recent(days=3)
+        # v50: 7 days instead of 3 – an article about last week's event
+        # (GPT-6 Cyber, kapitanhack.pl 12.11 about 5.11) is a continuation.
+        recent_records = load_recent(days=CONTINUATION_DAYS)
         # v34: a longer look back for the story of an event (context only).
         context_records = load_recent(days=CONTEXT_DAYS)
     except Exception as error:

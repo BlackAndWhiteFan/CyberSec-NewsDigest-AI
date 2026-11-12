@@ -64,3 +64,6 @@ atrybuowa*;przypisać
 egzekucj* kodu;wykonanie kodu
 security update*;aktualizacja zabezpieczeń
 advisory;komunikat bezpieczeństwa
+# v50 (10–12.11.2026): nakaz z Reguł języka Prasówki (v48) wsparty kontrolą.
+zero-dayów;luk zero-day
+zero-daye;luki zero-day

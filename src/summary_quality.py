@@ -518,6 +518,36 @@ def readability_problems(text):
     return problems
 
 
+# v51: sentences about a missing patch or CVE where the article says
+# nothing about patches ("Luka nie jest jeszcze wykorzystywana w atakach i
+# nie istnieje łatka" about eBPF rootkits, "Firma nie podała informacji o
+# łatce" about a breach at Notion, 12.11.2026).
+NO_PATCH_SENTENCE = re.compile(
+    r"[^.]*\b(?:nie (?:istnieje|ma|podał\w*|ujawnił\w*|poinformował\w*|wydał\w*)[^.]*\b(?:łatk\w*|CVE)"
+    r"|brak łatki|łatka nie (?:jest|została|istnieje)|bez łatki|o łatce)[^.]*\.?",
+    re.IGNORECASE,
+)
+PATCH_WORDS = re.compile(
+    r"patch|fix|update|upgrade|łatk|poprawk|aktualizac|firmware|mitigat|advisory|cve-|no fix|unpatched|version",
+    re.IGNORECASE,
+)
+
+
+def baseless_patch_problems(text, source):
+    """Soft problem: a sentence about a missing patch or CVE although the
+    article mentions no patch, update or CVE at all (v51)."""
+    if not source or PATCH_WORDS.search(source):
+        return []
+
+    match = NO_PATCH_SENTENCE.search(text)
+
+    if not match:
+        return []
+
+    return [f"zdanie o łatce lub CVE bez podstaw w artykule („{match.group(0).strip()[:80]}”) – usuń je, "
+            "artykuł nie mówi o łatce"]
+
+
 def quality_problems(text, source=None, soft=True):
     """Return descriptions of quality problems (empty list = summary is fine).
 
@@ -580,6 +610,8 @@ def quality_problems(text, source=None, soft=True):
         # v42: English words left untranslated (soft: asks for a fix).
         if soft:
             problems.extend(english_problems(text, source))
+            # v51: no sentences about a patch the article does not mention.
+            problems.extend(baseless_patch_problems(text, source))
 
     return problems
 

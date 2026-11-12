@@ -24,6 +24,41 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v51 · Bez pustych zdań --- 12.11.2026
+
+**O łatce i numerze CVE tylko przy lukach; bez poprawek Microsoftu do
+błędów jego własnych aktualizacji.**
+
+Powód: prasówki z 10–12.11.2026. Model dopisywał zdania o łatce i CVE
+także przy wyciekach, technikach i badaniach („Luka nie jest jeszcze
+wykorzystywana w atakach i nie istnieje łatka” o rootkitach eBPF, „Firma
+nie podała informacji o łatce” przy Notion, wcześniej Mittwald). Do
+działu podatności trafiały poprawki Microsoftu do błędów jego aktualizacji
+(dźwięk USB 12.11, VPN 31.10).
+
+Zmiany:
+
+- **Prompt piszący** (`src/ai_summaries.py`): pytania „czy wykorzystywane?”
+  i „czy jest łatka?” dotyczą tylko artykułów o lukach; przy wycieku,
+  ataku na firmę, badaniu, technice, narzędziu albo kampanii zamiast tego
+  skutek lub skala.
+- **Kontrola** (`src/summary_quality.py`): zdanie o braku łatki lub CVE,
+  gdy artykuł nie wspomina o łatce, aktualizacji ani CVE, to problem
+  miękki („usuń je”).
+- **Dobór** (`src/article_selection.py`): tytuły z „issues caused by”
+  i „broken by” odpadają (Exchange 12.11). W archiwum od 19.10 łapie to
+  tylko 31.10 (VPN).
+- **Reguły języka Prasówki**: przy „hashe (skróty haseł)” odmieniaj oba
+  człony („wyciek hashy (skrótów haseł)”).
+- **Karton Prasówki** odświeżony do v51. **Testy**: `src/test_v51.py`;
+  razem 505.
+
+Zmienione pliki: `src/ai_summaries.py`, `src/summary_quality.py`,
+`src/article_selection.py`, `data/reguly_jezyka.md`, `src/test_v51.py`
+(nowy), `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v50 · Jeden wtorek --- 12.11.2026
 
 **Patch Tuesday Microsoftu jako jedna pozycja, „ciąg dalszy” z 7 dni,
@@ -2626,6 +2661,41 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v51 · No empty sentences --- 2026-11-12
+
+**A patch or a CVE only for vulnerabilities; no Microsoft fixes for bugs
+of its own updates.**
+
+Reason: the digests of 10–12 Nov 2026. The model added sentences about a
+patch and a CVE also to breaches, techniques and research ("Luka nie jest
+jeszcze wykorzystywana w atakach i nie istnieje łatka" about eBPF
+rootkits, "Firma nie podała informacji o łatce" for Notion, earlier
+Mittwald). Microsoft fixes for bugs of its own updates went to the
+vulnerabilities section (USB audio on 12 Nov, VPN on 31 Oct).
+
+Changes:
+
+- **Writing prompt** (`src/ai_summaries.py`): the questions "is it
+  exploited?" and "is there a patch?" apply to vulnerability articles
+  only; for a breach, an attack on a company, research, a technique, a
+  tool or a campaign write the impact or scale instead.
+- **Checks** (`src/summary_quality.py`): a sentence about a missing patch
+  or CVE when the article mentions no patch, update or CVE is a soft
+  problem ("remove it").
+- **Selection** (`src/article_selection.py`): titles with "issues caused
+  by" and "broken by" are excluded (Exchange on 12 Nov). In the archive
+  since 19 Oct this matches only 31 Oct (VPN).
+- **Prasówka language rules**: with "hashe (skróty haseł)" inflect both
+  parts ("wyciek hashy (skrótów haseł)").
+- **Karton Prasówki** refreshed to v51. **Tests**: `src/test_v51.py`; 505
+  in total.
+
+Changed files: `src/ai_summaries.py`, `src/summary_quality.py`,
+`src/article_selection.py`, `data/reguly_jezyka.md`, `src/test_v51.py`
+(new), `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

@@ -52,6 +52,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 34 | Common platforms: inflected platform names ("Androida") no longer join different stories (v48) | completed; verified by unit tests |
 | 35 | Hashes: "hash" is industry usage, "hashe (skróty haseł)" at the first mention (v49) | completed; verified by unit tests |
 | 36 | One Tuesday: Patch Tuesday as one item, continuations from 7 days, items without a summary last in the daily limit (v50) | completed; verified by unit tests |
+| 37 | No empty sentences: a patch or a CVE only for vulnerabilities, no Microsoft fixes for its own update bugs (v51) | completed; verified by unit tests |
 
 ## Current Implementation
 

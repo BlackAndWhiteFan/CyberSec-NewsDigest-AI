@@ -52,6 +52,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 34 | Wspólne platformy: odmienione nazwy platform („Androida”) nie łączą różnych spraw (v48) | zakończony; zweryfikowany testami jednostkowymi |
 | 35 | Hashe: „hash” to uzus branżowy, przy pierwszym wystąpieniu „hashe (skróty haseł)” (v49) | zakończony; zweryfikowany testami jednostkowymi |
 | 36 | Jeden wtorek: Patch Tuesday jako jedna pozycja, ciąg dalszy z 7 dni, pozycja bez streszczenia na końcu limitu (v50) | zakończony; zweryfikowany testami jednostkowymi |
+| 37 | Bez pustych zdań: o łatce i CVE tylko przy lukach, bez poprawek Microsoftu do własnych aktualizacji (v51) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 

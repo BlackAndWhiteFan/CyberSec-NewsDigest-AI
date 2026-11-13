@@ -4395,5 +4395,362 @@
       "H166"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "Maile NATO celem rosyjskiego FSB. Hakerzy wykorzystali luki w systemach Microsoftu",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/maile-nato-celem-rosyjskiego-fsb-hakerzy-wykorzystali-luki-w-systemach-microsoftu",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa Turla, powiązana z rosyjskim FSB, przeprowadziła atak na rumuńską agencję wywiadowczą, wykorzystując luki w systemach Microsoftu oraz narzędzia do przeszukiwania poczty e-mail NATO i UE. Eksperci ESET podkreślili, że atak miał charakter długoterminowego cyberprzestępczego szpiegostwa, jednak nie doszło do wycieku poufnych danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Grupa Turla, powiązana z rosyjskim FSB, przeprowadziła atak na rumuńską agencję wywiadowczą, wykorzystując luki w systemach Microsoftu i narzędzia do przeszukiwania maili NATO oraz UE. Eksperci ESET podkreślili, że atak miał charakter długoterminowego cyberszpiegostwa, ale nie doszło do wycieku poufnych danych.",
+        "after": "Grupa Turla, powiązana z rosyjskim FSB, przeprowadziła atak na rumuńską agencję wywiadowczą, wykorzystując luki w systemach Microsoftu oraz narzędzia do przeszukiwania poczty e-mail NATO i UE. Eksperci ESET podkreślili, że atak miał charakter długoterminowego cyberprzestępczego szpiegostwa, jednak nie doszło do wycieku poufnych danych.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "Kampania Poisoned Source. Przejęte strony, złośliwy JavaScript i exploity na smartfony",
+    "link": "https://kapitanhack.pl/kampania-poisoned-source-przejete-strony-zlosliwy-javascript-i-exploity-na-smartfony/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Kampania Poisoned Source, przypisywana rosyjskiej grupie APT29, polegała na przejmowaniu legalnych witryn i wstawianiu złośliwego kodu JavaScript, który dostarczał exploity na urządzenia z systemami iOS i Android. Atakujący wykorzystywali technikę watering hole, aby wykradać pliki cookies, hasła oraz inne dane użytkowników.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Kampania Poisoned Source, przypisywana rosyjskiej grupie APT29, polegała na przejmowaniu legalnych witryn i wstawianiu złośliwego JavaScriptu, który dostarczał exploity na smartfony z iOS i Androidem. Atakujący wykorzystywali technikę watering hole, aby wykradać pliki cookies, hasła i inne dane użytkowników.",
+        "after": "Kampania Poisoned Source, przypisywana rosyjskiej grupie APT29, polegała na przejmowaniu legalnych witryn i wstawianiu złośliwego kodu JavaScript, który dostarczał exploity na urządzenia z systemami iOS i Android. Atakujący wykorzystywali technikę watering hole, aby wykradać pliki cookies, hasła oraz inne dane użytkowników.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H007",
+      "H030"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "New N-able \"4EverAble2Shell\" zero-day exploited hours after PoC released",
+    "link": "https://www.bleepingcomputer.com/news/security/new-n-able-4everable2shell-zero-day-exploited-hours-after-poc-released/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Hackers Target N-central Zero-Days as N-able Rushes Patches",
+        "link": "https://www.securityweek.com/hackers-target-n-central-zero-days-as-n-able-rushes-patches/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Badacze zgłosili aktywne wykorzystywanie nowej luki zero-day w N-able N-central, nazwanej 4EverAble2Shell. Exploit tej luki pozwala atakującemu bez uwierzytelnienia wykonać polecenia z uprawnieniami root. Luka łączy podatność Apache Axis (CVE-2026-90436) z włączonym Legacy API. Aktualizacja bezpieczeństwa została wydana 10 listopada w wersji 2026.4.1.26 HF2.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "nieautoryzowanemu atakującemu",
+        "form": "nieautoryzowan* atakując*",
+        "suggestion": "atakujący bez uwierzytelnienia, niezalogowany atakujący",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Badacze zgłosili aktywne wykorzystywanie nowej luki zero-day w N-able N-central, nazwanej 4EverAble2Shell, której exploit pozwala atakującemu bez uwierzytelnienia wykonać polecenia jako root. Luka łączy podatność Apache Axis (CVE-2026-90436) z włączonym Legacy API. Aktualizacja bezpieczeństwa została wydana 10 listopada w wersji 2026.4.1.26 HF2.",
+        "after": "Badacze zgłosili aktywne wykorzystywanie nowej luki zero-day w N-able N-central, nazwanej 4EverAble2Shell. Exploit tej luki pozwala atakującemu bez uwierzytelnienia wykonać polecenia z uprawnieniami root. Luka łączy podatność Apache Axis (CVE-2026-90436) z włączonym Legacy API. Aktualizacja bezpieczeństwa została wydana 10 listopada w wersji 2026.4.1.26 HF2.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H152",
+      "H153",
+      "H159",
+      "H164",
+      "H189",
+      "H462"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "Apache HTTP Server patches critical HTTP/2 remote code execution flaw",
+    "link": "https://www.bleepingcomputer.com/news/security/apache-http-server-patches-critical-http-2-remote-code-execution-flaw/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Apache Patches Critical HTTP Server RCE Found by Anthropic, Google",
+        "link": "https://www.securityweek.com/apache-patches-critical-http-server-rce-found-by-anthropic-google/",
+        "source": "securityweek.com"
+      },
+      {
+        "title": "Critical Apache HTTP/2 Flaw Could Let Unauthenticated Attackers Execute Code Remotely",
+        "link": "https://thehackernews.com/2026/11/critical-apache-http2-flaw-could-let.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Apache Software Foundation wydała łatkę na krytyczną podatność RCE w module HTTP/2 (CVE-2026-119618), która dotyczy wersji 2.4.55-2.4.70 oraz mod_h2 2.0.8-2.0.42. Według danych Wiz, 64 % środowisk chmurowych ma narażone serwery, z czego połowa jest publicznie dostępna.",
+    "cves": [
+      "CVE-2026-119618"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H090",
+      "H150",
+      "H164"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "New Windows SignDrop zero-day gives hackers SYSTEM privileges",
+    "link": "https://www.bleepingcomputer.com/news/security/new-windows-signdrop-zero-day-gives-hackers-system-privileges/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "New SignDrop Zero-Day Exploit Turns Windows CLFS Security Feature Into SYSTEM Access",
+        "link": "https://thehackernews.com/2026/11/new-signdrop-zero-day-exploit-turns.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Badacz Abdelhamid Naceri ujawnił lukę zero-day SignDrop w systemie Windows, umożliwiającą atakującemu bez uwierzytelnienia uzyskanie uprawnień SYSTEM poprzez nadużycie mechanizmu łagodzącego CLFS. Luka nie ma jeszcze dostępnej łatki.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "nieautoryzowanemu atakującemu",
+        "form": "nieautoryzowan* atakując*",
+        "suggestion": "atakujący bez uwierzytelnienia, niezalogowany atakujący",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Badacz Abdelhamid Naceri ujawnił zero-day SignDrop w systemie Windows, umożliwiający atakującemu bez uwierzytelnienia uzyskanie uprawnień SYSTEM poprzez nadużycie środka łagodzącego CLFS. Luka nie ma jeszcze dostępnej łatki.",
+        "after": "Badacz Abdelhamid Naceri ujawnił lukę zero-day SignDrop w systemie Windows, umożliwiającą atakującemu bez uwierzytelnienia uzyskanie uprawnień SYSTEM poprzez nadużycie mechanizmu łagodzącego CLFS. Luka nie ma jeszcze dostępnej łatki.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H159"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "Citrix Patches 12 NetScaler and Secure Access Client Flaws, Including Authentication Bypass",
+    "link": "https://thehackernews.com/2026/11/citrix-patches-12-netscaler-and-secure.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Citrix opublikowało łatki dla NetScaler ADC, NetScaler Gateway i NetScaler Console, które mogły być wykorzystywane do przeprowadzenia ataku DoS lub obejścia uwierzytelnienia. Firma nie odnotowała żadnych exploitów, ale zaleca zastosowanie aktualizacji.",
+    "cves": [
+      "CVE-2026-120868"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "proofreading",
+        "before": "Citrix wydało łatki dla NetScaler ADC, NetScaler Gateway i NetScaler Console, które mogły powodować atak DoS lub obejście uwierzytelnienia. Firma nie odnotowała żadnych exploitów, ale zaleca zastosowanie aktualizacji.",
+        "after": "Citrix opublikowało łatki dla NetScaler ADC, NetScaler Gateway i NetScaler Console, które mogły być wykorzystywane do przeprowadzenia ataku DoS lub obejścia uwierzytelnienia. Firma nie odnotowała żadnych exploitów, ale zaleca zastosowanie aktualizacji.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H097",
+      "H234",
+      "H725"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "PTC Patches Critical Windchill and FlexPLM Flaw That Could Enable Remote Code Execution",
+    "link": "https://thehackernews.com/2026/11/ptc-patches-critical-windchill-and.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "PTC opublikowało łatkę dla krytycznej luki CVE-2026-126325 w Windchill i FlexPLM, umożliwiającej RCE przez deserializację nieufnych danych. Łatka jest już wdrożona w środowiskach hostowanych, a w pozostałych należy ją jak najszybciej zastosować.",
+    "cves": [
+      "CVE-2026-126325"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "zdalne wykonanie kodu",
+        "fixed": "RCE"
+      },
+      {
+        "type": "autofix",
+        "id": "H090",
+        "rule": "RCE",
+        "used": "wykonanie kodu zdalnie",
+        "fixed": "RCE"
+      },
+      {
+        "type": "proofreading",
+        "before": "PTC opublikowało łatkę dla krytycznej luki CVE-2026-126325 w Windchill i FlexPLM, umożliwiającej RCE przez deserializację nieufnych danych. Łatka jest już wdrożona w środowiskach hostowanych, a w innych należy ją jak najszybciej zastosować.",
+        "after": "PTC opublikowało łatkę dla krytycznej luki CVE-2026-126325 w Windchill i FlexPLM, umożliwiającej RCE przez deserializację nieufnych danych. Łatka jest już wdrożona w środowiskach hostowanych, a w pozostałych należy ją jak najszybciej zastosować.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H166"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "Apify rotates API tokens, prompts 2FA resets after breach",
+    "link": "https://www.bleepingcomputer.com/news/security/apify-rotates-api-tokens-prompts-2fa-resets-after-breach/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Apify po wykryciu nieautoryzowanego dostępu w dniach 9-10 listopada 2026 odnowiło tokeny API, zresetowało 2FA i wyłączyło niektóre połączenia OAuth. Nie stwierdzono wycieku danych klientów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H232",
+      "H462"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "Shipping giant Maersk says recent cyber incident affected legacy system",
+    "link": "https://therecord.media/shipping-giant-maersk-says-recent-incident-affected-legacy-system",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Maersk poinformowało, że sprawcy uzyskały dostęp do starszego systemu po jego przejęciu, jednak incydent został odizolowany i nie spowodował wycieku danych ani zakłóceń w działaniu usług.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Maersk poinformowało, że sprawcy uzyskali dostęp do starszego systemu po przejęciu, ale incydent jest odizolowany i nie spowodował wycieku danych ani zakłóceń usług.",
+        "after": "Maersk poinformowało, że sprawcy uzyskały dostęp do starszego systemu po jego przejęciu, jednak incydent został odizolowany i nie spowodował wycieku danych ani zakłóceń w działaniu usług.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H372"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-13",
+    "title": "ConnectWise investigates ScreenConnect breaches after reports of incidents at nearly 50 organizations",
+    "link": "https://therecord.media/connectwise-screenconnect-breaches-third-party-tool",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "SCKit Malware Turns ScreenConnect Support Sessions Into Potential MSP Attack Paths",
+        "link": "https://thehackernews.com/2026/11/sckit-malware-targets-screenconnect.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Hackers Deploy Malware in Fresh ScreenConnect Campaign",
+        "link": "https://www.securityweek.com/hackers-deploy-malware-in-fresh-screenconnect-campaign/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "ConnectWise bada naruszenia w narzędziu ScreenConnect, które dotknęły prawie 50 organizacji poprzez złośliwe rozszerzenie RMM+. Firma wyłączyła RMM+ w 400 środowiskach i zaleca klientom samodzielne wyłączenie tego rozszerzenia.",
+    "cves": [
+      "CVE-2026-84869"
+    ],
+    "kev": [
+      "CVE-2026-84869"
+    ],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H358"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
   }
 ]

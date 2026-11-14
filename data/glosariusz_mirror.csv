@@ -1,4 +1,4 @@
-﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v93 · 2026-11-07 · CC BY-NC-ND 4.0 · © Jan Wolski.
+﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v99 · 2026-11-14 · CC BY-NC-ND 4.0 · © Jan Wolski.
 id;termin_en;forma;nawias;regula;unikaj
 H001;adware;adware;;;
 H002;bloatware;bloatware;;;
@@ -739,5 +739,16 @@ H736;WMI execution;wykonanie przez WMI;;;
 H737;malicious document macro;złośliwe makro w dokumencie;;;
 H738;DNS exfiltration;eksfiltracja przez DNS;;;
 H739;access token manipulation;kradzież / podszycie tokenu dostępu;;;
+H741;rainbow table;tęczowe tablice;;;
 H740;DCSync;DCSync;;;
+H742;evil twin;evil twin;;;
+DOP-15;pharming;pharming;;;
+DOP-16;YARA rules;reguły YARA;;;
+DOP-17;order of volatility;kolejność ulotności dowodów;;;
+DOP-18;write blocker;bloker zapisu;;;
+DOP-19;dwell time / mean time to detect;czas przebywania / MTTD;;;
+DOP-20;beaconing;sygnalizowanie C2;;;
+DOP-21;true positive / benign positive;prawdziwy / łagodny alarm;;;
+DOP-22;split tunneling / full tunnel;tunelowanie dzielone / pełne;;;
+DOP-23;port security;bezpieczeństwo portów przełącznika;;;
 H371-sponsored;state-sponsored;opłacani przez państwo;;odmieniaj zgodnie z kontekstem;sponsorowan\w* przez państwo

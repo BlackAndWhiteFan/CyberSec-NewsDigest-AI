@@ -57,6 +57,15 @@ Zmienione pliki: `src/ai_summaries.py`, `src/summary_quality.py`,
 `src/article_selection.py`, `data/reguly_jezyka.md`, `src/test_v51.py`
 (nowy), `docs/karton.html`, README (PL/EN).
 
+**Dopisek 15.11.2026 (krok K5: nowy mirror do Prasówki):** mirror
+glosariusza (Mozaika → Prasówka) v99 (`plik-matka v99 · 2026-11-14`,
+List 33): 11 nowych wierszy – H741 tęczowe tablice, H742 evil twin i 9
+wpisów z „Haseł do dopisania” (DOP-15…DOP-23: pharming, reguły YARA,
+kolejność ulotności dowodów, bloker zapisu, czas przebywania / MTTD,
+sygnalizowanie C2, prawdziwy / łagodny alarm, tunelowanie dzielone /
+pełne, bezpieczeństwo portów przełącznika). Kod bez zmian; Karton
+Prasówki i README pokazują v99.
+
 ------------------------------------------------------------------------
 
 ## v50 · Jeden wtorek --- 12.11.2026
@@ -2696,6 +2705,12 @@ Changes:
 Changed files: `src/ai_summaries.py`, `src/summary_quality.py`,
 `src/article_selection.py`, `data/reguly_jezyka.md`, `src/test_v51.py`
 (new), `docs/karton.html`, README (PL/EN).
+
+**Addendum 2026-11-15 (runbook step K5: new mirror to the digest):**
+glossary mirror (Mozaika → Prasówka) v99 (`plik-matka v99 · 2026-11-14`,
+Letter 33): 11 new rows – H741 rainbow tables, H742 evil twin and 9
+entries from the "Hasła do dopisania" sheet (DOP-15…DOP-23). No code
+change; the Karton Prasówki and the READMEs show v99.
 
 ------------------------------------------------------------------------
 

@@ -194,7 +194,7 @@ Data and tools:
 - `data/archive/YYYY-MM.json` — monthly archive of delivered articles; since v38 with glossary entries (`terms`), since v39 with the language correction model (`proofread`, empty text = no correction).
 - `data/last_digest.json`, `data/last_top.json` — markers of the last digest and tops.
 - `data/tops/YYYY-Www.json`, `data/tops/YYYY-MM.json` — delivered weekly and monthly tops with their event stories (since v38; material for the bridge to CyberSec Mozaika).
-- `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (mother workbook v93, six columns). Exported by the private bridge repository `cybersec-most` (since v38; before that by `tools/eksport_mirrora.py` in this repository).
+- `data/glosariusz_mirror.csv` — mirror of the CyberSec Mozaika glossary (mother workbook v99, six columns). Exported by the private bridge repository `cybersec-most` (since v38; before that by `tools/eksport_mirrora.py` in this repository).
 - `data/styl_unikaj.csv` — style list: calques and anglicisms with suggestions, edited by hand (`*` = any ending).
 - `data/reguly_jezyka.md` — Prasówka language rules, edited by JW: the section "Nakazy dla modeli" goes to the prompts (since v46).
 - `data/slowa_angielskie_ok.csv` — English words that may stay untranslated in summaries, edited by hand (`*` = any ending; since v42).

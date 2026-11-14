@@ -4752,5 +4752,345 @@
       "H358"
     ],
     "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Dwa nowe zero-daye wykorzystywane w atakach – jeden w Chromie, drugi w Outlooku",
+    "link": "https://kapitanhack.pl/dwa-nowe-zero-daye-wykorzystywane-w-atakach-jeden-w-chromie-drugi-w-outlooku/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Microsoft Patches 1,259 Flaws, Including Exploited Outlook Bug That May Expose NTLMv2 Hashes",
+        "link": "https://thehackernews.com/2026/11/microsoft-patches-1259-flaws-including.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Google poinformowało o aktualizacji Chrome usuwającej dziewięć podatności, w tym zero-day CVE-2026-125350 polegający na wykorzystaniu zasobu po jego zwolnieniu w komponencie XML.",
+    "cves": [
+      "CVE-2026-125350"
+    ],
+    "kev": [
+      "CVE-2026-125350"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Google poinformowało o aktualizacji Chrome usuwającej dziewięć podatności, w tym zero-day CVE-2026-125350 typu use-after-free w komponencie XML.",
+        "after": "Google poinformowało o aktualizacji Chrome usuwającej dziewięć podatności, w tym zero-day CVE-2026-125350 polegający na wykorzystaniu zasobu po jego zwolnieniu w komponencie XML.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H159"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Check Point warns of zero-day flaw exploited for root access",
+    "link": "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Hackers Exploit PHP2Shell Flaws in Check Point Gateways to Deploy TSGA Backdoor and Wipe ESXi Files",
+        "link": "https://thehackernews.com/2026/11/hackers-exploit-php2shell-flaws-in.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "PHP2Shell Exploited in Destructive Check Point Gateway Attacks",
+        "link": "https://www.securityweek.com/php2shell-exploited-in-destructive-check-point-gateway-attacks/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Check Point wydało emergency hotfixy przeciwko luki LPE CVE-2026-123039 w interfejsie DynamicCLI, którą aktywnie wykorzystywano przeciwko kilkudziesięciu klientom. Łatka obejmuje Firewall, Multi-Domain Security Management Server i inne produkty firmy.",
+    "cves": [
+      "CVE-2026-123039"
+    ],
+    "kev": [
+      "CVE-2026-123039"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "emergency",
+        "form": "emergency",
+        "suggestion": "awaryjny",
+        "fixed_by": "remains"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H159",
+      "H166",
+      "H189",
+      "H351"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Nightmare Eclipse Drops Windows Zero-Day Exploit ‘SignDrop’",
+    "link": "https://www.securityweek.com/nightmare-eclipse-drops-windows-zero-day-exploit-signdrop/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Badacz Nightmare Eclipse ujawnił zero-day SignDrop, który pozwala lokalnemu użytkownikowi podnieść uprawnienia do SYSTEM poprzez nadużycie mechanizmu CLFS w Windows. Łatka nie jest jeszcze dostępna.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H153",
+      "H159",
+      "H166"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Cyberatak na system wynajmu noclegów w Polsce. Uważaj na wyłudzenia",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-system-wynajmu-noclegow-w-polsce-uwazaj-na-wyludzenia",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "System IdoBooking padł ofiarą cyberataku, w wyniku którego nieuprawniona osoba uzyskała poświadczenia technicznej usługi i utworzyła konto administratora w panelach klientów. Incydent trwał około 36 godzin, a dane osobowe mogły zostać naruszone.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "System IdoBooking padł ofiarą cyberataku, w wyniku którego nieuprawniony uzyskał poświadczenia technicznej usługi i stworzył konto administratora w panelach klientów. Incydent trwał ok. 36 godzin, a dane osobowe mogły zostać naruszone.",
+        "after": "System IdoBooking padł ofiarą cyberataku, w wyniku którego nieuprawniona osoba uzyskała poświadczenia technicznej usługi i utworzyła konto administratora w panelach klientów. Incydent trwał około 36 godzin, a dane osobowe mogły zostać naruszone.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H207",
+      "H399"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Autopay zhackowane. Możliwy wyciek danych finansowych. [Aktualizacja]",
+    "link": "https://sekurak.pl/autopay-zhackowane-mozliwy-wyciek-danych-finansowych/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Autopay S.A. odnotowało nieautoryzowany dostęp do infrastruktury i części danych płatności, przy czym atak był zautomatyzowany przy użyciu sztucznej inteligencji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Autopay S.A. odnotowało nieautoryzowany dostęp do infrastruktury i części danych płatności, przy czym atak był zautomatyzowany przy użyciu AI.",
+        "after": "Autopay S.A. odnotowało nieautoryzowany dostęp do infrastruktury i części danych płatności, przy czym atak był zautomatyzowany przy użyciu sztucznej inteligencji.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Producent dronów dla Niemiec i Ukrainy ofiarą cyberataku. Bundeswehra uziemiła bezzałogowce",
+    "link": "https://cyberdefence24.pl/armia-i-sluzby/cyberatak-na-niemieckiego-producenta-bundeswehra-uziemila-drony",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Quantum Systems, producent dronów dostarczanych Bundeswehry i Ukrainie, padł ofiarą cyberataku – nieznani sprawcy wprowadzili szkodliwe oprogramowanie podszywające się pod aktualizację QBase.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Quantum Systems, producent dronów dostarczanych Bundeswehrze i Ukrainie, padł ofiarą cyberataku – nieznani sprawcy wprowadzili szkodliwe oprogramowanie podszywające się pod aktualizację QBase.",
+        "after": "Quantum Systems, producent dronów dostarczanych Bundeswehry i Ukrainie, padł ofiarą cyberataku – nieznani sprawcy wprowadzili szkodliwe oprogramowanie podszywające się pod aktualizację QBase.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H372"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Hakerzy Korei Północnej wykradli kryptowaluty o wartości ponad 400 mln dolarów. FBI ostrzega posiadaczy",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/hakerzy-korei-polnocnej-wykradli-kryptowaluty-o-wartosci-ponad-400-mln-dolarow-fbi-ostrzega-posiadaczy",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Hakerzy z Korei Północnej ukradli kryptowaluty o wartości ponad 400 milionów dolarów, wykorzystując narzędzia zarządzane przez AI do podszywania się pod osoby w wideorozmowach. FBI ostrzegło posiadaczy kryptowalut i poinformowało o zakłóceniu infrastruktury chmurowej używanej przez sprawców.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Hakerzy z Korei Północnej ukradli kryptowaluty o wartości ponad 400 mln USD, wykorzystując narzędzia AI do podszywania się pod osoby w wideorozmowach. FBI ostrzegło posiadaczy kryptowalut i poinformowało o zakłóceniu infrastruktury chmurowej używanej przez sprawców.",
+        "after": "Hakerzy z Korei Północnej ukradli kryptowaluty o wartości ponad 400 milionów dolarów, wykorzystując narzędzia zarządzane przez AI do podszywania się pod osoby w wideorozmowach. FBI ostrzegło posiadaczy kryptowalut i poinformowało o zakłóceniu infrastruktury chmurowej używanej przez sprawców.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Check Point gateways hacked via PHP2Shell to deploy VMware ESXi wiper",
+    "link": "https://www.bleepingcomputer.com/news/security/check-point-gateways-hacked-via-php2shell-to-deploy-vmware-esxi-wiper/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Check Point Security Gateway został zaatakowany przy użyciu luk PHP2Shell (CVE-2026-109618 i CVE-2026-109619), co pozwoliło na uruchomienie kodu bez uwierzytelnienia i instalację wipera na hostach VMware ESXi. Luki znajdują się w katalogu CISA KEV, a PHP wydało łatki awaryjne 21 października, więc dostępne są łatki.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "emergency",
+        "form": "emergency",
+        "suggestion": "awaryjny",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawki",
+        "fixed": "łatki"
+      },
+      {
+        "type": "proofreading",
+        "before": "Check Point Security Gateway został zaatakowany przy użyciu luk PHP2Shell (CVE-2026-109618 i CVE-2026-109619), co pozwoliło na nieautoryzowane uruchomienie kodu i instalację wipera na hostach VMware ESXi. Luki są w katalogu CISA KEV, a PHP wydało emergency patches 21 października, więc dostępna jest łatka.",
+        "after": "Check Point Security Gateway został zaatakowany przy użyciu luk PHP2Shell (CVE-2026-109618 i CVE-2026-109619), co pozwoliło na uruchomienie kodu bez uwierzytelnienia i instalację wipera na hostach VMware ESXi. Luki znajdują się w katalogu CISA KEV, a PHP wydało łatki awaryjne 21 października, więc dostępne są łatki.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H154",
+      "H723"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "SilentAir Hijacks Asian Telecom Networks to Intercept SMS 2FA Codes and Spy on Taiwanese Users",
+    "link": "https://thehackernews.com/2026/11/silentair-hijacks-asian-telecom.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa SilentAir przejęła kontrolę nad sprzętem w co najmniej sześciu operatorach telekomunikacyjnych w Azji i przechwyciła SMS-y oraz połączenia, w tym kody 2FA, głównie w Tajwanie. Atak wykorzystuje protokoły SS7 i Diameter w sieci IPX, a dotychczasowe działania ograniczyły jego działanie, choć ryzyko powrotu istnieje.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H232",
+      "H494",
+      "H527"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-14",
+    "title": "Podatności w oprogramowaniu Edito CMS",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-59074/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymał zgłoszenie o czterech podatnościach w Edito CMS, w tym CVE-2026-59074 umożliwiającej podwyższenie uprawnień poprzez spreparowany token JWT oraz CVE-2026-59075 pozwalającej na dynamiczne wstrzykiwanie kodu LINQ. Pozostałe podatności to dwa typy przechowywanych ataków XSS.",
+    "cves": [
+      "CVE-2026-59074",
+      "CVE-2026-59081"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "glossary",
+        "id": "H182",
+        "used": "podniesienie uprawnień",
+        "required": "podwyższenie uprawnień",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "CERT Polska otrzymał zgłoszenie o czterech podatnościach w Edito CMS, w tym CVE-2026-59074 umożliwiającej podwyższenie uprawnień poprzez spreparowany token JWT oraz CVE-2026-59075 pozwalającej na dynamiczny wstrzyknięcie LINQ. Pozostałe podatności to dwa typy stored XSS.",
+        "after": "CERT Polska otrzymał zgłoszenie o czterech podatnościach w Edito CMS, w tym CVE-2026-59074 umożliwiającej podwyższenie uprawnień poprzez spreparowany token JWT oraz CVE-2026-59075 pozwalającej na dynamiczne wstrzykiwanie kodu LINQ. Pozostałe podatności to dwa typy przechowywanych ataków XSS.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H089",
+      "H150",
+      "H182",
+      "H221",
+      "H434"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
   }
 ]

@@ -1,4 +1,4 @@
-﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v100 · 2026-11-15 · CC BY-NC-ND 4.0 · © Jan Wolski.
+﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v101 · 2026-11-15 · CC BY-NC-ND 4.0 · © Jan Wolski.
 id;termin_en;forma;nawias;regula;unikaj
 H001;adware;adware;;;
 H002;bloatware;bloatware;;;
@@ -745,6 +745,9 @@ H742;evil twin;evil twin;;;
 H743;pharming;pharming;;;
 H744;YARA rules;reguły YARA;;;
 H745;order of volatility;kolejność ulotności dowodów;;;
+H746;code execution (from AI output);wykonanie kodu z wyjścia AI;;;
+H747;Security Service Edge (SSE);SSE;;;
+H748;Group Managed Service Accounts (gMSA);gMSA;;;
 DOP-18;write blocker;bloker zapisu;;;
 DOP-19;dwell time / mean time to detect;czas przebywania / MTTD;;;
 DOP-20;beaconing;sygnalizowanie C2;;;

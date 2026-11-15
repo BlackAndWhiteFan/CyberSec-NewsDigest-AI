@@ -71,6 +71,11 @@ Prasówki i README pokazują v99.
 przeszły z „Haseł do dopisania” do Glosariusza (DOP-15…DOP-17 →
 H743…H745). Formy bez zmian; Karton Prasówki i README pokazują v100.
 
+**Dopisek 15.11.2026, wieczór (krok K5):** mirror v101 (`plik-matka v101 ·
+2026-11-15`): trzy nowe hasła Glosariusza: H746 wykonanie kodu z wyjścia
+AI, H747 SSE (Security Service Edge), H748 gMSA. Kod bez zmian; Karton
+Prasówki i README pokazują v101.
+
 ------------------------------------------------------------------------
 
 ## v50 · Jeden wtorek --- 12.11.2026
@@ -2721,6 +2726,11 @@ change; the Karton Prasówki and the READMEs show v99.
 2026-11-15`): pharming, YARA rules and order of volatility moved from
 "Hasła do dopisania" to the Glossary (DOP-15…DOP-17 → H743…H745). Forms
 unchanged; the Karton Prasówki and the READMEs show v100.
+
+**Addendum 2026-11-15, evening (step K5):** mirror v101 (`plik-matka v101 ·
+2026-11-15`): three new Glossary entries: H746 code execution (from AI
+output), H747 SSE (Security Service Edge), H748 gMSA. No code change;
+the Karton Prasówki and the READMEs show v101.
 
 ------------------------------------------------------------------------
 

@@ -66,6 +66,11 @@ sygnalizowanie C2, prawdziwy / łagodny alarm, tunelowanie dzielone /
 pełne, bezpieczeństwo portów przełącznika). Kod bez zmian; Karton
 Prasówki i README pokazują v99.
 
+**Dopisek 15.11.2026 (krok K5):** mirror v100 (`plik-matka v100 ·
+2026-11-15`): pharming, reguły YARA i kolejność ulotności dowodów
+przeszły z „Haseł do dopisania” do Glosariusza (DOP-15…DOP-17 →
+H743…H745). Formy bez zmian; Karton Prasówki i README pokazują v100.
+
 ------------------------------------------------------------------------
 
 ## v50 · Jeden wtorek --- 12.11.2026
@@ -2711,6 +2716,11 @@ glossary mirror (Mozaika → Prasówka) v99 (`plik-matka v99 · 2026-11-14`,
 Letter 33): 11 new rows – H741 rainbow tables, H742 evil twin and 9
 entries from the "Hasła do dopisania" sheet (DOP-15…DOP-23). No code
 change; the Karton Prasówki and the READMEs show v99.
+
+**Addendum 2026-11-15 (step K5):** mirror v100 (`plik-matka v100 ·
+2026-11-15`): pharming, YARA rules and order of volatility moved from
+"Hasła do dopisania" to the Glossary (DOP-15…DOP-17 → H743…H745). Forms
+unchanged; the Karton Prasówki and the READMEs show v100.
 
 ------------------------------------------------------------------------
 

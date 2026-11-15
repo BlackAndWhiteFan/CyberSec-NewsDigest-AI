@@ -1,4 +1,4 @@
-﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v99 · 2026-11-14 · CC BY-NC-ND 4.0 · © Jan Wolski.
+﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v100 · 2026-11-15 · CC BY-NC-ND 4.0 · © Jan Wolski.
 id;termin_en;forma;nawias;regula;unikaj
 H001;adware;adware;;;
 H002;bloatware;bloatware;;;
@@ -742,9 +742,9 @@ H739;access token manipulation;kradzież / podszycie tokenu dostępu;;;
 H741;rainbow table;tęczowe tablice;;;
 H740;DCSync;DCSync;;;
 H742;evil twin;evil twin;;;
-DOP-15;pharming;pharming;;;
-DOP-16;YARA rules;reguły YARA;;;
-DOP-17;order of volatility;kolejność ulotności dowodów;;;
+H743;pharming;pharming;;;
+H744;YARA rules;reguły YARA;;;
+H745;order of volatility;kolejność ulotności dowodów;;;
 DOP-18;write blocker;bloker zapisu;;;
 DOP-19;dwell time / mean time to detect;czas przebywania / MTTD;;;
 DOP-20;beaconing;sygnalizowanie C2;;;

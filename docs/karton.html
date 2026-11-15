@@ -2,7 +2,7 @@
 <!-- v41: Karton Prasówki w repo (docs/karton.html). Znaczniki wersji czyta strażnik src/test_v41.py
      i Raport Mostu (Prasówka → Mozaika); zmieniaj je w tej samej rundzie co CHANGELOG i mirror. -->
 <meta name="prasowka-wersja" content="v51">
-<meta name="plik-matka-wersja" content="v100">
+<meta name="plik-matka-wersja" content="v101">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,7 +139,7 @@ footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padd
 
 <header>
   <div>
-    <div class="eyebrow">Prasówka (CyberSec AI News Digest) · stan na v51 · Bez pustych zdań · 15.11.2026 · mirror plik-matka v100</div>
+    <div class="eyebrow">Prasówka (CyberSec AI News Digest) · stan na v51 · Bez pustych zdań · 15.11.2026 · mirror plik-matka v101</div>
     <h1>Karton Prasówki</h1>
     <p class="lead">Rysunek 1:1 aplikacji, która codziennie rano zamienia kanały RSS w polską prasówkę dla analityków SOC na Discordzie. Widać tu, skąd przychodzą newsy, co wybiera <b>kod</b>, co pisze i poprawia <b>AI</b> i co pilnuje, żeby żaden tekst nie przeszedł bez kontroli.</p>
   </div>
@@ -238,7 +238,7 @@ footer{font-size:12.5px;color:var(--muted);border-top:1px solid var(--line);padd
 │   ├── archive/           <span class="c"># RRRR-MM.json + dziennik języka</span>
 │   ├── tops/              <span class="c"># zapisane zestawienia (v38)</span>
 │   ├── seen_articles.json
-│   ├── glosariusz_mirror.csv  <span class="c"># Mozaika → Prasówka, v100</span>
+│   ├── glosariusz_mirror.csv  <span class="c"># Mozaika → Prasówka, v101</span>
 │   ├── styl_unikaj.csv
 │   ├── slowa_angielskie_ok.csv  <span class="c"># uzus branżowy: angielskie słowa dozwolone</span>
 │   └── reguly_jezyka.md   <span class="c"># Reguły języka Prasówki: nakazy dla modeli (v46)</span>
@@ -262,7 +262,7 @@ const N=[
   r:'Kanał RSS daje zwykle tylko zajawkę. article_pages.py pobiera tekst ze strony, żeby AI miało fakty, a kontrola miała z czym porównać liczby i CVE.'},
  {id:'kev_src',k:'src',x:20,y:310,w:190,h:56,t:'Katalog CISA KEV',L:['luki wykorzystywane w atakach'],
   r:'Katalog CISA Known Exploited Vulnerabilities. Pozycja z luką z katalogu dostaje 🔥, a AI dostaje pole „kev”, więc może napisać, że luka jest wykorzystywana.'},
- {id:'glos',k:'src',x:20,y:382,w:190,h:84,t:'Glosariusz Mozaiki',f:'data/glosariusz_mirror.csv',L:['mirror v100 (Mozaika → Prasówka)','eksport: Most (cybersec-most)'],
+ {id:'glos',k:'src',x:20,y:382,w:190,h:84,t:'Glosariusz Mozaiki',f:'data/glosariusz_mirror.csv',L:['mirror v101 (Mozaika → Prasówka)','eksport: Most (cybersec-most)'],
   r:'Lustro słowniczka z CyberSec Mozaiki i lista kalk do unikania. Prompt dostaje tylko terminy, które występują w artykułach z danego dnia, a kontrola pilnuje form zakazanych. Od v40 objaśnienia w nawiasie tylko przy H182 i H207. Lista kalk styl_unikaj.csv leży obok.'},
  {id:'seen',k:'file',x:20,y:482,w:190,h:70,t:'Historia wysłanych',f:'data/seen_articles.json',L:['bez powtórek z poprzednich dni'],
   r:'Zapis linków, które już poszły. Dzięki niemu wczorajszy news nie wraca, a dalszy ciąg znanej sprawy dostaje znacznik kontynuacji.'},

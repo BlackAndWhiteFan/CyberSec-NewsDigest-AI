@@ -147,6 +147,11 @@ EXCLUDED_TITLE_KEYWORDS = (
     "issues caused by",
     # ("fixes Exchange sign-ins broken by Windows Server updates", 12.11.2026)
     "broken by",
+    # v53: "Microsoft says November security updates cause printing issues",
+    # "Microsoft confirms Windows activation failures after November updates"
+    # (16.11.2026).
+    "updates cause",
+    "failures after",
     "series a$",
     "series b$",
 )

@@ -24,6 +24,42 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v53 · Lata 90. --- 16.11.2026
+
+**Bez wielkiej litery po liczebniku porządkowym; bez błędów Microsoftu po
+własnych aktualizacjach; nowe reguły języka.**
+
+Powód: prasówki z 14–16.11.2026 (dwie automatyczne, test z gałęzi v52) i
+zestawienie tygodniowe 09–15.11.
+
+Zmiany:
+
+- **Wielka litera** (`src/summary_quality.py`, `fix_sentence_case`): kod
+  traktował „90.” jak koniec zdania („w latach 90. Rozważano”). Liczba z
+  kropką po spacji to liczebnik porządkowy – litera zostaje mała. Numery
+  CVE na końcu zdania („CVE-2026-111497. Aktualizacja…”) działają jak
+  dotąd.
+- **Dobór** (`src/article_selection.py`): tytuły z „updates cause” i
+  „failures after” odpadają (drukowanie i aktywacja Windows po
+  listopadowych aktualizacjach, test 16.11).
+- **Kontrola pustych zdań o łatce**: także „nie wspomniano o (dostępnej)
+  łatce” (Log4Shell w vCenter, test 16.11).
+- **Lista kalek i anglicyzmów** (`data/styl_unikaj.csv`): „emergency” →
+  „awaryjny” („wydało emergency hotfixy”, 14.11). „Hotfix” zostaje.
+- **Reguły języka Prasówki**: RCE rodzaju nijakiego („potencjalne RCE”);
+  przypadek po przyimku („przeciwko luce”, „ataki na klientów”, „u
+  operatorów”, „na Tajwanie”); „workflow” i „hotfix” jako uzus branżowy.
+- Po uwadze JW (głos branży): „napędzany przez AI” i „zarządzany przez
+  AI” zostają – bez nowych zakazów.
+- **Karton Prasówki** odświeżony do v53. **Testy**: `src/test_v53.py`;
+  razem 513.
+
+Zmienione pliki: `src/summary_quality.py`, `src/article_selection.py`,
+`data/styl_unikaj.csv`, `data/reguly_jezyka.md`, `src/test_v53.py` (nowy),
+`docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v52 · Głos branży --- 16.11.2026
 
 **„Poprawka”, „zdalne wykonanie kodu” i „rekordy” są poprawne; kod
@@ -2718,6 +2754,40 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v53 · The 90s --- 2026-11-16
+
+**No capital letter after an ordinal number; no Microsoft fixes for its
+own update bugs; new language rules.**
+
+Reason: the digests of 14–16 Nov 2026 (two automatic, one v52 branch
+test) and the weekly top for 9–15 Nov.
+
+Changes:
+
+- **Capital letters** (`src/summary_quality.py`, `fix_sentence_case`): the
+  code treated "90." as the end of a sentence ("w latach 90. Rozważano").
+  A number with a dot after a space is a Polish ordinal, so the letter
+  stays lowercase. CVE ids at the end of a sentence work as before.
+- **Selection** (`src/article_selection.py`): titles with "updates cause"
+  and "failures after" are excluded (Windows printing and activation after
+  the November updates, test of 16 Nov).
+- **Empty patch sentences**: also "nie wspomniano o (dostępnej) łatce"
+  (Log4Shell in vCenter, test of 16 Nov).
+- **Calque and anglicism list** (`data/styl_unikaj.csv`): "emergency" →
+  "awaryjny" ("wydało emergency hotfixy", 14 Nov). "Hotfix" stays.
+- **Prasówka language rules**: RCE is neuter ("potencjalne RCE"); case
+  after prepositions; "workflow" and "hotfix" are industry usage.
+- After JW's remark (industry voice): "napędzany przez AI" and "zarządzany
+  przez AI" stay – no new bans.
+- **Karton Prasówki** refreshed to v53. **Tests**: `src/test_v53.py`; 513
+  in total.
+
+Changed files: `src/summary_quality.py`, `src/article_selection.py`,
+`data/styl_unikaj.csv`, `data/reguly_jezyka.md`, `src/test_v53.py` (new),
+`docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

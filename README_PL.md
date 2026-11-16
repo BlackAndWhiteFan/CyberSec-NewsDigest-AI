@@ -54,6 +54,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 36 | Jeden wtorek: Patch Tuesday jako jedna pozycja, ciąg dalszy z 7 dni, pozycja bez streszczenia na końcu limitu (v50) | zakończony; zweryfikowany testami jednostkowymi |
 | 37 | Bez pustych zdań: o łatce i CVE tylko przy lukach, bez poprawek Microsoftu do własnych aktualizacji (v51) | zakończony; zweryfikowany testami jednostkowymi |
 | 38 | Głos branży: „poprawka”, „zdalne wykonanie kodu” i „rekordy” są poprawne, kod przestaje je zamieniać (v52) | zakończony; zweryfikowany testami jednostkowymi |
+| 39 | Lata 90.: bez wielkiej litery po liczebniku porządkowym, bez poprawek Microsoftu do własnych aktualizacji, nowe reguły języka (v53) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 

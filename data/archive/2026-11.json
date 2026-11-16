@@ -5092,5 +5092,346 @@
       "H434"
     ],
     "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "W listopadzie Microsoft załatał 1252 luki, w tym 68 krytycznych i jedną typu 0-day",
+    "link": "https://www.crowdstrike.com/en-us/blog/patch-tuesday-analysis-november-2026/",
+    "source": "crowdstrike.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft załatał w listopadzie 2026 r. 1 252 podatności, w tym jedną zero-day w Outlook (CVE-2026-110043). Luka umożliwiała wykonanie kodu po zaznaczeniu wiadomości w panelu podglądu, a łatka została udostępniona w aktualizacji listopadowej.",
+    "cves": [
+      "CVE-2026-110043",
+      "CVE-2026-110068",
+      "CVE-2026-113753",
+      "CVE-2026-113856",
+      "CVE-2026-113860",
+      "CVE-2026-118146",
+      "CVE-2026-118148",
+      "CVE-2026-119958"
+    ],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawka",
+        "fixed": "łatka"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H159",
+      "H166"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "Luki PHP2Shell wykorzystywane w atakach na zapory sieciowe Check Pointa",
+    "link": "https://research.checkpoint.com/2026/php2shell-exploitation-on-check-point-gateway/",
+    "source": "research.checkpoint.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": true,
+    "summary": "Sprawcy wykorzystali lukę PHP2Shell (CVE-2026-109618) do ataków na bramki Check Point Mobile Access, a następnie eskalowali uprawnienia do poziomu root za pomocą luki CVE-2026-123039. Ataki były aktywne w październiku i listopadzie 2026 r., a awaryjna łatka została wydana wcześniej.",
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-123039"
+    ],
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-123039"
+    ],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "style",
+        "used": "emergency",
+        "form": "emergency",
+        "suggestion": "awaryjny",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Sprawcy wykorzystali luki PHP2Shell (CVE-2026-109618) do ataków na bramki Check Point Mobile Access, a następnie eskalowali uprawnienia do root przez CVE-2026-123039. Ataki były aktywne w październiku i listopadzie 2026 r., a awaryjna łatka została wydana wcześniej.",
+        "after": "Sprawcy wykorzystali lukę PHP2Shell (CVE-2026-109618) do ataków na bramki Check Point Mobile Access, a następnie eskalowali uprawnienia do poziomu root za pomocą luki CVE-2026-123039. Ataki były aktywne w październiku i listopadzie 2026 r., a awaryjna łatka została wydana wcześniej.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H166",
+      "H189",
+      "H372"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "Rosyjska grupa APT29 używa techniki watering hole do kradzieży danych z urządzeń mobilnych",
+    "link": "https://sekurak.pl/rosyjska-grupa-apt29-uzywa-techniki-watering-hole-do-kradziezy-danych-z-urzadzen-mobilnych/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa APT29 przeprowadziła kampanię typu watering-hole, w której przejęte witryny serwowały złośliwe skrypty infekujące urządzenia mobilne użytkowników z Ukrainy, Europy i USA. Operacja nie wykorzystywała socjotechniki, a celem były automatyczne infekcje bez konieczności interakcji użytkownika.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Grupa APT29 przeprowadziła kampanię watering-hole, w której przejęte witryny serwowały złośliwe skrypty infekujące urządzenia mobilne użytkowników z Ukrainy, Europy i USA. Operacja nie wykorzystywała socjotechniki, a celem były automatyczne infekcje bez interakcji użytkownika.",
+        "after": "Grupa APT29 przeprowadziła kampanię typu watering-hole, w której przejęte witryny serwowały złośliwe skrypty infekujące urządzenia mobilne użytkowników z Ukrainy, Europy i USA. Operacja nie wykorzystywała socjotechniki, a celem były automatyczne infekcje bez konieczności interakcji użytkownika.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H030"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "Rola czynnika cyber na współczesnym polu bitwy",
+    "link": "https://cyberdefence24.pl/armia-i-sluzby/rola-czynnika-cyber-na-wspolczesnym-polu-bitwy",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Artykuł przytacza, że już w latach 90. Rozważano użycie cyberprzestrzeni w działaniach militarnych, m.in. rzekomą infekcję irackich systemów obrony przeciwlotniczej oraz planowaną w 1994 r. operację mającą sparaliżować sieć telefoniczną Haiti.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Artykuł przytacza, że już w latach 90. Rozważano użycie cyberprzestrzeni w działaniach militarnych, m.in. rzekoma infekcja irackich systemów obrony przeciwlotniczej oraz planowana w 1994 r. operacja mająca sparaliżować sieć telefoniczną Haiti.",
+        "after": "Artykuł przytacza, że już w latach 90. Rozważano użycie cyberprzestrzeni w działaniach militarnych, m.in. rzekomą infekcję irackich systemów obrony przeciwlotniczej oraz planowaną w 1994 r. operację mającą sparaliżować sieć telefoniczną Haiti.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "FBI warns ARTEX AI hacking tool is powering global cyberattacks",
+    "link": "https://www.bleepingcomputer.com/news/security/fbi-warns-artex-ai-hacking-tool-is-powering-global-cyberattacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "FBI ostrzega, że hakerzy wykorzystują otwartoźródłowy framework ARTEX, napędzany przez AI i przeznaczony do testów penetracyjnych, do automatyzacji ataków, w tym niedawnego naruszenia łańcucha dostaw ConnectWise. Framework samodzielnie przeprowadza rozpoznanie, wykrywa luki, eksploatuje systemy, podnosi uprawnienia i kradnie dane, przyspieszając tempo ataku.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "AI-napędzany",
+        "form": "AI-napędzan*",
+        "suggestion": "oparty na AI",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "style",
+        "used": "eksploatuje",
+        "form": "eksploatuj*",
+        "suggestion": "wykorzystuje, wykorzystując",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "FBI ostrzega, że hakerzy wykorzystują otwarto-źródłowy framework ARTEX, AI-napędzany do testów penetracyjnych, do automatyzacji ataków, w tym niedawnego naruszenia łańcucha dostaw ConnectWise. Framework samodzielnie prowadzi rozpoznanie, wykrywa podatności, eksploatuje systemy, podnosi uprawnienia i kradnie dane, przyspieszając tempo ataku.",
+        "after": "FBI ostrzega, że hakerzy wykorzystują otwartoźródłowy framework ARTEX, napędzany przez AI i przeznaczony do testów penetracyjnych, do automatyzacji ataków, w tym niedawnego naruszenia łańcucha dostaw ConnectWise. Framework samodzielnie przeprowadza rozpoznanie, wykrywa luki, eksploatuje systemy, podnosi uprawnienia i kradnie dane, przyspieszając tempo ataku.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "TSMC employee data breach linked to cloud provider",
+    "link": "https://www.bleepingcomputer.com/news/security/tsmc-employee-data-breach-linked-to-cloud-provider/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "TSMC potwierdziło wyciek danych osobowych pracowników po tym, jak sprawcy opublikowali 6,9 GB skradzionych informacji na aukcji. Incydent dotyczył usług chmurowych zewnętrznego dostawcy, a firma nie wykryła naruszenia własnych systemów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "TSMC potwierdziło wyciek danych osobowych pracowników po tym, jak sprawcy umieścili 6,9 GB skradzionych informacji na aukcji. Incydent pochodzi z usług chmurowych zewnętrznego dostawcy, a firma nie wykryła naruszenia własnych systemów.",
+        "after": "TSMC potwierdziło wyciek danych osobowych pracowników po tym, jak sprawcy opublikowali 6,9 GB skradzionych informacji na aukcji. Incydent dotyczył usług chmurowych zewnętrznego dostawcy, a firma nie wykryła naruszenia własnych systemów.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H372",
+      "H411"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "Cursor confirms security breach led to malicious Claude Code extension",
+    "link": "https://www.bleepingcomputer.com/news/security/cursor-confirms-security-breach-led-to-malicious-claude-code-extension/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Cursor Says Stolen Fireworks AI Key Led to Trojanized Claude Code Extension Incident",
+        "link": "https://thehackernews.com/2026/11/stolen-fireworks-ai-key-led-to-cursor.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Cursor przyznało, że po kradzieży poświadczeń od dostawcy Fireworks AI hakerzy rozprowadzili złośliwe rozszerzenie Claude Code w swoim marketplace, co doprowadziło do zainstalowania trwałych backdoorów SSH u do 5 000 programistów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H327"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "Operation Endgame Takes Down Gootloader, CastleRAT and StealC Servers, Seizes 6.4M Stolen Logins",
+    "link": "https://thehackernews.com/2026/11/operation-endgame-takes-down-gootloader.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Międzynarodowa operacja policyjna zlikwidowała serwery Gootloader, CastleRAT i StealC oraz przejęła około 6,4 miliona skradzionych loginów od ponad 40 000 ofiar, co utrudni przestępcom dalsze ataki ransomware i kradzieże haseł.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Międzynarodowa operacja policyjna zlikwidowała serwery Gootloader, CastleRAT i StealC oraz przejęła około 6,4 mln skradzionych loginów od ponad 40 000 ofiar, co utrudniło przestępcom dalsze ataki ransomware i kradzież haseł.",
+        "after": "Międzynarodowa operacja policyjna zlikwidowała serwery Gootloader, CastleRAT i StealC oraz przejęła około 6,4 miliona skradzionych loginów od ponad 40 000 ofiar, co utrudni przestępcom dalsze ataki ransomware i kradzieże haseł.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H015"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "Nowa wersja KeePassXC (2.8.0) – dużo nowości i naprawa poważnych błędów bezpieczeństwa (CVE-2026-69150)",
+    "link": "https://sekurak.pl/nowa-wersja-keepassxc-2-8-0-duzo-nowosci-i-naprawa-powaznych-bledow-bezpieczenstwa-cve-2026-69150/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "KeePassXC wypuścił wersję 2.8.0, w której naprawiono cztery poważne luki, w tym CVE-2026-69150, powodującą użycie zwolnionej pamięci i potencjalny RCE. Brak jest publicznego PoC, a łatka jest dostępna w wersji 2.8.0.",
+    "cves": [
+      "CVE-2026-69150"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "autofix",
+        "id": "H166",
+        "rule": "łatka",
+        "used": "poprawka",
+        "fixed": "łatka"
+      },
+      {
+        "type": "proofreading",
+        "before": "KeePassXC wypuścił wersję 2.8.0, w której naprawiono cztery poważne luki, w tym CVE-2026-69150 powodującą użycie zwolnionej pamięci i potencjalny RCE. Brak publicznego PoC, a łatka jest dostępna w wersji 2.8.0.",
+        "after": "KeePassXC wypuścił wersję 2.8.0, w której naprawiono cztery poważne luki, w tym CVE-2026-69150, powodującą użycie zwolnionej pamięci i potencjalny RCE. Brak jest publicznego PoC, a łatka jest dostępna w wersji 2.8.0.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H152",
+      "H166"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-16",
+    "title": "Cisco Catalyst SD-WAN na celowniku grupy APT. Cyberprzestępcy używają luki CVE-2026-20127 do przejmowania urządzeń",
+    "link": "https://sekurak.pl/cisco-catalyst-sd-wan-na-celowniku-grupy-apt-cyberprzestepcy-uzywaja-luki-cve-2026-20127-do-przejmowania-urzadzen/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Grupa APT wykorzystała krytyczną lukę CVE-2026-20127 w kontrolerach Cisco Catalyst SD-WAN, umożliwiając zdalne obejście uwierzytelniania i dostęp do interfejsu NETCONF. Luka znajduje się w katalogu CISA KEV i została załatana w lutym 2026, więc wymagana jest aktualizacja do najnowszej wersji firmware.",
+    "cves": [
+      "CVE-2026-20127"
+    ],
+    "kev": [
+      "CVE-2026-20127"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Grupa APT wykorzystała krytyczną lukę CVE-2026-20127 w kontrolerach Cisco Catalyst SD-WAN, umożliwiając zdalne obejście uwierzytelniania i dostęp do interfejsu NETCONF. Luka jest w katalogu CISA KEV i została załatana w lutym 2026, więc wymagana jest aktualizacja do najnowszej wersji firmware.",
+        "after": "Grupa APT wykorzystała krytyczną lukę CVE-2026-20127 w kontrolerach Cisco Catalyst SD-WAN, umożliwiając zdalne obejście uwierzytelniania i dostęp do interfejsu NETCONF. Luka znajduje się w katalogu CISA KEV i została załatana w lutym 2026, więc wymagana jest aktualizacja do najnowszej wersji firmware.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H154",
+      "H385",
+      "H524",
+      "H725"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
   }
 ]

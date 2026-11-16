@@ -50,12 +50,12 @@ def types(article):
 class TestAutofixNotes(unittest.TestCase):
     def test_replacements_are_noted_with_glossary_ids(self):
         changes = []
-        text = autofix("Wydano poprawkę na zdalne wykonanie kodu i eksploit.", changes)
+        text = autofix("Wydano łatę na remote code execution i eksploit.", changes)
 
         self.assertEqual(text, "Wydano łatkę na RCE i exploit.")
         self.assertEqual(
             [(c["id"], c["used"], c["fixed"]) for c in changes],
-            [("H166", "poprawkę", "łatkę"), ("H090", "zdalne wykonanie kodu", "RCE"), ("H153", "eksploit", "exploit")],
+            [("H090", "remote code execution", "RCE"), ("H153", "eksploit", "exploit"), ("H166", "łatę", "łatkę")],
         )
 
     def test_rule_without_glossary_entry_has_a_label(self):
@@ -66,7 +66,7 @@ class TestAutofixNotes(unittest.TestCase):
         self.assertEqual(changes[0]["rule"], "powtórzenie w nawiasie")
 
     def test_without_list_nothing_is_noted(self):
-        self.assertEqual(autofix("poprawka"), "łatka")
+        self.assertEqual(autofix("łata"), "łatka")
 
     def test_entry_by_form(self):
         self.assertEqual(entry_by_form("łatka")["id"], "H166")
@@ -75,12 +75,12 @@ class TestAutofixNotes(unittest.TestCase):
 
 class TestFindings(unittest.TestCase):
     def test_glossary_style_and_inflection(self):
-        notes = findings("Luka pozwala na eskalację uprawnień. Wyciekły rekordy pacjentów. Ostrzegają przed exploit.")
+        notes = findings("Luka pozwala na eskalację uprawnień. Framework służył do intruzji. Ostrzegają przed exploit.")
         by_type = {note["type"]: note for note in notes}
 
         self.assertEqual(by_type["glossary"]["id"], "H182")
         self.assertEqual(by_type["glossary"]["used"], "eskalację uprawnień")
-        self.assertEqual(by_type["style"]["form"], "rekordy")
+        self.assertEqual(by_type["style"]["form"], "intruzj*")
         self.assertEqual(by_type["inflection"]["id"], "H153")
         self.assertEqual(by_type["inflection"]["used"], "przed exploit")
 
@@ -113,7 +113,7 @@ class TestNotesInSummaries(unittest.TestCase):
 
     def test_autofix_in_draft(self):
         articles = [make_article("A")]
-        summarize_articles(articles, {"GROQ_API_KEY": "g"}, ScriptedOpener([{1: "Producent wydał poprawkę."}]),
+        summarize_articles(articles, {"GROQ_API_KEY": "g"}, ScriptedOpener([{1: "Producent wydał łatę."}]),
                            lambda s: None)
 
         self.assertEqual(articles[0]["summary"], "Producent wydał łatkę.")

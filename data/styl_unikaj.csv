@@ -1,15 +1,11 @@
 # Lista stylu prasówki: kalki i anglicyzmy, których streszczenia AI nie mogą używać.
 # Kolumny (średnik): forma;zamiast
 # forma – słowo lub wyrażenie; gwiazdka * na końcu słowa oznacza dowolną końcówkę
-#         (rekord* = rekord, rekordy, rekordów…). Wielkość liter bez znaczenia.
+#         (intruzj* = intruzja, intruzji, intruzję…). Wielkość liter bez znaczenia.
 # zamiast – podpowiedź dla AI, czego użyć (trafia do prośby o poprawkę).
-# Uwaga: „rekord*” złapałoby też poprawne „rekordowy”, dlatego formy „rekordy” itd. są wypisane osobno.
+# v52 (List 42, decyzja 15.11.2026): „rekordy” zdjęte z listy – utrwalony żargon („wyciek 2 mln rekordów”).
 # Linie zaczynające się od # są komentarzami. Plik edytuje JW (v29, 25.10.2026).
 forma;zamiast
-rekordy;wpisy, dane (np. „dane pacjentów”, „1,8 mln wpisów”)
-rekordów;wpisów, danych
-rekordami;wpisami, danymi
-rekordach;wpisach, danych
 AI-zarządzan*;zarządzany przez AI
 AI-sterowan*;sterowany przez AI
 AI-napędzan*;oparty na AI

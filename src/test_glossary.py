@@ -147,7 +147,7 @@ class TestConventionViolations(unittest.TestCase):
             "Badacze opublikowali eksploit.": "exploit",
             "Za atakiem stoją aktorzy zagrożeń.": "sprawcy",
             "Rozsyłano złośliwe oprogramowanie.": "malware",
-            "Możliwe jest zdalne wykonanie kodu.": "RCE",
+            "Możliwe jest remote code execution.": "RCE",
             "Opublikowano dowód koncepcji.": "PoC",
             "Wykradziono kredencjały.": "poświadczenia",
             "Grupa sponsorowana przez państwo.": "opłacani przez państwo",
@@ -172,11 +172,11 @@ class TestConventionViolations(unittest.TestCase):
         # The check runs on the AI text before explanations are added.
         self.assertEqual(convention_violations("Producent wydał łatkę."), [])
 
-    def test_poprawka_is_forbidden_in_favour_of_latka(self):
-        self.assertEqual(
-            [forma for _, forma in convention_violations("Firma wydała poprawki poza cyklem.")],
-            ["łatka"],
-        )
+    def test_list42_poprawka_and_expansion_are_allowed(self):
+        # v52 (List 42, mirror build 102): "poprawka" and "zdalne wykonanie
+        # kodu" are correct; "patchować" stays forbidden.
+        self.assertEqual(convention_violations("Firma wydała poprawki; możliwe jest zdalne wykonanie kodu."), [])
+        self.assertEqual([forma for _, forma in convention_violations("Firma spatchowała lukę.")], ["łatka"])
 
 
 class TestPrompt(unittest.TestCase):
@@ -207,10 +207,16 @@ class TestAutofixV29(unittest.TestCase):
     def test_duplicate_acronym_and_iphone(self):
         from glossary import autofix
         self.assertEqual(
-            autofix("Luki umożliwiają zdalne wykonanie kodu (RCE) na iPhoneie."),
+            autofix("Luki umożliwiają remote code execution (RCE) na iPhoneie."),
             "Luki umożliwiają RCE na iPhonie.",
         )
-        self.assertEqual(autofix("Luka pozwala na wykonanie kodu zdalnie."), "Luka pozwala na RCE.")
+
+    def test_list42_correct_forms_stay(self):
+        # v52 (List 42): "poprawka" and "zdalne wykonanie kodu" are correct.
+        from glossary import autofix
+        text = "Wydano poprawkę bezpieczeństwa; luka pozwalała na zdalne wykonanie kodu."
+        self.assertEqual(autofix(text), text)
+        self.assertEqual(autofix("Luka pozwala na wykonanie kodu zdalnie."), "Luka pozwala na wykonanie kodu zdalnie.")
 
     def test_escalation_after_typu_is_nominative(self):
         self.assertEqual(

@@ -1,4 +1,4 @@
-﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v101 · 2026-11-15 · CC BY-NC-ND 4.0 · © Jan Wolski.
+﻿# Mirror glosariusza CyberSec Mozaika · plik-matka v102 · 2026-11-15 · CC BY-NC-ND 4.0 · © Jan Wolski.
 id;termin_en;forma;nawias;regula;unikaj
 H001;adware;adware;;;
 H002;bloatware;bloatware;;;
@@ -89,7 +89,7 @@ H086;command injection;command injection;;;
 H087;prompt injection;prompt injection;;;
 H088;SQL injection;SQL injection;;;
 H089;XSS;XSS;;;
-H090;RCE;RCE;;;zdaln\w+ wykonani\w+ kodu | remote code execution
+H090;RCE;RCE;;„zdalne wykonanie kodu” też poprawne;remote code execution
 H091;malicious update;złośliwa aktualizacja;;;
 H092;active attack;atak aktywny;;;
 H093;zero-click attack;zero-click;;;
@@ -165,7 +165,7 @@ H162;patch gap;patch gap;;;
 H163;rogue devices / unmanaged systems;rogue devices;;;
 H164;vulnerability;podatność;;"nie dopisuj „(luka)” w nawiasie; słowa „luka” możesz używać zamiennie";\(luk\w*\)
 H165;resource reuse;ponowne użycie zasobów;;;
-H166;patch;łatka;;;poprawk\w*|poprawce|poprawek | (?:s|za)?patch(?:uj|ow)\w*
+H166;patch;łatka;;„poprawka (bezpieczeństwa)” też poprawna, gdy pasuje do kontekstu;(?:s|za)?patch(?:uj|ow)\w*
 H167;public repositories / public object storage;publiczne repozytoria i publiczne zasobniki danych;;;
 H168;shadow IT;shadow IT;;;
 H169;EPSS;EPSS;;;

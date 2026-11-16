@@ -39,10 +39,12 @@ promptów. Pisz krótko, z przykładem „błąd → poprawnie”.
 - *Unauthenticated* to „bez uwierzytelnienia” lub „niezalogowany”, nie „nieautoryzowany”: „luka pozwala atakującemu bez uwierzytelnienia wykonać kod”. „Niezalogowany” piszemy tylko o osobie (atakujący, użytkownik); o luce lub ataku: „podatność XXE dostępna bez logowania”, „obejście uwierzytelniania bez logowania”, a nie „niezalogowana podatność” ani „niezalogowane obejście”.
 - „Hash” to uzus branżowy: przy pierwszym wystąpieniu w streszczeniu „hashe (skróty haseł)”, dalej „hashe”. Pisownia „hash, hasha, hashe”, nie „hasz, hasze”. Odmieniaj oba człony: „wyciek hashy (skrótów haseł)”, „hashami (skrótami haseł)”, a nie „hashy (skróty haseł)”.
 - Liczba przy zero-day: „30 luk zero-day”, „dwie luki zero-day”, a nie „30 zero-day” ani „30 zero-dayów”.
+- Uzus branżowy, który jest poprawny: „łatka” i „poprawka (bezpieczeństwa)”, „RCE” i „zdalne wykonanie kodu”, „wyciek 2 mln rekordów”. Nie pisz „patchować” ani „remote code execution”. Podatności się „wykorzystuje”, a nie „eksploatuje”: „wykorzystanie podatności”, nie „eksploatacja podatności”.
 
 ## Historia zmian reguł
 
 - v46 (07.11.2026): pierwsza wersja dokumentu; nakazy z przeglądu prasówek 31.10–7.11; „build” przeniesiony z zakazów do uzusu branżowego.
+- v52 (16.11.2026): decyzje autora z Listu 42 – „poprawka (bezpieczeństwa)”, „zdalne wykonanie kodu” i „rekordy” dopuszczone; „eksploatacja” podatności dalej zakazana.
 - v51 (12.11.2026): przy „hashe (skróty haseł)” odmieniaj oba człony (prasówka z 12.11: „wyciek hashy (skróty haseł)”).
 - v49 (10.11.2026): „hash” przeniesiony z zakazów do uzusu branżowego; pierwsze wystąpienie „hashe (skróty haseł)” (decyzja JW: branża mówi „hash”).
 - v48 (10.11.2026): „niezalogowany” tylko o osobie (prasówka z 10.11: „niezalogowana podatność XXE”); liczba przy zero-day.

@@ -122,7 +122,6 @@ class TestLanguageV29(unittest.TestCase):
 
     def test_calques_from_the_style_list(self):
         cases = {
-            "Mogły zostać ujawnione rekordy pacjentów.": "rekordy",
             "Grupy używały AI‑zarządzanego frameworka.": "AI‑zarządzanego",
             "Framework służył do intruzji.": "intruzji",
             "Napastnicy eksploatując FortiClient przejęli serwery.": "eksploatując",
@@ -139,7 +138,11 @@ class TestLanguageV29(unittest.TestCase):
         self.assertEqual(quality_problems("Odnotowano rekordową liczbę ataków."), [])
 
     def test_style_problems_are_soft(self):
-        self.assertEqual(quality_problems("Ujawniono rekordy pacjentów.", soft=False), [])
+        self.assertEqual(quality_problems("Framework służył do intruzji.", soft=False), [])
+
+    def test_records_are_industry_usage(self):
+        # v52 (List 42): "wyciek 2 mln rekordów" is settled jargon.
+        self.assertFalse(any("kalka" in p for p in quality_problems("Wyciekło 2 mln rekordów pacjentów.")))
 
     def test_english_summary_is_reported(self):
         text = ("Hackers compromised the LiteLLM project and published malicious Docker images "

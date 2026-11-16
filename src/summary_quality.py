@@ -523,7 +523,7 @@ def readability_problems(text):
 # nie istnieje łatka" about eBPF rootkits, "Firma nie podała informacji o
 # łatce" about a breach at Notion, 12.11.2026).
 NO_PATCH_SENTENCE = re.compile(
-    r"[^.]*\b(?:nie (?:istnieje|ma|podał\w*|ujawnił\w*|poinformował\w*|wydał\w*)[^.]*\b(?:łatk\w*|CVE)"
+    r"[^.]*\b(?:nie (?:istnieje|ma|podał\w*|ujawnił\w*|poinformował\w*|wydał\w*|wspomnian\w*|wspomniał\w*)[^.]*\b(?:łatk\w*|łatce|CVE)"
     r"|brak łatki|łatka nie (?:jest|została|istnieje)|bez łatki|o łatce)[^.]*\.?",
     re.IGNORECASE,
 )
@@ -622,7 +622,10 @@ def fix_sentence_case(text):
         before = match.group("before") or ""
         letter = match.group("letter")
 
-        if before.lower() not in ABBREVIATIONS:
+        # v53: a number with a dot is a Polish ordinal ("w latach 90. rozważano").
+        start = match.start()
+        ordinal = before.isdigit() and (start == 0 or match.string[start - 1] in " (")
+        if before.lower() not in ABBREVIATIONS and not ordinal:
             letter = letter.upper()
 
         return before + match.group("end") + match.group("space") + letter

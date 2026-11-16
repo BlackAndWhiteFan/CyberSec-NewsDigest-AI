@@ -54,6 +54,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 36 | One Tuesday: Patch Tuesday as one item, continuations from 7 days, items without a summary last in the daily limit (v50) | completed; verified by unit tests |
 | 37 | No empty sentences: a patch or a CVE only for vulnerabilities, no Microsoft fixes for its own update bugs (v51) | completed; verified by unit tests |
 | 38 | Industry voice: "poprawka", "zdalne wykonanie kodu" and "rekordy" are correct, the code stops replacing them (v52) | completed; verified by unit tests |
+| 39 | The 90s: no capital letter after an ordinal number, no Microsoft fixes for its own update bugs, new language rules (v53) | completed; verified by unit tests |
 
 ## Current Implementation
 

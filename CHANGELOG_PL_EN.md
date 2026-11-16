@@ -24,6 +24,44 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v52 · Głos branży --- 16.11.2026
+
+**„Poprawka”, „zdalne wykonanie kodu” i „rekordy” są poprawne; kod
+przestaje je zamieniać.**
+
+Powód: List 42 od Mostu (cybersec-most) – cztery decyzje autora z
+Raportów Mostu W44–W45 (krok K1: przegląd raportu i decyzja autora,
+15.11.2026). Zasada: język branży wygrywa z purystyką. Kod przez 14 dni
+sam zamienił 29 razy „poprawkę” na „łatkę”, choć obie formy są
+poprawne.
+
+Zmiany:
+
+- **Autopoprawki** (`src/glossary.py`): usunięte zamiany „poprawka” →
+  „łatka” oraz „zdalne wykonanie (dowolnego) kodu” / „wykonanie kodu
+  zdalnie” → „RCE”. Zostają „łata” → „łatka”, „eksploit” → „exploit” i
+  angielskie „remote code execution” → „RCE”.
+- **Lista kalek** (`data/styl_unikaj.csv`): usunięte cztery wiersze
+  „rekordy, rekordów, rekordami, rekordach” (utrwalony żargon: „wyciek
+  2 mln rekordów”); przykład „rekordy pacjentów” zniknął też z promptu
+  korekty.
+- **Reguły języka Prasówki** (`data/reguly_jezyka.md`): nowy nakaz o
+  uzusie branżowym („łatka” i „poprawka”, „RCE” i „zdalne wykonanie
+  kodu”, „rekordy”); „eksploatacja” podatności dalej zakazana
+  (decyzja 3).
+- **Mirror glosariusza build 102** (krok K5: nowy mirror do Prasówki):
+  H166 i H090 bez form „poprawka” i „zdalne wykonanie kodu” w kolumnie
+  „unikaj”, z regułą dla AI, że te formy też są poprawne.
+- **Karton Prasówki** odświeżony do v52. **Testy**: zamiany sprawdzane
+  na nowe decyzje, nowe testy na formy, które zostają; razem 507.
+
+Zmienione pliki: `src/glossary.py`, `src/ai_summaries.py`,
+`src/summary_quality.py`, `data/styl_unikaj.csv`,
+`data/reguly_jezyka.md`, `data/glosariusz_mirror.csv`, testy,
+`docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v51 · Bez pustych zdań --- 12.11.2026
 
 **O łatce i numerze CVE tylko przy lukach; bez poprawek Microsoftu do
@@ -2680,6 +2718,42 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v52 · Industry voice --- 2026-11-16
+
+**"Poprawka", "zdalne wykonanie kodu" and "rekordy" are correct; the
+code stops replacing them.**
+
+Reason: Letter 42 from the bridge (cybersec-most) – four author
+decisions from the Bridge Reports W44–W45 (step K1: report review and
+author decision, 15 Nov 2026). Principle: industry usage beats purism.
+In 14 days the code replaced "poprawka" with "łatka" 29 times, although
+both forms are correct.
+
+Changes:
+
+- **Autofixes** (`src/glossary.py`): removed "poprawka" → "łatka" and
+  "zdalne wykonanie (dowolnego) kodu" / "wykonanie kodu zdalnie" →
+  "RCE". "łata" → "łatka", "eksploit" → "exploit" and the English
+  "remote code execution" → "RCE" stay.
+- **Calque list** (`data/styl_unikaj.csv`): the four "rekordy" rows
+  removed (settled jargon: "wyciek 2 mln rekordów"); the "rekordy
+  pacjentów" example also left the correction prompt.
+- **Prasówka language rules** (`data/reguly_jezyka.md`): a new rule on
+  industry usage; "eksploatacja" of a vulnerability stays forbidden
+  (decision 3).
+- **Glossary mirror build 102** (step K5: new mirror to the digest): H166
+  and H090 without "poprawka" and "zdalne wykonanie kodu" in the "unikaj"
+  column, with an AI rule that these forms are correct too.
+- **Karton Prasówki** refreshed to v52. **Tests**: replacements checked
+  against the new decisions, new tests for forms that stay; 507 in total.
+
+Changed files: `src/glossary.py`, `src/ai_summaries.py`,
+`src/summary_quality.py`, `data/styl_unikaj.csv`,
+`data/reguly_jezyka.md`, `data/glosariusz_mirror.csv`, tests,
+`docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

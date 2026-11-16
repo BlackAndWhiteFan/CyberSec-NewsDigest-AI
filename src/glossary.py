@@ -101,11 +101,9 @@ INFLECTED = {
 
 
 # Forbidden forms that code can replace safely (v27, third branch test of
-# 22.10.2026: most correction requests were for "poprawki" and "zdalne
-# wykonanie kodu", and a rate-limited correction round lost five
-# summaries). Replacing them in code saves AI requests. "łatka" inflects
-# like "poprawka" (poprawce -> łatce), RCE does not inflect, and "eksploit"
-# forms map to the same "exploit" forms.
+# 22.10.2026: a rate-limited correction round lost five summaries).
+# Replacing them in code saves AI requests. "eksploit" forms map to the
+# same "exploit" forms, "łata" forms to "łatka".
 # v43: month names in the Polish genitive ("15 sierpnia").
 GENITIVE_MONTHS = ["stycznia", "lutego", "marca", "kwietnia", "maja", "czerwca", "lipca", "sierpnia",
                    "września", "października", "listopada", "grudnia"]
@@ -126,12 +124,10 @@ def month_genitive(name):
 
 AUTOFIX = [
     # (pattern, replacement, required glossary form or a label of the rule)
-    (re.compile(r"(?<!\w)([Pp])opraw(ka|ki|kę|ką|ce|ek|kom|kami|kach)(?!\w)"),
-     lambda m: ("Ł" if m.group(1) == "P" else "ł") + "at" + m.group(2), "łatka"),
-    (re.compile(r"(?<!\w)zdaln\w+ wykonani\w+ (?:dowolnego )?kodu(?!\w)", re.IGNORECASE), lambda m: "RCE", "RCE"),
+    # v52 (List 42, decision of 15.11.2026): "poprawka (bezpieczeństwa)" and
+    # "zdalne wykonanie kodu" are correct Polish, so code no longer replaces
+    # them; only the English "remote code execution" becomes RCE.
     (re.compile(r"(?<!\w)remote code execution(?!\w)", re.IGNORECASE), lambda m: "RCE", "RCE"),
-    # v29: reversed order ("wykonanie kodu zdalnie", test 25.10.2026).
-    (re.compile(r"(?<!\w)wykonani\w+ (?:dowolnego )?kodu zdalnie(?!\w)", re.IGNORECASE), lambda m: "RCE", "RCE"),
     (re.compile(r"(?<!\w)([Ee])ksploi(t|ta|ty|tem|tów|tom|tami|tach|towi|cie)(?!\w)"),
      lambda m: m.group(1) + "xploi" + m.group(2), "exploit"),
     # v29: "zdalne wykonanie kodu (RCE)" became "RCE (RCE)" (24.10.2026);

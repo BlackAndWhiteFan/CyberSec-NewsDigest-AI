@@ -564,7 +564,7 @@ PROOFREAD_PROMPT = """Jesteś korektorem polskiej prasówki o cyberbezpieczeńst
 Przeczytaj uważnie każde zdanie i popraw wyłącznie błędy językowe: gramatykę (odmiana, rodzaj, liczba, składnia), interpunkcję, literówki oraz kalki z angielskiego. Typowe błędy do wyłapania:
 - przypadek po imiesłowie lub czasowniku: „dotykających wersje AOS” → „dotykających wersji AOS”, „brak łatki” (nie „brak łatka”);
 - rodzaj i liczba: „dwa krytyczne luki” → „dwie krytyczne luki”, „nazwanego łatki” → „nazwanej łatki”;
-- kalki: „rekordy pacjentów” → „dane pacjentów”, „AI-zarządzany” → „zarządzany przez AI”, „intruzja” → „włamanie”, „eksploatować lukę” → „wykorzystywać lukę”, „nieokreślona liczba danych” → „nieokreślony zakres danych”;
+- kalki: „AI-zarządzany” → „zarządzany przez AI”, „intruzja” → „włamanie”, „eksploatować lukę” → „wykorzystywać lukę”, „nieokreślona liczba danych” → „nieokreślony zakres danych”;
 - składnia bezosobowa: „Publikuje się natychmiastowa łatka” → „Opublikowano łatkę”.
 - rekcja i uzgodnienie: „CISA dodało … dwóch podatności” → „CISA dodała … dwie podatności”;
 - sens: zdanie niejasne lub nielogiczne przeformułuj prościej, zachowując fakty (np. „Exploit CVE-2026-110447 umożliwia backdoor” → „Luka CVE-2026-110447 pozwala zainstalować backdoora”). Długie zdanie możesz podzielić na dwa.

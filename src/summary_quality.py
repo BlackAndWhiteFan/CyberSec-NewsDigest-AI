@@ -300,7 +300,7 @@ def unsupported_facts(text, source, year=None):
 
 
 # v29: style list (data/styl_unikaj.csv), edited by JW: calques and
-# anglicisms with a suggestion ("rekordy" -> "wpisy, dane").
+# anglicisms with a suggestion ("intruzja" -> "włamanie").
 STYLE_PATH = Path(__file__).resolve().parent.parent / "data" / "styl_unikaj.csv"
 
 

@@ -351,7 +351,7 @@ class TestGlossaryEnforcement(unittest.TestCase):
 
     def test_safe_replacements_need_no_correction_request(self):
         articles = [make_article("A")]
-        opener = ScriptedOpener([{1: "Producent wydał poprawki; luka umożliwiała zdalne wykonanie kodu."}])
+        opener = ScriptedOpener([{1: "Producent wydał łaty; luka umożliwiała remote code execution."}])
 
         summarize_articles(articles, {"GROQ_API_KEY": "g"}, opener, lambda s: None)
 

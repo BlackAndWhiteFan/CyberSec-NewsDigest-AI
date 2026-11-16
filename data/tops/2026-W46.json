@@ -1,0 +1,118 @@
+[
+  {
+    "period": "2026-W46",
+    "kind": "week",
+    "rank": 1,
+    "title": "Dwa nowe zero-daye wykorzystywane w atakach – jeden w Chromie, drugi w Outlooku",
+    "link": "https://kapitanhack.pl/dwa-nowe-zero-daye-wykorzystywane-w-atakach-jeden-w-chromie-drugi-w-outlooku/",
+    "summary": "Firma Google oraz firma Microsoft naprawiły dwie aktywnie wykorzystywane luki zero-day: w przeglądarce Chrome oraz w programie Outlook. 11 listopada Google udostępniło łatkę dla błędu CVE-2026-125350 w komponencie XML, który jest ósmą luką zero-day w Chrome zaatakowaną w 2026 roku. W tym samym czasie Microsoft wydał aktualizację usuwającą podatność w Outlooku. Luki znajdują się w katalogu CISA KEV. Łatkę dla Chrome wydano w wersji 157.0.8103.50.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 8,
+    "sources": 6,
+    "first_date": "2026-11-11",
+    "kev": [
+      "CVE-2026-124194",
+      "CVE-2026-125350"
+    ],
+    "cves": [
+      "CVE-2026-124194",
+      "CVE-2026-125350"
+    ],
+    "links": [
+      "https://kapitanhack.pl/dwa-nowe-zero-daye-wykorzystywane-w-atakach-jeden-w-chromie-drugi-w-outlooku/",
+      "https://www.bleepingcomputer.com/news/microsoft/microsoft-november-2026-patch-tuesday-fixes-1-235-flaws-outlook-zero-day/",
+      "https://krebsonsecurity.com/2026/11/microsoft-fixes-nearly-1100-security-vulnerabilities/",
+      "https://thehackernews.com/2026/11/google-issues-chrome-security-update.html"
+    ]
+  },
+  {
+    "period": "2026-W46",
+    "kind": "week",
+    "rank": 2,
+    "title": "N-able Takes N-central Cloud Offline After Researcher Discloses 33 Zero-Days with PoC Exploits",
+    "link": "https://thehackernews.com/2026/11/n-able-takes-hosted-n-central-offline.html",
+    "summary": "Firma N-able wyłączyła platformę N-central Hosted po ujawnieniu przez badaczy ponad 30 luk zero-day z kodami PoC. Kilka godzin po publikacji PoC, sprawcy zaczęli wykorzystywać lukę 4EverAble2Shell, pozwalającą niezalogowanym atakującym wykonać polecenia z uprawnieniami konta root. Ataki łączą podatność Apache Axis CVE-2026-90436 z włączonym Legacy API. Producent udostępnił łatki bezpieczeństwa w wersji N-central 2026.4.1.26 HF2.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 6,
+    "sources": 3,
+    "first_date": "2026-11-10",
+    "kev": [],
+    "cves": [],
+    "links": [
+      "https://thehackernews.com/2026/11/n-able-takes-hosted-n-central-offline.html",
+      "https://www.bleepingcomputer.com/news/security/n-able-takes-cloud-platform-offline-after-30-plus-zero-days-published/",
+      "https://www.bleepingcomputer.com/news/security/n-able-releases-security-hotfixes-for-zero-day-vulnerabilities/",
+      "https://www.bleepingcomputer.com/news/security/new-n-able-4everable2shell-zero-day-exploited-hours-after-poc-released/"
+    ]
+  },
+  {
+    "period": "2026-W46",
+    "kind": "week",
+    "rank": 3,
+    "title": "Check Point warns of zero-day flaw exploited for root access",
+    "link": "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/",
+    "summary": "Cyberprzestępcy zaatakowali produkty firmy Check Point przy użyciu luk PHP2Shell oraz błędu zero-day CVE-2026-123039. Atakujący wykonali kod bez uwierzytelnienia, przejęli 24 z 25 zapór sieciowych producenta i zainstalowali wiper na hostach VMware ESXi. Trwają ataki na kilkudziesięciu klientach. Luki PHP2Shell znajdują się w katalogu CISA KEV. Check Point udostępniło awaryjne łatki dla swoich urządzeń.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 5,
+    "sources": 4,
+    "first_date": "2026-11-09",
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-123039"
+    ],
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-123039"
+    ],
+    "links": [
+      "https://www.bleepingcomputer.com/news/security/check-point-patches-zero-day-that-lets-hackers-get-root-access/",
+      "https://www.bleepingcomputer.com/news/security/check-point-gateways-hacked-via-php2shell-to-deploy-vmware-esxi-wiper/",
+      "https://www.welivesecurity.com/en/business-security/lessons-cybersecurity-black-week/"
+    ]
+  },
+  {
+    "period": "2026-W46",
+    "kind": "week",
+    "rank": 4,
+    "title": "ConnectWise investigates ScreenConnect breaches after reports of incidents at nearly 50 organizations",
+    "link": "https://therecord.media/connectwise-screenconnect-breaches-third-party-tool",
+    "summary": "Firma ConnectWise prowadzi śledztwo w sprawie naruszeń w oprogramowaniu ScreenConnect. Cyberprzestępcy użyli złośliwego rozszerzenia RMM+ do instalacji nieuprawnionych klientów zdalnego dostępu w 47 organizacjach. W ramach incydentu zaatakowano 6 dostawców MSP i zainfekowano ponad 286 punktów końcowych. ConnectWise wyłączyło rozszerzenie RMM+ w 400 środowiskach i zaleca jego samodzielne wyłączenie.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 5,
+    "sources": 4,
+    "first_date": "2026-11-12",
+    "kev": [
+      "CVE-2026-84869"
+    ],
+    "cves": [
+      "CVE-2026-84869"
+    ],
+    "links": [
+      "https://therecord.media/connectwise-screenconnect-breaches-third-party-tool",
+      "https://www.bleepingcomputer.com/news/security/active-screenconnect-attacks-breach-msps-impact-dozens-of-organizations/"
+    ]
+  },
+  {
+    "period": "2026-W46",
+    "kind": "week",
+    "rank": 5,
+    "title": "Hackers exploit SSHole OpenSSH flaw to breach Linux systems",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/",
+    "summary": "Cyberprzestępcy aktywnie wykorzystują lukę SSHole o numerze CVE-2026-123158 w oprogramowaniu OpenSSH na systemach Linux. Publiczny exploit pojawił się 5 listopada i umożliwia obejście uwierzytelnienia, kradzież poświadczeń oraz uzyskanie uprawnień konta root. Podatność znajduje się w katalogu CISA KEV, a ataki na systemy trwają. Luki usunięto w wersji OpenSSH 10.6p2.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 4,
+    "sources": 4,
+    "first_date": "2026-11-10",
+    "kev": [
+      "CVE-2026-123158"
+    ],
+    "cves": [
+      "CVE-2026-123158"
+    ],
+    "links": [
+      "https://www.bleepingcomputer.com/news/security/hackers-exploit-sshole-openssh-flaw-to-breach-linux-systems/"
+    ]
+  }
+]

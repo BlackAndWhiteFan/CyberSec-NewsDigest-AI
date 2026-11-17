@@ -5433,5 +5433,299 @@
       "H725"
     ],
     "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Hakerzy nie potrzebują już własnych serwerów C2. Jak GSocket pozwala ukrywać dostęp do przejętych systemów Linux",
+    "link": "https://kapitanhack.pl/hakerzy-nie-potrzebuja-juz-wlasnych-serwerow-c2-jak-gsocket-pozwala-ukrywac-dostep-do-przejetych-systemow-linux/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Microsoft Security Research w raporcie z 11 listopada 2026 opisuje rosnące wykorzystanie narzędzia GSocket do utrzymywania dostępu do przejętych serwerów z Linuksem. Telemetria Microsoft Defender for Endpoint wykazała wzrost wykryć aktywności GSocket o 356,2% między marcem a sierpniem 2026 roku.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Microsoft Security Research w raporcie z 11 listopada 2026 opisuje rosnące wykorzystanie narzędzia GSocket do utrzymywania dostępu do przejętych serwerów Linux. Telemetria Microsoft Defender for Endpoint wykazała wzrost wykryć aktywności GSocket o 356,2 % między marcem a sierpniem 2026.",
+        "after": "Microsoft Security Research w raporcie z 11 listopada 2026 opisuje rosnące wykorzystanie narzędzia GSocket do utrzymywania dostępu do przejętych serwerów z Linuksem. Telemetria Microsoft Defender for Endpoint wykazała wzrost wykryć aktywności GSocket o 356,2% między marcem a sierpniem 2026 roku.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H318"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Atak na Instytut Slawistyki PAN. Zagrożone hasła i artykuły naukowe",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/atak-na-instytut-slawistyki-pan-zagrozone-hasla-i-artykuly-naukowe",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [
+      {
+        "title": "Modułowy zestaw Cereal na serwerach Exchange instytucji rządowych",
+        "link": "https://www.welivesecurity.com/en/eset-research/exchange-for-breakfast-turlas-cereal-tricks-are-not-for-kids/",
+        "source": "welivesecurity.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Instytut Slawistyki PAN poinformował o włamaniu do platformy OJS 15 października 2026 roku, w którym nieuprawniona osoba uzyskała dostęp administratora oraz dostęp do bazy danych. Naruszenie mogło dotknąć 7,9 tys. użytkowników oraz ujawnić hashe (skróty haseł) i nieopublikowane artykuły naukowe.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Instytut Slawistyki PAN poinformował o włamaniu do platformy OJS 15 października 2026, w którym nieuprawniona osoba uzyskała dostęp administratora i bazę danych. Naruszenie mogło dotknąć 7,9 tys. użytkowników oraz ujawnić hashe i nieopublikowane artykuły naukowe.",
+        "after": "Instytut Slawistyki PAN poinformował o włamaniu do platformy OJS 15 października 2026 roku, w którym nieuprawniona osoba uzyskała dostęp administratora oraz dostęp do bazy danych. Naruszenie mogło dotknąć 7,9 tys. użytkowników oraz ujawnić hashe (skróty haseł) i nieopublikowane artykuły naukowe.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Raport miesięczny zespołu CERT Polska za październik 2026",
+    "link": "https://cert.pl/uploads/docs/Podsumowanie_CERT_Polska_2026_10.pdf",
+    "source": "cert.pl",
+    "categories": [
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół CERT Polska wydał raport miesięczny za październik 2026 roku, w którym opisał liczbę zgłoszonych incydentów oraz ich charakterystykę.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół CERT Polska wydał raport miesięczny za październik 2026, w którym opisano liczbę zgłoszonych incydentów oraz ich charakterystykę.",
+        "after": "Zespół CERT Polska wydał raport miesięczny za październik 2026 roku, w którym opisał liczbę zgłoszonych incydentów oraz ich charakterystykę.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Atakują lekarzy, a potem wystawiają fałszywe recepty na opioidy. Masowa skala",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/atakuja-lekarzy-a-potem-wystawiaja-falszywe-recepty-na-opioidy-masowa-skala",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Sprawcy włamań do kont lekarzy umożliwili wystawianie fałszywych recept na opioidy, co potwierdzają liczne incydenty od 2023 roku. Zdarzenia te wskazują na rosnącą skalę nielegalnego dostępu do systemów elektronicznych recept.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Sprawcy włamań do kont lekarzy umożliwili wystawianie fałszywych recept na opioidy, co potwierdzono licznymi incydentami od 2023 roku. Zdarzenia te wskazują na rosnącą skalę nielegalnego dostępu do systemów elektronicznych recepty.",
+        "after": "Sprawcy włamań do kont lekarzy umożliwili wystawianie fałszywych recept na opioidy, co potwierdzają liczne incydenty od 2023 roku. Zdarzenia te wskazują na rosnącą skalę nielegalnego dostępu do systemów elektronicznych recept.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H372"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Cyberatak z użyciem AI na Autopay. Ryzyko wycieku danych kart płatniczych",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-z-uzyciem-ai-na-autopay-ryzyko-wycieku-danych-kart-platniczych",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Autopay zgłosił nieautoryzowany dostęp do infrastruktury i części danych płatności 11 listopada 2026, przy czym sprawcy używali automatyzacji wspieranej przez AI. Firma podjęła działania odcinające dostęp i wprowadziła dodatkowe mechanizmy monitorowania. Autopay zalecił klientom regularne sprawdzanie historii transakcji i zgłaszanie nieautoryzowanych operacji.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H372"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Kampania wfx-loot wykorzystała przejęte konta na GitHubie do kradzieży danych",
+    "link": "https://www.aikido.dev/blog/compromised-github-accounts-push-ci-secret-stealer-to-tens-of-thousands-of-repositories",
+    "source": "aikido.dev",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Kampania wfx-loot wykorzystała przejęte dane logowania do GitHuba, aby wprowadzić złośliwy workflow kradnący sekrety GitHub Actions i poświadczenia chmurowe. Payload uruchomił się w co najmniej 1 806 repozytoriach, a logi zostały usunięte, co wskazuje na zebranie danych bez dostępnej łatki.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [],
+    "terms": [
+      "H007",
+      "H119",
+      "H207",
+      "H217"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Barracuda links cloud breach to ARTEX AI-powered cyberattack",
+    "link": "https://www.bleepingcomputer.com/news/security/barracuda-links-cloud-breach-to-artex-ai-powered-cyberattack/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Barracuda Hacked Amid Surge in Artex-Powered Cyberattacks",
+        "link": "https://www.securityweek.com/barracuda-hacked-amid-surge-in-artex-powered-cyberattacks/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "W ataku na Barracudę wykorzystano skradziony klucz dostępu do chmury oraz framework ARTEX oparty na AI, co pozwoliło napastnikom uzyskać dostęp do około 10 kont w ciągu 44 godzin od 1 do 2 listopada.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W ataku na Barracuda wykorzystano skradziony klucz dostępu do chmury oraz framework ARTEX oparty na AI, co pozwoliło napastnikom na dostęp do około 10 kont w ciągu 44 godzin od 1 do 2 listopada.",
+        "after": "W ataku na Barracudę wykorzystano skradziony klucz dostępu do chmury oraz framework ARTEX oparty na AI, co pozwoliło napastnikom uzyskać dostęp do około 10 kont w ciągu 44 godzin od 1 do 2 listopada.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Uber Data Breach Impacts 150,000 People",
+    "link": "https://www.securityweek.com/uber-data-breach-impacts-150000-people/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Uber says nearly 150,000 impacted by third-party breach",
+        "link": "https://therecord.media/uber-says-150000-impacted-third-party-breach",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": true,
+    "summary": "Uber zgłosił wyciek danych osobowych około 150 000 kierowców po wykorzystaniu przejętych poświadczeń dostawcy usług 7 października 2026 roku, co umożliwiło dostęp do zdjęć dokumentów i danych identyfikacyjnych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Uber zgłosiło wyciek danych osobowych około 150 000 kierowców po użyciu przejętych poświadczeń dostawcy usług 7 października 2026, co umożliwiło dostęp do zdjęć dokumentów i danych identyfikacyjnych.",
+        "after": "Uber zgłosił wyciek danych osobowych około 150 000 kierowców po wykorzystaniu przejętych poświadczeń dostawcy usług 7 października 2026 roku, co umożliwiło dostęp do zdjęć dokumentów i danych identyfikacyjnych.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Podatności w oprogramowaniu VisualNet visualTicket",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-113443/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska zgłosiło lukę CVE-2026-113443 w VisualNet visualTicket, umożliwiającą atakującemu bez uwierzytelnienia zmianę koszyka innego użytkownika poprzez przewidywalny parametr cart_id. Zgłoszono także lukę CVE-2026-113444, pozwalającą na path traversal w mechanizmie generowania miniatur, co umożliwia zapis plików poza katalogiem /uploads.",
+    "cves": [
+      "CVE-2026-113443",
+      "CVE-2026-113456"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska zgłosił lukę CVE-2026-113443 w VisualNet visualTicket, umożliwiającą atakującemu bez uwierzytelnienia zmianę koszyka innego użytkownika poprzez przewidywalny parametr cart_id. Zgłoszono także CVE-2026-113444, pozwalającą na path traversal w mechanizmie generowania miniatur, co umożliwia zapis plików poza katalogiem /uploads.",
+        "after": "CERT Polska zgłosiło lukę CVE-2026-113443 w VisualNet visualTicket, umożliwiającą atakującemu bez uwierzytelnienia zmianę koszyka innego użytkownika poprzez przewidywalny parametr cart_id. Zgłoszono także lukę CVE-2026-113444, pozwalającą na path traversal w mechanizmie generowania miniatur, co umożliwia zapis plików poza katalogiem /uploads.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H075",
+      "H150",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-17",
+    "title": "Podatność w oprogramowaniu Batflat",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-111559/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymało zgłoszenie o luce CVE-2026-111559 w Batflat CMS, która pozwala niezalogowanemu atakującemu wykonać kod PHP z uprawnieniami www-data poprzez punkt końcowy /contact. Projekt nie jest już wspierany, więc luka nie została naprawiona.",
+    "cves": [
+      "CVE-2026-111559"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska otrzymał zgłoszenie o luce CVE-2026-111559 w Batflat CMS, która pozwala niezalogowanemu atakującemu wykonać kod PHP z uprawnieniami www-data poprzez punkt końcowy /contact. Projekt nie jest już wspierany, więc luka nie została naprawiona.",
+        "after": "CERT Polska otrzymało zgłoszenie o luce CVE-2026-111559 w Batflat CMS, która pozwala niezalogowanemu atakującemu wykonać kod PHP z uprawnieniami www-data poprzez punkt końcowy /contact. Projekt nie jest już wspierany, więc luka nie została naprawiona.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H164",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

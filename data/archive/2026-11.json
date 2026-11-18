@@ -5727,5 +5727,343 @@
       "H434"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Critical Java4Shell flaw allows RCE attacks on major Java applications",
+    "link": "https://www.bleepingcomputer.com/news/security/critical-java4shell-flaw-allows-rce-attacks-on-major-java-applications/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Oracle to Patch 11 Java Flaws Today as Critical OpenJDK RCE (CVE-2026-114938) Report Emerges",
+        "link": "https://thehackernews.com/2026/11/oracle-to-patch-11-java-flaws-today-as.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Krytyczna luka Java4Shell (CVE-2026-114938) w OpenJDK umożliwia atakującemu bez uwierzytelnienia zdalne wykonanie kodu w aplikacjach takich jak Jenkins, Jira, Confluence i Keycloak. Luka dotyczy OpenJDK 17.0.6 i późniejszych wersji oraz dystrybucji opartych na tym kodzie, a poprawka nie została jeszcze udostępniona.",
+    "cves": [
+      "CVE-2026-114938"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "nieautoryzowanemu atakującemu",
+        "form": "nieautoryzowan* atakując*",
+        "suggestion": "atakujący bez uwierzytelnienia, niezalogowany atakujący",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "Krytyczna luka Java4Shell (CVE-2026-114938) w OpenJDK umożliwia nieautoryzowanemu atakującemu zdalne wykonanie kodu w aplikacjach takich jak Jenkins, Jira, Confluence i Keycloak. Luka dotyczy OpenJDK 17.0.6 i późniejszych wersji oraz dystrybucji opartych na tym kodzie, a poprawka nie została jeszcze udostępniona.",
+        "after": "Krytyczna luka Java4Shell (CVE-2026-114938) w OpenJDK umożliwia atakującemu bez uwierzytelnienia zdalne wykonanie kodu w aplikacjach takich jak Jenkins, Jira, Confluence i Keycloak. Luka dotyczy OpenJDK 17.0.6 i późniejszych wersji oraz dystrybucji opartych na tym kodzie, a poprawka nie została jeszcze udostępniona.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H484"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "N-able Kills Legacy APIs, Patches 17 N-central Zero-Days",
+    "link": "https://www.securityweek.com/n-able-kills-legacy-apis-patches-17-n-central-zero-days/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "N-able Patches 17 N-central Flaws as Attackers Exploit Earlier Bugs to Deploy Crypto Miners",
+        "link": "https://thehackernews.com/2026/11/n-able-patches-17-n-central-flaws-as.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "N-able wydało aktualizację N-central 2026.4 Hotfix 3, naprawiającą 17 luk zero-day (CVE-2026-129271-CVE-2026-129287) i usuwającą obsługę przestarzałego API, co blokuje łańcuch exploitów 4EverAble2Shell. Poprawka jest dostępna w wersji N-central 2026.4 HF3 i zaleca się jej szybkie wdrożenie.",
+    "cves": [
+      "CVE-2026-129271",
+      "CVE-2026-129287"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "zero-dayów",
+        "form": "zero-dayów",
+        "suggestion": "luk zero-day",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "N-able wydało aktualizację N-central 2026.4 Hotfix 3, naprawiającą 17 zero-dayów (CVE-2026-129271-CVE-2026-129287) i usuwającą obsługę legacy API, co blokuje łańcuch exploitów 4EverAble2Shell. Poprawka jest dostępna w wersji N-central 2026.4 HF3 i zaleca się jej szybkie wdrożenie.",
+        "after": "N-able wydało aktualizację N-central 2026.4 Hotfix 3, naprawiającą 17 luk zero-day (CVE-2026-129271-CVE-2026-129287) i usuwającą obsługę przestarzałego API, co blokuje łańcuch exploitów 4EverAble2Shell. Poprawka jest dostępna w wersji N-central 2026.4 HF3 i zaleca się jej szybkie wdrożenie.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H159",
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Japan takes Fugaku supercomputer offlline after cyberattack",
+    "link": "https://www.bleepingcomputer.com/news/security/japan-takes-fugaku-supercomputer-offlline-after-cyberattack/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Japoński superkomputer Fugaku został wyłączony po wykryciu włamania, w którym nieuprawniony podmiot uzyskał dostęp do wewnętrznych serwerów i zainstalował malware wymierzone w dane użytkowników. RIKEN wyłączył system 14 listopada i zalecił użytkownikom wymianę kluczy logowania.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Japoński superkomputer Fugaku został wyłączony po wykryciu włamania, w którym nieautoryzowany podmiot uzyskał dostęp do wewnętrznych serwerów i zainstalował malware celujące w dane użytkowników. RIKEN wyłączył system 14 listopada i zalecił użytkownikom wymianę kluczy logowania.",
+        "after": "Japoński superkomputer Fugaku został wyłączony po wykryciu włamania, w którym nieuprawniony podmiot uzyskał dostęp do wewnętrznych serwerów i zainstalował malware wymierzone w dane użytkowników. RIKEN wyłączył system 14 listopada i zalecił użytkownikom wymianę kluczy logowania.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H028"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Uber notifies drivers of data breach affecting nearly 150,000 people",
+    "link": "https://www.bleepingcomputer.com/news/security/uber-notifies-drivers-of-data-breach-affecting-nearly-150-000-people/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Uber poinformował prawie 150 tysięcy kierowców, że ich dane osobowe zostały skradzione po przełamaniu infrastruktury dostawcy usług AI w październiku. Wyciek obejmuje imiona, numery praw jazdy, daty urodzenia i adresy, a firma odcięła wymianę danych z dostawcą.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Uber poinformował prawie 150 tysięcy kierowców, że ich dane osobowe zostały skradzione po przełamaniu infrastruktury dostawcy usług AI w październiku. Wyciek obejmuje imiona, numery prawa jazdy, daty urodzenia i adresy, a firma odcięła połączenia danych z dostawcą.",
+        "after": "Uber poinformował prawie 150 tysięcy kierowców, że ich dane osobowe zostały skradzione po przełamaniu infrastruktury dostawcy usług AI w październiku. Wyciek obejmuje imiona, numery praw jazdy, daty urodzenia i adresy, a firma odcięła wymianę danych z dostawcą.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H399",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Ransomware affiliate suspect extradited to US, faces 27 years in prison",
+    "link": "https://www.bleepingcomputer.com/news/security/alleged-inc-lynx-ransomware-affiliate-extradited-to-us-faces-27-years-in-prison/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Kazakh ransomware hacking suspect extradited from Italy",
+        "link": "https://therecord.media/kazakh-suspected-extradited-charges-8-digits-team-inc-lynx",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": false,
+    "summary": "Obywatel Kazachstanu Roman Khlynovskiy został ekstradowany do USA i oskarżony o udział w atakach ransomware na szkoły i szpitale w USA, przy czym grupa INC-Ransom twierdziła, że posiada ponad 50 TB danych z 70 milionami rekordów medycznych. Sprawa nie wymaga działań technicznych w SOC.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Kazachski obywatel Roman Khlynovskiy został ekstradowany do USA i oskarżony o udział w atakach ransomware na szkoły i szpitale w USA, przy czym grupa INC-Ransom roszczeniowo posiadała ponad 50 TB danych z 70 milionami rekordów medycznych. Sprawa nie wymaga działań technicznych w SOC.",
+        "after": "Obywatel Kazachstanu Roman Khlynovskiy został ekstradowany do USA i oskarżony o udział w atakach ransomware na szkoły i szpitale w USA, przy czym grupa INC-Ransom twierdziła, że posiada ponad 50 TB danych z 70 milionami rekordów medycznych. Sprawa nie wymaga działań technicznych w SOC.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H259"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Market Research Giant Ipsos Investigating Breach of Internal System",
+    "link": "https://www.securityweek.com/market-research-giant-ipsos-investigating-breach-of-internal-system/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Ipsos poinformowało o naruszeniu jednego ze swoich wewnętrznych systemów, które nie zakłóciło działania ani nie wpłynęło na obsługę klientów. Incydent nie spowodował wycieku danych i firma nie ujawniła szczegółów technicznych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H614"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Access Dental Management Data Breach Impacts Over 340,000",
+    "link": "https://www.securityweek.com/access-dental-management-data-breach-impacts-over-340000/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Website management platform Optimizely confirms hackers put malicious code into customer sites",
+        "link": "https://therecord.media/optimizely-malicious-code-customer-sites",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": true,
+    "summary": "Access Dental Management ujawniło wyciek danych ponad 340 000 osób, w tym imion, adresów, dat urodzenia, numerów SSN oraz informacji medycznych. Atakujący uzyskał dostęp do sieci w okresie 1-4 maja, a organizacja powiadomiła poszkodowanych i wprowadza zmiany w polityce prywatności.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Access Dental Management ujawniło wyciek danych ponad 340 000 osób, w tym imion, adresów, dat urodzenia, numerów SSN oraz informacji medycznych. Atakujący uzyskał dostęp do sieci w okresie 1-4 maja, a organizacja powiadomiła poszkodowanych i wprowadza zmiany w politykach prywatności.",
+        "after": "Access Dental Management ujawniło wyciek danych ponad 340 000 osób, w tym imion, adresów, dat urodzenia, numerów SSN oraz informacji medycznych. Atakujący uzyskał dostęp do sieci w okresie 1-4 maja, a organizacja powiadomiła poszkodowanych i wprowadza zmiany w polityce prywatności.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Podatność w oprogramowaniu Bludit",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-107190/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymał zgłoszenie o luce w oprogramowaniu Bludit (CVE-2026-107190), umożliwiającej atakującemu z rolą „Author” usunięcie dowolnych plików poprzez path traversal w funkcji usuwania stron. Łatka nie została jeszcze wydana, a podatność potwierdzono w wersji 3.22.0.",
+    "cves": [
+      "CVE-2026-107190"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H075",
+      "H150",
+      "H164",
+      "H166",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "PostgreSQL usuwa 52 luki bezpieczeństwa. Krytyczny błąd umożliwiał wykonanie kodu na serwerze",
+    "link": "https://kapitanhack.pl/postgresql-usuwa-52-luki-bezpieczenstwa-krytyczny-blad-umozliwial-wykonanie-kodu-na-serwerze/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "PostgreSQL wydało aktualizację usuwającą 52 podatności, w tym krytyczną lukę CVE-2026-6460 (CVSS 8,8) pozwalającą zalogowanemu użytkownikowi wykonać kod z uprawnieniami systemowymi. Administratorzy muszą zaktualizować serwer oraz przejrzeć rozszerzenia w języku C.",
+    "cves": [
+      "CVE-2026-6460"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "PostgreSQL wydało aktualizację usuwającą 52 podatności, w tym krytyczną lukę CVE-2026-6460 (CVSS 8,8) pozwalającą zalogowanemu użytkownikowi wykonać kod z uprawnieniami systemowymi. Administratorzy muszą zaktualizować serwer oraz przeglądnąć rozszerzenia w języku C.",
+        "after": "PostgreSQL wydało aktualizację usuwającą 52 podatności, w tym krytyczną lukę CVE-2026-6460 (CVSS 8,8) pozwalającą zalogowanemu użytkownikowi wykonać kod z uprawnieniami systemowymi. Administratorzy muszą zaktualizować serwer oraz przejrzeć rozszerzenia w języku C.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H151"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-18",
+    "title": "Hijacked Optimizely Scripts Served Card Skimmer and iOS Exploit Kits to CNN, BBC and Zoom Visitors",
+    "link": "https://thehackernews.com/2026/11/hijacked-optimizely-scripts-served-card.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [
+      {
+        "title": "Optimizely hack infected CNN, Fox News, BBC, Salesforce sites with malware",
+        "link": "https://www.bleepingcomputer.com/news/security/optimizely-supply-chain-attack-delivers-malware-to-cnn-fox-news-bbc-salesforce-sites/",
+        "source": "bleepingcomputer.com"
+      },
+      {
+        "title": "Attackers Used Optimizely to A/B Test Malware on Top Websites",
+        "link": "https://krebsonsecurity.com/2026/11/attackers-used-optimizely-to-a-b-test-malware-on-top-websites/",
+        "source": "krebsonsecurity.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Optimizely wykryło, że atakujący wykorzystał lukę w usłudze Web Experimentation, aby wstrzyknąć złośliwy JavaScript do skryptów co najmniej 178 witryn, w tym CNN, BBC i Zoom, podmieniając adresy portfeli i przechwytując dane kart. Dostawca usunął kod i wprowadził dodatkowe zabezpieczenia kont użytkowników.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Optimizely wykryło, że atakujący wykorzystał lukę w usłudze Web Experimentation, aby wstrzyknąć złośliwy JavaScript do skryptów przynajmniej 178 witryn, w tym CNN, BBC i Zoom, podmieniając adresy portfeli i przechwytując dane kart. Dostawca usunął kod i wprowadził dodatkowe zabezpieczenia kont użytkowników.",
+        "after": "Optimizely wykryło, że atakujący wykorzystał lukę w usłudze Web Experimentation, aby wstrzyknąć złośliwy JavaScript do skryptów co najmniej 178 witryn, w tym CNN, BBC i Zoom, podmieniając adresy portfeli i przechwytując dane kart. Dostawca usunął kod i wprowadził dodatkowe zabezpieczenia kont użytkowników.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H153",
+      "H693"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

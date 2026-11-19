@@ -6065,5 +6065,343 @@
       "H693"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Krytyczna podatność w środowisku Java",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/krytyczna-podatnosc-w-srodowisku-java",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 6,
+    "related": [
+      {
+        "title": "Krytyczna podatność w Cisco Secure Email Gateway (CVE-2026-76519). Atakujący może wykonać dowolny kod z uprawnieniami roota",
+        "link": "https://sekurak.pl/krytyczna-podatnosc-w-cisco-secure-email-gateway-cve-2026-76519-atakujacy-moze-wykonac-dowolny-kod-z-uprawnieniami-roota/",
+        "source": "sekurak.pl"
+      },
+      {
+        "title": "Java4Shell Flaw (CVE-2026-114938) Enables Pre-Auth RCE in Jira, Jenkins, Keycloak and More",
+        "link": "https://thehackernews.com/2026/11/java4shell-cve-2026-114938-enables-pre.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Java4Shell (CVE-2026-114938), czyli jak optymalizacje w assembly spowodowały RCE w dekoderze Base64 OpenJDK",
+        "link": "https://sekurak.pl/java4shell-cve-2026-114938-czyli-jak-optymalizacje-w-assembly-spowodowaly-rce-w-dekoderze-base64-openjdk/",
+        "source": "sekurak.pl"
+      },
+      {
+        "title": "CISA Urges Immediate Patching of Java4Shell Flaw That Could Allow Remote Code Execution",
+        "link": "https://thehackernews.com/2026/11/cisa-urges-immediate-patching-of.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "CERT Polska poinformował o krytycznej luce CVE-2026-114938 w środowisku Java, ocenionej na CVSS 9,2, która umożliwia zdalne wykonanie kodu w podatnej wersji JVM. Luka jest wymieniona w katalogu CISA KEV i jest aktywnie wykorzystywana w atakach.",
+    "cves": [
+      "CVE-2026-114938",
+      "CVE-2026-76519"
+    ],
+    "kev": [
+      "CVE-2026-76519"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska poinformowało o krytycznej luce CVE-2026-114938 w środowisku Java, ocenionej CVSS 9,2, która umożliwia zdalne wykonanie kodu w podatnej wersji JVM. Luka jest wymieniona w katalogu CISA KEV i jest aktywnie wykorzystywana w atakach.",
+        "after": "CERT Polska poinformował o krytycznej luce CVE-2026-114938 w środowisku Java, ocenionej na CVSS 9,2, która umożliwia zdalne wykonanie kodu w podatnej wersji JVM. Luka jest wymieniona w katalogu CISA KEV i jest aktywnie wykorzystywana w atakach.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H151",
+      "H154",
+      "H164",
+      "H434"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Krytyczne podatności w nginx, najpopularniejszym serwerze webowym na świecie (działa na nim ponad 220 milionów stron / aplikacji webowych)",
+    "link": "https://sekurak.pl/krytyczne-podatnosci-w-nginx-najpopularniejszym-serwerze-webowym-na-swiecie-dziala-na-nim-ponad-220-milionow-stron-aplikacji-webowych/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "W raporcie opisano krytyczne podatności w serwerze nginx, które pozwalają na niezalogowany dostęp do systemu operacyjnego i istnieją działające exploity oraz dowody koncepcyjne (PoC) na GitHubie. Brak publicznej łatki. Jedynym rozwiązaniem są wersje 1.31.9 lub 1.30.7.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W raporcie opisano krytyczne podatności w nginx, które pozwalają na zdalny dostęp do systemu operacyjnego bez uwierzytelnienia i istnieją działające exploity oraz PoC na GitHubie. Brak publicznej łatki, jedynym rozwiązaniem są wersje 1.31.9 lub 1.30.7.",
+        "after": "W raporcie opisano krytyczne podatności w serwerze nginx, które pozwalają na niezalogowany dostęp do systemu operacyjnego i istnieją działające exploity oraz dowody koncepcyjne (PoC) na GitHubie. Brak publicznej łatki. Jedynym rozwiązaniem są wersje 1.31.9 lub 1.30.7.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H152"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Krytyczna podatność 0-click w Cisco Catalyst SD-WAN umożliwiająca zdalne uzyskanie uprawnień administratora",
+    "link": "https://sekurak.pl/krytyczna-podatnosc-0-click-w-cisco-catalyst-sd-wan-umozliwiajaca-zdalne-uzyskanie-uprawnien-administratora/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Cisco ogłosiło krytyczną lukę CVE-2026-76504 w API Cisco Catalyst SD-WAN Manager, umożliwiającą uzyskanie uprawnień administratora bez uwierzytelnienia i już wykorzystywaną przez cyberprzestępców. Luka znajduje się w katalogu CISA KEV. Jedynym zabezpieczeniem jest aktualizacja oprogramowania.",
+    "cves": [
+      "CVE-2026-76504"
+    ],
+    "kev": [
+      "CVE-2026-76504"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Cisco ogłosiło krytyczną lukę CVE-2026-76504 w API Cisco Catalyst SD-WAN Manager, umożliwiającą nieautoryzowane uzyskanie uprawnień administratora i jest już wykorzystywana przez cyberprzestępców. Luka znajduje się w katalogu CISA KEV. Jedynym zabezpieczeniem jest aktualizacja firmware.",
+        "after": "Cisco ogłosiło krytyczną lukę CVE-2026-76504 w API Cisco Catalyst SD-WAN Manager, umożliwiającą uzyskanie uprawnień administratora bez uwierzytelnienia i już wykorzystywaną przez cyberprzestępców. Luka znajduje się w katalogu CISA KEV. Jedynym zabezpieczeniem jest aktualizacja oprogramowania.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H154",
+      "H164",
+      "H462",
+      "H524"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Jak wykryć użycie sztucznej inteligencji do atakowania infrastruktury klientów przez hackerów?",
+    "link": "https://kapitanhack.pl/jak-wykryc-uzycie-sztucznej-inteligencji-do-atakowania-infrastruktury-klientow-przez-hackerow/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Google Threat Intelligence Group ostrzega, że cyberprzestępcy wykorzystują autonomiczne agenty sztucznej inteligencji do koordynowania i automatyzacji ataków na infrastrukturę klientów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Google Threat Intelligence Group ostrzega, że cyberprzestępcy używają autonomicznych agentów sztucznej inteligencji do koordynowania i automatyzacji ataków na infrastrukturę klientów.",
+        "after": "Google Threat Intelligence Group ostrzega, że cyberprzestępcy wykorzystują autonomiczne agenty sztucznej inteligencji do koordynowania i automatyzacji ataków na infrastrukturę klientów.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H386"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "F5 Warns 6 Critical BIG-IP Flaws Can Crash Traffic in Specific Setups, May Allow RCE",
+    "link": "https://thehackernews.com/2026/11/f5-warns-6-critical-big-ip-flaws-can.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "F5 ujawniło sześć krytycznych luk w BIG-IP, które mogą spowodować awarię komponentu Traffic Management Microkernel i potencjalnie umożliwić zdalne wykonanie kodu. Luki nie były dotąd wykorzystywane, a jedynym rozwiązaniem są wydane awaryjne poprawki.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "F5 ujawniło sześć krytycznych luk w BIG-IP, które mogą spowodować awarię komponentu Traffic Management Microkernel i potencjalnie umożliwić zdalne wykonanie kodu. Luki nie były dotąd wykorzystywane, a jedynym rozwiązaniem są wydane awaryjne hotfixy.",
+        "after": "F5 ujawniło sześć krytycznych luk w BIG-IP, które mogą spowodować awarię komponentu Traffic Management Microkernel i potencjalnie umożliwić zdalne wykonanie kodu. Luki nie były dotąd wykorzystywane, a jedynym rozwiązaniem są wydane awaryjne poprawki.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H090"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Oddajesz zepsuty dysk do naprawy? Uważaj, być może Twoje dane wyciekną.",
+    "link": "https://sekurak.pl/oddajesz-zepsuty-dysk-do-naprawy-uwazaj-byc-moze-twoje-dane-wyciekna/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": true,
+    "summary": "Bartosz oddał zepsuty dysk SSD do serwisu Amazon, a po prawie dwóch latach nieznajomy z Niemiec sprzedał go na eBayu z jego zdjęciami, dokumentami i danymi finansowymi.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Bartosz oddał zepsuty dysk SSD do serwisu Amazona, a po prawie dwóch latach nieznajomy z Niemiec sprzedał go na eBayu z jego zdjęciami, dokumentami i danymi finansowymi.",
+        "after": "Bartosz oddał zepsuty dysk SSD do serwisu Amazon, a po prawie dwóch latach nieznajomy z Niemiec sprzedał go na eBayu z jego zdjęciami, dokumentami i danymi finansowymi.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Claude Code zapisywał sekrety i wrzucał je na GitHuba. Oczywiście za “zgodą” użytkownika. Wyciekło ponad 1300 haseł i kluczy",
+    "link": "https://sekurak.pl/claude-code-zapisywal-sekrety-i-wrzucal-je-na-githuba-oczywiscie-za-zgoda-uzytkownika-wycieklo-ponad-1300-hasel-i-kluczy/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Badacze z firmy Apiiro wykryli w publicznych repozytoriach GitHub pliki konfiguracyjne Claude Code zawierające ponad 1300 haseł, kluczy SSH i tokenów AWS, z których ponad jedna trzecia umożliwiała dostęp do baz danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H217",
+      "H327"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Russian COLD RELIC Hackers Use Stolen Google Workspace Data to Breach Second U.S. Organization",
+    "link": "https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Russian APT Poses as Employee of Hacked Firm to Breach Another US Organization",
+        "link": "https://www.securityweek.com/russian-apt-poses-as-employee-of-hacked-firm-to-breach-another-us-organization/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Grupa rosyjska Cold Relic wykorzystała wykradzione dane z Google Workspace po wcześniejszym ataku, aby uzyskać dostęp do drugiej organizacji w USA i zarejestrować fałszywe urządzenia MFA oraz passkeys, co umożliwiło długotrwałą obecność i wyciek danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Grupa rosyjska Cold Relic wykorzystała wykradnięte dane z Google Workspace po wcześniejszym ataku, aby uzyskać dostęp do drugiej organizacji w USA i zarejestrować fałszywe urządzenia MFA oraz passkeys, co umożliwiło długotrwałą obecność i eksfiltrację danych.",
+        "after": "Grupa rosyjska Cold Relic wykorzystała wykradzione dane z Google Workspace po wcześniejszym ataku, aby uzyskać dostęp do drugiej organizacji w USA i zarejestrować fałszywe urządzenia MFA oraz passkeys, co umożliwiło długotrwałą obecność i wyciek danych.",
+        "model": "Mistral ministral-14b-2512"
+      }
+    ],
+    "terms": [
+      "H188",
+      "H232",
+      "H411"
+    ],
+    "proofread": "Mistral ministral-14b-2512"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Podatności w oprogramowaniu LMS",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-127142/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymała zgłoszenie o dwóch podatnościach w LMS. CVE-2026-127142 pozwala na zdalne wykonanie kodu przez przesłanie pliku .htaccess i PHP, a CVE-2026-127143 umożliwia podwyższenie uprawnień do root poprzez wczytanie niezweryfikowanej biblioteki w demonie lmsd. Problem naprawiono w zmianie 89dd3f7. Zaleca się wyłączenie i usunięcie komponentu lmsd.",
+    "cves": [
+      "CVE-2026-127142",
+      "CVE-2026-127143",
+      "CVE-2026-129961"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "glossary",
+        "id": "H182",
+        "used": "eskalację uprawnień",
+        "required": "podwyższenie uprawnień",
+        "fixed_by": "ai"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H182",
+      "H189",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-19",
+    "title": "Podatności w oprogramowaniu CAST Imaging",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-109857/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska zgłosiła dwie podatności w CAST Imaging. CVE-2026-109857 pozwala atakującemu bez uwierzytelnienia obejść uwierzytelnianie i uzyskać uprawnienia administratora. CVE-2026-109858 umożliwia uwierzytelnionemu atakującemu path traversal, odczyt /proc/self/environ i wyciek haseł (skrótów haseł). Wykryto także lukę nieautoryzowanego dostępu do zasobu użytkowników.",
+    "cves": [
+      "CVE-2026-109857",
+      "CVE-2026-109864"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska zgłosiła dwie podatności w CAST Imaging. CVE-2026-109857 pozwala nieuwierzytelnionemu atakującemu obejść uwierzytelnienie i uzyskać uprawnienia administratora. CVE-2026-109858 umożliwia autoryzowanemu atakującemu path traversal, odczyt /proc/self/environ i wyciek haseł. Wykryto także lukę nieautoryzowanego dostępu do zasobu użytkowników.",
+        "after": "CERT Polska zgłosiła dwie podatności w CAST Imaging. CVE-2026-109857 pozwala atakującemu bez uwierzytelnienia obejść uwierzytelnianie i uzyskać uprawnienia administratora. CVE-2026-109858 umożliwia uwierzytelnionemu atakującemu path traversal, odczyt /proc/self/environ i wyciek haseł (skrótów haseł). Wykryto także lukę nieautoryzowanego dostępu do zasobu użytkowników.",
+        "model": "Gemini gemini-3.5-flash-lite"
+      }
+    ],
+    "terms": [
+      "H075",
+      "H150",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash-lite"
   }
 ]

@@ -6403,5 +6403,355 @@
       "H434"
     ],
     "proofread": "Gemini gemini-3.5-flash-lite"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "Kolejne krytyczne podatności w PHP. Zadbaj o aktualizację",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/kolejne-krytyczne-podatnosci-w-php-zadbaj-o-aktualizacje",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "PHP Fixes 7 Critical Flaws, Including Bugs That Could Allow Remote Code Execution",
+        "link": "https://thehackernews.com/2026/11/php-fixes-7-critical-flaws-including.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Patchujcie PHP – request smuggling, UAF i pokłosie php2shell.",
+        "link": "https://sekurak.pl/patchujcie-php-request-smuggling-uaf-i-poklosie-php2shell/",
+        "source": "sekurak.pl"
+      }
+    ],
+    "continuation": true,
+    "summary": "19 listopada PHP opublikowało łatki dla wszystkich wspieranych wersji, w tym nowej wersji 8.6.0. Najpoważniejsze luki, m.in. CVE-2026-129289 i CVE-2026-129474, umożliwiają zdalne wykonanie kodu przy nietypowej konfiguracji serwera oraz stanowią inne podatności RCE.",
+    "cves": [
+      "CVE-2026-115560",
+      "CVE-2026-129289"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "PHP opublikowało łatki 19 listopada dla wszystkich wspieranych wersji, w tym nową wersję 8.6.0. Najpoważniejsze luki, m.in. CVE-2026-129289 i CVE-2026-129474, umożliwiają zdalne wykonanie kodu przy nietypowej konfiguracji serwera i inne luki RCE.",
+        "after": "19 listopada PHP opublikowało łatki dla wszystkich wspieranych wersji, w tym nowej wersji 8.6.0. Najpoważniejsze luki, m.in. CVE-2026-129289 i CVE-2026-129474, umożliwiają zdalne wykonanie kodu przy nietypowej konfiguracji serwera oraz stanowią inne podatności RCE.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "VMware patches vCenter zero-day exploited in attacks since September",
+    "link": "https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Newly Patched VMware vCenter Flaw Exploited as Zero-Day by Chinese APT",
+        "link": "https://www.securityweek.com/newly-patched-vmware-vcenter-flaw-exploited-as-zero-day-by-chinese-apt/",
+        "source": "securityweek.com"
+      },
+      {
+        "title": "Critical VMware vCenter Zero-Day Flaw Lets Network Attackers Bypass Authentication",
+        "link": "https://thehackernews.com/2026/11/critical-vmware-vcenter-flaw-cvss-98.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Broadcom wydał aktualizacje naprawiające krytyczną lukę w uwierzytelnianiu w VMware vCenter Server (CVE-2026-123890), wykorzystywaną w atakach zero-day od września 2026 roku. Łatka jest oznaczona jako awaryjna i obejmuje wszystkie wersje vCenter, SDDC Manager oraz VMware Tools dla Windows przed wersjami wskazanymi w VMSA-2026-0009.",
+    "cves": [
+      "CVE-2026-123890"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Broadcom wydało aktualizacje naprawiające krytyczną lukę uwierzytelniania w VMware vCenter Server (CVE-2026-123890), wykorzystywaną w atakach zero-day od września 2026. Łatka jest oznaczona jako awaryjna i obejmuje wszystkie wersje vCenter, SDDC Manager oraz VMware Tools dla Windows przed wersjami wskazanymi w VMSA-2026-0009.",
+        "after": "Broadcom wydał aktualizacje naprawiające krytyczną lukę w uwierzytelnianiu w VMware vCenter Server (CVE-2026-123890), wykorzystywaną w atakach zero-day od września 2026 roku. Łatka jest oznaczona jako awaryjna i obejmuje wszystkie wersje vCenter, SDDC Manager oraz VMware Tools dla Windows przed wersjami wskazanymi w VMSA-2026-0009.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H159",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "ASUS warns of critical hard-coded key flaw in Control Center Express",
+    "link": "https://www.bleepingcomputer.com/news/security/asus-warns-of-critical-hard-coded-key-flaw-in-control-center-express/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Drupal Patches Critical Installer Flaw That Could Give Unauthenticated Attackers Control of Sites",
+        "link": "https://thehackernews.com/2026/11/drupal-patches-critical-installer-flaw.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Hackers Exploit Cisco Expressway Vulnerability Soon After PoC Release",
+        "link": "https://www.securityweek.com/hackers-exploit-cisco-expressway-vulnerability-soon-after-poc-release/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "ASUS wydał Control Center Express v1.7.29, usuwając trzy krytyczne luki, w tym CVE-2026-114202 z kluczem zakodowanym na sztywno, które pozwalały niezalogowanemu atakującemu uzyskać pełne uprawnienia administratora bez interakcji.",
+    "cves": [
+      "CVE-2026-114202",
+      "CVE-2026-114204"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "ASUS wydało Control Center Express v1.7.29, usuwając trzy krytyczne luki, w tym CVE-2026-114202 z twardo zakodowanym kluczem, które pozwalały nieupoważnionemu atakującemu uzyskać pełne uprawnienia administratora bez interakcji.",
+        "after": "ASUS wydał Control Center Express v1.7.29, usuwając trzy krytyczne luki, w tym CVE-2026-114202 z kluczem zakodowanym na sztywno, które pozwalały niezalogowanemu atakującemu uzyskać pełne uprawnienia administratora bez interakcji.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H222"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "CISA Warns of 4 Exploited Flaws Linked to Ransomware, Cryptomining, and LLMjacking Attacks",
+    "link": "https://thehackernews.com/2026/11/cisa-warns-of-4-exploited-flaws-linked.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "CISA dodała cztery podatności do katalogu KEV, potwierdzając ich aktywne wykorzystywanie w atakach ransomware, kopania kryptowalut i LLMjacking, dotyczących Synology DiskStation Manager, BerriAI LiteLLM, Apache Axis i REDCap.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CISA dodała cztery podatności do katalogu KEV, potwierdzając ich aktywne wykorzystywanie w atakach ransomware, cryptominingowych i LLMjacking, dotyczących Synology DiskStation Manager, BerriAI LiteLLM, Apache Axis i REDCap.",
+        "after": "CISA dodała cztery podatności do katalogu KEV, potwierdzając ich aktywne wykorzystywanie w atakach ransomware, kopania kryptowalut i LLMjacking, dotyczących Synology DiskStation Manager, BerriAI LiteLLM, Apache Axis i REDCap.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H015",
+      "H445"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "[AKTUALIZACJA] Autopay zhackowany. Wykradziono dane kart płatniczych Polaków",
+    "link": "https://niebezpiecznik.pl/post/autopay-zhackowany-wykradziono-dane-kart-platniczych-polakow/",
+    "source": "niebezpiecznik.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": true,
+    "summary": "Spółka Autopay S.A. z Sopotu została zhakowana. 11 listopada 2026 r. wykryto nieuprawniony dostęp do danych płatności, w tym adresów e-mail, numerów telefonów, adresów IP i danych kart płatniczych. Dwa banki samodzielnie zastrzegły karty poszkodowanych klientów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Autopay S.A. z Sopotu został zhakowany. 11 listopada 2026 r. wykryto nieautoryzowany dostęp do danych płatności, w tym adresów e-mail, numerów telefonów, adresów IP i danych kart płatniczych. Dwa banki samodzielnie zastrzegły karty poszkodowanych klientów.",
+        "after": "Spółka Autopay S.A. z Sopotu została zhakowana. 11 listopada 2026 r. wykryto nieuprawniony dostęp do danych płatności, w tym adresów e-mail, numerów telefonów, adresów IP i danych kart płatniczych. Dwa banki samodzielnie zastrzegły karty poszkodowanych klientów.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "Wycieki za pomocą zrzutów ekranu – PixelLeak czyli u agentów AI po staremu",
+    "link": "https://sekurak.pl/wycieki-za-pomoca-zrzutow-ekranu-pixelleak-czyli-u-agentow-ai-po-staremu/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Tekst krytykuje narrację mediów, które przedstawiają agentów AI jako autonomiczne systemy, i podkreśla, że w rzeczywistości działają oni zgodnie z zaprogramowanymi instrukcjami, a nie z własną wolą.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Tekst krytykuje narrację mediów, które przedstawiają agenty AI jako autonomiczne systemy, podkreślając, że w rzeczywistości działają zgodnie z zaprogramowanymi instrukcjami, a nie własną wolą.",
+        "after": "Tekst krytykuje narrację mediów, które przedstawiają agentów AI jako autonomiczne systemy, i podkreśla, że w rzeczywistości działają oni zgodnie z zaprogramowanymi instrukcjami, a nie z własną wolą.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "FBI podszyło się pod gang ransomware oraz pod zainfekowaną firmę…",
+    "link": "https://sekurak.pl/fbi-podszylo-sie-pod-gang-ransomware-oraz-pod-zainfekowana-firme/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Ukraine, FBI arrest ransomware gang members tied to $40M in ransoms",
+        "link": "https://www.bleepingcomputer.com/news/security/ukraine-fbi-arrest-ransomware-gang-members-tied-to-40m-in-ransoms/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "FBI podszyło się pod firmę rzekomo zainfekowaną przez ransomware oraz pod samą grupę ransomware, aby wyłudzić okup od firmy oferującej „zaawansowane narzędzia kryptograficzne”. Firma zapłaciła okup, który trafił do FBI.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "FBI podszyło się pod firmę rzekomo zainfekowaną ransomware oraz pod sam gang ransomware, aby wyłudzić okup od firmy oferującej „zaawansowane narzędzia kryptograficzne”. Firma zapłaciła okup, który trafił do FBI.",
+        "after": "FBI podszyło się pod firmę rzekomo zainfekowaną przez ransomware oraz pod samą grupę ransomware, aby wyłudzić okup od firmy oferującej „zaawansowane narzędzia kryptograficzne”. Firma zapłaciła okup, który trafił do FBI.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H015"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "Cyberatak na Komisję Europejską. W użyciu semi-autonomiczny system AI – ARTEX.",
+    "link": "https://sekurak.pl/cyberatak-na-komisje-europejska-w-uzyciu-semi-autonomiczny-system-ai-artex/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Cyberatak na Komisję Europejską. Sprawcy wykorzystali narzędzie AI",
+        "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-komisje-europejska-sprawcy-wykorzystali-narzedzie-ai",
+        "source": "cyberdefence24.pl"
+      }
+    ],
+    "continuation": true,
+    "summary": "Komisja Europejska padła ofiarą cyberataku, w którym użyto systemu AI ARTEX. Odcięto część systemów od sieci i trwa analiza szkód. FBI wcześniej ostrzegało, że ARTEX jest wykorzystywany do automatyzacji ataków, co potwierdza ten incydent.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Komisja Europejska padła ofiarą cyberataku, w którym użyto systemu AI ARTEX. Odcięto część systemów od sieci i trwa analiza szkód. FBI wcześniej ostrzegło, że ARTEX jest wykorzystywany w automatyzacji ataków, co potwierdza jego użycie w tym incydencie.",
+        "after": "Komisja Europejska padła ofiarą cyberataku, w którym użyto systemu AI ARTEX. Odcięto część systemów od sieci i trwa analiza szkód. FBI wcześniej ostrzegało, że ARTEX jest wykorzystywany do automatyzacji ataków, co potwierdza ten incydent.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "Hakerzy wykradli rządowe dane. Wieloletnia operacja w europejskim państwie",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/hakerzy-wykradli-rzadowe-dane-wieloletnia-operacja-w-europejskim-panstwie",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Hakerzy uzyskali dostęp do rządowych baz danych w Europie i od 2021 r. pobrali ponad 130 GB dokumentów, w tym raporty oraz korespondencję. W operacji brało udział kilka międzynarodowych grup. Po wykryciu incydentu usunięto malware, a atakujących odcięto od sieci.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "glossary",
+        "id": "H028",
+        "used": "złośliwe oprogramowanie",
+        "required": "malware",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Hakerzy uzyskali dostęp do rządowych baz danych w Europie, od 2021 r. pobrali ponad 130 GB dokumentów, w tym raporty i korespondencję. Kilka międzynarodowych grup brało udział w operacji. Po wykryciu incydentu malware zostało usunięte i atakujący odcięci od sieci.",
+        "after": "Hakerzy uzyskali dostęp do rządowych baz danych w Europie i od 2021 r. pobrali ponad 130 GB dokumentów, w tym raporty oraz korespondencję. W operacji brało udział kilka międzynarodowych grup. Po wykryciu incydentu usunięto malware, a atakujących odcięto od sieci.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H028"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-20",
+    "title": "Nvidia Responds to Gentlemen Ransomware Claim",
+    "link": "https://www.securityweek.com/nvidia-responds-to-gentlemen-ransomware-claim/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "NVIDIA investigating Gentlemen ransomware breach claims",
+        "link": "https://www.bleepingcomputer.com/news/security/nvidia-investigating-gentlemen-ransomware-breach-claims/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Nvidia oświadczyła, że nie wykryła wpływu ransomware Gentlemen na własne systemy, choć postępowanie dotyczy potencjalnego incydentu u zewnętrznego partnera.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Nvidia oświadczyło, że nie wykryło wpływu ransomware Gentlemen na własne systemy, choć badanie dotyczy potencjalnego incydentu u partnera trzeciego.",
+        "after": "Nvidia oświadczyła, że nie wykryła wpływu ransomware Gentlemen na własne systemy, choć postępowanie dotyczy potencjalnego incydentu u zewnętrznego partnera.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H015"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
   }
 ]

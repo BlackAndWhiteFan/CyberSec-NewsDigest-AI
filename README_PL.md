@@ -55,6 +55,7 @@ Prasówka działa produkcyjnie od października 2026 (wersja v36). Każda zmiana
 | 37 | Bez pustych zdań: o łatce i CVE tylko przy lukach, bez poprawek Microsoftu do własnych aktualizacji (v51) | zakończony; zweryfikowany testami jednostkowymi |
 | 38 | Głos branży: „poprawka”, „zdalne wykonanie kodu” i „rekordy” są poprawne, kod przestaje je zamieniać (v52) | zakończony; zweryfikowany testami jednostkowymi |
 | 39 | Lata 90.: bez wielkiej litery po liczebniku porządkowym, bez poprawek Microsoftu do własnych aktualizacji, nowe reguły języka (v53) | zakończony; zweryfikowany testami jednostkowymi |
+| 40 | Podpowiedź dla korektora: kalki i anglicyzmy z listy stylu trafiają do korekty językowej jako uwagi (v54) | zakończony; zweryfikowany testami jednostkowymi |
 
 ## Obecna implementacja
 

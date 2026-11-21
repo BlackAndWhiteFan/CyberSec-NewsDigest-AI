@@ -24,6 +24,37 @@ przeanalizowane diffy.
 
 ------------------------------------------------------------------------
 
+## v54 · Podpowiedź dla korektora --- 21.11.2026
+
+**Kalki i anglicyzmy z listy stylu trafiają też do korekty językowej jako
+uwagi.**
+
+Powód: List 43 od Mostu (cybersec-most), Raport W47 (P3 · Kalki):
+„emergency” przeszło do wysłanego tekstu, choć jest na liście stylu
+(„wydało emergency hotfixy przeciwko luki LPE”, 14.11). Kontrola je
+złapała (dziennik języka: `remains`), ale tylko model piszący dostawał
+prośbę o poprawkę. Korektor językowy (Gemini → Ministral → Gemini lite)
+widział uwagi z LanguageTool, Morfeusza i angielskie słowa, a kalk nie.
+W listopadzie zostało tak 11 z 20 kalk znalezionych w streszczeniach.
+
+Zmiany:
+
+- **Korekta językowa** (`src/ai_summaries.py`): kalki i anglicyzmy z
+  `data/styl_unikaj.csv`, które zostały w streszczeniu, idą do korektora
+  jako „uwagi” z podpowiedzią („kalka „emergency” – użyj: awaryjny”).
+  Poprawka korektora przechodzi te same kontrole co dotąd.
+- **Lista stylu**: v53 dopisała „emergency” drugi raz (wiersz był od
+  v43). Duplikat usunięty, a pierwszy wiersz dostał przykłady branżowe
+  („awaryjne hotfixy”, „awaryjna łatka”, „awaryjna aktualizacja”).
+  Nowy test pilnuje, żeby forma nie powtarzała się na liście.
+- **Karton Prasówki** odświeżony do v54. **Testy**: `src/test_v54.py`;
+  razem 515.
+
+Zmienione pliki: `src/ai_summaries.py`, `data/styl_unikaj.csv`,
+`src/test_v54.py` (nowy), `docs/karton.html`, README (PL/EN).
+
+------------------------------------------------------------------------
+
 ## v53 · Lata 90. --- 16.11.2026
 
 **Bez wielkiej litery po liczebniku porządkowym; bez błędów Microsoftu po
@@ -2754,6 +2785,37 @@ described in the nearest version as a separate paragraph.
 Format inspired by [Keep a Changelog](https://keepachangelog.com/).
 Sources for v1--v10: Git history (113 commits), commit descriptions,
 and reviewed diffs.
+
+------------------------------------------------------------------------
+
+## v54 · A hint for the corrector --- 2026-11-21
+
+**Calques and anglicisms from the style list also reach the language
+correction as hints.**
+
+Reason: Letter 43 from the bridge (cybersec-most), Report W47 (P3 ·
+Calques): "emergency" reached the sent text although it is on the style
+list ("wydało emergency hotfixy przeciwko luki LPE", 14 Nov). The check
+found it (language log: `remains`), but only the writing model was asked
+to fix it. The language corrector (Gemini → Ministral → Gemini lite) got
+hints from LanguageTool, Morfeusz and English words, but not calques. In
+November 11 of 20 calques found in summaries stayed this way.
+
+Changes:
+
+- **Language correction** (`src/ai_summaries.py`): calques and
+  anglicisms from `data/styl_unikaj.csv` left in a summary go to the
+  corrector as hints with a suggestion. The corrected text passes the
+  same checks as before.
+- **Style list**: v53 added "emergency" a second time (the row existed
+  since v43). The duplicate is removed and the first row got industry
+  examples ("awaryjne hotfixy", "awaryjna łatka", "awaryjna
+  aktualizacja"). A new test keeps forms on the list unique.
+- **Karton Prasówki** refreshed to v54. **Tests**: `src/test_v54.py`;
+  515 in total.
+
+Changed files: `src/ai_summaries.py`, `data/styl_unikaj.csv`,
+`src/test_v54.py` (new), `docs/karton.html`, README (PL/EN).
 
 ------------------------------------------------------------------------
 

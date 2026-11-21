@@ -6753,5 +6753,329 @@
       "H015"
     ],
     "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Java4shell - krytyczna podatność w środowisku uruchomieniowym Java",
+    "link": "https://moje.cert.pl/komunikaty/2026/216/krytyczna-podatnosc-w-srodowisku-java-umozliwiajaca-zdalne-wykonanie-kodu-java4shell/",
+    "source": "moje.cert.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 7,
+    "related": [
+      {
+        "title": "„Java4Shell” – nowo opisana luka naraża wiele aplikacji korporacyjnych na przejęcie",
+        "link": "https://kapitanhack.pl/java4shell-nowo-opisana-luka-naraza-wiele-aplikacji-korporacyjnych-na-przejecie/",
+        "source": "kapitanhack.pl"
+      }
+    ],
+    "continuation": true,
+    "summary": "CERT Polska ostrzegło o krytycznej luce java4shell (CVE-2026-114938) w środowisku uruchomieniowym Java, która umożliwia atakującemu bez uwierzytelnienia zdalne wykonanie kodu w aplikacjach działających na podatnych wersjach JVM, m.in. w Oracle Java SE 8 Enterprise Performance Pack (8u511b33-perf). Brak jeszcze dostępnej łatki, a podatność występuje wyłącznie na procesorach obsługujących rozszerzenia AVX-512 VBMI i AVX-512 BW.",
+    "cves": [
+      "CVE-2026-114938"
+    ],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska ostrzegło o krytycznej luce java4shell (CVE-2026-114938) w środowisku uruchomieniowym Java, która umożliwia nieuwierzytelnionemu atakującemu zdalne wykonanie kodu w aplikacjach działających na podatnych wersjach JVM, m.in. w Oracle Java SE 8 Enterprise Performance Pack (8u511b33-perf). Brak jeszcze dostępnej łatki, a podatność występuje wyłącznie na procesorach obsługujących rozszerzenia AVX-512 VBMI i AVX-512 BW.",
+        "after": "CERT Polska ostrzegło o krytycznej luce java4shell (CVE-2026-114938) w środowisku uruchomieniowym Java, która umożliwia atakującemu bez uwierzytelnienia zdalne wykonanie kodu w aplikacjach działających na podatnych wersjach JVM, m.in. w Oracle Java SE 8 Enterprise Performance Pack (8u511b33-perf). Brak jeszcze dostępnej łatki, a podatność występuje wyłącznie na procesorach obsługujących rozszerzenia AVX-512 VBMI i AVX-512 BW.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H164",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Krytyczna podatność w module mod_http2 na serwerach Apache",
+    "link": "https://www.circl.lu/pub/tr-103/",
+    "source": "circl.lu",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Apache Software Foundation ujawniła krytyczną podatność w module mod_http2 (CVE-2026-119618), pozwalającą atakującemu bez uwierzytelnienia na wykonanie kodu z uprawnieniami procesu Apache poprzez stan wyścigu w obsłudze nagłówków HTTP/2.",
+    "cves": [
+      "CVE-2026-119618"
+    ],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Apache Software Foundation ujawniło krytyczną podatność w module mod_http2 (CVE-2026-119618), pozwalającą nieuwierzytelnionemu atakującemu na wykonanie kodu z uprawnieniami procesu Apache poprzez wyścig w obsłudze nagłówków HTTP/2.",
+        "after": "Apache Software Foundation ujawniła krytyczną podatność w module mod_http2 (CVE-2026-119618), pozwalającą atakującemu bez uwierzytelnienia na wykonanie kodu z uprawnieniami procesu Apache poprzez stan wyścigu w obsłudze nagłówków HTTP/2.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Rosyjska grupa Cold Relic podszywa się pod pracowników zhakowanych firm",
+    "link": "https://cloud.google.com/blog/topics/threat-intelligence/cold-relic-a-case-study-in-impersonation-and-compromise",
+    "source": "cloud.google.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Firma Mandiant opisała, że rosyjska grupa Cold Relic podszywa się pod pracowników zhakowanych firm, wykorzystując skradzione dane i katalogi pracowników do tworzenia autentycznych pretekstów i atakowania kolejnych celów. Technika umożliwia dalsze przejęcia i długotrwałą obecność w środowiskach ofiar.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Mandiant opisało, że rosyjska grupa Cold Relic podszywa się pod pracowników zhakowanych firm, wykorzystując skradzione dane i katalogi pracowników do tworzenia autentycznych pretekstów i atakowania kolejnych celów. Technika umożliwia dalsze przejęcia i długotrwałą obecność w środowiskach ofiar.",
+        "after": "Firma Mandiant opisała, że rosyjska grupa Cold Relic podszywa się pod pracowników zhakowanych firm, wykorzystując skradzione dane i katalogi pracowników do tworzenia autentycznych pretekstów i atakowania kolejnych celów. Technika umożliwia dalsze przejęcia i długotrwałą obecność w środowiskach ofiar.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Hackers use autonomous AI tool Cairn to find zero-day, take over server",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-use-autonomous-ai-tool-cairn-to-find-zero-day-take-over-server/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Amazon says Chinese hackers used Cairn AI tool to discover apparent zero-day during attack on university",
+        "link": "https://therecord.media/amazon-research-cairn-ai-university-attacks-possible-zero-day",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": false,
+    "summary": "Badacze z Amazon Threat Intelligence wykryli, że chińscy atakujący użyli autonomicznego narzędzia AI Cairn do samodzielnego odkrycia i wykorzystania luki zero-day w aplikacji do obrazowania medycznego, co doprowadziło do przejęcia serwera. Kampania obejmowała także nieudane próby ataku brute-force na serwerach Redis i GPU, co świadczy o szerokim, choć częściowo nieudanym, wykorzystaniu AI w atakach.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "eksploatacji",
+        "form": "eksploatacj*",
+        "suggestion": "wykorzystanie (luki)",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "Badacze Amazon Threat Intelligence wykryli, że chińscy atakujący użyli autonomicznego narzędzia AI Cairn do samodzielnego odkrycia i eksploatacji luki zero-day w aplikacji do obrazowania medycznego, co doprowadziło do przejęcia serwera. Kampania obejmowała także nieudane próby brute-force na serwerach Redis i GPU, co świadczy o szerokim, choć częściowo niepowodzącym się, wykorzystaniu AI w atakach.",
+        "after": "Badacze z Amazon Threat Intelligence wykryli, że chińscy atakujący użyli autonomicznego narzędzia AI Cairn do samodzielnego odkrycia i wykorzystania luki zero-day w aplikacji do obrazowania medycznego, co doprowadziło do przejęcia serwera. Kampania obejmowała także nieudane próby ataku brute-force na serwerach Redis i GPU, co świadczy o szerokim, choć częściowo nieudanym, wykorzystaniu AI w atakach.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H007",
+      "H159",
+      "H386"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Hackers Exploit Critical Cisco Expressway Flaw, Breach Four Devices and Reach Internal Network",
+    "link": "https://thehackernews.com/2026/11/hackers-exploit-critical-cisco.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "W Cisco Expressway ujawniono krytyczną lukę CVE-2026-76466, umożliwiającą atakującemu bez uwierzytelnienia wykonanie dowolnych poleceń jako root poprzez niewłaściwe użycie trwałych plików cookie (persistent cookies) i brak weryfikacji certyfikatów klienta. Exploit PoC stał się publiczny, a pierwsze aktywne ataki (w-the-wild) odnotowano na urządzeniach Cisco Expressway X15.5.3. Poprawki wydano 21 października 2026 r.",
+    "cves": [
+      "CVE-2026-76466"
+    ],
+    "kev": [
+      "CVE-2026-76466"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zagrożeniom poddano Cisco Expressway po ujawnieniu krytycznej luki CVE-2026-76466, umożliwiającej nieuwierzytelnionemu atakującemu wykonanie dowolnych poleceń jako root poprzez niewłaściwe użycie persistent cookies i brak weryfikacji certyfikatów klienta. Exploit PoC stał się publiczny, a pierwsze ataki w-the-wild odnotowano na urządzeniach Cisco Expressway X15.5.3. Poprawki wydano 21 października 2026.",
+        "after": "W Cisco Expressway ujawniono krytyczną lukę CVE-2026-76466, umożliwiającą atakującemu bez uwierzytelnienia wykonanie dowolnych poleceń jako root poprzez niewłaściwe użycie trwałych plików cookie (persistent cookies) i brak weryfikacji certyfikatów klienta. Exploit PoC stał się publiczny, a pierwsze aktywne ataki (w-the-wild) odnotowano na urządzeniach Cisco Expressway X15.5.3. Poprawki wydano 21 października 2026 r.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H152",
+      "H153",
+      "H189",
+      "H614"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "China-Linked Hackers Exploit Critical VMware vCenter Zero-Day to Gain Admin Access and Steal Data",
+    "link": "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Grupa cyberszpiegowska Armory Castle wykorzystała lukę zero-day CVE-2026-123890 w VMware vCenter Server, uzyskując nieuprawniony dostęp administratora. Luka była aktywnie wykorzystywana i została usunięta w łatkach wydanych 19 listopada 2026 roku.",
+    "cves": [
+      "CVE-2026-123890"
+    ],
+    "kev": [
+      "CVE-2026-123890"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Grupa cyberszpiegowska Armory Castle wykorzystała zero-day CVE-2026-123890 w VMware vCenter Server, uzyskując nieautoryzowany dostęp administratora. Luka była aktywnie wykorzystywana i została załatana w łatkach wydanych 19 listopada 2026.",
+        "after": "Grupa cyberszpiegowska Armory Castle wykorzystała lukę zero-day CVE-2026-123890 w VMware vCenter Server, uzyskując nieuprawniony dostęp administratora. Luka była aktywnie wykorzystywana i została usunięta w łatkach wydanych 19 listopada 2026 roku.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H153",
+      "H159"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Cyberatak na Autopay. Kto będzie musiał wymienić kartę?",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/cyberatak-na-autopay-kto-bedzie-musial-wymienic-karte",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": true,
+    "summary": "11 listopada 2026 roku doszło do włamania do infrastruktury firmy Autopay, w wyniku którego mogły wyciec numery kart płatniczych, adresy e-mail i numery telefonów. Niektóre banki prewencyjnie zastrzegły wybrane karty Visa i Mastercard.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W dniu 11 listopada 2026 doszło do włamania do infrastruktury Autopay, w wyniku którego mogły wycieknąć numery kart płatniczych, adresy e-mail i numery telefonów. Niektóre banki prewencyjnie zastrzegły wybrane karty Visa i Mastercard.",
+        "after": "11 listopada 2026 roku doszło do włamania do infrastruktury firmy Autopay, w wyniku którego mogły wyciec numery kart płatniczych, adresy e-mail i numery telefonów. Niektóre banki prewencyjnie zastrzegły wybrane karty Visa i Mastercard.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Nowe uprawnienia niemieckich służb. AI będzie analizować dane biometryczne",
+    "link": "https://cyberdefence24.pl/armia-i-sluzby/nowe-uprawnienia-niemieckich-sluzb-ai-bedzie-analizowac-dane-biometryczne",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Bundesrat przyjął w połowie listopada ustawę zezwalającą BND i BfV na gromadzenie i analizowanie danych biometrycznych przy użyciu sztucznej inteligencji oraz na prowadzenie ataków hakerskich w celu modyfikacji danych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Włamanie do kamer aquaparku w Wielkopolsce. Podglądano gości basenu",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/wlamanie-do-kamer-aquaparku-w-wielkopolsce-podgladano-gosci-basenu",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Osoba nieuprawniona uzyskała krótkotrwały dostęp do kamer monitoringu w aquaparku w Pile i około 22 października podglądała z nich obraz. W odpowiedzi operator wymienił przestarzałe urządzenia monitoringu, które nie otrzymywały już aktualizacji zabezpieczeń.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Osoba nieuprawniona uzyskała krótkotrwały dostęp do kamer monitoringu w aquaparku w Pile i podglądała obrazy około 22 października. W odpowiedzi operator wymienił przestarzałe urządzenia monitoringu, które nie otrzymują aktualizacji zabezpieczeń.",
+        "after": "Osoba nieuprawniona uzyskała krótkotrwały dostęp do kamer monitoringu w aquaparku w Pile i około 22 października podglądała z nich obraz. W odpowiedzi operator wymienił przestarzałe urządzenia monitoringu, które nie otrzymywały już aktualizacji zabezpieczeń.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-21",
+    "title": "Wyciek danych z JPMorgan Chase. Tysiące e-maili klientów w darkwebie",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/wyciek-danych-z-jpmorgan-chase-tysiace-e-maili-klientow-w-darkwebie",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Vendor data breach exposes Chase, Visa, Mastercard customer info",
+        "link": "https://www.bleepingcomputer.com/news/security/vendor-data-breach-exposes-chase-visa-mastercard-customer-info/",
+        "source": "bleepingcomputer.com"
+      },
+      {
+        "title": "JPMorgan, Visa, Mastercard Cite Third-Party Incidents Amid Data Leak",
+        "link": "https://www.securityweek.com/jpmorgan-visa-mastercard-cite-third-party-incidents-amid-data-leak/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Atak na podwykonawcę JPMorgan Chase umożliwił sprawcom uzyskanie dostępu do części danych marketingowych, w tym nazwisk i adresów e-mail klientów. Wykradzione informacje pojawiły się w darknecie.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Atak na podwykonawcę JPMorgan Chase umożliwił sprawcom dostęp do części danych marketingowych, w tym nazwisk i adresów e-mail klientów. Wykradnięte informacje pojawiły się w darkwebie.",
+        "after": "Atak na podwykonawcę JPMorgan Chase umożliwił sprawcom uzyskanie dostępu do części danych marketingowych, w tym nazwisk i adresów e-mail klientów. Wykradzione informacje pojawiły się w darknecie.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

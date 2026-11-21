@@ -44,7 +44,7 @@ wytransferowa*;przelać, wyprowadzić
 threat actor*;sprawcy
 dokona* wycieku;ujawnić, opublikować dane
 dokona* kradzieży;ukraść (np. „ukradziono”)
-emergency;awaryjny
+emergency;awaryjny (np. „awaryjne hotfixy”, „awaryjna łatka”, „awaryjna aktualizacja”)
 aplikowa*;instalować, wdrażać
 zaaplikowa*;zainstalować, wdrożyć
 w dziczy;w rzeczywistych atakach
@@ -63,4 +63,3 @@ advisory;komunikat bezpieczeństwa
 # v50 (10–12.11.2026): nakaz z Reguł języka Prasówki (v48) wsparty kontrolą.
 zero-dayów;luk zero-day
 zero-daye;luki zero-day
-emergency;awaryjny (np. „awaryjne hotfixy”, „awaryjna łatka”)

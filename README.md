@@ -55,6 +55,7 @@ The digest has been running in production since October 2026 (version v36). Ever
 | 37 | No empty sentences: a patch or a CVE only for vulnerabilities, no Microsoft fixes for its own update bugs (v51) | completed; verified by unit tests |
 | 38 | Industry voice: "poprawka", "zdalne wykonanie kodu" and "rekordy" are correct, the code stops replacing them (v52) | completed; verified by unit tests |
 | 39 | The 90s: no capital letter after an ordinal number, no Microsoft fixes for its own update bugs, new language rules (v53) | completed; verified by unit tests |
+| 40 | A hint for the corrector: calques and anglicisms from the style list reach the language correction as hints (v54) | completed; verified by unit tests |
 
 ## Current Implementation
 

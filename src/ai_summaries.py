@@ -43,6 +43,7 @@ from summary_quality import (
     fix_sentence_case,
     quality_problems,
     remove_unsupported_labels,
+    style_problems,
     looks_english,
     repair_summary,
     split_sentences,
@@ -834,6 +835,12 @@ def proofread_summaries(articles, providers, environ, opener=urllib.request.urlo
 
         # v46: grammar findings of Morfeusz 2 go to the corrector too.
         hints.setdefault(index, []).extend(grammar_problems(article["summary"]))
+
+        # v54: calques and anglicisms from the style list that survived the
+        # writer's own fix go to the corrector too (List 43: "wydało emergency
+        # hotfixy" stayed on 14.11.2026 – 11 of 20 style findings in November
+        # stayed, because the corrector never saw them).
+        hints.setdefault(index, []).extend(style_problems(article["summary"]))
 
         if not hints[index]:
             del hints[index]

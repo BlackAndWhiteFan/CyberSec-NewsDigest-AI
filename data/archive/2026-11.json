@@ -7077,5 +7077,289 @@
       "H411"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Ktoś zhackował chmurę producenta routerów domowych i zdalnie infekował routery. GL.iNET",
+    "link": "https://sekurak.pl/ktos-zhackowal-chmure-producenta-routerow-domowych-i-zdalnie-infekowal-routery-gl-inet/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 6,
+    "related": [],
+    "continuation": false,
+    "summary": "GL.iNet wykryło 20 listopada 2026 roku lukę w usługach chmurowych, którą nieuprawniony podmiot wykorzystał do zdalnego zainfekowania routerów i urządzeń KVM. Urządzenia tej firmy są dostępne również w Polsce, a atakujący zainstalowali na nich złośliwy kod.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "GL.iNet wykryło 20 listopada 2026 roku lukę w usługach chmurowych, którą nieuprawniony podmiot wykorzystał do zdalnej infekcji routerów i urządzeń KVM. Urządzenia tej firmy są dostępne również w Polsce, a atakujący zainstalowali na nich złośliwy kod.",
+        "after": "GL.iNet wykryło 20 listopada 2026 roku lukę w usługach chmurowych, którą nieuprawniony podmiot wykorzystał do zdalnego zainfekowania routerów i urządzeń KVM. Urządzenia tej firmy są dostępne również w Polsce, a atakujący zainstalowali na nich złośliwy kod.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H468"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Microsoft Entra Connect Health flaw exploited to steal tenant data",
+    "link": "https://www.bleepingcomputer.com/news/security/microsoft-entra-connect-health-flaw-exploited-to-steal-tenant-data/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Microsoft ujawnił wyciek danych po tym, jak sprawcy wykorzystali podatność w usłudze Microsoft Entra Connect Health do uzyskania dostępu do metadanych najemców. Luka, wprowadzona 23 lipca, została wykryta 9 listopada 2026 roku i umożliwiała odczyt poświadczeń administratorów oraz konfiguracji monitoringu. Firma potwierdziła, że nie doszło do nieautoryzowanych zmian w konfiguracji ani wycieku haseł.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H164",
+      "H198",
+      "H372",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Amazon: China-Linked Hackers’ AI Agents Exploited Medical Software Zero-Day",
+    "link": "https://www.securityweek.com/amazon-china-linked-hackers-ai-agents-exploited-medical-software-zero-day/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Amazon poinformowało, że agenci AI sterowani przez grupę powiązaną z Chinami wykorzystali lukę zero-day w narzędziu MONAI Label do ataku na uczelnie w Azji Wschodniej. Kampania trwała około 48 godzin, a agenci uzyskali dostęp do powłoki systemowej w ciągu 11 minut od zmapowania API. Atakujący wykorzystali następnie proxy do tunelowania połączenia do drugiej uczelni i zainfekowania kolejnych urządzeń w sieci.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Amazon poinformowało, że agenci AI sterowani przez grupę powiązaną z Chinami wykorzystali lukę zero-day w narzędziu MONAI Label do ataku na uczelnie w Azji Wschodniej. Kampania trwała około 48 godzin, a agenci uzyskali dostęp do powłoki systemowej w ciągu 11 minut od zmapowania API. Atakujący wykorzystali następnie proxy do tunelowania do drugiej uczelni i infekowania kolejnych urządzeń w sieci.",
+        "after": "Amazon poinformowało, że agenci AI sterowani przez grupę powiązaną z Chinami wykorzystali lukę zero-day w narzędziu MONAI Label do ataku na uczelnie w Azji Wschodniej. Kampania trwała około 48 godzin, a agenci uzyskali dostęp do powłoki systemowej w ciągu 11 minut od zmapowania API. Atakujący wykorzystali następnie proxy do tunelowania połączenia do drugiej uczelni i zainfekowania kolejnych urządzeń w sieci.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H007",
+      "H159",
+      "H319",
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Nginx2root - luki w serwerze nginx umożliwiające zdalne wykonanie kodu",
+    "link": "https://moje.cert.pl/komunikaty/2026/217/krytyczne-podatnosci-w-serwerze-nginx-umozliwiajace-zdalne-wykonanie-kodu-nginx2root/",
+    "source": "moje.cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska ostrzega przed pięcioma krytycznymi podatnościami w serwerze nginx, w tym CVE-2026-123007, która pozwala na zdalne wykonanie poleceń z uprawnieniami procesu roboczego bez uwierzytelnienia. Podatne są wszystkie oficjalne wydania nginx od 1.9.5 do 1.31.8, a wykorzystanie luki może nie pozostawiać śladów w logach. Poprawka dla wszystkich pięciu luk znajduje się w wydaniach 1.30.7 i 1.31.9.",
+    "cves": [
+      "CVE-2026-121810",
+      "CVE-2026-123007",
+      "CVE-2026-123633"
+    ],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska ostrzega przed pięcioma krytycznymi podatnościami w serwerze nginx, w tym CVE-2026-123007, która pozwala na zdalne wykonanie poleceń z uprawnieniami workera bez uwierzytelnienia. Podatne są wszystkie oficjalne wydania nginx od 1.9.5 do 1.31.8, a wykorzystanie luki może nie pozostawiać śladów w logach. Poprawka dla wszystkich pięciu luk znajduje się w wydaniach 1.30.7 i 1.31.9.",
+        "after": "CERT Polska ostrzega przed pięcioma krytycznymi podatnościami w serwerze nginx, w tym CVE-2026-123007, która pozwala na zdalne wykonanie poleceń z uprawnieniami procesu roboczego bez uwierzytelnienia. Podatne są wszystkie oficjalne wydania nginx od 1.9.5 do 1.31.8, a wykorzystanie luki może nie pozostawiać śladów w logach. Poprawka dla wszystkich pięciu luk znajduje się w wydaniach 1.30.7 i 1.31.9.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Cyberatak na ePUAP. Dobrze to nie wygląda",
+    "link": "https://sekurak.pl/cyberatak-na-epuap-dobrze-to-nie-wyglada/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "COI potwierdził, że atak na ePUAP został wykryty i zatrzymany, a pełne działanie systemu przywrócono 19 listopada 2026 roku. Agencja Bezpieczeństwa Wewnętrznego bada okoliczności incydentu, w którym na jednym z serwerów znaleziono niezidentyfikowany skrypt. Wicepremier Gawkowski wcześniej informował o udaremnieniu ataku i utrzymaniu stabilności infrastruktury.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "COI potwierdziło, że atak na ePUAP został wykryty i zatrzymany, a pełne działanie systemu przywrócono 19 listopada 2026 roku. Agencja Bezpieczeństwa Wewnętrznego bada okoliczności incydentu, w którym na jednym z serwerów znaleziono niezidentyfikowany skrypt. Wicepremier Gawkowski wcześniej informował o udaremnieniu ataku i utrzymaniu stabilności infrastruktury.",
+        "after": "COI potwierdził, że atak na ePUAP został wykryty i zatrzymany, a pełne działanie systemu przywrócono 19 listopada 2026 roku. Agencja Bezpieczeństwa Wewnętrznego bada okoliczności incydentu, w którym na jednym z serwerów znaleziono niezidentyfikowany skrypt. Wicepremier Gawkowski wcześniej informował o udaremnieniu ataku i utrzymaniu stabilności infrastruktury.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Komunikacja kryzysowa po cyberataku. Milczenie też jest ryzykiem",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/komunikacja-kryzysowa-po-cyberataku-milczenie-tez-jest-ryzykiem",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska opublikował 16 października 2026 r. wpis o komunikacji kryzysowej, wskazując, że milczenie po incydencie bezpieczeństwa sprzyja dezinformacji i utracie zaufania. RODO dodaje własne wymogi powiadamiania, które organizacje muszą spełniać równolegle z obowiązkami wobec CSIRT.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska opublikowało 16 października 2026 r. wpis o komunikacji kryzysowej, wskazując, że milczenie po incydencie bezpieczeństwa sprzyja dezinformacji i utracie zaufania. RODO dodaje własne wymogi powiadamiania, które organizacje muszą spełniać równolegle z obowiązkami wobec CSIRT.",
+        "after": "CERT Polska opublikował 16 października 2026 r. wpis o komunikacji kryzysowej, wskazując, że milczenie po incydencie bezpieczeństwa sprzyja dezinformacji i utracie zaufania. RODO dodaje własne wymogi powiadamiania, które organizacje muszą spełniać równolegle z obowiązkami wobec CSIRT.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H281",
+      "H425",
+      "H434",
+      "H435"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Wyciek 15 mln plików ujawnia sekrety i podwójne standardy Deutsche Banku",
+    "link": "https://www.direkt36.hu/en/piszkos-penzek-felrenezo-bankarok-feltarulnak-a-vilag-egyik-legnagyobb-bankjanak-titkai/",
+    "source": "direkt36.hu",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Z Deutsche Banku wyciekło ponad 15 mln wewnętrznych plików, w tym e-maile kadry zarządzającej, tajne oceny ryzyka i raporty o transakcjach. Materiały obejmują dane prywatne miliarderów, polityków i członków rodzin królewskich oraz informacje o firmach powiązanych z reżimami autorytarnymi. To największy wyciek wewnętrznych dokumentów bankowych ujawniony dziennikarzom, analizowany przez ponad 200 reporterów w ramach śledztwa Inside Deutsche Bank.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [],
+    "terms": [
+      "H217"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Haker znany z ujawnienia wczesnych materiałów z GTA6 przyznał się do winy",
+    "link": "https://www.bbc.com/news/articles/cq99exy89dngo",
+    "source": "bbc.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Arion Kurtaj przyznał się do włamania do Rockstar Games w 2022 r., podczas którego ukradł 90 klipów z gry Grand Theft Auto 6 i kod źródłowy. Haker działał wtedy w grupie Lapsus$ i używał urządzenia Amazon Fire Stick podłączonego do telewizora w hotelu, bo jego komputer został zarekwirowany przez policję.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Arion Kurtaj przyznał się do winy za włamanie do Rockstar Games w 2022 r., podczas którego ukradł 90 klipów z gry Grand Theft Auto 6 i kod źródłowy. Haker działał wtedy w grupie Lapsus$ i używał Amazon Fire Stick podłączonego do telewizora w hotelu, bo jego komputer był zabezpieczony przez policję.",
+        "after": "Arion Kurtaj przyznał się do włamania do Rockstar Games w 2022 r., podczas którego ukradł 90 klipów z gry Grand Theft Auto 6 i kod źródłowy. Haker działał wtedy w grupie Lapsus$ i używał urządzenia Amazon Fire Stick podłączonego do telewizora w hotelu, bo jego komputer został zarekwirowany przez policję.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Cleverbridge warns hackers stole credit card numbers, CVVs in data breach",
+    "link": "https://www.bleepingcomputer.com/news/security/cleverbridge-warns-hackers-stole-credit-card-numbers-cvvs-in-data-breach/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Cleverbridge poinformowało, że sprawcy włamali się do jego systemów i ukradli numery kart płatniczych, daty ważności oraz kody CVV klientów. Firma wykryła nieuprawnioną aktywność 4 listopada 2026 r. i tymczasowo wyłączyła systemy, by ograniczyć skalę wycieku. Wśród klientów platformy są m.in. Red Hat, SUSE, Tenable, Veeam, Jamf, Sony i Parallels, ale Cleverbridge nie ujawniło, których z nich dotyczy incydent.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Cleverbridge poinformowało, że sprawcy włamali się do jego systemów i ukradli numery kart płatniczych, daty ważności oraz kody CVV klientów. Firma wykryła nieautoryzowaną aktywność 4 listopada 2026 r. i tymczasowo wyłączyła systemy, by ograniczyć skalę wycieku. Wśród klientów platformy są m.in. Red Hat, SUSE, Tenable, Veeam, Jamf, Sony i Parallels, ale Cleverbridge nie ujawniło, których z nich dotyczy incydent.",
+        "after": "Cleverbridge poinformowało, że sprawcy włamali się do jego systemów i ukradli numery kart płatniczych, daty ważności oraz kody CVV klientów. Firma wykryła nieuprawnioną aktywność 4 listopada 2026 r. i tymczasowo wyłączyła systemy, by ograniczyć skalę wycieku. Wśród klientów platformy są m.in. Red Hat, SUSE, Tenable, Veeam, Jamf, Sony i Parallels, ale Cleverbridge nie ujawniło, których z nich dotyczy incydent.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H372",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-23",
+    "title": "Rackspace Spot breach let hackers access customer Kubernetes secrets",
+    "link": "https://www.bleepingcomputer.com/news/security/rackspace-spot-breach-let-hackers-access-customer-kubernetes-secrets/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Rackspace ostrzegło klientów, że sprawcy wykorzystali skradzione poświadczenia, by uzyskać dostęp do platformy Rackspace Spot i odczytać sekrety Kubernetes w klastrach klientów. Atak trwał 17 listopada 2026 r. między 00:20 a 22:00 UTC, a napastnicy mogli tworzyć pody, czytać hashe (skróty haseł), tokeny uwierzytelniające i klucze API. Firma odwołała dotknięte incydentem poświadczenia i tokeny API.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Rackspace ostrzegło klientów, że sprawcy wykorzystali skradzione poświadczenia, by uzyskać dostęp do platformy Rackspace Spot i odczytać sekrety Kubernetes w klastrach klientów. Atak trwał 17 listopada 2026 r. między 00:20 a 22:00 UTC, a napastnicy mogli tworzyć pody, czytać hashe, tokeny uwierzytelniające i klucze API. Firma odwołała dotknięte incydentem poświadczenia i tokeny API.",
+        "after": "Rackspace ostrzegło klientów, że sprawcy wykorzystali skradzione poświadczenia, by uzyskać dostęp do platformy Rackspace Spot i odczytać sekrety Kubernetes w klastrach klientów. Atak trwał 17 listopada 2026 r. między 00:20 a 22:00 UTC, a napastnicy mogli tworzyć pody, czytać hashe (skróty haseł), tokeny uwierzytelniające i klucze API. Firma odwołała dotknięte incydentem poświadczenia i tokeny API.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H207",
+      "H217",
+      "H372",
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

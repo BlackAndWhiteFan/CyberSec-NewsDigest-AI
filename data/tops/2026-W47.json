@@ -1,0 +1,114 @@
+[
+  {
+    "period": "2026-W47",
+    "kind": "week",
+    "rank": 1,
+    "title": "Java4shell - krytyczna podatność w środowisku uruchomieniowym Java",
+    "link": "https://moje.cert.pl/komunikaty/2026/216/krytyczna-podatnosc-w-srodowisku-java-umozliwiajaca-zdalne-wykonanie-kodu-java4shell/",
+    "summary": "Krytyczna luka Java4Shell (CVE-2026-114938) w OpenJDK umożliwia atakującemu bez uwierzytelnienia zdalne wykonanie kodu w aplikacjach Jenkins, Jira i Keycloak. Podatność oceniono na CVSS 9,2 i znajduje się ona w katalogu CISA KEV z powodu aktywnego wykorzystania. Błąd występuje wyłącznie na procesorach obsługujących rozszerzenia AVX-512 VBMI i AVX-512 BW. Poprawka nie została jeszcze udostępniona.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 9,
+    "sources": 6,
+    "first_date": "2026-11-18",
+    "kev": [
+      "CVE-2026-76519"
+    ],
+    "cves": [
+      "CVE-2026-114938",
+      "CVE-2026-76519"
+    ],
+    "links": [
+      "https://moje.cert.pl/komunikaty/2026/216/krytyczna-podatnosc-w-srodowisku-java-umozliwiajaca-zdalne-wykonanie-kodu-java4shell/",
+      "https://cyberdefence24.pl/cyberbezpieczenstwo/krytyczna-podatnosc-w-srodowisku-java",
+      "https://www.bleepingcomputer.com/news/security/critical-java4shell-flaw-allows-rce-attacks-on-major-java-applications/"
+    ]
+  },
+  {
+    "period": "2026-W47",
+    "kind": "week",
+    "rank": 2,
+    "title": "Cyberatak na Komisję Europejską. W użyciu semi-autonomiczny system AI – ARTEX.",
+    "link": "https://sekurak.pl/cyberatak-na-komisje-europejska-w-uzyciu-semi-autonomiczny-system-ai-artex/",
+    "summary": "Komisja Europejska padła ofiarą cyberataku z użyciem półautonomicznego systemu AI ARTEX. Wcześniej sprawcy użyli tego narzędzia do ataku na ConnectWise oraz włamania do Barracudy za pomocą skradzionego klucza dostępu, uzyskując dostęp do około 10 kont w ciągu 44 godzin. Po ataku na Komisję część systemów odcięto od sieci i trwa analiza szkód.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 5,
+    "sources": 4,
+    "first_date": "2026-11-16",
+    "kev": [],
+    "cves": [],
+    "links": [
+      "https://sekurak.pl/cyberatak-na-komisje-europejska-w-uzyciu-semi-autonomiczny-system-ai-artex/",
+      "https://www.bleepingcomputer.com/news/security/fbi-warns-artex-ai-hacking-tool-is-powering-global-cyberattacks/",
+      "https://www.bleepingcomputer.com/news/security/barracuda-links-cloud-breach-to-artex-ai-powered-cyberattack/"
+    ]
+  },
+  {
+    "period": "2026-W47",
+    "kind": "week",
+    "rank": 3,
+    "title": "Kolejne krytyczne podatności w PHP. Zadbaj o aktualizację",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/kolejne-krytyczne-podatnosci-w-php-zadbaj-o-aktualizacje",
+    "summary": "Sprawcy wykorzystali lukę PHP2Shell (CVE-2026-109618) do ataków na bramki Check Point Mobile Access. W atakach z października i listopada 2026 roku sprawcy podnosili uprawnienia do konta root za pomocą drugiej luki CVE-2026-123039. Podatność znajduje się w katalogu CISA KEV. Łatki wydano 19 listopada dla wszystkich wspieranych wersji PHP oraz w nowej wersji 8.6.0.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 4,
+    "sources": 4,
+    "first_date": "2026-11-16",
+    "kev": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-123039"
+    ],
+    "cves": [
+      "CVE-2026-109618",
+      "CVE-2026-109619",
+      "CVE-2026-115560",
+      "CVE-2026-123039",
+      "CVE-2026-129289"
+    ],
+    "links": [
+      "https://cyberdefence24.pl/cyberbezpieczenstwo/kolejne-krytyczne-podatnosci-w-php-zadbaj-o-aktualizacje",
+      "https://research.checkpoint.com/2026/php2shell-exploitation-on-check-point-gateway/"
+    ]
+  },
+  {
+    "period": "2026-W47",
+    "kind": "week",
+    "rank": 4,
+    "title": "Rosyjska grupa Cold Relic podszywa się pod pracowników zhakowanych firm",
+    "link": "https://cloud.google.com/blog/topics/threat-intelligence/cold-relic-a-case-study-in-impersonation-and-compromise",
+    "summary": "Rosyjska grupa Cold Relic atakuje organizacje, podszywając się pod pracowników wcześniej zhakowanych firm. Sprawcy użyli skradzionych danych z Google Workspace, aby przejąć dostęp w amerykańskiej firmie i zarejestrować fałszywe urządzenia MFA oraz passkeys. Równolegle grupa APT29 prowadziła ataki typu watering hole złośliwymi skryptami na urządzenia mobilne.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 4,
+    "sources": 4,
+    "first_date": "2026-11-16",
+    "kev": [],
+    "cves": [],
+    "links": [
+      "https://cloud.google.com/blog/topics/threat-intelligence/cold-relic-a-case-study-in-impersonation-and-compromise",
+      "https://sekurak.pl/rosyjska-grupa-apt29-uzywa-techniki-watering-hole-do-kradziezy-danych-z-urzadzen-mobilnych/",
+      "https://thehackernews.com/2026/11/russian-cold-relic-hackers-use-stolen.html"
+    ]
+  },
+  {
+    "period": "2026-W47",
+    "kind": "week",
+    "rank": 5,
+    "title": "VMware patches vCenter zero-day exploited in attacks since September",
+    "link": "https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/",
+    "summary": "Powiązana z Chinami grupa Armory Castle wykorzystała lukę zero-day w VMware vCenter Server (CVE-2026-123890) do ominięcia uwierzytelnienia i uzyskania uprawnień administratora. Ataki trwały od września 2026 roku, a błąd trafił do katalogu CISA KEV. Broadcom udostępnił 19 listopada awaryjne łatki dla wszystkich wersji vCenter i VMware Tools dla Windows.",
+    "story_model": "Gemini gemini-3.5-flash",
+    "articles": 4,
+    "sources": 3,
+    "first_date": "2026-11-20",
+    "kev": [
+      "CVE-2026-123890"
+    ],
+    "cves": [
+      "CVE-2026-123890"
+    ],
+    "links": [
+      "https://www.bleepingcomputer.com/news/security/vmware-patches-vcenter-zero-day-exploited-in-attacks-since-september/",
+      "https://thehackernews.com/2026/11/china-linked-hackers-exploit-critical.html"
+    ]
+  }
+]

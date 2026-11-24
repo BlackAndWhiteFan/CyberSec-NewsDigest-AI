@@ -7361,5 +7361,294 @@
       "H462"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "CISA flags critical Cisco RCE flaw as actively exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/cisa-flags-critical-cisco-expressway-rce-flaw-as-actively-exploited/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "CISA ostrzegła agencje federalne, że atakujący wykorzystują krytyczną lukę CVE-2026-76466 w urządzeniach Cisco Expressway-C i Expressway-E, umożliwiającą zdalne wykonanie poleceń jako root bez uwierzytelnienia. Luka jest w katalogu CISA KEV i została oznaczona jako aktywnie wykorzystywana w atakach. Poprawka została wydana w październiku 2026 r.",
+    "cves": [
+      "CVE-2026-76466"
+    ],
+    "kev": [
+      "CVE-2026-76466"
+    ],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H090",
+      "H150",
+      "H154",
+      "H189"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "N-able Discloses Critical Mail Assure Vulnerability Found During Breach Investigation",
+    "link": "https://thehackernews.com/2026/11/n-able-discloses-critical-mail-assure.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Firma N-able ujawniła krytyczną lukę SSRF CVE-2026-134624 w usłudze Mail Assure, pozwalającą uwierzytelnionemu użytkownikowi API na łączenie się z dowolnym wewnętrznym hostem i portem. Luka była wykorzystywana w atakach i znajduje się w katalogu CISA KEV. Lukę usunięto w wersji 20261121.1943.",
+    "cves": [
+      "CVE-2026-134624"
+    ],
+    "kev": [
+      "CVE-2026-134624"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "N-able ujawniło krytyczną lukę SSRF CVE-2026-134624 w usłudze Mail Assure, pozwalającą autoryzowanemu użytkownikowi API na połączenia z dowolnym wewnętrznym hostem i portem. Luka była wykorzystywana w atakach i znajduje się w katalogu CISA KEV. Naprawa jest w wersji 20261121.1943.",
+        "after": "Firma N-able ujawniła krytyczną lukę SSRF CVE-2026-134624 w usłudze Mail Assure, pozwalającą uwierzytelnionemu użytkownikowi API na łączenie się z dowolnym wewnętrznym hostem i portem. Luka była wykorzystywana w atakach i znajduje się w katalogu CISA KEV. Lukę usunięto w wersji 20261121.1943.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H067",
+      "H150",
+      "H154",
+      "H164",
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "Hackers Exploit Critical ASP.NET Anti-CSRF Library Flaw Allowing Unauthenticated RCE",
+    "link": "https://thehackernews.com/2026/11/hackers-exploit-critical-aspnet-anti.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Badacze z firmy Google odkryli krytyczną lukę CVE-2026-131914 w bibliotece Idunno.AntiCsrf, umożliwiającą zdalne wykonanie kodu bez uwierzytelnienia za pomocą pojedynczego żądania HTTP POST. Luka jest aktywnie wykorzystywana w atakach i znajduje się w katalogu CISA KEV.",
+    "cves": [
+      "CVE-2026-131914"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Badacze Google odkryli krytyczną lukę CVE-2026-131914 w bibliotece Idunno.AntiCsrf, umożliwiającą nieautoryzowane zdalne wykonanie kodu przez jedną nieautoryzowaną prośbę HTTP POST. Luka jest aktywnie wykorzystywana w atakach i znajduje się w katalogu CISA KEV.",
+        "after": "Badacze z firmy Google odkryli krytyczną lukę CVE-2026-131914 w bibliotece Idunno.AntiCsrf, umożliwiającą zdalne wykonanie kodu bez uwierzytelnienia za pomocą pojedynczego żądania HTTP POST. Luka jest aktywnie wykorzystywana w atakach i znajduje się w katalogu CISA KEV.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H066",
+      "H090",
+      "H150",
+      "H153",
+      "H154"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "LaLiga ofiarą cyberataku. Wyciekły dane kibiców",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/laliga-ofiara-cyberataku-wyciekly-dane-kibicow",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Spanish LaLiga confirms hackers stole soccer fans’ personal data",
+        "link": "https://www.bleepingcomputer.com/news/security/spanish-laliga-confirms-hackers-stole-soccer-fans-personal-data/",
+        "source": "bleepingcomputer.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "LaLiga poinformowała o wycieku danych kibiców po nieuprawnionym dostępie do systemu usług internetowych w dniach 14–16 listopada 2026 r. Atakujący skopiował dane użytkowników, a incydent został wykryty i zablokowany 16 listopada.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "LaLiga poinformowała o wycieku danych kibiców po nieuprawnionym dostępie do systemu usług internetowych w dniach 14-16 listopada 2026 r. Atakujący skopiował dane użytkowników, a incydent został wykryty i zablokowany 16 listopada.",
+        "after": "LaLiga poinformowała o wycieku danych kibiców po nieuprawnionym dostępie do systemu usług internetowych w dniach 14–16 listopada 2026 r. Atakujący skopiował dane użytkowników, a incydent został wykryty i zablokowany 16 listopada.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "South Korea’s power giant KEPCO confirms data breach impacting 1.5 million",
+    "link": "https://www.bleepingcomputer.com/news/security/south-koreas-power-giant-kepco-confirms-data-breach-impacting-15-million/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma Korea Electric Power Corporation (KEPCO) potwierdziła wyciek danych ponad 1,5 mln osób po włamaniu do wewnętrznej sieci oraz systemów ON i SRM. Atak wykryto 20 listopada, po czym zablokowano dostęp zewnętrzny i zawieszono usługi.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Korea Electric Power Corporation (KEPCO) potwierdziło wyciek danych ponad 1,5 mln osób po włamaniu do wewnętrznej sieci i systemów ON oraz SRM. Atak został wykryty 20 listopada, a dostęp zewnętrzny został zablokowany, a usługi zawieszone.",
+        "after": "Firma Korea Electric Power Corporation (KEPCO) potwierdziła wyciek danych ponad 1,5 mln osób po włamaniu do wewnętrznej sieci oraz systemów ON i SRM. Atak wykryto 20 listopada, po czym zablokowano dostęp zewnętrzny i zawieszono usługi.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "Attackers' AI Agents Found a Zero-Day in Medical-Imaging Software and Gained Root Access",
+    "link": "https://thehackernews.com/2026/11/attackers-ai-agents-found-zero-day-in.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Chińscy hakerzy użyli autonomicznych agentów AI, aby wykryć nieznaną wcześniej lukę typu path-traversal w MONAI Label w wersjach 0.8.5 i starszych. Luka została naprawiona w kodzie źródłowym, ale nie ma jeszcze dostępnej wersji z poprawką.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H159",
+      "H189"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "Hackers breach Austrian Foreign Ministry website, access diplomats' contact details",
+    "link": "https://therecord.media/austrian-foreign-ministry-says-website-hacked",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Hakerzy włamali się do jednej ze stron internetowych austriackiego Ministerstwa Spraw Zagranicznych. Uzyskali dostęp do nazwisk i danych kontaktowych dyplomatów w Wiedniu oraz w placówkach zagranicznych. Incydent został opanowany i nie wyciekły dane publiczne.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Hakerzy włamali się do jednej ze stron internetowych austriackiego Ministerstwa Spraw Zagranicznych. Uzyskali dostęp do nazw i danych kontaktowych dyplomatów w Wiedniu oraz w placówkach zagranicznych. Incydent został opanowany i nie wyciekły dane publiczne.",
+        "after": "Hakerzy włamali się do jednej ze stron internetowych austriackiego Ministerstwa Spraw Zagranicznych. Uzyskali dostęp do nazwisk i danych kontaktowych dyplomatów w Wiedniu oraz w placówkach zagranicznych. Incydent został opanowany i nie wyciekły dane publiczne.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "FBI reportedly facing second data breach involving National Crime Information Center",
+    "link": "https://therecord.media/fbi-cyberattack-data-breach",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "FBI bada wyciek danych z National Crime Information Center, bazy używanej przez amerykańskie organy ścigania. To drugi potwierdzony atak na FBI w tym roku.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "Dowolna złośliwa appka na iOS mogła sobie słuchać mikrofonu",
+    "link": "https://sekurak.pl/dowolna-zlosliwa-appka-na-ios-mogla-sobie-sluchac-mikrofonu/",
+    "source": "sekurak.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Zgłoszono podatność CVE-2026-65339 w iOS, która umożliwia dowolnej złośliwej aplikacji nasłuchiwanie za pomocą mikrofonu bez żądania zgody i bez wyświetlania żółtej ikony na iPhonie. Apple nie podało jeszcze informacji o dostępnej łatce.",
+    "cves": [
+      "CVE-2026-65339"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zgłoszono podatność CVE-2026-65339 w iOS, która umożliwia dowolnej złośliwej aplikacji nasłuchiwanie mikrofonu bez żądania zgody i bez wyświetlania żółtej ikony na iPhonie. Apple nie podało jeszcze informacji o dostępnej łatce.",
+        "after": "Zgłoszono podatność CVE-2026-65339 w iOS, która umożliwia dowolnej złośliwej aplikacji nasłuchiwanie za pomocą mikrofonu bez żądania zgody i bez wyświetlania żółtej ikony na iPhonie. Apple nie podało jeszcze informacji o dostępnej łatce.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-24",
+    "title": "Od łatki do exploita bez udziału człowieka. Co zmienia pierwszy w pełni zautomatyzowany atak AI?",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/od-latki-do-exploita-bez-udzialu-czlowieka-co-zmienia-pierwszy-w-pelni-zautomatyzowany-atak-ai",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Google Threat Intelligence Group w raporcie z połowy listopada 2026 r. opisała w pełni zautomatyzowany atak AI. System exploit_agent samodzielnie wykrywał luki, generował exploita i uruchamiał go, co skróciło czas od publikacji poprawki do przeprowadzenia ataku do kilku godzin.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Google Threat Intelligence Group w raporcie z połowy listopada 2026 opisał w pełni zautomatyzowany atak AI. System exploit_agent samodzielnie wykrywał luki, generował exploit i uruchamiał go, co skróciło czas od publikacji poprawki do działania ataku do kilku godzin.",
+        "after": "Google Threat Intelligence Group w raporcie z połowy listopada 2026 r. opisała w pełni zautomatyzowany atak AI. System exploit_agent samodzielnie wykrywał luki, generował exploita i uruchamiał go, co skróciło czas od publikacji poprawki do przeprowadzenia ataku do kilku godzin.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H386"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

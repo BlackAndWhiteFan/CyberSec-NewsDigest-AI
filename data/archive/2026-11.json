@@ -7650,5 +7650,336 @@
       "H386"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "VMware vCenter Hit by Another Critical 9.8-Rated Auth Bypass Flaw After Zero-Day Exploitation",
+    "link": "https://thehackernews.com/2026/11/vmware-vcenter-hit-by-another-critical.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "VMware Updates Patch Critical ESX, vCenter Vulnerabilities",
+        "link": "https://www.securityweek.com/vmware-updates-patch-critical-esx-vcenter-vulnerabilities/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Firma Broadcom wydała poprawki dla VMware vCenter, usuwając m.in. krytyczną lukę CVE-2026-123903 umożliwiającą obejście uwierzytelniania w usłudze Directory Service. Luka pozwala atakującemu z dostępem sieciowym na uzyskanie nieuprawnionego dostępu do systemu.",
+    "cves": [
+      "CVE-2026-123903"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Broadcom wydał poprawki dla VMware vCenter, w tym krytyczną lukę CVE-2026-123903 umożliwiającą obejście uwierzytelnienia w usłudze Directory Service. Luka może być wykorzystana przez atakującego z dostępem sieciowym do nieautoryzowanego dostępu do systemu.",
+        "after": "Firma Broadcom wydała poprawki dla VMware vCenter, usuwając m.in. krytyczną lukę CVE-2026-123903 umożliwiającą obejście uwierzytelniania w usłudze Directory Service. Luka pozwala atakującemu z dostępem sieciowym na uzyskanie nieuprawnionego dostępu do systemu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H159",
+      "H725"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Hackers Exploit N-able MailAssure Flaw While AI Agents Exploit MONAI Label Zero-Day",
+    "link": "https://thehackernews.com/2026/11/hackers-exploit-n-able-mailassure-flaw.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "CISA warns of exploited N-able bug as company restores email platform",
+        "link": "https://therecord.media/cisa-nable-cybersecurity-bug",
+        "source": "therecord.media"
+      }
+    ],
+    "continuation": true,
+    "summary": "CISA dodała do katalogu KEV dwie podatności, w tym CVE-2026-134624 w N-able MailAssure, której aktywne wykorzystanie spowodowało zakłócenie usług 16 listopada 2026. Luka jest wykorzystywana w atakach, a producent potwierdził usunięcie incydentu po naprawie jednego serwera.",
+    "cves": [
+      "CVE-2026-134624"
+    ],
+    "kev": [
+      "CVE-2026-134624"
+    ],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H150",
+      "H153",
+      "H159"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Wyciek danych po cyberataku na Komisję Europejską. Użytkownicy zagrożeni",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/wyciek-danych-po-cyberataku-na-komisje-europejska-uzytkownicy-zagrozeni",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "European Commission confirms data theft in EU Academy breach",
+        "link": "https://www.bleepingcomputer.com/news/security/european-commission-confirms-data-theft-in-eu-academy-breach/",
+        "source": "bleepingcomputer.com"
+      },
+      {
+        "title": "European Commission Uncovers Data Breach in Cyberattack Investigation",
+        "link": "https://www.securityweek.com/european-commission-uncovers-data-breach-in-cyberattack-investigation/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Komisja Europejska ujawniła wyciek danych użytkowników platformy EU Academy, w tym imion, nazwisk i adresów e-mail, po cyberataku z końca października. Dane mogą zostać użyte do spersonalizowanych ataków phishingowych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Komisja Europejska ujawniła wyciek danych użytkowników platformy EU Academy, w tym imion, nazwisk i adresów e-mail po cyberataku pod koniec października. Dane mogą zostać użyte do spersonalizowanych ataków phishingowych.",
+        "after": "Komisja Europejska ujawniła wyciek danych użytkowników platformy EU Academy, w tym imion, nazwisk i adresów e-mail, po cyberataku z końca października. Dane mogą zostać użyte do spersonalizowanych ataków phishingowych.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Austriackie MSZ ofiarą cyberataku. Sprawcy mieli wgląd w dane pracowników",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/austriackie-msz-ofiara-cyberataku-sprawcy-mieli-wglad-w-dane-pracownikow",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Austriackie Ministerstwo Spraw Zagranicznych padło ofiarą ataku, w wyniku którego sprawcy uzyskali dostęp do imion, nazwisk i służbowych danych kontaktowych pracowników. Incydent został opanowany, a dodatkowe zabezpieczenia wdrożono po wykryciu nieuprawnionej aktywności.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Austriackie Ministerstwo Spraw Zagranicznych padło ofiarą ataku, w wyniku którego sprawcy uzyskali dostęp do imion, nazwisk i służbowych danych kontaktowych pracowników. Incydent został opanowany, a dodatkowe zabezpieczenia wdrożono po wykryciu nieautoryzowanej aktywności.",
+        "after": "Austriackie Ministerstwo Spraw Zagranicznych padło ofiarą ataku, w wyniku którego sprawcy uzyskali dostęp do imion, nazwisk i służbowych danych kontaktowych pracowników. Incydent został opanowany, a dodatkowe zabezpieczenia wdrożono po wykryciu nieuprawnionej aktywności.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H372",
+      "H693"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Wyciek danych klientów Microsoftu. Firma ostrzega przed kolejnymi atakami",
+    "link": "https://cyberdefence24.pl/wyciek-danych-klientow-microsoftu-firma-ostrzega-przed-kolejnymi-atakami",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "W usłudze Microsoft Entra Connect Health wykryto podatność, która pozostawała w systemie od 23 lipca do 9 listopada 2026 r., co umożliwiało nieuprawniony dostęp do informacji o klientach. Microsoft wdrożył poprawkę 19 listopada. Klienci nie muszą instalować aktualizacji samodzielnie.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "W usłudze Microsoft Entra Connect Health wykryto podatność, która pozostawała w systemie od 23 lipca do 9 listopada 2026, co umożliwiło nieuprawniony dostęp do informacji klientów. Microsoft wdrożył poprawkę 19 listopada. Klienci nie muszą instalować aktualizacji samodzielnie.",
+        "after": "W usłudze Microsoft Entra Connect Health wykryto podatność, która pozostawała w systemie od 23 lipca do 9 listopada 2026 r., co umożliwiało nieuprawniony dostęp do informacji o klientach. Microsoft wdrożył poprawkę 19 listopada. Klienci nie muszą instalować aktualizacji samodzielnie.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H164",
+      "H198",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Atak hakerski na kopalnię uranu. Zakłócono jej pracę",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/atak-hakerski-na-kopalnie-uranu-zaklocono-jej-prace",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Peninsula Energy poinformowało o cyberataku na kopalnię uranu Lance w Wyoming, który dotknął serwera i systemu operacyjnego zakładu, ale nie objął systemów administracyjnych.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Rackspace shuts down Spot cloud platform after security breach",
+    "link": "https://www.bleepingcomputer.com/news/security/rackspace-shuts-down-spot-cloud-platform-after-security-breach/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Rackspace zamyka platformę Rackspace Spot po incydencie, w którym hakerzy wykorzystali skradzione poświadczenia, aby uzyskać dostęp do klastrów Kubernetes klientów, odczytywać sekrety i tworzyć nieautoryzowane pody (kontenery). Usługa zostanie wyłączona 8 grudnia 2026, a klienci mają do tego czasu przenieść obciążenia i pobrać dane.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Rackspace zamyka platformę Rackspace Spot po incydencie, w którym hakerzy wykorzystali skradzione poświadczenia, aby uzyskać dostęp do klastrów Kubernetes klientów, czytać sekrety i tworzyć nieautoryzowane pody. Usługa zostanie wyłączona 8 grudnia 2026, a klienci mają do tego czasu przenieść obciążenia i pobrać dane.",
+        "after": "Rackspace zamyka platformę Rackspace Spot po incydencie, w którym hakerzy wykorzystali skradzione poświadczenia, aby uzyskać dostęp do klastrów Kubernetes klientów, odczytywać sekrety i tworzyć nieautoryzowane pody (kontenery). Usługa zostanie wyłączona 8 grudnia 2026, a klienci mają do tego czasu przenieść obciążenia i pobrać dane.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H207",
+      "H217"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Radware discloses breach exposing customer cloud access keys",
+    "link": "https://www.bleepingcomputer.com/news/security/radware-discloses-breach-exposing-customer-cloud-access-keys/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Radware ujawniło wyciek danych klientów po nieautoryzowanym dostępie do wewnętrznego API Cloud WAF, które było dostępne z internetu bez uwierzytelnienia. Atakujący mogli zobaczyć dane kontaktowe klientów oraz poświadczenia do eksportu logów. Firma zablokowała adres IP i wymieniła wszystkie wewnętrzne poświadczenia.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Radware ujawniło wyciek danych klientów po nieautoryzowanym dostępie do wewnętrznego API Cloud WAF, które było dostępne z Internetu bez uwierzytelnienia. Atakanci mogli zobaczyć dane kontaktowe klientów oraz poświadczenia do eksportu logów. Firma zablokowała adres IP i wymieniła wszystkie wewnętrzne poświadczenia.",
+        "after": "Radware ujawniło wyciek danych klientów po nieautoryzowanym dostępie do wewnętrznego API Cloud WAF, które było dostępne z internetu bez uwierzytelnienia. Atakujący mogli zobaczyć dane kontaktowe klientów oraz poświadczenia do eksportu logów. Firma zablokowała adres IP i wymieniła wszystkie wewnętrzne poświadczenia.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H207",
+      "H349",
+      "H411",
+      "H462"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "ShinyHunters claims to return after FBI arrests, uses old PGP keys as proof",
+    "link": "https://www.bleepingcomputer.com/news/security/shinyhunters-resurfaces-after-fbi-arrests-uses-old-pgp-keys-as-proof/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Okta Links ShinyHunters-Associated Vishing Group to New INCEPTION Data Leak Site",
+        "link": "https://thehackernews.com/2026/11/okta-links-shinyhunters-associated.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Grupa wymuszająca okupy ShinyHunters ogłosiła powrót na nowej stronie w sieci Tor, zamieszczając wiadomości podpisane historycznymi kluczami PGP z 2020 roku po serii aresztowań. Komunikaty mają potwierdzić, że nowi operatorzy posiadają dostęp do dawnych kluczy, ale nie wskazują na zmianę taktyki.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Grupa extorsyjna ShinyHunters ogłosiła powrót na nowej stronie Tor, zamieszczając wiadomości podpisane historycznymi kluczami PGP z 2020 roku po serii aresztowań. Komunikaty mają potwierdzić, że nowi operatorzy posiadają dostęp do dawnych kluczy, ale nie wskazują na zmianę taktyki.",
+        "after": "Grupa wymuszająca okupy ShinyHunters ogłosiła powrót na nowej stronie w sieci Tor, zamieszczając wiadomości podpisane historycznymi kluczami PGP z 2020 roku po serii aresztowań. Komunikaty mają potwierdzić, że nowi operatorzy posiadają dostęp do dawnych kluczy, ale nie wskazują na zmianę taktyki.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H381"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-25",
+    "title": "Check Point Security Management Servers Hacked in AI-Assisted Campaign",
+    "link": "https://www.securityweek.com/check-point-security-management-servers-hacked-in-ai-assisted-campaign/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Hackers compromise Check Point Servers in 22 organizations",
+        "link": "https://www.bleepingcomputer.com/news/security/hackers-compromise-check-point-servers-in-22-organizations/",
+        "source": "bleepingcomputer.com"
+      },
+      {
+        "title": "OpenAI and Cisco Unveil AI-Assisted Linux Security Tool to Block Exploits Before Patching",
+        "link": "https://thehackernews.com/2026/11/openai-and-cisco-unveil-ai-assisted.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Serwery zarządzające Check Point zostały zhakowane w kampanii wykorzystującej narzędzia AI, prowadzonej przez grupę GreyNoise Threat 13 z ponad 99 adresów IP. Działania obejmowały skanowanie, wykorzystanie luk i przejęcie kontroli, a atak dotknął co najmniej 22 organizacji w sektorach energetycznym, finansowym i rządowym.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "eksploatację",
+        "form": "eksploatacj*",
+        "suggestion": "wykorzystanie (luki)",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Serwery zarządzania Check Point zostały zhakowane w kampanii wykorzystującej narzędzia AI, prowadzonym przez grupę GreyNoise Threat 13 z ponad 99 adresów IP. Działania obejmowały skanowanie, wykorzystanie luk i kontrolę, a atak dotknął co najmniej 22 organizacji w sektorach energetycznym, finansowym i rządowym.",
+        "after": "Serwery zarządzające Check Point zostały zhakowane w kampanii wykorzystującej narzędzia AI, prowadzonej przez grupę GreyNoise Threat 13 z ponad 99 adresów IP. Działania obejmowały skanowanie, wykorzystanie luk i przejęcie kontroli, a atak dotknął co najmniej 22 organizacji w sektorach energetycznym, finansowym i rządowym.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H007",
+      "H386"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]

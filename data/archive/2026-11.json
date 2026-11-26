@@ -7981,5 +7981,326 @@
       "H386"
     ],
     "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "Zhackowali DIVD, holenderską organizację zajmującą się bezpieczeństwem w sieci",
+    "link": "https://sekurak.pl/zhackowali-divd-holenderska-organizacje-zajmujaca-sie-bezpieczenstwem-w-sieci/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "W organizacji DIVD, holenderskim podmiocie zajmującym się bezpieczeństwem w sieci, przeprowadzono atak wykorzystujący dwie podatności zero-day w systemie ticketowym Zammad, co pozwoliło uzyskać dostęp administratora i eskalować uprawnienia na całym serwerze. Atakujący przechwycili ruch sieciowy, wstrzyknęli token „remember-me” do bazy Jira/Confluence i wykradli 2 806 plików oraz 41 tysięcy tytułów zgłoszeń.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H159",
+      "H221"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "CISA warns of critical unpatched flaw in Danfoss refrigeration controllers",
+    "link": "https://www.bleepingcomputer.com/news/security/cisa-warns-of-critical-unpatched-flaw-in-danfoss-refrigeration-controllers/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "CISA ostrzegła przed krytyczną luką CVE-2026-129713 w kontrolerach Danfoss AK-SM 8xxA, wykorzystywaną w atakach na supermarkety w Europie, umożliwiającą zdalne wykonanie kodu bez uwierzytelnienia. Łatka nie jest jeszcze dostępna. Producent zapowiedział poprawkę w nadchodzącej wersji oprogramowania 5.5.x.",
+    "cves": [
+      "CVE-2026-129713"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H150",
+      "H166"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "Hackers now exploit critical Drupal RCE flaw to hijack sites",
+    "link": "https://www.bleepingcomputer.com/news/security/hackers-now-exploit-critical-drupal-rce-flaw-to-hijack-sites/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Drupal Fail2Install Exploit Details Emerge as Critical RCE Flaw Faces Active Exploitation",
+        "link": "https://thehackernews.com/2026/11/drupal-fail2install-exploit-details.html",
+        "source": "thehackernews.com"
+      },
+      {
+        "title": "Drupal Flaw Found by Anthropic Scanner Exploited in Attacks",
+        "link": "https://www.securityweek.com/drupal-flaw-found-by-anthropic-scanner-exploited-in-attacks/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Zespół bezpieczeństwa Drupala potwierdził aktywne wykorzystywanie krytycznej luki CVE-2026-132165, umożliwiającej niezalogowanym użytkownikom przejęcie witryny lub zdalne wykonanie kodu poprzez instalator install.php.",
+    "cves": [
+      "CVE-2026-132165"
+    ],
+    "kev": [
+      "CVE-2026-132165"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Zespół bezpieczeństwa Drupal potwierdził aktywne wykorzystywanie krytycznej luki CVE-2026-132165, umożliwiającej anonimowym użytkownikom przejęcie witryny lub zdalne wykonanie kodu poprzez instalator install.php.",
+        "after": "Zespół bezpieczeństwa Drupala potwierdził aktywne wykorzystywanie krytycznej luki CVE-2026-132165, umożliwiającej niezalogowanym użytkownikom przejęcie witryny lub zdalne wykonanie kodu poprzez instalator install.php.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H090",
+      "H150",
+      "H153"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "Wyciekły dane klientów Deichmanna",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/wyciekly-dane-klientow-deichmanna",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Deichmann poinformował o wycieku danych wybranych klientów, którzy robili zakupy online, w wyniku wykorzystania luki w zabezpieczeniach sklepu internetowego. Wykradziono informacje o zgłoszeniach, ale nie ujawniono haseł, danych logowania ani numerów kart kredytowych. Lukę usunięto, a dostęp sprawcom zablokowano.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Deichmann poinformował o wycieku danych wybranych klientów, którzy robili zakupy online, po wykorzystaniu luki w zabezpieczeniach sklepu internetowego. Wykradnięto informacje o zgłoszeniach, ale nie ujawniono haseł, danych logowania ani numerów kart kredytowych. Podatność została usunięta i dostęp sprawcom zablokowano.",
+        "after": "Deichmann poinformował o wycieku danych wybranych klientów, którzy robili zakupy online, w wyniku wykorzystania luki w zabezpieczeniach sklepu internetowego. Wykradziono informacje o zgłoszeniach, ale nie ujawniono haseł, danych logowania ani numerów kart kredytowych. Lukę usunięto, a dostęp sprawcom zablokowano.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "System wywiadowczy CIA i ODNI zhakowany",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/system-wywiadowczy-cia-i-odni-zhakowany",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Wykryto włamanie do niejawnej platformy wywiadowczej CIA i ODNI, służącej do analizy danych OSINT. Atak spowodował zakłócenie jej działania, ale nie wpłynął na systemy tajne i nie potwierdzono kradzieży danych. Agencje nie ujawniły źródła ataku.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Włamanie wykryto w niejawnej platformie wywiadowczej CIA i ODNI, służącej do analizy danych OSINT, co spowodowało zakłócenie jej działania, ale nie wpłynęło na systemy tajne i nie potwierdzono kradzieży danych. Agencje nie ujawniły źródła ataku.",
+        "after": "Wykryto włamanie do niejawnej platformy wywiadowczej CIA i ODNI, służącej do analizy danych OSINT. Atak spowodował zakłócenie jej działania, ale nie wpłynął na systemy tajne i nie potwierdzono kradzieży danych. Agencje nie ujawniły źródła ataku.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H706"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "Podatności w module PrestaHelp phsuperpack dla Prestashop",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-114346/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities",
+      "poland"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "CERT Polska otrzymał zgłoszenie o dwóch podatnościach w module PrestaHelp do pakowania dla PrestaShop. Luka CVE-2026-114346 umożliwia atakującemu bez uwierzytelnienia modyfikację danych modułu i produktów, a CVE-2026-114347 pozwala uwierzytelnionemu atakującemu z wysokimi uprawnieniami wykonać atak SQL Injection i odczytać lub zmodyfikować bazę danych sklepu.",
+    "cves": [
+      "CVE-2026-114346",
+      "CVE-2026-114347"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "CERT Polska otrzymało zgłoszenie o dwóch podatnościach w module PrestaHelp do pakowania dla PrestaShop. Luka CVE-2026-114346 umożliwia nieuwierzytelnionemu atakującemu modyfikację danych modułu i produktów, a CVE-2026-114347 pozwala uwierzytelnionemu atakującemu z wysokimi uprawnieniami wykonać SQL Injection i odczytać lub zmodyfikować bazę danych sklepu.",
+        "after": "CERT Polska otrzymał zgłoszenie o dwóch podatnościach w module PrestaHelp do pakowania dla PrestaShop. Luka CVE-2026-114346 umożliwia atakującemu bez uwierzytelnienia modyfikację danych modułu i produktów, a CVE-2026-114347 pozwala uwierzytelnionemu atakującemu z wysokimi uprawnieniami wykonać atak SQL Injection i odczytać lub zmodyfikować bazę danych sklepu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "1Password customer data stolen after employee GitHub account breach",
+    "link": "https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "1Password Hacked, Customer Data and Source Code Stolen in GitHub Account Breach",
+        "link": "https://thehackernews.com/2026/11/1password-hacked-customer-data-and.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "1Password ujawniło wyciek danych klientów po włamaniu na konto pracownika w serwisie GitHub, które zostało użyte do wstrzyknięcia złośliwego kodu do usług zaplecza. Atakujący uzyskali dostęp do wewnętrznych repozytoriów kodu i poświadczeń CI/CD, a skradzione tokeny nie umożliwiają samodzielnego logowania bez SSO lub kodu weryfikacyjnego.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "1Password ujawniło wyciek danych klientów po włamaniu na konto pracownika w GitHubie, które zostało użyte do wstrzyknięcia złośliwego kodu do usług zaplecza. Atakujący uzyskali dostęp do wewnętrznych repozytoriów kodu i poświadczeń CI/CD, a skradzione tokeny nie umożliwiają samodzielnego logowania bez SSO lub kodu weryfikacyjnego.",
+        "after": "1Password ujawniło wyciek danych klientów po włamaniu na konto pracownika w serwisie GitHub, które zostało użyte do wstrzyknięcia złośliwego kodu do usług zaplecza. Atakujący uzyskali dostęp do wewnętrznych repozytoriów kodu i poświadczeń CI/CD, a skradzione tokeny nie umożliwiają samodzielnego logowania bez SSO lub kodu weryfikacyjnego.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H205",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "FIFA says hackers accessed ‘limited set of personal and business information’",
+    "link": "https://therecord.media/fifa-data-breach-limited",
+    "source": "therecord.media",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "Luka w Windows Remote Access API pozwala uzyskać uprawnienia SYSTEM. Microsoft udostępnił poprawkę",
+        "link": "https://kapitanhack.pl/luka-w-windows-remote-access-api-pozwala-uzyskac-uprawnienia-system-microsoft-udostepnil-poprawke/",
+        "source": "kapitanhack.pl"
+      }
+    ],
+    "continuation": false,
+    "summary": "FIFA potwierdziła, że hakerzy uzyskali nieuprawniony dostęp do ograniczonego zestawu danych osobowych i firmowych, a grupa Handsome Boy Hacking Club opublikowała ponad 12 GB wykradzionych plików. Dane obejmują dokumenty tożsamości, informacje finansowe i prawne, co może zostać wykorzystane w kolejnych atakach.",
+    "cves": [
+      "CVE-2026-119853"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "FIFA potwierdziło, że hakerzy uzyskali nieautoryzowany dostęp do ograniczonego zestawu danych osobowych i firmowych, a grupa Handsome Boy Hacking Club opublikowała ponad 12 GB wykradzionych plików. Dane obejmują dokumenty tożsamości, informacje finansowe i prawne, co może być wykorzystane w dalszych atakach.",
+        "after": "FIFA potwierdziła, że hakerzy uzyskali nieuprawniony dostęp do ograniczonego zestawu danych osobowych i firmowych, a grupa Handsome Boy Hacking Club opublikowała ponad 12 GB wykradzionych plików. Dane obejmują dokumenty tożsamości, informacje finansowe i prawne, co może zostać wykorzystane w kolejnych atakach.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "Podatność w oprogramowaniu LiteSpeed Cache Plugin for Prestashop",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-129968/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Wtyczka LiteSpeed Cache dla PrestaShop zawiera lukę CVE-2026-129968, która pozwala atakującemu bez uwierzytelnienia na zdalne wstrzyknięcie szablonu, uzyskanie pełnej kontroli nad sklepem oraz dostęp do danych klientów i płatności. CERT Polska koordynował proces ujawnienia tej podatności.",
+    "cves": [
+      "CVE-2026-129968"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "nieautoryzowanemu atakującemu",
+        "form": "nieautoryzowan* atakując*",
+        "suggestion": "atakujący bez uwierzytelnienia, niezalogowany atakujący",
+        "fixed_by": "ai"
+      },
+      {
+        "type": "proofreading",
+        "before": "Wtyczka LiteSpeed Cache dla Prestashop zawiera lukę CVE-2026-129968, która pozwala atakującemu bez uwierzytelnienia na zdalne przetwarzanie szablonów i uzyskanie pełnej kontroli nad sklepem oraz dostęp do danych klientów i płatności. CERT Polska koordynował proces ujawnienia tej podatności.",
+        "after": "Wtyczka LiteSpeed Cache dla PrestaShop zawiera lukę CVE-2026-129968, która pozwala atakującemu bez uwierzytelnienia na zdalne wstrzyknięcie szablonu, uzyskanie pełnej kontroli nad sklepem oraz dostęp do danych klientów i płatności. CERT Polska koordynował proces ujawnienia tej podatności.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H164",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-26",
+    "title": "Podatność w ASSA ABLOY Seawing SC-1000 WebConfig",
+    "link": "https://cert.pl/posts/2026/11/CVE-2026-97180/",
+    "source": "cert.pl",
+    "categories": [
+      "vulnerabilities"
+    ],
+    "score": 2,
+    "related": [],
+    "continuation": false,
+    "summary": "Komponent WebConfig w urządzeniach ASSA ABLOY Seawing SC-1000 zawiera lukę CVE-2026-97180, która umożliwia zdalne wstrzyknięcie poleceń i wykonanie ich z uprawnieniami roota. CERT Polska uczestniczył w koordynacji ujawnienia tej podatności.",
+    "cves": [
+      "CVE-2026-97180"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "WebConfig w urządzeniach ASSA ABLOY Seawing SC-1000 ma lukę CVE-2026-97180 umożliwiającą zdalne wstrzyknięcie poleceń i wykonanie ich z uprawnieniami root. CERT Polska uczestniczył w koordynacji ujawnienia tej podatności.",
+        "after": "Komponent WebConfig w urządzeniach ASSA ABLOY Seawing SC-1000 zawiera lukę CVE-2026-97180, która umożliwia zdalne wstrzyknięcie poleceń i wykonanie ich z uprawnieniami roota. CERT Polska uczestniczył w koordynacji ujawnienia tej podatności.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H164",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
   }
 ]

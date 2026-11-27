@@ -8302,5 +8302,303 @@
       "H434"
     ],
     "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Remus malware steals Gmail messages via fake Google Sheets extension",
+    "link": "https://www.bleepingcomputer.com/news/security/remus-malware-steals-gmail-messages-via-fake-google-sheets-extension/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Infostealer Remus wykrada wiadomości z Gmaila poprzez złośliwe rozszerzenie do Chrome, które pozostaje w przeglądarce po zmianie hasła i wylogowaniu. Badacze z Hudson Rock oraz zespoły GenDigital i Invoke RE potwierdzili, że nie ma dowodów na wykorzystanie luki zero-day, a funkcjonalność opiera się wyłącznie na zainstalowanym dodatku.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Remus infostealer wykrada wiadomości Gmail poprzez złośliwe rozszerzenie Chrome, które pozostaje w przeglądarce po zmianie hasła i wylogowaniu. Badacze z Hudson Rock oraz zespoły GenDigital i Invoke RE potwierdzili, że nie ma dowodu na wykorzystanie luki zero-day, a funkcjonalność opiera się wyłącznie na zainstalowanym dodatku.",
+        "after": "Infostealer Remus wykrada wiadomości z Gmaila poprzez złośliwe rozszerzenie do Chrome, które pozostaje w przeglądarce po zmianie hasła i wylogowaniu. Badacze z Hudson Rock oraz zespoły GenDigital i Invoke RE potwierdzili, że nie ma dowodów na wykorzystanie luki zero-day, a funkcjonalność opiera się wyłącznie na zainstalowanym dodatku.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H019",
+      "H028",
+      "H159"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Drupal Warns of New Highly Critical Site Takeover Vulnerability Under Active Exploitation",
+    "link": "https://thehackernews.com/2026/11/drupal-warns-of-new-highly-critical.html",
+    "source": "thehackernews.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Drupal Installer Patch Left a Gap Attackers Are Already Exploiting",
+        "link": "https://www.securityweek.com/drupal-installer-patch-left-a-gap-attackers-are-already-exploiting/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Drupal ostrzega przed nową krytyczną podatnością w rdzeniu, oznaczoną jako CVE-2026-136716, która jest wykorzystywana w rzeczywistych atakach.",
+    "cves": [
+      "CVE-2026-132165",
+      "CVE-2026-136716"
+    ],
+    "kev": [
+      "CVE-2026-132165"
+    ],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H133",
+      "H150",
+      "H164"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Mitel MiCollab Zero-Days Exploited in Suspected AI-Assisted Attacks",
+    "link": "https://www.securityweek.com/mitel-micollab-zero-days-exploited-in-suspected-ai-assisted-attacks/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Hackers Exploit 10 Vulnerabilities Across Mitel, Juniper, Vates, and Danfoss Products",
+        "link": "https://thehackernews.com/2026/11/hackers-exploit-10-vulnerabilities.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "",
+    "cves": [
+      "CVE-2026-133275"
+    ],
+    "kev": [
+      "CVE-2026-133275"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "glossary",
+        "id": "H182",
+        "used": "podniesienie uprawnień",
+        "required": "podwyższenie uprawnień",
+        "fixed_by": "dropped"
+      }
+    ],
+    "terms": [],
+    "proofread": ""
+  },
+  {
+    "date": "2026-11-27",
+    "title": "WOT chce mieć cyberzespoły w każdym województwie. Terytorialsi pokazali plan rozwoju",
+    "link": "https://cyberdefence24.pl/armia-i-sluzby/wojsko-polskie/wot-chce-miec-cyberzespoly-w-kazdym-wojewodztwie-terytorialsi-pokazali-plan-rozwoju",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical",
+      "poland"
+    ],
+    "score": 4,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół Działań Cyberprzestrzennych DWOT wsparł Szpital Zespolony w Szczecinie po poważnym cyberataku, przywracając infrastrukturę IT i usługi domenowe.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Autopay potwierdza, że włamywacz miał dostęp do kodów CVV2",
+    "link": "https://niebezpiecznik.pl/post/autopay-potwierdza-ze-wlamywacz-mial-dostep-do-kodow-cvv2/",
+    "source": "niebezpiecznik.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": true,
+    "summary": "Autopay potwierdziło, że włamywacz uzyskał dostęp do kodu CVV2 oraz innych danych karty płatniczej.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Autopay potwierdził, że włamywacz uzyskał dostęp do kodu CVV2 oraz innych danych karty płatniczej.",
+        "after": "Autopay potwierdziło, że włamywacz uzyskał dostęp do kodu CVV2 oraz innych danych karty płatniczej.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Incydent bezpieczeństwa w firmie drEryk – producencie oprogramowania medycznego.",
+    "link": "https://sekurak.pl/incydent-bezpieczenstwa-w-dreryk-producencie-oprogramowania-medycznego/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "drEryk zhakowany. Ostrzeżenie dla pacjentów i placówek korzystających z eRejestracji",
+        "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/dreryk-zhakowany-ostrzezenie-dla-pacjentow-i-placowek-korzystajacych-z-erejestracji",
+        "source": "cyberdefence24.pl"
+      }
+    ],
+    "continuation": false,
+    "summary": "Firma drEryk potwierdziła nieuprawniony dostęp do swoich systemów i odcięła przejęty serwer. Analiza wskazuje na niekontrolowaną deserializację w przestarzałym komponencie aplikacji portalowej, co może umożliwić zdalne wykonanie kodu i dotyczy danych eRejestracji, w tym IP, NIP, REGON i PESEL pacjentów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "skompromitowany",
+        "form": "skompromitowa*",
+        "suggestion": "przejęty, zaatakowany",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "Firma drEryk potwierdziła nieuprawniony dostęp do swoich systemów i odcięła skompromitowany serwer. Analiza wskazuje na niekontrolowaną deserializację w przestarzałym komponencie aplikacji portalowej, co może umożliwić zdalne wykonanie kodu i dotyczy danych eRejestracji, w tym IP, NIP, REGON i PESEL pacjentów.",
+        "after": "Firma drEryk potwierdziła nieuprawniony dostęp do swoich systemów i odcięła przejęty serwer. Analiza wskazuje na niekontrolowaną deserializację w przestarzałym komponencie aplikacji portalowej, co może umożliwić zdalne wykonanie kodu i dotyczy danych eRejestracji, w tym IP, NIP, REGON i PESEL pacjentów.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H417"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Incydent bezpieczeństwa w 1Password.",
+    "link": "https://sekurak.pl/incydent-bezpieczenstwa-w-1password/",
+    "source": "sekurak.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [
+      {
+        "title": "1Password Breach Exposes Customer Data, Internal Source Code",
+        "link": "https://www.securityweek.com/1password-breach-exposes-customer-data-internal-source-code/",
+        "source": "securityweek.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "1Password poinformowało o nieuprawnionym dostępie do części systemów zaplecza po kradzieży danych logowania pracownika do serwisu GitHub. Atakujący wykradł fragmenty kodu źródłowego i zmodyfikował go, co spowodowało wyciek adresów e-mail, imion i nazwisk oraz części metadanych klientów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "1Password poinformowało o nieautoryzowanym dostępie do części systemów backendowych po kradzieży danych logowania do GitHub pracownika. Atakujący wykradł fragmenty kodu źródłowego i zmodyfikował go, co spowodowało wyciek e-maili, imion i nazwisk oraz części metadanych klientów.",
+        "after": "1Password poinformowało o nieuprawnionym dostępie do części systemów zaplecza po kradzieży danych logowania pracownika do serwisu GitHub. Atakujący wykradł fragmenty kodu źródłowego i zmodyfikował go, co spowodowało wyciek adresów e-mail, imion i nazwisk oraz części metadanych klientów.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Seria cyberataków na statki handlowe. Służby podejrzewają Iran",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/cyberataki/seria-cyberatakow-na-statki-handlowe-sluzby-podejrzewaja-iran",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Amerykańskie służby obserwują wzmożoną aktywność grup hakerskich powiązanych z Iranem, które atakują systemy sterowania przemysłowego i infrastrukturę morską. W ostatnich miesiącach zgłoszono manipulacje danymi paliwa w zbiornikach oraz dostęp do systemów identyfikacji jednostek i kamer pokładowych statków.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "FIFA ofiarą cyberataku. Sprawcy twierdzą, że wykradli 12 GB danych",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/fifa-ofiara-cyberataku-sprawcy-twierdza-ze-wykradli-12-gb-danych",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "FIFA potwierdziła cyberatak. Grupa Handsome Boy Hacking Club twierdzi, że przejęła ponad 12 GB danych osobowych i biznesowych. Przestępcy nie uzyskali dostępu do dokumentacji projektu FIFA Forward Enterprise i nie potwierdzono żądania okupu.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "FIFA potwierdziła cyberatak, w wyniku którego grupa Handsome Boy Hacking Club twierdzi, że przejęła ponad 12 GB danych osobowych i biznesowych. Przestępcy nie uzyskali dostępu do dokumentacji projektu FIFA Forward Enterprise i nie potwierdzono wymuszenia okupu.",
+        "after": "FIFA potwierdziła cyberatak. Grupa Handsome Boy Hacking Club twierdzi, że przejęła ponad 12 GB danych osobowych i biznesowych. Przestępcy nie uzyskali dostępu do dokumentacji projektu FIFA Forward Enterprise i nie potwierdzono żądania okupu.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H372"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-27",
+    "title": "Skradziono dane ponad miliona mieszkańców Belgii. Użyto chińskiego AI",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/skradziono-dane-ponad-miliona-mieszkancow-belgii-uzyto-chinskiego-ai",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Secutec ujawniło wyciek danych około 1,2 mln mieszkańców Flandrii po ataku wykorzystującym chiński model AI DeepSeek i framework Hermes Agent.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Secutec ujawniło wyciek danych około 1,2 mln mieszkańców Flandrii po ataku wykorzystującym chiński model AI DeepSeeka i framework Hermes Agent.",
+        "after": "Secutec ujawniło wyciek danych około 1,2 mln mieszkańców Flandrii po ataku wykorzystującym chiński model AI DeepSeek i framework Hermes Agent.",
+        "model": "Gemini gemini-3.8-flash"
+      }
+    ],
+    "terms": [
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.8-flash"
   }
 ]

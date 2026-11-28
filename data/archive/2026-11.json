@@ -8600,5 +8600,333 @@
       "H411"
     ],
     "proofread": "Gemini gemini-3.8-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Niezależny badacz ujawnił 33 krytyczne luki w platformie N-central",
+    "link": "https://www.huntress.com/blog/n-able-disables-cloud-services-following-disclosure-of-able2shell-exploit-chains",
+    "source": "huntress.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 7,
+    "related": [],
+    "continuation": false,
+    "summary": "Firma N-able wydała hotfix N-central 2026.4 HF3 (build 2026.4.1.39) naprawiający 17 podatności, w tym trzy krytyczne. Publiczny PoC dla wszystkich CVE został udostępniony 16 listopada, więc niezałatane serwery są narażone. Poprawka jest dostępna w wersji N-central 2026.4 HF3.",
+    "cves": [
+      "CVE-2026-129271",
+      "CVE-2026-129272",
+      "CVE-2026-129273",
+      "CVE-2026-129274",
+      "CVE-2026-129275",
+      "CVE-2026-129276",
+      "CVE-2026-129277",
+      "CVE-2026-129280",
+      "CVE-2026-129281",
+      "CVE-2026-129282",
+      "CVE-2026-129286",
+      "CVE-2026-129287"
+    ],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "N-able wydało hotfix N-central 2026.4 HF3 (build 2026.4.1.39) naprawiający 17 podatności, w tym trzy krytyczne. Publiczny PoC dla wszystkich CVE został udostępniony 16 listopada, więc niezałatany serwer jest narażony. Poprawka jest w wersji N-central 2026.4 HF3.",
+        "after": "Firma N-able wydała hotfix N-central 2026.4 HF3 (build 2026.4.1.39) naprawiający 17 podatności, w tym trzy krytyczne. Publiczny PoC dla wszystkich CVE został udostępniony 16 listopada, więc niezałatane serwery są narażone. Poprawka jest dostępna w wersji N-central 2026.4 HF3.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H152"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "VMware naprawia krytyczne luki w zabezpieczeniach systemów ESX i vCenter",
+    "link": "https://kapitanhack.pl/vmware-naprawia-krytyczne-luki-w-zabezpieczeniach-systemow-esx-i-vcenter/",
+    "source": "kapitanhack.pl",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Chińska grupa wykorzystała lukę w VMware vCenter przed jej ujawnieniem",
+        "link": "https://cloud.google.com/blog/topics/threat-intelligence/armory-castle-exploits-vsphere",
+        "source": "cloud.google.com"
+      }
+    ],
+    "continuation": true,
+    "summary": "Broadcom opublikował poprawki usuwające 23 luki w produktach VMware, w tym krytyczną lukę CVE-2026-123903 umożliwiającą obejście uwierzytelniania w usłudze VMware Directory Service (CVSS 9,8). Aktualizacje dla vCenter i ESX są dostępne i eliminują te podatności.",
+    "cves": [
+      "CVE-2026-123903"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H150",
+      "H151",
+      "H725"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Ruby2Shell - krytyczna luka w Ruby umożliwiająca zdalne wykonanie kodu",
+    "link": "https://verialabs.com/ruby2shell/",
+    "source": "verialabs.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Zespół badaczy ujawnił krytyczną lukę Ruby2Shell, umożliwiającą zdalne wykonanie kodu przez przepełnienie bufora w funkcjach upcase i podobnych. Poprawka musi pochodzić od dostawcy, a proof-of-concept zostanie opublikowany po 25 listopada.",
+    "cves": [],
+    "kev": [],
+    "via": "Zaufana Trzecia Strona (Weekendowa lektura)",
+    "language": [],
+    "terms": [
+      "H080"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Unpatched Cacti zero-day with public PoC gives remote code execution",
+    "link": "https://www.bleepingcomputer.com/news/security/unpatched-cacti-zero-day-with-public-poc-gives-remote-code-execution/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [
+      {
+        "title": "Unpatched Cacti Zero-Day Enables RCE in Just Four HTTP Requests via Guest Access",
+        "link": "https://thehackernews.com/2026/11/unpatched-cacti-zero-day-enables-rce-in.html",
+        "source": "thehackernews.com"
+      }
+    ],
+    "continuation": false,
+    "summary": "Badacz odkrył lukę zero-day w platformie Cacti, dającą atakującemu bez uwierzytelnienia możliwość wykonania poleceń na serwerze po czterech żądaniach HTTP. Publiczny exploit „4HTTP2SHELL” został udostępniony, co sprawia, że podatność jest aktywnie wykorzystywana.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "nieautoryzowanemu atakującemu",
+        "form": "nieautoryzowan* atakując*",
+        "suggestion": "atakujący bez uwierzytelnienia, niezalogowany atakujący",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "Badacz odkrył zero-day w platformie Cacti, dający nieautoryzowanemu atakującemu możliwość wykonania poleceń na serwerze po czterech żądaniach HTTP. Publiczny exploit „4HTTP2SHELL” został udostępniony, co czyni podatność pilnie wykorzystywaną.",
+        "after": "Badacz odkrył lukę zero-day w platformie Cacti, dającą atakującemu bez uwierzytelnienia możliwość wykonania poleceń na serwerze po czterech żądaniach HTTP. Publiczny exploit „4HTTP2SHELL” został udostępniony, co sprawia, że podatność jest aktywnie wykorzystywana.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H152",
+      "H153",
+      "H159",
+      "H164",
+      "H454",
+      "H746"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Drupal warns of new site takeover flaw exploited in attacks",
+    "link": "https://www.bleepingcomputer.com/news/security/drupal-warns-of-new-access-bypass-flaw-exploited-in-attacks/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": true,
+    "summary": "Drupal ostrzega przed nową krytyczną luką CVE-2026-136716, wykorzystywaną w atakach i pozwalającą na przejęcie niezałatanych witryn. Poprzednia luka CVE-2026-132165 była już aktywnie wykorzystywana.",
+    "cves": [
+      "CVE-2026-132165",
+      "CVE-2026-136716"
+    ],
+    "kev": [
+      "CVE-2026-132165",
+      "CVE-2026-136716"
+    ],
+    "via": "",
+    "language": [
+      {
+        "type": "style",
+        "used": "eksploatowana",
+        "form": "eksploatowa*",
+        "suggestion": "wykorzystywał, wykorzystywano",
+        "fixed_by": "remains"
+      },
+      {
+        "type": "proofreading",
+        "before": "Drupal ostrzega przed nową krytyczną luką CVE-2026-136716, wykorzystywaną w atakach i pozwalającą na przejęcie niezałatanych witryn. Poprzednia luka CVE-2026-132165 była już aktywnie eksploatowana.",
+        "after": "Drupal ostrzega przed nową krytyczną luką CVE-2026-136716, wykorzystywaną w atakach i pozwalającą na przejęcie niezałatanych witryn. Poprzednia luka CVE-2026-132165 była już aktywnie wykorzystywana.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "New NFS2ROOT Linux flaw can let attackers gain root privileges",
+    "link": "https://www.bleepingcomputer.com/news/security/new-nfs2root-linux-flaw-can-let-attackers-gain-root-privileges/",
+    "source": "bleepingcomputer.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Krytyczna luka w serwerze NFS systemu Linux, oznaczona CVE-2026-99362 i nazwana NFS2ROOT, pozwala atakującym bez uwierzytelnienia uzyskać uprawnienia roota na serwerach z usługą NFSD i otwartym portem 2049. Luka jest wykorzystywana w atakach zdalnych, a poprawka została przekazana deweloperom NFSD po jej odkryciu w sierpniu.",
+    "cves": [
+      "CVE-2026-99362"
+    ],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Krytyczna luka w serwerze NFS systemu Linux, oznaczona CVE-2026-99362 i nazwana NFS2ROOT, pozwala nieupoważnionym atakującym uzyskać uprawnienia root na serwerach z nfsd i otwartym portem 2049. Luka jest wykorzystywana w atakach zdalnych, a poprawka została przekazana maintainerom NFSD po jej odkryciu w sierpniu.",
+        "after": "Krytyczna luka w serwerze NFS systemu Linux, oznaczona CVE-2026-99362 i nazwana NFS2ROOT, pozwala atakującym bez uwierzytelnienia uzyskać uprawnienia roota na serwerach z usługą NFSD i otwartym portem 2049. Luka jest wykorzystywana w atakach zdalnych, a poprawka została przekazana deweloperom NFSD po jej odkryciu w sierpniu.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H150",
+      "H189"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Hex Package Manager Warns of Potential Data Breach",
+    "link": "https://www.securityweek.com/hex-package-manager-warns-of-potential-data-breach/",
+    "source": "securityweek.com",
+    "categories": [
+      "critical",
+      "vulnerabilities"
+    ],
+    "score": 5,
+    "related": [],
+    "continuation": false,
+    "summary": "Hex, menedżer pakietów dla Elixira i Erlanga, został zaatakowany 23 listopada z powodu luki w hex.pm, co umożliwiło odczytanie danych, takich jak hashe (skróty haseł) i sekrety MFA. Atak został zablokowany, a wszystkie serwery hex.pm zastąpiono wersjami z poprawką i zresetowano poświadczenia.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Hex, menedżer pakietów dla Elixira i Erlanga, został zaatakowany 23 listopada poprzez lukę w hex.pm, co umożliwiło odczytanie danych takich jak hashe haseł i sekrety MFA. Atak został zablokowany, a wszystkie serwery hex.pm zastąpiono wersjami z poprawką i zresetowano poświadczenia.",
+        "after": "Hex, menedżer pakietów dla Elixira i Erlanga, został zaatakowany 23 listopada z powodu luki w hex.pm, co umożliwiło odczytanie danych, takich jak hashe (skróty haseł) i sekrety MFA. Atak został zablokowany, a wszystkie serwery hex.pm zastąpiono wersjami z poprawką i zresetowano poświadczenia.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H207",
+      "H217",
+      "H232",
+      "H411"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Dane pracowników seksualnych dostępne bez hasła. Ogromny wyciek",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/dane-pracownikow-seksualnych-dostepne-bez-hasla-ogromny-wyciek",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Z serwisu HOT.com wyciekły dane wskutek publicznego udostępnienia bazy Elasticsearch z danymi pracowników seksualnych, obejmującej informacje o kontach i ich aktywności, co naraża użytkowników na dyskryminację i szantaż.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Serwis HOT.com wyciekł, udostępniając publicznie bazę Elasticsearch z danymi pracowników seksualnych, obejmującą informacje o kontach i aktywności, co naraża ich na dyskryminację i szantaż.",
+        "after": "Z serwisu HOT.com wyciekły dane wskutek publicznego udostępnienia bazy Elasticsearch z danymi pracowników seksualnych, obejmującej informacje o kontach i ich aktywności, co naraża użytkowników na dyskryminację i szantaż.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H647"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Oszustwa na Black Friday. Atrakcyjna oferta może być pułapką",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/poradniki/oszustwa-na-black-friday-atrakcyjna-oferta-moze-byc-pulapka",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "Oszuści wykorzystują Black Friday, podszywając się pod sklepy internetowe, firmy kurierskie oraz bramki płatnicze, aby wyłudzić dane osobowe i informacje o kartach płatniczych. CERT Polska obserwuje kampanię SMS z linkami do fałszywych stron imitujących serwis przewoźnika i zaleca zgłaszanie podejrzanych wiadomości na numer 8080.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [
+      {
+        "type": "proofreading",
+        "before": "Oszuści wykorzystują Black Friday, podszywając się pod sklepy internetowe, firmy kurierskie i fałszywe bramki płatnicze, aby wyłudzić dane osobowe i informacje o kartach płatniczych. CERT Polska obserwuje kampanię SMS z linkami do fałszywych stron imitujących serwis przewoźnika i zaleca zgłaszanie podejrzanych wiadomości na numer 8080.",
+        "after": "Oszuści wykorzystują Black Friday, podszywając się pod sklepy internetowe, firmy kurierskie oraz bramki płatnicze, aby wyłudzić dane osobowe i informacje o kartach płatniczych. CERT Polska obserwuje kampanię SMS z linkami do fałszywych stron imitujących serwis przewoźnika i zaleca zgłaszanie podejrzanych wiadomości na numer 8080.",
+        "model": "Gemini gemini-3.5-flash"
+      }
+    ],
+    "terms": [
+      "H399",
+      "H434"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
+  },
+  {
+    "date": "2026-11-28",
+    "title": "Hakerzy zaatakowali popularny menedżer haseł. Wyciekły dane klientów",
+    "link": "https://cyberdefence24.pl/cyberbezpieczenstwo/wycieki-danych/hakerzy-zaatakowali-popularny-menedzer-hasel-wyciekly-dane-klientow",
+    "source": "cyberdefence24.pl",
+    "categories": [
+      "critical"
+    ],
+    "score": 3,
+    "related": [],
+    "continuation": false,
+    "summary": "1Password poinformowało o incydencie, w którym atakujący przejął służbowe konto GitHub pracownika i uzyskał dostęp do części infrastruktury technicznej, co doprowadziło do wycieku danych administracyjnych klientów.",
+    "cves": [],
+    "kev": [],
+    "via": "",
+    "language": [],
+    "terms": [
+      "H197"
+    ],
+    "proofread": "Gemini gemini-3.5-flash"
   }
 ]
